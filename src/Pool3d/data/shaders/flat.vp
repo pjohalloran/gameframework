@@ -1,0 +1,24 @@
+// /////////////////////////////////////////////////////////////////
+// @file flat.vp
+// @author PJ O Halloran.
+// @date 22/09/2010
+//
+// Transforms geometry by the uniform mvp matrix supplied.
+//
+// /////////////////////////////////////////////////////////////////
+
+//#version 130
+#version 150
+
+// Transformation Matrix
+uniform mat4 mvpMatrix;
+
+// Incoming per vertex
+in vec4 vertexPos;
+
+void main(void)
+{
+    // Transform the geometry
+    gl_Position = mvpMatrix * vertexPos;
+}
+

@@ -1,0 +1,18 @@
+// /////////////////////////////////////////////////////////////////
+// @file identity.vp
+// @author Richard S. Wright Jr. and PJ O Halloran.
+// @date 22/09/2010
+//
+// Does not transform geometry.  Geometry rendered in the default 
+// -1.0 to 1.0 coordinate system.
+//
+// /////////////////////////////////////////////////////////////////
+
+#version 130
+
+in vec4 vertexPosVec;
+
+void main(void)
+{ 
+    gl_Position = vertexPosVec;
+}

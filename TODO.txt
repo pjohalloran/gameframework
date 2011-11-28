@@ -1,0 +1,82 @@
+
+
+Here is a few ideas for the future direction of my personal project...
+
+
+ ***** Data structures and memory ***** 
+- Write Tree, Graph, Set data structure(s).
+
+ - Add Algorithms for custom data structures.
+	- Add algorithms.h (BinarySearch, LinearSearch, Sorting, etc.).
+	- Add iterators.h and iterator classes that will be extended by each containers own iterator so that we can keep the algorithms independant of the containers they operate on much like how the STL algorithms are implemented.
+
+ - Add more custom allocaters (Pool, Heap etc.).  For Heap write a defragmenter algorithm and a means of updating existing pointers (smart pointers, handles).
+
+ - Fix StackAllocater and write UTs.
+
+ - Add some sort of Allocater interface and allow classes to be created like Bullets #define allocaters.
+
+ - Add custom allocaters to the data structures so that we can avid using the OS heap for them.
+
+ - 
+
+ ***** Graphics *****
+ - Learn DirectX 10/11.
+
+ - Write low level graphics API like as described in Game Engine Architecture.  It would be nice if it was API independant, provided some common interface which I could implement for OpenGL and DirectX.  Low level API should contain methods for drawing 3D primitives, text and 3D meshes.  It should batch these calls up using some sort of smart rendering pipeline batch.
+
+ - Fix font rendering in current architecture.  Either rework FTGL or write own font API using truetype and textures or something.
+
+ - Learn more advanced features of OpenGL.
+
+ - Write some more particle systems.
+
+ - Implement MatrixStack with new data structures.
+
+ - Seperate SceneGraph code out from rendering.  It should use the proposed batch class to batch up drawing requests.
+
+ - Remove all unneeded 3rd party code.
+
+ - Write a console type class where the developer can see log output in real time and can input in LUA commands.  See the developer console in the game Max Payne for something like what I am aiming for...
+
+ ***** Scripting ***** 
+
+ - Remove Pool3d specific stuff from LuaStateManager.
+
+ - Write a squirrel state manager.  Give the user freedom to use eiher lua or squirrel in their game (or neither).  Will possibly have to write some sort of luaplus like squirrel c++ binder for that.
+
+ - Maybe move away from luaplus as its not updated very often - just write my own C++ wrapper for lua and depend only on lua itself.
+
+ - Write a script language independent event system interface for the event manager so the framework doesn't know or care what scripting language the devs are using.
+
+ ***** Physics ***** 
+
+ - Try out Havok API.  Implement a Havok impl and use it to power Pool3d.  Make it easy to switch between Bullet and Havok in Pool3d using the options file.
+
+ - 
+
+ ***** Events *****
+
+- Write own event system and manager.  Write a runtime packed event data package like the event system I saw in one of my previous jobs.  No need then for huge .h files defining all event types as classes.  Make these event packets scriptable like the current system.
+
+ ***** Math ***** 
+
+ - Write a Quaternion class.
+
+ - Fix Plane and RayCast classes.
+
+ ***** General *****
+
+- Consider moving off of GLFW and writing my own app platform drivers for communicating with the OS and setting up a graphics context.  This is very important if I want to make the framework available for iOS or android platforms.
+
+ - Move away from GCC3 and write my own resource cache and event manager and system.  Make the event manager scriptable.
+
+ - Replace STL with my own containers (see logic, view layers and ResourceCache especially).
+
+ - Create a few more compelling demos for future career.
+
+ - Replace Game Actors/Objects system/interface with something more simple, faster and more powerful like the slideshow I read about Insomniacs C game object API.
+
+ - Port Pool3d to be runnable in Linux.
+
+ - Setup a website to show off my work.

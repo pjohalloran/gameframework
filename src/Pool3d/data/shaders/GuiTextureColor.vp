@@ -1,0 +1,34 @@
+// /////////////////////////////////////////////////////////////////
+// @file GuiTextureColor.vp
+// @author PJ O Halloran.
+// @date 25/10/2010
+//
+// Shader for drawing GUI widgets overlayed on my application
+// using an orthographic projection matrix.
+//
+// Transforms the vertex position and interpolates the texture
+// coordinates for the accompanying fragment shader.
+//
+// /////////////////////////////////////////////////////////////////
+
+//#version 330
+#version 150
+
+// Transformation Projection Matrix (The MV matrix is not needed for this 2D rendering for the GUI widgets)
+uniform mat4 projMatrix;
+
+// Incoming per vertex
+in vec4 vertexPos;
+in vec2 texCoords;
+
+// Outgoing interpolated texture coordinates.
+smooth out vec2 varyTexCoords;
+
+void main(void)
+{
+	// Set the output texture coordinates for the fragment shader.
+	varyTexCoords = texCoords;
+
+    // Transform the geometry
+    gl_Position = projMatrix * vertexPos;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Options>
+    <OptionType id="0">
+        <ScreenBpp>32</ScreenBpp>
+        <ScreenHeight>480</ScreenHeight>
+        <ScreenWidth>640</ScreenWidth>
+        <TEST>RRRRR</TEST>
+    </OptionType>
+    <OptionType id="1">
+        <FullScreen>0</FullScreen>
+        <GameName>TestGame</GameName>
+        <GameRoot>C:/Documents and Settings/HP_Administrator/My Documents/Visual Studio 2008/Projects/gameframework/trunk</GameRoot>
+        <GameSaveDir>C:/temp/savedir</GameSaveDir>
+        <LogLevel>3</LogLevel>
+        <MinCpuSpeed>300</MinCpuSpeed>
+        <MinHdSpace>1</MinHdSpace>
+        <MinSysRam>16</MinSysRam>
+        <MinVideoRam>16</MinVideoRam>
+        <MinVirtualMemory>16</MinVirtualMemory>
+    </OptionType>
+</Options>
+<!--If you are manually editing the file, remember that the OptionsType id must be unique, must start at 0 and be incremented according to how the OptionsType are layed out in the file!-->

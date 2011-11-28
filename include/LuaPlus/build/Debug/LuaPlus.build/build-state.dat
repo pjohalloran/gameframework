@@ -1,0 +1,1847 @@
+TLuaPlus
+v3
+r1
+cCheck dependencies
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusAddons.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusAddons.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaObject.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlus.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaStackObject.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lapi.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lapi.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusFunctions.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lwstrlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/lwstrlib.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaState.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lauxlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lauxlib.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lbaselib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lbaselib.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lcode.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lcode.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldblib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldblib.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldebug.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldebug.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldo.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldo.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldump.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldump.c normal x86_64 c com.apple.compilers.gcc.4_2
+
+N/Developer/SDKs/MacOSX10.7.sdk
+c000000004E2B35EA00000000000000EE
+t1311454698
+s238
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/assert.h
+c000000004E05497A0000000000000F6E
+t1308969338
+s3950
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/ctype.h
+c000000004E05497B0000000000002C18
+t1308969339
+s11288
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/dlfcn.h
+c000000004E0541830000000000000B1C
+t1308967299
+s2844
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/errno.h
+c000000004E05497A00000000000003EB
+t1308969338
+s1003
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/locale.h
+c000000004E05497A00000000000008F0
+t1308969338
+s2288
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/mach-o/dyld.h
+c000000004E0541830000000000003CB5
+t1308967299
+s15541
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/math.h
+c000000004DF6418700000000000004F1
+t1307984263
+s1265
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/readline/history.h
+c000000004DF65CC90000000000001D06
+t1307991241
+s7430
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/readline/readline.h
+c000000004DF65CC90000000000001D06
+t1307991241
+s7430
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/setjmp.h
+c000000004E05497A0000000000000438
+t1308969338
+s1080
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/stdio.h
+c000000004E05497C0000000000004763
+t1308969340
+s18275
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/stdlib.h
+c000000004E05497C00000000000030A7
+t1308969340
+s12455
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/string.h
+c000000004E05497C0000000000001A3A
+t1308969340
+s6714
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/sys/param.h
+c000000004DFD01D200000000000027BE
+t1308426706
+s10174
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/time.h
+c000000004E05497C000000000000178E
+t1308969340
+s6030
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/unistd.h
+c000000004E05497C0000000000006662
+t1308969340
+s26210
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/wchar.h
+c000000004E05497C0000000000002A2B
+t1308969340
+s10795
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/include/wctype.h
+c000000004E05497A0000000000000F66
+t1308969338
+s3942
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/lib/gcc/i686-apple-darwin11/4.2.1/include/limits.h
+c000000004DFA70700000000000000C7E
+t1308258416
+s3198
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/lib/gcc/i686-apple-darwin11/4.2.1/include/stdarg.h
+c000000004DFA707000000000000010DD
+t1308258416
+s4317
+
+N/Developer/SDKs/MacOSX10.7.sdk/usr/lib/gcc/i686-apple-darwin11/4.2.1/include/stddef.h
+c000000004DFA70700000000000003197
+t1308258416
+s12695
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/libLuaPlus.a
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaAutoBlock.h
+c000000004E47A79A0000000000000683
+t1313318810
+s1667
+i"LuaPlusInternal.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h
+c000000004E47A79A0000000000000817
+t1313318810
+s2071
+i"LuaPlusInternal.h"
+i"LuaObject.h"
+i"LuaCall.inl"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl
+c000000004E47A79A0000000000000E6E
+t1313318810
+s3694
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaFunction.h
+c000000004E47A79A00000000000016BA
+t1313318810
+s5818
+i"LuaPlusInternal.h"
+i"LuaAutoBlock.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaHelper.h
+c000000004E47A79A00000000000002EB
+t1313318810
+s747
+i"LuaHelper_Object.h"
+i"LuaHelper_StackObject.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaHelper_Object.h
+c000000004E47A79A00000000000017DB
+t1313318810
+s6107
+i"LuaPlusInternal.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaHelper_StackObject.h
+c000000004E47A79A0000000000001A88
+t1313318810
+s6792
+i"LuaStackObject.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaLink.h
+c000000004E47A79A0000000000000CCD
+t1313318810
+s3277
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp
+c000000004E47A79A000000000000C540
+t1313318810
+s50496
+i"LuaLink.h"
+i"src/lfunc.h"
+i"src/lobject.h"
+i"src/lstate.h"
+i"src/lstring.h"
+i"src/ltable.h"
+i"src/lvm.h"
+i"LuaPlus.h"
+i<string.h>
+i<malloc.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.h
+c000000004E47A79A00000000000054CD
+t1313318810
+s21709
+i"LuaStateCD.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.inl
+c000000004E47A79A00000000000006D6
+t1313318810
+s1750
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp
+c000000004E47A79A0000000000001249
+t1313318810
+s4681
+i"LuaLink.h"
+i"src/lobject.h"
+i"src/lgc.h"
+i"LuaPlus.h"
+i"LuaState.h"
+i<string.h>
+i<windows.h>
+i<xtl.h>
+i<new>
+i<new.h>
+i<stdlib.h>
+i<wchar.h>
+i<assert.h>
+i"src/lualib.h"
+i"src/lstate.h"
+i"src/lualib.h"
+i"src/lfunc.h"
+i"src/lgc.h"
+i"src/lstate.h"
+i"src/lua.h"
+i"src/lauxlib.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h
+c000000004E47A79A00000000000003B7
+t1313318810
+s951
+i"LuaPlusInternal.h"
+i"src/lua.h"
+i"src/lauxlib.h"
+i"LuaStackObject.h"
+i"LuaObject.h"
+i"LuaState.h"
+i"LuaTableIterator.h"
+i"LuaObject.inl"
+i"LuaStateOutFile.h"
+i"LuaHelper.h"
+i"LuaAutoBlock.h"
+i"LuaStackTableIterator.h"
+i"LuaCall.h"
+i"LuaFunction.h"
+i"LuaPlusCD.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusAddons.c
+c000000004E47A79A00000000000014FA
+t1313318810
+s5370
+i<string.h>
+i"src/lua.h"
+i"src/lauxlib.h"
+i"src/lobject.h"
+i"src/lstring.h"
+i"src/ltable.h"
+i"src/ldo.h"
+i<assert.h>
+i<stdio.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusCD.h
+c000000004E47A79A000000000000B419
+t1313318810
+s46105
+i"LuaLink.h"
+i"src/lua.h"
+i"src/lauxlib.h"
+i<stdlib.h>
+i<string.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp
+c000000004E47A79A000000000000117D
+t1313318810
+s4477
+i<windows.h>
+i<xtl.h>
+i<io.h>
+i<sys/param.h>
+i<mach-o/dyld.h>
+i"LuaLink.h"
+i"src/lobject.h"
+i"LuaPlus.h"
+i"src/lua.h"
+i"src/lauxlib.h"
+i<stdlib.h>
+i<assert.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusInternal.h
+c000000004E47A79A0000000000000811
+t1313318810
+s2065
+i"src/lua.h"
+i<assert.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.cpp
+c00000000000000000000000000000000
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.h
+c000000004E47A79A00000000000018E0
+t1313318810
+s6368
+i"LuaPlusInternal.h"
+i"LuaPlusCD.h"
+i"LuaStackObject.inl"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.inl
+c000000004E47A79A0000000000004900
+t1313318810
+s18688
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackTableIterator.h
+c000000004E47A79A0000000000000769
+t1313318810
+s1897
+i"LuaStackObject.h"
+i"LuaStackTableIterator.inl"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackTableIterator.inl
+c000000004E47A79A0000000000001171
+t1313318810
+s4465
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp
+c000000004E47A79A0000000000001BC4
+t1313318810
+s7108
+i"LuaLink.h"
+i"src/lobject.h"
+i"LuaPlus.h"
+i"LuaState.h"
+i"LuaPlusCD.h"
+i<windows.h>
+i<xtl.h>
+i<ctype.h>
+i"src/lstate.h"
+i"src/lvm.h"
+i"src/lgc.h"
+i"LuaState.inl"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.h
+c000000004E47A79A0000000000003502
+t1313318810
+s13570
+i"LuaPlusInternal.h"
+i"LuaState.inl"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.inl
+c000000004E47A79A0000000000005CFA
+t1313318810
+s23802
+i<string.h>
+i<assert.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStateCD.h
+c000000004E47A79A00000000000007FD
+t1313318810
+s2045
+i"LuaPlusInternal.h"
+i"LuaPlusCD.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStateOutFile.h
+c000000004E47A79A0000000000000749
+t1313318810
+s1865
+i"LuaPlusInternal.h"
+i<stdio.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaTableIterator.h
+c000000004E47A79A00000000000006F1
+t1313318810
+s1777
+i"LuaPlusInternal.h"
+i"LuaObject.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/LuaObject.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/LuaPlus.LinkFileList
+c000000004E63F6BF0000000000000FD7
+t1315174079
+s4055
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/LuaPlus.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/LuaPlusAddons.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/LuaPlusFunctions.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/LuaStackObject.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/LuaState.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lapi.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lauxlib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lbaselib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lcode.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/ldblib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/ldebug.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/ldo.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/ldump.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lfunc.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lgc.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/libLuaPlus.a
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/linit.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/liolib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/llex.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lmathlib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lmem.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/loadlib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lobject.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lopcodes.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/loslib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lparser.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lstate.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lstring.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lstrlib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/ltable.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/ltablib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/ltm.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lundump.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lvm.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lwstrlib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/lzio.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/print.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaObject.o
+t1315174079
+s240536
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlus.LinkFileList
+c000000004E63F6BF0000000000001021
+t1315174079
+s4129
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlus.o
+t1315174079
+s52688
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusAddons.o
+t1315174079
+s18052
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusFunctions.o
+t1315174079
+s45676
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaStackObject.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaState.o
+t1315174079
+s70000
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lapi.o
+t1315174079
+s77860
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lauxlib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lbaselib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lcode.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ldblib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ldebug.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ldo.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ldump.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lfunc.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lgc.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/libLuaPlus.a
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/linit.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/liolib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/llex.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lmathlib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lmem.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/loadlib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lobject.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lopcodes.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/loslib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lparser.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lstate.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lstring.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lstrlib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ltable.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ltablib.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ltm.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lundump.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lvm.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lwstrlib.o
+t1315174079
+s56416
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lzio.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/print.o
+t2
+s0
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/lwstrlib.c
+c000000004E47A79A0000000000007657
+t1313318810
+s30295
+i"src/lua.h"
+i<ctype.h>
+i<stddef.h>
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i<assert.h>
+i"src/lauxlib.h"
+i"src/lualib.h"
+i<wctype.h>
+i<wchar.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lapi.c
+c000000004E47A79A0000000000008154
+t1313318810
+s33108
+i<assert.h>
+i<math.h>
+i<stdarg.h>
+i<string.h>
+i"lua.h"
+i"lapi.h"
+i"ldebug.h"
+i"ldo.h"
+i"lfunc.h"
+i"lgc.h"
+i"lmem.h"
+i"lobject.h"
+i"lstate.h"
+i"lstring.h"
+i"ltable.h"
+i"ltm.h"
+i"lundump.h"
+i"lvm.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lapi.h
+c000000004E47A79A000000000000012D
+t1313318810
+s301
+i"lobject.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lauxlib.c
+c000000004E47A79A000000000000499A
+t1313318810
+s18842
+i<ctype.h>
+i<errno.h>
+i<stdarg.h>
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i"lua.h"
+i"lauxlib.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lauxlib.h
+c000000004E47A79A0000000000001C71
+t1313318810
+s7281
+i<stddef.h>
+i<stdio.h>
+i"lua.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lbaselib.c
+c000000004E47A79A0000000000005FCF
+t1313318810
+s24527
+i<ctype.h>
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i"lua.h"
+i"lauxlib.h"
+i"lualib.h"
+i"lstate.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lcode.c
+c000000004E47A79A00000000000065EB
+t1313318810
+s26091
+i<stdlib.h>
+i"lua.h"
+i"lcode.h"
+i"ldebug.h"
+i"ldo.h"
+i"lgc.h"
+i"llex.h"
+i"lmem.h"
+i"lobject.h"
+i"lopcodes.h"
+i"lparser.h"
+i"ltable.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lcode.h
+c000000004E47A79A0000000000000C3B
+t1313318810
+s3131
+i"llex.h"
+i"lobject.h"
+i"lopcodes.h"
+i"lparser.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldblib.c
+c000000004E47A79A000000000000277B
+t1313318810
+s10107
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i"lua.h"
+i"lauxlib.h"
+i"lualib.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldebug.c
+c000000004E47A79A0000000000004769
+t1313318810
+s18281
+i<stdarg.h>
+i<stddef.h>
+i<string.h>
+i"lua.h"
+i"lapi.h"
+i"lcode.h"
+i"ldebug.h"
+i"ldo.h"
+i"lfunc.h"
+i"lobject.h"
+i"lopcodes.h"
+i"lstate.h"
+i"lstring.h"
+i"ltable.h"
+i"ltm.h"
+i"lvm.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldebug.h
+c000000004E47A79A0000000000000486
+t1313318810
+s1158
+i"lstate.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldo.c
+c000000004E47A79A0000000000006242
+t1313318810
+s25154
+i<setjmp.h>
+i<stdlib.h>
+i<string.h>
+i"lua.h"
+i"ldebug.h"
+i"ldo.h"
+i"lfunc.h"
+i"lgc.h"
+i"lmem.h"
+i"lobject.h"
+i"lopcodes.h"
+i"lparser.h"
+i"lstate.h"
+i"lstring.h"
+i"ltable.h"
+i"ltm.h"
+i"lundump.h"
+i"lvm.h"
+i"lzio.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldo.h
+c000000004E47A79A0000000000000BF5
+t1313318810
+s3061
+i"lobject.h"
+i"lstate.h"
+i"lzio.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldump.c
+c000000004E47A79A00000000000015FE
+t1313318810
+s5630
+i<stddef.h>
+i"lua.h"
+i"lobject.h"
+i"lstate.h"
+i"lundump.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lfunc.c
+c000000004E47A79A0000000000001985
+t1313318810
+s6533
+i<stddef.h>
+i"lua.h"
+i"lfunc.h"
+i"lgc.h"
+i"lmem.h"
+i"lobject.h"
+i"lstate.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lfunc.h
+c000000004E47A79A000000000000048B
+t1313318810
+s1163
+i"lobject.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lgc.c
+c000000004E47A79A0000000000005B8B
+t1313318810
+s23435
+i<string.h>
+i"lua.h"
+i"ldebug.h"
+i"ldo.h"
+i"lfunc.h"
+i"lgc.h"
+i"lmem.h"
+i"lobject.h"
+i"lstate.h"
+i"lstring.h"
+i"ltable.h"
+i"ltm.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lgc.h
+c000000004E47A79A0000000000000C7D
+t1313318810
+s3197
+i"lobject.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/linit.c
+c000000004E47A79A0000000000000439
+t1313318810
+s1081
+i"lua.h"
+i"lualib.h"
+i"lauxlib.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/liolib.c
+c000000004E47A79A0000000000003891
+t1313318810
+s14481
+i<errno.h>
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i"lua.h"
+i"lauxlib.h"
+i"lualib.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/llex.c
+c000000004E47A79A0000000000005027
+t1313318810
+s20519
+i<ctype.h>
+i<locale.h>
+i<string.h>
+i"lua.h"
+i"ldo.h"
+i"llex.h"
+i"lobject.h"
+i"lparser.h"
+i"lstate.h"
+i"lstring.h"
+i"ltable.h"
+i"lzio.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/llex.h
+c000000004E47A79A0000000000000A9D
+t1313318810
+s2717
+i"lobject.h"
+i"lzio.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/llimits.h
+c000000004E47A79A0000000000000972
+t1313318810
+s2418
+i<limits.h>
+i<stddef.h>
+i"lua.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lmathlib.c
+c000000004E47A79A00000000000016ED
+t1313318810
+s5869
+i<stdlib.h>
+i<math.h>
+i"lua.h"
+i"lauxlib.h"
+i"lualib.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lmem.c
+c000000004E47A79A0000000000000994
+t1313318810
+s2452
+i<stddef.h>
+i"lua.h"
+i"ldebug.h"
+i"ldo.h"
+i"lmem.h"
+i"lobject.h"
+i"lstate.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lmem.h
+c000000004E47A79A000000000000072E
+t1313318810
+s1838
+i<stddef.h>
+i"llimits.h"
+i"lua.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/loadlib.c
+c000000004E47A79A0000000000006198
+t1313318810
+s24984
+i<stdlib.h>
+i<string.h>
+i"lua.h"
+i"lauxlib.h"
+i"lualib.h"
+i<dlfcn.h>
+i<sys/param.h>
+i<dlfcn.h>
+i<windows.h>
+i<io.h>
+i<mach-o/dyld.h>
+i<sys/param.h>
+i<dlfcn.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lobject.c
+c000000004E47A79A0000000000003EAC
+t1313318810
+s16044
+i<ctype.h>
+i<stdarg.h>
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i"lua.h"
+i"ldo.h"
+i"lmem.h"
+i"lobject.h"
+i"lstate.h"
+i"lstring.h"
+i"lvm.h"
+i"ltable.h"
+i"lfunc.h"
+i<math.h>
+i<assert.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lobject.h
+c000000004E47A79A0000000000003E22
+t1313318810
+s15906
+i<stdarg.h>
+i"llimits.h"
+i"lua.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lopcodes.c
+c000000004E47A79A0000000000000F21
+t1313318810
+s3873
+i"lopcodes.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lopcodes.h
+c000000004E47A79A00000000000022FE
+t1313318810
+s8958
+i"llimits.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/loslib.c
+c000000004E47A79A00000000000018C2
+t1313318810
+s6338
+i<errno.h>
+i<locale.h>
+i<stdlib.h>
+i<string.h>
+i<time.h>
+i"lua.h"
+i"lauxlib.h"
+i"lualib.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lparser.c
+c000000004E47A79A000000000000AC19
+t1313318810
+s44057
+i<string.h>
+i"lua.h"
+i"lcode.h"
+i"ldebug.h"
+i"ldo.h"
+i"lfunc.h"
+i"llex.h"
+i"lmem.h"
+i"lobject.h"
+i"lopcodes.h"
+i"lparser.h"
+i"lstate.h"
+i"lstring.h"
+i"ltable.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lparser.h
+c000000004E47A79A0000000000000979
+t1313318810
+s2425
+i"llimits.h"
+i"lobject.h"
+i"lzio.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstate.c
+c000000004E47A79A00000000000022B1
+t1313318810
+s8881
+i<stddef.h>
+i"lua.h"
+i"ldebug.h"
+i"ldo.h"
+i"lfunc.h"
+i"lgc.h"
+i"llex.h"
+i"lmem.h"
+i"lstate.h"
+i"lstring.h"
+i"ltable.h"
+i"ltm.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstate.h
+c000000004E47A79A00000000000019A9
+t1313318810
+s6569
+i"lua.h"
+i"lobject.h"
+i"ltm.h"
+i"lzio.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstring.c
+c000000004E47A79A00000000000018AF
+t1313318810
+s6319
+i<string.h>
+i"lua.h"
+i"lmem.h"
+i"lobject.h"
+i"lstate.h"
+i"lstring.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstring.h
+c000000004E47A79A000000000000053B
+t1313318810
+s1339
+i"lgc.h"
+i"lobject.h"
+i"lstate.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstrlib.c
+c000000004E47A79A0000000000009D92
+t1313318810
+s40338
+i<ctype.h>
+i<stddef.h>
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i"lua.h"
+i"lauxlib.h"
+i"lualib.h"
+i"stdlib.h"
+i<ctype.h>
+i<string.h>
+i<stdlib.h>
+i"lzio.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltable.c
+c000000004E47A79A00000000000056EC
+t1313318810
+s22252
+i<math.h>
+i<string.h>
+i"lua.h"
+i"ldebug.h"
+i"ldo.h"
+i"lgc.h"
+i"lmem.h"
+i"lobject.h"
+i"lstate.h"
+i"ltable.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltable.h
+c000000004E47A79A0000000000000678
+t1313318810
+s1656
+i"lobject.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltablib.c
+c000000004E47A79A0000000000001F45
+t1313318810
+s8005
+i<stddef.h>
+i"lua.h"
+i"lauxlib.h"
+i"lualib.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltm.c
+c000000004E47A79A0000000000000760
+t1313318810
+s1888
+i<string.h>
+i"lua.h"
+i"lobject.h"
+i"lstate.h"
+i"lstring.h"
+i"ltable.h"
+i"ltm.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltm.h
+c000000004E47A79A00000000000004AE
+t1313318810
+s1198
+i"lobject.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lua.h
+c000000004E47A79A0000000000003F01
+t1313318810
+s16129
+i<stdarg.h>
+i<stddef.h>
+i"../LuaLink.h"
+i"luaconf.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/luaconf.h
+c000000004E47A79A0000000000006643
+t1313318810
+s26179
+i<limits.h>
+i<stddef.h>
+i<unistd.h>
+i<io.h>
+i<stdio.h>
+i<stdio.h>
+i<readline/readline.h>
+i<readline/history.h>
+i<assert.h>
+i<math.h>
+i<unistd.h>
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lualib.h
+c000000004E47A79A0000000000000428
+t1313318810
+s1064
+i"lua.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lundump.c
+c000000004E47A79A0000000000001C34
+t1313318810
+s7220
+i<string.h>
+i"lua.h"
+i"ldebug.h"
+i"ldo.h"
+i"lfunc.h"
+i"lmem.h"
+i"lobject.h"
+i"lstring.h"
+i"lundump.h"
+i"lzio.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lundump.h
+c000000004E47A79A00000000000004C2
+t1313318810
+s1218
+i"lobject.h"
+i"lzio.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lvm.c
+c000000004E47A79A00000000000090C4
+t1313318810
+s37060
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i"lua.h"
+i"ldebug.h"
+i"ldo.h"
+i"lfunc.h"
+i"lgc.h"
+i"lobject.h"
+i"lopcodes.h"
+i"lstate.h"
+i"lstring.h"
+i"ltable.h"
+i"ltm.h"
+i"lvm.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lvm.h
+c000000004E47A79A0000000000000803
+t1313318810
+s2051
+i"ldo.h"
+i"lobject.h"
+i"ltm.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lzio.c
+c000000004E47A79A0000000000000944
+t1313318810
+s2372
+i<string.h>
+i"lua.h"
+i"llimits.h"
+i"lmem.h"
+i"lstate.h"
+i"lzio.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lzio.h
+c000000004E47A79A0000000000000778
+t1313318810
+s1912
+i"lua.h"
+i"lmem.h"
+
+N/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/print.c
+c000000004E47A79A0000000000001378
+t1313318810
+s4984
+i<ctype.h>
+i<stdio.h>
+i"ldebug.h"
+i"lobject.h"
+i"lopcodes.h"
+i"lundump.h"
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusAddons.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.cpp
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/lwstrlib.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lapi.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lauxlib.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lbaselib.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lcode.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldblib.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldebug.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldo.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldump.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lfunc.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lgc.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/linit.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/liolib.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/llex.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lmathlib.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lmem.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/loadlib.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lobject.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lopcodes.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/loslib.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lparser.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstate.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstring.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstrlib.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltable.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltablib.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltm.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lundump.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lvm.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lzio.c
+r0
+
+CBuild AST from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/print.c
+r0
+
+CCheck dependencies
+r0
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies426045932e14b441^a2297b932e14b441^---0#1#0#--18"Check dependencies
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/LuaObject.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/LuaPlus.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/LuaPlusAddons.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusAddons.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/LuaPlusFunctions.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/LuaStackObject.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/LuaState.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp normal i386 c++ com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lapi.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lapi.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lauxlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lauxlib.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lbaselib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lbaselib.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lcode.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lcode.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/ldblib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldblib.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/ldebug.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldebug.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/ldo.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldo.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/ldump.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldump.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lfunc.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lfunc.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lgc.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lgc.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/linit.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/linit.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/liolib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/liolib.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/llex.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/llex.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lmathlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lmathlib.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lmem.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lmem.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/loadlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/loadlib.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lobject.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lobject.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lopcodes.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lopcodes.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/loslib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/loslib.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lparser.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lparser.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lstate.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstate.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lstring.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstring.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lstrlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstrlib.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/ltable.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltable.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/ltablib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltablib.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/ltm.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltm.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lundump.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lundump.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lvm.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lvm.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lwstrlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/lwstrlib.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/lzio.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lzio.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/i386/print.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/print.c normal i386 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaObject.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s336866879.290577
+e336866879.812950
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/LuaObject.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+oIn file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h:62,
+o                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h:29,
+o                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp:23:
+o/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl: In member function 'LuaPlus::LuaStackObject LuaPlus::LuaCall::operator<<(const LuaPlus::LuaRun&)':
+o/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl:113: warning: unused variable 'state'
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection75"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cppff754a3f2e14b441^9220d03f2e14b441^-544"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h:62,                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h:29,                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp:23:/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl: In member function 'LuaPlus::LuaStackObject LuaPlus::LuaCall::operator<<(const LuaPlus::LuaRun&)':/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl:113: warning: unused variable 'state'1(21%IDEActivityLogMessage2@23"Unused variable 'state'-336866879#440#104#4(36%IDEActivityLogHeaderInclusionMessage3@89"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp-336866879#18446744073709551615#0#-0#-23%DVTTextDocumentLocation4@83"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp0000000000000000^22#18446744073709551615#22#18446744073709551615#18446744073709551615#0#---3@85"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h-336866879#18446744073709551615#0#-0#-4@79"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h0000000000000000^28#18446744073709551615#28#18446744073709551615#18446744073709551615#0#---3@85"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h-336866879#18446744073709551615#0#-0#-4@79"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h0000000000000000^61#18446744073709551615#61#18446744073709551615#18446744073709551615#0#---2@92"Unused variable 'state' in /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl-336866879#18446744073709551615#0#-0#-4@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl0000000000000000^112#18446744073709551615#112#18446744073709551615#18446744073709551615#0#---1#-4@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl0000000000000000^112#18446744073709551615#112#18446744073709551615#18446744073709551615#0#19"Unused variable '*'--0#0#0#-19%DVTDocumentLocation5@83"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp0000000000000000^1121"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaObject.o LuaObject.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -fvisibility-inlines-hidden -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaObject.cpp -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaObject.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlus.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s336866879.290619
+e336866879.610644
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlus.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+oIn file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h:62,
+o                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h:29,
+o                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp:18:
+o/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl: In member function 'LuaPlus::LuaStackObject LuaPlus::LuaCall::operator<<(const LuaPlus::LuaRun&)':
+o/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl:113: warning: unused variable 'state'
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection73"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp53764a3f2e14b441^09539c3f2e14b441^-542"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h:62,                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h:29,                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp:18:/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl: In member function 'LuaPlus::LuaStackObject LuaPlus::LuaCall::operator<<(const LuaPlus::LuaRun&)':/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl:113: warning: unused variable 'state'1(21%IDEActivityLogMessage2@23"Unused variable 'state'-336866879#438#104#4(36%IDEActivityLogHeaderInclusionMessage3@87"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp-336866879#18446744073709551615#0#-0#-23%DVTTextDocumentLocation4@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp0000000000000000^17#18446744073709551615#17#18446744073709551615#18446744073709551615#0#---3@85"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h-336866879#18446744073709551615#0#-0#-4@79"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h0000000000000000^28#18446744073709551615#28#18446744073709551615#18446744073709551615#0#---3@85"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h-336866879#18446744073709551615#0#-0#-4@79"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h0000000000000000^61#18446744073709551615#61#18446744073709551615#18446744073709551615#0#---2@92"Unused variable 'state' in /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl-336866879#18446744073709551615#0#-0#-4@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl0000000000000000^112#18446744073709551615#112#18446744073709551615#18446744073709551615#0#---1#-4@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl0000000000000000^112#18446744073709551615#112#18446744073709551615#18446744073709551615#0#19"Unused variable '*'--0#0#0#-19%DVTDocumentLocation5@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp0000000000000000^1113"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlus.o LuaPlus.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -fvisibility-inlines-hidden -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.cpp -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlus.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusAddons.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusAddons.c normal x86_64 c com.apple.compilers.gcc.4_2
+s336866879.291012
+e336866879.410624
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusAddons.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusAddons.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusAddons.cb98d4a3f2e14b441^963d693f2e14b441^---0#0#0#-19%DVTDocumentLocation2@85"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusAddons.c0000000000000000^1101"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusAddons.o LuaPlusAddons.c normal x86_64 c com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusAddons.c -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusAddons.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusFunctions.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s336866879.292204
+e336866879.612263
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusFunctions.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+oIn file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h:62,
+o                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h:29,
+o                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp:33:
+o/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl: In member function 'LuaPlus::LuaStackObject LuaPlus::LuaCall::operator<<(const LuaPlus::LuaRun&)':
+o/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl:113: warning: unused variable 'state'
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection82"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp7bdd4a3f2e14b441^2cbb9c3f2e14b441^-551"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h:62,                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h:29,                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp:33:/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl: In member function 'LuaPlus::LuaStackObject LuaPlus::LuaCall::operator<<(const LuaPlus::LuaRun&)':/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl:113: warning: unused variable 'state'1(21%IDEActivityLogMessage2@23"Unused variable 'state'-336866879#447#104#4(36%IDEActivityLogHeaderInclusionMessage3@96"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp-336866879#18446744073709551615#0#-0#-23%DVTTextDocumentLocation4@90"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp0000000000000000^32#18446744073709551615#32#18446744073709551615#18446744073709551615#0#---3@85"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h-336866879#18446744073709551615#0#-0#-4@79"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h0000000000000000^28#18446744073709551615#28#18446744073709551615#18446744073709551615#0#---3@85"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h-336866879#18446744073709551615#0#-0#-4@79"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h0000000000000000^61#18446744073709551615#61#18446744073709551615#18446744073709551615#0#---2@92"Unused variable 'state' in /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl-336866879#18446744073709551615#0#-0#-4@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl0000000000000000^112#18446744073709551615#112#18446744073709551615#18446744073709551615#0#---1#-4@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl0000000000000000^112#18446744073709551615#112#18446744073709551615#18446744073709551615#0#19"Unused variable '*'--0#0#0#-19%DVTDocumentLocation5@90"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp0000000000000000^1149"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusFunctions.o LuaPlusFunctions.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -fvisibility-inlines-hidden -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlusFunctions.cpp -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaPlusFunctions.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaStackObject.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s336866963.512644
+e336866963.521063
+r0
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/LuaStackObject.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+oi686-apple-darwin11-gcc-4.2.1: /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.cpp: No such file or directory
+oi686-apple-darwin11-gcc-4.2.1: warning: '-x c++' after last input file has no effect
+oi686-apple-darwin11-gcc-4.2.1: no input files
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.cppb95283932e14b441^3e4285932e14b441^-59"Command /Developer/usr/bin/gcc-4.2 failed with exit code 11(21%IDEActivityLogMessage2@58"Command /Developer/usr/bin/gcc-4.2 failed with exit code 1-336866963#18446744073709551615#0#-2#--13"GCC 4.2 Error--0#0#0#-19%DVTDocumentLocation3@88"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.cpp00f4b097dcffdf42^1141"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaStackObject.o LuaStackObject.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -fvisibility-inlines-hidden -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaStackObject.cpp -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaStackObject.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaState.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s336866879.292581
+e336866879.612331
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/LuaState.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+oIn file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h:62,
+o                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h:29,
+o                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp:17:
+o/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl: In member function 'LuaPlus::LuaStackObject LuaPlus::LuaCall::operator<<(const LuaPlus::LuaRun&)':
+o/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl:113: warning: unused variable 'state'
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection74"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cppaef44a3f2e14b441^64c99c3f2e14b441^-543"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h:62,                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h:29,                 from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp:17:/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl: In member function 'LuaPlus::LuaStackObject LuaPlus::LuaCall::operator<<(const LuaPlus::LuaRun&)':/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl:113: warning: unused variable 'state'1(21%IDEActivityLogMessage2@23"Unused variable 'state'-336866879#439#104#4(36%IDEActivityLogHeaderInclusionMessage3@88"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp-336866879#18446744073709551615#0#-0#-23%DVTTextDocumentLocation4@82"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp0000000000000000^16#18446744073709551615#16#18446744073709551615#18446744073709551615#0#---3@85"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h-336866879#18446744073709551615#0#-0#-4@79"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaPlus.h0000000000000000^28#18446744073709551615#28#18446744073709551615#18446744073709551615#0#---3@85"In file included from /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h-336866879#18446744073709551615#0#-0#-4@79"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.h0000000000000000^61#18446744073709551615#61#18446744073709551615#18446744073709551615#0#---2@92"Unused variable 'state' in /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl-336866879#18446744073709551615#0#-0#-4@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl0000000000000000^112#18446744073709551615#112#18446744073709551615#18446744073709551615#0#---1#-4@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaCall.inl0000000000000000^112#18446744073709551615#112#18446744073709551615#18446744073709551615#0#19"Unused variable '*'--0#0#0#-19%DVTDocumentLocation5@82"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp0000000000000000^1117"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaState.o LuaState.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -fvisibility-inlines-hidden -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/LuaState.cpp -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/LuaState.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lapi.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lapi.c normal x86_64 c com.apple.compilers.gcc.4_2
+s336866879.293762
+e336866879.612286
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/lapi.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lapi.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection72"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lapi.cd74b4b3f2e14b441^a8c59c3f2e14b441^---0#0#0#-19%DVTDocumentLocation2@80"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lapi.c0000000000000000^1073"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lapi.o src/lapi.c normal x86_64 c com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lapi.c -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lapi.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lauxlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lauxlib.c normal x86_64 c com.apple.compilers.gcc.4_2
+s336866963.513780
+e336866963.722764
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/lauxlib.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lauxlib.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection75"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lauxlib.c819583932e14b441^350ab9932e14b441^---0#0#0#-19%DVTDocumentLocation2@83"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lauxlib.c0000000000000000^1085"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lauxlib.o src/lauxlib.c normal x86_64 c com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lauxlib.c -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lauxlib.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lbaselib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lbaselib.c normal x86_64 c com.apple.compilers.gcc.4_2
+s336866963.513811
+e336866963.722806
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/lbaselib.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lbaselib.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection76"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lbaselib.c5f9983932e14b441^7616b9932e14b441^---0#0#0#-19%DVTDocumentLocation2@84"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lbaselib.c0000000000000000^1089"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lbaselib.o src/lbaselib.c normal x86_64 c com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lbaselib.c -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lbaselib.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lcode.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lcode.c normal x86_64 c com.apple.compilers.gcc.4_2
+s336866963.513816
+e336866963.722740
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/lcode.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lcode.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection73"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lcode.cc89883932e14b441^0801b9932e14b441^---0#0#0#-19%DVTDocumentLocation2@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lcode.c0000000000000000^1077"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lcode.o src/lcode.c normal x86_64 c com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lcode.c -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lcode.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldblib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldblib.c normal x86_64 c com.apple.compilers.gcc.4_2
+s336866963.514220
+e336866963.623502
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/ldblib.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldblib.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection74"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldblib.c02ba83932e14b441^42ed9f932e14b441^---0#0#0#-19%DVTDocumentLocation2@82"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldblib.c0000000000000000^1081"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldblib.o src/ldblib.c normal x86_64 c com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldblib.c -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ldblib.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldebug.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldebug.c normal x86_64 c com.apple.compilers.gcc.4_2
+s336866963.514232
+e336866963.722814
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/ldebug.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldebug.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection74"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldebug.cc3b883932e14b441^8812b9932e14b441^---0#0#0#-19%DVTDocumentLocation2@82"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldebug.c0000000000000000^1081"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldebug.o src/ldebug.c normal x86_64 c com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldebug.c -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ldebug.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldo.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldo.c normal x86_64 c com.apple.compilers.gcc.4_2
+s336866963.514711
+e336866963.725855
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/ldo.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldo.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection71"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldo.c74d283932e14b441^ead0b9932e14b441^---0#0#0#-19%DVTDocumentLocation2@79"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldo.c0000000000000000^1069"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldo.o src/ldo.c normal x86_64 c com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldo.c -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ldo.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldump.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldump.c normal x86_64 c com.apple.compilers.gcc.4_2
+s336866963.515482
+e336866963.625998
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/ldump.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldump.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection73"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldump.c3e0584932e14b441^8fa9a7932e14b441^---0#0#0#-19%DVTDocumentLocation2@81"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldump.c0000000000000000^1077"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ldump.o src/ldump.c normal x86_64 c com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ldump.c -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/ldump.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lfunc.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lfunc.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lgc.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lgc.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/linit.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/linit.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/liolib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/liolib.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/llex.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/llex.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lmathlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lmathlib.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lmem.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lmem.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/loadlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/loadlib.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lobject.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lobject.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lopcodes.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lopcodes.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/loslib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/loslib.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lparser.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lparser.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lstate.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstate.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lstring.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstring.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lstrlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lstrlib.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ltable.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltable.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ltablib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltablib.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/ltm.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/ltm.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lundump.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lundump.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lvm.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lvm.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lwstrlib.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/lwstrlib.c normal x86_64 c com.apple.compilers.gcc.4_2
+s336866879.292596
+e336866879.511489
+r1
+xCompileC
+xbuild/Debug/LuaPlus.build/Objects-normal/x86_64/lwstrlib.o
+x/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/lwstrlib.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection72"Compile /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/lwstrlib.c5ef74a3f2e14b441^aef0823f2e14b441^---0#0#0#-19%DVTDocumentLocation2@80"file://localhost/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/lwstrlib.c0000000000000000^1081"CompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lwstrlib.o lwstrlib.c normal x86_64 c com.apple.compilers.gcc.4_2    cd /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/LuaPlus.hmap -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/include -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources/x86_64 -I/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/DerivedSources -F/Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx -c /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/lwstrlib.c -o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/lwstrlib.o
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/lzio.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/lzio.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/Debug/LuaPlus.build/Objects-normal/x86_64/print.o /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/src/print.c normal x86_64 c com.apple.compilers.gcc.4_2
+r0
+
+CCreateUniversalBinary /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/../../bin/macosx/libLuaPlus.a normal "x86_64 i386"
+r0
+
+CLibtool /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/i386/libLuaPlus.a normal i386
+r0
+
+CLibtool /Users/pjohalloran/work/git/luaplus51-all/Src/LuaPlus/build/Debug/LuaPlus.build/Objects-normal/x86_64/libLuaPlus.a normal x86_64
+r0
+

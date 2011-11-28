@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "1.0">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/trunk/src/graphics/EnvironmentSceneNode.cpp"
+         timestampString = "343859207.67767"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "33"
+         endingLineNumber = "33"
+         landmarkName = "EnvironmentSceneNode::Init(const std::vector&lt;std::string&gt; &amp;cubemapTextureNameVec, const std::string &amp;shaderNameRef, const F32 cmRadius)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/trunk/src/graphics/TextureManager.cpp"
+         timestampString = "343947046.508935"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "779"
+         endingLineNumber = "779"
+         landmarkName = "TextureManager::LoadCubeMap(const std::vector&lt;std::string&gt; &amp;cubeImgVec, const GLenum wrapMode)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/trunk/src/graphics/TextureManager.cpp"
+         timestampString = "343947046.508935"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "469"
+         endingLineNumber = "469"
+         landmarkName = "TextureManager::LoadCommon2D(const GLenum target, const GLint level, const GLint internalFormat, const GLsizei width, const GLsizei height,\ const GLint border, const GLenum format, const GLenum type, void *data, const bool tightlyPack)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/trunk/src/graphics/GLSLShader.cpp"
+         timestampString = "343866587.56765"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "479"
+         endingLineNumber = "479"
+         landmarkName = "GLSLShader::BuildProgramFromFiles(const boost::filesystem::path &amp;vsFilename, const boost::filesystem::path &amp;gsFilename, const boost::filesystem::path &amp;fsFilename, const VSAttributeNameList &amp;vsAttList, std::string &amp;messageRef, const bool includeGeometryShader)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/trunk/src/graphics/GLSLShader.cpp"
+         timestampString = "343866587.56765"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "675"
+         endingLineNumber = "675"
+         landmarkName = "GLSLShader::BuildProgramFromSrc(const char *vsSrc, const char *gsSrc, const char *fsSrc, const VSAttributeNameList &amp;vsAttList, std::string &amp;messageRef, const bool includeGeometryShader)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/trunk/src/graphics/GLSLShader.cpp"
+         timestampString = "343866587.56765"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "518"
+         endingLineNumber = "518"
+         landmarkName = "GLSLShader::BuildProgramFromSrc(const char *vsSrc, const char *gsSrc, const char *fsSrc, const VSAttributeNameList &amp;vsAttList, std::string &amp;messageRef, const bool includeGeometryShader)"
+         landmarkType = "5">
+      </FileBreakpoint>
+   </FileBreakpoints>
+</Bucket>

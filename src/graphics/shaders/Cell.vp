@@ -1,0 +1,42 @@
+// /////////////////////////////////////////////////////////////////
+// @file Cell.vp
+// @author Richard S. Wright Jr. and PJ O Halloran.
+// @date 22/09/2010
+//
+// Renders a primitive using a cell or toon shading style using a 1D
+// texture as a lookup table to fill a primitive with color.
+//
+// /////////////////////////////////////////////////////////////////
+
+#version 130
+
+// Incoming per vertex... position and normal
+in vec4 vertexPos;
+in vec3 normalVec;
+
+smooth out float textureCoordinate;
+
+uniform vec3	lightPosition;
+uniform mat4	mvpMatrix;
+uniform mat4	mvMatrix;
+uniform mat3	normalMatrix;
+
+
+void main(void) 
+{ 
+    // Get surface normal in eye coordinates
+    vec3 eyeNormalVec = normalMatrix * normalVec;
+
+    // Get vertex position in eye coordinates
+    vec4 eyeVertexPos4 = mvMatrix * vertexPos;
+    vec3 eyeVertexPos3 = eyeVertexPos4.xyz / eyeVertexPos4.w;
+
+    // Get vector to light source
+    vec3 lightDir = normalize(lightPosition - eyeVertexPos3);
+
+    // Dot product gives us diffuse intensity
+    textureCoordinate = max(0.0, dot(eyeNormalVec, lightDir));
+
+    // Don't forget to transform the geometry!
+    gl_Position = mvpMatrix * vertexPos;
+}

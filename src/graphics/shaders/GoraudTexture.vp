@@ -1,0 +1,75 @@
+// /////////////////////////////////////////////////////////////////
+// @file GoraudTexture.vp
+// @author Richard S. Wright Jr. and PJ O Halloran.
+// @date 22/09/2010
+//
+// Applies the Goraud shading model to each vertex.
+//
+// A vertex color is calculated from the position of the vector with
+// respect to the light source and the materials ambient, diffuse 
+// and specular components.
+//
+// A texture is also applied to the primitive.
+//
+// /////////////////////////////////////////////////////////////////
+
+#version 130
+
+// Incoming per vertex... position, normal and texture coordinates.
+in vec4 vertexPos;
+in vec3 normalVec;
+in vec2 texCoords0;
+
+// Set per batch
+uniform vec4    ambientColor;
+uniform vec4    diffuseColor;
+
+uniform vec3	lightPosition;
+uniform mat4	mvpMatrix;
+uniform mat4	mvMatrix;
+uniform mat3	normalMatrix;
+
+// Color to fragment program
+smooth out vec4 varyingColorVec;
+
+// Texture coordinate to fragment program.
+smooth out vec2 varyingTexCoordVec;
+
+// Light direction to fragment program.
+flat out vec3 flatLightDirVec;
+
+// Vertex normal to fragment program.
+flat out vec3 flatEyeNormalVec;
+
+flat out float flatDiff;
+
+void main(void)
+{ 
+    // Get surface normal in eye coordinates
+    flatEyeNormalVec = normalMatrix * normalVec;
+
+    // Get vertex position in eye coordinates
+    vec4 eyeVertexPos4 = mvMatrix * vertexPos;
+    vec3 eyeVertexPos3 = eyeVertexPos4.xyz / eyeVertexPos4.w;
+
+    // Get vector to light source
+    flatLightDirVec = normalize(lightPosition - eyeVertexPos3);
+
+    // Dot product gives us diffuse intensity
+    flatDiff = max(0.0, dot(flatEyeNormalVec, flatLightDirVec));
+
+    // Multiply intensity by diffuse color, force alpha to 1.0
+    varyingColorVec = flatDiff * diffuseColor;
+
+    // Add in ambient light
+    varyingColorVec += ambientColor;
+
+	// Set the texture coordinate.
+	varyingTexCoordVec = texCoords0.st;
+
+	// NB. The specular light component must be applied in the fragment shader
+	// after the interpolated texture coordinate is applied to the varying color.
+
+    // Don't forget to transform the geometry!
+    gl_Position = mvpMatrix * vertexPos;
+}

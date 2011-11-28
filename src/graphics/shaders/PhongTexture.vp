@@ -1,0 +1,51 @@
+// /////////////////////////////////////////////////////////////////
+// @file PhongTexture.vp
+// @author Richard S. Wright Jr. and PJ O Halloran.
+// @date 22/09/2010
+//
+// Applies the Phong shading model to each vertex.
+//
+// Per pixel illumiation using ambient, diffuse and specular lighting.
+//
+// The vetices normal vector is interpolated across the surface of the
+// primitive as well as the light direction.
+//
+// A texture is also applied to the primitive.
+//
+// /////////////////////////////////////////////////////////////////
+
+#version 130
+
+// Incoming per vertex... position and normal
+in vec4 vertexPos;
+in vec3 normalVec;
+in vec4 textureVec0;
+
+uniform mat4   mvpMatrix;
+uniform mat4   mvMatrix;
+uniform mat3   normalMatrix;
+uniform vec3   lightPositionVec;
+
+// Color to fragment program
+smooth out vec3 varyingNormalVec;
+smooth out vec3 varyingLightDir;
+smooth out vec2 texCoordsVec;
+
+void main(void) 
+{ 
+    // Get surface normal in eye coordinates
+    varyingNormalVec = normalMatrix * normalVec;
+
+    // Get vertex position in eye coordinates
+    vec4 eyeVertexPos4 = mvMatrix * vertexPos;
+    vec3 eyeVertexPos3 = eyeVertexPos4.xyz / eyeVertexPos4.w;
+
+    // Get vector to light source
+    varyingLightDir = normalize(lightPositionVec - eyeVertexPos3);
+
+    // Pass along the texture coordinates
+    texCoordsVec = textureVec0.st;
+
+    // Don't forget to transform the geometry!
+    gl_Position = mvpMatrix * vertexPos;
+}

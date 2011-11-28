@@ -1,0 +1,110 @@
+// /////////////////////////////////////////////////////////////////
+// @file SnowPointShader.vp
+// @author PJ O Halloran
+//
+// This shader is used to create the snow particle effect.
+//
+// The shader transforms the vertex.   It also alters the size of the
+// point sprite based on its distance from the camera.  
+//
+// /////////////////////////////////////////////////////////////////
+
+// Use GL shader version 3.3
+#version 330
+
+// /////////////////////////////////////////////////////////////////
+// ******************* Input parameters ****************************
+// /////////////////////////////////////////////////////////////////
+in vec4 vertexPos;				// The position of the vertex.
+// /////////////////////////////////////////////////////////////////
+
+
+// /////////////////////////////////////////////////////////////////
+// ******************* Uniform/Batch constants *********************
+// /////////////////////////////////////////////////////////////////
+uniform mat4 mvpMatrix;			// MVP Transformation matrix.
+uniform vec4 snowColor;			// Color of the snow.
+uniform vec4 cameraPos;			// Position of the camera in world space.
+uniform mat4 mvMatrix;			// ModelView transformation matrix.
+// /////////////////////////////////////////////////////////////////
+
+
+// /////////////////////////////////////////////////////////////////
+// ******************* Output parameters ***************************
+// /////////////////////////////////////////////////////////////////
+smooth out vec4 vertexVaryColor;		// Color interpolated to the next vertex.
+// /////////////////////////////////////////////////////////////////
+
+// /////////////////////////////////////////////////////////////////
+// Calculate point size attenuation based on distance.
+//
+// size = sqrt(1 / (a + b*d + c*d*d))
+// where:	d = distance,
+//			a, b and c are configurable parameters of a quadratic
+//			equation.
+//
+//  - If b and c == 0 and a > 0, then falloff will be constant with 
+//	distance.
+//  - If a and c == 0 and b > 0, the  falloff will be linear with 
+//	distance.
+//
+// @param dis The distance from the camera to the vertex.
+//
+// @return float The size of the point (at a minimum will be 1.0f).
+// 
+// /////////////////////////////////////////////////////////////////
+float CalculatePointSize(in float dis)
+{
+	const float a = 2.0f;			// Parameter 'a' in quadratic equation.
+	const float b = 3.0f;			// Parameter 'b' in quadratic equation.
+	const float c = 1.0f;			// Parameter 'c' in quadratic equation.
+	float size = 1.0f;				// Final size of the point (default val of 1.0f!)
+	
+	float under = (a + (b*dis) + (c*(dis*dis)));
+	if(under >= 0.0f)
+	{
+		size = sqrt(1 / under);
+	}
+	
+	//return (size);
+	
+	if(size <= 1.0f)
+		size = 1.0f;
+	else if(size > 1.0f && size <= 2.0f)
+		size = 2.0f;
+	else
+		size = 3.0f;
+		
+	return (size);
+}
+
+// /////////////////////////////////////////////////////////////////
+// Main entry point of shader program.
+//
+// /////////////////////////////////////////////////////////////////
+void main(void) 
+{
+    // Pass on the color to the fragment shader.
+    vertexVaryColor = snowColor;
+    
+    // Get the camera and vertex position in eye space.
+    vec4 cameraEyePos = mvMatrix * cameraPos;
+    vec4 vertexEyePos = mvMatrix * vertexPos;
+    
+    // Calculate the distance between both points.
+    float d = distance(cameraEyePos, vertexEyePos);
+    d = abs(d);
+    
+	// Adjust the size of the point depending on the distance from the screen.
+	//gl_PointSize = CalculatePointSize(d);
+	gl_PointSize = 5.0f;
+	
+    //// If the points are very small, fade them up rather than having them appear out of no where.
+    //if(gl_PointSize < 4.0)
+    //{
+    //    vertexVaryColor = smoothstep(0.0, 4.0, gl_PointSize) * vertexVaryColor;
+    //}
+	
+    // Don't forget to transform the geometry!
+    gl_Position = mvpMatrix * vertexPos;
+}

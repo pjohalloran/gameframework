@@ -1,0 +1,67 @@
+// /////////////////////////////////////////////////////////////////
+// @file goraud.vp
+// @author Richard S. Wright Jr. and PJ O Halloran.
+// @date 22/09/2010
+//
+// Applies the Goraud shading model to each vertex.
+//
+// A vertex color is calculated from the position of the vector with
+// respect to the light source and the materials ambient, diffuse 
+// and specular components.
+//
+// /////////////////////////////////////////////////////////////////
+
+#version 130
+
+// Incoming per vertex... position and normal
+in vec4 vertexPos;
+in vec3 normalVec;
+
+// Set per batch
+uniform vec4    ambientColor;
+uniform vec4    diffuseColor;	
+uniform vec4    specularColor;
+
+uniform vec3	lightPosition;
+uniform mat4	mvpMatrix;
+uniform mat4	mvMatrix;
+uniform mat3	normalMatrix;
+
+// Color to fragment program
+smooth out vec4 varyingColorVec;
+
+void main(void)
+{ 
+    // Get surface normal in eye coordinates
+    vec3 eyeNormalVec = normalMatrix * normalVec;
+
+    // Get vertex position in eye coordinates
+    vec4 eyeVertexPos4 = mvMatrix * vertexPos;
+    vec3 eyeVertexPos3 = eyeVertexPos4.xyz / eyeVertexPos4.w;
+
+    // Get vector to light source
+    vec3 lightDirVec = normalize(lightPosition - eyeVertexPos3);
+
+    // Dot product gives us diffuse intensity
+    float diff = max(0.0, dot(eyeNormalVec, lightDirVec));
+
+    // Multiply intensity by diffuse color, force alpha to 1.0
+    varyingColorVec = diff * diffuseColor;
+
+    // Add in ambient light
+    varyingColorVec += ambientColor;
+
+
+    // Specular Light
+    vec3 reflectionVec = normalize(reflect(-lightDirVec, eyeNormalVec));
+    float spec = max(0.0, dot(eyeNormalVec, reflectionVec));
+    if(diff != 0)
+    {
+        float fSpec = pow(spec, 128.0);
+        varyingColorVec.rgb += vec3(fSpec, fSpec, fSpec);
+	}
+
+
+    // Don't forget to transform the geometry!
+    gl_Position = mvpMatrix * vertexPos;
+}

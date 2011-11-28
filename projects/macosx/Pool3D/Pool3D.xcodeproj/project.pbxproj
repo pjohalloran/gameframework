@@ -1,0 +1,729 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		148506A51412B8DC00ADF5C2 /* pool3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148506931412B8DC00ADF5C2 /* pool3d.cpp */; };
+		148506A61412B8DC00ADF5C2 /* Pool3dActors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148506941412B8DC00ADF5C2 /* Pool3dActors.cpp */; };
+		148506A71412B8DC00ADF5C2 /* Pool3dEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148506971412B8DC00ADF5C2 /* Pool3dEvents.cpp */; };
+		148506A81412B8DC00ADF5C2 /* Pool3dGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148506991412B8DC00ADF5C2 /* Pool3dGame.cpp */; };
+		148506A91412B8DC00ADF5C2 /* Pool3dLogic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1485069B1412B8DC00ADF5C2 /* Pool3dLogic.cpp */; };
+		148506AA1412B8DC00ADF5C2 /* Pool3dMenuView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1485069D1412B8DC00ADF5C2 /* Pool3dMenuView.cpp */; };
+		148506AB1412B8DC00ADF5C2 /* Pool3dMovementController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1485069F1412B8DC00ADF5C2 /* Pool3dMovementController.cpp */; };
+		148506AC1412B8DC00ADF5C2 /* Pool3dSceneNodes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148506A11412B8DC00ADF5C2 /* Pool3dSceneNodes.cpp */; };
+		148506AD1412B8DC00ADF5C2 /* Pool3dView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148506A31412B8DC00ADF5C2 /* Pool3dView.cpp */; };
+		148506B01412C40200ADF5C2 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506AF1412C40200ADF5C2 /* OpenAL.framework */; };
+		148506B21412C41600ADF5C2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506B11412C41600ADF5C2 /* OpenGL.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		148506BE1412C50200ADF5C2 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506B31412C50100ADF5C2 /* libboost_filesystem.a */; };
+		148506BF1412C50200ADF5C2 /* libBulletCollision.2.77.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506B41412C50100ADF5C2 /* libBulletCollision.2.77.dylib */; };
+		148506C01412C50200ADF5C2 /* libBulletDynamics.2.77.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506B51412C50100ADF5C2 /* libBulletDynamics.2.77.dylib */; };
+		148506C11412C50200ADF5C2 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506B61412C50100ADF5C2 /* libfreetype.a */; };
+		148506C21412C50200ADF5C2 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506B71412C50100ADF5C2 /* libftgl.a */; };
+		148506C31412C50200ADF5C2 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506B81412C50100ADF5C2 /* libGLEW.a */; };
+		148506C41412C50200ADF5C2 /* libLinearMath.2.77.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506B91412C50100ADF5C2 /* libLinearMath.2.77.dylib */; };
+		148506C51412C50200ADF5C2 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506BA1412C50100ADF5C2 /* libogg.a */; };
+		148506C71412C50200ADF5C2 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506BC1412C50100ADF5C2 /* libvorbis.a */; };
+		148506C81412C50200ADF5C2 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506BD1412C50200ADF5C2 /* libz.a */; };
+		148506CD1412C52700ADF5C2 /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506CA1412C52700ADF5C2 /* libglfw.a */; };
+		148506CE1412C52700ADF5C2 /* libLuaPlusLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506CB1412C52700ADF5C2 /* libLuaPlusLib.a */; };
+		1485DDCB1413F2330031966F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1485DDC91413F2330031966F /* CoreFoundation.framework */; };
+		1485DDE91413F35B0031966F /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1485DDE81413F35B0031966F /* libboost_system.a */; };
+		1485DDEB1413F4640031966F /* libobjc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1485DDEA1413F4640031966F /* libobjc.dylib */; };
+		1485DDED1413F4B10031966F /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1485DDEC1413F4B10031966F /* libbz2.dylib */; };
+		1485DDF31413F8A10031966F /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1485DDF21413F8A10031966F /* AppKit.framework */; };
+		1485DE2214140E490031966F /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1485DE2114140E490031966F /* libvorbisfile.a */; };
+		1485DE2A14140F100031966F /* libtinyxml.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1485DE2914140F100031966F /* libtinyxml.a */; };
+		1485DE2C141415690031966F /* libgameframework.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1485DE2B141415690031966F /* libgameframework.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		14CAD20014254B7C00D7865B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14CAD1F914254B7B00D7865B /* gameframework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 14A5333E13D4F33D00F9B3B1;
+			remoteInfo = gameframework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		148506781412B82700ADF5C2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		142AC4211442101300B97B09 /* ExcludeList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExcludeList.txt; sourceTree = "<group>"; };
+		142AC4231442101300B97B09 /* .zip */ = {isa = PBXFileReference; lastKnownFileType = file; path = .zip; sourceTree = "<group>"; };
+		142AC4241442101300B97B09 /* Dialogs.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = Dialogs.lua; sourceTree = "<group>"; };
+		142AC4251442101300B97B09 /* init.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = init.lua; sourceTree = "<group>"; };
+		142AC4261442101300B97B09 /* InstructionsScreen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = InstructionsScreen.lua; sourceTree = "<group>"; };
+		142AC4271442101300B97B09 /* MainMenu.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = MainMenu.lua; sourceTree = "<group>"; };
+		142AC4281442101300B97B09 /* NewMenu.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = NewMenu.lua; sourceTree = "<group>"; };
+		142AC4291442101300B97B09 /* OptionsMenu.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = OptionsMenu.lua; sourceTree = "<group>"; };
+		142AC42A1442101300B97B09 /* PauseMenu.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = PauseMenu.lua; sourceTree = "<group>"; };
+		142AC42B1442101300B97B09 /* Pool3dInitialScene.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = Pool3dInitialScene.lua; sourceTree = "<group>"; };
+		142AC42C1442101300B97B09 /* SphereBallDimensions.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SphereBallDimensions.lua; sourceTree = "<group>"; };
+		142AC42D1442101300B97B09 /* UIScreenList.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UIScreenList.lua; sourceTree = "<group>"; };
+		142AC42F1442101300B97B09 /* floor.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = floor.obj; sourceTree = "<group>"; };
+		142AC4301442101300B97B09 /* PoolCue.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PoolCue.obj; sourceTree = "<group>"; };
+		142AC4311442101300B97B09 /* PoolTableCornerFix.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PoolTableCornerFix.obj; sourceTree = "<group>"; };
+		142AC4321442101300B97B09 /* PoolTableCornerGF.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PoolTableCornerGF.obj; sourceTree = "<group>"; };
+		142AC4331442101300B97B09 /* PoolTableFrontPanelGF.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PoolTableFrontPanelGF.obj; sourceTree = "<group>"; };
+		142AC4341442101300B97B09 /* PoolTableMeshGF.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PoolTableMeshGF.obj; sourceTree = "<group>"; };
+		142AC4351442101300B97B09 /* PoolTablePocketMiddleGF.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PoolTablePocketMiddleGF.obj; sourceTree = "<group>"; };
+		142AC4361442101300B97B09 /* PoolTableSidePanelGF.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PoolTableSidePanelGF.obj; sourceTree = "<group>"; };
+		142AC4371442101300B97B09 /* roomedge.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = roomedge.obj; sourceTree = "<group>"; };
+		142AC4381442101300B97B09 /* options.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = options.xml; sourceTree = "<group>"; };
+		142AC43A1442101300B97B09 /* EnvironmentBox.fp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EnvironmentBox.fp; sourceTree = "<group>"; };
+		142AC43B1442101300B97B09 /* EnvironmentBox.vp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = EnvironmentBox.vp; sourceTree = "<group>"; };
+		142AC43C1442101300B97B09 /* flat.fp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flat.fp; sourceTree = "<group>"; };
+		142AC43D1442101300B97B09 /* flat.vp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flat.vp; sourceTree = "<group>"; };
+		142AC43E1442101300B97B09 /* GuiTextureColor.fp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = GuiTextureColor.fp; sourceTree = "<group>"; };
+		142AC43F1442101300B97B09 /* GuiTextureColor.vp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = GuiTextureColor.vp; sourceTree = "<group>"; };
+		142AC4401442101300B97B09 /* ProgrammablePhongAds.fp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = ProgrammablePhongAds.fp; sourceTree = "<group>"; };
+		142AC4411442101300B97B09 /* ProgrammablePhongAds.vp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 2; path = ProgrammablePhongAds.vp; sourceTree = "<group>"; };
+		142AC4431442101300B97B09 /* ball_ball_collision_fx.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ball_ball_collision_fx.wav; sourceTree = "<group>"; };
+		142AC4441442101300B97B09 /* ball_drop_fx.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball_drop_fx.ogg; sourceTree = "<group>"; };
+		142AC4451442101300B97B09 /* ball_wall_collision_fx.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ball_wall_collision_fx.wav; sourceTree = "<group>"; };
+		142AC4461442101300B97B09 /* cue_ball_collision_fx.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cue_ball_collision_fx.wav; sourceTree = "<group>"; };
+		142AC4481442101300B97B09 /* ball01.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball01.tga; sourceTree = "<group>"; };
+		142AC4491442101300B97B09 /* ball02.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball02.tga; sourceTree = "<group>"; };
+		142AC44A1442101300B97B09 /* ball03.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball03.tga; sourceTree = "<group>"; };
+		142AC44B1442101300B97B09 /* ball04.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball04.tga; sourceTree = "<group>"; };
+		142AC44C1442101300B97B09 /* ball05.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball05.tga; sourceTree = "<group>"; };
+		142AC44D1442101300B97B09 /* ball06.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball06.tga; sourceTree = "<group>"; };
+		142AC44E1442101300B97B09 /* ball07.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball07.tga; sourceTree = "<group>"; };
+		142AC44F1442101300B97B09 /* ball08.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball08.tga; sourceTree = "<group>"; };
+		142AC4501442101300B97B09 /* ball09.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball09.tga; sourceTree = "<group>"; };
+		142AC4511442101300B97B09 /* ball10.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball10.tga; sourceTree = "<group>"; };
+		142AC4521442101300B97B09 /* ball11.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball11.tga; sourceTree = "<group>"; };
+		142AC4531442101300B97B09 /* ball12.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball12.tga; sourceTree = "<group>"; };
+		142AC4541442101300B97B09 /* ball13.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball13.tga; sourceTree = "<group>"; };
+		142AC4551442101300B97B09 /* ball14.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball14.tga; sourceTree = "<group>"; };
+		142AC4561442101300B97B09 /* ball15.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ball15.tga; sourceTree = "<group>"; };
+		142AC4571442101300B97B09 /* checkDefault.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkDefault.tga; sourceTree = "<group>"; };
+		142AC4581442101300B97B09 /* checkDefaultChecked.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkDefaultChecked.tga; sourceTree = "<group>"; };
+		142AC4591442101300B97B09 /* checkHover.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkHover.tga; sourceTree = "<group>"; };
+		142AC45A1442101300B97B09 /* checkHoverChecked.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = checkHoverChecked.tga; sourceTree = "<group>"; };
+		142AC45B1442101300B97B09 /* clouds.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = clouds.tga; sourceTree = "<group>"; };
+		142AC45C1442101300B97B09 /* CueTexNew.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = CueTexNew.tga; sourceTree = "<group>"; };
+		142AC45D1442101300B97B09 /* dBut.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = dBut.tga; sourceTree = "<group>"; };
+		142AC45E1442101300B97B09 /* fontBackground.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontBackground.tga; sourceTree = "<group>"; };
+		142AC45F1442101300B97B09 /* fontBackgroundA.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontBackgroundA.tga; sourceTree = "<group>"; };
+		142AC4601442101300B97B09 /* greenfelt.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = greenfelt.tga; sourceTree = "<group>"; };
+		142AC4611442101300B97B09 /* hBut.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = hBut.tga; sourceTree = "<group>"; };
+		142AC4621442101300B97B09 /* Instructions.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Instructions.tga; sourceTree = "<group>"; };
+		142AC4631442101300B97B09 /* MainMenuBackground.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = MainMenuBackground.tga; sourceTree = "<group>"; };
+		142AC4641442101300B97B09 /* Marble.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Marble.tga; sourceTree = "<group>"; };
+		142AC4651442101300B97B09 /* PanelOutline.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = PanelOutline.tga; sourceTree = "<group>"; };
+		142AC4661442101300B97B09 /* pBut.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = pBut.tga; sourceTree = "<group>"; };
+		142AC4671442101300B97B09 /* Pool3dLogo.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pool3dLogo.tga; sourceTree = "<group>"; };
+		142AC4681442101300B97B09 /* PoolTableTex.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = PoolTableTex.tga; sourceTree = "<group>"; };
+		142AC4691442101300B97B09 /* sliderBut.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = sliderBut.tga; sourceTree = "<group>"; };
+		142AC46A1442101300B97B09 /* tbBack.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = tbBack.tga; sourceTree = "<group>"; };
+		142AC46B1442101300B97B09 /* wood3.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = wood3.tga; sourceTree = "<group>"; };
+		1485067A1412B82700ADF5C2 /* Pool3D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Pool3D; sourceTree = BUILT_PRODUCTS_DIR; };
+		148506931412B8DC00ADF5C2 /* pool3d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; name = pool3d.cpp; path = ../../../../src/Pool3d/pool3d.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		148506941412B8DC00ADF5C2 /* Pool3dActors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; name = Pool3dActors.cpp; path = ../../../../src/Pool3d/Pool3dActors.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		148506951412B8DC00ADF5C2 /* Pool3dActors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = Pool3dActors.h; path = ../../../../src/Pool3d/Pool3dActors.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		148506961412B8DC00ADF5C2 /* Pool3dCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = Pool3dCommon.h; path = ../../../../src/Pool3d/Pool3dCommon.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		148506971412B8DC00ADF5C2 /* Pool3dEvents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pool3dEvents.cpp; path = ../../../../src/Pool3d/Pool3dEvents.cpp; sourceTree = "<group>"; };
+		148506981412B8DC00ADF5C2 /* Pool3dEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = Pool3dEvents.h; path = ../../../../src/Pool3d/Pool3dEvents.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		148506991412B8DC00ADF5C2 /* Pool3dGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; name = Pool3dGame.cpp; path = ../../../../src/Pool3d/Pool3dGame.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		1485069A1412B8DC00ADF5C2 /* Pool3dGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = Pool3dGame.h; path = ../../../../src/Pool3d/Pool3dGame.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		1485069B1412B8DC00ADF5C2 /* Pool3dLogic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; name = Pool3dLogic.cpp; path = ../../../../src/Pool3d/Pool3dLogic.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		1485069C1412B8DC00ADF5C2 /* Pool3dLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = Pool3dLogic.h; path = ../../../../src/Pool3d/Pool3dLogic.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		1485069D1412B8DC00ADF5C2 /* Pool3dMenuView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; name = Pool3dMenuView.cpp; path = ../../../../src/Pool3d/Pool3dMenuView.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		1485069E1412B8DC00ADF5C2 /* Pool3dMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = Pool3dMenuView.h; path = ../../../../src/Pool3d/Pool3dMenuView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		1485069F1412B8DC00ADF5C2 /* Pool3dMovementController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; name = Pool3dMovementController.cpp; path = ../../../../src/Pool3d/Pool3dMovementController.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		148506A01412B8DC00ADF5C2 /* Pool3dMovementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = Pool3dMovementController.h; path = ../../../../src/Pool3d/Pool3dMovementController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		148506A11412B8DC00ADF5C2 /* Pool3dSceneNodes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; name = Pool3dSceneNodes.cpp; path = ../../../../src/Pool3d/Pool3dSceneNodes.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		148506A21412B8DC00ADF5C2 /* Pool3dSceneNodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = Pool3dSceneNodes.h; path = ../../../../src/Pool3d/Pool3dSceneNodes.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		148506A31412B8DC00ADF5C2 /* Pool3dView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; name = Pool3dView.cpp; path = ../../../../src/Pool3d/Pool3dView.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		148506A41412B8DC00ADF5C2 /* Pool3dView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 2; name = Pool3dView.h; path = ../../../../src/Pool3d/Pool3dView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		148506AF1412C40200ADF5C2 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		148506B11412C41600ADF5C2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		148506B31412C50100ADF5C2 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = /opt/local/lib/libboost_filesystem.a; sourceTree = "<absolute>"; };
+		148506B41412C50100ADF5C2 /* libBulletCollision.2.77.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libBulletCollision.2.77.dylib; path = /opt/local/lib/libBulletCollision.2.77.dylib; sourceTree = "<absolute>"; };
+		148506B51412C50100ADF5C2 /* libBulletDynamics.2.77.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libBulletDynamics.2.77.dylib; path = /opt/local/lib/libBulletDynamics.2.77.dylib; sourceTree = "<absolute>"; };
+		148506B61412C50100ADF5C2 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = /opt/local/lib/libfreetype.a; sourceTree = "<absolute>"; };
+		148506B71412C50100ADF5C2 /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = /opt/local/lib/libftgl.a; sourceTree = "<absolute>"; };
+		148506B81412C50100ADF5C2 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = /opt/local/lib/libGLEW.a; sourceTree = "<absolute>"; };
+		148506B91412C50100ADF5C2 /* libLinearMath.2.77.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLinearMath.2.77.dylib; path = /opt/local/lib/libLinearMath.2.77.dylib; sourceTree = "<absolute>"; };
+		148506BA1412C50100ADF5C2 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = /opt/local/lib/libogg.a; sourceTree = "<absolute>"; };
+		148506BC1412C50100ADF5C2 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = /opt/local/lib/libvorbis.a; sourceTree = "<absolute>"; };
+		148506BD1412C50200ADF5C2 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = /opt/local/lib/libz.a; sourceTree = "<absolute>"; };
+		148506CA1412C52700ADF5C2 /* libglfw.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw.a; path = ../../../../libs/Debug/libglfw.a; sourceTree = "<group>"; };
+		148506CB1412C52700ADF5C2 /* libLuaPlusLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLuaPlusLib.a; path = ../../../../libs/Debug/libLuaPlusLib.a; sourceTree = "<group>"; };
+		1485DDC81413F2330031966F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1485DDC91413F2330031966F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		1485DDE81413F35B0031966F /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = /opt/local/lib/libboost_system.a; sourceTree = "<absolute>"; };
+		1485DDEA1413F4640031966F /* libobjc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.dylib; path = usr/lib/libobjc.dylib; sourceTree = SDKROOT; };
+		1485DDEC1413F4B10031966F /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
+		1485DDF01413F8930031966F /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = System/Library/Frameworks/AGL.framework; sourceTree = SDKROOT; };
+		1485DDF21413F8A10031966F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		1485DDF41413F8C90031966F /* libLuaPlusLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLuaPlusLib.a; path = ../../../../libs/Debug/libLuaPlusLib.a; sourceTree = "<group>"; };
+		1485DE2114140E490031966F /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = /opt/local/lib/libvorbisfile.a; sourceTree = "<absolute>"; };
+		1485DE2914140F100031966F /* libtinyxml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxml.a; path = ../../../../libs/Debug/libtinyxml.a; sourceTree = "<group>"; };
+		1485DE2B141415690031966F /* libgameframework.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgameframework.a; path = ../../../../libs/Release/libgameframework.a; sourceTree = "<group>"; };
+		14CAD1F914254B7B00D7865B /* gameframework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gameframework.xcodeproj; path = ../../gameframework/gameframework.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		148506771412B82700ADF5C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1485DE2C141415690031966F /* libgameframework.a in Frameworks */,
+				1485DE2A14140F100031966F /* libtinyxml.a in Frameworks */,
+				148506CE1412C52700ADF5C2 /* libLuaPlusLib.a in Frameworks */,
+				148506BE1412C50200ADF5C2 /* libboost_filesystem.a in Frameworks */,
+				1485DDE91413F35B0031966F /* libboost_system.a in Frameworks */,
+				148506C21412C50200ADF5C2 /* libftgl.a in Frameworks */,
+				148506C11412C50200ADF5C2 /* libfreetype.a in Frameworks */,
+				148506C01412C50200ADF5C2 /* libBulletDynamics.2.77.dylib in Frameworks */,
+				148506BF1412C50200ADF5C2 /* libBulletCollision.2.77.dylib in Frameworks */,
+				148506C41412C50200ADF5C2 /* libLinearMath.2.77.dylib in Frameworks */,
+				1485DE2214140E490031966F /* libvorbisfile.a in Frameworks */,
+				148506C71412C50200ADF5C2 /* libvorbis.a in Frameworks */,
+				148506C51412C50200ADF5C2 /* libogg.a in Frameworks */,
+				148506CD1412C52700ADF5C2 /* libglfw.a in Frameworks */,
+				148506C31412C50200ADF5C2 /* libGLEW.a in Frameworks */,
+				148506C81412C50200ADF5C2 /* libz.a in Frameworks */,
+				1485DDED1413F4B10031966F /* libbz2.dylib in Frameworks */,
+				1485DDEB1413F4640031966F /* libobjc.dylib in Frameworks */,
+				1485DDF31413F8A10031966F /* AppKit.framework in Frameworks */,
+				148506B21412C41600ADF5C2 /* OpenGL.framework in Frameworks */,
+				148506B01412C40200ADF5C2 /* OpenAL.framework in Frameworks */,
+				1485DDCB1413F2330031966F /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		142AC4201442101300B97B09 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				142AC4211442101300B97B09 /* ExcludeList.txt */,
+				142AC4221442101300B97B09 /* lua */,
+				142AC42E1442101300B97B09 /* models */,
+				142AC4381442101300B97B09 /* options.xml */,
+				142AC4391442101300B97B09 /* shaders */,
+				142AC4421442101300B97B09 /* sounds */,
+				142AC4471442101300B97B09 /* textures */,
+			);
+			name = data;
+			path = ../../../../src/Pool3d/data;
+			sourceTree = "<group>";
+		};
+		142AC4221442101300B97B09 /* lua */ = {
+			isa = PBXGroup;
+			children = (
+				142AC4231442101300B97B09 /* .zip */,
+				142AC4241442101300B97B09 /* Dialogs.lua */,
+				142AC4251442101300B97B09 /* init.lua */,
+				142AC4261442101300B97B09 /* InstructionsScreen.lua */,
+				142AC4271442101300B97B09 /* MainMenu.lua */,
+				142AC4281442101300B97B09 /* NewMenu.lua */,
+				142AC4291442101300B97B09 /* OptionsMenu.lua */,
+				142AC42A1442101300B97B09 /* PauseMenu.lua */,
+				142AC42B1442101300B97B09 /* Pool3dInitialScene.lua */,
+				142AC42C1442101300B97B09 /* SphereBallDimensions.lua */,
+				142AC42D1442101300B97B09 /* UIScreenList.lua */,
+			);
+			path = lua;
+			sourceTree = "<group>";
+		};
+		142AC42E1442101300B97B09 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				142AC42F1442101300B97B09 /* floor.obj */,
+				142AC4301442101300B97B09 /* PoolCue.obj */,
+				142AC4311442101300B97B09 /* PoolTableCornerFix.obj */,
+				142AC4321442101300B97B09 /* PoolTableCornerGF.obj */,
+				142AC4331442101300B97B09 /* PoolTableFrontPanelGF.obj */,
+				142AC4341442101300B97B09 /* PoolTableMeshGF.obj */,
+				142AC4351442101300B97B09 /* PoolTablePocketMiddleGF.obj */,
+				142AC4361442101300B97B09 /* PoolTableSidePanelGF.obj */,
+				142AC4371442101300B97B09 /* roomedge.obj */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		142AC4391442101300B97B09 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				142AC43A1442101300B97B09 /* EnvironmentBox.fp */,
+				142AC43B1442101300B97B09 /* EnvironmentBox.vp */,
+				142AC43C1442101300B97B09 /* flat.fp */,
+				142AC43D1442101300B97B09 /* flat.vp */,
+				142AC43E1442101300B97B09 /* GuiTextureColor.fp */,
+				142AC43F1442101300B97B09 /* GuiTextureColor.vp */,
+				142AC4401442101300B97B09 /* ProgrammablePhongAds.fp */,
+				142AC4411442101300B97B09 /* ProgrammablePhongAds.vp */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
+		142AC4421442101300B97B09 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				142AC4431442101300B97B09 /* ball_ball_collision_fx.wav */,
+				142AC4441442101300B97B09 /* ball_drop_fx.ogg */,
+				142AC4451442101300B97B09 /* ball_wall_collision_fx.wav */,
+				142AC4461442101300B97B09 /* cue_ball_collision_fx.wav */,
+			);
+			path = sounds;
+			sourceTree = "<group>";
+		};
+		142AC4471442101300B97B09 /* textures */ = {
+			isa = PBXGroup;
+			children = (
+				142AC4481442101300B97B09 /* ball01.tga */,
+				142AC4491442101300B97B09 /* ball02.tga */,
+				142AC44A1442101300B97B09 /* ball03.tga */,
+				142AC44B1442101300B97B09 /* ball04.tga */,
+				142AC44C1442101300B97B09 /* ball05.tga */,
+				142AC44D1442101300B97B09 /* ball06.tga */,
+				142AC44E1442101300B97B09 /* ball07.tga */,
+				142AC44F1442101300B97B09 /* ball08.tga */,
+				142AC4501442101300B97B09 /* ball09.tga */,
+				142AC4511442101300B97B09 /* ball10.tga */,
+				142AC4521442101300B97B09 /* ball11.tga */,
+				142AC4531442101300B97B09 /* ball12.tga */,
+				142AC4541442101300B97B09 /* ball13.tga */,
+				142AC4551442101300B97B09 /* ball14.tga */,
+				142AC4561442101300B97B09 /* ball15.tga */,
+				142AC4571442101300B97B09 /* checkDefault.tga */,
+				142AC4581442101300B97B09 /* checkDefaultChecked.tga */,
+				142AC4591442101300B97B09 /* checkHover.tga */,
+				142AC45A1442101300B97B09 /* checkHoverChecked.tga */,
+				142AC45B1442101300B97B09 /* clouds.tga */,
+				142AC45C1442101300B97B09 /* CueTexNew.tga */,
+				142AC45D1442101300B97B09 /* dBut.tga */,
+				142AC45E1442101300B97B09 /* fontBackground.tga */,
+				142AC45F1442101300B97B09 /* fontBackgroundA.tga */,
+				142AC4601442101300B97B09 /* greenfelt.tga */,
+				142AC4611442101300B97B09 /* hBut.tga */,
+				142AC4621442101300B97B09 /* Instructions.tga */,
+				142AC4631442101300B97B09 /* MainMenuBackground.tga */,
+				142AC4641442101300B97B09 /* Marble.tga */,
+				142AC4651442101300B97B09 /* PanelOutline.tga */,
+				142AC4661442101300B97B09 /* pBut.tga */,
+				142AC4671442101300B97B09 /* Pool3dLogo.tga */,
+				142AC4681442101300B97B09 /* PoolTableTex.tga */,
+				142AC4691442101300B97B09 /* sliderBut.tga */,
+				142AC46A1442101300B97B09 /* tbBack.tga */,
+				142AC46B1442101300B97B09 /* wood3.tga */,
+			);
+			path = textures;
+			sourceTree = "<group>";
+		};
+		144FF4FA147D16C8008B361D /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				1485DE2914140F100031966F /* libtinyxml.a */,
+				1485DE2114140E490031966F /* libvorbisfile.a */,
+				1485DDF41413F8C90031966F /* libLuaPlusLib.a */,
+				1485DDEC1413F4B10031966F /* libbz2.dylib */,
+				1485DDEA1413F4640031966F /* libobjc.dylib */,
+				1485DDE81413F35B0031966F /* libboost_system.a */,
+				148506CA1412C52700ADF5C2 /* libglfw.a */,
+				148506CB1412C52700ADF5C2 /* libLuaPlusLib.a */,
+				148506B31412C50100ADF5C2 /* libboost_filesystem.a */,
+				148506B41412C50100ADF5C2 /* libBulletCollision.2.77.dylib */,
+				148506B51412C50100ADF5C2 /* libBulletDynamics.2.77.dylib */,
+				148506B61412C50100ADF5C2 /* libfreetype.a */,
+				148506B71412C50100ADF5C2 /* libftgl.a */,
+				148506B81412C50100ADF5C2 /* libGLEW.a */,
+				148506B91412C50100ADF5C2 /* libLinearMath.2.77.dylib */,
+				148506BA1412C50100ADF5C2 /* libogg.a */,
+				148506BC1412C50100ADF5C2 /* libvorbis.a */,
+				148506BD1412C50200ADF5C2 /* libz.a */,
+			);
+			name = 3rdParty;
+			sourceTree = "<group>";
+		};
+		144FF4FC147D1707008B361D /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				1485DDF21413F8A10031966F /* AppKit.framework */,
+				1485DDF01413F8930031966F /* AGL.framework */,
+				1485DDC81413F2330031966F /* CoreData.framework */,
+				1485DDC91413F2330031966F /* CoreFoundation.framework */,
+				148506B11412C41600ADF5C2 /* OpenGL.framework */,
+				148506AF1412C40200ADF5C2 /* OpenAL.framework */,
+			);
+			name = Apple;
+			sourceTree = "<group>";
+		};
+		14704BD1144390590013AE42 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				148506931412B8DC00ADF5C2 /* pool3d.cpp */,
+				148506941412B8DC00ADF5C2 /* Pool3dActors.cpp */,
+				148506951412B8DC00ADF5C2 /* Pool3dActors.h */,
+				148506961412B8DC00ADF5C2 /* Pool3dCommon.h */,
+				148506971412B8DC00ADF5C2 /* Pool3dEvents.cpp */,
+				148506981412B8DC00ADF5C2 /* Pool3dEvents.h */,
+				148506991412B8DC00ADF5C2 /* Pool3dGame.cpp */,
+				1485069A1412B8DC00ADF5C2 /* Pool3dGame.h */,
+				1485069B1412B8DC00ADF5C2 /* Pool3dLogic.cpp */,
+				1485069C1412B8DC00ADF5C2 /* Pool3dLogic.h */,
+				1485069D1412B8DC00ADF5C2 /* Pool3dMenuView.cpp */,
+				1485069E1412B8DC00ADF5C2 /* Pool3dMenuView.h */,
+				1485069F1412B8DC00ADF5C2 /* Pool3dMovementController.cpp */,
+				148506A01412B8DC00ADF5C2 /* Pool3dMovementController.h */,
+				148506A11412B8DC00ADF5C2 /* Pool3dSceneNodes.cpp */,
+				148506A21412B8DC00ADF5C2 /* Pool3dSceneNodes.h */,
+				148506A31412B8DC00ADF5C2 /* Pool3dView.cpp */,
+				148506A41412B8DC00ADF5C2 /* Pool3dView.h */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		1485066F1412B82700ADF5C2 = {
+			isa = PBXGroup;
+			children = (
+				1485067D1412B82700ADF5C2 /* Pool3D */,
+				1485067B1412B82700ADF5C2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1485067B1412B82700ADF5C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1485067A1412B82700ADF5C2 /* Pool3D */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1485067D1412B82700ADF5C2 /* Pool3D */ = {
+			isa = PBXGroup;
+			children = (
+				14704BD1144390590013AE42 /* src */,
+				142AC4201442101300B97B09 /* data */,
+				14CAD1F714254B4A00D7865B /* Framework */,
+			);
+			path = Pool3D;
+			sourceTree = "<group>";
+		};
+		14CAD1F714254B4A00D7865B /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				144FF4FC147D1707008B361D /* Apple */,
+				144FF4FA147D16C8008B361D /* 3rdParty */,
+				1485DE2B141415690031966F /* libgameframework.a */,
+				14CAD1F914254B7B00D7865B /* gameframework.xcodeproj */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		14CAD1FA14254B7B00D7865B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14CAD20114254B7C00D7865B /* libgameframework.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		148506791412B82700ADF5C2 /* Pool3D */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 148506841412B82700ADF5C2 /* Build configuration list for PBXNativeTarget "Pool3D" */;
+			buildPhases = (
+				148506761412B82700ADF5C2 /* Sources */,
+				148506771412B82700ADF5C2 /* Frameworks */,
+				148506781412B82700ADF5C2 /* CopyFiles */,
+				14D67CEF1442075600DED6B0 /*  Build Resources */,
+				142AC46C144210A200B97B09 /* Copy Options.xml */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pool3D;
+			productName = Pool3D;
+			productReference = 1485067A1412B82700ADF5C2 /* Pool3D */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		148506711412B82700ADF5C2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = n/a;
+			};
+			buildConfigurationList = 148506741412B82700ADF5C2 /* Build configuration list for PBXProject "Pool3D" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1485066F1412B82700ADF5C2;
+			productRefGroup = 1485067B1412B82700ADF5C2 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 14CAD1FA14254B7B00D7865B /* Products */;
+					ProjectRef = 14CAD1F914254B7B00D7865B /* gameframework.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				148506791412B82700ADF5C2 /* Pool3D */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		14CAD20114254B7C00D7865B /* libgameframework.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libgameframework.a;
+			remoteRef = 14CAD20014254B7C00D7865B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		142AC46C144210A200B97B09 /* Copy Options.xml */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Options.xml";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp ../../../src/Pool3d/data/options.xml ../../../data/Pool3D/";
+		};
+		14D67CEF1442075600DED6B0 /*  Build Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = " Build Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "../../../src/build/macosx/BuildResources.sh ../../../src/Pool3d/data/ExcludeList.txt ../../../src/Pool3d/data/ ../../../data/Pool3D/Pool3D.zip";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		148506761412B82700ADF5C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				148506A51412B8DC00ADF5C2 /* pool3d.cpp in Sources */,
+				148506A61412B8DC00ADF5C2 /* Pool3dActors.cpp in Sources */,
+				148506A71412B8DC00ADF5C2 /* Pool3dEvents.cpp in Sources */,
+				148506A81412B8DC00ADF5C2 /* Pool3dGame.cpp in Sources */,
+				148506A91412B8DC00ADF5C2 /* Pool3dLogic.cpp in Sources */,
+				148506AA1412B8DC00ADF5C2 /* Pool3dMenuView.cpp in Sources */,
+				148506AB1412B8DC00ADF5C2 /* Pool3dMovementController.cpp in Sources */,
+				148506AC1412B8DC00ADF5C2 /* Pool3dSceneNodes.cpp in Sources */,
+				148506AD1412B8DC00ADF5C2 /* Pool3dView.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		148506821412B82700ADF5C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					USE_NEW_GLFW,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../include/,
+					/opt/local/include/,
+					/opt/local/include/freetype2/,
+					/opt/local/include/boost/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/pjohalloran/work/trunk/libs/$(CONFIGURATION)",
+					/opt/local/lib/,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OBJROOT = /Users/pjohalloran/work/trunk/obj/;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				SDKROOT = macosx;
+				SHARED_PRECOMPS_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				SYMROOT = /Users/pjohalloran/work/trunk/bin/;
+			};
+			name = Debug;
+		};
+		148506831412B82700ADF5C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = USE_NEW_GLFW;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../include/,
+					/opt/local/include/,
+					/opt/local/include/freetype2/,
+					/opt/local/include/boost/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/pjohalloran/work/trunk/libs/$(CONFIGURATION)",
+					/opt/local/lib/,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OBJROOT = /Users/pjohalloran/work/trunk/obj/;
+				OTHER_LDFLAGS = "";
+				SDKROOT = macosx;
+				SHARED_PRECOMPS_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				SYMROOT = /Users/pjohalloran/work/trunk/bin/;
+			};
+			name = Release;
+		};
+		148506851412B82700ADF5C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				GCC_ENABLE_SYMBOL_SEPARATION = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					TARGET_OS_MAC,
+					LUAPLUS_ENABLE_INLINES,
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				HEADER_SEARCH_PATHS = (
+					../../../include/,
+					/opt/local/include/,
+					/opt/local/include/freetype2/,
+					/opt/local/include/boost/,
+					/opt/local/include/bullet/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+					"\"$(SRCROOT)/../../../libs/Debug\"",
+					"\"$(SRCROOT)/../../../libs/Release\"",
+				);
+				MACH_O_TYPE = mh_execute;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = debugging;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		148506861412B82700ADF5C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				GCC_ENABLE_SYMBOL_SEPARATION = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					TARGET_OS_MAC,
+					LUAPLUS_ENABLE_INLINES,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				HEADER_SEARCH_PATHS = (
+					../../../include/,
+					/opt/local/include/,
+					/opt/local/include/freetype2/,
+					/opt/local/include/boost/,
+					/opt/local/include/bullet/,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/lib,
+					"\"$(SRCROOT)/../../../libs/Debug\"",
+					"\"$(SRCROOT)/../../../libs/Release\"",
+				);
+				MACH_O_TYPE = mh_execute;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = debugging;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		148506741412B82700ADF5C2 /* Build configuration list for PBXProject "Pool3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				148506821412B82700ADF5C2 /* Debug */,
+				148506831412B82700ADF5C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		148506841412B82700ADF5C2 /* Build configuration list for PBXNativeTarget "Pool3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				148506851412B82700ADF5C2 /* Debug */,
+				148506861412B82700ADF5C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 148506711412B82700ADF5C2 /* Project object */;
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+    <game>CM8</game>
+    <context adapter="0" fullscreen="1" width="1280" height="1024" multisamples="0" gamma="1.000000" />
+    <shadermodel vsprofile="vs_1_1" psprofile="ps_2_0" />
+    <shadows enabled="0" size="2048" splits="2" splitdistances="12 36 108" />
+    <textures quality="0" />
+    <texture_filtering track_anisotropy="4" />
+</config>
