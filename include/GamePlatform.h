@@ -61,6 +61,7 @@
                 #define GLFW_FUNC_PRE GLFWCALL
             #endif
         #endif
+        #include <assert.h>
 
     #elif TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 
@@ -76,5 +77,7 @@
         #error "Platform not yet supported!"
     #endif
 #endif
+
+
 
 #endif

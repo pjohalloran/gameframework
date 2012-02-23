@@ -558,9 +558,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
-				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -569,6 +569,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					_DEBUG,
 					"$(inherited)",
 					USE_NEW_GLFW,
 				);
@@ -585,16 +586,16 @@
 					/opt/local/include/boost/,
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/pjohalloran/work/trunk/libs/$(CONFIGURATION)",
+					"../../../libs/$(CONFIGURATION)",
 					/opt/local/lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OBJROOT = /Users/pjohalloran/work/trunk/obj/;
+				OBJROOT = ../../../obj/;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 				SHARED_PRECOMPS_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				SYMROOT = /Users/pjohalloran/work/trunk/bin/;
+				SYMROOT = ../../../bin/;
 			};
 			name = Debug;
 		};
@@ -602,7 +603,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -621,15 +622,15 @@
 					/opt/local/include/boost/,
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"/Users/pjohalloran/work/trunk/libs/$(CONFIGURATION)",
+					"../../../libs/$(CONFIGURATION)",
 					/opt/local/lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OBJROOT = /Users/pjohalloran/work/trunk/obj/;
+				OBJROOT = ../../../obj/;
 				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 				SHARED_PRECOMPS_DIR = "$(PROJECT_TEMP_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				SYMROOT = /Users/pjohalloran/work/trunk/bin/;
+				SYMROOT = ../../../bin/;
 			};
 			name = Release;
 		};
@@ -641,7 +642,6 @@
 				GCC_ENABLE_SYMBOL_SEPARATION = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
 					TARGET_OS_MAC,
 					LUAPLUS_ENABLE_INLINES,

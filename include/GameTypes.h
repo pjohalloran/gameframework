@@ -28,9 +28,12 @@ namespace GameHalloran
     typedef float F32;
     typedef double F64;
     
+	// Matrix3x3 aray definition (a F32 array as it is used in GLSL shaders only).
+	typedef F32 Matrix3x3[9];
+    
     // unsigned long is 32 bits or 64 bits depending on the target architecture...
-    // 3rd party data chunks used in framework (zlib (.zip), .wav) use 4 bytes for DWORD no matter
-    //  what the architeture used is...
+    // However, 3rd party data chunks used in framework (zlib (.zip), .wav) use 4 bytes for DWORD no matter
+    //  what the architeture used is...  So we will explicitly define DWORD and WORD types here!
 #if defined(__i386__)
     typedef GameHalloran::U64 DWORD;
     typedef GameHalloran::U16 WORD;

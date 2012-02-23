@@ -291,7 +291,7 @@ namespace GameHalloran
 			// Copy constructor.
 			//
 			// /////////////////////////////////////////////////////////////////
-			Matrix4(const Matrix4 &matRef);
+            Matrix4(const Matrix4 &matRef)/* { Set(matRef.m_mat); }*/;
 			
 			// /////////////////////////////////////////////////////////////////
 			// Destructor.
@@ -907,9 +907,6 @@ namespace GameHalloran
 	//
 	// /////////////////////////////////////////////////////////////////
 	Matrix4 &BuildOrthographic(Matrix4 &outMatrix, const F32 xMin, const F32 xMax, const F32 yMin, const F32 yMax, const F32 zMin, const F32 zMax);
-
-	// Matrix3x3 aray definition (a F32 array as it is used in GLSL shaders only).
-	typedef F32 Matrix3x3[9];
 
 	// /////////////////////////////////////////////////////////////////
 	// Extract the rotation matrix from a Matrix4.

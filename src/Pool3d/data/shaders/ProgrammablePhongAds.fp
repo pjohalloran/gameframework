@@ -246,7 +246,9 @@ vec3 GetAmbientTerm(vec4 lightAmbientColor)
 // /////////////////////////////////////////////////////////////////
 vec3 GetDiffuseTerm(vec4 lightDiffuseColor, vec3 dirToLight, vec3 vertexCameraNormal)
 {
-	float dotProduct = max(dot(vertexCameraNormal, dirToLight), 0.0);
+    return (vec3(0.0));
+	//float dotProduct = max(dot(vertexCameraNormal, dirToLight), 0.0);
+    float dotProduct = dot(vertexCameraNormal, dirToLight);
 	return (dotProduct * lightDiffuseColor.rgb * u_materialD.rgb);
 }
 

@@ -20,6 +20,7 @@
 #include <boost/filesystem.hpp>
 
 // Project Headers
+#include "ICleanableObserver.h"
 
 
 // /////////////////////////////////////////////////////////////////
@@ -50,7 +51,7 @@ namespace GameHalloran
 	// when instances of this object go out of scope or are freed.
 	//
 	// /////////////////////////////////////////////////////////////////
-	class GLSLShader
+	class GLSLShader : public ICleanableObserver
 	{
 	private:
 
@@ -231,7 +232,14 @@ namespace GameHalloran
 		// Guarantees that the shader program will be freed.
 		//
 		// /////////////////////////////////////////////////////////////////
-		~GLSLShader();
+		virtual ~GLSLShader();
+        
+        // /////////////////////////////////////////////////////////////////
+        // Interface for dependant Uniforms to notify their shader that
+        // there values need to be updated to the GPU.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VNotifyDirty(ICleanable *ptr) {};
 
 		// /////////////////////////////////////////////////////////////////
 		// Builds and compiles the vertex and fragment shaders.

@@ -15,6 +15,7 @@
 		14AB121E1448A39E00390E7A /* GameMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AB121D1448A39E00390E7A /* GameMemory.cpp */; };
 		14AB12211448ABFA00390E7A /* GameAllocater.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AB12201448ABF900390E7A /* GameAllocater.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14B5AA42144B5302000EFA8D /* DefaultAllocater.h in Headers */ = {isa = PBXBuildFile; fileRef = 14B5AA41144B5302000EFA8D /* DefaultAllocater.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		14C1BE3014F16FAC00F922E1 /* ShaderUniform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14C1BE2F14F16FAC00F922E1 /* ShaderUniform.cpp */; };
 		14C6B6BC13F9CBA1005130FC /* DynamicArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B5C113F9CBA1005130FC /* DynamicArray.cpp */; };
 		14C6B6BD13F9CBA1005130FC /* DynamicArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 14C6B5C213F9CBA1005130FC /* DynamicArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14C6B6BE13F9CBA1005130FC /* LinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B5C313F9CBA1005130FC /* LinkedList.cpp */; };
@@ -209,9 +210,9 @@
 		14C6B77D13F9CBA2005130FC /* HumanView.h in Headers */ = {isa = PBXBuildFile; fileRef = 14C6B6B913F9CBA1005130FC /* HumanView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14C6B77E13F9CBA2005130FC /* IGameView.h in Headers */ = {isa = PBXBuildFile; fileRef = 14C6B6BA13F9CBA1005130FC /* IGameView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14C6B77F13F9CBA2005130FC /* IScreenElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 14C6B6BB13F9CBA1005130FC /* IScreenElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		14F701551481298D00B44AE6 /* ICleanable.h in Headers */ = {isa = PBXBuildFile; fileRef = 14F701541481298D00B44AE6 /* ICleanable.h */; };
-		14F70157148129F800B44AE6 /* ICleanableObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 14F70156148129F800B44AE6 /* ICleanableObserver.h */; };
-		14F7015914812DA700B44AE6 /* ShaderUniform.h in Headers */ = {isa = PBXBuildFile; fileRef = 14F7015814812DA700B44AE6 /* ShaderUniform.h */; };
+		14F701551481298D00B44AE6 /* ICleanable.h in Headers */ = {isa = PBXBuildFile; fileRef = 14F701541481298D00B44AE6 /* ICleanable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		14F70157148129F800B44AE6 /* ICleanableObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 14F70156148129F800B44AE6 /* ICleanableObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		14F7015914812DA700B44AE6 /* ShaderUniform.h in Headers */ = {isa = PBXBuildFile; fileRef = 14F7015814812DA700B44AE6 /* ShaderUniform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -220,12 +221,15 @@
 		148144191424F01800B969A5 /* GameTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GameTypes.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1481441C1424F0B700B969A5 /* GamePlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlatform.h; sourceTree = "<group>"; };
 		1481441E1424F2E000B969A5 /* GameEndianConv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GameEndianConv.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		149C7F5A14AB4274008A2C63 /* AtlasGenerator.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = AtlasGenerator.py; sourceTree = "<group>"; };
+		149C7F5C14AB8CA9008A2C63 /* ModuleList.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ModuleList.py; sourceTree = "<group>"; };
 		14A5333E13D4F33D00F9B3B1 /* libgameframework.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libgameframework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A5334313D4F33D00F9B3B1 /* gameframeworkProj.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = gameframeworkProj.xcconfig; sourceTree = "<group>"; };
 		14A5334413D4F33D00F9B3B1 /* gameframeworkTarget.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = gameframeworkTarget.xcconfig; sourceTree = "<group>"; };
 		14AB121D1448A39E00390E7A /* GameMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameMemory.cpp; sourceTree = "<group>"; };
 		14AB12201448ABF900390E7A /* GameAllocater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameAllocater.h; sourceTree = "<group>"; };
 		14B5AA41144B5302000EFA8D /* DefaultAllocater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultAllocater.h; sourceTree = "<group>"; };
+		14C1BE2F14F16FAC00F922E1 /* ShaderUniform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderUniform.cpp; sourceTree = "<group>"; };
 		14C6B5BC13F9CBA1005130FC /* .project */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = .project; sourceTree = "<group>"; };
 		14C6B5BD13F9CBA1005130FC /* .pydevproject */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; lineEnding = 2; path = .pydevproject; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xml; };
 		14C6B5BF13F9CBA1005130FC /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -477,6 +481,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		149C7F5914AB4274008A2C63 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				149C7F5C14AB8CA9008A2C63 /* ModuleList.py */,
+				149C7F5A14AB4274008A2C63 /* AtlasGenerator.py */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
 		14A5333313D4F33D00F9B3B1 = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +554,7 @@
 		14C6B5BB13F9CBA1005130FC /* build */ = {
 			isa = PBXGroup;
 			children = (
+				149C7F5914AB4274008A2C63 /* tools */,
 				14E3A20C1438B17700979A25 /* macosx */,
 				14C6B5BC13F9CBA1005130FC /* .project */,
 				14C6B5BD13F9CBA1005130FC /* .pydevproject */,
@@ -657,6 +671,8 @@
 				14C6B5FE13F9CBA1005130FC /* GLShaderManager.h */,
 				14C6B5FF13F9CBA1005130FC /* GLSLShader.cpp */,
 				14C6B60013F9CBA1005130FC /* GLSLShader.h */,
+				14C1BE2F14F16FAC00F922E1 /* ShaderUniform.cpp */,
+				14F7015814812DA700B44AE6 /* ShaderUniform.h */,
 				14C6B60113F9CBA1005130FC /* GLTools.cpp */,
 				14C6B60213F9CBA1005130FC /* GLTools.h */,
 				14C6B60313F9CBA1005130FC /* GLTriangleBatch.cpp */,
@@ -676,7 +692,6 @@
 				14C6B61113F9CBA1005130FC /* SceneNode.h */,
 				14C6B61213F9CBA1005130FC /* SceneNodeProperties.cpp */,
 				14C6B61313F9CBA1005130FC /* SceneNodeProperties.h */,
-				14F7015814812DA700B44AE6 /* ShaderUniform.h */,
 				14C6B61413F9CBA1005130FC /* shaders */,
 				14C6B63A13F9CBA1005130FC /* SnowParticleSystem.cpp */,
 				14C6B63B13F9CBA1005130FC /* SnowParticleSystem.h */,
@@ -1218,6 +1233,7 @@
 				14C6B77913F9CBA2005130FC /* GlfwGameTimer.cpp in Sources */,
 				14C6B77C13F9CBA2005130FC /* HumanView.cpp in Sources */,
 				14AB121E1448A39E00390E7A /* GameMemory.cpp in Sources */,
+				14C1BE3014F16FAC00F922E1 /* ShaderUniform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1230,24 +1246,28 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					_DEBUG,
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OBJROOT = /Users/pjohalloran/work/trunk/obj/;
+				OBJROOT = ../../../obj/;
 				ONLY_ACTIVE_ARCH = YES;
-				RUN_CLANG_STATIC_ANALYZER = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = macosx;
 				SHARED_PRECOMPS_DIR = "$(BUILD_DIR)";
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
 				SUPPORTED_PLATFORMS = macosx;
-				SYMROOT = /Users/pjohalloran/work/trunk/libs/;
+				SYMROOT = ../../../libs/;
 			};
 			name = Debug;
 		};
@@ -1257,20 +1277,22 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = 4.2;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				OBJROOT = /Users/pjohalloran/work/trunk/obj/;
-				RUN_CLANG_STATIC_ANALYZER = YES;
+				OBJROOT = ../../../obj/;
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = macosx;
 				SHARED_PRECOMPS_DIR = "$(BUILD_DIR)";
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
 				SUPPORTED_PLATFORMS = macosx;
-				SYMROOT = /Users/pjohalloran/work/trunk/libs/;
+				SYMROOT = ../../../libs/;
 			};
 			name = Release;
 		};
@@ -1278,7 +1300,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
@@ -1288,6 +1310,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					DEBUG,
+					_DEBUG,
 					TARGET_OS_MAC,
 					TIXML_USE_STL,
 					LUAPLUS_ENABLE_INLINES,
@@ -1310,6 +1333,7 @@
 				PRIVATE_HEADERS_FOLDER_PATH = ../../include/;
 				PRODUCT_NAME = "lib$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = ../../include/;
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/$(CONFIGURATION) /opt/local/include/";
 			};
 			name = Debug;
@@ -1318,7 +1342,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = NO;
@@ -1326,6 +1350,7 @@
 				EXECUTABLE_EXTENSION = a;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
 					TARGET_OS_MAC,
 					TIXML_USE_STL,
 					LUAPLUS_ENABLE_INLINES,
@@ -1347,6 +1372,7 @@
 				PRIVATE_HEADERS_FOLDER_PATH = ../../include/;
 				PRODUCT_NAME = "lib$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = ../../include/;
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/$(CONFIGURATION)  /opt/local/include/";
 			};
 			name = Release;

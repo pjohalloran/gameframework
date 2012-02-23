@@ -102,7 +102,7 @@ int main(int args, char *argv[])
 	shared_ptr<Pool3dGame> gamePtr;				// Game application class (starts up the logic and view layers and manages the game subsystems).
 	int value = 0;								// Main function return value.
 
-#ifdef _DEBUG
+#if defined(_DEBUG) || defined(DEBUG)
 #	if defined(_WINDOWS)
 		// Perform a memory leak check on exit when we are running on Windows
 		int tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
@@ -146,14 +146,17 @@ int main(int args, char *argv[])
 		//if(myAlloc.GetAvailableMemory() != 20 * 1024)
 		//	printf("Incorrect mem available\n");
 
-#ifdef _DEBUG
+#if defined(_DEBUG) || defined(DEBUG)
 		// To handle the current $GAMEROOT path for debugging comment in or out the following path set.
 
+#if defined(WIN32)
 		// 1) Include this for debugging in Visual Studio (exe run from inside $GAMEROOT/src/Pool3d/)
 		path rootDirPath = boost::filesystem::current_path().parent_path().parent_path();
-
+#elif defined(TARGET_OS_MAC)
+        path rootDirPath = boost::filesystem::current_path().parent_path();
 		// or 2) Include this for running debug builds from the command line or from a profiler (Sleepy/Gdebugger).
 		//path rootDirPath = boost::filesystem::current_path().parent_path();
+#endif
 #else
 		path rootDirPath = boost::filesystem::current_path().parent_path();
 #endif
