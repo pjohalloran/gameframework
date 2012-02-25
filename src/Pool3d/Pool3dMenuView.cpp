@@ -71,7 +71,6 @@ namespace GameHalloran
 
 		// Log receipt of the event and its type.
         GF_LOG_TRACE_DEB(VGetName(), string("Recevied event type = ") + string(eventObj.VGetEventType().getStr()));
-//		SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, string(VGetName()), string("Recevied event type = ") + string(eventObj.VGetEventType().getStr()));
 
 		// Check what event has occurred and handle it appropriately.
 		if(eventObj.VGetEventType() == EvtData_Button_Action::sk_EventType)
@@ -128,7 +127,6 @@ namespace GameHalloran
 		else
 		{
             GF_LOG_DEB(string("Unknown game event received: ") + eventObj.VGetEventType().getStr());
-//			SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::DEB, string("Unknown game event received: ") + eventObj.VGetEventType().getStr());
 			result = false;
 		}
 
@@ -270,10 +268,6 @@ namespace GameHalloran
 		if (m_createDialogFunctionLuaObj.IsNil())
 		{
             GF_LOG_TRACE_ERR("Pool3dMenuView::LoadUiScreens()", "Failed to find the Create Dialog LUA function object");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::LoadUiScreens()"),\
-									std::string("Failed to find the Create Dialog LUA function object"));
 		}
 		else
 		{
@@ -281,10 +275,6 @@ namespace GameHalloran
 			if(!m_createDialogFunctionLuaObj.IsFunction())
 			{
                 GF_LOG_TRACE_ERR("Pool3dMenuView::LoadUiScreens()", "The Create Dialog LUA function object is not a valid LUA function");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dMenuView::LoadUiScreens()"),\
-										std::string("The Create Dialog LUA function object is not a valid LUA function"));
 			}
 		}
 
@@ -292,10 +282,6 @@ namespace GameHalloran
 		if (m_destroyDialogFunctionLuaObj.IsNil())
 		{
             GF_LOG_TRACE_ERR("Pool3dMenuView::LoadUiScreens()", "Failed to find the Destroy Dialog LUA function object");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::LoadUiScreens()"),\
-									std::string("Failed to find the Destroy Dialog LUA function object"));
 		}
 		else
 		{
@@ -303,10 +289,6 @@ namespace GameHalloran
 			if(!m_destroyDialogFunctionLuaObj.IsFunction())
 			{
                 GF_LOG_TRACE_ERR("Pool3dMenuView::LoadUiScreens()", "The Destroy Dialog LUA function object is not a valid LUA function");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dMenuView::LoadUiScreens()"),\
-										std::string("The Destroy Dialog LUA function object is not a valid LUA function"));
 			}
 		}
 	}
@@ -321,10 +303,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't add widget as widget data is not a table"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::ConstructWidget()", "Can't add widget as widget data is not a table");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::ConstructWidget()"),\
-									std::string("Can't add widget as widget data is not a table"));
 			return (boost::shared_ptr<AbstractWidget>());
 		}
 		LuaPlus::LuaObject widgetTypeTable = widgetDataTable.GetByName("Type");
@@ -332,10 +310,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't add widget as widget does not have a concrete widget \"Type\" field defined"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::ConstructWidget()", "Can't add widget as widget does not have a concrete widget \"Type\" field defined");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::ConstructWidget()"),\
-									std::string("Can't add widget as widget does not have a concrete widget \"Type\" field defined"));
 			return (boost::shared_ptr<AbstractWidget>());
 		}
 
@@ -378,10 +352,6 @@ namespace GameHalloran
 			{
 				ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Tried to add unknown widget type: ") + widgetTypeStr, 0.0f);
                 GF_LOG_TRACE_ERR("Pool3dMenuView::ConstructWidget()", std::string("Tried to add unknown widget type: ") + widgetTypeStr);
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dMenuView::ConstructWidget()"),\
-										std::string("Tried to add unknown widget type: ") + widgetTypeStr);
 				return (boost::shared_ptr<AbstractWidget>());
 			}
 
@@ -389,10 +359,6 @@ namespace GameHalloran
 			{
 				ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Failed to create widget.  Out of memory"), 0.0f);
                 GF_LOG_TRACE_ERR("Pool3dMenuView::ConstructWidget()", "Failed to create widget.  Out of memory");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dMenuView::ConstructWidget()"),\
-										std::string("Failed to create widget.  Out of memory"));
 				return (boost::shared_ptr<AbstractWidget>());
 			}
 		}
@@ -401,10 +367,6 @@ namespace GameHalloran
 			// Some error occurred creating container with the data we gave the constructor.
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Failed to create the widget: ") + std::string(ge.what()), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::ConstructWidget()", std::string("Failed to create the widget: ") + std::string(ge.what()));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::ConstructWidget()"),\
-									std::string("Failed to create the widget: ") + std::string(ge.what()));
 			return (boost::shared_ptr<AbstractWidget>());	
 		}
 
@@ -420,10 +382,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Trying to register NULL or empty value for screen type"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::RegisterScreenType()", "Trying to register NULL or empty value for screen type");
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::RegisterScreenType()"),\
-									std::string("Trying to register NULL or empty value for screen type"));
 			return (false);
 		}
 
@@ -443,19 +401,11 @@ namespace GameHalloran
 					// Hash collision, notify scripter with error dialog.
 					ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Error (Hash collision): ") + std::string(screenType) + std::string(" and ") + (*i).getStr() + std::string(" generate the same hash value"), 0.0f);
                     GF_LOG_TRACE_ERR("Pool3dMenuView::RegisterScreenType()", std::string("Error (Hash collision): ") + std::string(screenType) + std::string(" and ") + (*i).getStr() + std::string(" generate the same hash value"));
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-											GameLog::ERR,\
-											std::string("Pool3dMenuView::RegisterScreenType()"),\
-											std::string("Error (Hash collision): ") + std::string(screenType) + std::string(" and ") + (*i).getStr() + std::string(" generate the same hash value"));
 				}
 				else
 				{
 					ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Screen type ") + std::string(screenType) + std::string(" already registered.  Choose a different screen type string"), 0.0f);
                     GF_LOG_TRACE_ERR("Pool3dMenuView::RegisterScreenType()", std::string("Screen type ") + std::string(screenType) + std::string(" already registered.  Choose a different screen type string"));
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-											GameLog::ERR,\
-											std::string("Pool3dMenuView::RegisterScreenType()"),\
-											std::string("Screen type ") + std::string(screenType) + std::string(" already registered.  Choose a different screen type string"));
 				}
 			}
 		}
@@ -500,10 +450,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't add screen as no screen type registered"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::AddScreen()", "Can't add screen as no screen type registered");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::AddScreen()"),\
-									std::string("Can't add screen as no screen type registered"));
 			return (false);
 		}
 
@@ -516,10 +462,6 @@ namespace GameHalloran
 			{
 				ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Failed to create screen.  Out of memory"), 0.0f);
                 GF_LOG_TRACE_ERR("Pool3dMenuView::AddScreen()", "Failed to create screen.  Out of memory");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dMenuView::AddScreen()"),\
-										std::string("Failed to create screen.  Out of memory"));
 				return (false);	
 			}
 
@@ -528,10 +470,6 @@ namespace GameHalloran
 			if(m_currentScreenType == hashScreenType.getHashValue())
 			{
                 GF_LOG_TRACE_INF("Pool3dMenuView::AddScreen()", std::string("Warning: Replacing previous screen with the screen type ") + std::string(screenType));
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::INF,\
-										std::string("Pool3dMenuView::AddScreen()"),\
-										std::string("Warning: Replacing previous screen with the screen type ") + std::string(screenType));
 				m_currScreenPtr = containerPtr;
 			}
 		}
@@ -540,10 +478,6 @@ namespace GameHalloran
 			// Some error occurred creating container with the data we gave the constructor.
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Failed to add screen: ") + std::string(ge.what()), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::AddScreen()", std::string("Failed to add screen: ") + std::string(ge.what()));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::AddScreen()"),\
-									std::string("Failed to add screen: ") + std::string(ge.what()));
 			return (false);	
 		}
 
@@ -559,10 +493,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't add widget as no screen type registered"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::AddWidgetToScreen()", "Can't add widget as no screen type registered");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::AddWidgetToScreen()"),\
-									std::string("Can't add widget as no screen type registered"));
 			return (0);
 		}
 
@@ -574,10 +504,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't add widget a there is no screen added as of yet for the screen type ") + hashScreenType.getStr(), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::AddWidgetToScreen()", std::string("Can't add widget a there is no screen added as of yet for the screen type ") + hashScreenType.getStr());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::AddWidgetToScreen()"),\
-									std::string("Can't add widget a there is no screen added as of yet for the screen type ") + hashScreenType.getStr());
 			return (0);
 		}
 		boost::shared_ptr<ContainerWidget> containerPtr = i->second;
@@ -594,10 +520,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Failed to add the widget to the control"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::AddWidgetToScreen()", "Failed to add the widget to the control");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::AddWidgetToScreen()"),\
-									std::string("Failed to add the widget to the control"));
 			return (0);
 		}
 
@@ -613,10 +535,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't get widget data as no screen type registered"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::GetControlData()", "Can't get widget data as no screen type registered");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::GetControlData()"),\
-									std::string("Can't get widget data as no screen type registered"));
 			return (LuaPlus::LuaObject());
 		}
 
@@ -628,10 +546,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't get widget data as there is no screen added as of yet for the screen type ") + hashScreenType.getStr(), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::GetControlData()", std::string("Can't get widget data as there is no screen added as of yet for the screen type ") + hashScreenType.getStr());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::GetControlData()"),\
-									std::string("Can't get widget data as there is no screen added as of yet for the screen type ") + hashScreenType.getStr());
 			return (LuaPlus::LuaObject());
 		}
 		boost::shared_ptr<ContainerWidget> containerPtr = i->second;
@@ -643,10 +557,6 @@ namespace GameHalloran
 			try { idStr = boost::lexical_cast<std::string, U32>(widgetId); } catch(...) {}
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("There is no widget with the screen ID ") + idStr + std::string(" attached to the screen ") + hashScreenType.getStr(), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::GetControlData()", std::string("There is no widget with the screen ID ") + idStr + std::string(" attached to the screen ") + hashScreenType.getStr());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::GetControlData()"),\
-									std::string("There is no widget with the screen ID ") + idStr + std::string(" attached to the screen ") + hashScreenType.getStr());
 			return (LuaPlus::LuaObject());
 		}
 
@@ -662,10 +572,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't set widget data as no screen type registered"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::SetControlData()", "Can't set widget data as no screen type registered");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::SetControlData()"),\
-									std::string("Can't set widget data as no screen type registered"));
 			return (false);
 		}
 
@@ -677,10 +583,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't set widget data as there is no screen added as of yet for the screen type ") + hashScreenType.getStr(), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::SetControlData()", std::string("Can't set widget data as there is no screen added as of yet for the screen type ") + hashScreenType.getStr());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::SetControlData()"),\
-									std::string("Can't set widget data as there is no screen added as of yet for the screen type ") + hashScreenType.getStr());
 			return (false);
 		}
 		boost::shared_ptr<ContainerWidget> containerPtr = i->second;
@@ -691,10 +593,6 @@ namespace GameHalloran
 			try { idStr = boost::lexical_cast<std::string, U32>(widgetId); } catch(...) {}
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("There is no widget with the screen ID ") + idStr + std::string(" attached to the screen ") + hashScreenType.getStr(), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::SetControlData()", std::string("There is no widget with the screen ID ") + idStr + std::string(" attached to the screen ") + hashScreenType.getStr());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::SetControlData()"),\
-									std::string("There is no widget with the screen ID ") + idStr + std::string(" attached to the screen ") + hashScreenType.getStr());
 			return (false);
 		}
 
@@ -710,10 +608,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't get widget data as no screen type registered"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::SetScreenWidgetVisibility()", "Can't get widget data as no screen type registered");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::SetScreenWidgetVisibility()"),\
-									std::string("Can't get widget data as no screen type registered"));
 			return (false);
 		}
 
@@ -725,10 +619,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't set widget visibility as there is no screen added as of yet for the screen type ") + hashScreenType.getStr(), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::SetScreenWidgetVisibility()", std::string("Can't set widget visibility as there is no screen added as of yet for the screen type ") + hashScreenType.getStr());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::SetScreenWidgetVisibility()"),\
-									std::string("Can't set widget visibility as there is no screen added as of yet for the screen type ") + hashScreenType.getStr());
 			return (false);
 		}
 		boost::shared_ptr<ContainerWidget> containerPtr = i->second;
@@ -737,10 +627,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("No widget with that ID is managed by the screen ") + hashScreenType.getStr(), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::SetScreenWidgetVisibility()", std::string("No widget with that ID is managed by the screen ") + hashScreenType.getStr());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::SetScreenWidgetVisibility()"),\
-									std::string("No widget with that ID is managed by the screen ") + hashScreenType.getStr());
 			return (false);
 		}
 
@@ -783,10 +669,6 @@ namespace GameHalloran
 			{
 				ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Failed to create sub container:  Out of memory"), 0.0f);
                 GF_LOG_TRACE_ERR("Pool3dMenuView::CreateContainer()", "Failed to create sub container:  Out of memory");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dMenuView::CreateContainer()"),\
-										std::string("Failed to create sub container:  Out of memory"));
 				return (0);	
 			}
 
@@ -797,10 +679,6 @@ namespace GameHalloran
 			// Some error occurred creating container with the data we gave the constructor.
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Failed to create sub container: ") + std::string(ge.what()), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::CreateContainer()", std::string("Failed to create sub container: ") + std::string(ge.what()));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::CreateContainer()"),\
-									std::string("Failed to create sub container: ") + std::string(ge.what()));
 			return (0);	
 		}
 
@@ -833,20 +711,12 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Can't add screen as no screen type registered"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::AddContainerToScreen()", "Can't add screen as no screen type registered");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::AddContainerToScreen()"),\
-									std::string("Can't add screen as no screen type registered"));
 			return (false);
 		}
 		if(subContainerId == 0)
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("0 is not a valid screen ID for a UI widget"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::AddContainerToScreen()", "0 is not a valid screen ID for a UI widget");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::AddContainerToScreen()"),\
-									std::string("0 is not a valid screen ID for a UI widget"));
 			return (false);
 		}
 
@@ -866,10 +736,6 @@ namespace GameHalloran
 				{
 					ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("The screen ") + hashScreenType.getStr() + std::string(" does not have an root container added yet!"), 0.0f);
                     GF_LOG_TRACE_ERR("Pool3dMenuView::AddContainerToScreen()", std::string("The screen ") + hashScreenType.getStr() + std::string(" does not have an root container added yet!"));
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-											GameLog::ERR,\
-											std::string("Pool3dMenuView::AddContainerToScreen()"),\
-											std::string("The screen ") + hashScreenType.getStr() + std::string(" does not have an root container added yet!"));
 					return (false);
 				}
 
@@ -879,10 +745,6 @@ namespace GameHalloran
 					try { idStr = boost::lexical_cast<std::string, U32>(subContainerId); } catch(...) {}
 					ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Failed to add the sub container (id: ") + idStr + std::string(") to the screen ") + hashScreenType.getStr(), 0.0f);
                     GF_LOG_TRACE_ERR("Pool3dMenuView::AddContainerToScreen()", std::string("Failed to add the sub container (id: ") + idStr + std::string(") to the screen ") + hashScreenType.getStr());
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-											GameLog::ERR,\
-											std::string("Pool3dMenuView::AddContainerToScreen()"),\
-											std::string("Failed to add the sub container (id: ") + idStr + std::string(") to the screen ") + hashScreenType.getStr());
 					return (false);
 				}
 				m_subContainerList.erase(i++);
@@ -899,10 +761,6 @@ namespace GameHalloran
 			try { idStr = boost::lexical_cast<std::string, U32>(subContainerId); } catch(...) {}
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("No record of any sub container created with the ID: ") + idStr, 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::AddContainerToScreen()", std::string("No record of any sub container created with the ID: ") + idStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::AddContainerToScreen()"),\
-									std::string("No record of any sub container created with the ID: ") + idStr);
 			return (false);
 		}
 
@@ -918,10 +776,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("0 is not a valid screen ID for a UI widget"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::AddContainerToScreen()", "0 is not a valid screen ID for a UI widget");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::AddContainerToScreen()"),\
-									std::string("0 is not a valid screen ID for a UI widget"));
 			return (false);
 		}
 
@@ -961,10 +815,6 @@ namespace GameHalloran
 			{
 				ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Failed to add the widget to the control"), 0.0f);
                 GF_LOG_TRACE_ERR("Pool3dMenuView::AddContainerToScreen()", "Failed to add the widget to the control");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dMenuView::AddWidgetToContainer()"),\
-										std::string("Failed to add the widget to the control"));
 				return (false);
 			}
 		}
@@ -993,10 +843,6 @@ namespace GameHalloran
 
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("No record of any widget(s) created with the ID(s): ") + finalStr, 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::AddContainerToScreen()", std::string("No record of any widget(s) created with the ID(s): ") + finalStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::AddContainerToScreen()"),\
-									std::string("No record of any widget(s) created with the ID(s): ") + finalStr);
 			return (false);
 		}
 
@@ -1019,14 +865,12 @@ namespace GameHalloran
 		if(!m_stackManager->GetProjectionMatrixStack())
 		{
             GF_LOG_TRACE_ERR("Pool3dMenuView()", "The projection matrix stack does not already exist so will create it now!");
-//			SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("Pool3dMenuView()"), string("The projection matrix stack does not already exist so will create it now!"));
 			m_projStackPtr.reset(GCC_NEW GLMatrixStack());
 			m_stackManager->SetProjectionMatrixStack(m_projStackPtr);
 		}
 		if(!m_stackManager->GetModelViewMatrixStack())
 		{
             GF_LOG_TRACE_ERR("Pool3dMenuView()", "The modelview matrix stack does not already exist so will create it now!");
-//			SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("Pool3dMenuView()"), string("The modelview matrix stack does not already exist so will create it now!"));
 			m_modelViewStackPtr.reset(GCC_NEW GLMatrixStack());
 			m_stackManager->SetModelViewMatrixStack(m_modelViewStackPtr);
 		}
@@ -1329,10 +1173,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("Screen type not registered"), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::SetCurrentScreenType()", "Screen type not registered");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::SetCurrentScreenType()"),\
-									std::string("Screen type not registered"));
 			return (false);
 		}
 		ScreenType hashedScreenType(screenType);
@@ -1341,10 +1181,6 @@ namespace GameHalloran
 		{
 			ReportUserMessage(EvtData_Dialog_Open_Request_Event::eError, std::string("No screen added for screen type: ") + hashedScreenType.getStr(), 0.0f);
             GF_LOG_TRACE_ERR("Pool3dMenuView::SetCurrentScreenType()", std::string("No screen added for screen type: ") + hashedScreenType.getStr());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::SetCurrentScreenType()"),\
-									std::string("No screen added for screen type: ") + hashedScreenType.getStr());
 			return (false);
 		}
 
@@ -1364,7 +1200,6 @@ namespace GameHalloran
 		std::string evidStr = boost::lexical_cast<std::string, U32>(eventTypeId);
 		std::string checkedStr = boost::lexical_cast<std::string, I32>((checked ? 1 : 0));
         GF_LOG_INF(std::string("OnButtonActionEvent: ") + idStr + std::string(" ") + evidStr + std::string(" ") + checkedStr);
-//		SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::INF, std::string("OnButtonActionEvent: ") + idStr + std::string(" ") + evidStr + std::string(" ") + checkedStr);
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -1373,7 +1208,6 @@ namespace GameHalloran
 	void Pool3dMenuView::OnDebugStringEvent(const EvtData_Debug_String::eDebugStringType type, const std::string &message)
 	{
         GF_LOG_INF(std::string("Lua debug message: ") + message);
-//		SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::INF, std::string("Lua debug message: ") + message);
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -1385,10 +1219,6 @@ namespace GameHalloran
 		if(m_specialDialogScreenPtr)
 		{
             GF_LOG_TRACE_INF("Pool3dMenuView::OpenDialog()", std::string("The application tried to popup a dialog when one was already open, Text: ") + textRef);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::INF,\
-									std::string("Pool3dMenuView::OpenDialog()"),\
-									std::string("The application tried to popup a dialog when one was already open, Text: ") + textRef);
 			return (true);
 		}
 
@@ -1396,10 +1226,6 @@ namespace GameHalloran
 		if(textRef.empty() || type == EvtData_Dialog_Open_Request_Event::eUnknown)
 		{
             GF_LOG_TRACE_ERR("Pool3dMenuView::OpenDialog()", "Invalid Arguments.  Cannot display dialog");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::OpenDialog()"),\
-									std::string("Invalid Arguments.  Cannot display dialog"));
 			return (false);
 		}
 
@@ -1438,10 +1264,6 @@ namespace GameHalloran
 		if(!result)
 		{
             GF_LOG_TRACE_ERR("Pool3dMenuView::OpenDialog()", "Failed to create and setup the dialog");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::OpenDialog()"),\
-									std::string("Failed to create and setup the dialog"));
 			return (false);
 		}
 
@@ -1454,20 +1276,12 @@ namespace GameHalloran
 		else
 		{
             GF_LOG_TRACE_ERR("Pool3dMenuView::OpenDialog()", "The queue of containers is empty.  No dialog created!");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::OpenDialog()"),\
-									std::string("The queue of containers is empty.  No dialog created!"));
 			return (false);
 		}
 
 		if(!m_specialDialogScreenPtr)
 		{
             GF_LOG_TRACE_ERR("Pool3dMenuView::OpenDialog()", "Failed to create dialog");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::OpenDialog()"),\
-									std::string("Failed to create dialog"));
 			return (false);
 		}
 
@@ -1483,10 +1297,6 @@ namespace GameHalloran
 		if(!safeQueEvent(openDialogEventPtr))
 		{
             GF_LOG_TRACE_ERR("Pool3dMenuView::OpenDialog()", "Failed to broadcast the open dialog event");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::OpenDialog()"),\
-									std::string("Failed to broadcast the open dialog event"));
 			return (false);
 		}
 
@@ -1526,10 +1336,6 @@ namespace GameHalloran
 		}
         
         GF_LOG_TRACE_INF("Pool3dMenuView::CloseDialog()", std::string("Dialog ") + idStr + std::string(" has been closed with a result ") + resultStr);
-//		SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-								GameLog::INF,\
-								std::string("Pool3dMenuView::CloseDialog()"),\
-								std::string("Dialog ") + idStr + std::string(" has been closed with a result ") + resultStr);
 
 		m_specialDialogScreenPtr.reset();
 		m_dialogLifetime = 0.0f;
@@ -1542,10 +1348,6 @@ namespace GameHalloran
 		if(!DestroyDialogLuaFunction())
 		{
             GF_LOG_TRACE_ERR("Pool3dMenuView::CloseDialog()", "Failed to call the Destroy Dialog LUA function");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dMenuView::CloseDialog()"),\
-									std::string("Failed to call the Destroy Dialog LUA function"));
 			return (false);
 		}
 

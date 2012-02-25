@@ -276,10 +276,6 @@ namespace GameHalloran
 		if(!g_oalAudioPtr || !g_oalAudioPtr->IsInitialized() || !g_oalAudioPtr->HasSoundCard())
 		{
             GF_LOG_TRACE_ERR("LoadOpenALBufferFromResourceCache()", std::string("Cannot load ") + resourceId + std::string(" as the OpenAL audio system either is not initialized or there is no sound card available"));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("LoadOpenALBufferFromResourceCache()"),\
-									std::string("Cannot load ") + resourceId + std::string(" as the OpenAL audio system either is not initialized or there is no sound card available"));
 			return (oalBufferPtr);
 		}
 
@@ -289,10 +285,6 @@ namespace GameHalloran
 		if(!soundHandle)
 		{
             GF_LOG_TRACE_ERR("LoadOpenALBufferFromResourceCache()", std::string("Failed to retrieve the sound fx handle from the resource cache: ") + resourceId);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("LoadOpenALBufferFromResourceCache()"),\
-									std::string("Failed to retrieve the sound fx handle from the resource cache: ") + resourceId);
 			return (oalBufferPtr);
 		}
 
@@ -300,10 +292,6 @@ namespace GameHalloran
 		if(!soundHandle->VInitialize())
 		{
             GF_LOG_TRACE_ERR("LoadOpenALBufferFromResourceCache()", std::string("Failed to load the sound file type: ") + resourceId);
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("LoadOpenALBufferFromResourceCache()"),\
-									std::string("Failed to load the sound file type: ") + resourceId);
 			return (oalBufferPtr);
 		}
 
@@ -314,20 +302,12 @@ namespace GameHalloran
 			if(!oalBufferPtr)
 			{
                 GF_LOG_TRACE_ERR("LoadOpenALBufferFromResourceCache()", std::string("Failed to create OpenAL audio buffer with ") + resourceId);
-				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("LoadOpenALBufferFromResourceCache()"),\
-										std::string("Failed to create OpenAL audio buffer with ") + resourceId);
 				return (oalBufferPtr);
 			}
 		}
 		catch(GameException &ge)
 		{
             GF_LOG_TRACE_ERR("LoadOpenALBufferFromResourceCache()", std::string("Failed to create OpenAL audio buffer with ") + resourceId + std::string(", Reason: ") + std::string(ge.what()));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("LoadOpenALBufferFromResourceCache()"),\
-									std::string("Failed to create OpenAL audio buffer with ") + resourceId + std::string(", Reason: ") + std::string(ge.what()));
 			return (oalBufferPtr);
 		}
 

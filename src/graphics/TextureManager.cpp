@@ -288,10 +288,6 @@ namespace GameHalloran
 			if(!GF_CHECK_GL_ERROR_TRC("TextureManager::UnloadTexture(): "))
 			{
                 GF_LOG_TRACE_ERR("TextureManager::UnloadTexture()", std::string("An OpenGL error occurred freeing the texture data for the image ") + ((*texIter).second).m_filename);
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("TextureManager::UnloadTexture()"),\
-										std::string("An OpenGL error occurred freeing the texture data for the image ") + ((*texIter).second).m_filename + std::string(": ") + GetOpenGLError(errorFlag));
 				return (bytesFreed);
 			}
 
@@ -360,10 +356,6 @@ namespace GameHalloran
 		if((textureData == NULL) || (w == 0) || (imgnameRef.empty()))
 		{
             GF_LOG_TRACE_ERR("TextureManager::Load1D()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("TextureManager::Load1D()"),\
-									std::string("Invalid parameters"));
 			return (tHandle);
 		}
 
@@ -381,10 +373,6 @@ namespace GameHalloran
 			if(w > m_maxSize)
 			{
                 GF_LOG_TRACE_ERR("TextureManager::Load1D()", "Cannot load image! It is bigger than the entire size of the TextureManagers memory budget!");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("TextureManager::Load1D()"),\
-										std::string("Cannot load image! It is bigger than the entire size of the TextureManagers memory budget!"));
 				return (tHandle);
 			}
 
@@ -477,10 +465,6 @@ namespace GameHalloran
 			&& (target != GL_TEXTURE_CUBE_MAP_NEGATIVE_Z))
 		{
             GF_LOG_TRACE_ERR("TextureManager::LoadCommon2D()", "Target is not a 2D, RECTANGLE or CubeMap texture");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("TextureManager::LoadCommon2D()"),\
-									std::string("Target is not a 2D, RECTANGLE or CubeMap texture"));
 			return (false);
 		}
 
@@ -527,10 +511,6 @@ namespace GameHalloran
 		if(imgnameRef.empty())
 		{
             GF_LOG_TRACE_ERR("TextureManager::Load2D()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("TextureManager::Load2D()"),\
-									std::string("Invalid parameters"));
 			return (tHandle);
 		}
 
@@ -548,10 +528,6 @@ namespace GameHalloran
 		if(!imgResHandle || !imgResHandle->VInitialize())
 		{
             GF_LOG_TRACE_ERR("TextureManager::Load2D()", std::string("Failed to retrieve and/or initialize the resource ") + imgnameRef);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("TextureManager::Load2D()"),\
-									std::string("Failed to retrieve and/or initialize the resource ") + imgnameRef);
 			return (tHandle);
 		}
 
@@ -562,10 +538,6 @@ namespace GameHalloran
 			if(imgsize > m_maxSize)
 			{
                 GF_LOG_TRACE_ERR("TextureManager::Load2D()", "Cannot load image! It is bigger than the entire size of the TextureManagers memory budget!");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("TextureManager::Load2D()"),\
-										std::string("Cannot load image! It is bigger than the entire size of the TextureManagers memory budget!"));
 				return (tHandle);
 			}
 			while(imgsize + m_currSize > m_maxSize)
@@ -658,10 +630,6 @@ namespace GameHalloran
 		if(imgnameRef.empty() || wrapMode == GL_REPEAT)
 		{
             GF_LOG_TRACE_ERR("TextureManager::LoadRectangle()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("TextureManager::LoadRectangle()"),\
-									std::string("Invalid parameters"));
 			return (tHandle);
 		}
 
@@ -679,10 +647,6 @@ namespace GameHalloran
 		if(!imgResHandle || !imgResHandle->VInitialize())
 		{
             GF_LOG_TRACE_ERR("TextureManager::LoadRectangle()", std::string("Failed to retrieve and/or initialize the resource ") + imgnameRef);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("TextureManager::LoadRectangle()"),\
-									std::string("Failed to retrieve and/or initialize the resource ") + imgnameRef);
 			return (tHandle);
 		}
 
@@ -696,10 +660,6 @@ namespace GameHalloran
 			if(imgsize > m_maxSize)
 			{
                 GF_LOG_TRACE_ERR("TextureManager::LoadRectangle()", "Cannot load image! It is bigger than the entire size of the TextureManagers memory budget!");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("TextureManager::LoadRectangle()"),\
-										std::string("Cannot load image! It is bigger than the entire size of the TextureManagers memory budget!"));
 				return (tHandle);
 			}
 			while(imgsize + m_currSize > m_maxSize)
@@ -784,10 +744,6 @@ namespace GameHalloran
 		if(cubeImgVec.size() != CUBE_SIDES)
 		{
             GF_LOG_TRACE_ERR("TextureManager::LoadCubeMap()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("TextureManager::LoadCubeMap()"),\
-									std::string("Invalid parameters"));
 			return (tHandle);
 		}
 		for(std::vector<std::string>::const_iterator i = cubeImgVec.begin(), end = cubeImgVec.end(); i != end; ++i)
@@ -795,10 +751,6 @@ namespace GameHalloran
 			if((*i).empty())
 			{
                 GF_LOG_TRACE_ERR("TextureManager::LoadCubeMap()", "Invalid parameters");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("TextureManager::LoadCubeMap()"),\
-										std::string("Invalid parameters"));
 				return (tHandle);
 			}
 			else
@@ -859,10 +811,6 @@ namespace GameHalloran
 			if(!imgResArr[i] || !imgResArr[i]->VInitialize())
 			{
                 GF_LOG_TRACE_ERR("TextureManager::LoadCubeMap()", std::string("Failed to retrieve and/or initialize the resource ") + cubeImgVec[i]);
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("TextureManager::LoadCubeMap()"),\
-										std::string("Failed to retrieve and/or initialize the resource ") + cubeImgVec[i]);
 				return (tHandle);
 			}
 			totalSize += imgResArr[i]->GetImageWidth() * imgResArr[i]->GetImageHeight();
@@ -874,10 +822,6 @@ namespace GameHalloran
 			if(totalSize > m_maxSize)
 			{
                 GF_LOG_TRACE_ERR("TextureManager::LoadCubeMap()", "Cannot load image! It is bigger than the entire size of the TextureManagers memory budget!");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("TextureManager::LoadCubeMap()"),\
-										std::string("Cannot load image! It is bigger than the entire size of the TextureManagers memory budget!"));
 				return (tHandle);
 			}
 			while(totalSize + m_currSize > m_maxSize)
@@ -960,10 +904,6 @@ namespace GameHalloran
 		if(!textureId.is_initialized())
 		{
             GF_LOG_TRACE_ERR("TextureManager::Bind()", "The texture with the public ID has not been loaded into the TextureManager");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("TextureManager::Bind()"),\
-									std::string("The texture with the public ID has not been loaded into the TextureManager"));
 			return (false);
 		}
 

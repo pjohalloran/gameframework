@@ -34,7 +34,6 @@ namespace GameHalloran
 		if(!th.is_initialized())
 		{
             GF_LOG_TRACE_ERR("ButtonControl::Init()", std::string("Failed to create the texture: ") + texturePressedRef);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ButtonControl::Init()"), std::string("Failed to create the texture: ") + texturePressedRef);
 		}
 		else
 		{
@@ -44,7 +43,6 @@ namespace GameHalloran
 		if(!th.is_initialized())
 		{
             GF_LOG_TRACE_ERR("ButtonControl::Init()",std::string("Failed to create the texture: ") + textureHoverRef);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ButtonControl::Init()"), std::string("Failed to create the texture: ") + textureHoverRef);
 		}
 		else
 		{
@@ -213,7 +211,6 @@ namespace GameHalloran
 				try { idStr = boost::lexical_cast<std::string, ScreenElementId>(AbstractWidget::VGetId()); } catch(...) {}
                 GF_LOG_TRACE_ERR("ButtonControl::VOnAction()", std::string("Failed to send the EvtData_Button_Action event for the button ") + idStr);
 #endif
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ButtonControl::VOnAction()"), std::string("Failed to send the EvtData_Button_Action event for the button ") + idStr);
 				return (false);
 			}
 		}

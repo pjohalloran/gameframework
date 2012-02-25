@@ -219,7 +219,6 @@ namespace GameHalloran
 			{
 				// We have to create a default button in code!
                 GF_LOG_TRACE_ERR("SliderControl::SliderControl()", "Creation of scripted slider button failed.  Creating default button");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SliderControl::SliderControl()"), std::string("Creation of scripted slider button failed.  Creating default button"));
 				CreateDefaultButton(VGetColor(), mvpStackManPtr, fontPtr, shaderFlatObj, shaderTexObj, VIsVisible(), VIsEnabled());
 			}
 		}
@@ -227,7 +226,6 @@ namespace GameHalloran
 		{
 			// We have to create a default button in code!
             GF_LOG_TRACE_ERR("SliderControl::SliderControl()", "Missing slider button information from script so creating default button");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SliderControl::SliderControl()"), std::string("Missing slider button information from script so creating default button"));
 			CreateDefaultButton(VGetColor(), mvpStackManPtr, fontPtr, shaderFlatObj, shaderTexObj, VIsVisible(), VIsEnabled());
 		}
 
@@ -363,7 +361,6 @@ namespace GameHalloran
 			std::string idStr;
 			try { idStr = boost::lexical_cast<std::string, ScreenElementId>(AbstractWidget::VGetId()); } catch(...) {}
             GF_LOG_TRACE_ERR("SliderControl::VOnAction()", std::string("Failed to send the EvtData_Slider_Action event for the button ") + idStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SliderControl::VOnAction()"), std::string("Failed to send the EvtData_Slider_Action event for the button ") + idStr);
 			return (false);
 		}
 		return (true);

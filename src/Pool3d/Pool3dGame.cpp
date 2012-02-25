@@ -44,7 +44,6 @@ namespace GameHalloran
 
 		// Log receipt of the event and its type.
         GF_LOG_TRACE_TRC(VGetName(), string("Recevied event type = ") + string(eventObj.VGetEventType().getStr()));
-//		SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::TRC, string(VGetName()), string("Recevied event type = ") + string(eventObj.VGetEventType().getStr()));
 
 		// Check what event has occurred and handle it appropriately.
 		if(eventObj.VGetEventType() == EvtData_Graphics_Config_Change::sk_EventType)
@@ -61,7 +60,6 @@ namespace GameHalloran
 		else
 		{
             GF_LOG_DEB(string("View: Unknown game event received: ") + eventObj.VGetEventType().getStr());
-//			SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::DEB, string("View: Unknown game event received: ") + eventObj.VGetEventType().getStr());
 			result = false;
 		}
 
@@ -119,7 +117,6 @@ namespace GameHalloran
 		bool result = true;
 
         GF_LOG_DEB("Initializing the GLEW library");
-//		SafeGameLog(m_loggerPtr, GameLog::DEB, string("Initializing the GLEW library."));
 #if TARGET_OS_MAC
         glewExperimental = GL_TRUE;
 #endif
@@ -128,13 +125,11 @@ namespace GameHalloran
 		{
 			// Problem: glewInit failed, something is seriously wrong.
             GF_LOG_ERR(string("Failed to initialize the GLEW library: ") + string(reinterpret_cast<const char *>(glewGetErrorString(res))));
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to initialize the GLEW library: ") + string(reinterpret_cast<const char *>(glewGetErrorString(res))));
 			result = false;
 		}
 		if(result)
 		{
             GF_LOG_DEB(string("Using GLEW version: ") + string(reinterpret_cast<const char *>(glewGetString(GLEW_VERSION))));
-//			SafeGameLog(m_loggerPtr, GameLog::DEB, string("Using GLEW version: ") + string(reinterpret_cast<const char *>(glewGetString(GLEW_VERSION))));
 		}
 
 		// Check for required OpenGL extensions here and set application wide flags if certain features are available.
@@ -185,7 +180,6 @@ namespace GameHalloran
 		if(!logicPtr)
 		{
             GF_LOG_FAT("Failed to allocate memory for the Pool3D logic layer");
-//			SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to allocate memory for the Pool3D logic layer"));
 		}
 		else
 		{
@@ -196,7 +190,6 @@ namespace GameHalloran
 			if(!viewPtr)
 			{
                 GF_LOG_FAT("Failed to allocate memory for the Pool3D view (Removing the Pool3D logic layer as a result)");
-//				SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to allocate memory for the Pool3D view (Removing the Pool3D logic layer as a result)"));
 				logicPtr.reset();
 			}
 			else
@@ -205,7 +198,6 @@ namespace GameHalloran
 				if(!gameViewId.is_initialized())
 				{
                     GF_LOG_FAT("Failed to add the GameView to the Logic layer");
-//					SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to add the GameView to the Logic layer"));
 				}
 				else
 				{
@@ -218,7 +210,6 @@ namespace GameHalloran
 			if(!menuViewPtr)
 			{
                 GF_LOG_FAT("Failed to allocate memory for the Pool3D UI/Menu view (Removing the Pool3D logic layer as a result)");
-//				SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to allocate memory for the Pool3D UI/Menu view (Removing the Pool3D logic layer as a result)"));
 				logicPtr.reset();
 			}
 			else
@@ -227,7 +218,6 @@ namespace GameHalloran
 				if(!uiViewId.is_initialized())
 				{
                     GF_LOG_FAT("Failed to add the UiView to the Logic layer");
-//					SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to add the UiView to the Logic layer"));
 				}
 				else
 				{

@@ -1,1 +1,0 @@
-// TODO: Implement a quaternion class to fit in with my math3d library.

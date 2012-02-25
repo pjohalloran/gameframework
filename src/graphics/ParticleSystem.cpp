@@ -119,7 +119,6 @@ namespace GameHalloran
 		if(m_textureResource.GetName().empty())
 		{
             GF_LOG_TRACE_DEB("ParticleSystem::VOnRestore()", "The particle system was not yet assigned a texture to reload");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("ParticleSystem::VOnRestore()"), std::string("The particle system was not yet assigned a texture to reload."));
 			result = false;
 		}
 
@@ -129,7 +128,6 @@ namespace GameHalloran
 			if(!imgH || !imgH->VInitialize())
 			{
                 GF_LOG_TRACE_ERR("ParticleSystem::VOnRestore()", std::string("Failed to load the resource ") + m_textureResource.GetName());
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ParticleSystem::VOnRestore()"), std::string("Failed to load the resource ") + m_textureResource.GetName());
 				result = false;
 			}
 
@@ -254,7 +252,6 @@ namespace GameHalloran
 		if(!particle)
 		{
             GF_LOG_FAT("Failed to allocate memory to add a particle");
-//			SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::FAT, std::string("Failed to allocate memory to add a particle!"));
 		}
 
 		VResetParticle(particle);

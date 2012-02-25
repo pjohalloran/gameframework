@@ -55,32 +55,27 @@ namespace GameHalloran
 		if(!GameHalloran::RetrieveAndConvertOption<string>(m_optionsPtr, string("GameRoot"), GameOptions::PROGRAMMER, gameRoot))
 		{
             GF_LOG_FAT("Failed to get \"GameRoot\" from options file");
-//			SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to get \"GameRoot\" from options file"));
 			return (false);
 		}
 		if(!GameHalloran::RetrieveAndConvertOption<string>(m_optionsPtr, string("GlobalDataDir"), GameOptions::PROGRAMMER, data))
 		{
             GF_LOG_FAT("Failed to get \"GlobalDataDir\" from options file");
-//			SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to get \"GlobalDataDir\" from options file"));
 			return (false);
 		}
 		if(!GameHalloran::RetrieveAndConvertOption<string>(m_optionsPtr, string("LuaGeneralRoot"), GameOptions::PROGRAMMER, lua))
 		{
             GF_LOG_FAT("Failed to get \"LuaGeneralRoot\" from options file");
-//			SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to get \"LuaGeneralRoot\" from options file"));
 			return (false);
 		}
 		if(!GameHalloran::RetrieveAndConvertOption<string>(m_optionsPtr, string("GameName"), GameOptions::PROGRAMMER, appData))
 		{
             GF_LOG_FAT("Failed to get \"GameName\" from options file");
-//			SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to get \"GameName\" from options file"));
 			return (false);
 		}
 #ifndef GF_DEMO_BUILD
 		if(!GameHalloran::RetrieveAndConvertOption<string>(m_optionsPtr, string("GameSaveDir"), GameOptions::PROGRAMMER, saveGame))
 		{
             GF_LOG_FAT("Failed to get \"GameSaveDir\" from options file");
-//			SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to get \"GameSaveDir\" from options file"));
 			return (false);
 		}
 #endif
@@ -102,32 +97,27 @@ namespace GameHalloran
 		if(!boost::filesystem::is_directory(m_gameRootDir))
 		{
             GF_LOG_FAT(m_gameRootDir.string() + string(" is not a valid directory"));
-			SafeGameLog(m_loggerPtr, GameLog::FAT, m_gameRootDir.string() + string(" is not a valid directory"));
 			return (false);
 		}
 		if(!boost::filesystem::is_directory(m_dataDir))
 		{
             GF_LOG_FAT(m_dataDir.string() + string(" is not a valid directory"));
-			SafeGameLog(m_loggerPtr, GameLog::FAT, m_dataDir.string() + string(" is not a valid directory"));
 			return (false);
 		}
 		if(!boost::filesystem::is_directory(m_appDataDir))
 		{
             GF_LOG_FAT(m_appDataDir.string() + string(" is not a valid directory"));
-			SafeGameLog(m_loggerPtr, GameLog::FAT, m_appDataDir.string() + string(" is not a valid directory"));
 			return (false);
 		}
 		if(!boost::filesystem::is_directory(m_luaCommonDir))
 		{
             GF_LOG_FAT(m_luaCommonDir.string() + string(" is not a valid directory"));
-			SafeGameLog(m_loggerPtr, GameLog::FAT, m_luaCommonDir.string() + string(" is not a valid directory"));
 			return (false);
 		}
 #ifndef GF_DEMO_BUILD
 		if(!boost::filesystem::is_directory(m_saveGameDir))
 		{
             GF_LOG_FAT(m_saveGameDir.string() + string(" is not a valid directory"));
-			SafeGameLog(m_loggerPtr, GameLog::FAT, m_saveGameDir.string() + string(" is not a valid directory"));
 			return (false);
 		}
 #endif
@@ -156,7 +146,6 @@ namespace GameHalloran
 			if(!systemCheckObj.CheckHardDiskSpace(freeHdSpace))
 			{
                 GF_LOG_ERR("There is not enough free space on the hard disk to run the application");
-//				SafeGameLog(m_loggerPtr, GameLog::ERR, string("There is not enough free space on the hard disk to run the application."));
 			}
 		}
 
@@ -177,7 +166,6 @@ namespace GameHalloran
 			if(!systemCheckObj.CheckPhysicalMemory(minSysRam))
 			{
                 GF_LOG_ERR("There is not enough system RAM available to run the appplication");
-//				SafeGameLog(m_loggerPtr, GameLog::ERR, string("There is not enough system RAM available to run the appplication."));
 			}
 		}
 
@@ -188,7 +176,6 @@ namespace GameHalloran
 			if(!systemCheckObj.CheckVirtualMemory(minVirtualMemory))
 			{
                 GF_LOG_ERR("There is not enough virtual memory available to run the application");
-//				SafeGameLog(m_loggerPtr, GameLog::ERR, string("There is not enough virtual memory available to run the application."));
 			}
 		}
 
@@ -200,7 +187,6 @@ namespace GameHalloran
 		//	if(!systemCheckObj.CheckVideoMemory(minFreeVideoRam))
 		//	{
         //      GF_LOG_ERR("There is not enough video memory to run the application");
-		//		SafeGameLog(m_loggerPtr, GameLog::ERR, string("There is not enough video memory to run the application."));
 		//	}
 		//}
 	}
@@ -218,13 +204,11 @@ namespace GameHalloran
 		if(result && !RetrieveAndConvertOption<U32>(m_optionsPtr, string("ResCacheSize"), GameOptions::PROGRAMMER, resCacheSize))
 		{
             GF_LOG_ERR("Failed to get the ResCacheSize option so using a default value instead (5)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the ResCacheSize option so using a default value instead (5)."));
 			resCacheSize = 5;
 		}
 		if(result && !RetrieveAndConvertOption<string>(m_optionsPtr, string("ResFile"), GameOptions::PROGRAMMER, resFilename))
 		{
             GF_LOG_ERR("Failed to get the ResFile option");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the ResFile option."));
 			result = false;
 		}
 
@@ -235,12 +219,10 @@ namespace GameHalloran
 			path resPath(m_appDataDir);
 			resPath.append(resFilename.begin(), resFilename.end());
             GF_LOG_INF(string("Loading resource file: ") + resPath.string());
-//			SafeGameLog(m_loggerPtr, GameLog::INF, string("Loading resource file: ") + resPath.string());
 			resContainerPtr = GCC_NEW ResourceZipFile(resPath);
 			if(!resContainerPtr)
 			{
                 GF_LOG_ERR("Failed to allocate memory for the Resource Container");
-//				SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to allocate memory for the Resource Container."));
 				result = false;
 			}
 		}
@@ -252,7 +234,6 @@ namespace GameHalloran
 			if(!m_resourceCachePtr)
 			{
                 GF_LOG_ERR("Failed to allocate memory for the Resource Cache");
-//				SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to allocate memory for the Resource Cache."));
 				delete resContainerPtr;
 				resContainerPtr = NULL;
 				result = false;
@@ -261,7 +242,6 @@ namespace GameHalloran
 		if(result && !m_resourceCachePtr->Init())
 		{
             GF_LOG_ERR("Failed to initialize the Resource Cache");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to initialize the Resource Cache."));
 			result = false;
 		}
 
@@ -280,7 +260,6 @@ namespace GameHalloran
 		if(!m_luaStateManagerPtr)
 		{
             GF_LOG_ERR("Failed to allocate memory for the LuaStateManager");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to allocate memory for the LuaStateManager."));
 			result = false;
 		}
 
@@ -316,7 +295,6 @@ namespace GameHalloran
 		if(!m_eventManagerPtr)
 		{
             GF_LOG_ERR("Failed to allocate memory for the EventManager");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to allocate memory for the EventManager."));
 			result = false;
 		}
 
@@ -331,7 +309,6 @@ namespace GameHalloran
 		if(!m_eventManagerPtr)
 		{
             GF_LOG_FAT("Cannot log core game events until the event manager has been created");
-//			SafeGameLog(m_loggerPtr, GameLog::FAT, string("Cannot log core game events until the event manager has been created."));
 			return (false);
 		}
 
@@ -400,86 +377,72 @@ namespace GameHalloran
 		if(!RetrieveAndConvertOption<bool>(m_optionsPtr, string("UseDesktopSettings"), GameOptions::PROGRAMMER, useDesktopSettings))
 		{
             GF_LOG_ERR("Failed to get the UseDesktopSettings option so using a default value instead (true)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the UseDesktopSettings option so using a default value instead (true)"));
 			useDesktopSettings = true;
 		}
 		if(!RetrieveAndConvertOption<I32>(m_optionsPtr, string("ScreenWidth"), GameOptions::PLAYER, screenWidth))
 		{
             GF_LOG_ERR("Failed to get the ScreenWidth option so using a default value instead (640)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the ScreenWidth option so using a default value instead (640)."));
 			screenWidth = 0;
 		}
 		if(!RetrieveAndConvertOption<I32>(m_optionsPtr, string("ScreenHeight"), GameOptions::PLAYER, screenHeight))
 		{
             GF_LOG_ERR("Failed to get the ScreenHeight option so using a default value instead (480)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the ScreenHeight option so using a default value instead (480)."));
 			screenHeight = 0;
 		}
 		if(!RetrieveAndConvertOption<string>(m_optionsPtr, string("GameName"), GameOptions::PROGRAMMER, gameName))
 		{
             GF_LOG_ERR("Failed to get the GameName option so using a default value instead \" -- Unknown Title -- \"");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the GameName option so using a default value instead \" -- Unknown Title -- \"."));
 			gameName.assign(string(" -- Unknown Title -- "));
 		}
 		if(!RetrieveAndConvertOption<I32>(m_optionsPtr, string("FullScreen"), GameOptions::PROGRAMMER, fullscreen))
 		{
             GF_LOG_ERR("Failed to get the FullScreen option so using a default value instead (on)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the FullScreen option so using a default value instead (on)."));
 			fullscreen = 1;
 		}
 		if(!RetrieveAndConvertOption<I32>(m_optionsPtr, string("Multisampling"), GameOptions::PLAYER, multisampling))
 		{
             GF_LOG_ERR("Failed to get the Multisampling option so using a default value instead (off)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the Multisampling option so using a default value instead (off)."));
 			multisampling = 0;
 		}
 		if(!RetrieveAndConvertOption<I32>(m_optionsPtr, string("OpenGLMajor"), GameOptions::PROGRAMMER, glMajor))
 		{
             GF_LOG_ERR("Failed to get the OpenGLMajor option so using a default value instead (3)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the OpenGLMajor option so using a default value instead (3)."));
 			glMajor = 3;
 		}
 		if(!RetrieveAndConvertOption<I32>(m_optionsPtr, string("OpenGLMinor"), GameOptions::PROGRAMMER, glMinor))
 		{
             GF_LOG_ERR("Failed to get the OpenGLMinor option so using a default value instead (3)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the OpenGLMinor option so using a default value instead (3)."));
 			glMinor = 3;
 		}
 		string profileStr;
 		if(!RetrieveAndConvertOption<string>(m_optionsPtr, string("OpenGLProfile"), GameOptions::PROGRAMMER, profileStr))
 		{
             GF_LOG_ERR("Failed to get the OpenGLProfile option so using a default value instead (Unknown)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the OpenGLProfile option so using a default value instead (Unknown)."));
 			profile = 0;
 		}
 		if(!RetrieveAndConvertOption<I32>(m_optionsPtr, string("ColorBufferSize"), GameOptions::PROGRAMMER, cbSize))
 		{
             GF_LOG_ERR("Failed to get the ColorBufferSize option so using a default value instead (desktop default)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the ColorBufferSize option so using a default value instead (desktop default)."));
 			cbSize = 0;
 		}
 		if(!RetrieveAndConvertOption<I32>(m_optionsPtr, string("DepthBufferSize"), GameOptions::PROGRAMMER, dbSize))
 		{
             GF_LOG_ERR("Failed to get the DepthBufferSize option so using a default value instead (desktop default)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the DepthBufferSize option so using a default value instead (desktop default)."));
 			dbSize = 0;
 		}
 		if(!RetrieveAndConvertOption<I32>(m_optionsPtr, string("StencilBufferSize"), GameOptions::PROGRAMMER, sbSize))
 		{
             GF_LOG_ERR("Failed to get the StencilBufferSize option so using a default value instead (off)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the StencilBufferSize option so using a default value instead (off)."));
 			sbSize = 0;
 		}
 		if(!RetrieveAndConvertOption<I32>(m_optionsPtr, string("AlphaBits"), GameOptions::PROGRAMMER, alphaBits))
 		{
             GF_LOG_ERR("Failed to get the AlphaBits option so using a default value instead (off)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the AlphaBits option so using a default value instead (off)."));
 			alphaBits = 0;
 		}
 		if(!RetrieveAndConvertOption<bool>(m_optionsPtr, string("OpenGLDebug"), GameOptions::PROGRAMMER, glDebugContext))
 		{
             GF_LOG_ERR("Failed to get the OpenGLDebug option so using a default value instead (off)");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the OpenGLDebug option so using a default value instead (off)."));
 			glDebugContext = 0;
 		}
 
@@ -513,14 +476,12 @@ namespace GameHalloran
 			{
 				// invalid options, fall back to default
                 GF_LOG_ERR("Invalid color buffer size from options.  Falling back to default");
-//				SafeGameLog(m_loggerPtr, GameLog::ERR, string("Invalid color buffer size from options.  Falling back to default"));
 				cbSize = 0;
 				params.SetColorBuffer(0, 0, 0);
 			}
 			if(dbSize != 16 && dbSize != 24 && dbSize != cbSize)
 			{
                 GF_LOG_ERR("Invalid depth buffer size from options.  Falling back to same size as color buffer");
-//				SafeGameLog(m_loggerPtr, GameLog::ERR, string("Invalid depth buffer size from options.  Falling back to same size as color buffer."));
 				dbSize = cbSize;
 			}
 			params.SetDepthBufferSize(dbSize);
@@ -566,14 +527,12 @@ namespace GameHalloran
 			if(!systemCheckObj.CheckForJoysticks(m_joystickList, numJoysticks))
 			{
                 GF_LOG_INF("There are no joysticks plugged into the system");
-//				SafeGameLog(m_loggerPtr, GameLog::INF, string("There are no joysticks plugged into the system."));
 			}
 			else
 			{
 				ostringstream conv;
 				conv << numJoysticks;
                 GF_LOG_INF(string("There are ") + conv.str() + string(" joysticks plugged in"));
-//				SafeGameLog(m_loggerPtr, GameLog::INF, string("There are ") + conv.str() + string(" joysticks plugged in."));
 			}
 		}
 
@@ -592,7 +551,6 @@ namespace GameHalloran
 		if(!RetrieveAndConvertOption<string>(m_optionsPtr, string("GameName"), GameOptions::PROGRAMMER, gameName))
 		{
             GF_LOG_ERR("Failed to get the GameName option so using a default value instead \" -- Unknown Title -- \"");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to get the GameName option so using a default value instead \" -- Unknown Title -- \"."));
 			gameName.assign(string(" -- Unknown Title -- "));
 		}
 		minParams.SetTitle(gameName);
@@ -621,7 +579,6 @@ namespace GameHalloran
 			catch(GameException &)
 			{
                 GF_LOG_FAT("Failed to retrieve desktop settings");
-//				SafeGameLog(m_loggerPtr, GameLog::FAT, string("Failed to retrieve desktop settings"));
 				return (false);
 			}
 
@@ -639,7 +596,6 @@ namespace GameHalloran
 		catch(GameException &)
 		{
             GF_LOG_ERR("Failed to create window with user defined options");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to create window with user defined options"));
 			return (false);
 		}
 
@@ -712,7 +668,6 @@ namespace GameHalloran
 			if(!m_logicPtr)
 			{
                 GF_LOG_TRACE_FAT("GameMain::Initialize()", "The base game logic pointer has not been set");
-//				SafeGameLogAndPrefix(m_loggerPtr, GameLog::FAT, string("GameMain::Initialize()"), string("The base game logic pointer has not been set!"));
 				result = false;
 			}
 		}
@@ -945,7 +900,6 @@ namespace GameHalloran
 	void GameMain::VOnRefresh()
 	{
         GF_LOG_INF("Window refresh event occurred");
-//		SafeGameLog(m_loggerPtr, GameLog::INF, string("Window refresh event occurred!"));
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -954,7 +908,6 @@ namespace GameHalloran
 	void GameMain::VOnJoystickStateChange(const I32 joyId, const I32 state, const I32 numAxes, const I32 numButtons)
 	{
         GF_LOG_INF("Joystick state change event occurred");
-//		SafeGameLog(m_loggerPtr, GameLog::INF, string("Joystick state change event occurred."));
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -971,7 +924,6 @@ namespace GameHalloran
 	void GameMain::VOnResize(const I32 width, const I32 height)
 	{
         GF_LOG_INF("Resize window event occurred");
-//		SafeGameLog(m_loggerPtr, GameLog::INF, string("Resize window event occurred!"));
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -1040,7 +992,6 @@ namespace GameHalloran
 		if(!m_logicPtr)
 		{
             GF_LOG_FAT("Cannot run the main game loop as the logic layer does not exist");
-//			SafeGameLog(m_loggerPtr, GameLog::FAT, string("Cannot run the main game loop as the logic layer does not exist."));
 			return;
 		}
 
@@ -1115,7 +1066,6 @@ namespace GameHalloran
 #endif
 		}
         GF_LOG_INF("Leaving the main game loop now");
-//		SafeGameLog(m_loggerPtr, GameLog::INF, string("Leaving the main game loop now!"));
 	}
 
 	// /////////////////////////////////////////////////////////////////

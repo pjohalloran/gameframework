@@ -135,7 +135,6 @@ namespace GameHalloran
 		if(!m_processManagerPtr)
 		{
             GF_LOG_FAT("Failed to create the ProcessManager");
-//			SafeGameLogAndPrefix(m_loggerPtr, GameLog::FAT, string("HumanView"), string("Failed to create the ProcessManager."));
 			throw GameException(string("Failed to allocate memory off the heap."));
 		}
 
@@ -202,12 +201,10 @@ namespace GameHalloran
 				{
 					string idStr = lexical_cast<string, ScreenElementId>((*i)->VGetId());
                     GF_LOG_ERR("Failed to create the ProcessManager");
-//					SafeGameLog(m_loggerPtr, GameLog::ERR, string("The screen element (id=") + idStr + string(") failed to Render."));
 				}
 				catch(bad_lexical_cast &)
 				{
                     GF_LOG_ERR("Some screen element failed to Render");
-//					SafeGameLog(m_loggerPtr, GameLog::ERR, string("Some screen element failed to Render."));
 				}
 			}
 		}
@@ -235,12 +232,10 @@ namespace GameHalloran
 					{
 						string idStr = lexical_cast<string, ScreenElementId>((*i)->VGetId());
                         GF_LOG_ERR(string("The screen element (id=") + idStr + string(") failed to Restore."));
-//						SafeGameLog(m_loggerPtr, GameLog::ERR, string("The screen element (id=") + idStr + string(") failed to Restore."));
 					}
 					catch(bad_lexical_cast &)
 					{
                         GF_LOG_ERR("Some screen element failed to Restore");
-//						SafeGameLog(m_loggerPtr, GameLog::ERR, string("Some screen element failed to Restore."));
 					}
 				}
 			}
@@ -288,7 +283,6 @@ namespace GameHalloran
 		if(g_audioPtr && g_audioPtr->VActive())
 		{
             GF_LOG_TRACE_INF("HumanView::InitAudio()", "The global audio system has already been initialized");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::INF, string("HumanView::InitAudio()"), string("The global audio system has already been initialized"));
 			return (true);
 		}
 
@@ -302,7 +296,6 @@ namespace GameHalloran
 		if(!RetrieveAndConvertOption<string>(opPtr, optionName, GameOptions::PROGRAMMER, audioSystem))
 		{
             GF_LOG_TRACE_INF("HumanView::InitAudio()", string("Failed to get the ") + optionName + string(" so we will use the OpenAL system by default!"));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::INF, string("HumanView::InitAudio()"), string("Failed to get the ") + optionName + string(" so we will use the OpenAL system by default!"));
 			audioSystem.assign(OAL_SYS);
 		}
 
@@ -310,7 +303,6 @@ namespace GameHalloran
 		if(audioSystem.compare(OAL_SYS.c_str()) == 0)
 		{
             GF_LOG_TRACE_INF("HumanView::InitAudio()", "Using OpenAL as the audio system");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::INF, string("HumanView::InitAudio()"), string("Using OpenAL as the audio system"));
 			g_audioPtr = GCC_NEW OpenALAudio;
 			useOpenAL = true;
 		}
@@ -318,7 +310,6 @@ namespace GameHalloran
 		else if(audioSystem.compare(DS_SYS.c_str()) == 0)
 		{
             GF_LOG_TRACE_INF("HumanView::InitAudio()", "Using DirectSound as the audio system");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::INF, string("HumanView::InitAudio()"), string("Using DirectSound as the audio system"));
 			// TODO: HWND is a windows specific handle, I cant get this at present from my GLFW window manager...
 			//g_audioPtr = GCC_NEW DirectSound8Audio(g_appPtr->GetWindowManager()->GetHwnd());
 		}
@@ -326,7 +317,6 @@ namespace GameHalloran
 		else
 		{
             GF_LOG_TRACE_INF("HumanView::InitAudio()", "Using OpenAL as the audio system");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::INF, string("HumanView::InitAudio()"), string("Using OpenAL as the audio system"));
 			g_audioPtr = GCC_NEW OpenALAudio;
 			useOpenAL = true;
 		}
@@ -334,7 +324,6 @@ namespace GameHalloran
 		if(!g_audioPtr)
 		{
             GF_LOG_TRACE_ERR("HumanView::InitAudio()", "Failed to create the audio system");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("HumanView::InitAudio()"), string("Failed to create the audio system"));
 			return (false);
 		}
 
@@ -344,7 +333,6 @@ namespace GameHalloran
 			g_oalAudioPtr = dynamic_cast<OpenALAudio *>(g_audioPtr);
 			if(!g_oalAudioPtr)
 			{
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("HumanView::InitAudio()"), string("Failed to set the Global OpenAL audio system pointer"));
 				return (false);
 			}
 		}
@@ -352,7 +340,6 @@ namespace GameHalloran
 		if (!g_audioPtr->VInitialize())
 		{
             GF_LOG_TRACE_ERR("HumanView::InitAudio()", "Failed to initialize the audio system");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("HumanView::InitAudio()"), string("Failed to initialize the audio system"));
 			return (false);
 		}
 
@@ -386,12 +373,10 @@ namespace GameHalloran
 				{
 					string idStr = lexical_cast<string, ScreenElementId>((*i)->VGetId());
                     GF_LOG_ERR(string("The screen element (id=") + idStr + string(") failed to process the event queue."));
-//					SafeGameLog(m_loggerPtr, GameLog::ERR, string("The screen element (id=") + idStr + string(") failed to process the event queue."));
 				}
 				catch(bad_lexical_cast &)
 				{
                     GF_LOG_ERR("Some screen element failed to process the event queue");
-//					SafeGameLog(m_loggerPtr, GameLog::ERR, string("Some screen element failed to process the event queue."));
 				}
 			}
 		}

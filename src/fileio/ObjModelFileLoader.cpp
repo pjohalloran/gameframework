@@ -186,10 +186,6 @@ namespace GameHalloran
 		catch(GameException &ge)
 		{
             GF_LOG_TRACE_ERR("ObjModelFileLoader::BuildTriangleLists()", std::string("Failed to build the triangle lists: ") + std::string(ge.what()));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("ObjModelFileLoader::BuildTriangleLists()"),\
-									std::string("Failed to build the triangle lists: ") + std::string(ge.what()));
 			return (false);
 		}
 
@@ -437,10 +433,6 @@ namespace GameHalloran
 		if(resourceFileKey.empty())
 		{
             GF_LOG_TRACE_ERR("ObjModelFileLoader::VLoad(RC)", "Resource cache file key is empty");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("ObjModelFileLoader::VLoad(RC)"),\
-									std::string("Resource cache file key is empty"));
 			return (false);
 		}
 
@@ -449,10 +441,6 @@ namespace GameHalloran
 		if(!thPtr || !thPtr->VInitialize())
 		{
             GF_LOG_TRACE_ERR("ObjModelFileLoader::VLoad(RC)", std::string("Failed to find and initialize the text resource from the resource cache: ") + resourceFileKey);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("ObjModelFileLoader::VLoad(RC)"),\
-									std::string("Failed to find and initialize the text resource from the resource cache: ") + resourceFileKey);
 			return (false);
 		}
 
@@ -501,19 +489,11 @@ namespace GameHalloran
 		if(!boost::filesystem::is_regular_file(filePath))
 		{
             GF_LOG_TRACE_ERR("ObjModelFileLoader::VLoad(FS)", std::string("File is not a regular file (does it exist? Are you specifing a directory?, etc.): ") + filePath.string());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("ObjModelFileLoader::VLoad(FS)"),\
-									std::string("File is not a regular file (does it exist? Are you specifing a directory?, etc.): ") + filePath.string());
 			return (false);
 		}
 		if(filePath.extension().string().compare(".obj") != 0)
 		{
             GF_LOG_TRACE_ERR("ObjModelFileLoader::VLoad(FS)", std::string("File does not have a .obj extension: ") + filePath.string());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("ObjModelFileLoader::VLoad(FS)"),\
-									std::string("File does not have a .obj extension: ") + filePath.string());
 			return (false);
 		}
 
@@ -521,10 +501,6 @@ namespace GameHalloran
 		if(!inputStream)
 		{
             GF_LOG_TRACE_ERR("ObjModelFileLoader::VLoad(FS)", std::string("Failed to open file: ") + filePath.string());
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("ObjModelFileLoader::VLoad(FS)"),\
-									std::string("Failed to open file: ") + filePath.string());
 			return (false);
 		}
 

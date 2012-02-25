@@ -42,30 +42,18 @@ namespace GameHalloran
         if(context == NULL)
         {
             GF_LOG_TRACE_ERR("OpenALAudio::AlSanityCheck()", alGetErrorString(ALUT_ERROR_NO_CURRENT_CONTEXT));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlSanityCheck()"),\
-                                 std::string(alGetErrorString(ALUT_ERROR_NO_CURRENT_CONTEXT)));
             return (AL_FALSE);
         }
         
         if(alGetError() != AL_NO_ERROR)
         {
             GF_LOG_TRACE_ERR("OpenALAudio::AlSanityCheck()", alGetErrorString(ALUT_ERROR_AL_ERROR_ON_ENTRY));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlSanityCheck()"),\
-                                 std::string(alGetErrorString(ALUT_ERROR_AL_ERROR_ON_ENTRY)));
             return (AL_FALSE);
         }
         
         if(alcGetError (alcGetContextsDevice(context)) != ALC_NO_ERROR)
         {
             GF_LOG_TRACE_ERR("OpenALAudio::AlSanityCheck()", alGetErrorString(ALUT_ERROR_ALC_ERROR_ON_ENTRY));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlSanityCheck()"),\
-                                 std::string(alGetErrorString(ALUT_ERROR_ALC_ERROR_ON_ENTRY)));
             return (AL_FALSE);
         }
         
@@ -80,10 +68,6 @@ namespace GameHalloran
         if(Audio::IsInitialized())
         {
             GF_LOG_TRACE_ERR("OpenALAudio::AlInit()", alGetErrorString(AL_INVALID_OPERATION));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlInit()"),\
-                                 std::string(alGetErrorString(AL_INVALID_OPERATION)));
             return (AL_FALSE);
         }
         
@@ -91,10 +75,6 @@ namespace GameHalloran
         if (device == NULL)
         {
             GF_LOG_TRACE_ERR("OpenALAudio::AlInit()", alGetErrorString(ALUT_ERROR_OPEN_DEVICE));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlInit()"),\
-                                 std::string(alGetErrorString(ALUT_ERROR_OPEN_DEVICE)));
             return (AL_FALSE);
         }
         
@@ -105,10 +85,6 @@ namespace GameHalloran
         {
             alcCloseDevice (device);
             GF_LOG_TRACE_ERR("OpenALAudio::AlInit()", alGetErrorString(ALUT_ERROR_CREATE_CONTEXT));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlInit()"),\
-                                 std::string(alGetErrorString(ALUT_ERROR_CREATE_CONTEXT)));
             return (AL_FALSE);
         }
         
@@ -118,10 +94,6 @@ namespace GameHalloran
             m_contextPtr = NULL;
             alcCloseDevice (device);
             GF_LOG_TRACE_ERR("OpenALAudio::AlInit()", alGetErrorString(ALUT_ERROR_MAKE_CONTEXT_CURRENT));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlInit()"),\
-                                 std::string(alGetErrorString(ALUT_ERROR_MAKE_CONTEXT_CURRENT)));
             return (AL_FALSE);
         }
         
@@ -136,10 +108,6 @@ namespace GameHalloran
         if(!Audio::IsInitialized())
         {
             GF_LOG_TRACE_ERR("OpenALAudio::AlExit()", alGetErrorString(AL_INVALID_OPERATION));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlExit()"),\
-                                 std::string(alGetErrorString(AL_INVALID_OPERATION)));
             return (AL_FALSE);
         }
         
@@ -153,10 +121,6 @@ namespace GameHalloran
         if(!alcMakeContextCurrent(NULL))
         {
             GF_LOG_TRACE_ERR("OpenALAudio::AlExit()", alGetErrorString(ALUT_ERROR_MAKE_CONTEXT_CURRENT));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlExit()"),\
-                                 std::string(alGetErrorString(ALUT_ERROR_MAKE_CONTEXT_CURRENT)));
             return (AL_FALSE);
         }
         
@@ -167,20 +131,12 @@ namespace GameHalloran
         if(alcGetError(device) != ALC_NO_ERROR)
         {
             GF_LOG_TRACE_ERR("OpenALAudio::AlExit()", alGetErrorString(ALUT_ERROR_DESTROY_CONTEXT));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlExit()"),\
-                                 std::string(alGetErrorString(ALUT_ERROR_DESTROY_CONTEXT)));
             return (AL_FALSE);
         }
         
         if(!alcCloseDevice(device))
         {
             GF_LOG_TRACE_ERR("OpenALAudio::AlExit()", alGetErrorString(ALUT_ERROR_CLOSE_DEVICE));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                 GameLog::ERR,\
-                                 std::string("OpenALAudio::AlExit()"),\
-                                 std::string(alGetErrorString(ALUT_ERROR_CLOSE_DEVICE)));
             return (AL_FALSE);
         }
         
@@ -468,20 +424,12 @@ namespace GameHalloran
 		if(Audio::IsInitialized())
 		{
             GF_LOG_TRACE_INF("OpenALAudio::VShutdown()", "Shutting down the audio system");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::INF,\
-									std::string("OpenALAudio::VShutdown()"),\
-									std::string("Shutting down the audio system"));
 
 			ClearAllSources();
 
 			Audio::VShutdown();
 			AlExit();
             GF_LOG_TRACE_INF("OpenALAudio::VShutdown()", "OpenAL system shutdown");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::INF,\
-									std::string("OpenALAudio::VShutdown()"),\
-									std::string("OpenAL system shutdown"));
 			Audio::SetInitialized(false);
 		}
 	}
@@ -494,20 +442,12 @@ namespace GameHalloran
 		if(!Audio::IsInitialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::AddActorSource()", "Audio system is not initialized");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::AddActorSource()"),\
-									std::string("Audio system is not initialized"));
 			return (false);
 		}
 
 		if(!srcPtr)
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::AddActorSource()", "The OpenALAudioSource pointer is NULL");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::AddActorSource()"),\
-									std::string("The OpenALAudioSource pointer is NULL"));
 			return (false);
 		}
 
@@ -520,10 +460,6 @@ namespace GameHalloran
 			try { actorIdStr = boost::lexical_cast<std::string, ActorId>(actorId); } catch(...) { }
             GF_LOG_TRACE_INF("OpenALAudio::AddActorSource()", std::string("Duplicate source found for actor ") + actorIdStr);
 #endif
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::INF,\
-									std::string("OpenALAudio::AddActorSource()"),\
-									std::string("Duplicate source found for actor ") + actorIdStr);
 			m_actorSourceMap.erase(actorId);
 			actorSrcPtr.reset();
 		}
@@ -542,30 +478,18 @@ namespace GameHalloran
 		if(!Audio::IsInitialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::AddSceneSource()", "Audio system is not initialized");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::AddSceneSource()"),\
-									std::string("Audio system is not initialized"));
 			return (false);
 		}
 
 		if(!srcPtr)
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::AddSceneSource()", "The OpenALAudioSource pointer is NULL");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::AddSceneSource()"),\
-									std::string("The OpenALAudioSource pointer is NULL"));
 			return (false);
 		}
 
 		if(freeOnceStopped && srcPtr->IsStopped())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::AddSceneSource()", "The audio source cannot be added in a AL_STOPPED state");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::AddSceneSource()"),\
-									std::string("The audio source cannot be added in a AL_STOPPED state"));
 			return (false);
 		}
 
@@ -585,10 +509,6 @@ namespace GameHalloran
 		if(!Audio::IsInitialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::FindActorSource()", "Audio system is not initialized");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::FindActorSource()"),\
-									std::string("Audio system is not initialized"));
 			return (boost::shared_ptr<OpenALAudioSource>());
 		}
 
@@ -609,10 +529,6 @@ namespace GameHalloran
 		if(!Audio::IsInitialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::GetSceneSource()", "Audio system is not initialized");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::GetSceneSource()"),\
-									std::string("Audio system is not initialized"));
 			return (boost::shared_ptr<OpenALAudioSource>());
 		}
 
@@ -644,10 +560,6 @@ namespace GameHalloran
 		if(!Audio::IsInitialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::RemoveActorSource()", "Audio system is not initialized");
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::RemoveActorSource()"),\
-									std::string("Audio system is not initialized"));
 			return (false);
 		}
 
@@ -657,10 +569,6 @@ namespace GameHalloran
 			std::string actorIdStr;
 			try { actorIdStr = boost::lexical_cast<std::string, ActorId>(actorId); } catch(...) { }
             GF_LOG_TRACE_ERR("OpenALAudio::RemoveActorSource()", std::string("No actor in container matching id ") + actorIdStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::RemoveActorSource()"),\
-									std::string("No actor in container matching id ") + actorIdStr);
 			return (false);
 		}
 
@@ -668,10 +576,6 @@ namespace GameHalloran
 		if(!srcToRemovePtr)
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::RemoveActorSource()", "NULL pointer found in container");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::RemoveActorSource()"),\
-									std::string("NULL pointer found in container"));
 			return (false);
 		}
 
@@ -689,10 +593,6 @@ namespace GameHalloran
 		if(!Audio::IsInitialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::RemoveSceneSource()", "Audio system is not initialized");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::RemoveSceneSource()"),\
-									std::string("Audio system is not initialized"));
 			return (false);
 		}
 
@@ -750,31 +650,19 @@ namespace GameHalloran
 	{
 		if(!Audio::IsInitialized())
 		{
-            GF_LOG_TRACE_ERR("", "");
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::VInitAudioBuffer()"),\
-									std::string("Audio system is not initialized"));
+            GF_LOG_TRACE_ERR("OpenALAudio::VInitAudioBuffer()", "Audio system is not initialized");
 			return (boost::shared_ptr<IAudioBuffer>());
 		}
 
 		if(!soundResource)
 		{
-            GF_LOG_TRACE_ERR("", "");
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::VInitAudioBuffer()"),\
-									std::string("Sound Resource Handle is NULL"));
+            GF_LOG_TRACE_ERR("OpenALAudio::VInitAudioBuffer()", "Sound Resource Handle is NULL");
 			return (boost::shared_ptr<IAudioBuffer>());
 		}
 
 		if(!soundResource->VInitialize())
 		{
-            GF_LOG_TRACE_ERR("", "");
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::VInitAudioBuffer()"),\
-									std::string("Failed to initialize the PCM buffers in the Sound Resource"));
+            GF_LOG_TRACE_ERR("OpenALAudio::VInitAudioBuffer()", "Failed to initialize the PCM buffers in the Sound Resource");
 			return (boost::shared_ptr<IAudioBuffer>());
 		}
 
@@ -784,21 +672,13 @@ namespace GameHalloran
 			buffer.reset(GCC_NEW OpenALAudioBuffer(soundResource));
 			if(!buffer)
 			{
-                GF_LOG_TRACE_ERR("", "");
-				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("OpenALAudio::VInitAudioBuffer()"),\
-										std::string("Failed to create the AudioBuffer"));
+                GF_LOG_TRACE_ERR("OpenALAudio::VInitAudioBuffer()", "Failed to create the AudioBuffer");
 				return (boost::shared_ptr<IAudioBuffer>());
 			}
 		}
 		catch (GameException &ge)
 		{
-            GF_LOG_TRACE_ERR("", "");
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::VInitAudioBuffer()"),\
-									std::string("Failed to create the AudioBuffer: ") + std::string(ge.what()));
+            GF_LOG_TRACE_ERR("OpenALAudio::VInitAudioBuffer()", "Failed to create the AudioBuffer (exception)");
 			return (boost::shared_ptr<IAudioBuffer>());
 		}
 
@@ -814,20 +694,12 @@ namespace GameHalloran
 		if(!Audio::IsInitialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::VReleaseAudioBuffer()", "Audio system is not initialized");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::VReleaseAudioBuffer()"),\
-									std::string("Audio system is not initialized"));
 			return;
 		}
 
 		if(!audioBuffer)
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::VReleaseAudioBuffer()", "The audio buffer is NULL");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::VReleaseAudioBuffer()"),\
-									std::string("The audio buffer is NULL"));
 			return;
 		}
 
@@ -835,10 +707,6 @@ namespace GameHalloran
 		if(!oalBuffer)
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::VReleaseAudioBuffer()", "The audio buffer is not an instance of OpenALAudioBuffer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::VReleaseAudioBuffer()"),\
-									std::string("The audio buffer is not an instance of OpenALAudioBuffer"));
 			return;
 		}
 
@@ -887,10 +755,6 @@ namespace GameHalloran
 		if(!Audio::IsInitialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::VStopAllSounds()", "Audio system is not initialized");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::VStopAllSounds()"),\
-									std::string("Audio system is not initialized"));
 			return;
 		}
 
@@ -914,10 +778,6 @@ namespace GameHalloran
 		if(!Audio::IsInitialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::VPauseAllSounds()", "Audio system is not initialized");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::VPauseAllSounds()"),\
-									std::string("Audio system is not initialized"));
 			return;
 		}
 
@@ -941,10 +801,6 @@ namespace GameHalloran
 		if(!Audio::IsInitialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudio::VResumeAllSounds()", "Audio system is not initialized");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudio::VResumeAllSounds()"),\
-									std::string("Audio system is not initialized"));
 			return;
 		}
 

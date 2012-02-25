@@ -58,7 +58,6 @@ namespace GameHalloran
 		if(!exists(filePathRef))
 		{
             GF_LOG_ERR(string("The path ") + filePathRef.string() + string(" does not exist"));
-//			SafeGameLog(m_logPtr, GameLog::ERR, string("The path ") + filePathRef.string() + string(" does not exist"));
 			result = false;
 		}
 
@@ -66,7 +65,6 @@ namespace GameHalloran
 		if(result && !filePathRef.has_filename())
 		{
             GF_LOG_INF(string("The path ") + filePathRef.string() + string(" is not a file"));
-//			SafeGameLog(m_logPtr, GameLog::INF, string("The path ") + filePathRef.string() + string(" is not a file"));
 			result = false;
 		}
 
@@ -77,7 +75,6 @@ namespace GameHalloran
 			if(!iends_with(fileExt, XML_EXT))
 			{
                 GF_LOG_INF(string("The file ") + filePathRef.string() + string(" does not have an xml extension"));
-//				SafeGameLog(m_logPtr, GameLog::INF, string("The file ") + filePathRef.string() + string(" does not have an xml extension"));
 				result = false;
 			}
 		}
@@ -159,8 +156,7 @@ namespace GameHalloran
 					if(!CreateKey(idValueStr, name, key))
 					{
 						// Log this and skip the option.
-//                        GF_LOG_ERR(string("Failed to create the key for the ") + name + string(" option so we will not add it"));
-						SafeGameLog(m_logPtr, GameLog::ERR, string("Failed to create the key for the ") + name + string(" option so we will not add it"));
+                        GF_LOG_ERR(string("Failed to create the key for the ") + name + string(" option so we will not add it"));
 					}
 					else
 					{
@@ -172,9 +168,7 @@ namespace GameHalloran
 		}
 		else
 		{
-//            GF_LOG_TRACE_ERR("GameOptions::ParseOptions()", string("The current ") + OPTION_TYPE_NODE + string(" did not have a valid id: ") + string(idValueStr));
-			SafeGameLogAndPrefix(m_logPtr, GameLog::ERR, string("GameOptions::ParseOptions()"),\
-				string("The current ") + OPTION_TYPE_NODE + string(" did not have a valid id (") + string(idValueStr) + string(").")); 
+            GF_LOG_TRACE_ERR("GameOptions::ParseOptions()", string("The current ") + OPTION_TYPE_NODE + string(" did not have a valid id: ") + string(idValueStr)); 
 		}
 	}
 
@@ -188,8 +182,7 @@ namespace GameHalloran
 		// Ensure the ID is not NULL.
 		if(!optionIdStr)
 		{
-//            GF_LOG_TRACE_DEB("GameOptions::IsValidGameOptionId()", "The option ID string retrieved from the options file is NULL");
-			SafeGameLogAndPrefix(m_logPtr, GameLog::DEB, string("GameOptions::IsValidGameOptionId()"), string("The option ID string retrieved from the options file is NULL"));
+            GF_LOG_TRACE_DEB("GameOptions::IsValidGameOptionId()", "The option ID string retrieved from the options file is NULL");
 			result = false;
 		}
 
@@ -202,9 +195,7 @@ namespace GameHalloran
 			}
 			catch(bad_lexical_cast &)
 			{
-//                GF_LOG_TRACE_DEB("GameOptions::IsValidGameOptionId()", string("The option ID string retrieved from the options file is not a valid number: ") + std::string(optionIdStr));
-				SafeGameLogAndPrefix(m_logPtr, GameLog::DEB, string("GameOptions::IsValidGameOptionId()"),\
-					string("The option ID string retrieved from the options file is not a valid number (") + std::string(optionIdStr) + string(")"));
+                GF_LOG_TRACE_DEB("GameOptions::IsValidGameOptionId()", string("The option ID string retrieved from the options file is not a valid number: ") + std::string(optionIdStr));
 				result = false;
 			}
 		}
@@ -229,14 +220,12 @@ namespace GameHalloran
 		if(optionIdStr.empty())
 		{
 			result = false;
-//            GF_LOG_TRACE_DEB("GameOptions::CreateKey()", "The option ID was an empty string");
-			SafeGameLogAndPrefix(m_logPtr, GameLog::DEB, string("GameOptions::CreateKey()"), string("The option ID was an empty string"));
+            GF_LOG_TRACE_DEB("GameOptions::CreateKey()", "The option ID was an empty string");
 		}
 		if(result && optionNameRef.empty())
 		{
 			result = false;
-//            GF_LOG_TRACE_DEB("GameOptions::CreateKey()", "The option name was an empty string");
-			SafeGameLogAndPrefix(m_logPtr, GameLog::DEB, string("GameOptions::CreateKey()"), string("The option name was an empty string"));
+            GF_LOG_TRACE_DEB("GameOptions::CreateKey()", "The option name was an empty string");
 		}
 
 		// Generate the key.
@@ -244,8 +233,7 @@ namespace GameHalloran
 		{
 			// The key = id number + "." + option name (e.g. 0.Width, 1.UpMovement, etc.).
 			keyRef.assign(optionIdStr + DOT_SEPERATOR + optionNameRef);
-//            GF_LOG_TRACE_TRC("GameOptions::CreateKey()", string("Created the key: ") + keyRef);
-			SafeGameLogAndPrefix(m_logPtr, GameLog::TRC, string("GameOptions::CreateKey()"), string("Created the key: ") + keyRef);
+            GF_LOG_TRACE_TRC("GameOptions::CreateKey()", string("Created the key: ") + keyRef);
 		}
 
 		return (result);
@@ -266,17 +254,14 @@ namespace GameHalloran
 		}
 		catch(bad_lexical_cast &)
 		{
-//            GF_LOG_TRACE_ERR("GameOptions::AssembleKey()", "Failed to convert the OptionType ID supplied to a string");
-			SafeGameLogAndPrefix(m_logPtr, GameLog::ERR, string("GameOptions::AssembleKey()"), string("Failed to convert the OptionType ID supplied to a string"));
+            GF_LOG_TRACE_ERR("GameOptions::AssembleKey()", "Failed to convert the OptionType ID supplied to a string");
 			result = false;
 		}
 
 		// Create the key to access the value.
 		if(result && !CreateKey(idStr, optionNameRef, keyRef))
 		{
-//            GF_LOG_TRACE_ERR("GameOptions::AssembleKey()", string("Failed to generate the key from the option type id (") + idStr + string(" and option name supplied: ") + optionNameRef);
-			SafeGameLogAndPrefix(m_logPtr, GameLog::ERR, string("GameOptions::AssembleKey"),\
-				string("Failed to generate the key from the option type id (") + idStr + string(" and option name supplied (") + optionNameRef + string(")"));
+            GF_LOG_TRACE_ERR("GameOptions::AssembleKey()", string("Failed to generate the key from the option type id (") + idStr + string(" and option name supplied: ") + optionNameRef);
 		}
 
 		return (result);
@@ -291,8 +276,7 @@ namespace GameHalloran
 
 		if(keyRef.empty())
 		{
-//            GF_LOG_TRACE_ERR("GameOptions::ExtractIdAndOptionsName()", "The key is empty");
-			SafeGameLogAndPrefix(m_logPtr, GameLog::ERR, string("GameOptions::ExtractIdAndOptionsName()"), string("The key is empty"));
+            GF_LOG_TRACE_ERR("GameOptions::ExtractIdAndOptionsName()", "The key is empty");
 			result = false;
 		}
 
@@ -309,8 +293,7 @@ namespace GameHalloran
 
 			if(tokens.size() != 2)
 			{
-//                GF_LOG_TRACE_ERR("GameOptions::ExtractIdAndOptionsName()", string("The key ") + keyRef + string(" contained an invalid number of tokens"));
-				SafeGameLogAndPrefix(m_logPtr, GameLog::ERR, string("GameOptions::ExtractIdAndOptionsName()"), string("The key ") + keyRef + string(" contained an invalid number of tokens"));
+                GF_LOG_TRACE_ERR("GameOptions::ExtractIdAndOptionsName()", string("The key ") + keyRef + string(" contained an invalid number of tokens"));
 				result = false;
 			}
 		}
@@ -325,8 +308,7 @@ namespace GameHalloran
 			}
 			catch(bad_lexical_cast &)
 			{
-//                GF_LOG_TRACE_ERR("GameOptions::ExtractIdAndOptionsName()", string("Failed to convert the ID ") + tokens[0] + string(" to a number"));
-				SafeGameLogAndPrefix(m_logPtr, GameLog::ERR, string("GameOptions::ExtractIdAndOptionsName()"), string("Failed to convert the ID ") + tokens[0] + string(" to a number"));
+                GF_LOG_TRACE_ERR("GameOptions::ExtractIdAndOptionsName()", string("Failed to convert the ID ") + tokens[0] + string(" to a number"));
 				result = false;
 			}
 		}
@@ -379,8 +361,7 @@ namespace GameHalloran
 		// If there is a file already loaded into memory, then discard it.
 		if(!m_isValidFileOpen)
 		{
-            //GF_LOG_INF("Clearing the previous options file from memory");
-			SafeGameLog(m_logPtr, GameLog::INF, string("Clearing the previous options file from memory."));
+//            GF_LOG_INF("Clearing the previous options file from memory");
 			m_optionsFilePath = filePathRef;
 			m_optionsMap.clear();
 			m_isModified = false;
@@ -398,8 +379,7 @@ namespace GameHalloran
 
 		// Set the file valid flag on exit, we will never get here unless the 
 		//  file was loaded into memory successfully.
-        //GF_LOG_INF(string("Options file ") + m_optionsFilePath.string() + string(" loaded successfully"));
-		SafeGameLog(m_logPtr, GameLog::INF, string("Options file ") + m_optionsFilePath.string() + string(" loaded successfully"));
+//        GF_LOG_INF(string("Options file ") + m_optionsFilePath.string() + string(" loaded successfully"));
 		m_isValidFileOpen = true;
 	}
 
@@ -420,8 +400,7 @@ namespace GameHalloran
 		{
 			// Get the value (please note if no value matching the key is found in the set then a new blank value will be added with the invalid key name!)
 			valueRef.assign(m_optionsMap[key]);
-            //GF_LOG_TRC(string("Got value ") + valueRef + string(" from the option ") + key);
-			SafeGameLog(m_logPtr, GameLog::TRC, string("Got value ") + valueRef + string(" from the option ") + key);
+            GF_LOG_TRC(string("Got value ") + valueRef + string(" from the option ") + key);
 		}
 	}
 
@@ -442,8 +421,7 @@ namespace GameHalloran
 		{
 			// Add/Set the value (please note if no value matching the key is found in the set then a new blank value will be added with the invalid key name!)
 			m_optionsMap[key] = valueRef;
-            //GF_LOG_DEB(string("Set value ") + valueRef + string(" for the option ") + key);
-			SafeGameLog(m_logPtr, GameLog::DEB, string("Set value ") + valueRef + string(" for the option ") + key);
+            GF_LOG_DEB(string("Set value ") + valueRef + string(" for the option ") + key);
 
 			if(!m_isModified)
 			{
@@ -473,8 +451,7 @@ namespace GameHalloran
 			{
 				// Set the new value (please note if no value matching the key is found in the set then a new blank value will be added with the invalid key name!)
 				m_optionsMap[key] = valueRef;
-                //GF_LOG_DEB(string("Set value ") + valueRef + string(" for the option ") + key);
-				SafeGameLog(m_logPtr, GameLog::DEB, string("Set value ") + valueRef + string(" for the option ") + key);
+                GF_LOG_DEB(string("Set value ") + valueRef + string(" for the option ") + key);
 
 				if(!m_isModified)
 				{
@@ -500,8 +477,7 @@ namespace GameHalloran
 		if(AssembleKey(optionType, optionNameRef, key))
 		{
 			m_optionsMap.erase(key);
-            //GF_LOG_DEB(string("Removed (if it exists) option ") + key);
-			SafeGameLog(m_logPtr, GameLog::DEB, string("Removed (if it exists) option ") + key);
+            GF_LOG_DEB(string("Removed (if it exists) option ") + key);
 
 			if(!m_isModified)
 			{
@@ -526,8 +502,7 @@ namespace GameHalloran
 		}
 		catch(bad_lexical_cast &)
 		{
-            //GF_LOG_TRACE_ERR("GameOptions::Remove(OptionType)", "Failed remove all options (failed to convert the optionType to a string)");
-			SafeGameLogAndPrefix(m_logPtr, GameLog::ERR, string("GameOptions::Remove(OptionType)"), string("Failed remove all options (failed to convert the optionType to a string)."));
+            GF_LOG_TRACE_ERR("GameOptions::Remove(OptionType)", "Failed remove all options (failed to convert the optionType to a string)");
 			return;
 		}
 
@@ -564,8 +539,7 @@ namespace GameHalloran
 		// Create the directory if it does not exist.
 		if(!exists(fileDir))
 		{
-            //GF_LOG_TRACE_INF("GameOptions::Save()", string("The directory ") + fileDir.string() + string(" does not exist so will attempt to create it"));
-			SafeGameLogAndPrefix(m_logPtr, GameLog::INF, string("GameOptions::Save()"), string("The directory ") + fileDir.string() + string(" does not exist so will attempt to create it"));
+            GF_LOG_TRACE_INF("GameOptions::Save()", string("The directory ") + fileDir.string() + string(" does not exist so will attempt to create it"));
 			if(!create_directory(fileDir))
 			{
 				throw GameException(string("Failed to create the directory ") + fileDir.string());
@@ -622,8 +596,7 @@ namespace GameHalloran
 				if(!ExtractIdAndOptionsName(key, name, id))
 				{
 					// skip this option and log error
-                    //GF_LOG_TRACE_ERR("GameOptions::Commit()", string("Failed to extract id and name from the key ") + key);
-					SafeGameLogAndPrefix(m_logPtr, GameLog::ERR, string("GameOptions::Commit()"), string("Failed to extract id and name from the key ") + key);
+                    GF_LOG_TRACE_ERR("GameOptions::Commit()", string("Failed to extract id and name from the key ") + key);
 				}
 				else
 				{

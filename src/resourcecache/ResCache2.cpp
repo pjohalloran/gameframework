@@ -268,7 +268,6 @@ namespace GameHalloran
 		if(m_file == NULL)
 		{
             GF_LOG_ERR("Failed to initialize the resource cache.  The resource file is NULL");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to initialize the resource cache.  The resource file is NULL."));
 			result = false;
 		}
 		else
@@ -279,7 +278,6 @@ namespace GameHalloran
 		if(!result)
 		{
             GF_LOG_ERR("Failed to initialize the resource cache.  Failed to open the resource container");
-			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Failed to initialize the resource cache.  Failed to open the resource container."));
 		}
 
 		return (result);
@@ -294,7 +292,6 @@ namespace GameHalloran
 		if(r == NULL)
 		{
             GF_LOG_ERR("Cannot get the resource as the resource pointer is NULL");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Cannot get the resource as the resource pointer is NULL."));
 			return (shared_ptr<ResHandle>());
 		}
 
@@ -303,14 +300,12 @@ namespace GameHalloran
 		{
 			// Load the resource into memory.
             GF_LOG_INF(string("The resource ") + r->GetName() + string(" is not currently in the cache so it will be loaded."));
-//			SafeGameLog(m_loggerPtr, GameLog::INF, string("The resource ") + r->GetName() + string(" is not currently in the cache so it will be loaded."));
 			handle = Load(r);
 		}
 		else
 		{
 			// The resource is already in memory so update the LRU list.
             GF_LOG_DEB(string("The resource ") + r->GetName() + string(" is currently in the cache."));
-//			SafeGameLog(m_loggerPtr, GameLog::INF, string("The resource ") + r->GetName() + string(" is currently in the cache."));
 			Update(handle);
 		}
 
@@ -329,7 +324,6 @@ namespace GameHalloran
 		if(!size)
 		{
             GF_LOG_INF(string("Failed to get the resource size: ") + r->GetName());
-//			SafeGameLog(m_loggerPtr, GameLog::INF, string("Failed to get the resource size (") + r->GetName() + string(")."));
 			return shared_ptr<ResHandle>();		// Could not find resource in container!
 		}
 		
@@ -337,7 +331,6 @@ namespace GameHalloran
 		if (buffer == NULL)
 		{
             GF_LOG_INF(string("Failed to allocate cache memory for the resource from the ResCache: ") + r->GetName());
-//			SafeGameLog(m_loggerPtr, GameLog::INF, string("Failed to allocate cache memory for the resource from the ResCache (") + r->GetName() + string(")."));
 			return shared_ptr<ResHandle>();		// ResCache is out of memory!
 		}
 
@@ -347,7 +340,6 @@ namespace GameHalloran
 		if(!handle)
 		{
             GF_LOG_INF(string("Failed to allocate dynamic memory for the resource handle: ") + r->GetName());
-//			SafeGameLog(m_loggerPtr, GameLog::INF, string("Failed to allocate dynamic memory for the resource handle (") + r->GetName() + string(")."));
 			// Reverse the changes made in Allocate (its not stored in a valid handle yet so we must do this manually).
 			DeleteArray(buffer);
 			m_allocated -= *size;
@@ -358,7 +350,6 @@ namespace GameHalloran
 		if(!error && !handle->VLoad(m_file))
 		{
             GF_LOG_INF(string("Failed to load in the resource from the resource container: ") + r->GetName());
-//			SafeGameLog(m_loggerPtr, GameLog::INF, string("Failed to load in the resource from the resource container (") + r->GetName() + string(")."));
 			// Reset the handle as we should not pass back a valid handle in the event that we failed to load the resource from the file.
 			handle.reset();
 			error = true;
@@ -370,7 +361,6 @@ namespace GameHalloran
 			m_lru.push_front(handle);
 			m_resources[r->GetName()] = handle;
             GF_LOG_DEB(string("Resource loaded: ") + r->GetName());
-//			SafeGameLog(m_loggerPtr, GameLog::DEB, string("Resource (") + r->GetName() + string(") loaded successfully."));
 		}
 
 		return (handle);
@@ -435,7 +425,6 @@ namespace GameHalloran
 
 		// Remove the least recently used resource from the list and the queue.
         GF_LOG_DEB(string("Freeing the least recently used resource (") + handle->GetResourceName() + string(") from the cache now"));
-//		SafeGameLog(m_loggerPtr, GameLog::DEB, string("Freeing the least recently used resource (") + handle->GetResourceName() + string(") from the cache now."));
 		m_lru.pop_back();							
 		m_resources.erase(handle->GetResourceName());
 	}
@@ -446,7 +435,6 @@ namespace GameHalloran
 	void ResCache::Flush()
 	{
         GF_LOG_DEB("Flushing the entire cache now");
-//		SafeGameLog(m_loggerPtr, GameLog::DEB, string("Flushing the entire cache now."));
 
 		while (!m_lru.empty())
 		{
@@ -465,7 +453,6 @@ namespace GameHalloran
 		if (size > m_cacheSize)
 		{
             GF_LOG_ERR("Could not make room for the resource as its bigger than the cache");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Could not make room for the resource as its bigger than the cache!"));
 			return (false);
 		}
 
@@ -476,7 +463,6 @@ namespace GameHalloran
 			if (m_lru.empty())
 			{
                 GF_LOG_ERR("Could not make room for the resource as we cleared the entire cache but there still is not enough room");
-//				SafeGameLog(m_loggerPtr, GameLog::ERR, string("Could not make room for the resource as we cleared the entire cache but there still is not enough room!"));
 				return (false);
 			}
 
@@ -502,7 +488,6 @@ namespace GameHalloran
 	void ResCache::MemoryHasBeenFreed(const U32 size, const string &resourceName)
 	{
         GF_LOG_DEB(string("The resource ") + resourceName + string(" is reporting that it has freed itself."));
-//		SafeGameLog(m_loggerPtr, GameLog::DEB, string("The resource ") + resourceName + string(" is reporting that it has freed itself."));
 		m_allocated -= size;
 	}
 

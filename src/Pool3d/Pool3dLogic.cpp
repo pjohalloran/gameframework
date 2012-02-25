@@ -37,10 +37,6 @@ namespace GameHalloran
 		if(!srcData.IsTable())
 		{
             GF_LOG_TRACE_ERR("Pool3dLogicEventListener::CreateNewActorParams()", "Lua data is not valid");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dLogicEventListener::CreateNewActorParams()"),\
-									std::string("Lua data is not valid"));
 			return (NULL);
 		}
 
@@ -49,10 +45,6 @@ namespace GameHalloran
 		if(!actorTypeObj.IsString())
 		{
             GF_LOG_TRACE_ERR("Pool3dLogicEventListener::CreateNewActorParams()", "ActorType field not found");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dLogicEventListener::CreateNewActorParams()"),\
-									std::string("ActorType field not found"));
 			return (NULL);
 		}
 
@@ -79,10 +71,6 @@ namespace GameHalloran
 		else
 		{
             GF_LOG_TRACE_ERR("Pool3dLogicEventListener::CreateNewActorParams()", std::string("Unknown actor type encountered: ") + std::string(actorTypeStr));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dLogicEventListener::CreateNewActorParams()"),\
-									std::string("Unknown actor type encountered: ") + std::string(actorTypeStr));
 			return (NULL);
 		}
 
@@ -98,17 +86,9 @@ namespace GameHalloran
 #if DEBUG
 				// Spit out all the error messages.
                 GF_LOG_TRACE_ERR("Pool3dLogicEventListener::CreateNewActorParams()", "Actor Parameter Errors: ");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dLogicEventListener::CreateNewActorParams()"),\
-										std::string("Actor Parameter Errors: "));
 				for (TErrorMessageList::const_iterator iter = errorMessages.begin(), end = errorMessages.end(); iter != end; ++iter)
 				{
                     GF_LOG_TRACE_ERR("Pool3dLogicEventListener::CreateNewActorParams()", *iter);
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-											GameLog::ERR,\
-											std::string("Pool3dLogicEventListener::CreateNewActorParams()"),\
-											*iter);
 				}
 #endif
 			}
@@ -149,7 +129,6 @@ namespace GameHalloran
 
 		// Log receipt of the event and its type.
         GF_LOG_TRACE_TRC(VGetName(), string("Recevied event type = ") + string(eventObj.VGetEventType().getStr()));
-//		SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::TRC, string(VGetName()), string("Recevied event type = ") + string(eventObj.VGetEventType().getStr()));
 
 		// Check what event has occurred and handle it appropriately.
 		if(eventObj.VGetEventType() == EvtData_Request_Pause_Game_Event::sk_EventType)
@@ -249,7 +228,6 @@ namespace GameHalloran
 		else
 		{
             GF_LOG_DEB(string("Logic: Unknown game event received: ") + eventObj.VGetEventType().getStr());
-//			SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::DEB, string("Logic: Unknown game event received: ") + eventObj.VGetEventType().getStr());
 			result = false;
 		}
 
@@ -345,10 +323,6 @@ namespace GameHalloran
 		if(!params)
 		{
             GF_LOG_TRACE_ERR("Pool3dLogicEventListener::OnRequestNewActorEvent()", "NULL parameters, cannot create actor");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dLogicEventListener::OnRequestNewActorEvent()"),\
-									std::string("NULL parameters, cannot create actor"));
 		}
 		else
 		{
@@ -357,10 +331,6 @@ namespace GameHalloran
 			if(!safeQueEvent(newActorEventData))
 			{
                 GF_LOG_TRACE_ERR("Pool3dLogicEventListener::OnRequestNewActorEvent()", "Failed to send out new actor event");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dLogicEventListener::OnRequestNewActorEvent()"),\
-										std::string("NULL parameters, cannot create actor"));
 			}
 
 			// If we got actor from a script, then we needed to allocate some memory creating the parameters, so deallocate it now.
@@ -398,10 +368,6 @@ namespace GameHalloran
 			std::string idStr;
 			try { idStr = boost::lexical_cast<std::string, ActorId>(eventData.GetActorId()); } catch(...) {}
             GF_LOG_TRACE_ERR("Pool3dLogicEventListener::OnUpdateActorParametersEvent()", std::string("No Actor found in the logic layer with the ID supplied: ") + idStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dLogicEventListener::OnUpdateActorParametersEvent()"),\
-									std::string("No Actor found in the logic layer with the ID supplied: ") + idStr);
 		}
 		else
 		{
@@ -411,10 +377,6 @@ namespace GameHalloran
 				std::string idStr;
 				try { idStr = boost::lexical_cast<std::string, ActorId>(eventData.GetActorId()); } catch(...) {}
                 GF_LOG_TRACE_ERR("Pool3dLogicEventListener::OnUpdateActorParametersEvent()", std::string("The Actor ") + idStr + std::string(" has NULL parameters!"));
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dLogicEventListener::OnUpdateActorParametersEvent()"),\
-										std::string("The Actor ") + idStr + std::string(" has NULL parameters!"));
 			}
 			else
 			{
@@ -423,14 +385,9 @@ namespace GameHalloran
 				if(!paramsPtr->VInit(eventData.VGetLuaEventData(), errMsgList))
 				{
                     GF_LOG_TRACE_ERR("Pool3dLogicEventListener::OnUpdateActorParametersEvent()", "Failed to reinitialize the actors parameters (list of causes): ");
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-											GameLog::ERR,\
-											std::string("Pool3dLogicEventListener::OnUpdateActorParametersEvent()"),\
-											std::string("Failed to reinitialize the actors parameters (list of causes): "));
 					for(TErrorMessageList::iterator i = errMsgList.begin(), end = errMsgList.end(); i != end; ++i)
 					{
                         GF_LOG_TRACE_ERR("Pool3dLogicEventListener::OnUpdateActorParametersEvent()", *i);
-//						SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, *i);
 					}
 				}
 			}
@@ -655,7 +612,6 @@ namespace GameHalloran
 		{
 			// Log Error - shot start event received during a shot.
             GF_LOG_ERR("Recevied EvtData_Shot_Start event when a shot was already in progress");
-//			SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Recevied EvtData_Shot_Start event when a shot was already in progress"));
 			return (false);
 		}
 
@@ -663,7 +619,6 @@ namespace GameHalloran
 		{
 			// Log Error - shot start event received during a shot.
             GF_LOG_ERR("Wrong player took the shot");
-			SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Wrong player took the shot"));
 			return (false);
 		}
 
@@ -698,10 +653,6 @@ namespace GameHalloran
 			if(!cueBallActorParams || cueBallActorParams->GetBallGroup() != BallActorParams::eCue)
 			{
                 GF_LOG_TRACE_ERR("Pool3dLogicEventListener::OnResetCueBall()", "Cue ball actor not found");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dLogicEventListener::OnResetCueBall()"),\
-										std::string("Cue ball actor not found"));
 				return (true);
 			}
 
@@ -1234,7 +1185,6 @@ namespace GameHalloran
 				if(!safeQueEvent(newGameEventDataPtr))
 				{
                     GF_LOG_TRACE_ERR("Pool3dLogic::VChangeState()", std::string("Failed to broadcast the event: ") + EvtData_New_Game::sk_EventType.getStr());
-//					SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, std::string("Pool3dLogic::VChangeState()"), std::string("Failed to broadcast the event: ") + EvtData_New_Game::sk_EventType.getStr());
 				}
 			}
 			break;

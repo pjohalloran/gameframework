@@ -92,7 +92,6 @@ namespace GameHalloran
 		if (!m_children[childNodePtr->VGet()->GetRenderPass()])
 		{
             GF_LOG_TRACE_ERR("RootSceneNode::VAddChild()", "No such render pass");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("RootSceneNode::VAddChild()"), std::string("No such render pass"));
 			return (false);
 		}
 
@@ -124,7 +123,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("RootSceneNode::VRenderChildren()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("RootSceneNode::VRenderChildren()"), std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 

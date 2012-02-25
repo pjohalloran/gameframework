@@ -68,7 +68,6 @@ namespace GameHalloran
 		if(!scenePtr)
 		{
             GF_LOG_TRACE_ERR("CameraSceneNode::VOnUpdate()", "No valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("CameraSceneNode::VOnUpdate()"), std::string("No valid SceneGraphManager pointer"));
 			return (false);
 		}
 
@@ -81,7 +80,7 @@ namespace GameHalloran
 			m_updateCameraMatrix = false;
 		}
 
-		// A camera scene node does not have an children so it is safe not to call the base class for instances of it.
+		// A camera scene node does not have any children so it is safe not to call the base class for instances of it.
 		//return (SceneNode::VOnUpdate(scenePtr, elapsedTime));
 		return (true);
 	}
@@ -108,20 +107,12 @@ namespace GameHalloran
 			if(projLoc == -1)
 			{
                 GF_LOG_TRACE_ERR("CameraSceneNode::VRender()", "Failed to find the mvpMatrix position");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("CameraSceneNode::VRender()"),\
-										std::string("Failed to find the mvpMatrix position"));
 				result = false;
 			}
 			GLuint colorLoc = m_shaderPtr->GetUniformLocation("colorVec");
 			if(colorLoc == -1)
 			{
                 GF_LOG_TRACE_ERR("CameraSceneNode::VRender()", "Failed to find the colorVec position");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("CameraSceneNode::VRender()"),\
-										std::string("Failed to find the colorVec position"));
 				result = false;
 			}
 
@@ -166,7 +157,6 @@ namespace GameHalloran
 		if(!scenePtr)
 		{
             GF_LOG_TRACE_ERR("CameraSceneNode::VSetViewTransform()", "No valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("CameraSceneNode::VSetViewTransform()"), std::string("No valid SceneGraphManager pointer"));
 			return (false);
 		}
 

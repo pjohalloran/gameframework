@@ -37,7 +37,6 @@ namespace GameHalloran
 		bool error = false;
 
         GF_LOG_DEB("Checking GLFW intialization parameters");
-//		SafeGameLog(m_loggerPtr, GameLog::DEB, string("Checking GLFW intialization parameters."));
 
 #ifdef USE_NEW_GLFW
         result = glfwGetWindowParam(m_glfwPtr, GLFW_RED_BITS);
@@ -47,7 +46,6 @@ namespace GameHalloran
 		if(m_params.GetCBufRedBits() != 0 && result != m_params.GetCBufRedBits())
 		{
             GF_LOG_ERR("GLFW_RED_BITS got does not match that requested");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("GLFW_RED_BITS got does not match that requested."));
 			error = true;
 		}
 
@@ -59,7 +57,6 @@ namespace GameHalloran
 		if(m_params.GetCBufGreenBits() != 0 && result != m_params.GetCBufGreenBits())
 		{
             GF_LOG_ERR("GLFW_GREEN_BITS got does not match that requested");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("GLFW_GREEN_BITS got does not match that requested."));
 			error = true;
 		}
 
@@ -71,7 +68,6 @@ namespace GameHalloran
 		if(m_params.GetCBufBlueBits() != 0 && result != m_params.GetCBufBlueBits())
 		{
             GF_LOG_ERR("GLFW_BLUE_BITS got does not match that requested");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("GLFW_BLUE_BITS got does not match that requested."));
 			error = true;
 		}
 
@@ -83,7 +79,6 @@ namespace GameHalloran
 		if(m_params.GetAlphaBufferSize() != 0 && result != m_params.GetAlphaBufferSize())
 		{
             GF_LOG_ERR("GLFW_ALPHA_BITS got does not match that requested");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("GLFW_ALPHA_BITS got does not match that requested."));
 			error = true;
 		}
 
@@ -95,7 +90,6 @@ namespace GameHalloran
 		if(m_params.GetDepthBufferSize() != 0 && result != m_params.GetDepthBufferSize())
 		{
             GF_LOG_ERR("GLFW_DEPTH_BITS got does not match that requested");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("GLFW_DEPTH_BITS got does not match that requested."));
 			error = true;
 		}
         
@@ -107,7 +101,6 @@ namespace GameHalloran
 		if(m_params.GetStencilBufferSize() != 0 && result != m_params.GetStencilBufferSize())
 		{
             GF_LOG_ERR("GLFW_STENCIL_BITS got does not match that requested");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("GLFW_STENCIL_BITS got does not match that requested."));
 			error = true;
 		}
 
@@ -120,7 +113,6 @@ namespace GameHalloran
 		if(result != stereo)
 		{
             GF_LOG_ERR("GLFW_STEREO got does not match that requested");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("GLFW_STEREO got does not match that requested."));
 			error = true;
 		}
 
@@ -132,7 +124,6 @@ namespace GameHalloran
 		if(m_params.GetFsaaSamplesNumber() != 0 && result != m_params.GetFsaaSamplesNumber())
 		{
             GF_LOG_ERR("GLFW_FSAA_SAMPLES got does not match that requested");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("GLFW_FSAA_SAMPLES got does not match that requested."));
 			error = true;
 		}
 
@@ -150,7 +141,6 @@ namespace GameHalloran
 		{
 			// TODO: We need to pop up an error message if this occurs on screen to make this clear.
            GF_LOG_FAT("The OpenGL library on the system is not the minimum we require to run these demos (version 2.1).  Please update your graphics hardware and/or your vendor drivers");
-//			SafeGameLog(m_loggerPtr, GameLog::FAT, string("The OpenGL library on the system is not the minimum we require to run these demos (version 2.1).  Please update your graphics hardware and/or your vendor drivers."));
 			error = true;
 		}
 		if(!CheckGlVersionMatches(glMajGot, glMinGot, glMajReq, glMinReq))
@@ -158,7 +148,6 @@ namespace GameHalloran
 			// TODO: We have to alter how we render the application if this occurs, some graphics effects may not work.
 			// Not a serious error but log it anyway.
             GF_LOG_ERR("The OpenGL version got does not match the version requested");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("The OpenGL version got does not match the version requested"));
 		}
 
 #ifdef USE_NEW_GLFW
@@ -169,7 +158,6 @@ namespace GameHalloran
 		if(m_params.GetGlProfile() != 0 && result != m_params.GetGlProfile())
 		{
             GF_LOG_ERR("GLFW_OPENGL_PROFILE got does not match that requested");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("GLFW_OPENGL_PROFILE got does not match that requested."));
 			// TODO: Figure out why GLFW is reporting that we are not getting the compatibility profile when requested.
 			//  To proceed i am marking this temporarily as not a fatal startup error...
 			//error = true;
@@ -178,7 +166,6 @@ namespace GameHalloran
 		if(!error)
 		{
             GF_LOG_INF("GLFW window and OpenGL context was setup as requested");
-//			SafeGameLog(m_loggerPtr, GameLog::INF, string("GLFW window and OpenGL context was setup as requested."));
 		}
 
 		return (!error);
@@ -191,7 +178,6 @@ namespace GameHalloran
 	{
 #if DEBUG
         GF_LOG_DEB("Logging GLFW properties");
-//		SafeGameLog(m_loggerPtr, GameLog::DEB, string("Logging GLFW properties."));
 
 		// List GLFW and OpenGL version in use.
 		string majorStr, minorStr, revStr;
@@ -203,7 +189,6 @@ namespace GameHalloran
 			minorStr = lexical_cast<string, I32>(minor);
 			revStr = lexical_cast<string, I32>(rev);
             GF_LOG_DEB(string("Using GLFW version: ") + majorStr + string(" ") + minorStr + string(" ") + revStr);
-//			SafeGameLog(m_loggerPtr, GameLog::DEB, string("Using GLFW version: ") + majorStr + string(" ") + minorStr + string(" ") + revStr);
 		}
 		catch(bad_lexical_cast &)
 		{
@@ -216,7 +201,6 @@ namespace GameHalloran
 			minorStr = lexical_cast<string, I32>(minor);
 			revStr = lexical_cast<string, I32>(rev);
             GF_LOG_DEB(string("Using OpenGL version: ") + majorStr + string(" ") + minorStr + string(" ") + revStr);
-//			SafeGameLog(m_loggerPtr, GameLog::DEB, string("Using OpenGL version: ") + majorStr + string(" ") + minorStr + string(" ") + revStr);
 		}
 		catch(bad_lexical_cast &)
 		{
@@ -243,7 +227,6 @@ namespace GameHalloran
 			hStr = lexical_cast<string, I32>(mode.Height);
 #endif
             GF_LOG_DEB(string("Current desktop video mode: ") + wStr + string("X") + hStr + string(" (") + rStr + string(",") + gStr + string(",") + bStr + string(")"));
-//			SafeGameLog(m_loggerPtr, GameLog::DEB, string("Current desktop video mode: ") + wStr + string("X") + hStr + string(" (") + rStr + string(",") + gStr + string(",") + bStr + string(")"));
 #ifdef USE_NEW_GLFW
 			rStr = lexical_cast<string, I32>(glfwGetWindowParam(m_glfwPtr, GLFW_RED_BITS));
 			gStr = lexical_cast<string, I32>(glfwGetWindowParam(m_glfwPtr, GLFW_GREEN_BITS));
@@ -262,13 +245,11 @@ namespace GameHalloran
 			wStr = lexical_cast<string, I32>(w);
 			hStr = lexical_cast<string, I32>(h);
             GF_LOG_DEB(string("Current Window Video Mode: ") + wStr + string("X") + hStr + string(" (") + rStr + string(",") + gStr + string(",") + bStr + string(")"));
-//			SafeGameLog(m_loggerPtr, GameLog::DEB, string("Current Window Video Mode: ") + wStr + string("X") + hStr + string(" (") + rStr + string(",") + gStr + string(",") + bStr + string(")"));
 			const I32 maxModes = 256;
 			GLFWvidmode vidModes[maxModes];
             I32 total = glfwGetVideoModes(vidModes, maxModes);
 			string indexStr;
             GF_LOG_DEB("List of available video modes:");
-//			SafeGameLog(m_loggerPtr, GameLog::DEB, string("List of available video modes:"));
 			for(I32 i = 0; i < total; ++i)
 			{
 				indexStr = lexical_cast<string, I32>(i+1);
@@ -286,7 +267,6 @@ namespace GameHalloran
 				hStr = lexical_cast<string, I32>(vidModes[i].Height);
 #endif
                 GF_LOG_DEB(indexStr + string(": ") + wStr + string("X") + hStr + string(" (") + rStr + string(",") + gStr + string(",") + bStr + string(")"));
-//				SafeGameLog(m_loggerPtr, GameLog::DEB, indexStr + string(": ") + wStr + string("X") + hStr + string(" (") + rStr + string(",") + gStr + string(",") + bStr + string(")"));
 			}
 		}
 		catch(bad_lexical_cast &)
@@ -300,7 +280,6 @@ namespace GameHalloran
 #ifndef USE_NEW_GLFW
 			numStr = lexical_cast<string, I32>(glfwGetNumberOfProcessors());
             GF_LOG_DEB(string("Number of processors available: ") + numStr);
-//			SafeGameLog(m_loggerPtr, GameLog::DEB, string("Number of processors available: ") + numStr);
 #endif
 #ifdef USE_NEW_GLFW
             numStr = lexical_cast<string, I32>(glfwGetWindowParam(m_glfwPtr, GLFW_ACCELERATED));
@@ -308,7 +287,6 @@ namespace GameHalloran
             numStr = lexical_cast<string, I32>(glfwGetWindowParam(GLFW_ACCELERATED));
 #endif
             GF_LOG_DEB(string("Window Hardware Acceleration (1=on, 0=off): ") + numStr);
-//			SafeGameLog(m_loggerPtr, GameLog::DEB, string("Window Hardware Acceleration (1=on, 0=off): ") + numStr);
 		}
 		catch(bad_lexical_cast &)
 		{
@@ -468,10 +446,6 @@ namespace GameHalloran
 		try
 		{
             GF_LOG_TRACE_DEB("WindowManager::~WindowManager()", "Shutting down the GLFW");
-//			SafeGameLogAndPrefix(m_loggerPtr,\
-									GameLog::DEB,\
-									string("WindowManager::~WindowManager()"),\
-									string("Shutting down the GLFW."));
 #ifdef USE_NEW_GLFW
             glfwCloseWindow(m_glfwPtr);
 #endif

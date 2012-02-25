@@ -60,10 +60,6 @@ namespace GameHalloran
 		if(!m_loaded)
 		{
             GF_LOG_TRACE_ERR("BaseModelFileLoader::VGetTriangleList()", "No file was loaded yet");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BaseModelFileLoader::VGetTriangleList()"),\
-									std::string("No file was loaded yet"));
 			return (false);
 		}
 
@@ -71,10 +67,6 @@ namespace GameHalloran
 		if(m_objectMap.empty())
 		{
             GF_LOG_TRACE_INF("BaseModelFileLoader::VGetTriangleList()", "No models were loaded from the file");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::INF,\
-									std::string("BaseModelFileLoader::VGetTriangleList()"),\
-									std::string("No models were loaded from the file"));
 			return (false);
 		}
 
@@ -91,19 +83,11 @@ namespace GameHalloran
 		if(!m_loaded)
 		{
             GF_LOG_TRACE_ERR("BaseModelFileLoader::VGetObjectTriangleList()", "No file was loaded yet");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BaseModelFileLoader::VGetObjectTriangleList()"),\
-									std::string("No file was loaded yet"));
 			return (false);
 		}
 		if(groupId.empty())
 		{
             GF_LOG_TRACE_ERR("BaseModelFileLoader::VGetObjectTriangleList()", "GroupId is empty");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BaseModelFileLoader::VGetObjectTriangleList()"),\
-									std::string("GroupId is empty"));
 			return (false);
 		}
 
@@ -111,10 +95,6 @@ namespace GameHalloran
 		if(i == m_objectMap.end())
 		{
             GF_LOG_TRACE_ERR("BaseModelFileLoader::VGetObjectTriangleList()", "No object found with the ID " + groupId);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BaseModelFileLoader::VGetObjectTriangleList()"),\
-									std::string("No object found with the ID ") + groupId);
 			return (false);
 		}
 
@@ -273,10 +253,6 @@ namespace GameHalloran
 		if(!modelLoadingObjPtr || meshId.empty())
 		{
             GF_LOG_TRACE_ERR("LoadMeshFromResourceCache()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("LoadMeshFromResourceCache()"),\
-									std::string("Invalid parameters"));
 			return (mesh);
 		}
 
@@ -290,10 +266,6 @@ namespace GameHalloran
 			loadProgressObj.Failure(errMsg);
             GF_LOG_TRACE_ERR("LoadMeshFromResourceCache()", errMsg);
 #endif
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("LoadMeshFromResourceCache()"),\
-									errMsg);
 			return (mesh);
 		}
 
@@ -330,10 +302,6 @@ namespace GameHalloran
 			loadProgressObj.Failure(errMsg);
             GF_LOG_TRACE_ERR("LoadBatchFromResourceCache()", errMsg);
 #endif
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("LoadBatchFromResourceCache()"),\
-									errMsg);
 			return (batch);
 		}
 

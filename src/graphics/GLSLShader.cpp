@@ -292,9 +292,6 @@ namespace GameHalloran
 						if(errCode != GL_NO_ERROR)
 						{
                             GF_LOG_ERR(std::string("Error finding the uniform location for \"") + currVariableName + std::string("\":") + GameHalloran::GetOpenGLError(errCode));
-//							SafeGameLog(g_appPtr->GetLoggerPtr(),\
-											GameLog::ERR,\
-											std::string("Error finding the uniform location for \"") + currVariableName + std::string("\":") + GameHalloran::GetOpenGLError(errCode));
 							return (false);
 						}
 #endif
@@ -783,13 +780,11 @@ namespace GameHalloran
 		if(shaderName.empty())
 		{
             GF_LOG_TRACE_ERR("BuildShaderFromResourceCache()", "The shader name is empty");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BuildShaderFromResourceCache()"), std::string("The shader name is empty"));
 			return (null);
 		}
 		if(vsNameList.empty())
 		{
             GF_LOG_TRACE_ERR("BuildShaderFromResourceCache()", "The VS attribute vector is empty");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BuildShaderFromResourceCache()"), std::string("The VS attribute vector is empty"));
 			return (null);
 		}
 
@@ -825,13 +820,11 @@ namespace GameHalloran
 				if(index != optionalI)
 				{
                     GF_LOG_TRACE_ERR("BuildShaderFromResourceCache()", std::string("Failed to retrieve ") + filename + std::string(" from the resource cache so we cannot build this shader"));
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BuildShaderFromResourceCache()"), std::string("Failed to retrieve ") + filename + std::string(" from the resource cache so we cannot build this shader"));
 					error = true;
 				}
 				else
 				{
                     GF_LOG_TRACE_DEB("BuildShaderFromResourceCache()", std::string("No geometry shader (") + filename + std::string(") in the resource cache for this shader"));
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("BuildShaderFromResourceCache()"), std::string("No geometry shader (") + filename + std::string(") in the resource cache for this shader"));
 				}
 			}
 		}
@@ -843,7 +836,6 @@ namespace GameHalloran
 			if(!shaderObj)
 			{
                 GF_LOG_TRACE_ERR("BuildShaderFromResourceCache()", "Failed to allocate memory for the new GLSLShader object");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BuildShaderFromResourceCache()"), std::string("Failed to allocate memory for the new GLSLShader object"));
 			}
 			else
 			{
@@ -864,7 +856,6 @@ namespace GameHalloran
 				if(!buildResult)
 				{
                     GF_LOG_TRACE_ERR("BuildShaderFromResourceCache()", std::string("Failed to build the ") + shaderName + std::string(" shader: ") + errorMsg);
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BuildShaderFromResourceCache()"), std::string("Failed to build the ") + shaderName + std::string(" shader: ") + errorMsg);
 					error = true;
 				}
 			}

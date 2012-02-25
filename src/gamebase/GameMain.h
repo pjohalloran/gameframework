@@ -684,35 +684,35 @@ extern GameHalloran::GameMain *g_appPtr;
 #if defined(DEBUG) || defined(FORCE_LOGGING)
 
 #ifndef GF_LOG_ERR
-#define GF_LOG_ERR(msg) SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, msg)
+#define GF_LOG_ERR(msg) if(g_appPtr) { SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, msg); }
 #endif
 #ifndef GF_LOG_TRC
-#define GF_LOG_TRC(msg) SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::TRC, msg)
+#define GF_LOG_TRC(msg) if(g_appPtr) { SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::TRC, msg); }
 #endif
 #ifndef GF_LOG_INF
-#define GF_LOG_INF(msg) SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::INF, msg)
+#define GF_LOG_INF(msg) if(g_appPtr) { SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::INF, msg); }
 #endif
 #ifndef GF_LOG_FAT
-#define GF_LOG_FAT(msg) SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::FAT, msg)
+#define GF_LOG_FAT(msg) if(g_appPtr) { SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::FAT, msg); }
 #endif
 #ifndef GF_LOG_DEB
-#define GF_LOG_DEB(msg) SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::DEB, msg)
+#define GF_LOG_DEB(msg) if(g_appPtr) { SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::DEB, msg); }
 #endif
 
 #ifndef GF_LOG_TRACE_ERR
-#define GF_LOG_TRACE_ERR(trc,msg) SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, trc, msg)
+#define GF_LOG_TRACE_ERR(trc,msg) if(g_appPtr) { SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, trc, msg); }
 #endif
 #ifndef GF_LOG_TRACE_TRC
-#define GF_LOG_TRACE_TRC(trc,msg) SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::TRC, trc, msg)
+#define GF_LOG_TRACE_TRC(trc,msg) if(g_appPtr) { SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::TRC, trc, msg); }
 #endif
 #ifndef GF_LOG_TRACE_INF
-#define GF_LOG_TRACE_INF(trc,msg) SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::INF, trc, msg)
+#define GF_LOG_TRACE_INF(trc,msg) if(g_appPtr) { SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::INF, trc, msg); }
 #endif
 #ifndef GF_LOG_TRACE_FAT
-#define GF_LOG_TRACE_FAT(trc,msg) SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::FAT, trc, msg)
+#define GF_LOG_TRACE_FAT(trc,msg) if(g_appPtr) { SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::FAT, trc, msg); }
 #endif
 #ifndef GF_LOG_TRACE_DEB
-#define GF_LOG_TRACE_DEB(trc,msg) SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, trc, msg)
+#define GF_LOG_TRACE_DEB(trc,msg) if(g_appPtr) { SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, trc, msg); }
 #endif
 
 #else

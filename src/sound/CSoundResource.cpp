@@ -113,7 +113,6 @@ namespace GameHalloran
 		try
 		{
             GF_LOG_DEB(string("Freeing the sound resource ") + m_SoundFile);
-//			SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::DEB, string("Freeing the sound resource ") + m_SoundFile);
 			DeleteArray(m_PCMBuffer);
 		}
 		catch(...)
@@ -154,7 +153,6 @@ namespace GameHalloran
 
 						default:
                             GF_LOG_ERR("Sound Type Not Supported");
-//							SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("Sound Type Not Supported"));
 							result = false;
 							break;
 					}
@@ -178,7 +176,6 @@ namespace GameHalloran
 					default:
 						result = false;
                         GF_LOG_ERR("Sound Type Not Supported");
-//						SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("Sound Type Not Supported"));
 						break;
 				}
 
@@ -243,7 +240,6 @@ namespace GameHalloran
 				case mmioFOURCC('f', 'a', 'c', 't'):
 				{
                     GF_LOG_INF("This wav file is compressed. We don't handle compressed wav at this time");
-//					SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::INF, string("This wav file is compressed. We don't handle compressed wav at this time"));
 					break;
 				}
 
@@ -264,7 +260,6 @@ namespace GameHalloran
 					if (bytesRead < static_cast<U32>(length))
 					{
                         GF_LOG_ERR("Couldn't read the sound data!");
-//						SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("Couldn't read the sound data!"));
 						return (false);
 					}
 					break;
@@ -346,7 +341,6 @@ namespace GameHalloran
 				case mmioFOURCC('f', 'a', 'c', 't'):
 				{
                     GF_LOG_INF("This wav file is compressed. We don't handle compressed wav at this time");
-//					SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::INF, string("This wav file is compressed. We don't handle compressed wav at this time"));
 					break;
 				}
 
@@ -521,7 +515,6 @@ namespace GameHalloran
 
 		default:
             GF_LOG_TRACE_ERR("CSoundResource::VorbisSeek()", "Bad parameter for 'origin', requires same as fseek");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("CSoundResource::VorbisSeek()"), string("Bad parameter for 'origin', requires same as fseek."));
 			break;
 	  };
 

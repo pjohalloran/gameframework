@@ -96,10 +96,6 @@ namespace GameHalloran
 					{
 						result = false;
                         GF_LOG_TRACE_ERR("CommonBatchSceneNode::VPreRender()", "Failed to get the uniform locations for the flat shader");
-//						SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-												GameLog::ERR,\
-												std::string("CommonBatchSceneNode::VPreRender()"),\
-												std::string("Failed to get the uniform locations for the flat shader"));
 					}
 					if(result)
 					{

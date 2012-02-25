@@ -43,18 +43,15 @@ namespace GameHalloran
 		{
 			// GL failed to generate a VAO or VBO for us so theres a serious rendering problem that needs debugging right away to get this app to run!
             GF_LOG_TRACE_FAT("AbstractWidget::SetupQuad()", "Failed to generate a VAO or VBO previously");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::FAT, std::string("AbstractWidget::SetupQuad()"), std::string("Failed to generate a VAO or VBO previously"));
 			return;
 		}
 		if(glIsVertexArray(m_vaoId) == GL_FALSE)
 		{
             GF_LOG_TRACE_DEB("AbstractWidget::SetupQuad()", "No VOA exists yet so will generate one now");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("AbstractWidget::SetupQuad()"), std::string("No VOA exists yet so will generate one now"));
 			glGenVertexArrays(1, &m_vaoId);
 			if(m_vaoId == 0)
 			{
                 GF_LOG_TRACE_ERR("AbstractWidget::SetupQuad()", "Failed to generate the VAO");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::SetupQuad()"), std::string("Failed to generate the VAO"));
 				vaoError = true;
 				return;
 			}
@@ -62,12 +59,10 @@ namespace GameHalloran
 		if(glIsBuffer(m_vboId) == GL_FALSE)
 		{
             GF_LOG_TRACE_DEB("AbstractWidget::SetupQuad()", "No VBO exists yet so will generate one now");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("AbstractWidget::SetupQuad()"), std::string("No VBO exists yet so will generate one now"));
 			glGenBuffers(1, &m_vboId);
 			if(m_vboId == 0)
 			{
                 GF_LOG_TRACE_ERR("AbstractWidget::SetupQuad()", "Failed to generate the VBO");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::SetupQuad()"), std::string("Failed to generate the VBO"));
 				vboError = true;
 				return;
 			}
@@ -140,13 +135,11 @@ namespace GameHalloran
 			if(m_projLoc == -1)
 			{
                 GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the mvpMatrix position");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::Init()"), std::string("Failed to find the mvpMatrix position"));
 			}
 			m_colorLoc = m_flatShaderProg->GetUniformLocation("colorVec");
 			if(m_colorLoc == -1)
 			{
                 GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the colorVec position");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::Init()"), std::string("Failed to find the colorVec position"));
 			}
 		}
 		if(m_texShaderProg)
@@ -155,19 +148,16 @@ namespace GameHalloran
 			if(m_projLoc == -1)
 			{
                 GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the projMatrix position");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::Init()"), std::string("Failed to find the projMatrix position"));
 			}
 			m_samplerLoc = m_texShaderProg->GetUniformLocation("colorMap");
 			if(m_samplerLoc == -1)
 			{
                 GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the colorMap position");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::Init()"), std::string("Failed to find the colorMap position"));
 			}
 			m_alphaLoc = m_texShaderProg->GetUniformLocation("uiAlpha");
 			if(m_alphaLoc == -1)
 			{
                 GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the uiAlpha position");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::Init()"), std::string("Failed to find the uiAlpha position"));
 			}
 		}
 
@@ -189,7 +179,6 @@ namespace GameHalloran
 				try { idStr = boost::lexical_cast<std::string, ScreenElementId>(m_id); } catch(...) { }
                 GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to generate the texture for the widget " + idStr);
 #endif
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::Init()"), std::string("Failed to generate the texture for the widget ") + idStr);
 			}
 		}
 
@@ -201,7 +190,6 @@ namespace GameHalloran
 			try { idStr = boost::lexical_cast<std::string, ScreenElementId>(m_id); } catch(...) { }
             GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to generate the VAO for the widget " + idStr);
 #endif
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::Init()"), std::string("Failed to generate the VAO for the widget ") + idStr);
 		}
 		glGenBuffers(1, &m_vboId);
 		if(m_vboId == 0)
@@ -211,7 +199,6 @@ namespace GameHalloran
 			try { idStr = boost::lexical_cast<std::string, ScreenElementId>(m_id); } catch(...) { }
             GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to generate the VBO for the widget " + idStr);
 #endif
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::Init()"), std::string("Failed to generate the VBO for the widget ") + idStr);
 		}
 
 		SetupQuad();
@@ -231,7 +218,6 @@ namespace GameHalloran
 				if((strcmp(posType.GetString(), "relative") != 0) && (strcmp(posType.GetString(), "absolute") != 0))
 				{
                     GF_LOG_TRACE_ERR("AbstractWidget::SetLuaPosition()", std::string("The Type parameter from Position is invalid: ") + posType.GetString());
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::SetLuaPosition()"), std::string("The Type parameter from Position is invalid: ") + std::string(posType.GetString()));
 				}
 #endif
 
@@ -288,7 +274,6 @@ namespace GameHalloran
 				if((strcmp(dimType.GetString(), "relative") != 0) && (strcmp(dimType.GetString(), "absolute") != 0))
 				{
                     GF_LOG_TRACE_ERR("AbstractWidget::SetLuaDimensions()", std::string("The Type parameter from Dimensions is invalid: ") + dimType.GetString());
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::SetLuaDimensions()"), std::string("The Type parameter from Dimensions is invalid: ") + std::string(dimType.GetString()));
 				}
 #endif
 
@@ -442,7 +427,6 @@ namespace GameHalloran
 		if(!m_texShaderProg->Activate())
 		{
             GF_LOG_TRACE_ERR("AbstractWidget::PreRenderTexturedWidget()", "Failed to activate the shader");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::PreRenderTexturedWidget()"), std::string("Failed to activate the shader"));
 			return (false);
 		}
 
@@ -463,7 +447,6 @@ namespace GameHalloran
 		if(!m_flatShaderProg->Activate())
 		{
             GF_LOG_TRACE_ERR("AbstractWidget::PreRenderFlatWidget()", "Failed to activate the shader");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AbstractWidget::PreRenderFlatWidget()"), std::string("Failed to activate the shader"));
 			return (false);
 		}
 

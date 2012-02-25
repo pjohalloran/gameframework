@@ -108,10 +108,6 @@ namespace GameHalloran
 		if(!RetrieveAndConvertOption<string>(m_optionsPtr, string("PhysicsSystem"), GameOptions::PROGRAMMER, physicsNameStr))
 		{
             GF_LOG_TRACE_ERR("BaseGameLogic::CreatePhysicsModule()", "Failed to find \"PhysicsSystem\" in the options file so we will use the default system (NULL)");
-//			SafeGameLogAndPrefix(m_loggerPtr,\
-									GameLog::ERR,\
-									string("BaseGameLogic::CreatePhysicsModule()"),\
-									string("Failed to find \"PhysicsSystem\" in the options file so we will use the default system (NULL)"));
 			physicsNameStr.assign(NULL_SYSTEM);
 		}
 		boost::algorithm::to_lower(physicsNameStr);
@@ -125,10 +121,6 @@ namespace GameHalloran
 			if(!stackManagerPtr)
 			{
                 GF_LOG_TRACE_ERR("BaseGameLogic::CreatePhysicsModule()", "Failed to initialize Bullet as it needs a valid MVP stack manager");
-//				SafeGameLogAndPrefix(m_loggerPtr,\
-										GameLog::ERR,\
-										string("BaseGameLogic::CreatePhysicsModule()"),\
-										string("Failed to initialize Bullet as it needs a valid MVP stack manager"));
 				return (false);
 			}
 			m_pPhysics.reset(GCC_NEW BulletPhysics(stackManagerPtr));
@@ -145,20 +137,12 @@ namespace GameHalloran
 		else
 		{
             GF_LOG_TRACE_ERR("BaseGameLogic::CreatePhysicsModule()", string("The physics system name is not known: ") + physicsNameStr);
-//			SafeGameLogAndPrefix(m_loggerPtr,\
-									GameLog::ERR,\
-									string("BaseGameLogic::CreatePhysicsModule()"),\
-									string("The physics system name is not known (") + physicsNameStr + string(")"));
 			return (false);
 		}
 
 		if(!m_pPhysics || !m_pPhysics->VInitialize())
 		{
             GF_LOG_TRACE_ERR("BaseGameLogic::CreatePhysicsModule()", "Failed to initialize the physics system");
-//			SafeGameLogAndPrefix(m_loggerPtr,\
-									GameLog::ERR,\
-									string("BaseGameLogic::CreatePhysicsModule()"),\
-									string("Failed to initialize the physics system"));
 			return (false);
 		}
 
@@ -166,7 +150,6 @@ namespace GameHalloran
 		m_pPhysics->VSetDiagnosticMode(0);
 
         GF_LOG_TRACE_INF("BaseGameLogic::CreatePhysicsModule()", string("Initialized the ") + physicsNameStr + string(" physics library"));
-//		SafeGameLogAndPrefix(m_loggerPtr, GameLog::INF, string("BaseGameLogic::CreatePhysicsModule()"), string("Initialized the ") + physicsNameStr + string(" physics library"));
 		return (true);
 	}
 
@@ -275,10 +258,6 @@ namespace GameHalloran
 			{
 				// unknown option...
                 GF_LOG_TRACE_ERR("BaseGameLogic::GetBulletDiagnosticOptions()", string("Unknown option: ") + *i);
-//				SafeGameLogAndPrefix(m_loggerPtr,\
-										GameLog::ERR,\
-										string("BaseGameLogic::GetBulletDiagnosticOptions()"),\
-										string("Unknown option: ") + *i);
 			}
 		}
 
@@ -337,7 +316,6 @@ namespace GameHalloran
 			if(!m_ActorList.empty())
 			{
                 GF_LOG_TRACE_ERR("BaseGameLogic::~BaseGameLogic()", "You should destroy the actor list in the inherited class!");
-//				SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseGameLogic::~BaseGameLogic()"), string("You should destroy the actor list in the inherited class!"));
 			}
 		}
 		catch(...)
@@ -426,7 +404,6 @@ namespace GameHalloran
 	{
 		// TODO: Implement.
         GF_LOG_ERR("BaseGameLogic::VLoadGame() is not implemented yet!");
-//		SafeGameLog(m_loggerPtr, GameLog::ERR, string("BaseGameLogic::VLoadGame() is not implemented yet!"));
 		return (false);
 	}
 
@@ -437,7 +414,6 @@ namespace GameHalloran
 	{
 		// TODO: Implement.
         GF_LOG_ERR("BaseGameLogic::VSaveGame() is not implemented yet!");
-//		SafeGameLog(m_loggerPtr, GameLog::ERR, string("BaseGameLogic::VSaveGame() is not implemented yet!"));
 		return (false);
 	}
 
@@ -447,7 +423,6 @@ namespace GameHalloran
 	void BaseGameLogic::VSetProxy()
 	{
         GF_LOG_INF("The logic layer is acting as a proxy for a remote logic layer");
-		SafeGameLog(m_loggerPtr, GameLog::INF, string("The logic layer is acting as a proxy for a remote logic layer."));
 		m_bProxy = true;
 	}
 
@@ -478,13 +453,11 @@ namespace GameHalloran
 		if(!actor)
 		{
             GF_LOG_ERR("No valid actor pointer supplied so we cannot add the actor to the logic layer");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("No valid actor pointer supplied so we cannot add the actor to the logic layer!"));
 			return;
 		}
 		if(!p)
 		{
             GF_LOG_ERR("No parameters were supplied so we cannot add the actor to the logic layer");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("No parameters were supplied so we cannot add the actor to the logic layer!"));
 			return;
 		}
 
@@ -497,7 +470,6 @@ namespace GameHalloran
 		else
 		{
             GF_LOG_ERR("Attempted to add an actor with no actor ID");
-			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Attempted to add an actor with no actor ID!"));
 		}
 	}
 
@@ -526,12 +498,10 @@ namespace GameHalloran
 			{
 				string idStr = lexical_cast<string, ActorId>(aid);
                 GF_LOG_ERR(string("Attempted to remove an actor (id=") + idStr + string(") that does not exist!"));
-//				SafeGameLog(m_loggerPtr, GameLog::ERR, string("Attempted to remove an actor (id=") + idStr + string(") that does not exist!"));
 			}
 			catch(bad_lexical_cast &)
 			{
                 GF_LOG_ERR("Attempted to remove an actor that does not exist");
-//				SafeGameLog(m_loggerPtr, GameLog::ERR, string("Attempted to remove an actor that does not exist!"));
 			}
 		}
 #endif
@@ -588,7 +558,6 @@ namespace GameHalloran
 				else
 				{
                     GF_LOG_TRACE_FAT("BaseGameLogic::VOnUpdate()", "The game failed to load");
-//					SafeGameLogAndPrefix(m_loggerPtr, GameLog::FAT, string("BaseGameLogic::VOnUpdate()"), string("The game failed to load."));
 					g_appPtr->SetRunning(false);
 				}
 			}
@@ -702,14 +671,12 @@ namespace GameHalloran
 		{
 			// failed to retrieve script.
             GF_LOG_TRACE_ERR("BaseGameLogic::VBuildInitialScene()", string("Failed to retrieve ") + luaStartupScriptRes.GetName());
-//			SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseGameLogic::VBuildInitialScene()"), string("Failed to retrieve ") + luaStartupScriptRes.GetName());
 			return;
 		}
 
 		if(!g_appPtr->GetLuaStateManager()->ExecuteString(scriptHandle->GetTextBuffer()))
 		{
             GF_LOG_TRACE_ERR("BaseGameLogic::VBuildInitialScene()", string("Unable to execute ") + luaStartupScriptRes.GetName());
-//			SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseGameLogic::VBuildInitialScene()"), string("Unable to execute ") + luaStartupScriptRes.GetName());
 			return;
 		}
 	}
@@ -759,7 +726,6 @@ namespace GameHalloran
 		if(!pView)
 		{
             GF_LOG_ERR("Tried to add a NULL GameView pointer to the logic layer");
-//			SafeGameLog(m_loggerPtr, GameLog::ERR, string("Tried to add a NULL GameView pointer to the logic layer!"));
 			return (id);
 		}
 
@@ -844,13 +810,11 @@ namespace GameHalloran
 		if(!pState)
 		{
             GF_LOG_TRACE_ERR("BaseLuaGameLogic::VAddActor()", "Failed to get the global LUA state object");
-//			SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseLuaGameLogic::VAddActor()"), string("Failed to get the global LUA state object."));
 			return;
 		}
 		if(!globalActorTable.IsTable())
 		{
             GF_LOG_TRACE_ERR("BaseLuaGameLogic::VAddActor()", "Script side actor table does not exist");
-//			SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseLuaGameLogic::VAddActor()"), string("Global actor table is NOT a table! This means that the actor was added but we failed to register the OnCreateFunc and OnDestroyFunc and failed to call the OnCreateFunc() in the LUA scripts!"));
 			return;
 		}
 
@@ -875,7 +839,6 @@ namespace GameHalloran
 			if(foundObj.IsNil())
 			{
                 GF_LOG_TRACE_ERR("BaseLuaGameLogic::VAddActor()", "OnCreateFunc missing...");
-//				SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseLuaGameLogic::VAddActor()"), string("Unable to find specified OnCreateFunc function (") + string(p->VGetCreateFuncName()) + string(")."));
 			}
 			else
 			{
@@ -883,7 +846,6 @@ namespace GameHalloran
 				if(!foundObj.IsFunction())
 				{
                     GF_LOG_TRACE_ERR("BaseLuaGameLogic::VAddActor()", "OnCreateFunc is not a LUA function - possibly some other script type");
-//					SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseLuaGameLogic::VAddActor()"), string("Specified OnCreateFunc is not a valid function (") + string(p->VGetCreateFuncName()) + string(")."));
 				}
 				else
 				{
@@ -907,12 +869,10 @@ namespace GameHalloran
 			{
 				string actorIdStr = lexical_cast<string, ActorId>(id);
                 GF_LOG_TRACE_ERR("BaseLuaGameLogic::VRemoveActor()", string("Actor (") + actorIdStr + string(") does not exist"));
-//				SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseLuaGameLogic::VRemoveActor()"), string("Actor (") + actorIdStr + string(") does not exist."));
 			}
 			catch(bad_lexical_cast &)
 			{
                 GF_LOG_TRACE_ERR("BaseLuaGameLogic::VRemoveActor()", "Actor with that ID does not exist");
-//				SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseLuaGameLogic::VRemoveActor()"), string("Actor with that ID does not exist."));
 			}
 			return;
 		}
@@ -926,13 +886,11 @@ namespace GameHalloran
 		if(!pState)
 		{
             GF_LOG_TRACE_ERR("BaseLuaGameLogic::VRemoveActor()", "Failed to get the global LUA state objec");
-			SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseLuaGameLogic::VRemoveActor()"), string("Failed to get the global LUA state object."));
 			return;
 		}
 		if(!globalActorTable.IsTable())
 		{
             GF_LOG_TRACE_ERR("BaseLuaGameLogic::VRemoveActor()", "Global script side actor table does not exist");
-			SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseLuaGameLogic::VRemoveActor()"), string("Global actor table is NOT a table!"));
 			return;
 		}
 
@@ -946,7 +904,6 @@ namespace GameHalloran
 			if (foundObj.IsNil())
 			{
                 GF_LOG_TRACE_ERR("BaseLuaGameLogic::VRemoveActor()", "Unable to find specified OnDestroyFunc");
-//				SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseLuaGameLogic::VRemoveActor()"), string("Unable to find specified OnDestroyFunc function (") + string(actorParams->VGetDestroyFuncName()) + string(")."));
 			}
 			else
 			{
@@ -954,7 +911,6 @@ namespace GameHalloran
 				if(!foundObj.IsFunction())
 				{
                     GF_LOG_TRACE_ERR("BaseLuaGameLogic::VRemoveActor()", "OnDestroyFunc not a valid script function");
-//					SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("BaseLuaGameLogic::VRemoveActor()"), string("The specified OnDestroyFunc function (") + string(actorParams->VGetDestroyFuncName()) + string(") is not a valid function."));
 				}
 				else
 				{

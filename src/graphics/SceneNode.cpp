@@ -105,10 +105,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("SceneNode::VPreRender()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("SceneNode::VPreRender()"),\
-									std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 
@@ -121,10 +117,6 @@ namespace GameHalloran
 				if(!m_shaderPtr)
 				{
                     GF_LOG_TRACE_ERR("SceneNode::VPreRender()", std::string("Failed to get the custom shader from the SGM: ") + m_props.GetShaderName());
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-											GameLog::ERR,\
-											std::string("SceneNode::VPreRender()"),\
-											std::string("Failed to get the custom shader from the SGM: ") + m_props.GetShaderName());
 					return (false);
 				}
 			}
@@ -133,10 +125,6 @@ namespace GameHalloran
 			if(!m_shaderPtr->Activate())
 			{
                 GF_LOG_TRACE_ERR("SceneNode::VPreRender()", std::string("Failed to activate the custom shader: ") + m_props.GetShaderName());
-//                SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-                                        GameLog::ERR,\
-                                        std::string("SceneNode::VPreRender()"),\
-                                        std::string("Failed to activate the custom shader: ") + m_props.GetShaderName());
                 return (false);
 			}
 
@@ -159,7 +147,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("SceneNode::VRender()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneNode::VRender()"), std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 
@@ -176,7 +163,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("SceneNode::VPostRender()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneNode::VPostRender()"), std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 
@@ -195,7 +181,6 @@ namespace GameHalloran
 		if(!toWorld.Inversed(inv))
 		{
             GF_LOG_TRACE_INF("SceneNode::VSetTransform()", "Failed to calculate an inverse for the nodes new toWorld matrix");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::INF, std::string("SceneNode::VSetTransform()"), std::string("Failed to calculate an inverse for the nodes new toWorld matrix"));
 			inv.LoadIdentity();
 		}
 
@@ -311,7 +296,6 @@ namespace GameHalloran
 			{
 				// Log trace here to help answer our problem...
                 GF_LOG_TRACE_DEB("SceneNode::VRenderChildren()", "The W component is non zero, recheck your work!!!!");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("SceneNode::VRenderChildren()"), std::string("The W component is non zero, recheck your work!!!!"));
 			}
 			z = eyePos4.GetZ();
 
@@ -319,7 +303,6 @@ namespace GameHalloran
 			if(!asn)
 			{
                 GF_LOG_TRACE_ERR("SceneNode::VRenderChildren()", "Failed to allocate memory for an alpha scene node");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneNode::VRenderChildren()"), std::string("Failed to allocate memory for an alpha scene node"));
 			}
 			else
 			{
@@ -337,7 +320,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("SceneNode::VRenderChildren()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneNode::VRenderChildren()"), std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 
@@ -364,7 +346,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("SceneNode::VOnRestore()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneNode::VOnRestore()"), std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 
@@ -388,7 +369,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("SceneNode::VOnLostDevice()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneNode::VOnLostDevice()"), std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 
@@ -412,7 +392,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("SceneNode::VIsVisible()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneNode::VIsVisible()"), std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 
@@ -443,7 +422,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("SceneNode::VPick()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneNode::VPick()"), std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 
@@ -472,7 +450,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("SceneNode::VOnUpdate()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneNode::VOnUpdate()"), std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 

@@ -48,20 +48,12 @@ namespace GameHalloran
 		if(m_vaoId == 0)
 		{
             GF_LOG_TRACE_ERR("BulletPhysicsDebugDrawer::CreateBuffers()", "Failed to generate the VAO");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysicsDebugDrawer::CreateBuffers()"),\
-									std::string("Failed to generate the VAO"));
 			return (false);
 		}
 		glGenBuffers(1, &m_vboId);
 		if(m_vboId == 0)
 		{
             GF_LOG_TRACE_ERR("BulletPhysicsDebugDrawer::CreateBuffers()", "Failed to generate the VBO");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysicsDebugDrawer::CreateBuffers()"),\
-									std::string("Failed to generate the VBO"));
 			return (false);
 		}
 
@@ -168,10 +160,6 @@ namespace GameHalloran
 		if(!m_shaderPtr->Activate())
 		{
             GF_LOG_TRACE_ERR("BulletPhysicsDebugDrawer::drawLine()", "Failed to activate the shader");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysicsDebugDrawer::drawLine()"),\
-									std::string("Failed to activate the shader"));
 			return;
 		}
 
@@ -214,7 +202,6 @@ namespace GameHalloran
 			return;
 		}
         GF_LOG_ERR(std::string("Bullet DebugDraw Error: ") + std::string(warningString));
-//		SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Bullet DebugDraw Error: ") + std::string(warningString));
 	}
 
 	// /////////////////////////////////////////////////////////////////

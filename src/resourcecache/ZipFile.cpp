@@ -174,7 +174,6 @@ namespace GameHalloran
         if(!headerPtr || !m_pFile)
         {
             GF_LOG_TRACE_ERR("ZipFile::ReadDirHeader()", "Invalid parameters");
-//            SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Invalid parameters"));
             return (false);
         }
         
@@ -213,7 +212,6 @@ namespace GameHalloran
         if(headerPtr->sig != TZipDirHeader::SIGNATURE)
         {
             GF_LOG_TRACE_ERR("ZipFile::ReadDirHeader()", "Invalid TZipDirHeader signature encountered");
-//            SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Invalid TZipDirHeader signature encountered"));
             return (false);
         }
         
@@ -268,7 +266,6 @@ namespace GameHalloran
         if (headerPtr->sig != TZipLocalHeader::SIGNATURE)
         {
             GF_LOG_TRACE_ERR("ZipFile::ReadLocalHeader()", "Local ZIP Header signature is invalid");
-//            SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Local ZIP Header signature is invalid"));
             return (false);
         }
         
@@ -324,7 +321,6 @@ namespace GameHalloran
         if (!m_pFile)
         {
             GF_LOG_TRACE_ERR("ZipFile::Init()", std::string("Failed to open zip file ") + resFileName.string());
-//            SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Failed to open zip file ") + resFileName.string());
             return (false);
         }
         
@@ -347,7 +343,6 @@ namespace GameHalloran
         if (!m_pDirData)
         {
             GF_LOG_TRACE_ERR("ZipFile::Init()", "Failed to allocate ZIP data buffer");
-//            SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Failed to allocate ZIP data buffer"));
             return (false);
         }
         memset(m_pDirData, 0, size);
@@ -470,7 +465,6 @@ namespace GameHalloran
         if(i >= m_nEntries)
         {
             GF_LOG_TRACE_ERR("ZipFile::GetFilename()", "ZIP index out of bounds");
-//            SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ZIP index out of bounds"));
             return (false);
         }
 		
@@ -492,7 +486,6 @@ namespace GameHalloran
         if (i >= m_nEntries)
         {
             GF_LOG_TRACE_ERR("ZipFile::GetFileLen()", "ZIP index out of bounds");
-//            SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ZIP index out of bounds"));
             return (false);
         }
 	  
@@ -509,7 +502,6 @@ namespace GameHalloran
         if ((pBuf == NULL) || (i >= m_nEntries))
         {
             GF_LOG_TRACE_ERR("ZipFile::ReadFile()", "Invalid ReadFile parameters");
-//            SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Invalid ReadFile parameters"));
             return (false);
         }
 
@@ -536,7 +528,6 @@ namespace GameHalloran
         else if (h.compression != Z_DEFLATED)
         {
             GF_LOG_TRACE_ERR("ZipFile::ReadFile()", "Unable to handle non Z_DEFLATED compressed data ZIP fil");
-//            SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Unable to handle non Z_DEFLATED compressed data ZIP file"));
             return (false);
         }
 
@@ -556,7 +547,6 @@ namespace GameHalloran
         if (!pcData)
         {
             GF_LOG_TRACE_ERR("ZipFile::ReadFile()", "Failed to allocate memory for local ZIP file");
-            SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Failed to allocate memory for local ZIP file"));
             return (false);
         }
         

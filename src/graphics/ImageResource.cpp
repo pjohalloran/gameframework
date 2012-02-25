@@ -487,7 +487,6 @@ namespace GameHalloran
 		try
 		{
             GF_LOG_DEB(std::string("Freeing the image resource ") + m_imageFilename);
-//			SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("Freeing the image resource ") + m_imageFilename);
 			DeleteArray(m_imageBuffer);
 		}
 		catch(...)
@@ -603,7 +602,6 @@ namespace GameHalloran
 							// TODO:
 						default:
                             GF_LOG_ERR("Image Type Not Supported");
-//							SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Image Type Not Supported"));
 							result = false;
 							break;
 					}
@@ -630,7 +628,6 @@ namespace GameHalloran
 					default:
 						result = false;
                         GF_LOG_ERR("Image Type Not Supported");
-//						SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("Image Type Not Supported"));
 						break;
 				}
 

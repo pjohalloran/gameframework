@@ -83,7 +83,6 @@ namespace GameHalloran
 		if(FAILED(hr = DirectSoundCreate8(NULL, &m_pDS, NULL)))
 		{
             GF_LOG_TRACE_ERR("DirectSound8Audio::VInitialize()", "Failed to initialized the DirectSound interface");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8Audio::VInitialize()"), string("Failed to initialized the DirectSound interface"));
 			return (false);
 		}
 
@@ -91,14 +90,12 @@ namespace GameHalloran
 		if(FAILED(hr = m_pDS->SetCooperativeLevel(m_hWnd, DSSCL_PRIORITY)))
 		{
             GF_LOG_TRACE_ERR("DirectSound8Audio::VInitialize()", "Failed to set the coop level of the DirectSound interface");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8Audio::VInitialize()"), string("Failed to set the coop level of the DirectSound interface"));
 			return (false);
 		}
 
 		if(FAILED(hr = SetPrimaryBufferFormat(8, 44100, 16)))
 		{
             GF_LOG_TRACE_ERR("DirectSound8Audio::VInitialize()", "Failed to set the primary buffer format of the DirectSound interface");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8Audio::VInitialize()"), string("Failed to set the primary buffer format of the DirectSound interface"));
 			return (false);
 		}
 
@@ -198,13 +195,11 @@ namespace GameHalloran
 			case SOUND_TYPE_MP3:
 			case SOUND_TYPE_MIDI:	//If it's a midi file, then do nothin at this time... maybe we will support this in the future
                 GF_LOG_TRACE_ERR("DirectSound8Audio::VInitAudioBuffer()", "MP3s and MIDI are not supported");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8Audio::VInitAudioBuffer()"), string("MP3s and MIDI are not supported"));
 				return (null);
 				break;
 
 			default:
                 GF_LOG_TRACE_ERR("DirectSound8Audio::VInitAudioBuffer()", "Unknown sound file");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8Audio::VInitAudioBuffer()"), string("Unknown sound file"));
 				return (null);
 				break;
 		}//end switch
@@ -226,7 +221,6 @@ namespace GameHalloran
 		if(FAILED(hr = m_pDS->CreateSoundBuffer(&dsbd, &sampleHandle, NULL)))
 		{
             GF_LOG_TRACE_ERR("DirectSound8Audio::VInitAudioBuffer()", "");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8Audio::VInitAudioBuffer()"), string("Failed to create DirectSound buffer."));
 			return (null);
 		}
 
@@ -270,7 +264,6 @@ namespace GameHalloran
  		if (!VOnRestore())
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VGet()", "Failed to restore the buffer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VGet()"), string("Failed to restore the buffer."));
 			return (NULL);
 		}
 
@@ -293,7 +286,6 @@ namespace GameHalloran
 		if (!pDSB)
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VPlay()", "Failed to cast the buffer to a DirectSound buffer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VPlay()"), string("Failed to cast the buffer to a DirectSound buffer"));
 			return (false);
 		}
 
@@ -314,13 +306,11 @@ namespace GameHalloran
 		if(!g_audioPtr || !g_audioPtr->VActive())
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VStop()", "The sound system is not active");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VStop()"), string("The sound system is not active"));
 			return (false);
 		}
 		if(pDSB == NULL)
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VStop()", "Failed to cast the buffer to a DirectSound buffer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VStop()"), string("Failed to cast the buffer to a DirectSound buffer"));
 			return (false);
 		}
 
@@ -341,13 +331,11 @@ namespace GameHalloran
 		if(!g_audioPtr || !g_audioPtr->VActive())
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VPause()", "The sound system is not active");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VPause()"), string("The sound system is not active"));
 			return (false);
 		}
 		if(pDSB == NULL)
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VPause()", "Failed to cast the buffer to a DirectSound buffe");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VPause()"), string("Failed to cast the buffer to a DirectSound buffer"));
 			return (false);
 		}
 
@@ -400,7 +388,6 @@ namespace GameHalloran
 		if(!g_audioPtr || !g_audioPtr->VActive())
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VIsPlaying()", "The sound system is not active");
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VIsPlaying()"), string("The sound system is not active"));
 			return (false);
 		}
 
@@ -409,7 +396,6 @@ namespace GameHalloran
 		if(!pDSB)
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VIsPlaying()", "Failed to cast the buffer to a DirectSound buffer");
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VIsPlaying()"), string("Failed to cast the buffer to a DirectSound buffer"));
 			return (false);
 		}
 
@@ -427,7 +413,6 @@ namespace GameHalloran
 		if(!g_audioPtr || !g_audioPtr->VActive())
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VSetVolume()", "The sound system is not active");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VSetVolume()"), string("The sound system is not active"));
 			return;
 		}
 
@@ -435,20 +420,17 @@ namespace GameHalloran
 		if(!pDSB)
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VSetVolume()", "Failed to cast the buffer to a DirectSound buffer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VSetVolume()"), string("Failed to cast the buffer to a DirectSound buffer"));
 			return;
 		}
 
 		if(volume < 0)
 		{
             GF_LOG_TRACE_INF("DirectSound8AudioBuffer::VSetVolume()", "Volume cannot be less than 0 so we are setting it to 0");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::INF, string("DirectSound8AudioBuffer::VSetVolume()"), string("Volume cannot be less than 0 so we are setting it to 0"));
 			volume = 0;
 		}
 		else if(volume > 100)
 		{
             GF_LOG_TRACE_INF("DirectSound8AudioBuffer::VSetVolume()", "The volume cannot be greater than 100 so we are setting it to 100");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::INF, string("DirectSound8AudioBuffer::VSetVolume()"), string("The volume cannot be greater than 100 so we are setting it to 100"));
 			volume = 100;
 		}
 
@@ -463,7 +445,6 @@ namespace GameHalloran
 		if(hr != S_OK)
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VSetVolume()", "Failed to set the volum of the DirectSound Buffer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VSetVolume()"), string("Failed to set the volum of the DirectSound Buffer."));
 		}
 	}
 
@@ -479,7 +460,6 @@ namespace GameHalloran
 		if(FAILED(hr = RestoreBuffer(&bRestored)))
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VOnRestore()", "Failed to restore the buffer");
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VOnRestore()"), string("Failed to restore the buffer"));
 			return (false);
 		}
 
@@ -489,14 +469,12 @@ namespace GameHalloran
 			if(FAILED(hr = FillBufferWithSound()))
 			{
                 GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VOnRestore()", "Failed to fill the buffer with sound");
-				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VOnRestore()"), string("Failed to fill the buffer with sound"));
 				return (false);
 			}
 		}
 		else
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VOnRestore()", "Failed to restore the buffer so cannot fill it with sound");
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VOnRestore()"), string("Failed to restore the buffer so cannot fill it with sound"));
 		}
 
 		return (true);
@@ -550,7 +528,6 @@ namespace GameHalloran
 			if(i >= NUM_RETRIES)
 			{
                 GF_LOG_TRACE_DEB("DirectSound8AudioBuffer::RestoreBuffer()", "Failed to restore the buffer after NUM_RETRIES tries.  DirectSound seems to be in a broken state...");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, string("DirectSound8AudioBuffer::RestoreBuffer()"), string("Failed to restore the buffer after NUM_RETRIES tries.  DirectSound seems to be in a broken state..."));
 			}
 			else
 			{
@@ -633,7 +610,6 @@ namespace GameHalloran
 		if(!pDSB)
 		{
             GF_LOG_TRACE_ERR("DirectSound8AudioBuffer::VGetProgress()", "Failed to cast the buffer to a DirectSound buffer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("DirectSound8AudioBuffer::VGetProgress()"), string("Failed to cast the buffer to a DirectSound buffer"));
 			return (false);
 		}
 		DWORD progress = 0;

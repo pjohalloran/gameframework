@@ -63,7 +63,6 @@ namespace GameHalloran
 		try
 		{
             GF_LOG_DEB(std::string("Freeing the text resource ") + m_filename);
-//			SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("Freeing the text resource ") + m_filename);
 			DeleteArray(m_textBuffer);
 		}
 		catch(...)

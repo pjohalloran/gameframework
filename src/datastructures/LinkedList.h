@@ -440,7 +440,7 @@ namespace GameHalloran
 			nodePtr->m_next = position.m_currNode;
 			nodePtr->m_prev = position.m_currNode->m_prev;
 
-			// Update the next and prev pointers on the nodes around the new node so that it is properl inserted.
+			// Update the next and prev pointers on the nodes around the new node so that it is properly inserted.
 			position.m_currNode->m_prev->m_next = nodePtr;
 			position.m_currNode->m_prev = nodePtr;
 		};

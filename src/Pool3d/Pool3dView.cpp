@@ -80,7 +80,6 @@ namespace GameHalloran
 
 		// Log receipt of the event and its type.
         GF_LOG_TRACE_TRC(VGetName(), std::string("Recevied event type = ") + string(eventObj.VGetEventType().getStr()));
-//		SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::TRC, string(VGetName()), string("Recevied event type = ") + string(eventObj.VGetEventType().getStr()));
 
 		// Check what event has occurred and handle it appropriately.
 		if(eventObj.VGetEventType() == EvtData_Destroy_Actor::sk_EventType)
@@ -152,7 +151,6 @@ namespace GameHalloran
 		else
 		{
             GF_LOG_DEB(string("View: Unknown game event received: ") + eventObj.VGetEventType().getStr());
-//			SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::DEB, string("View: Unknown game event received: ") + eventObj.VGetEventType().getStr());
 			result = false;
 		}
 
@@ -274,10 +272,6 @@ namespace GameHalloran
 		if(!actorNode)
 		{
             GF_LOG_TRACE_ERR("Pool3dViewEventListener::OnNewActorEvent()", "Failed to create scene node from parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dViewEventListener::OnNewActorEvent()"),\
-									std::string("Failed to create scene node from parameters"));
 		}
 		else
 		{
@@ -300,10 +294,6 @@ namespace GameHalloran
 			std::string idStr;
 			try { idStr = boost::lexical_cast<std::string, ActorId>(eventData.GetActorId()); } catch(...) {}
             GF_LOG_TRACE_ERR("Pool3dViewEventListener::OnDestroyActorEvent()", std::string("Failed to remove any actor from the view with the ID: ") + idStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dViewEventListener::OnDestroyActorEvent()"),\
-									std::string("Failed to remove any actor from the view with the ID: ") + idStr);
 		}
 
 		// Remove the audio source from the OpenAL sound manager, if any.
@@ -359,10 +349,6 @@ namespace GameHalloran
 			std::string idStr;
 			try { idStr = boost::lexical_cast<std::string, ActorId>(eventData.GetActorId()); } catch(...) {}
             GF_LOG_TRACE_ERR("Pool3dViewEventListener::OnUpdateActorParametersEvent()", std::string("Failed to get the parameters for the actor node with the ID: ") + idStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("Pool3dViewEventListener::OnUpdateActorParametersEvent()"),\
-									std::string("Failed to get the parameters for the actor node with the ID: ") + idStr);
 		}
 		else
 		{
@@ -370,13 +356,8 @@ namespace GameHalloran
 			if(!paramsPtr->VInit(eventData.VGetLuaEventData(), errMsgList))
 			{
                 GF_LOG_TRACE_ERR("Pool3dViewEventListener::OnUpdateActorParametersEvent()", "Failed to reinitialize the actors SceneNode parameters (list of causes): ");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dViewEventListener::OnUpdateActorParametersEvent()"),\
-										std::string("Failed to reinitialize the actors SceneNode parameters (list of causes): "));
 				for(TErrorMessageList::iterator i = errMsgList.begin(), end = errMsgList.end(); i != end; ++i)
 				{
-//					SafeGameLog(g_appPtr->GetLoggerPtr(), GameLog::ERR, *i);
                     GF_LOG_TRACE_ERR("Pool3dViewEventListener::OnUpdateActorParametersEvent()", *i);
 				}
 			}
@@ -387,10 +368,6 @@ namespace GameHalloran
 				std::string idStr;
 				try { idStr = boost::lexical_cast<std::string, ActorId>(eventData.GetActorId()); } catch(...) {}
                 GF_LOG_TRACE_ERR("Pool3dViewEventListener::OnUpdateActorParametersEvent()", std::string("Failed to reinitialize the SceneNode with the ID: ") + idStr);
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("Pool3dViewEventListener::OnUpdateActorParametersEvent()"),\
-										std::string("Failed to reinitialize the SceneNode with the ID: ") + idStr);
 			}
 		}
 
@@ -720,10 +697,6 @@ namespace GameHalloran
 		if(!g_appPtr->GetLuaStateManager()->DoFile(initialScriptName.c_str()))
 		{
             GF_LOG_TRACE_ERR("Pool3dView::CreatePoolBallMesh()", string("Failed to execute script ") + initialScriptName);
-//			SafeGameLogAndPrefix(m_loggerPtr,\
-									GameLog::ERR,\
-									string("Pool3dView::CreatePoolBallMesh()"),\
-									string("Failed to execute script ") + initialScriptName);
 			return (false);
 		}
 
@@ -731,10 +704,6 @@ namespace GameHalloran
 		if(!poolBallMeshParams.IsTable())
 		{
             GF_LOG_TRACE_ERR("Pool3dView::CreatePoolBallMesh()", "Could not get global SphereBallDimensions");
-//			SafeGameLogAndPrefix(m_loggerPtr,\
-									GameLog::ERR,\
-									string("Pool3dView::CreatePoolBallMesh()"),\
-									string("Could not get global SphereBallDimensions"));
 			return (false);
 		}
 		
@@ -743,10 +712,6 @@ namespace GameHalloran
 		if(!param.VInit(poolBallMeshParams, errMsg))
 		{
             GF_LOG_TRACE_ERR("Pool3dView::CreatePoolBallMesh()", "Failed to create global ball mesh params");
-//			SafeGameLogAndPrefix(m_loggerPtr,\
-									GameLog::ERR,\
-									string("Pool3dView::CreatePoolBallMesh()"),\
-									string("Failed to create global ball mesh params"));
 			return (false);
 		}
 
@@ -754,10 +719,6 @@ namespace GameHalloran
 		if(!m_commonPoolBallMesh)
 		{
             GF_LOG_TRACE_ERR("Pool3dView::CreatePoolBallMesh()", "Failed to create common pool ball mesh");
-//			SafeGameLogAndPrefix(m_loggerPtr,\
-									GameLog::ERR,\
-									string("Pool3dView()"),\
-									string("Failed to create common pool ball mesh"));
 			return (false);
 		}
 
@@ -830,14 +791,12 @@ namespace GameHalloran
 		if(!m_stackManager->GetProjectionMatrixStack())
 		{
             GF_LOG_TRACE_ERR("Pool3dView()", "The projection matrix stack does not already exist so will create it now!");
-//			SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("Pool3dView()"), string("The projection matrix stack does not already exist so will create it now!"));
 			m_projStackPtr.reset(GCC_NEW GLMatrixStack());
 			m_stackManager->SetProjectionMatrixStack(m_projStackPtr);
 		}
 		if(!m_stackManager->GetModelViewMatrixStack())
 		{
             GF_LOG_TRACE_ERR("Pool3dView()", "The modelview matrix stack does not already exist so will create it now!");
-//			SafeGameLogAndPrefix(m_loggerPtr, GameLog::ERR, string("Pool3dView()"), string("The modelview matrix stack does not already exist so will create it now!"));
 			m_modelViewStackPtr.reset(GCC_NEW GLMatrixStack());
 			m_stackManager->SetModelViewMatrixStack(m_modelViewStackPtr);
 		}

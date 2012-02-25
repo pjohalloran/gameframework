@@ -72,7 +72,6 @@ namespace GameHalloran
 		if(!th.is_initialized())
 		{
             GF_LOG_TRACE_ERR("CheckButtonControl::Init()", std::string("Failed to create the texture: ") + hoverNameRef);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("CheckButtonControl::Init()"), std::string("Failed to create the texture: ") + hoverNameRef);
 		}
 		else
 		{
@@ -82,7 +81,6 @@ namespace GameHalloran
 		if(!th.is_initialized())
 		{
             GF_LOG_TRACE_ERR("CheckButtonControl::Init()", std::string("Failed to create the texture: ") + checkNameRef);
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("CheckButtonControl::Init()"), std::string("Failed to create the texture: ") + checkNameRef);
 		}
 		else
 		{
@@ -92,7 +90,6 @@ namespace GameHalloran
 		if(!th.is_initialized())
 		{
             GF_LOG_TRACE_ERR("CheckButtonControl::Init()", std::string("Failed to create the texture: ") + checkHoverNameRef);
-			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("CheckButtonControl::Init()"), std::string("Failed to create the texture: ") + checkHoverNameRef);
 		}
 		else
 		{
@@ -251,7 +248,6 @@ namespace GameHalloran
 			try { idStr = boost::lexical_cast<std::string, ScreenElementId>(AbstractWidget::VGetId()); } catch(...) {}
             GF_LOG_TRACE_ERR("CheckButtonControl::CheckButtonControl()", std::string("Failed to send the EvtData_Button_Action event for the checkbox ") + idStr);
 #endif
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("CheckButtonControl::CheckButtonControl()"), std::string("Failed to send the EvtData_Button_Action event for the checkbox ") + idStr);
 			return (false);
 		}
 

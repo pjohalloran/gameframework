@@ -194,7 +194,6 @@ namespace GameHalloran
 		if(!AbstractWidget::VOnRender(time, elapsedTime))
 		{
             GF_LOG_TRACE_ERR("ControlWidget::VOnRender()", "Failed to render base class");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ControlWidget::VOnRender()"), std::string("Failed to render base class"));
 			return (false);
 		}
 

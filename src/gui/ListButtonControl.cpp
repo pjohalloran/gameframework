@@ -59,7 +59,6 @@ namespace GameHalloran
 		if(error)
 		{
             GF_LOG_TRACE_ERR("ListButtonControl::SetLuaTextList()", "No List of text strings got from lua data");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ListButtonControl::SetLuaTextList()"), std::string("No List of text strings got from lua data"));
 		}
 #endif
 	}
@@ -177,7 +176,6 @@ namespace GameHalloran
 			std::string idStr;
 			try { idStr = boost::lexical_cast<std::string, ScreenElementId>(AbstractWidget::VGetId()); } catch(...) {}
             GF_LOG_TRACE_ERR("ListButtonControl::ListButtonControl()", std::string("Failed to send the EvtData_List_Button_Action event for the list button ") + idStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ListButtonControl::ListButtonControl()"), std::string("Failed to send the EvtData_List_Button_Action event for the list button ") + idStr);
 			return (false);
 		}
 

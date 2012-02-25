@@ -88,10 +88,6 @@ namespace GameHalloran
 			if((m_mvpLocation == -1) || (m_cmLocation == -1))
 			{
                 GF_LOG_TRACE_ERR("EnvironmentSceneNode::VPreRender()", std::string("Failed to set one or all of the uniforms for ") + VGet()->GetShaderName());
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("EnvironmentSceneNode::VPreRender()"),\
-										std::string("Failed to set one or all of the uniforms for ") + VGet()->GetShaderName());
 				result = false;
 			}
 		}
@@ -100,10 +96,6 @@ namespace GameHalloran
 		if(result && !g_appPtr->GetTextureManagerPtr()->Bind(m_texHandle, GL_TEXTURE_CUBE_MAP, GL_TEXTURE0))
 		{
             GF_LOG_TRACE_ERR("EnvironmentSceneNode::VPreRender()", "Failed to activate the CubeMap texture");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("EnvironmentSceneNode::VPreRender()"),\
-									std::string("Failed to activate the CubeMap texture"));
 			result = false;
 		}
 
@@ -149,10 +141,6 @@ namespace GameHalloran
 				if(error != GL_NO_ERROR)
 				{
                     GF_LOG_TRACE_ERR("EnvironmentSceneNode::VRender()", "The rendering of the cubemap failed");
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-											GameLog::ERR,\
-											std::string("EnvironmentSceneNode::VRender()"),\
-											std::string("The rendering of the cubemap failed."));
 					result = false;
 				}
 			}

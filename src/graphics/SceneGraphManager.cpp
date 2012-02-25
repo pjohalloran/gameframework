@@ -148,10 +148,6 @@ namespace GameHalloran
 		{
 			// TODO: Popup dialog to inform scripter of error.
             GF_LOG_TRACE_ERR("SceneGraphManager::ScriptAddDynamicLight()", std::string("Failed to add a light: ") + std::string(ge.what()));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("SceneGraphManager::ScriptAddDynamicLight()"),\
-									std::string("Failed to add a light: ") + std::string(ge.what()));
 			result = false;
 		}
 
@@ -174,10 +170,6 @@ namespace GameHalloran
 		{
 			// TODO: Popup dialog to inform scripter of error.
             GF_LOG_TRACE_ERR("SceneGraphManager::ScriptSetGlobalIllumination()", std::string("Failed to set global light: ") + std::string(ge.what()));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("SceneGraphManager::ScriptSetGlobalIllumination()"),\
-									std::string("Failed to set global light: ") + std::string(ge.what()));
 			result = false;
 		}
 
@@ -478,7 +470,6 @@ namespace GameHalloran
 		if(shaderKeyRef.empty())
 		{
             GF_LOG_TRACE_ERR("SceneGraphManager::GetShader()", "The shader name is empty");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneGraphManager::GetShader()"), std::string("The shader name is empty"));
 			return (null);
 		}
 
@@ -500,19 +491,16 @@ namespace GameHalloran
 		if(!shaderPtr)
 		{
             GF_LOG_TRACE_ERR("SceneGraphManager::AddShader()", "The shader object pointer is NULL");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneGraphManager::AddShader()"), std::string("The shader object pointer is NULL"));
 			return (false);
 		}
 		if(shaderNameRef.empty())
 		{
             GF_LOG_TRACE_ERR("SceneGraphManager::AddShader()", "The shader name is empty");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SceneGraphManager::AddShader()"), std::string("The shader name is empty"));
 			return (false);
 		}
 		if(ContainsShader(shaderNameRef))
 		{
             GF_LOG_TRACE_DEB("SceneGraphManager::AddShader()", "The shader name is already loaded");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("SceneGraphManager::AddShader()"), std::string("The shader name is already loaded"));
 			return (true);
 		}
 
@@ -538,19 +526,16 @@ namespace GameHalloran
 		if(shaderNameVec.empty())
 		{
             GF_LOG_TRACE_ERR("AddShadersToSceneGraphManager()", "The shader name vector is empty");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AddShadersToSceneGraphManager()"), std::string("The shader name vector is empty"));
 			return (false);
 		}
 		if(vsAttNameListVec.empty())
 		{
             GF_LOG_TRACE_ERR("AddShadersToSceneGraphManager()", "The VS attribute name list vector is empty");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AddShadersToSceneGraphManager()"), std::string("The VS attribute name list vector is empty"));
 			return (false);
 		}
 		if(vsAttNameListVec.size() != shaderNameVec.size())
 		{
             GF_LOG_TRACE_ERR("AddShadersToSceneGraphManager()", "The size of the shader vector and attribute name list vector do not match");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AddShadersToSceneGraphManager()"), std::string("The size of the shader vector and attribute name list vector do not match"));
 			return (false);
 		}
 
@@ -563,7 +548,6 @@ namespace GameHalloran
 			if(shaderObj && !sgm.AddShader(shaderObj, *i))
 			{
                 GF_LOG_TRACE_ERR("AddShadersToSceneGraphManager()", std::string("Failed to add the ") + *i + std::string(" shader to the SceneGraphManager"));
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("AddShadersToSceneGraphManager()"), std::string("Failed to add the ") + *i + std::string(" shader to the SceneGraphManager"));
 				error = true;						
 			}
 		}

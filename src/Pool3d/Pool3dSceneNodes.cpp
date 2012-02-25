@@ -545,10 +545,6 @@ namespace GameHalloran
 		{
 			// Log error
             GF_LOG_TRACE_ERR("TableSceneNode::VRenderChildren()", "Failed to pass a valid SceneGraphManager pointer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("TableSceneNode::VRenderChildren()"),\
-									std::string("Failed to pass a valid SceneGraphManager pointer"));
 			return (false);
 		}
 

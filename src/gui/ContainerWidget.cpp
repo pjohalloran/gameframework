@@ -78,8 +78,6 @@ namespace GameHalloran
 					{
 					}
                     GF_LOG_TRACE_ERR("ContainerWidget::VOnRestore()", std::string("Failed to restore screen element ") + idStr + std::string(" held by the container ") + containerIdStr);
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ContainerWidget::VOnRestore()"),\
-						std::string("Failed to restore screen element ") + idStr + std::string(" held by the container ") + containerIdStr);
 				}
 #endif
 			}
@@ -90,7 +88,6 @@ namespace GameHalloran
 			std::string idStr;
 			try { idStr = boost::lexical_cast<std::string, ScreenElementId>(AbstractWidget::VGetId()); } catch(...) {}
             GF_LOG_TRACE_ERR("ContainerWidget::VOnRestore()", std::string("Failed to restore the container ") + idStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ContainerWidget::VOnRestore()"), std::string("Failed to restore the container ") + idStr);
 		}
 #endif
 
@@ -151,8 +148,6 @@ namespace GameHalloran
 						{
 						}
                         GF_LOG_TRACE_ERR("ContainerWidget::VOnRender()", std::string("Failed to render screen element ") + idStr + std::string(" held by the container ") + containerIdStr);
-//						SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ContainerWidget::VOnRender()"),\
-							std::string("Failed to render screen element ") + idStr + std::string(" held by the container ") + containerIdStr);
 					}
 				}
 			}
@@ -162,7 +157,6 @@ namespace GameHalloran
 			std::string idStr;
 			try { idStr = boost::lexical_cast<std::string, ScreenElementId>(AbstractWidget::VGetId()); } catch(...) {}
             GF_LOG_TRACE_ERR("ContainerWidget::VOnRender()", std::string("Failed to render the container ") + idStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("ContainerWidget::VOnRender()"), std::string("Failed to render the container ") + idStr);
 		}
 
 		return (result);
@@ -311,8 +305,6 @@ namespace GameHalloran
 			{
 			}
             GF_LOG_TRACE_DEB("ContainerWidget::VAddControl()", std::string("Failed to add the screen element ") + idStr + std::string(" as it was already in the container ") + containerIdStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("ContainerWidget::VAddControl()"),\
-				std::string("Failed to add the screen element ") + idStr + std::string(" as it was already in the container ") + containerIdStr);
 		}
 #endif
 
@@ -348,8 +340,6 @@ namespace GameHalloran
 			{
 			}
             GF_LOG_TRACE_DEB("ContainerWidget::VRemoveControl()", std::string("Failed to remove the screen element ") + idStr + std::string(" held by the container ") + containerIdStr);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("ContainerWidget::VRemoveControl()"),\
-				std::string("Failed to remove the screen element ") + idStr + std::string(" held by the container ") + containerIdStr);
 		}
 #endif
 

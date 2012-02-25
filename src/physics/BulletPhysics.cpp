@@ -127,7 +127,6 @@ namespace GameHalloran
 		if(!manifoldPtr || !body0Ptr || !body1Ptr)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::SendCollisionPairAddEvent()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::SendCollisionPairAddEvent()"), std::string("Invalid parameters"));
 			return;
 		}
 
@@ -160,6 +159,7 @@ namespace GameHalloran
 			
 			if(!id0.is_initialized() || !id1.is_initialized())
 			{
+#if defined(DEBUG)
 				std::string str;
 				if(id0.is_initialized())
 				{
@@ -172,7 +172,7 @@ namespace GameHalloran
 
 				// something is colliding with a non-actor.  we currently don't send events for that
                 GF_LOG_TRACE_DEB("BulletPhysics::SendCollisionPairAddEvent()", "A collision event occurred between actor " + str + " and a game object with no ID assigned (Not handled at present)");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("BulletPhysics::SendCollisionPairAddEvent()"), std::string("A collision event occurred between actor ") + str + std::string(" and a game object with no ID assigned (Not handled at present)"));
+#endif
 				return;
 			}
 
@@ -213,7 +213,6 @@ namespace GameHalloran
 		if(!body0Ptr || !body1Ptr)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::SendCollisionPairRemoveEvent()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::SendCollisionPairRemoveEvent()"), std::string("Invalid parameters"));
 			return;
 		}
 
@@ -245,6 +244,7 @@ namespace GameHalloran
 			if(!id0.is_initialized() || !id1.is_initialized())
 			{
 				// collision is ending between some object(s) that don't have actors.  we don't send events for that.
+#if defined(DEBUG)
 				std::string str;
 				if(id0.is_initialized())
 				{
@@ -255,7 +255,7 @@ namespace GameHalloran
 					try { str = boost::lexical_cast<std::string, ActorId>(*id1); } catch(...) { }
 				}
                 GF_LOG_DEB(std::string("BulletPhysics::SendCollisionPairRemoveEvent()", "A collision end event occurred between a game object ") + str + std::string(" and an object that has no ID (Not handled at present)"));
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::DEB, std::string("BulletPhysics::SendCollisionPairRemoveEvent()"), std::string("A collision end event occurred between a game object ") + str + std::string(" and an object that has no ID (Not handled at present)"));
+#endif
 				return;
 			}
 			
@@ -272,19 +272,11 @@ namespace GameHalloran
 		if(!shapePtr || !physicsObject.m_actorId)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::AddGameActorRigidBody()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysics::AddGameActorRigidBody()"),\
-									std::string("Invalid parameters"));
 			return;
 		}
 		if(physicsObject.m_bodyType != eRigidBody)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::AddGameActorRigidBody()", "Cannot add non rigid body using this function");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysics::AddGameActorRigidBody()"),\
-									std::string("Cannot add non rigid body using this function"));
 			return;
 		}
 
@@ -297,10 +289,6 @@ namespace GameHalloran
 			try { actorStr = boost::lexical_cast<std::string, ActorId>(actorID); } catch(...) { }
             GF_LOG_TRACE_ERR("BulletPhysics::AddGameActorRigidBody()", "Tried to add another shape for an actor that already has a shape registered, id: " + actorStr);
 #endif
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysics::AddGameActorRigidBody()"),\
-									std::string("Tried to add another shape for an actor that already has a shape registered, id: ") + actorStr);
 			return;
 		}
 
@@ -365,10 +353,6 @@ namespace GameHalloran
 		if(!removeMePtr)
 		{
             GF_LOG_TRACE_DEB("BulletPhysics::RemoveCollisionObject()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::DEB,\
-									std::string("BulletPhysics::RemoveCollisionObject()"),\
-									std::string("Invalid parameters"));
 			return;
 		}
 
@@ -414,10 +398,6 @@ namespace GameHalloran
 		else
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::RemoveCollisionObject()", "Non btRigidBody found in bullet world!");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysics::RemoveCollisionObject()"),\
-									std::string("Non btRigidBody found in bullet world!"));
 		}
 		
 		delete removeMePtr;
@@ -462,7 +442,6 @@ namespace GameHalloran
 		if(!bodyPtr)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::FindActorID()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::FindActorID()"), std::string("Invalid parameters"));
 			return (boost::optional<ActorId>());
 		}
 
@@ -565,10 +544,6 @@ namespace GameHalloran
 		if(!world || !world->getWorldUserInfo())
 		{
             GF_LOG_TRACE_DEB("BulletPhysics::BulletInternalTickCallback()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::DEB,\
-									std::string("BulletPhysics::BulletInternalTickCallback()"),\
-									std::string("Invalid parameters"));
 			return;
 		}
 
@@ -586,10 +561,6 @@ namespace GameHalloran
 			if(!manifold)
 			{
                 GF_LOG_TRACE_ERR("BulletPhysics::BulletInternalTickCallback()", "Failed to get the manifold pointer");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("BulletPhysics::BulletInternalTickCallback()"),\
-										std::string("Failed to get the manifold pointer"));
 				return;
 			}
 
@@ -713,7 +684,6 @@ namespace GameHalloran
 		if(!m_collisionConfiguration)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VInitialize()", "Failed to create the btDefaultCollisionConfiguration");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::VInitialize()"), std::string("Failed to create the btDefaultCollisionConfiguration"));
 			return (false);
 		}
 
@@ -722,7 +692,6 @@ namespace GameHalloran
 		if(!m_dispatcher)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VInitialize()", "Failed to create the btCollisionDispatcher");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::VInitialize()"), std::string("Failed to create the btCollisionDispatcher"));
 			return (false);
 		}
 
@@ -734,7 +703,6 @@ namespace GameHalloran
 		if(!m_broadphase)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VInitialize()", "Failed to create the btDbvtBroadphase");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::VInitialize()"), std::string("Failed to create the btDbvtBroadphase"));
 			return (false);
 		}
 
@@ -744,7 +712,6 @@ namespace GameHalloran
 		if(!m_solver)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VInitialize()", "Failed to create the btSequentialImpulseConstraintSolver");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::VInitialize()"), std::string("Failed to create the btSequentialImpulseConstraintSolver"));
 			return (false);
 		}
 
@@ -756,7 +723,6 @@ namespace GameHalloran
 		if(!m_dynamicsWorld)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VInitialize()", "Failed to create the btDiscreteDynamicsWorld");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::VInitialize()"), std::string("Failed to create the btDiscreteDynamicsWorld"));
 			return (false);
 		} 
 
@@ -765,7 +731,6 @@ namespace GameHalloran
 		if(!m_debugDrawer)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VInitialize()", "Failed to create the BulletPhysicsDebugDrawer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::VInitialize()"), std::string("Failed to create the BulletPhysicsDebugDrawer"));
 			return (false);
 		}
 
@@ -798,10 +763,6 @@ namespace GameHalloran
 			if(!actorMotionStatePtr)
 			{
                 GF_LOG_TRACE_DEB("BulletPhysics::VSyncVisibleScene()", "Failed to cast to ActorMotionState");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::DEB,\
-										std::string("BulletPhysics::VSyncVisibleScene()"),\
-										std::string("Failed to cast to ActorMotionState"));
 				continue;
 			}
 			
@@ -813,10 +774,6 @@ namespace GameHalloran
 				try { boost::lexical_cast<std::string, ActorId>(id); } catch(...) { }
                 GF_LOG_TRACE_DEB("BulletPhysics::VSyncVisibleScene()", "Failed to retrieve the actor from the Logic Layer, id: " + str);
 #endif
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::DEB,\
-										std::string("BulletPhysics::VSyncVisibleScene()"),\
-										std::string("Failed to retrieve the actor from the Logic Layer, id: ") + str);
 				continue;
 			}
 			if(gameActor->VGetMat() != actorMotionStatePtr->m_worldToPositionTransform)
@@ -946,20 +903,12 @@ namespace GameHalloran
 		if(mesh.empty() || !physicsObjectAtt.m_actorId)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VAddStaticMesh()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysics::VAddStaticMesh()"),\
-									std::string("Invalid parameters"));
 			return;
 		}
 		
 		if(FindMeshShape(*physicsObjectAtt.m_actorId) != NULL)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VAddStaticMesh()", "Actor already has a mesh");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysics::VAddStaticMesh()"),\
-									std::string("Actor already has a mesh"));
 			return;
 		}
 
@@ -984,20 +933,12 @@ namespace GameHalloran
 		if(!batch.IsBatchComplete() || !physicsObjectAtt.m_actorId)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VAddStaticMesh()", "Invalid parameters");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysics::VAddStaticMesh()"),\
-									std::string("Invalid parameters"));
 			return;
 		}
 
 		if(FindMeshShape(*physicsObjectAtt.m_actorId) != NULL)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VAddStaticMesh()", "Actor already has a mesh");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("BulletPhysics::VAddStaticMesh()"),\
-									std::string("Actor already has a mesh"));
 			return;
 		}
 		
@@ -1280,7 +1221,6 @@ namespace GameHalloran
 		if(!pBulletActor)
 		{
             GF_LOG_TRACE_ERR("BulletPhysics::VGetOrientationY()", "Failed to find the actor in the physics system");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::VGetOrientationY()"), std::string("Failed to find the actor in the physics system"));
 			return (FLT_MAX);
 		}
 		
@@ -1297,7 +1237,6 @@ namespace GameHalloran
 		{
 			// gimbal lock (orientation is straight up or down)
             GF_LOG_TRACE_ERR("BulletPhysics::VGetOrientationY()", "Gimbal lock occurred");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::VGetOrientationY()"), std::string("Gimbal lock occurred"));
 			return 0;
 		}
 
@@ -1309,7 +1248,6 @@ namespace GameHalloran
 		}
 
         GF_LOG_TRACE_ERR("BulletPhysics::VGetOrientationY()", "Failed to find the Y orientation for the actor");
-//		SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("BulletPhysics::VGetOrientationY()"), std::string("Failed to find the Y orientation for the actor"));
 		return (FLT_MAX);  // fail...
 	}
 

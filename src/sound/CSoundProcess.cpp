@@ -84,7 +84,6 @@ namespace GameHalloran
 				else
 				{
                     GF_LOG_TRACE_ERR("~SoundProcess()", "The global audio pointer is NULL so cannot free audio buffer");
-//					SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("~SoundProcess()"), string("The global audio pointer is NULL so cannot free audio buffer."));
 				}
 			}
 		}
@@ -129,14 +128,12 @@ namespace GameHalloran
 		if (!m_SoundResource)
 		{
             GF_LOG_TRACE_ERR("SoundProcess::VOnInitialize()", "Sound resource is NULL");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("SoundProcess::VOnInitialize()"), string("Sound resource is NULL"));
 			return;
 		}
 
 		if(!g_audioPtr)
 		{
             GF_LOG_TRACE_ERR("SoundProcess::VOnInitialize()", "Global audio pointer is NULL");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("SoundProcess::VOnInitialize()"), string("Global audio pointer is NULL"));
 			return;
 		}
 
@@ -148,7 +145,6 @@ namespace GameHalloran
 		if (!m_AudioBuffer)
 		{
             GF_LOG_TRACE_ERR("SoundProcess::VOnInitialize()", "Failed to initialize the audio buffer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("SoundProcess::VOnInitialize()"), string("Failed to initialize the audio buffer"));
 			VKill();
 			return;
 		}
@@ -196,7 +192,6 @@ namespace GameHalloran
 		if(m_AudioBuffer==NULL)
 		{
             GF_LOG_TRACE_ERR("SoundProcess::SetVolume()", "The audio buffer is NULL");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("SoundProcess::SetVolume()"), string("The audio buffer is NULL"));
 			return;
 		}
 
@@ -212,7 +207,6 @@ namespace GameHalloran
 		if(m_AudioBuffer==NULL)
 		{
             GF_LOG_TRACE_ERR("SoundProcess::GetVolume()", "The audio buffer is NULL");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("SoundProcess::GetVolume()"), string("audio buffer is NULL"));
 			return 0;
 		}
 
@@ -251,7 +245,6 @@ namespace GameHalloran
 		if(!m_AudioBuffer)
 		{
             GF_LOG_TRACE_ERR("SoundProcess::Play()", "audio buffer is NULL");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("SoundProcess::Play()"), string("audio buffer is NULL"));
 			return;
 		}
 		
@@ -280,7 +273,6 @@ namespace GameHalloran
 		}
 
         GF_LOG_TRACE_ERR("SoundProcess::GetProgress()", "audio buffer is NULL");
-//		SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("SoundProcess::GetProgress()"), string("audio buffer is null"));
 		return (0.0f);
 	}
 

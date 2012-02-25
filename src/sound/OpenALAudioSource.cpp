@@ -72,10 +72,6 @@ namespace GameHalloran
 		if(!GF_CHECK_AL_ERROR())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::GetFloatParam()", GetALEnumString(param));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::GetFloatParam()"),\
-									GetALEnumString(param)));
 			return (false);
 		}
 
@@ -93,10 +89,6 @@ namespace GameHalloran
 		if(!GF_CHECK_AL_ERROR())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::SetFloatParam()", GetALEnumString(param));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::SetFloatParam()"),\
-									GetALEnumString(param) + std::string(" ") + std::string(alGetErrorString(err)));
 			return (false);
 		}
 
@@ -114,10 +106,6 @@ namespace GameHalloran
 		if(!GF_CHECK_AL_ERROR())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::GetFloatArrayParam()", GetALEnumString(param));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::GetFloatArrayParam()"),\
-									GetALEnumString(param) + std::string(" ") + std::string(alGetErrorString(err)));
 			return (false);
 		}
 
@@ -135,10 +123,6 @@ namespace GameHalloran
 		if(!GF_CHECK_AL_ERROR())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::SetFloatArrayParam()", GetALEnumString(param));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::SetFloatArrayParam()"),\
-									GetALEnumString(param) + std::string(" ") + std::string(alGetErrorString(err)));
 			return (false);
 		}
 
@@ -156,10 +140,6 @@ namespace GameHalloran
 		if(!GF_CHECK_AL_ERROR())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::GetIntParam()", GetALEnumString(param));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::GetIntParam()"),\
-									GetALEnumString(param) + std::string(" ") + std::string(alGetErrorString(err)));
 			return (false);
 		}
 
@@ -177,10 +157,6 @@ namespace GameHalloran
 		if(!GF_CHECK_AL_ERROR())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::SetIntParam()", GetALEnumString(param));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::SetIntParam()"),\
-									GetALEnumString(param) + std::string(" ") + std::string(alGetErrorString(err)));
 			return (false);
 		}
 
@@ -198,10 +174,6 @@ namespace GameHalloran
 		if(!GF_CHECK_AL_ERROR())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::GetIntArrayParam()", GetALEnumString(param));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::GetIntArrayParam()"),\
-									GetALEnumString(param) + std::string(" ") + std::string(alGetErrorString(err)));
 			return (false);
 		}
 
@@ -219,10 +191,6 @@ namespace GameHalloran
 		if(!GF_CHECK_AL_ERROR())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::SetIntArrayParam()", GetALEnumString(param));
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::SetIntArrayParam()"),\
-									GetALEnumString(param) + std::string(" ") + std::string(alGetErrorString(err)));
 			return (false);
 		}
 
@@ -241,10 +209,6 @@ namespace GameHalloran
 		if(!GF_CHECK_AL_ERROR())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::OpenALAudioSource()", "Failed to generate the OpenAL source ID");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::OpenALAudioSource()"),\
-									std::string("Failed to generate the OpenAL source ID"));
 			m_id = 0;
 		}
 
@@ -354,10 +318,6 @@ namespace GameHalloran
 		if(!oalAudioBufferPtr)
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::AttachBuffer()", "The buffer supplied is NULL");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::AttachBuffer()"),\
-									std::string("The buffer supplied is NULL"));
 			return (false);
 		}
 
@@ -370,10 +330,6 @@ namespace GameHalloran
 		if(!m_totalDuration.is_initialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::AttachBuffer()", "Failed to calculate the duration for the buffer");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::AttachBuffer()"),\
-									std::string("Failed to calculate the duration for the buffer"));
 			return (false);
 		}
 		return (true);
@@ -387,10 +343,6 @@ namespace GameHalloran
 		if(oalAudioBufferQueue.empty())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::AttachBufferList()", "The buffer queue is empty");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::AttachBufferList()"),\
-									std::string("The buffer queue is empty"));
 			return (false);
 		}
 
@@ -400,10 +352,6 @@ namespace GameHalloran
 		if(!bufferIdArr)
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::AttachBufferList()", "Failed to allocate memory for the array of buffer IDs");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::AttachBufferList()"),\
-									std::string("Failed to allocate memory for the array of buffer IDs"));
 			return (false);
 		}
 
@@ -414,10 +362,6 @@ namespace GameHalloran
 			if(!(*i))
 			{
                 GF_LOG_TRACE_ERR("OpenALAudioSource::AttachBufferList()", "One of the OpenALAudioBuffer objects in the queue was NULL");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("OpenALAudioSource::AttachBufferList()"),\
-										std::string("One of the OpenALAudioBuffer objects in the queue was NULL"));
 				m_totalDuration.reset();
 				delete [] bufferIdArr;
 				return (false);
@@ -436,10 +380,6 @@ namespace GameHalloran
 			else
 			{
                 GF_LOG_TRACE_ERR("OpenALAudioSource::AttachBufferList()", "Failed to calculate the duration for the buffer");
-//				SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-										GameLog::ERR,\
-										std::string("OpenALAudioSource::AttachBufferList()"),\
-										std::string("Failed to calculate the duration for the buffer"));
 			}
 		}
 
@@ -566,10 +506,6 @@ namespace GameHalloran
 		if(!m_totalDuration.is_initialized())
 		{
             GF_LOG_TRACE_ERR("OpenALAudioSource::GetProgress()", "The total duration of the source buffer(s) is not known");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(),\
-									GameLog::ERR,\
-									std::string("OpenALAudioSource::GetProgress()"),\
-									std::string("The total duration of the source buffer(s) is not known"));
 			return (0.0f);
 		}
 

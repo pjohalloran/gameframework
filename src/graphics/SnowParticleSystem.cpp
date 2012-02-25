@@ -38,21 +38,18 @@ namespace GameHalloran
 		if(!vpSrcH || !fpSrcH)
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", "Failed to retrieve the SnowPointShader programs from the resource cache");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SnowParticleSystem::PrepareShader()"), std::string("Failed to retrieve the SnowPointShader programs from the resource cache"));
 			return;
 		}
 
 		if(!vpSrcH->VInitialize())
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", "Failed to initialize the SnowPointShader.vp shader source handle");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SnowParticleSystem::PrepareShader()"), std::string("Failed to initialize the SnowPointShader.vp shader source handle."));
 			return;
 		}
 
 		if(!fpSrcH->VInitialize())
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", "Failed to initialize the SnowPointShader.fp shader source handle");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SnowParticleSystem::PrepareShader()"), std::string("Failed to initialize the SnowPointShader.fp shader source handle."));
 			return;
 		}
 
@@ -63,7 +60,6 @@ namespace GameHalloran
 		if(!m_shaderProg.Build(vpSrcH->GetTextBuffer(), fpSrcH->GetTextBuffer(), attList, errorMsg))
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", std::string("Failed to build the SnowPointShader: ") + errorMsg);
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SnowParticleSystem::PrepareShader()"), std::string("Failed to build the SnowPointShader: ") + errorMsg);
 			return;
 		}
 
@@ -74,31 +70,26 @@ namespace GameHalloran
 		if(m_mvpMatrixLoc == -1)
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", "Failed to find the mvpMatrix in the SnowPointShader");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SnowParticleSystem::PrepareShader()"), std::string("Failed to find the mvpMatrix in the SnowPointShader"));
 		}
 		m_snowColorLoc = m_shaderProg.GetUniformLocation("snowColor");
 		if(m_snowColorLoc == -1)
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", "Failed to find the snowColor in the SnowPointShader");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SnowParticleSystem::PrepareShader()"), std::string("Failed to find the snowColor in the SnowPointShader"));
 		}
 		m_pointImageLoc = m_shaderProg.GetUniformLocation("pointImage");
 		if(m_pointImageLoc == -1)
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", "Failed to find the pointImage in the SnowPointShader");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SnowParticleSystem::PrepareShader()"), std::string("Failed to find the pointImage in the SnowPointShader"));
 		}
 		m_mvMatrixLoc = m_shaderProg.GetUniformLocation("mvMatrix");
 		if(m_mvMatrixLoc == -1)
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", "Failed to find the mvMatrix in the SnowPointShader");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SnowParticleSystem::PrepareShader()"), std::string("Failed to find the mvMatrix in the SnowPointShader"));
 		}
 		m_cameraPosLoc = m_shaderProg.GetUniformLocation("cameraPos");
 		if(m_cameraPosLoc == -1)
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", "Failed to find the cameraPos in the SnowPointShader");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SnowParticleSystem::PrepareShader()"), std::string("Failed to find the cameraPos in the SnowPointShader"));
 		}
 	}
 
@@ -274,7 +265,6 @@ namespace GameHalloran
 		if(!particlePtr)
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::VResetParticle()", "NULL pointer given to reset method");
-//			SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, std::string("SnowParticleSystem::VResetParticle()"), std::string("NULL pointer given to reset method."));
 			return;
 		}
 
