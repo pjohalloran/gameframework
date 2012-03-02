@@ -11,6 +11,8 @@
 #include "ShaderUniform.h"
 #include "GameBase.h"
 
+#include "CommonMath.h"
+
 // /////////////////////////////////////////////////////////////////
 //
 //
@@ -66,5 +68,82 @@ namespace GameHalloran
         }
         
         GF_CHECK_GL_ERROR();
+        m_dirty = false;
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    void ShaderUniform::SetValue(const GLint value, const bool forceCopyToGpu)
+    {
+        if(!forceCopyToGpu && m_type == eInt && m_size == 1 && value == m_value.m_intArr[0])
+            return;
+        
+        m_type = eInt;
+        m_size = 1;
+        m_value.m_intArr[0] = value;
+        NotifyShader();
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    void ShaderUniform::SetValue(GLint * const arr, const U32 size, const bool forceCopyToGpu)
+    {
+        assert(arr != NULL);
+        
+        if(!forceCopyToGpu && m_type == eIntArr && m_size == size)
+        {
+            bool changed(false);
+            for(I32 i = 0; ((!changed) && (i < size)); ++i)
+                if(m_value.m_intArr[i] != arr[i])
+                    changed = true;
+            
+            if(changed)
+                return;
+        }
+        
+        m_type = eIntArr;
+        m_size = size;
+        memcpy(arr, m_value.m_intArr, m_size*sizeof(GLint));
+        NotifyShader();
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    void ShaderUniform::SetValue(const GLfloat value, const bool forceCopyToGpu)
+    {
+        if(!forceCopyToGpu && m_type == eFloat && m_size == 1 && FloatCmp(value, m_value.m_floatArr[0]))
+            return;
+        
+        m_type = eFloat;
+        m_size = 1;
+        m_value.m_floatArr[0] = value;
+        NotifyShader();
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    void ShaderUniform::SetValue(GLfloat * const arr, const U32 size, const bool forceCopyToGpu)
+    {
+        assert(arr != NULL);
+        
+        if(!forceCopyToGpu && m_type == eFloatArr && m_size == size)
+        {
+            bool changed(false);
+            for(I32 i = 0; ((!changed) && (i < size)); ++i)
+                if(!FloatCmp(m_value.m_floatArr[i], arr[i]))
+                    changed = true;
+            
+            if(changed)
+                return;
+        }
+        
+        m_type = eFloatArr;
+        m_size = size;
+        memcpy(arr, m_value.m_floatArr, m_size*sizeof(GLfloat));
+        NotifyShader();
     }
 }

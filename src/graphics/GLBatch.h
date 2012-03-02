@@ -42,33 +42,7 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 #ifndef __GL_BATCH__
 #define __GL_BATCH__
 
-// External Headers
-#ifdef WIN32
-//#ifndef GLEW_STATIC
-//#define GLEW_STATIC
-//#endif
-#include <GL/glew.h>			// OpenGL Extension "autoloader"
-#include <GL/glfw.h>			// Microsoft OpenGL headers (version 1.1 by themselves)
-#endif
-
-// Mac OS X
-#ifdef __APPLE__
-#include <TargetConditionals.h>
-#if TARGET_OS_IPHONE | TARGET_IPHONE_SIMULATOR
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
-#define OPENGL_ES
-#else
-#include <GL/glew.h>
-#include <OpenGL/gl.h>		// Apple OpenGL haders (version depends on OS X SDK version)
-#endif
-#endif
-
-// Linux
-#ifdef linux
-#define GLEW_STATIC
-#include <glew.h>
-#endif
+#include "GamePlatform.h"
 
 // Project Headers
 #include "IGLBatchBase.h"

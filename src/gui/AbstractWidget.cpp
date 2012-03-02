@@ -424,15 +424,19 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool AbstractWidget::PreRenderTexturedWidget()
 	{
+        m_texShaderProg->SetUniform("colorMap", 0, true);
+        m_texShaderProg->SetUniform("uiAlpha", m_color.GetW());
+        m_texShaderProg->SetUniform("projMatrix", m_projMatrix);
+        
 		if(!m_texShaderProg->Activate())
 		{
             GF_LOG_TRACE_ERR("AbstractWidget::PreRenderTexturedWidget()", "Failed to activate the shader");
 			return (false);
 		}
-
-		glUniform1i(m_samplerLoc, 0);
-		glUniform1f(m_alphaLoc, m_color.GetW());
-		glUniformMatrix4fv(m_projLoc, 1, GL_FALSE, m_projMatrix.GetComponentsConst());
+        
+//		glUniform1i(m_samplerLoc, 0);
+//		glUniform1f(m_alphaLoc, m_color.GetW());
+//		glUniformMatrix4fv(m_projLoc, 1, GL_FALSE, m_projMatrix.GetComponentsConst());
 
 		g_appPtr->GetTextureManagerPtr()->Bind(m_currentTextureHandle, GL_TEXTURE_2D);
 

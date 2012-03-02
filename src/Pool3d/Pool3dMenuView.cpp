@@ -916,7 +916,7 @@ namespace GameHalloran
 		m_metaTable = g_appPtr->GetLuaStateManager()->GetGlobalState()->GetGlobals().CreateTable("Pool3dMenuView");
 		m_metaTable.SetObject("__index", m_metaTable);
 
-		// Here we register two functions to make them accessible to script.
+		// Here we register functions to make them accessible to script.
 		m_metaTable.RegisterObjectDirect("RegisterScreenType", (Pool3dMenuView *)0, &Pool3dMenuView::RegisterScreenType);
 		m_metaTable.RegisterObjectDirect("IsRegistered", (Pool3dMenuView *)0, &Pool3dMenuView::IsRegistered);
 		m_metaTable.RegisterObjectDirect("AddScreen", (Pool3dMenuView *)0, &Pool3dMenuView::AddScreen);

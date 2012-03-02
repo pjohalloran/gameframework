@@ -46,7 +46,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
@@ -60,7 +60,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
@@ -157,5 +157,125 @@
          landmarkName = "main(int args, char *argv[])"
          landmarkType = "7">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/gamebase/GameMain.cpp"
+         timestampString = "351966166.74052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1140"
+         endingLineNumber = "1140"
+         landmarkName = "GameMain::OnGlfwKeyEvent(const I32 keyId, const I32 action)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dView.cpp"
+         timestampString = "351982071.347647"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1258"
+         endingLineNumber = "1258"
+         landmarkName = "Pool3dView::VOnEvent(GF_Event &amp;eventObj, const F32 elapsedTime)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dView.cpp"
+         timestampString = "351982147.164847"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1311"
+         endingLineNumber = "1311"
+         landmarkName = "Pool3dView::VOnEvent(GF_Event &amp;eventObj, const F32 elapsedTime)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/gui/AbstractWidget.cpp"
+         timestampString = "351987369.834738"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "427"
+         endingLineNumber = "427"
+         landmarkName = "AbstractWidget::PreRenderTexturedWidget()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/GLSLShader.cpp"
+         timestampString = "351987491.936994"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "338"
+         endingLineNumber = "338"
+         landmarkName = "GLSLShader::LocateUniforms(const std::vector&lt;std::string&gt; &amp;linesVec)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dMenuView.cpp"
+         timestampString = "351987583.082867"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "909"
+         endingLineNumber = "909"
+         landmarkName = "Pool3dMenuView::Pool3dMenuView(shared_ptr&lt;GameOptions&gt; optionsPtr, shared_ptr&lt;GameLog&gt; loggerPtr, shared_ptr&lt;WindowManager&gt; screenManPtr, shared_ptr&lt;ModelViewProjStackManager&gt; matStackManager)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/GLSLShader.cpp"
+         timestampString = "351988426.661771"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "106"
+         endingLineNumber = "106"
+         landmarkName = "GLSLShader::UpdateUniformsToGPU()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/GLSLShader.cpp"
+         timestampString = "351988479.125462"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "119"
+         endingLineNumber = "119"
+         landmarkName = "GLSLShader::VNotifyDirty(ICleanable *ptr)"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
+   <SymbolicBreakpoints>
+      <AddressBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         symbolName = "*0x00007fff5fc04952">
+      </AddressBreakpoint>
+   </SymbolicBreakpoints>
 </Bucket>

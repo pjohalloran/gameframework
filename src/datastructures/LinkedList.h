@@ -669,7 +669,7 @@ namespace GameHalloran
 		// @return bool True|False on success|error.
 		//
 		// ////////////////////////////////////////////////////////////
-		bool PushBack(const ElementType &val)
+		bool PushBack(const ElementType val)
 		{
 			ListNode *newEndPtr(AllocateNode());
 			if(!newEndPtr)
@@ -717,7 +717,7 @@ namespace GameHalloran
 		// @return bool True|false on success|error.
 		//
 		// ////////////////////////////////////////////////////////////
-		bool PushFront(const ElementType &val)
+		bool PushFront(const ElementType val)
 		{
 			ListNode *newNodePtr(AllocateNode());
 			if(!newNodePtr)

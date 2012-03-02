@@ -21,6 +21,7 @@
 #include "GameBase.h"
 #include "GameMain.h"
 #include "TextResource.h"
+#include "HashedString.h"
 
 using std::string;
 
@@ -79,6 +80,44 @@ namespace GameHalloran
 		{
 		}
 	}
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    ShaderUniform *GLSLShader::GetUniform(const std::string &name)
+    {
+        HashedString id(name.c_str());
+        for (UniformArray::iterator i = m_uniforms.begin(), end = m_uniforms.end(); i != end; ++i)
+        {
+            if((*i)->GetId() == id.getHashValue())
+            {
+                return (*i);
+            }
+        }
+        
+        return (NULL);
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    void GLSLShader::UpdateUniformsToGPU()
+    {
+        for(DirtyList::iterator i = m_dirtyList.begin(), end = m_dirtyList.end(); i != end; ++i)
+        {
+            (*i)->VClean();
+        }
+        m_dirtyList.clear();
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    void GLSLShader::VNotifyDirty(ICleanable *ptr)
+    {
+        if(ptr)
+            m_dirtyList.push_back(ptr);
+    }
 
 	// /////////////////////////////////////////////////////////////////
 	//
@@ -285,8 +324,9 @@ namespace GameHalloran
 							currVariableName = uniformSections[2];
 						}
 
-						// Get the location of the uniform in the compiled shader source according to he uniform name.
-						m_uniformMap[currVariableName] = glGetUniformLocation(m_id, static_cast<const GLchar *>(currVariableName.c_str()));
+						// Get the location of the uniform in the compiled shader source according to the uniform name.
+                        GLint loc = glGetUniformLocation(m_id, static_cast<const GLchar *>(currVariableName.c_str()));
+						m_uniformMap[currVariableName] = loc;
 #if DEBUG
 						GLenum errCode = glGetError();
 						if(errCode != GL_NO_ERROR)
@@ -295,6 +335,7 @@ namespace GameHalloran
 							return (false);
 						}
 #endif
+                        m_uniforms.push_back(new ShaderUniform(loc, currVariableName, this));
 					}
 					else
 					{
@@ -706,7 +747,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool GLSLShader::Activate() const
+	bool GLSLShader::Activate()
 	{
 		if(!IsBuilt())
 		{
@@ -714,6 +755,7 @@ namespace GameHalloran
 		}
 		if(IsActivated())
 		{
+            UpdateUniformsToGPU();
 			return (true);
 		}
 
@@ -728,6 +770,7 @@ namespace GameHalloran
 		GF_CLEAR_GL_ERROR();
 
 		glUseProgram(m_id);
+        UpdateUniformsToGPU();
 
 		return (GF_CHECK_GL_ERROR_TRC("GLSLShader::Activate(): "));
 	}
@@ -763,6 +806,111 @@ namespace GameHalloran
 		}
 		return ((*i).second);
 	}
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool GLSLShader::SetUniform(const std::string &name, const GLint value, const bool forceCopyToGpu)
+    {
+        ShaderUniform *uniform = GetUniform(name);
+        if(!uniform)
+        {
+            return (false);
+        }
+        
+        uniform->SetValue(value, forceCopyToGpu);
+        return (true);
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool GLSLShader::SetUniform(const std::string &name, const GLfloat value, const bool forceCopyToGpu)
+    {
+        ShaderUniform *uniform = GetUniform(name);
+        if(!uniform)
+        {
+            return (false);
+        }
+        
+        uniform->SetValue(value, forceCopyToGpu);
+        return (true);
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool GLSLShader::SetUniform(const std::string &name, const Vector3 &value, const bool forceCopyToGpu)
+    {
+        ShaderUniform *uniform = GetUniform(name);
+        if(!uniform)
+        {
+            return (false);
+        }
+        
+        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 3, forceCopyToGpu);
+        return (true);
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool GLSLShader::SetUniform(const std::string &name, const Vector4 &value, const bool forceCopyToGpu)
+    {
+        ShaderUniform *uniform = GetUniform(name);
+        if(!uniform)
+        {
+            return (false);
+        }
+        
+        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 4, forceCopyToGpu);
+        return (true);
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool GLSLShader::SetUniform(const std::string &name, const Point3 &value, const bool forceCopyToGpu)
+    {
+        ShaderUniform *uniform = GetUniform(name);
+        if(!uniform)
+        {
+            return (false);
+        }
+        
+        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 3, forceCopyToGpu);
+        return (true);
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool GLSLShader::SetUniform(const std::string &name, const Matrix4 &value, const bool forceCopyToGpu)
+    {
+        ShaderUniform *uniform = GetUniform(name);
+        if(!uniform)
+        {
+            return (false);
+        }
+        
+        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 16, forceCopyToGpu);
+        return (true);
+    }
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool GLSLShader::SetUniform(const std::string &name, const Matrix3x3 value, const bool forceCopyToGpu)
+    {
+        ShaderUniform *uniform = GetUniform(name);
+        if(!uniform)
+        {
+            return (false);
+        }
+        
+        uniform->SetValue((GLfloat*)value, 9, forceCopyToGpu);
+        return (true);
+    }
 
 	// /////////////////////////////////////////////////////////////////
 	// ******************** MISC Helper functions **********************

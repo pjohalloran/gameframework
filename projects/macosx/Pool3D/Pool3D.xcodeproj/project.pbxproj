@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14804A1E14FACBAD002DD576 /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14804A1D14FACBAD002DD576 /* libglfw.a */; };
 		148506A51412B8DC00ADF5C2 /* pool3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148506931412B8DC00ADF5C2 /* pool3d.cpp */; };
 		148506A61412B8DC00ADF5C2 /* Pool3dActors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148506941412B8DC00ADF5C2 /* Pool3dActors.cpp */; };
 		148506A71412B8DC00ADF5C2 /* Pool3dEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148506971412B8DC00ADF5C2 /* Pool3dEvents.cpp */; };
@@ -28,7 +29,6 @@
 		148506C51412C50200ADF5C2 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506BA1412C50100ADF5C2 /* libogg.a */; };
 		148506C71412C50200ADF5C2 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506BC1412C50100ADF5C2 /* libvorbis.a */; };
 		148506C81412C50200ADF5C2 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506BD1412C50200ADF5C2 /* libz.a */; };
-		148506CD1412C52700ADF5C2 /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506CA1412C52700ADF5C2 /* libglfw.a */; };
 		148506CE1412C52700ADF5C2 /* libLuaPlusLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148506CB1412C52700ADF5C2 /* libLuaPlusLib.a */; };
 		1485DDCB1413F2330031966F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1485DDC91413F2330031966F /* CoreFoundation.framework */; };
 		1485DDE91413F35B0031966F /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1485DDE81413F35B0031966F /* libboost_system.a */; };
@@ -133,6 +133,7 @@
 		142AC4691442101300B97B09 /* sliderBut.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = sliderBut.tga; sourceTree = "<group>"; };
 		142AC46A1442101300B97B09 /* tbBack.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = tbBack.tga; sourceTree = "<group>"; };
 		142AC46B1442101300B97B09 /* wood3.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = wood3.tga; sourceTree = "<group>"; };
+		14804A1D14FACBAD002DD576 /* libglfw.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw.a; path = ../../../../../../../../opt/local/lib/libglfw.a; sourceTree = "<group>"; };
 		1485067A1412B82700ADF5C2 /* Pool3D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Pool3D; sourceTree = BUILT_PRODUCTS_DIR; };
 		148506931412B8DC00ADF5C2 /* pool3d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; name = pool3d.cpp; path = ../../../../src/Pool3d/pool3d.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		148506941412B8DC00ADF5C2 /* Pool3dActors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; name = Pool3dActors.cpp; path = ../../../../src/Pool3d/Pool3dActors.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -185,6 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14804A1E14FACBAD002DD576 /* libglfw.a in Frameworks */,
 				1485DE2C141415690031966F /* libgameframework.a in Frameworks */,
 				1485DE2A14140F100031966F /* libtinyxml.a in Frameworks */,
 				148506CE1412C52700ADF5C2 /* libLuaPlusLib.a in Frameworks */,
@@ -198,7 +200,6 @@
 				1485DE2214140E490031966F /* libvorbisfile.a in Frameworks */,
 				148506C71412C50200ADF5C2 /* libvorbis.a in Frameworks */,
 				148506C51412C50200ADF5C2 /* libogg.a in Frameworks */,
-				148506CD1412C52700ADF5C2 /* libglfw.a in Frameworks */,
 				148506C31412C50200ADF5C2 /* libGLEW.a in Frameworks */,
 				148506C81412C50200ADF5C2 /* libz.a in Frameworks */,
 				1485DDED1413F4B10031966F /* libbz2.dylib in Frameworks */,
@@ -397,6 +398,7 @@
 		1485066F1412B82700ADF5C2 = {
 			isa = PBXGroup;
 			children = (
+				14804A1D14FACBAD002DD576 /* libglfw.a */,
 				1485067D1412B82700ADF5C2 /* Pool3D */,
 				1485067B1412B82700ADF5C2 /* Products */,
 			);
@@ -571,7 +573,6 @@
 					"DEBUG=1",
 					_DEBUG,
 					"$(inherited)",
-					USE_NEW_GLFW,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -609,7 +610,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = USE_NEW_GLFW;
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;

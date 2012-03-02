@@ -824,7 +824,11 @@ namespace GameHalloran
 							std::cout << "Mouse button " << curr->mouseButton.buttonId << " was " << (curr->mouseButton.state == GLFW_PRESS ? " pressed " : " released ") << " at position " << curr->mouseButton.x << ", " << curr->mouseButton.y << std::endl;
 							break;
 						case GF_MOUSE_WHEEL_EVENT:
-							std::cout << "Mouse wheel moved to a new position of " << curr->mouseWheel.pos << std::endl;
+#if defined(USE_NEW_GLFW)
+                            std::cout << "Mouse wheel moved to a new position of " << curr->mouseWheel.x << "," << curr->mouseWheel.y << std::endl;
+#else
+                            std::cout << "Mouse wheel moved to a new position of " << curr->mouseWheel.pos << std::endl;
+#endif
 							break;
 						case GF_MOUSE_MOVE_EVENT:
 							std::cout << "Mouse moved to position " << curr->mouseMove.x << ", " << curr->mouseMove.y << " relative motion: " << curr->mouseMove.xrel << ", " << curr->mouseMove.yrel << std::endl;
@@ -863,12 +867,10 @@ namespace GameHalloran
 					//		topViewHandled = true;
 					//	}
 					//}
-					GameViewList viewList = m_logicPtr->GetGameViewList();
+					GameViewList &viewList = m_logicPtr->GetGameViewList();
 					for(GameViewList::reverse_iterator i = viewList.rbegin(); i != viewList.rend(); ++i)
 					{
-						if((*i)->VOnEvent(*curr, elapsedTime))
-						{
-						}
+						(*i)->VOnEvent(*curr, elapsedTime);
 					}
 				}
 				break;

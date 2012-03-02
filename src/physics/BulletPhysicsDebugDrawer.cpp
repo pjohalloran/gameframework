@@ -40,8 +40,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool BulletPhysicsDebugDrawer::CreateBuffers()
 	{
-		// Clear GL error on entry.
-		GLenum errCode = glGetError();
+		GF_CLEAR_GL_ERROR();
 
 		// Generate the VBO and VOA objects.
 		glGenVertexArrays(1, &m_vaoId);
@@ -66,7 +65,7 @@ namespace GameHalloran
 
 		// Allocate memory and a type for the currently bound VBO (we will be updating this frequently so we use GL_DYNAMIC_DRAW).
 		glBufferData(GL_ARRAY_BUFFER, bufferSize, NULL, GL_DYNAMIC_DRAW);
-		errCode = glGetError();
+		GF_CHECK_GL_ERROR();
 
 		// Bind to the VAO to save the vertex attributes state to speed up rendering.
 		glBindVertexArray(m_vaoId);
@@ -80,8 +79,11 @@ namespace GameHalloran
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
-		errCode = glGetError();
-		return (errCode == GL_NO_ERROR);
+#if defined(DEBUG)
+		return (GF_CHECK_GL_ERROR());
+#else
+        return (true);
+#endif
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -92,13 +94,16 @@ namespace GameHalloran
 		GLfloat positions[] = {from.x(), from.y(), from.z(), 1.0f,
 								to.x(), to.y(), to.z(), 1.0f};
 
-		GLenum err = glGetError();
+		GF_CLEAR_GL_ERROR();
 
 		// Copy the line vertices into the VBO.
 		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(positions), positions);
-		err = glGetError();
-
-		return (err == GL_NO_ERROR);
+        
+#if defined(DEBUG)
+		return (GF_CHECK_GL_ERROR());
+#else
+        return (true);
+#endif
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -164,23 +169,25 @@ namespace GameHalloran
 		}
 
 		Matrix4 mvp;
-		m_mvpStackManagerPtr->GetModelViewProjectionMatrix(mvp);
+ 		m_mvpStackManagerPtr->GetModelViewProjectionMatrix(mvp);
+        
+        GF_CLEAR_GL_ERROR();
+        
 		glUniformMatrix4fv(m_mvpLoc, 1, GL_FALSE, mvp.GetComponentsConst());
 		glUniform4fv(m_colorLoc, 1, color.m_floats);
 
-		GLenum err = glGetError();
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
 		LoadVertexBuffer(from, to);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		err = glGetError();
+		GF_CHECK_GL_ERROR();
 
 		glBindVertexArray(m_vaoId);
 		glDrawArrays(GL_LINES, 0, 2);
 		glBindVertexArray(0);
 
-		err = glGetError();
+		GF_CHECK_GL_ERROR();
 	}
 
 	// /////////////////////////////////////////////////////////////////

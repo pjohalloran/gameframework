@@ -676,14 +676,14 @@ namespace GameHalloran
 		shaderAttVec.push_back(tmpVec);
 		tmpVec.clear();
 
-		// D) GUI texture shader.
-		shaderNameVec.push_back(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("GuiTextureColor"));
-		tmpVec.push_back(string("vertexPos"));
-		tmpVec.push_back(g_ignoreShaderSlot);
-		tmpVec.push_back(g_ignoreShaderSlot);
-		tmpVec.push_back(string("texCoords"));
-		shaderAttVec.push_back(tmpVec);
-		tmpVec.clear();
+//		// D) GUI texture shader.
+//		shaderNameVec.push_back(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("GuiTextureColor"));
+//		tmpVec.push_back(string("vertexPos"));
+//		tmpVec.push_back(g_ignoreShaderSlot);
+//		tmpVec.push_back(g_ignoreShaderSlot);
+//		tmpVec.push_back(string("texCoords"));
+//		shaderAttVec.push_back(tmpVec);
+//		tmpVec.clear();
 
 		return (AddShadersToSceneGraphManager(m_sgm, shaderNameVec, shaderAttVec));
 	}

@@ -16,11 +16,16 @@
 
 #include <map>
 #include <string>
+#include <vector>
+#include <list>
 
 #include <boost/filesystem.hpp>
 
 // Project Headers
 #include "ICleanableObserver.h"
+#include "ShaderUniform.h"
+#include "Vector.h"
+#include "Matrix.h"
 
 
 // /////////////////////////////////////////////////////////////////
@@ -55,10 +60,14 @@ namespace GameHalloran
 	{
 	private:
 
-		GLuint m_id;							///< The GL shader program ID.
+		GLuint m_id;                                ///< The GL shader program ID.
+        typedef std::vector<ShaderUniform *> UniformArray;
+        UniformArray m_uniforms;                    ///< Array of shader uniforms.
+        typedef std::list<ICleanable *> DirtyList;
+        DirtyList m_dirtyList;                      ///< List of dirty shader uniforms.
 
 		typedef std::map<std::string, GLint> UniformLocationMap;
-		UniformLocationMap m_uniformMap;		///< Map of uniform variable names to their locations in the shader program.
+		UniformLocationMap m_uniformMap;            ///< Map of uniform variable names to their locations in the shader program.
 
 		// /////////////////////////////////////////////////////////////////
 		// Uses OpenGL to validate the program.
@@ -175,6 +184,18 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		bool BuildProgramFromSrc(const char *vsSrc, const char *gsSrc, const char *fsSrc, const VSAttributeNameList &vsAttList, std::string &messageRef, const bool includeGeometryShader = false);
+        
+        // /////////////////////////////////////////////////////////////////
+        // Get the uniform with the id specified.
+        //
+        // /////////////////////////////////////////////////////////////////
+        ShaderUniform *GetUniform(const std::string &name);
+        
+        // /////////////////////////////////////////////////////////////////
+        // Updates all the dirty/changed uniforms to the GPU.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void UpdateUniformsToGPU();
 
 		// /////////////////////////////////////////////////////////////////
 		// @class ShaderProgram
@@ -224,7 +245,7 @@ namespace GameHalloran
 		// Default constructor.
 		//
 		// /////////////////////////////////////////////////////////////////
-		GLSLShader() : m_id(0) { };
+		GLSLShader() : m_id(0), m_uniforms(), m_dirtyList(), m_uniformMap() { };
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.  
@@ -239,7 +260,7 @@ namespace GameHalloran
         // there values need to be updated to the GPU.
         //
         // /////////////////////////////////////////////////////////////////
-        virtual void VNotifyDirty(ICleanable *ptr) {};
+        virtual void VNotifyDirty(ICleanable *ptr);
 
 		// /////////////////////////////////////////////////////////////////
 		// Builds and compiles the vertex and fragment shaders.
@@ -365,7 +386,7 @@ namespace GameHalloran
 		// @return bool True on success or false on failure.
 		//
 		// /////////////////////////////////////////////////////////////////
-		bool Activate() const;
+		bool Activate();
 
 		// /////////////////////////////////////////////////////////////////
 		// Check if this shader program is the current program in use by GL.
@@ -407,6 +428,83 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		void FreeProgram();
+        
+        // /////////////////////////////////////////////////////////////////
+        // Set the value of the uniform.
+        // 
+        // @param name The uniform name.
+        // @param value The new value.
+        //
+        // @return bool True|False on success or failure.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool SetUniform(const std::string &name, const GLint value, const bool forceCopyToGpu = false);
+        
+        // /////////////////////////////////////////////////////////////////
+        // Set the value of the uniform.
+        // 
+        // @param name The uniform name.
+        // @param value The new value.
+        //
+        // @return bool True|False on success or failure.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool SetUniform(const std::string &name, const GLfloat value, const bool forceCopyToGpu = false);
+        
+        // /////////////////////////////////////////////////////////////////
+        // Set the value of the uniform.
+        // 
+        // @param name The uniform name.
+        // @param value The new value.
+        //
+        // @return bool True|False on success or failure.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool SetUniform(const std::string &name, const Vector3 &value, const bool forceCopyToGpu = false);
+        
+        // /////////////////////////////////////////////////////////////////
+        // Set the value of the uniform.
+        // 
+        // @param name The uniform name.
+        // @param value The new value.
+        //
+        // @return bool True|False on success or failure.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool SetUniform(const std::string &name, const Vector4 &value, const bool forceCopyToGpu = false);
+        
+        // /////////////////////////////////////////////////////////////////
+        // Set the value of the uniform.
+        // 
+        // @param name The uniform name.
+        // @param value The new value.
+        //
+        // @return bool True|False on success or failure.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool SetUniform(const std::string &name, const Point3 &value, const bool forceCopyToGpu = false);
+        
+        // /////////////////////////////////////////////////////////////////
+        // Set the value of the uniform.
+        // 
+        // @param name The uniform name.
+        // @param value The new value.
+        //
+        // @return bool True|False on success or failure.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool SetUniform(const std::string &name, const Matrix4 &value, const bool forceCopyToGpu = false);
+        
+        // /////////////////////////////////////////////////////////////////
+        // Set the value of the uniform.
+        // 
+        // @param name The uniform name.
+        // @param value The new value.
+        //
+        // @return bool True|False on success or failure.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool SetUniform(const std::string &name, const Matrix3x3 value, const bool forceCopyToGpu = false);
 
 	};
 

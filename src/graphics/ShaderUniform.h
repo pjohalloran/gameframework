@@ -11,10 +11,12 @@
 // /////////////////////////////////////////////////////////////////
 
 #include <cstring>
+#include <string>
 
-#include "GamePlatform.h"
 #include "ICleanable.h"
 #include "ICleanableObserver.h"
+#include "HashedString.h"
+#include "GameBase.h"
 
 // /////////////////////////////////////////////////////////////////
 //
@@ -29,7 +31,7 @@ namespace GameHalloran
     // Base Uniform type.
     //
     // /////////////////////////////////////////////////////////////////
-    class ShaderUniform : public ICleanable
+    class ShaderUniform : public ICleanable, public NonCopyable
     {
     public:
         
@@ -54,52 +56,80 @@ namespace GameHalloran
         U32 m_size;                             ///< Number of elements in the uniform (1, 2, 3, 4, 9 or 16 depending on the type)
         ICleanableObserver *m_observer;         ///< Pointer to the shader program, the uniform observer.
         bool m_dirty;                           ///< Dirty flag.
+        HashedString m_id;                      ///< Uniform name/ID.
         Value m_value;                          ///< ...
         
+        // /////////////////////////////////////////////////////////////////
+        // Notifies the shader of a change of value.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void NotifyShader()
+        {
+            if(!m_dirty)
+            {
+                m_observer->VNotifyDirty(this);
+            }
+            m_dirty = true;
+        };
+        
     public:
+        
+        // /////////////////////////////////////////////////////////////////
+        // General constructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver *observer) : m_type(eInt), m_location(location), m_size(1), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        {
+            assert(observer != NULL);
+            m_observer->VNotifyDirty(this);
+        };
         
         // /////////////////////////////////////////////////////////////////
         // GLint Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, ICleanableObserver * observer, const GLint val) : m_type(eInt), m_location(location), m_size(1), m_observer(observer), m_dirty(true)
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const GLint val) : m_type(eInt), m_location(location), m_size(1), m_observer(observer), m_dirty(true), m_id(name.c_str())
         {
             assert(observer != NULL);
             m_value.m_intArr[0] = val;
+            m_observer->VNotifyDirty(this);
         };
         
         // /////////////////////////////////////////////////////////////////
         // GLint [] Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, ICleanableObserver * observer, const U32 size, const GLint *arr) : m_type(eIntArr), m_location(location), m_size(size), m_observer(observer), m_dirty(true)
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const GLint *arr) : m_type(eIntArr), m_location(location), m_size(size), m_observer(observer), m_dirty(true), m_id(name.c_str())
         {
             assert(m_size != 0 && m_size <= 4);
             assert(observer != NULL);
             assert(arr != NULL);
             memcpy(m_value.m_intArr, arr, m_size*sizeof(GLint));
+            m_observer->VNotifyDirty(this);
         };
         
         // /////////////////////////////////////////////////////////////////
         // GLfloat Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, ICleanableObserver * observer, const U32 size, const GLfloat val) : m_type(eFloat), m_location(location), m_size(size), m_observer(observer), m_dirty(true)
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const GLfloat val) : m_type(eFloat), m_location(location), m_size(size), m_observer(observer), m_dirty(true), m_id(name.c_str())
         {
             assert(m_observer != NULL);
             m_value.m_floatArr[0] = val;
+            m_observer->VNotifyDirty(this);
         };
         
         // /////////////////////////////////////////////////////////////////
         // GLfloat [] Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, ICleanableObserver * observer, const U32 size, const GLfloat *arr) : m_type(eFloatArr), m_location(location), m_size(size), m_observer(observer), m_dirty(true)
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const GLfloat *arr) : m_type(eFloatArr), m_location(location), m_size(size), m_observer(observer), m_dirty(true), m_id(name.c_str())
         {
             assert(m_size != 0 && m_size <= 16);
             assert(observer != NULL);
             assert(arr != NULL);
             memcpy(m_value.m_floatArr, arr, m_size*sizeof(GLfloat));
+            m_observer->VNotifyDirty(this);
         };
         
         // /////////////////////////////////////////////////////////////////
@@ -107,6 +137,12 @@ namespace GameHalloran
         //
         // /////////////////////////////////////////////////////////////////
         virtual ~ShaderUniform() {};
+        
+        // /////////////////////////////////////////////////////////////////
+        // Get the hashed value of the shader name.
+        //
+        // /////////////////////////////////////////////////////////////////
+        U64 GetId() const { return (m_id.getHashValue()); };
         
         // /////////////////////////////////////////////////////////////////
         // Get the value.
@@ -136,25 +172,25 @@ namespace GameHalloran
         // Set the value.
         //
         // /////////////////////////////////////////////////////////////////
-        inline void SetValue(const GLint value) { assert(m_type == eInt); m_value.m_intArr[0] = value; };
+        void SetValue(const GLint value, const bool forceCopyToGpu = false);
         
         // /////////////////////////////////////////////////////////////////
         // Set the value.
         //
         // /////////////////////////////////////////////////////////////////
-        inline void SetValue(GLint * const arr) { assert(m_type == eIntArr); assert(arr != NULL);  memcpy(arr, m_value.m_intArr, m_size*sizeof(GLint)); };
+        void SetValue(GLint * const arr, const U32 size, const bool forceCopyToGpu = false);
         
         // /////////////////////////////////////////////////////////////////
         // Set the value.
         //
         // /////////////////////////////////////////////////////////////////
-        inline void SetValue(const GLfloat value) { assert(m_type == eFloat); m_value.m_floatArr[0] = value; };
+        void SetValue(const GLfloat value, const bool forceCopyToGpu = false);
         
         // /////////////////////////////////////////////////////////////////
         // Set the value.
         //
         // /////////////////////////////////////////////////////////////////
-        inline void SetValue(GLfloat * const arr) { assert(m_type == eFloatArr); assert(arr != NULL);  memcpy(arr, m_value.m_floatArr, m_size*sizeof(GLfloat)); };
+        void SetValue(GLfloat * const arr, const U32 size, const bool forceCopyToGpu = false);
         
         // /////////////////////////////////////////////////////////////////
         // Get uniform location.
