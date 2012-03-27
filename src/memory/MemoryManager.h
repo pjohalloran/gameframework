@@ -94,6 +94,7 @@ namespace GameHalloran
             }
             
             m_allocaters[aid] = NULL;
+            return (true);
         };
         
         // ////////////////////////////////////////////////////////////

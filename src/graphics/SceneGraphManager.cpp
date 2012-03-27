@@ -72,32 +72,64 @@ namespace GameHalloran
 			return;
 		}
 
-		m_adsUniformCache.m_applyTexLoc = m_globalShaderPtr->GetUniformLocation("u_applyTexture");
-		m_adsUniformCache.m_texture2dMapLoc = m_globalShaderPtr->GetUniformLocation("u_texture2dMap");
-
-		m_adsUniformCache.m_mvpLoc = m_globalShaderPtr->GetUniformLocation("u_mvpMatrix");
-		m_adsUniformCache.m_mvLoc = m_globalShaderPtr->GetUniformLocation("u_mvMatrix");
-		m_adsUniformCache.m_normalLoc = m_globalShaderPtr->GetUniformLocation("u_normalMatrix");
-
-		m_adsUniformCache.m_numLightsLoc = m_globalShaderPtr->GetUniformLocation("u_numberLights");
-		m_adsUniformCache.m_lightTypesLoc = m_globalShaderPtr->GetUniformLocation("u_lightTypesArr");
-		m_adsUniformCache.m_lightPosLoc = m_globalShaderPtr->GetUniformLocation("u_lightPositionArr");
-		m_adsUniformCache.m_lightAmbLoc = m_globalShaderPtr->GetUniformLocation("u_lightAmbientArr");
-		m_adsUniformCache.m_lightDiffLoc = m_globalShaderPtr->GetUniformLocation("u_lightDiffuseArr");
-		m_adsUniformCache.m_lightSpecLoc = m_globalShaderPtr->GetUniformLocation("u_lightSpecularArr");
-		m_adsUniformCache.m_spotCutoffLoc = m_globalShaderPtr->GetUniformLocation("u_spotlightCutoffArr");
-		m_adsUniformCache.m_spotExpLoc = m_globalShaderPtr->GetUniformLocation("u_spotlightExpArr");
-		m_adsUniformCache.m_spotDirLoc = m_globalShaderPtr->GetUniformLocation("u_spotlightDirection");
-		m_adsUniformCache.m_constantAttLoc = m_globalShaderPtr->GetUniformLocation("u_cAttArr");
-		m_adsUniformCache.m_linearAttLoc = m_globalShaderPtr->GetUniformLocation("u_lAttArr");
-		m_adsUniformCache.m_quadAttLoc = m_globalShaderPtr->GetUniformLocation("u_qAttArr");
-		m_adsUniformCache.m_globalAmbLoc = m_globalShaderPtr->GetUniformLocation("u_globalAmbient");
-
-		m_adsUniformCache.m_matEmmLoc = m_globalShaderPtr->GetUniformLocation("u_materialE");
-		m_adsUniformCache.m_matAmbLoc = m_globalShaderPtr->GetUniformLocation("u_materialA");
-		m_adsUniformCache.m_matDiffLoc = m_globalShaderPtr->GetUniformLocation("u_materialD");
-		m_adsUniformCache.m_matSpecLoc = m_globalShaderPtr->GetUniformLocation("u_materialS");
-		m_adsUniformCache.m_matExpLoc = m_globalShaderPtr->GetUniformLocation("u_materialExp");
+//		m_adsUniformCache.m_applyTexLoc = m_globalShaderPtr->GetUniformLocation("u_applyTexture");
+//		m_adsUniformCache.m_texture2dMapLoc = m_globalShaderPtr->GetUniformLocation("u_texture2dMap");
+//
+//		m_adsUniformCache.m_mvpLoc = m_globalShaderPtr->GetUniformLocation("u_mvpMatrix");
+//		m_adsUniformCache.m_mvLoc = m_globalShaderPtr->GetUniformLocation("u_mvMatrix");
+//		m_adsUniformCache.m_normalLoc = m_globalShaderPtr->GetUniformLocation("u_normalMatrix");
+//
+//		m_adsUniformCache.m_numLightsLoc = m_globalShaderPtr->GetUniformLocation("u_numberLights");
+//		m_adsUniformCache.m_lightTypesLoc = m_globalShaderPtr->GetUniformLocation("u_lightTypesArr");
+//		m_adsUniformCache.m_lightPosLoc = m_globalShaderPtr->GetUniformLocation("u_lightPositionArr");
+//		m_adsUniformCache.m_lightAmbLoc = m_globalShaderPtr->GetUniformLocation("u_lightAmbientArr");
+//		m_adsUniformCache.m_lightDiffLoc = m_globalShaderPtr->GetUniformLocation("u_lightDiffuseArr");
+//		m_adsUniformCache.m_lightSpecLoc = m_globalShaderPtr->GetUniformLocation("u_lightSpecularArr");
+//		m_adsUniformCache.m_spotCutoffLoc = m_globalShaderPtr->GetUniformLocation("u_spotlightCutoffArr");
+//		m_adsUniformCache.m_spotExpLoc = m_globalShaderPtr->GetUniformLocation("u_spotlightExpArr");
+//		m_adsUniformCache.m_spotDirLoc = m_globalShaderPtr->GetUniformLocation("u_spotlightDirection");
+//		m_adsUniformCache.m_constantAttLoc = m_globalShaderPtr->GetUniformLocation("u_cAttArr");
+//		m_adsUniformCache.m_linearAttLoc = m_globalShaderPtr->GetUniformLocation("u_lAttArr");
+//		m_adsUniformCache.m_quadAttLoc = m_globalShaderPtr->GetUniformLocation("u_qAttArr");
+//		m_adsUniformCache.m_globalAmbLoc = m_globalShaderPtr->GetUniformLocation("u_globalAmbient");
+//
+//		m_adsUniformCache.m_matEmmLoc = m_globalShaderPtr->GetUniformLocation("u_materialE");
+//		m_adsUniformCache.m_matAmbLoc = m_globalShaderPtr->GetUniformLocation("u_materialA");
+//		m_adsUniformCache.m_matDiffLoc = m_globalShaderPtr->GetUniformLocation("u_materialD");
+//		m_adsUniformCache.m_matSpecLoc = m_globalShaderPtr->GetUniformLocation("u_materialS");
+//		m_adsUniformCache.m_matExpLoc = m_globalShaderPtr->GetUniformLocation("u_materialExp");
+//        
+//		m_adsUniformCache.m_applyTexLoc = m_globalShaderPtr->GetUniformLocation("u_applyTexture");
+//		m_adsUniformCache.m_texture2dMapLoc = m_globalShaderPtr->GetUniformLocation("u_texture2dMap");
+        
+        m_adsUniformCache.m_applyTex = m_globalShaderPtr->GetUniform("u_applyTexture");
+        m_adsUniformCache.m_texture2dMap = m_globalShaderPtr->GetUniform("u_texture2dMap");
+        
+		m_adsUniformCache.m_mvpMatrix = m_globalShaderPtr->GetUniform("u_mvpMatrix");
+		m_adsUniformCache.m_mvMatrix = m_globalShaderPtr->GetUniform("u_mvMatrix");
+		m_adsUniformCache.m_normalMatrix = m_globalShaderPtr->GetUniform("u_normalMatrix");
+        
+		m_adsUniformCache.m_numLights = m_globalShaderPtr->GetUniform("u_numberLights");
+		m_adsUniformCache.m_lightTypes = m_globalShaderPtr->GetUniform("u_lightTypesArr");
+		m_adsUniformCache.m_lightPos = m_globalShaderPtr->GetUniform("u_lightPositionArr");
+		m_adsUniformCache.m_lightAmb = m_globalShaderPtr->GetUniform("u_lightAmbientArr");
+		m_adsUniformCache.m_lightDiff = m_globalShaderPtr->GetUniform("u_lightDiffuseArr");
+		m_adsUniformCache.m_lightSpec = m_globalShaderPtr->GetUniform("u_lightSpecularArr");
+		m_adsUniformCache.m_spotCutoff = m_globalShaderPtr->GetUniform("u_spotlightCutoffArr");
+		m_adsUniformCache.m_spotExp = m_globalShaderPtr->GetUniform("u_spotlightExpArr");
+		m_adsUniformCache.m_spotDir = m_globalShaderPtr->GetUniform("u_spotlightDirection");
+		m_adsUniformCache.m_constantAtt = m_globalShaderPtr->GetUniform("u_cAttArr");
+		m_adsUniformCache.m_linearAtt = m_globalShaderPtr->GetUniform("u_lAttArr");
+		m_adsUniformCache.m_quadAtt = m_globalShaderPtr->GetUniform("u_qAttArr");
+		m_adsUniformCache.m_globalAmb = m_globalShaderPtr->GetUniform("u_globalAmbient");
+        
+		m_adsUniformCache.m_materialEmiss = m_globalShaderPtr->GetUniform("u_materialE");
+		m_adsUniformCache.m_materialAmb = m_globalShaderPtr->GetUniform("u_materialA");
+		m_adsUniformCache.m_materialDiff = m_globalShaderPtr->GetUniform("u_materialD");
+		m_adsUniformCache.m_materialSpec = m_globalShaderPtr->GetUniform("u_materialS");
+		m_adsUniformCache.m_materialExp = m_globalShaderPtr->GetUniform("u_materialExp");
+        
+        m_adsUniformCache.m_cameraPos = m_globalShaderPtr->GetUniform("u_cameraPos");
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -119,7 +151,7 @@ namespace GameHalloran
 			AlphaSceneNodeList::reverse_iterator i = m_alphaNodeList.rbegin();
 
 			m_stackManagerPtr->GetModelViewMatrixStack()->PushMatrix((*i)->GetMatrix());
-			(*i)->GetNode()->VRender(this);
+			(*i)->GetNode()->VRender();
 			m_stackManagerPtr->GetModelViewMatrixStack()->PopMatrix();
 
 			// Since they are shared ptrs, this frees the alpha node and reduces the lists length.
@@ -183,7 +215,7 @@ namespace GameHalloran
 		: m_adsUniformCache(), m_root(), m_camera(), m_stackManagerPtr(stackManagerPtr), m_alphaNodeList(), m_actorMap(), m_shaderMap(),\
 			m_ambientLightSrc(), m_dynamicLights(), m_globalShaderPtr(), m_metaTable()
 	{
-		m_root.reset(GCC_NEW RootSceneNode);
+		m_root.reset(GCC_NEW RootSceneNode(this));
 
 		// Set up the global illumination ambient light in the scene.
 		m_ambientLightSrc.SetLightType(Light::eDirectional);
@@ -243,13 +275,7 @@ namespace GameHalloran
 	bool SceneGraphManager::PrepareAdsShader(const Material &objectMaterial, const boost::optional<TexHandle> textureId)
 	{
 		if(!m_globalShaderPtr)
-		{
-			// No global shader.
 			return (false);
-		}
-
-		// Activate the shader.
-		m_globalShaderPtr->Activate();
 
 		// Set up texture uniforms.
 		GLint applyTextureVal = GL_FALSE;
@@ -258,24 +284,29 @@ namespace GameHalloran
 			applyTextureVal = GL_TRUE;
 			g_appPtr->GetTextureManagerPtr()->Bind(*textureId, GL_TEXTURE_2D);
 		}
-
-		glUniform1i(m_adsUniformCache.m_applyTexLoc, applyTextureVal);
-		glUniform1i(m_adsUniformCache.m_texture2dMapLoc, 0);
-
+        
+        m_adsUniformCache.m_applyTex->SetValue(applyTextureVal);
+        m_adsUniformCache.m_texture2dMap->SetValue(0);
+        
 		Matrix4 mvpMat, mvMat;
 		Matrix3x3 normalMat3;
 		m_stackManagerPtr->GetModelViewProjectionMatrix(mvpMat);
 		m_stackManagerPtr->GetModelViewMatrixStack()->GetMatrix(mvMat);
 		m_stackManagerPtr->GetNormalMatrix(normalMat3, true);
-		glUniformMatrix4fv(m_adsUniformCache.m_mvpLoc, 1, GL_FALSE, mvpMat.GetComponentsConst());
-		glUniformMatrix4fv(m_adsUniformCache.m_mvLoc, 1, GL_FALSE, mvMat.GetComponentsConst());
-		glUniformMatrix3fv(m_adsUniformCache.m_normalLoc, 1, GL_FALSE, normalMat3);
-
+		m_adsUniformCache.m_mvpMatrix->SetValue((GLfloat * const)mvpMat.GetComponentsConst(), 16);
+		m_adsUniformCache.m_mvMatrix->SetValue((GLfloat * const)mvMat.GetComponentsConst(), 16);
+		m_adsUniformCache.m_normalMatrix->SetValue(normalMat3, 9, 1, true);
+        
+        Matrix4 camMatrix(m_camera->VGet()->GetToWorld());
+        Vector4 camPos(m_camera->GetPosition());
+        Vector4 camEyePos(camMatrix * camPos);
+        m_adsUniformCache.m_cameraPos->SetValue((GLfloat * const)camPos.GetComponentsConst(), 4);
+        
 		// Set up Light uniforms.
 		if(!m_dynamicLights.empty())
 		{
-			const GLuint numberLights(m_dynamicLights.size());
-
+			const GLint numberLights(m_dynamicLights.size());
+            
 			GLint lightTypesArr[MAX_LIGHTS][1];
 			GLfloat lightPositionArr[MAX_LIGHTS][3];
 			GLfloat lightAmbientArr[MAX_LIGHTS][4];
@@ -300,7 +331,7 @@ namespace GameHalloran
 					lightCAttArr[index][0] = currLight->GetConstantAttenuation();
 					lightLAttArr[index][0] = currLight->GetLinearAttenuation();
 					lightQAttArr[index][0] = currLight->GetQuadraticAttenuation();
-
+                    
 					// Translate light position and direction vectors into View/Camera space.
 					Vector4 lightWorldPos(currLight->GetPosition());
 					Vector4 lightWorldDir(currLight->GetDirection());
@@ -309,7 +340,7 @@ namespace GameHalloran
 					lightViewDir.Normalize();
 					Vector3 lightViewPos3(lightViewPos);
 					Vector3 lightViewDir3(lightViewDir);
-
+                    
 					memcpy(lightPositionArr[index], lightViewPos3.GetComponentsConst(), m_adsUniformCache.FLOAT_SIZE * 3);
 					memcpy(lightDirectionArr[index], lightViewDir3.GetComponentsConst(), m_adsUniformCache.FLOAT_SIZE * 3);
 					memcpy(lightAmbientArr[index], currLight->GetAmbient().GetComponentsConst(), m_adsUniformCache.FLOAT_ARR_SIZE);
@@ -317,28 +348,121 @@ namespace GameHalloran
 					memcpy(lightSpecularArr[index], currLight->GetSpecular().GetComponentsConst(), m_adsUniformCache.FLOAT_ARR_SIZE);
 				}
 			}
-
-			glUniform1i(m_adsUniformCache.m_numLightsLoc, numberLights);
-			glUniform1iv(m_adsUniformCache.m_lightTypesLoc, numberLights, (const GLint *)lightTypesArr);
-			glUniform3fv(m_adsUniformCache.m_lightPosLoc, numberLights, (const GLfloat *)lightPositionArr);
-			glUniform4fv(m_adsUniformCache.m_lightAmbLoc, numberLights, (const GLfloat *)lightAmbientArr);
-			glUniform4fv(m_adsUniformCache.m_lightDiffLoc, numberLights, (const GLfloat *)lightDiffuseArr);
-			glUniform4fv(m_adsUniformCache.m_lightSpecLoc, numberLights, (const GLfloat *)lightSpecularArr);
-			glUniform1fv(m_adsUniformCache.m_spotCutoffLoc, numberLights, (const GLfloat *)lightCutoffArr);
-			glUniform1fv(m_adsUniformCache.m_spotExpLoc, numberLights, (const GLfloat *)lightExpArr);
-			glUniform3fv(m_adsUniformCache.m_spotDirLoc, numberLights, (const GLfloat *)lightDirectionArr);
-			glUniform1fv(m_adsUniformCache.m_constantAttLoc, numberLights, (const GLfloat *)lightCAttArr);
-			glUniform1fv(m_adsUniformCache.m_linearAttLoc, numberLights, (const GLfloat *)lightLAttArr);
-			glUniform1fv(m_adsUniformCache.m_quadAttLoc, numberLights, (const GLfloat *)lightQAttArr);
-			glUniform4fv(m_adsUniformCache.m_globalAmbLoc, 1, m_ambientLightSrc.GetAmbient().GetComponentsConst());
+            
+            m_adsUniformCache.m_numLights->SetValue(numberLights);
+            m_adsUniformCache.m_lightTypes->SetValue((GLint * const)lightTypesArr, 1, numberLights);
+            m_adsUniformCache.m_lightPos->SetValue((GLfloat * const)lightPositionArr, 3, numberLights);
+            m_adsUniformCache.m_lightAmb->SetValue((GLfloat * const)lightAmbientArr, 4, numberLights);
+            m_adsUniformCache.m_lightDiff->SetValue((GLfloat * const)lightDiffuseArr, 4, numberLights);
+            m_adsUniformCache.m_lightSpec->SetValue((GLfloat * const)lightSpecularArr, 4, numberLights);
+            m_adsUniformCache.m_spotCutoff->SetValue((GLfloat * const)lightCutoffArr, 1, numberLights);
+            m_adsUniformCache.m_spotExp->SetValue( (GLfloat * const)lightExpArr, 1, numberLights);
+            m_adsUniformCache.m_spotDir->SetValue((GLfloat * const)lightDirectionArr, 3, numberLights);
+            m_adsUniformCache.m_constantAtt->SetValue((GLfloat * const)lightCAttArr, 1, numberLights);
+            m_adsUniformCache.m_linearAtt->SetValue((GLfloat * const)lightLAttArr, 1, numberLights);
+            m_adsUniformCache.m_quadAtt->SetValue((GLfloat * const)lightQAttArr, 1, numberLights);
 		}
-
+        
+        m_adsUniformCache.m_globalAmb->SetValue((GLfloat * const)m_ambientLightSrc.GetAmbient().GetComponentsConst(), 4, 1);
+        
 		// Set up Object/Scene Nodes material uniforms.
-		glUniform4fv(m_adsUniformCache.m_matEmmLoc, 1, objectMaterial.GetEmissive().GetComponentsConst());
-		glUniform4fv(m_adsUniformCache.m_matAmbLoc, 1, objectMaterial.GetAmbient().GetComponentsConst());
-		glUniform4fv(m_adsUniformCache.m_lightDiffLoc, 1, objectMaterial.GetDiffuse().GetComponentsConst());
-		glUniform4fv(m_adsUniformCache.m_matSpecLoc, 1, objectMaterial.GetSpecular().GetComponentsConst());
-		glUniform1f(m_adsUniformCache.m_matExpLoc, objectMaterial.GetSpecularPower());
+		m_adsUniformCache.m_materialEmiss->SetValue((GLfloat * const)objectMaterial.GetEmissive().GetComponentsConst(), 4);
+		m_adsUniformCache.m_materialAmb->SetValue((GLfloat * const)objectMaterial.GetAmbient().GetComponentsConst(), 4);
+		m_adsUniformCache.m_materialDiff->SetValue((GLfloat * const)objectMaterial.GetDiffuse().GetComponentsConst(), 4);
+		m_adsUniformCache.m_materialSpec->SetValue((GLfloat * const)objectMaterial.GetSpecular().GetComponentsConst(), 4);
+		m_adsUniformCache.m_materialExp->SetValue((GLfloat)objectMaterial.GetSpecularPower());
+        
+		// Activate the shader.
+		m_globalShaderPtr->Activate();
+
+//		// Set up texture uniforms.
+//		GLint applyTextureVal = GL_FALSE;
+//		if(textureId.is_initialized())
+//		{
+//			applyTextureVal = GL_TRUE;
+//			g_appPtr->GetTextureManagerPtr()->Bind(*textureId, GL_TEXTURE_2D);
+//		}
+//
+//		glUniform1i(m_adsUniformCache.m_applyTexLoc, applyTextureVal);
+//		glUniform1i(m_adsUniformCache.m_texture2dMapLoc, 0);
+//
+//		Matrix4 mvpMat, mvMat;
+//		Matrix3x3 normalMat3;
+//		m_stackManagerPtr->GetModelViewProjectionMatrix(mvpMat);
+//		m_stackManagerPtr->GetModelViewMatrixStack()->GetMatrix(mvMat);
+//		m_stackManagerPtr->GetNormalMatrix(normalMat3, true);
+//		glUniformMatrix4fv(m_adsUniformCache.m_mvpLoc, 1, GL_FALSE, mvpMat.GetComponentsConst());
+//		glUniformMatrix4fv(m_adsUniformCache.m_mvLoc, 1, GL_FALSE, mvMat.GetComponentsConst());
+//		glUniformMatrix3fv(m_adsUniformCache.m_normalLoc, 1, GL_FALSE, normalMat3);
+//
+//		// Set up Light uniforms.
+//		if(!m_dynamicLights.empty())
+//		{
+//			const GLuint numberLights(m_dynamicLights.size());
+//
+//			GLint lightTypesArr[MAX_LIGHTS][1];
+//			GLfloat lightPositionArr[MAX_LIGHTS][3];
+//			GLfloat lightAmbientArr[MAX_LIGHTS][4];
+//			GLfloat lightDiffuseArr[MAX_LIGHTS][4];
+//			GLfloat lightSpecularArr[MAX_LIGHTS][4];
+//			GLfloat lightCutoffArr[MAX_LIGHTS][1];
+//			GLfloat lightExpArr[MAX_LIGHTS][1];
+//			GLfloat lightDirectionArr[MAX_LIGHTS][3];
+//			GLfloat lightCAttArr[MAX_LIGHTS][1];
+//			GLfloat lightLAttArr[MAX_LIGHTS][1];
+//			GLfloat lightQAttArr[MAX_LIGHTS][1];
+//			I32 index = 0;
+//			Matrix4 viewMat(m_camera->VGet()->GetToWorld());
+//			for(LightVector::iterator i = m_dynamicLights.begin(), end = m_dynamicLights.end(); ((index < MAX_LIGHTS) && (i != end)); ++i, ++index)
+//			{
+//				boost::shared_ptr<Light> currLight = *i;
+//				if(currLight->IsOn())
+//				{
+//					lightTypesArr[index][0] = currLight->GetLightType();
+//					lightCutoffArr[index][0] = currLight->GetSpotlightCutoff();
+//					lightExpArr[index][0] = currLight->GetSpotlightExponent();
+//					lightCAttArr[index][0] = currLight->GetConstantAttenuation();
+//					lightLAttArr[index][0] = currLight->GetLinearAttenuation();
+//					lightQAttArr[index][0] = currLight->GetQuadraticAttenuation();
+//
+//					// Translate light position and direction vectors into View/Camera space.
+//					Vector4 lightWorldPos(currLight->GetPosition());
+//					Vector4 lightWorldDir(currLight->GetDirection());
+//					Vector4 lightViewPos(viewMat * lightWorldPos);
+//					Vector4 lightViewDir(viewMat * lightWorldDir);
+//					lightViewDir.Normalize();
+//					Vector3 lightViewPos3(lightViewPos);
+//					Vector3 lightViewDir3(lightViewDir);
+//
+//					memcpy(lightPositionArr[index], lightViewPos3.GetComponentsConst(), m_adsUniformCache.FLOAT_SIZE * 3);
+//					memcpy(lightDirectionArr[index], lightViewDir3.GetComponentsConst(), m_adsUniformCache.FLOAT_SIZE * 3);
+//					memcpy(lightAmbientArr[index], currLight->GetAmbient().GetComponentsConst(), m_adsUniformCache.FLOAT_ARR_SIZE);
+//					memcpy(lightDiffuseArr[index], currLight->GetDiffuse().GetComponentsConst(), m_adsUniformCache.FLOAT_ARR_SIZE);
+//					memcpy(lightSpecularArr[index], currLight->GetSpecular().GetComponentsConst(), m_adsUniformCache.FLOAT_ARR_SIZE);
+//				}
+//			}
+//
+//			glUniform1i(m_adsUniformCache.m_numLightsLoc, numberLights);
+//			glUniform1iv(m_adsUniformCache.m_lightTypesLoc, numberLights, (const GLint *)lightTypesArr);
+//			glUniform3fv(m_adsUniformCache.m_lightPosLoc, numberLights, (const GLfloat *)lightPositionArr);
+//			glUniform4fv(m_adsUniformCache.m_lightAmbLoc, numberLights, (const GLfloat *)lightAmbientArr);
+//			glUniform4fv(m_adsUniformCache.m_lightDiffLoc, numberLights, (const GLfloat *)lightDiffuseArr);
+//			glUniform4fv(m_adsUniformCache.m_lightSpecLoc, numberLights, (const GLfloat *)lightSpecularArr);
+//			glUniform1fv(m_adsUniformCache.m_spotCutoffLoc, numberLights, (const GLfloat *)lightCutoffArr);
+//			glUniform1fv(m_adsUniformCache.m_spotExpLoc, numberLights, (const GLfloat *)lightExpArr);
+//			glUniform3fv(m_adsUniformCache.m_spotDirLoc, numberLights, (const GLfloat *)lightDirectionArr);
+//			glUniform1fv(m_adsUniformCache.m_constantAttLoc, numberLights, (const GLfloat *)lightCAttArr);
+//			glUniform1fv(m_adsUniformCache.m_linearAttLoc, numberLights, (const GLfloat *)lightLAttArr);
+//			glUniform1fv(m_adsUniformCache.m_quadAttLoc, numberLights, (const GLfloat *)lightQAttArr);
+//			glUniform4fv(m_adsUniformCache.m_globalAmbLoc, 1, m_ambientLightSrc.GetAmbient().GetComponentsConst());
+//		}
+//
+//		// Set up Object/Scene Nodes material uniforms.
+//		glUniform4fv(m_adsUniformCache.m_matEmmLoc, 1, objectMaterial.GetEmissive().GetComponentsConst());
+//		glUniform4fv(m_adsUniformCache.m_matAmbLoc, 1, objectMaterial.GetAmbient().GetComponentsConst());
+//		glUniform4fv(m_adsUniformCache.m_lightDiffLoc, 1, objectMaterial.GetDiffuse().GetComponentsConst());
+//		glUniform4fv(m_adsUniformCache.m_matSpecLoc, 1, objectMaterial.GetSpecular().GetComponentsConst());
+//		glUniform1f(m_adsUniformCache.m_matExpLoc, objectMaterial.GetSpecularPower());
 
 		return (true);
 	}
@@ -364,18 +488,16 @@ namespace GameHalloran
 			//// Apply the view transformation to the global matrix stack (i.e. point the camera in some direction in the scene).
 			//m_camera->VSetViewTransform(this);
 
-			if (m_root->VPreRender(this))
+			if (m_root->VPreRender())
 			{
-				m_root->VRender(this);
-				m_root->VRenderChildren(this);
-				m_root->VPostRender(this);
+				m_root->VRender();
+				m_root->VRenderChildren();
+				m_root->VPostRender();
 			}
 		}
 
 		if(!m_alphaNodeList.empty())
-		{
 			RenderAlphaPass();
-		}
 
 		return (true);
 	}
@@ -386,11 +508,9 @@ namespace GameHalloran
 	bool SceneGraphManager::OnRestore()
 	{
 		if (!m_root)
-		{
 			return (true);
-		}
 	 
-		return (m_root->VOnRestore(this));
+		return (m_root->VOnRestore());
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -399,11 +519,9 @@ namespace GameHalloran
 	bool SceneGraphManager::OnLostDevice()
 	{
 		if (!m_root)
-		{
 			return (true);
-		}
 	 
-		return (m_root->VOnLostDevice(this));
+		return (m_root->VOnLostDevice());
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -414,13 +532,9 @@ namespace GameHalloran
 		bool result = true;
 
 		if(m_camera)
-		{
-			result = m_camera->VOnUpdate(this, elapsedTime);
-		}
+			result = m_camera->VOnUpdate(elapsedTime);
 		if(result && m_root)
-		{
-			result = m_root->VOnUpdate(this, elapsedTime);
-		}
+			result = m_root->VOnUpdate(elapsedTime);
 
 		return (result);
 	}
@@ -450,6 +564,7 @@ namespace GameHalloran
 			bool added = m_root->VAddChild(nodePtr);
 			if(added)
 			{
+                nodePtr->VSetSceneManager(this);
 				if (id.is_initialized())
 				{
 					m_actorMap[*id] = nodePtr;	

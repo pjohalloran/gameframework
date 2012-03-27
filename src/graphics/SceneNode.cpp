@@ -65,9 +65,11 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	SceneNode::SceneNode(boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld)\
-		: m_parentPtr(NULL), m_props(), m_useCustomShader(false), m_children(), m_shaderPtr()
+	SceneNode::SceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld)\
+		: m_sgmPtr(sgPtr), m_parentPtr(NULL), m_props(), m_useCustomShader(false), m_children(), m_shaderPtr()
 	{
+        //assert(m_sgmPtr != NULL);
+        
 		m_props.SetActorId(actorId);
 		m_props.SetName(name);
 		m_props.SetRenderPass(renderPass);
@@ -78,9 +80,11 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	SceneNode::SceneNode(boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld)\
-		: m_parentPtr(NULL), m_props(), m_useCustomShader(false), m_children(), m_shaderPtr()
+	SceneNode::SceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld)\
+		: m_sgmPtr(sgPtr), m_parentPtr(NULL), m_props(), m_useCustomShader(false), m_children(), m_shaderPtr()
 	{
+        //assert(m_sgmPtr != NULL);
+        
 		m_props.SetActorId(actorId);
 		m_props.SetName(name);
 		m_props.SetRenderPass(renderPass);
@@ -99,21 +103,14 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool SceneNode::VPreRender(SceneGraphManager *scenePtr)
+	bool SceneNode::VPreRender()
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("SceneNode::VPreRender()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		// Check if we need to get the shader (On the first time through or else we changed to a different shader recently).
 		if(m_useCustomShader)
 		{
 			if(!m_shaderPtr)
 			{
-				m_shaderPtr = scenePtr->GetShader(m_props.GetShaderName());
+				m_shaderPtr = m_sgmPtr->GetShader(m_props.GetShaderName());
 				if(!m_shaderPtr)
 				{
                     GF_LOG_TRACE_ERR("SceneNode::VPreRender()", std::string("Failed to get the custom shader from the SGM: ") + m_props.GetShaderName());
@@ -133,23 +130,16 @@ namespace GameHalloran
 
 		// Save the transformation state of the modelview matrix stack before we render 
 		//  and set the new state to be the old matrix * this nodes matrix.
-		scenePtr->GetStackManager()->GetModelViewMatrixStack()->PushMatrix();
-		scenePtr->GetStackManager()->GetModelViewMatrixStack()->MultiplyMatrix(m_props.GetToWorld());
+		m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->PushMatrix();
+		m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->MultiplyMatrix(m_props.GetToWorld());
 		return (true);
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool SceneNode::VRender(SceneGraphManager *scenePtr)
+	bool SceneNode::VRender()
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("SceneNode::VRender()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		// Base implementation, TO be implemented by derived classes as only they will know exactly what to render.
 		return (true);
 	}
@@ -157,17 +147,10 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool SceneNode::VPostRender(SceneGraphManager *scenePtr)
+	bool SceneNode::VPostRender()
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("SceneNode::VPostRender()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		// Restore the ModelView stacks state after render.
-		scenePtr->GetStackManager()->GetModelViewMatrixStack()->PopMatrix();
+		m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->PopMatrix();
 		return (true);
 	}
 
@@ -224,9 +207,7 @@ namespace GameHalloran
 
 		F32 newRadius = dirToChild.Magnitude() + childRadius;
 		if (newRadius > m_props.GetRadius())
-		{
 			m_props.SetRadius(newRadius);
-		}
 
 		return (true);
 	}
@@ -246,9 +227,7 @@ namespace GameHalloran
 				found = true;
 			}
 			else
-			{
 				++i;
-			}
 		}
 		return (found);
 	}
@@ -256,21 +235,17 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	void SceneNode::RenderSceneNode(SceneGraphManager *scenePtr, ISceneNode *snPtr)
+	void SceneNode::RenderSceneNode(ISceneNode *snPtr)
 	{
-		if(!snPtr || !scenePtr)
-		{
+		if(!snPtr)
 			return;
-		}
 
 		F32 alpha = snPtr->VGet()->GetAlpha();
 		if(FloatCmp(alpha, g_OPAQUE))
 		{
-			if(snPtr->VPreRender(scenePtr))
-			{
-				snPtr->VRender(scenePtr);
-			}
-			snPtr->VPostRender(scenePtr);
+			if(snPtr->VPreRender())
+				snPtr->VRender();
+			snPtr->VPostRender();
 		}
 		else if (!FloatCmp(alpha, g_TRANSPARENT))
 		{
@@ -279,60 +254,48 @@ namespace GameHalloran
 			F32 z;
 
 			// Get the top most MV transformation matrix.
-			scenePtr->GetStackManager()->GetModelViewMatrixStack()->GetMatrix(mat);
+			m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->GetMatrix(mat);
 			
 			// Get our nodes position.
 			Vector4 worldPos4;
 			mat.GetPosition(worldPos4);
 			
 			// Get the camera matrix.
-			Matrix4 toWorldCamera(scenePtr->GetCamera()->VGet()->GetToWorld());
+			Matrix4 toWorldCamera(m_sgmPtr->GetCamera()->VGet()->GetToWorld());
 
 			// Transform the nodes position into eye space.
 			Vector4 eyePos4 = toWorldCamera * worldPos4;
 
-			// TODO: Should we take into account the W component?? (remove this check when we resolve this...)
-			if(!FloatCmp(eyePos4.GetW(), 1.0f))
-			{
-				// Log trace here to help answer our problem...
-                GF_LOG_TRACE_DEB("SceneNode::VRenderChildren()", "The W component is non zero, recheck your work!!!!");
-			}
+//			// TODO: Should we take into account the W component?? (remove this check when we resolve this...)
+//			if(!FloatCmp(eyePos4.GetW(), 1.0f))
+//                GF_LOG_TRACE_DEB("SceneNode::VRenderChildren()", "The W component is non zero, recheck your work!!!!");
 			z = eyePos4.GetZ();
 
 			boost::shared_ptr<AlphaSceneNode> asn(GCC_NEW AlphaSceneNode(boost::shared_ptr<ISceneNode>(snPtr), mat, z));
 			if(!asn)
-			{
+            {
                 GF_LOG_TRACE_ERR("SceneNode::VRenderChildren()", "Failed to allocate memory for an alpha scene node");
-			}
+            }
 			else
-			{
-				scenePtr->AddAlphaSceneNode(asn);
-			}
+            {
+				m_sgmPtr->AddAlphaSceneNode(asn);
+            }
 		}
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool SceneNode::VRenderChildren(SceneGraphManager *scenePtr)
+	bool SceneNode::VRenderChildren()
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("SceneNode::VRenderChildren()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		bool result = true;
 		for(SceneNodeList::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i)
 		{
 			// Don't render this node if you can't see it
-			if ((*i)->VIsVisible(scenePtr))
-			{
-				RenderSceneNode(scenePtr, (*i).get());
-			}
+			if ((*i)->VIsVisible())
+				RenderSceneNode((*i).get());
 
-			(*i)->VRenderChildren(scenePtr);
+			(*i)->VRenderChildren();
 		}
 		return (result);
 	}
@@ -340,22 +303,13 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool SceneNode::VOnRestore(SceneGraphManager *scenePtr)
+	bool SceneNode::VOnRestore()
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("SceneNode::VOnRestore()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		bool result = true;
 		for(SceneNodeList::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i)
 		{
-			if(!(*i)->VOnRestore(scenePtr))
-			{
+			if(!(*i)->VOnRestore())
 				result = false;
-			}
 		}
 		return (result);
 	}
@@ -363,22 +317,13 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool SceneNode::VOnLostDevice(SceneGraphManager *scenePtr)
+	bool SceneNode::VOnLostDevice()
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("SceneNode::VOnLostDevice()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		bool result = true;
 		for(SceneNodeList::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i)
 		{
-			if(!(*i)->VOnLostDevice(scenePtr))
-			{
+			if(!(*i)->VOnLostDevice())
 				result = false;
-			}
 		}
 		return (result);
 	}
@@ -386,17 +331,10 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool SceneNode::VIsVisible(SceneGraphManager *scenePtr) const
+	bool SceneNode::VIsVisible() const
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("SceneNode::VIsVisible()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
-		Matrix4 cameraTransform(scenePtr->GetCamera()->VGet()->GetToWorld());
-		Matrix4 cameraInvTransform(scenePtr->GetCamera()->VGet()->GetFromWorld());
+		Matrix4 cameraTransform(m_sgmPtr->GetCamera()->VGet()->GetToWorld());
+		Matrix4 cameraInvTransform(m_sgmPtr->GetCamera()->VGet()->GetFromWorld());
 		
 		// Position of the node in world space.
 		Vector4 posWorld4;
@@ -410,33 +348,22 @@ namespace GameHalloran
 		Point3 eyePt(posCamEyeSpace3);
 
 		// Check if the node is inside the camera nodes Frustrum!
-		return (scenePtr->GetCamera()->GetFrustum()->Inside(eyePt, m_props.GetRadius()));
+		return (m_sgmPtr->GetCamera()->GetFrustum()->Inside(eyePt, m_props.GetRadius()));
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool SceneNode::VPick(SceneGraphManager *scenePtr, const RayCast &ray)
+	bool SceneNode::VPick(const RayCast &ray)
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("SceneNode::VPick()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		if(m_children.empty())
-		{
 			return (false);
-		}
 
 		bool result = true;
 		for(SceneNodeList::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i)
 		{
-			if(!(*i)->VPick(scenePtr, ray))
-			{
+			if(!(*i)->VPick(ray))
 				result = false;
-			}
 		}
 		return (result);
 	}
@@ -444,22 +371,13 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool SceneNode::VOnUpdate(SceneGraphManager *scenePtr, const F32 elapsedTime)
+	bool SceneNode::VOnUpdate(const F32 elapsedTime)
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("SceneNode::VOnUpdate()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		bool result = true;
 		for(SceneNodeList::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i)
 		{
-			if(!(*i)->VOnUpdate(scenePtr, elapsedTime))
-			{
+			if(!(*i)->VOnUpdate(elapsedTime))
 				result = false;
-			}
 		}
 		return (result);
 	}
@@ -496,8 +414,7 @@ namespace GameHalloran
 		// Mark the node as using a custom GLSL shader from now on.
 		m_useCustomShader = true;
 		m_props.SetShaderName(shaderNameRef);
-		// Clear the current GLSL shader program so that on the next pre render call a new shader will be retrieved from the SGM
-		m_shaderPtr.reset();
+        m_shaderPtr = m_sgmPtr->GetShader(m_props.GetShaderName());
 	};
 
 }

@@ -32,7 +32,7 @@ namespace GameHalloran
 		Point3 butPos(VGetPosition());
 		F32 sliderLeftX, sliderRightX;
 		F32 butW = GetProjectedButtonWidth();
-		F32 butH = GetProjectedButtonHeight();
+		//F32 butH = GetProjectedButtonHeight();
 
 		sliderLeftX = butPos.GetX();
 		sliderRightX = sliderLeftX + VGetWidth() - butW;
@@ -352,7 +352,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool SliderControl::VOnAction()
 	{
-		bool result = true;
+		//bool result = true;
 		m_sliderPos = CalculateSliderPositionFromButton();
 		//std::cout << "Slider Pos: " << m_sliderPos << std::endl;
 		IEventDataPtr sliderActionEvent(GCC_NEW EvtData_Slider_Action(AbstractWidget::VGetId(), m_eventTypeId, m_sliderPos));

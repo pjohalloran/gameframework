@@ -96,8 +96,16 @@ namespace GameHalloran
 
 		GF_CLEAR_GL_ERROR();
 
+        glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
+        
+        GF_CHECK_GL_ERROR();
+        
 		// Copy the line vertices into the VBO.
 		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(positions), positions);
+        
+        GF_CHECK_GL_ERROR();
+        
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
         
 #if defined(DEBUG)
 		return (GF_CHECK_GL_ERROR());
@@ -110,7 +118,7 @@ namespace GameHalloran
 	//
 	// /////////////////////////////////////////////////////////////////
 	BulletPhysicsDebugDrawer::BulletPhysicsDebugDrawer(boost::shared_ptr<ModelViewProjStackManager> mvpStackManagerPtr, const std::string shaderName) throw (GameException &) \
-		: m_vaoId(0), m_vboId(0), m_shaderPtr(), m_mvpStackManagerPtr(mvpStackManagerPtr), m_debugMode(0), m_mvpLoc(-1), m_colorLoc(-1)
+		: m_vaoId(0), m_vboId(0), m_shaderPtr(), m_mvpStackManagerPtr(mvpStackManagerPtr), m_debugMode(0), m_mvpUniform(), m_colorUniform()
 	{
 		if(!m_mvpStackManagerPtr || shaderName.empty())
 		{
@@ -126,8 +134,8 @@ namespace GameHalloran
 			throw GameException(std::string("Failed to initialize the GLSL program"));
 		}
 
-		m_mvpLoc = m_shaderPtr->GetUniformLocation("mvpMatrix");
-		m_colorLoc = m_shaderPtr->GetUniformLocation("colorVec");
+        m_mvpUniform = m_shaderPtr->GetUniform("mvpMatrix");
+		m_colorUniform = m_shaderPtr->GetUniform("colorVec");
 
 		if(!CreateBuffers())
 		{
@@ -173,13 +181,11 @@ namespace GameHalloran
         
         GF_CLEAR_GL_ERROR();
         
-		glUniformMatrix4fv(m_mvpLoc, 1, GL_FALSE, mvp.GetComponentsConst());
-		glUniform4fv(m_colorLoc, 1, color.m_floats);
+        m_mvpUniform->SetValue((GLfloat * const)mvp.GetComponentsConst(), 16);
+        Vector4 colorTmp(color.m_floats[0], color.m_floats[1], color.m_floats[2], 1.0f);
+        m_colorUniform->SetValue((GLfloat * const)colorTmp.GetComponentsConst(), 4);
 
-
-		glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
 		LoadVertexBuffer(from, to);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		GF_CHECK_GL_ERROR();
 

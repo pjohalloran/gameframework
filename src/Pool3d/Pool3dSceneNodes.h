@@ -38,6 +38,8 @@
 
 namespace GameHalloran
 {
+    
+    class SceneGraphManager;
 
 	// /////////////////////////////////////////////////////////////////
 	// @enum Pool3dModelLoadingId
@@ -92,6 +94,7 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The Actor ID.
 		// @param material The objects material.
 		// @param toWorld Position and orientation of node relative to its
@@ -105,11 +108,12 @@ namespace GameHalloran
 		//							the actors parameters.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit BallSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, BallActorParams &param) throw (GameException &);
+		explicit BallSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, BallActorParams &param) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The Actor ID.
 		// @param material The objects material.
 		// @param toWorld Position and orientation of node relative to its
@@ -123,11 +127,12 @@ namespace GameHalloran
 		//							the actors parameters.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit BallSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, BallActorParams &param) throw (GameException &);
+		explicit BallSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, BallActorParams &param) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The Actor ID.
 		// @param material The objects material.
 		// @param toWorld Position and orientation of node relative to its
@@ -145,31 +150,13 @@ namespace GameHalloran
 		//							the actors parameters.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit BallSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, BallActorParams &param, boost::shared_ptr<IGLBatchBase> actorMesh) throw (GameException &);
+		explicit BallSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, BallActorParams &param, boost::shared_ptr<IGLBatchBase> actorMesh) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.
 		//
 		// /////////////////////////////////////////////////////////////////
 		virtual ~BallSceneNode();
-
-		//// /////////////////////////////////////////////////////////////////
-		//// Set the render state before rendering.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//virtual bool VPreRender(SceneGraphManager *scenePtr);
-
-		//// /////////////////////////////////////////////////////////////////
-		//// Render the node.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//virtual bool VRender(SceneGraphManager *scenePtr);
-
-		//// /////////////////////////////////////////////////////////////////
-		//// Reset the render state after rendering.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//virtual bool VPostRender(SceneGraphManager *scenePtr);
 
 		// /////////////////////////////////////////////////////////////////
 		// Get the Ball Actor parameters.
@@ -192,27 +179,24 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		// Called when application is restored.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnRestore(SceneGraphManager *scenePtr);
+		virtual bool VOnRestore();
 
 		// /////////////////////////////////////////////////////////////////
 		// Called when application loses focus.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnLostDevice(SceneGraphManager *scenePtr);
+		virtual bool VOnLostDevice();
 
 		// /////////////////////////////////////////////////////////////////
 		// Check if the ray intersects with this SceneNode.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		// @param ray Raycast.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPick(SceneGraphManager *scenePtr, const RayCast &ray);
+		virtual bool VPick(const RayCast &ray);
 	};
 
 	// /////////////////////////////////////////////////////////////////
@@ -266,6 +250,7 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The Actor ID.
 		// @param material The objects material.
 		// @param toWorld Position and orientation of node relative to its
@@ -279,11 +264,12 @@ namespace GameHalloran
 		//							the actors parameters.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit TableSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, TableActorParams &param) throw (GameException &);
+		explicit TableSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, TableActorParams &param) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The Actor ID.
 		// @param material The objects material.
 		// @param toWorld Position and orientation of node relative to its
@@ -297,31 +283,13 @@ namespace GameHalloran
 		//							the actors parameters.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit TableSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, TableActorParams &param) throw (GameException &);
+		explicit TableSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, TableActorParams &param) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.
 		//
 		// /////////////////////////////////////////////////////////////////
 		virtual ~TableSceneNode();
-
-		//// /////////////////////////////////////////////////////////////////
-		//// Set the render state before rendering.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//virtual bool VPreRender(SceneGraphManager *scenePtr);
-
-		//// /////////////////////////////////////////////////////////////////
-		//// Render the node.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//virtual bool VRender(SceneGraphManager *scenePtr);
-
-		//// /////////////////////////////////////////////////////////////////
-		//// Reset the render state after rendering.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//virtual bool VPostRender(SceneGraphManager *scenePtr);
 
 		// /////////////////////////////////////////////////////////////////
 		// Get the Ball Actor parameters.
@@ -344,37 +312,32 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		// Called when application is restored.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnRestore(SceneGraphManager *scenePtr);
+		virtual bool VOnRestore();
 
 		// /////////////////////////////////////////////////////////////////
 		// Called when application loses focus.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnLostDevice(SceneGraphManager *scenePtr);
+		virtual bool VOnLostDevice();
 
 		// /////////////////////////////////////////////////////////////////
 		// Check if the ray intersects with this SceneNode.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		// @param ray Raycast.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPick(SceneGraphManager *scenePtr, const RayCast &ray);
+		virtual bool VPick(const RayCast &ray);
 
 		// /////////////////////////////////////////////////////////////////
 		// Render all child nodes. Overriding all base class versions here
 		// to ensure that all children attached to the pool table are rendered
 		// if the pool table is visible to elimiate popping effect.
 		//
-		// @param scenePtr SceneGraph manager pointer.
-		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VRenderChildren(SceneGraphManager *scenePtr);
+		virtual bool VRenderChildren();
 	};
 
 	// /////////////////////////////////////////////////////////////////
@@ -401,6 +364,7 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The Actor ID.
 		// @param material The objects material.
 		// @param toWorld Position and orientation of node relative to its
@@ -414,11 +378,12 @@ namespace GameHalloran
 		//							the actors parameters.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit CueSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, CueActorParams &param) throw (GameException &);
+		explicit CueSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, CueActorParams &param) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The Actor ID.
 		// @param material The objects material.
 		// @param toWorld Position and orientation of node relative to its
@@ -432,31 +397,13 @@ namespace GameHalloran
 		//							the actors parameters.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit CueSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, CueActorParams &param) throw (GameException &);
+		explicit CueSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, CueActorParams &param) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.
 		//
 		// /////////////////////////////////////////////////////////////////
 		virtual ~CueSceneNode();
-
-		//// /////////////////////////////////////////////////////////////////
-		//// Set the render state before rendering.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//virtual bool VPreRender(SceneGraphManager *scenePtr);
-
-		//// /////////////////////////////////////////////////////////////////
-		//// Render the node.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//virtual bool VRender(SceneGraphManager *scenePtr);
-
-		//// /////////////////////////////////////////////////////////////////
-		//// Reset the render state after rendering.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//virtual bool VPostRender(SceneGraphManager *scenePtr);
 
 		// /////////////////////////////////////////////////////////////////
 		// Get the Cue Actor parameters.
@@ -479,27 +426,24 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		// Called when application is restored.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnRestore(SceneGraphManager *scenePtr);
+		virtual bool VOnRestore();
 
 		// /////////////////////////////////////////////////////////////////
 		// Called when application loses focus.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnLostDevice(SceneGraphManager *scenePtr);
+		virtual bool VOnLostDevice();
 
 		// /////////////////////////////////////////////////////////////////
 		// Check if the ray intersects with this SceneNode.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		// @param ray Raycast.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPick(SceneGraphManager *scenePtr, const RayCast &ray);
+		virtual bool VPick(const RayCast &ray);
 	};
 }
 

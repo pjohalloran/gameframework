@@ -63,7 +63,6 @@ namespace GameHalloran
 			return (false);
 		}
 
-		ObjectGroupMap::size_type size = m_objectMap.size();
 		if(m_objectMap.empty())
 		{
             GF_LOG_TRACE_INF("BaseModelFileLoader::VGetTriangleList()", "No models were loaded from the file");
@@ -207,7 +206,7 @@ namespace GameHalloran
 
 				if(!(*i)->GetVertex(Triangle::VertexId(index), vertexObjArr[index]))
 				{
-					I32 balls = 0;
+					//I32 balls = 0;
 				}
 				memcpy(vArr[index], vertexObjArr[index].GetPosition().GetComponentsConst(), sizeof(VertexArr));
 				if(vertexObjArr[index].HasNormal())

@@ -346,7 +346,7 @@ namespace GameHalloran
 		boost::shared_ptr<GLTriangleBatch> batchPtr = GameHalloran::LoadBatchFromResourceCache(std::string(m_meshName), &objLoader, loadProgressObj, bb);
 
 		// Create the appropriate scene node for the actor.
-		boost::shared_ptr<CommonBatchSceneNode> generalNode(GCC_NEW CommonBatchSceneNode(VGetId(),\
+		boost::shared_ptr<CommonBatchSceneNode> generalNode(GCC_NEW CommonBatchSceneNode(NULL, VGetId(),\
 																		std::string(""),\
 																		RenderPassStatic,\
 																		GetMaterial(),\
@@ -549,7 +549,7 @@ namespace GameHalloran
 		GameHalloran::BuildTranslationMatrix4(mat, pos.GetX(), pos.GetY(), pos.GetZ());
 
 		// Create the appropriate scene node for the ball.
-		boost::shared_ptr<BallSceneNode> ballNode(GCC_NEW BallSceneNode(VGetId(),\
+		boost::shared_ptr<BallSceneNode> ballNode(GCC_NEW BallSceneNode(NULL, VGetId(),\
 																		GetMaterial(),\
 																		mat,\
 																		std::string(GetTextureName()),\
@@ -1160,7 +1160,7 @@ namespace GameHalloran
 		GameHalloran::BuildTranslationMatrix4(mat, pos.GetX(), pos.GetY(), pos.GetZ());
 
 		// Create the appropriate scene node for the object.
-		boost::shared_ptr<TableSceneNode> tableNode(GCC_NEW TableSceneNode(VGetId(),\
+		boost::shared_ptr<TableSceneNode> tableNode(GCC_NEW TableSceneNode(NULL, VGetId(),\
 																			GetMaterial(),\
 																			mat,\
 																			std::string(GetTextureName()),\
@@ -1322,7 +1322,7 @@ namespace GameHalloran
 		GameHalloran::BuildTranslationMatrix4(mat, pos.GetX(), pos.GetY(), pos.GetZ());
 
 		// Create the appropriate scene node for the object.
-		boost::shared_ptr<CueSceneNode> cueNode(GCC_NEW CueSceneNode(VGetId(),\
+		boost::shared_ptr<CueSceneNode> cueNode(GCC_NEW CueSceneNode(NULL, VGetId(),\
 																		GetMaterial(),\
 																		mat,\
 																		std::string(GetTextureName()),\

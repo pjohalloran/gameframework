@@ -49,13 +49,15 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	BallSceneNode::BallSceneNode(const boost::optional<ActorId> actorId,\
+	BallSceneNode::BallSceneNode(SceneGraphManager *sgPtr,\
+                                    const boost::optional<ActorId> actorId,\
 									const Material &material,\
 									const Matrix4 &toWorld,\
 									const std::string &textureName,\
 									const std::string &shaderNameRef,\
 									BallActorParams &param) throw (GameException &)\
-									: CommonBatchSceneNode(actorId,\
+									: CommonBatchSceneNode(sgPtr,\
+                                                            actorId,\
 															std::string("PoolBall"),\
 															RenderPassActor,\
 															material,\
@@ -75,14 +77,16 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	BallSceneNode::BallSceneNode(const boost::optional<ActorId> actorId,\
+	BallSceneNode::BallSceneNode(SceneGraphManager *sgPtr,\
+                                    const boost::optional<ActorId> actorId,\
 									const Material &material,\
 									const Matrix4 &toWorld,\
 									const Matrix4 &fromWorld,\
 									const std::string &textureName,\
 									const std::string &shaderNameRef,\
 									BallActorParams &param) throw (GameException &)\
-									: CommonBatchSceneNode(actorId,\
+									: CommonBatchSceneNode(sgPtr,\
+                                                            actorId,\
 															std::string("PoolBall"),\
 															RenderPassActor,\
 															material,\
@@ -104,14 +108,16 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	BallSceneNode::BallSceneNode(const boost::optional<ActorId> actorId,\
+	BallSceneNode::BallSceneNode(SceneGraphManager *sgPtr,\
+                                    const boost::optional<ActorId> actorId,\
 									const Material &material,\
 									const Matrix4 &toWorld,\
 									const std::string &textureName,\
 									const std::string &shaderNameRef,\
 									BallActorParams &param,\
 									boost::shared_ptr<IGLBatchBase> actorMesh) throw (GameException &)\
-									: CommonBatchSceneNode(actorId,\
+									: CommonBatchSceneNode(sgPtr,\
+                                                            actorId,\
 															std::string("PoolBall"),\
 															RenderPassActor,\
 															material,\
@@ -139,36 +145,12 @@ namespace GameHalloran
 		catch(...) {}
 	}
 
-	//// /////////////////////////////////////////////////////////////////
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//bool BallSceneNode::VPreRender(SceneGraphManager *scenePtr)
-	//{
-	//	return (CommonBatchSceneNode::VPreRender(scenePtr));
-	//}
-
-	//// /////////////////////////////////////////////////////////////////
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//bool BallSceneNode::VRender(SceneGraphManager *scenePtr)
-	//{
-	//	return (CommonBatchSceneNode::VRender(scenePtr));
-	//}
-
-	//// /////////////////////////////////////////////////////////////////
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//bool BallSceneNode::VPostRender(SceneGraphManager *scenePtr)
-	//{
-	//	return (CommonBatchSceneNode::VPostRender(scenePtr));
-	//}
-
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool BallSceneNode::VOnRestore(SceneGraphManager *scenePtr)
+	bool BallSceneNode::VOnRestore()
 	{
-		bool result = CommonBatchSceneNode::VOnRestore(scenePtr);
+		bool result = CommonBatchSceneNode::VOnRestore();
 		
 		// Actor parameters may have changed so we regenerate the sphere geometry now.
 		//  This is to handle the UpdateActorParams events that may be recevied from lua
@@ -178,9 +160,7 @@ namespace GameHalloran
 			CommonBatchSceneNode::SetBatch(CreateBallMeshFromParams(m_param));
 			result = CommonBatchSceneNode::IsBatchValid();
 			if(result)
-			{
 				SceneNode::SetRadius(m_param.GetRadius());
-			}
 		}
 
 		return (result);
@@ -189,18 +169,18 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool BallSceneNode::VOnLostDevice(SceneGraphManager *scenePtr)
+	bool BallSceneNode::VOnLostDevice()
 	{
-		return (CommonBatchSceneNode::VOnLostDevice(scenePtr));
+		return (CommonBatchSceneNode::VOnLostDevice());
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool BallSceneNode::VPick(SceneGraphManager *scenePtr, const RayCast &ray)
+	bool BallSceneNode::VPick(const RayCast &ray)
 	{
 		bool result = false;
-		result = SceneNode::VPick(scenePtr, ray);
+		result = SceneNode::VPick(ray);
 
 		if(!result)
 		{
@@ -311,14 +291,14 @@ namespace GameHalloran
 
 			// Create and add FrontPanel child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, 0.0f, tableHHalf, tableDHalf + halfFpDepth - padding);
-			boost::shared_ptr<ISceneNode> frontPanel(GCC_NEW CommonBatchSceneNode(nullId, std::string("FrontPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), frontPanelBatch));
+			boost::shared_ptr<ISceneNode> frontPanel(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("FrontPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), frontPanelBatch));
 			SceneNode::VAddChild(frontPanel);
 
 			// Create and add BackPanel child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, 0.0f, tableHHalf, -tableDHalf - halfFpDepth + padding);
 			GameHalloran::BuildRotationYMatrix4(rotMatrix, 180.0f);
 			childTransMat *= rotMatrix;
-			boost::shared_ptr<ISceneNode> backPanel(GCC_NEW CommonBatchSceneNode(nullId, std::string("BackPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), frontPanelBatch));
+			boost::shared_ptr<ISceneNode> backPanel(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("BackPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), frontPanelBatch));
 			SceneNode::VAddChild(backPanel);
 		}
 
@@ -329,12 +309,12 @@ namespace GameHalloran
 
 			// Create and add Front Left SidePanel child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, -tableWHalf - spHalfW + padding, tableHHalf, spHalfD + mpDepth);
-			boost::shared_ptr<ISceneNode> frontLeftPanel(GCC_NEW CommonBatchSceneNode(nullId, std::string("FrontLeftPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), sidePanelBatch));
+			boost::shared_ptr<ISceneNode> frontLeftPanel(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("FrontLeftPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), sidePanelBatch));
 			SceneNode::VAddChild(frontLeftPanel);
 
 			// Create and add Back Left SidePanel child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, -tableWHalf - spHalfW + padding, tableHHalf, -spHalfD - mpDepth);
-			boost::shared_ptr<ISceneNode> backLeftPanel(GCC_NEW CommonBatchSceneNode(nullId, std::string("BackLeftPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), sidePanelBatch));
+			boost::shared_ptr<ISceneNode> backLeftPanel(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("BackLeftPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), sidePanelBatch));
 			SceneNode::VAddChild(backLeftPanel);
 
 			GameHalloran::BuildRotationYMatrix4(rotMatrix, 180.0f);
@@ -342,13 +322,13 @@ namespace GameHalloran
 			// Create and add Bottom Right SidePanel child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, tableWHalf + spHalfW - padding, tableHHalf, spHalfD + mpDepth);
 			childTransMat *= rotMatrix;
-			boost::shared_ptr<ISceneNode> frontRightPanel(GCC_NEW CommonBatchSceneNode(nullId, std::string("FrontRightPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), sidePanelBatch));
+			boost::shared_ptr<ISceneNode> frontRightPanel(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("FrontRightPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), sidePanelBatch));
 			SceneNode::VAddChild(frontRightPanel);
 
 			// Create and add Top Right SidePanel child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, tableWHalf + spHalfW - padding, tableHHalf, -spHalfD - mpDepth);
 			childTransMat *= rotMatrix;
-			boost::shared_ptr<ISceneNode> backRightPanel(GCC_NEW CommonBatchSceneNode(nullId, std::string("BackRightPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), sidePanelBatch));
+			boost::shared_ptr<ISceneNode> backRightPanel(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("BackRightPanel"), RenderPassStatic, m_param.GetTablePanelMaterial(), childTransMat, m_param.GetPanelTextureName(), m_param.GetShaderName(), sidePanelBatch));
 			SceneNode::VAddChild(backRightPanel);
 		}
 
@@ -422,14 +402,14 @@ namespace GameHalloran
 
 			// Create and add Left middle pocket child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, -tableWHalf + pocketRadius - diff + padding, -mpHalfH + tbb.GetHeight(), 0.0f);
-			boost::shared_ptr<ISceneNode> middleLeftPocket(GCC_NEW CommonBatchSceneNode(nullId, std::string("MiddleLeftPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), middlePocketBatch));
+			boost::shared_ptr<ISceneNode> middleLeftPocket(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("MiddleLeftPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), middlePocketBatch));
 			SceneNode::VAddChild(middleLeftPocket);
 
 			// Create and add Right middle pocket child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, tableWHalf - pocketRadius + diff - padding, -mpHalfH + tbb.GetHeight(), 0.0f);
 			GameHalloran::BuildRotationYMatrix4(rotMatrix, 180.0f);
 			childTransMat *= rotMatrix;
-			boost::shared_ptr<ISceneNode> middleRightPocket(GCC_NEW CommonBatchSceneNode(nullId, std::string("MiddleRightPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), middlePocketBatch));
+			boost::shared_ptr<ISceneNode> middleRightPocket(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("MiddleRightPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), middlePocketBatch));
 			SceneNode::VAddChild(middleRightPocket);
 		}
 
@@ -443,28 +423,28 @@ namespace GameHalloran
 
 			// Create and add bottom Left pocket child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, -tableWHalf + cpHalfW - diff + padding, -cpHalfH + tbb.GetHeight(), tableDHalf - cpHalfD + diff);
-			boost::shared_ptr<ISceneNode> bottomLeftPocket(GCC_NEW CommonBatchSceneNode(nullId, std::string("BottomLeftPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), cornerPocketBatch));
+			boost::shared_ptr<ISceneNode> bottomLeftPocket(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("BottomLeftPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), cornerPocketBatch));
 			SceneNode::VAddChild(bottomLeftPocket);
 
 			// Create and add top Left pocket child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, -tableWHalf + cpHalfW - diff + padding, -cpHalfH + tbb.GetHeight(), -tableDHalf + cpHalfD - diff);
 			GameHalloran::BuildRotationYMatrix4(rotMatrix, -90.0f);
 			childTransMat *= rotMatrix;
-			boost::shared_ptr<ISceneNode> topLeftPocket(GCC_NEW CommonBatchSceneNode(nullId, std::string("TopLeftPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), cornerPocketBatch));
+			boost::shared_ptr<ISceneNode> topLeftPocket(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("TopLeftPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), cornerPocketBatch));
 			SceneNode::VAddChild(topLeftPocket);
 
 			// Create and add bottom Right pocket child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, tableWHalf - cpHalfW + diff - padding, -cpHalfH + tbb.GetHeight(), tableDHalf - cpHalfD + diff);
 			GameHalloran::BuildRotationYMatrix4(rotMatrix, -270.0f);
 			childTransMat *= rotMatrix;
-			boost::shared_ptr<ISceneNode> bottomRightPocket(GCC_NEW CommonBatchSceneNode(nullId, std::string("BottomRightPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), cornerPocketBatch));
+			boost::shared_ptr<ISceneNode> bottomRightPocket(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("BottomRightPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), cornerPocketBatch));
 			SceneNode::VAddChild(bottomRightPocket);
 
 			// Create and add top Right pocket child SN.
 			GameHalloran::BuildTranslationMatrix4(childTransMat, tableWHalf - cpHalfW + diff - padding, -cpHalfH + tbb.GetHeight(), -tableDHalf + cpHalfD - diff);
 			GameHalloran::BuildRotationYMatrix4(rotMatrix, -180.0f);
 			childTransMat *= rotMatrix;
-			boost::shared_ptr<ISceneNode> topRightPocket(GCC_NEW CommonBatchSceneNode(nullId, std::string("TopRightPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), cornerPocketBatch));
+			boost::shared_ptr<ISceneNode> topRightPocket(GCC_NEW CommonBatchSceneNode(m_sgmPtr, nullId, std::string("TopRightPocket"), RenderPassStatic, m_param.GetTablePocketMaterial(), childTransMat, m_param.GetPocketTextureName(), m_param.GetShaderName(), cornerPocketBatch));
 			SceneNode::VAddChild(topRightPocket);
 		}
 
@@ -474,8 +454,9 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	TableSceneNode::TableSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, TableActorParams &param)\
-		throw (GameException &) : CommonBatchSceneNode(actorId,\
+	TableSceneNode::TableSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, TableActorParams &param)\
+		throw (GameException &) : CommonBatchSceneNode(sgPtr,\
+                                                        actorId,\
 														std::string("PoolTable"),\
 														RenderPassStatic,\
 														material,\
@@ -490,8 +471,9 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	TableSceneNode::TableSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, TableActorParams &param)\
-		throw (GameException &) : CommonBatchSceneNode(actorId,\
+	TableSceneNode::TableSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, TableActorParams &param)\
+		throw (GameException &) : CommonBatchSceneNode(sgPtr,\
+                                                        actorId,\
 														std::string("PoolTable"),\
 														RenderPassStatic,\
 														material,\
@@ -512,51 +494,20 @@ namespace GameHalloran
 		
 	}
 
-	//// /////////////////////////////////////////////////////////////////
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//bool TableSceneNode::VPreRender(SceneGraphManager *scenePtr)
-	//{
-	//	return (CommonBatchSceneNode::VPreRender(scenePtr));
-	//}
-
-	//// /////////////////////////////////////////////////////////////////
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//bool TableSceneNode::VRender(SceneGraphManager *scenePtr)
-	//{
-	//	return (CommonBatchSceneNode::VRender(scenePtr));
-	//}
-
-	//// /////////////////////////////////////////////////////////////////
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//bool TableSceneNode::VPostRender(SceneGraphManager *scenePtr)
-	//{
-	//	return (CommonBatchSceneNode::VPostRender(scenePtr));
-	//}
-
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool TableSceneNode::VRenderChildren(SceneGraphManager *scenePtr)
+	bool TableSceneNode::VRenderChildren()
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("TableSceneNode::VRenderChildren()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		bool result = true;
 
 		// Render table and all children if table is visible.
-		if (VIsVisible(scenePtr))
+		if (VIsVisible())
 		{
 			for(SceneNodeList::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i)
 			{
-				SceneNode::RenderSceneNode(scenePtr, (*i).get());
-				result = (*i)->VRenderChildren(scenePtr);
+				SceneNode::RenderSceneNode((*i).get());
+				result = (*i)->VRenderChildren();
 			}
 		}
 
@@ -566,9 +517,9 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool TableSceneNode::VOnRestore(SceneGraphManager *scenePtr)
+	bool TableSceneNode::VOnRestore()
 	{
-		bool result = CommonBatchSceneNode::VOnRestore(scenePtr);
+		bool result = CommonBatchSceneNode::VOnRestore();
 		
 		if(result)
 		{
@@ -589,18 +540,18 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool TableSceneNode::VOnLostDevice(SceneGraphManager *scenePtr)
+	bool TableSceneNode::VOnLostDevice()
 	{
-		return (CommonBatchSceneNode::VOnLostDevice(scenePtr));
+		return (CommonBatchSceneNode::VOnLostDevice());
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool TableSceneNode::VPick(SceneGraphManager *scenePtr, const RayCast &ray)
+	bool TableSceneNode::VPick(const RayCast &ray)
 	{
 		bool result = false;
-		result = SceneNode::VPick(scenePtr, ray);
+		result = SceneNode::VPick(ray);
 
 		if(!result)
 		{
@@ -648,8 +599,9 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	CueSceneNode::CueSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, CueActorParams &param)\
-		throw (GameException &) : CommonBatchSceneNode(actorId,\
+	CueSceneNode::CueSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, CueActorParams &param)\
+		throw (GameException &) : CommonBatchSceneNode(sgPtr,\
+                                                        actorId,\
 														std::string("PoolCue"),\
 														RenderPassActor,\
 														material,\
@@ -665,8 +617,9 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	CueSceneNode::CueSceneNode(const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, CueActorParams &param)\
-		throw (GameException &) : CommonBatchSceneNode(actorId,\
+	CueSceneNode::CueSceneNode(SceneGraphManager *sgPtr, const boost::optional<ActorId> actorId, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, CueActorParams &param)\
+		throw (GameException &) : CommonBatchSceneNode(sgPtr,\
+                                                        actorId,\
 														std::string("PoolCue"),\
 														RenderPassActor,\
 														material,\
@@ -687,36 +640,12 @@ namespace GameHalloran
 
 	}
 
-	//// /////////////////////////////////////////////////////////////////
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//bool CueSceneNode::VPreRender(SceneGraphManager *scenePtr)
-	//{
-	//	return (CommonBatchSceneNode::VPreRender(scenePtr));
-	//}
-
-	//// /////////////////////////////////////////////////////////////////
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//bool CueSceneNode::VRender(SceneGraphManager *scenePtr)
-	//{
-	//	return (CommonBatchSceneNode::VRender(scenePtr));
-	//}
-
-	//// /////////////////////////////////////////////////////////////////
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//bool CueSceneNode::VPostRender(SceneGraphManager *scenePtr)
-	//{
-	//	return (CommonBatchSceneNode::VPostRender(scenePtr));
-	//}
-
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool CueSceneNode::VOnRestore(SceneGraphManager *scenePtr)
+	bool CueSceneNode::VOnRestore()
 	{
-		bool result = CommonBatchSceneNode::VOnRestore(scenePtr);
+		bool result = CommonBatchSceneNode::VOnRestore();
 		
 		// Actor parameters may have changed so we regenerate the cue geometry now.
 		//  This is to handle the UpdateActorParams events that may be recevied from lua
@@ -739,18 +668,18 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool CueSceneNode::VOnLostDevice(SceneGraphManager *scenePtr)
+	bool CueSceneNode::VOnLostDevice()
 	{
-		return (CommonBatchSceneNode::VOnLostDevice(scenePtr));
+		return (CommonBatchSceneNode::VOnLostDevice());
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool CueSceneNode::VPick(SceneGraphManager *scenePtr, const RayCast &ray)
+	bool CueSceneNode::VPick(const RayCast &ray)
 	{
 		bool result = false;
-		result = SceneNode::VPick(scenePtr, ray);
+		result = SceneNode::VPick(ray);
 
 		if(!result)
 		{

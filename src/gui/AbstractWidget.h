@@ -118,14 +118,15 @@ namespace GameHalloran
 		boost::shared_ptr<ModelViewProjStackManager> m_mvpStackManagerPtr;		///< Pointer to the global MVP stack manager.
 		const boost::shared_ptr<GLSLShader> m_texShaderProg;					///< The GLSL shader program used to render textured widgets.
 		const boost::shared_ptr<GLSLShader> m_flatShaderProg;					///< The GLSL shader program used to render non textured widgets.
-		GLint m_projLoc;														///< Location of Proj matrix in shader.
-		GLint m_colorLoc;														///< Location of color vector in shader.
-		GLint m_samplerLoc;														///< Location of texture sampler in shader.
-		GLint m_alphaLoc;														///< Location of alpha value in shader.
 		Matrix4 m_projMatrix;													///< Proj matrix set just as the widget is to be rendered.
 		BoundingCube m_bb;														///< Bounding box.
 		TexHandle m_currentTextureHandle;										///< ID of the current texture handle to render.
 
+        ShaderUniformSPtr m_colorMapUniform;                                    ///< 
+        ShaderUniformSPtr m_alphaUniform;                                       ///< 
+        ShaderUniformSPtr m_projUniform;                                        ///< 
+        ShaderUniformSPtr m_colorUniform;                                       ///< 
+        
 		// /////////////////////////////////////////////////////////////////
 		// Set the current texture to render.
 		//

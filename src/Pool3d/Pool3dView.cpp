@@ -225,7 +225,7 @@ namespace GameHalloran
 				GameHalloran::BuildTranslationMatrix4(mat, pos.GetX(), pos.GetY(), pos.GetZ());
 
 				// Create the appropriate scene node for the ball.
-				actorNode.reset(GCC_NEW BallSceneNode(ballParams->VGetId(),\
+				actorNode.reset(GCC_NEW BallSceneNode(&m_viewPtr->m_sgm, ballParams->VGetId(),\
 														ballMaterial,\
 														mat,\
 														std::string(ballParams->GetTextureName()),\
@@ -363,7 +363,7 @@ namespace GameHalloran
 			}
 
 			// Reinitialize the actors node.
-			if(!actorSceneNodePtr || !actorSceneNodePtr->VOnRestore(&(m_viewPtr->m_sgm)))
+			if(!actorSceneNodePtr || !actorSceneNodePtr->VOnRestore())
 			{
 				std::string idStr;
 				try { idStr = boost::lexical_cast<std::string, ActorId>(eventData.GetActorId()); } catch(...) {}
@@ -823,7 +823,7 @@ namespace GameHalloran
 		safeAddListener(m_listenerPtr, EvtData_Sound_Config_Change::sk_EventType);
 
 		// Create the special camera scene node and add it to the SGM.
-		m_cameraNode.reset(GCC_NEW CameraSceneNode(m_viewFrustrumPtr));
+		m_cameraNode.reset(GCC_NEW CameraSceneNode(&m_sgm, m_viewFrustrumPtr));
 		m_sgm.SetCamera(m_cameraNode);
 
 #ifdef _DEBUG
@@ -858,7 +858,7 @@ namespace GameHalloran
 		cubeMapTextureVec.push_back(std::string("textures") + ZipFile::ZIP_PATH_SEPERATOR + std::string("clouds.tga"));
 		cubeMapTextureVec.push_back(std::string("textures") + ZipFile::ZIP_PATH_SEPERATOR + std::string("clouds.tga"));
 		cubeMapTextureVec.push_back(std::string("textures") + ZipFile::ZIP_PATH_SEPERATOR + std::string("clouds.tga"));
-		m_skyboxNodePtr.reset(GCC_NEW EnvironmentSceneNode(boost::optional<ActorId>(), g_identityMat, cubeMapTextureVec, std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("EnvironmentBox"), 25.0f));
+		m_skyboxNodePtr.reset(GCC_NEW EnvironmentSceneNode(&m_sgm, boost::optional<ActorId>(), g_identityMat, cubeMapTextureVec, std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("EnvironmentBox"), 25.0f));
 		m_sgm.AddChild(m_skyboxNodePtr);
 
 		if(!CreatePoolBallMesh())
@@ -950,7 +950,7 @@ namespace GameHalloran
 			m_modelViewStackPtr->PushMatrix();
 			{
 				// Place and point the camera in the scene.
-				m_cameraNode->VSetViewTransform(&m_sgm);
+				m_cameraNode->VSetViewTransform();
 
 				if(IsDrawModeOn(eScene))
 				{
@@ -959,7 +959,7 @@ namespace GameHalloran
 				}
 				if(IsDrawModeOn(eCulling))
 				{
-					m_cameraNode->VRender(&m_sgm);
+					m_cameraNode->VRender();
 					GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
 				}
 				if(!IsDrawModeOn(ePhysics))
@@ -967,7 +967,6 @@ namespace GameHalloran
 					g_appPtr->GetLogicPtr()->VRenderDiagnostics();
 					GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
 				}
-
 
 				//// TEST CODE FOR FTGL TEXTURE FONT
 				//glEnable(GL_TEXTURE_2D);

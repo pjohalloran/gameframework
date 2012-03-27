@@ -14,9 +14,9 @@
 uniform vec4 colorVec;
 
 // Output fragment color
-out vec4 fragmentColorVec;
+out vec4 fragmentColor;
 
 void main(void)
 {
-   fragmentColorVec = colorVec;
+   fragmentColor = colorVec;
 }

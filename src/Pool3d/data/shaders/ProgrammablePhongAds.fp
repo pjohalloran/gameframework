@@ -103,6 +103,8 @@ uniform vec4 u_globalAmbient;								// Global ambient illumination in the scene
 uniform sampler2D u_texture2dMap;							// The texture map sampler.
 // /////////////////////////////////////////////////////////////////
 
+uniform vec4 u_cameraPos;
+
 // /////////////////////////////////////////////////////////////////
 
 
@@ -247,8 +249,8 @@ vec3 GetAmbientTerm(vec4 lightAmbientColor)
 vec3 GetDiffuseTerm(vec4 lightDiffuseColor, vec3 dirToLight, vec3 vertexCameraNormal)
 {
     return (vec3(0.0));
-	//float dotProduct = max(dot(vertexCameraNormal, dirToLight), 0.0);
-    float dotProduct = dot(vertexCameraNormal, dirToLight);
+	float dotProduct = min(dot(vertexCameraNormal, dirToLight), 0.0);
+    //float dotProduct = dot(vertexCameraNormal, dirToLight);
 	return (dotProduct * lightDiffuseColor.rgb * u_materialD.rgb);
 }
 
@@ -271,6 +273,10 @@ vec3 GetSpecularTermGlBlue(vec4 lightSpecularColor, vec3 dirFromLight, vec3 vert
 {
 	vec3 reflectedLightVec = reflect(dirFromLight, vertexCameraNormal);
 	float dotProduct = min(dot(vertexCameraNormal, reflectedLightVec), 0.0);
+//    if(dotProduct == 0.0)
+//    {
+//        return (vec3(0.0, 0.0, 0.0));
+//    }
 	if(FloatCmp(dotProduct, 0.0, 0.000001))
 	{
 		return (vec3(0.0));
@@ -304,10 +310,10 @@ vec3 GetSpecularTermGlRed(vec4 lightSpecularColor, vec3 dirToLight, vec3 cameraP
 
 	vec3 s = normalize(dirToLight + normalize(cameraPosition - vertexCameraPos));
 	float dotProduct = max(dot(s, vertexCameraPos), 0.0);
-	if(FloatCmp(dotProduct, 0.0, 0.000001))
-	{
-		return (vec3(0.0));
-	}
+//	if(FloatCmp(dotProduct, 0.0, 0.000001))
+//	{
+//		return (vec3(0.0));
+//	}
 	
 	float spec = pow(dotProduct, u_materialExp);
 	
@@ -338,11 +344,11 @@ void main(void)
 	float spotTermArr[MAX_NUMBER_LIGHTS];		// Spotlight factor array (calculated once during primary loop and used again in secondary loop).
 
 	// Apply first two light independant terms.
-    	primaryColor.rgb = u_materialE.rgb + GetScaledGlobalAmbientLight();
+    primaryColor.rgb = u_materialE.rgb + GetScaledGlobalAmbientLight();
 
-    	// For each light in the scene, Apply the ambient and diffuse terms scaled by the attenuation and spotlight factors.
-    	for(int i = 0; i < numberLights; ++i)
-    	{
+    // For each light in the scene, Apply the ambient and diffuse terms scaled by the attenuation and spotlight factors.
+    for(int i = 0; i < numberLights; ++i)
+    {
 		attTermArr[i] = GetAttenuationFactor(u_lightTypesArr[i], u_lightPositionArr[i], vp_flatVertexPosition, u_cAttArr[i], u_lAttArr[i], u_qAttArr[i]);
 		spotTermArr[i] = GetSpotlightEffect(u_lightTypesArr[i], normalize(-vp_varyingLightDirArr[i]), u_spotlightDirection[i], u_spotlightCutoffArr[i], u_spotlightExpArr[i]);
 		vec3 ambientTerm = GetAmbientTerm(u_lightAmbientArr[i]);
@@ -362,12 +368,14 @@ void main(void)
     /*for(int i = 0; i < numberLights; ++i)
     {
 		vec3 specularTerm = GetSpecularTermGlBlue(u_lightSpecularArr[i], normalize(-vp_varyingLightDirArr[i]), normalize(vp_varyingNormalVec));
+        //vec3 specularTerm = GetSpecularTermGlRed(u_lightSpecularArr[i], normalize(vp_varyingLightDirArr[i]), u_cameraPos, vp_flatVertexPosition);
 		secondaryColor += (attTermArr[i] * spotTermArr[i]) * specularTerm;
 	}*/
 
 
 	// Final fragment color is the primary color (which is combined with the tex color) + the secondary color.
 	fp_colorVec.rgb = primaryColor.rgb + secondaryColor;
+
 
 	// Ensure the final alpha value for the fragment is equal to the Materials diffuse alpha.
 	// TODO: What about the textures alpha component??

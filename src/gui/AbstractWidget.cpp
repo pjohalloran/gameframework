@@ -120,45 +120,31 @@ namespace GameHalloran
 	{
 		m_applyTexture = !textureNameRef.empty();
 		if(!m_applyTexture && !m_flatShaderProg)
-		{
 			throw GameException(std::string("Flat Shader object passed to widget is NULL"));
-		}
 		else if(m_applyTexture && !m_texShaderProg)
-		{
 			throw GameException(std::string("Texture Shader object passed to widget is NULL"));
-		}
 
 		// Get the shader uniform locations here for use later...
 		if(m_flatShaderProg)
 		{
-			m_projLoc = m_flatShaderProg->GetUniformLocation("mvpMatrix");
-			if(m_projLoc == -1)
-			{
-                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the mvpMatrix position");
-			}
-			m_colorLoc = m_flatShaderProg->GetUniformLocation("colorVec");
-			if(m_colorLoc == -1)
-			{
-                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the colorVec position");
-			}
+            m_projUniform = m_flatShaderProg->GetUniform("mvpMatrix");
+            m_colorUniform = m_flatShaderProg->GetUniform("colorVec");
+			if(m_projUniform == NULL)
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the mvpMatrix uniform");
+			if(m_colorUniform == NULL)
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the colorVec uniform");
 		}
 		if(m_texShaderProg)
 		{
-			m_projLoc = m_texShaderProg->GetUniformLocation("projMatrix");
-			if(m_projLoc == -1)
-			{
-                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the projMatrix position");
-			}
-			m_samplerLoc = m_texShaderProg->GetUniformLocation("colorMap");
-			if(m_samplerLoc == -1)
-			{
-                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the colorMap position");
-			}
-			m_alphaLoc = m_texShaderProg->GetUniformLocation("uiAlpha");
-			if(m_alphaLoc == -1)
-			{
-                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the uiAlpha position");
-			}
+			m_projUniform = m_texShaderProg->GetUniform("projMatrix");
+            m_alphaUniform = m_texShaderProg->GetUniform("uiAlpha");
+			m_colorMapUniform = m_texShaderProg->GetUniform("colorMap");
+			if(m_projUniform == NULL)
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the projMatrix uniform");
+			if(m_colorMapUniform == NULL)
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the colorMap uniform");
+			if(m_alphaUniform == NULL)
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to find the uiAlpha uniform");
 		}
 
 		m_bb.SetMin(Point3(m_position.GetX(), m_position.GetY() - m_height, 0.0f));
@@ -313,7 +299,7 @@ namespace GameHalloran
 									const ScreenElementId id) throw (GameException &)\
 		: m_position(posRef), m_visible(visible), m_color(colorRef), m_id(id), m_width(width), m_height(height), m_applyTexture(false),\
 			m_vaoId(0), m_vboId(0), m_tHandle(0), m_mvpStackManagerPtr(mvpStackManPtr), m_texShaderProg(shaderTexObj), m_flatShaderProg(shaderFlatObj),\
-				m_projLoc(-1), m_colorLoc(-1), m_samplerLoc(-1), m_alphaLoc(-1), m_projMatrix(), m_bb(), m_currentTextureHandle(0)
+                m_projMatrix(), m_bb(), m_currentTextureHandle(0), m_colorMapUniform(), m_alphaUniform(), m_projUniform(), m_colorUniform()
 	{
 		if(m_width < 0.0f)
 		{
@@ -326,7 +312,7 @@ namespace GameHalloran
 
 		Init(textureNameRef);
 	}
-
+    
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
@@ -336,8 +322,7 @@ namespace GameHalloran
 									const boost::shared_ptr<GLSLShader> shaderTexObj,\
 									const ScreenElementId id) throw (GameException &)\
 		: m_position(), m_visible(true), m_color(), m_id(id), m_width(0.0f), m_height(0.0f), m_applyTexture(false),	m_vaoId(0), m_vboId(0), m_tHandle(0),\
-			m_mvpStackManagerPtr(mvpStackManPtr), m_texShaderProg(shaderTexObj), m_flatShaderProg(shaderFlatObj), m_projLoc(-1), m_colorLoc(-1), m_samplerLoc(-1),\
-				m_alphaLoc(-1), m_projMatrix(), m_bb(), m_currentTextureHandle(0)
+			m_mvpStackManagerPtr(mvpStackManPtr), m_texShaderProg(shaderTexObj), m_flatShaderProg(shaderFlatObj), m_projMatrix(), m_bb(), m_currentTextureHandle(0), m_colorMapUniform(), m_alphaUniform(), m_projUniform(), m_colorUniform()
 	{
 		if(!widgetScriptData.IsTable())
 		{
@@ -424,19 +409,15 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool AbstractWidget::PreRenderTexturedWidget()
 	{
-        m_texShaderProg->SetUniform("colorMap", 0, true);
-        m_texShaderProg->SetUniform("uiAlpha", m_color.GetW());
-        m_texShaderProg->SetUniform("projMatrix", m_projMatrix);
+        m_colorMapUniform->SetValue(0);
+        m_projUniform->SetValue((GLfloat * const)m_projMatrix.GetComponentsConst(), 16);
+        m_alphaUniform->SetValue(m_color.GetW());
         
 		if(!m_texShaderProg->Activate())
 		{
             GF_LOG_TRACE_ERR("AbstractWidget::PreRenderTexturedWidget()", "Failed to activate the shader");
 			return (false);
 		}
-        
-//		glUniform1i(m_samplerLoc, 0);
-//		glUniform1f(m_alphaLoc, m_color.GetW());
-//		glUniformMatrix4fv(m_projLoc, 1, GL_FALSE, m_projMatrix.GetComponentsConst());
 
 		g_appPtr->GetTextureManagerPtr()->Bind(m_currentTextureHandle, GL_TEXTURE_2D);
 
@@ -453,16 +434,13 @@ namespace GameHalloran
             GF_LOG_TRACE_ERR("AbstractWidget::PreRenderFlatWidget()", "Failed to activate the shader");
 			return (false);
 		}
-
-		glUniformMatrix4fv(m_projLoc, 1, GL_FALSE, m_projMatrix.GetComponentsConst());
+        
+        m_projUniform->SetValue((GLfloat * const)m_projMatrix.GetComponentsConst(), 16);
 		if(!opColor.is_initialized())
-		{
-			glUniform4fv(m_colorLoc, 1, m_color.GetComponentsConst());
-		}
+            m_colorUniform->SetValue((GLfloat * const)m_color.GetComponentsConst(), 4);
 		else
-		{
-			glUniform4fv(m_colorLoc, 1, (*opColor).GetComponentsConst());
-		}
+            m_colorUniform->SetValue((GLfloat * const)(*opColor).GetComponentsConst(), 4);
+        
 		return (true);
 	}
 

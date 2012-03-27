@@ -70,8 +70,7 @@
 namespace GameHalloran
 {
 
-	//// Forward declaraction.
-	//class SceneGraphManager;
+	class SceneGraphManager;
 
 	// /////////////////////////////////////////////////////////////////
 	// @class CameraNode
@@ -93,7 +92,9 @@ namespace GameHalloran
 		boost::shared_ptr<SceneNode> m_target;		///< The target node of the camera.
 		Vector4 m_camOffsetVector;					///< Direction of camera relative to target.
 		//Camera m_camera;
-
+		ShaderUniformSPtr m_mvpUniform;             ///< flat shader uniform locations.
+        ShaderUniformSPtr m_colorUniform;           ///< 
+        
 	public:
 
 		// /////////////////////////////////////////////////////////////////
@@ -102,13 +103,19 @@ namespace GameHalloran
 		// @param frustrum The viewing frustrum.
 		//
 		// /////////////////////////////////////////////////////////////////
-		inline explicit CameraSceneNode(Frustrum *frustrumPtr) : SceneNode(boost::optional<ActorId>(), std::string("Camera"), RenderPassFirst, Material(), GameHalloran::g_identityMat),\
+		inline explicit CameraSceneNode(SceneGraphManager *sgPtr, Frustrum *frustrumPtr) : SceneNode(sgPtr, boost::optional<ActorId>(), std::string("Camera"), RenderPassFirst, Material(), GameHalloran::g_identityMat),\
 			m_frame(), m_updateCameraMatrix(false), m_frustrumPtr(frustrumPtr), m_active(true), m_debugCamera(false), m_target(), m_camOffsetVector(0.0f, 0.0f, -10.0f, 0.0f)
 		{
 			Matrix4 camMat;
 			m_frame.GetCameraMatrix(camMat);
 			VSetTransform(camMat);
 			SetShaderName(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("flat"));
+            
+            if(m_shaderPtr)
+            {
+                m_mvpUniform = m_shaderPtr->GetUniform("mvpMatrix");
+                m_colorUniform = m_shaderPtr->GetUniform("colorVec");
+            }
 		};
 
 		// /////////////////////////////////////////////////////////////////
@@ -120,40 +127,35 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		// Updates the node once per main loop.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		// @param elapsedTime The number of seconds since the last update.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnUpdate(SceneGraphManager *scenePtr, const F32 elapsedTime);
+		virtual bool VOnUpdate(const F32 elapsedTime);
 
 		// /////////////////////////////////////////////////////////////////
 		// Renders node.
 		//
-		// @param scenePtr SceneGraph manager pointer.
-		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VRender(SceneGraphManager *scenePtr);
+		virtual bool VRender();
 
 		// /////////////////////////////////////////////////////////////////
 		// Called when application is restored.
 		//
-		// @param scenePtr SceneGraph manager pointer.
-		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnRestore(SceneGraphManager *scenePtr);
+		virtual bool VOnRestore();
 
 		// /////////////////////////////////////////////////////////////////
 		// Special camera node is always visible.
 		//
 		// /////////////////////////////////////////////////////////////////
-		inline virtual bool VIsVisible(SceneGraphManager *scenePtr) const { return (m_active); };
+		inline virtual bool VIsVisible() const { return (m_active); };
 
 		// /////////////////////////////////////////////////////////////////
 		// Set the ModelView matris stacks top most element to be this cameras
 		// matrix.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VSetViewTransform(SceneGraphManager *scenePtr);
+		virtual bool VSetViewTransform();
 
 		// /////////////////////////////////////////////////////////////////
 		// Get the viewing frustrum.
@@ -217,7 +219,7 @@ namespace GameHalloran
 		// Overridden and disabled for camera node.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VRenderChildren(SceneGraphManager *scenePtr) { return (true); };
+		virtual bool VRenderChildren() { return (true); };
 
 		// /////////////////////////////////////////////////////////////////
 		// Turn on or off rendering the cameras' Frustrum to aid debugging

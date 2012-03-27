@@ -867,7 +867,7 @@ namespace GameHalloran
 					//		topViewHandled = true;
 					//	}
 					//}
-					GameViewList &viewList = m_logicPtr->GetGameViewList();
+					GameViewList viewList = m_logicPtr->GetGameViewList();
 					for(GameViewList::reverse_iterator i = viewList.rbegin(); i != viewList.rend(); ++i)
 					{
 						(*i)->VOnEvent(*curr, elapsedTime);

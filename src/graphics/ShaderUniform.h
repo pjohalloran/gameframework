@@ -53,7 +53,8 @@ namespace GameHalloran
         
         UniformType m_type;                     ///< ...
         GLint m_location;                       ///< Location of the uniform in the shader.
-        U32 m_size;                             ///< Number of elements in the uniform (1, 2, 3, 4, 9 or 16 depending on the type)
+        U32 m_size;                             ///< Number of elements in the uniform (1, 2, 3, 4, 9 or 16 depending on the type).
+        U32 m_arrayCount;                       ///< Number of arrays to copy.
         ICleanableObserver *m_observer;         ///< Pointer to the shader program, the uniform observer.
         bool m_dirty;                           ///< Dirty flag.
         HashedString m_id;                      ///< Uniform name/ID.
@@ -68,8 +69,8 @@ namespace GameHalloran
             if(!m_dirty)
             {
                 m_observer->VNotifyDirty(this);
+                m_dirty = true;
             }
-            m_dirty = true;
         };
         
     public:
@@ -78,7 +79,7 @@ namespace GameHalloran
         // General constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver *observer) : m_type(eInt), m_location(location), m_size(1), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver *observer) : m_type(eInt), m_location(location), m_size(1), m_arrayCount(1), m_observer(observer), m_dirty(true), m_id(name.c_str())
         {
             assert(observer != NULL);
             m_observer->VNotifyDirty(this);
@@ -88,7 +89,7 @@ namespace GameHalloran
         // GLint Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const GLint val) : m_type(eInt), m_location(location), m_size(1), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const GLint val) : m_type(eInt), m_location(location), m_size(1), m_arrayCount(1), m_observer(observer), m_dirty(true), m_id(name.c_str())
         {
             assert(observer != NULL);
             m_value.m_intArr[0] = val;
@@ -99,9 +100,9 @@ namespace GameHalloran
         // GLint [] Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const GLint *arr) : m_type(eIntArr), m_location(location), m_size(size), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const U32 arrCount, const GLint *arr) : m_type(eIntArr), m_location(location), m_size(size), m_arrayCount(arrCount), m_observer(observer), m_dirty(true), m_id(name.c_str())
         {
-            assert(m_size != 0 && m_size <= 4);
+            assert(m_size != 0 && m_size <= 4 && m_arrayCount > 0);
             assert(observer != NULL);
             assert(arr != NULL);
             memcpy(m_value.m_intArr, arr, m_size*sizeof(GLint));
@@ -112,7 +113,7 @@ namespace GameHalloran
         // GLfloat Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const GLfloat val) : m_type(eFloat), m_location(location), m_size(size), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const GLfloat val) : m_type(eFloat), m_location(location), m_size(size), m_arrayCount(1), m_observer(observer), m_dirty(true), m_id(name.c_str())
         {
             assert(m_observer != NULL);
             m_value.m_floatArr[0] = val;
@@ -123,9 +124,9 @@ namespace GameHalloran
         // GLfloat [] Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const GLfloat *arr) : m_type(eFloatArr), m_location(location), m_size(size), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const U32 arrCount, const GLfloat *arr) : m_type(eFloatArr), m_location(location), m_size(size), m_arrayCount(arrCount), m_observer(observer), m_dirty(true), m_id(name.c_str())
         {
-            assert(m_size != 0 && m_size <= 16);
+            assert(m_size != 0 && m_size <= 16 && m_arrayCount > 0);
             assert(observer != NULL);
             assert(arr != NULL);
             memcpy(m_value.m_floatArr, arr, m_size*sizeof(GLfloat));
@@ -178,7 +179,7 @@ namespace GameHalloran
         // Set the value.
         //
         // /////////////////////////////////////////////////////////////////
-        void SetValue(GLint * const arr, const U32 size, const bool forceCopyToGpu = false);
+        void SetValue(GLint * const arr, const U32 size, const U32 arrCount = 1,  const bool forceCopyToGpu = false);
         
         // /////////////////////////////////////////////////////////////////
         // Set the value.
@@ -190,7 +191,7 @@ namespace GameHalloran
         // Set the value.
         //
         // /////////////////////////////////////////////////////////////////
-        void SetValue(GLfloat * const arr, const U32 size, const bool forceCopyToGpu = false);
+        void SetValue(GLfloat * const arr, const U32 size, const U32 arrCount = 1, const bool forceCopyToGpu = false);
         
         // /////////////////////////////////////////////////////////////////
         // Get uniform location.
@@ -210,6 +211,8 @@ namespace GameHalloran
         // /////////////////////////////////////////////////////////////////
         virtual void VClean();
     };
+    
+    typedef boost::shared_ptr<ShaderUniform> ShaderUniformSPtr;
 }
 
 #endif

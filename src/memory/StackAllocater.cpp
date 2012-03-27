@@ -7,7 +7,7 @@
 //
 // ////////////////////////////////////////////////////////////
 
-#ifdef _WINDOWS || WIN32
+#if defined(_WINDOWS) || defined(WIN32)
     #include <malloc.h>
 #else
     #include <cstdlib>

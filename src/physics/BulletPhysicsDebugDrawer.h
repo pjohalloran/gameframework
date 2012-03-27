@@ -51,9 +51,9 @@ namespace GameHalloran
 		boost::shared_ptr<GLSLShader> m_shaderPtr;								///< Shader program used to render the debug info.
 		boost::shared_ptr<ModelViewProjStackManager> m_mvpStackManagerPtr;		///< Pointer to the MVP stack manager.
 		I32 m_debugMode;														///< Current debug mode.
-		GLuint m_mvpLoc;														///< Flat shader uniforms.
-		GLuint m_colorLoc;														///< Flat shader uniforms.
-
+		ShaderUniformSPtr m_mvpUniform;                                         ///< 
+        ShaderUniformSPtr m_colorUniform;                                       ///< 
+        
 		// /////////////////////////////////////////////////////////////////
 		// Creates the Vertex Buffer and Vertex attribute objects.
 		//

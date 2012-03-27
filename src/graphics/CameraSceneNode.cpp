@@ -63,14 +63,8 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool CameraSceneNode::VOnUpdate(SceneGraphManager *scenePtr, const F32 elapsedTime)
+	bool CameraSceneNode::VOnUpdate(const F32 elapsedTime)
 	{
-		if(!scenePtr)
-		{
-            GF_LOG_TRACE_ERR("CameraSceneNode::VOnUpdate()", "No valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		// If somebod moved the camera using the FoR class then we must update it now before rendering occurs.
 		if(m_updateCameraMatrix)
 		{
@@ -88,54 +82,38 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool CameraSceneNode::VRender(SceneGraphManager *scenePtr)
+	bool CameraSceneNode::VRender()
 	{
 		bool preRenderStep = false;
 
-		bool result = SceneNode::VPreRender(scenePtr);
+		bool result = SceneNode::VPreRender();
 			
 		if(result)
 		{
 			preRenderStep = true;
-			result = SceneNode::VRender(scenePtr);
+			result = SceneNode::VRender();
 		}
 
 		if(result && m_debugCamera)
 		{
-			// Set the flat shader uniforms (if the flat shader was not activated in SceneNode::VPreRender() then probably nothing will render)
-			GLuint projLoc = m_shaderPtr->GetUniformLocation("mvpMatrix");
-			if(projLoc == -1)
-			{
-                GF_LOG_TRACE_ERR("CameraSceneNode::VRender()", "Failed to find the mvpMatrix position");
-				result = false;
-			}
-			GLuint colorLoc = m_shaderPtr->GetUniformLocation("colorVec");
-			if(colorLoc == -1)
-			{
-                GF_LOG_TRACE_ERR("CameraSceneNode::VRender()", "Failed to find the colorVec position");
-				result = false;
-			}
+            Matrix4 prevMat, mvp;
+            m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->GetMatrix(prevMat);
+            m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->PopMatrix();
+            m_sgmPtr->GetStackManager()->GetModelViewProjectionMatrix(mvp);
 
-			if(result)
-			{
-				Matrix4 prevMat, mvp;
-				scenePtr->GetStackManager()->GetModelViewMatrixStack()->GetMatrix(prevMat);
-				scenePtr->GetStackManager()->GetModelViewMatrixStack()->PopMatrix();
-				scenePtr->GetStackManager()->GetModelViewProjectionMatrix(mvp);
+            // Inefficient but just for debugging
+            m_mvpUniform = m_shaderPtr->GetUniform("mvpMatrix");
+            m_colorUniform = m_shaderPtr->GetUniform("colorVec");
+            m_mvpUniform->SetValue((GLfloat * const)mvp.GetComponentsConst(), 16);
+            m_colorUniform->SetValue((GLfloat * const)g_gcRed.GetComponentsConst(), 4);
+            
+            m_frustrumPtr->Render();
 
-				glUniformMatrix4fv(projLoc, 1, GL_FALSE, mvp.GetComponentsConst());
-				glUniform4fv(colorLoc, 1, g_gcRed.GetComponentsConst());
-
-				m_frustrumPtr->Render();
-
-				scenePtr->GetStackManager()->GetModelViewMatrixStack()->PushMatrix(prevMat);
-			}
+            m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->PushMatrix(prevMat);
 		}
 
 		if(result || preRenderStep)
-		{
-			SceneNode::VPostRender(scenePtr);
-		}
+			SceneNode::VPostRender();
 
 		return (result);
 	}
@@ -143,7 +121,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool CameraSceneNode::VOnRestore(SceneGraphManager *scenePtr)
+	bool CameraSceneNode::VOnRestore()
 	{
 		// Proj matrix used to be set here but this is done in my global game app class now (it could also be done here).
 		return (true);
@@ -152,14 +130,8 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool CameraSceneNode::VSetViewTransform(SceneGraphManager *scenePtr)
+	bool CameraSceneNode::VSetViewTransform()
 	{
-		if(!scenePtr)
-		{
-            GF_LOG_TRACE_ERR("CameraSceneNode::VSetViewTransform()", "No valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		//If there is a target, make sure the camera is
 		// rigidly attached right behind the target
 		if(m_target)
@@ -183,7 +155,7 @@ namespace GameHalloran
 			VSetTransform(targetTransformMat);
 		}
 
-		scenePtr->GetStackManager()->GetModelViewMatrixStack()->LoadMatrix(VGet()->GetToWorld());
+		m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->LoadMatrix(VGet()->GetToWorld());
 		return (true);
 	}
 

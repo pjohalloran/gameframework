@@ -59,9 +59,9 @@ namespace GameHalloran
 	class GLSLShader : public ICleanableObserver
 	{
 	private:
-
+        
 		GLuint m_id;                                ///< The GL shader program ID.
-        typedef std::vector<ShaderUniform *> UniformArray;
+        typedef std::vector< ShaderUniformSPtr > UniformArray;
         UniformArray m_uniforms;                    ///< Array of shader uniforms.
         typedef std::list<ICleanable *> DirtyList;
         DirtyList m_dirtyList;                      ///< List of dirty shader uniforms.
@@ -184,12 +184,6 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		bool BuildProgramFromSrc(const char *vsSrc, const char *gsSrc, const char *fsSrc, const VSAttributeNameList &vsAttList, std::string &messageRef, const bool includeGeometryShader = false);
-        
-        // /////////////////////////////////////////////////////////////////
-        // Get the uniform with the id specified.
-        //
-        // /////////////////////////////////////////////////////////////////
-        ShaderUniform *GetUniform(const std::string &name);
         
         // /////////////////////////////////////////////////////////////////
         // Updates all the dirty/changed uniforms to the GPU.
@@ -428,6 +422,17 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		void FreeProgram();
+        
+        // /////////////////////////////////////////////////////////////////
+        // Get the uniform by name to work with directly.
+        //
+        // @param name Name of the uniform.
+        //
+        // @return boost::shared_ptr<ShaderUniform> NULL on error or uniform
+        //                                          on success.
+        //
+        // /////////////////////////////////////////////////////////////////
+        ShaderUniformSPtr GetUniform(const std::string &name);
         
         // /////////////////////////////////////////////////////////////////
         // Set the value of the uniform.

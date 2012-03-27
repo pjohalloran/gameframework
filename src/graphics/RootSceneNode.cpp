@@ -62,15 +62,15 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	RootSceneNode::RootSceneNode() : SceneNode(boost::optional<ActorId>(), std::string(), RenderPassFirst, Material(), GameHalloran::g_identityMat)
+	RootSceneNode::RootSceneNode(SceneGraphManager *sgPtr) : SceneNode(sgPtr, boost::optional<ActorId>(), std::string(), RenderPassFirst, Material(), GameHalloran::g_identityMat)
 	{
-		boost::shared_ptr<SceneNode> staticGroup(GCC_NEW SceneNode(boost::optional<ActorId>(), std::string("StaticGroup"), RenderPassStatic, Material(), GameHalloran::g_identityMat));
+		boost::shared_ptr<SceneNode> staticGroup(GCC_NEW SceneNode(sgPtr, boost::optional<ActorId>(), std::string("StaticGroup"), RenderPassStatic, Material(), GameHalloran::g_identityMat));
 		m_children.push_back(staticGroup);	// RenderPass_Static = 0
 
-		boost::shared_ptr<SceneNode> actorGroup(GCC_NEW SceneNode(boost::optional<ActorId>(), std::string("ActorGroup"), RenderPassActor, Material(), GameHalloran::g_identityMat));
+		boost::shared_ptr<SceneNode> actorGroup(GCC_NEW SceneNode(sgPtr, boost::optional<ActorId>(), std::string("ActorGroup"), RenderPassActor, Material(), GameHalloran::g_identityMat));
 		m_children.push_back(actorGroup);	// RenderPass_Actor = 1
 
-		boost::shared_ptr<SceneNode> skyGroup(GCC_NEW SceneNode(boost::optional<ActorId>(), std::string("SkyGroup"), RenderPassSky, Material(), GameHalloran::g_identityMat));
+		boost::shared_ptr<SceneNode> skyGroup(GCC_NEW SceneNode(sgPtr, boost::optional<ActorId>(), std::string("SkyGroup"), RenderPassSky, Material(), GameHalloran::g_identityMat));
 		m_children.push_back(skyGroup);	// RenderPass_Sky = 2
 
 		SetShaderName(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("flat"));
@@ -82,9 +82,7 @@ namespace GameHalloran
 	bool RootSceneNode::VAddChild(boost::shared_ptr<ISceneNode> childNodePtr)
 	{
 		if(!childNodePtr)
-		{
 			return (false);
-		}
 
 		// The Root node has children that divide the scene graph into render passes.
 		// Scene nodes will get added to these children based on the value of the
@@ -117,15 +115,8 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool RootSceneNode::VRenderChildren(SceneGraphManager *scenePtr)
+	bool RootSceneNode::VRenderChildren()
 	{
-		if(!scenePtr)
-		{
-			// Log error
-            GF_LOG_TRACE_ERR("RootSceneNode::VRenderChildren()", "Failed to pass a valid SceneGraphManager pointer");
-			return (false);
-		}
-
 		for (I32 pass = RenderPassFirst, end = RenderPassLast; pass < end; ++pass)
 		{
 			switch(pass)
@@ -133,7 +124,7 @@ namespace GameHalloran
 				case RenderPassStatic:
 				case RenderPassActor:
 				case RenderPassSky:
-					m_children[pass]->VRenderChildren(scenePtr);
+					m_children[pass]->VRenderChildren();
 					break;
 			}
 		}

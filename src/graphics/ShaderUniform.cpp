@@ -26,6 +26,10 @@ namespace GameHalloran
     {
         GF_CLEAR_GL_ERROR();
         
+        
+        static int i(0);
+        printf("%i Cleaning uniform %s\n", ++i, m_id.getStr().c_str());
+        
         switch(m_type)
         {
             case eInt:
@@ -42,11 +46,11 @@ namespace GameHalloran
             {
                 switch(m_size)
                 {
-                    case 1:     glUniform1iv(m_location, 1, m_value.m_intArr);  break;
-                    case 2:     glUniform2iv(m_location, 1, m_value.m_intArr);  break;
-                    case 3:     glUniform3iv(m_location, 1, m_value.m_intArr);  break;
-                    case 4:     glUniform4iv(m_location, 1, m_value.m_intArr);  break;
-                    default:    assert(false);                                  break;
+                    case 1:     glUniform1iv(m_location, m_arrayCount, m_value.m_intArr);   break;
+                    case 2:     glUniform2iv(m_location, m_arrayCount, m_value.m_intArr);   break;
+                    case 3:     glUniform3iv(m_location, m_arrayCount, m_value.m_intArr);   break;
+                    case 4:     glUniform4iv(m_location, m_arrayCount, m_value.m_intArr);   break;
+                    default:    assert(false);                                              break;
                 }
                 break;
             }
@@ -54,13 +58,13 @@ namespace GameHalloran
             {
                 switch(m_size)
                 {
-                    case 1:     glUniform1fv(m_location, 1, m_value.m_floatArr);                    break;
-                    case 2:     glUniform2fv(m_location, 1, m_value.m_floatArr);                    break;
-                    case 3:     glUniform3fv(m_location, 1, m_value.m_floatArr);                    break;
-                    case 4:     glUniform4fv(m_location, 1, m_value.m_floatArr);                    break;
-                    case 9:     glUniformMatrix3fv(m_location, 1, GL_FALSE, m_value.m_floatArr);    break;
-                    case 16:    glUniformMatrix3fv(m_location, 1, GL_FALSE, m_value.m_floatArr);    break;
-                    default:    assert(false);                                                      break;
+                    case 1:     glUniform1fv(m_location, m_arrayCount, m_value.m_floatArr);                     break;
+                    case 2:     glUniform2fv(m_location, m_arrayCount, m_value.m_floatArr);                     break;
+                    case 3:     glUniform3fv(m_location, m_arrayCount, m_value.m_floatArr);                     break;
+                    case 4:     glUniform4fv(m_location, m_arrayCount, m_value.m_floatArr);                     break;
+                    case 9:     glUniformMatrix3fv(m_location, m_arrayCount, GL_FALSE, m_value.m_floatArr);     break;
+                    case 16:    glUniformMatrix4fv(m_location, m_arrayCount, GL_FALSE, m_value.m_floatArr);     break;
+                    default:    assert(false);                                                                  break;
                 }
                 break;
             }
@@ -81,6 +85,7 @@ namespace GameHalloran
         
         m_type = eInt;
         m_size = 1;
+        m_arrayCount = 1;
         m_value.m_intArr[0] = value;
         NotifyShader();
     }
@@ -88,24 +93,25 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
-    void ShaderUniform::SetValue(GLint * const arr, const U32 size, const bool forceCopyToGpu)
+    void ShaderUniform::SetValue(GLint * const arr, const U32 size, const U32 arrCount, const bool forceCopyToGpu)
     {
-        assert(arr != NULL);
+        assert(arr != NULL && size > 0 && arrCount > 0);
         
-        if(!forceCopyToGpu && m_type == eIntArr && m_size == size)
+        if(!forceCopyToGpu && m_type == eIntArr && m_size == size && m_arrayCount == arrCount)
         {
             bool changed(false);
             for(I32 i = 0; ((!changed) && (i < size)); ++i)
                 if(m_value.m_intArr[i] != arr[i])
                     changed = true;
             
-            if(changed)
+            if(!changed)
                 return;
         }
         
         m_type = eIntArr;
         m_size = size;
-        memcpy(arr, m_value.m_intArr, m_size*sizeof(GLint));
+        m_arrayCount = arrCount;
+        memcpy(m_value.m_intArr, arr, m_size*m_arrayCount*sizeof(GLint));
         NotifyShader();
     }
     
@@ -119,6 +125,7 @@ namespace GameHalloran
         
         m_type = eFloat;
         m_size = 1;
+        m_arrayCount = 1;
         m_value.m_floatArr[0] = value;
         NotifyShader();
     }
@@ -126,24 +133,25 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
-    void ShaderUniform::SetValue(GLfloat * const arr, const U32 size, const bool forceCopyToGpu)
+    void ShaderUniform::SetValue(GLfloat * const arr, const U32 size, const U32 arrCount, const bool forceCopyToGpu)
     {
-        assert(arr != NULL);
+        assert(arr != NULL && size > 0 && arrCount > 0);
         
-        if(!forceCopyToGpu && m_type == eFloatArr && m_size == size)
+        if(!forceCopyToGpu && m_type == eFloatArr && m_size == size && m_arrayCount == arrCount)
         {
             bool changed(false);
             for(I32 i = 0; ((!changed) && (i < size)); ++i)
                 if(!FloatCmp(m_value.m_floatArr[i], arr[i]))
                     changed = true;
             
-            if(changed)
+            if(!changed)
                 return;
         }
         
         m_type = eFloatArr;
         m_size = size;
-        memcpy(arr, m_value.m_floatArr, m_size*sizeof(GLfloat));
+        m_arrayCount = arrCount;
+        memcpy(m_value.m_floatArr, arr, m_size*m_arrayCount*sizeof(GLfloat));
         NotifyShader();
     }
 }

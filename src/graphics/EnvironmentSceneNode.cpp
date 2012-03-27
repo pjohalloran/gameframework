@@ -39,17 +39,24 @@ namespace GameHalloran
 		m_texHandle = *tHandle;
 
 		SceneNode::SetRadius(cmRadius);
+        
+        // TODO: Remove dependancy on GLTools external lib.
 		gltMakeCube(m_cubeBatch, cmRadius);
 
 		// Set the shader name (The SGM should already have this shader built and included).
 		SceneNode::SetShaderName(shaderNameRef);
+        if(m_shaderPtr)
+        {
+            m_mvpUniform = m_shaderPtr->GetUniform("mvpMatrix");
+            m_cmUniform = m_shaderPtr->GetUniform("cubeMap");
+        }
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	EnvironmentSceneNode::EnvironmentSceneNode(boost::optional<ActorId> actorId, const Matrix4 &toWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &)\
-		: SceneNode(actorId, std::string("EnvironmentSceneNode"), RenderPassSky, Material(), toWorld), m_texHandle(0), m_mvpLocation(-1), m_cmLocation(-1)
+	EnvironmentSceneNode::EnvironmentSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const Matrix4 &toWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &)\
+		: SceneNode(sgPtr, actorId, std::string("EnvironmentSceneNode"), RenderPassSky, Material(), toWorld), m_texHandle(0), m_mvpUniform(), m_cmUniform()
 	{
 		Init(cubemapTextureNameVec, shaderNameRef, cmRadius);
 	}
@@ -57,8 +64,8 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	EnvironmentSceneNode::EnvironmentSceneNode(boost::optional<ActorId> actorId, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &)\
-		: SceneNode(actorId, std::string("EnvironmentSceneNode"), RenderPassSky, Material(), toWorld, fromWorld), m_texHandle(0), m_mvpLocation(-1), m_cmLocation(-1)
+	EnvironmentSceneNode::EnvironmentSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &)\
+		: SceneNode(sgPtr, actorId, std::string("EnvironmentSceneNode"), RenderPassSky, Material(), toWorld, fromWorld), m_texHandle(0), m_mvpUniform(), m_cmUniform()
 	{
 		Init(cubemapTextureNameVec, shaderNameRef, cmRadius);
 	}
@@ -74,23 +81,11 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool EnvironmentSceneNode::VPreRender(SceneGraphManager *scenePtr)
+	bool EnvironmentSceneNode::VPreRender()
 	{
 		bool result = false;
 
-		result = SceneNode::VPreRender(scenePtr);
-		
-		// Set the uniform locations.
-		if(result)
-		{
-			m_mvpLocation = m_shaderPtr->GetUniformLocation("mvpMatrix");
-			m_cmLocation = m_shaderPtr->GetUniformLocation("cubeMap");
-			if((m_mvpLocation == -1) || (m_cmLocation == -1))
-			{
-                GF_LOG_TRACE_ERR("EnvironmentSceneNode::VPreRender()", std::string("Failed to set one or all of the uniforms for ") + VGet()->GetShaderName());
-				result = false;
-			}
-		}
+		result = SceneNode::VPreRender();
 
 		// Activate the cubemap texture on the first texture unit/layer.
 		if(result && !g_appPtr->GetTextureManagerPtr()->Bind(m_texHandle, GL_TEXTURE_CUBE_MAP, GL_TEXTURE0))
@@ -105,12 +100,12 @@ namespace GameHalloran
 			glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
 			// Get the camera matrix and clear the cameras position (we want to be able to rotate the environment box but not move it!).
-			Matrix4 camMatrix(scenePtr->GetCamera()->VGet()->GetToWorld());
+			Matrix4 camMatrix(m_sgmPtr->GetCamera()->VGet()->GetToWorld());
 			camMatrix[Matrix4::M30] = 0.0f;
 			camMatrix[Matrix4::M31] = 0.0f;
 			camMatrix[Matrix4::M32] = 0.0f;
 			camMatrix[Matrix4::M33] = 1.0f;
-			scenePtr->GetStackManager()->GetModelViewMatrixStack()->LoadMatrix(camMatrix);
+			m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->LoadMatrix(camMatrix);
 		}
 
 		return (result);
@@ -119,21 +114,25 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool EnvironmentSceneNode::VRender(SceneGraphManager *scenePtr)
+	bool EnvironmentSceneNode::VRender()
 	{
-		bool result = SceneNode::VRender(scenePtr);
+		bool result = SceneNode::VRender();
 
 		if(result)
 		{
 			// Send the uniforms to the shader.
 			Matrix4 mvp;
-			scenePtr->GetStackManager()->GetModelViewProjectionMatrix(mvp);
-			glUniformMatrix4fv(m_mvpLocation, 1, GL_FALSE, mvp.GetComponentsConst());
-			glUniform1i(m_cmLocation, 0);
+			m_sgmPtr->GetStackManager()->GetModelViewProjectionMatrix(mvp);
+			
+            m_mvpUniform->SetValue((GLfloat * const)mvp.GetComponentsConst(), 16);
+            m_cmUniform->SetValue(0);
 
+            m_shaderPtr->Activate();
+            
 			// Draw the cubemap.
 			m_cubeBatch.VDraw();
 
+#if defined(_DEBUG)
 			// Check if we are in debug mode, if so we should query OpenGL To see if the draw succeeded!
 			if(g_appPtr->GetLoggerPtr() && g_appPtr->GetLoggerPtr()->GetLogLevel() >= GameLog::DEB)
 			{
@@ -144,6 +143,7 @@ namespace GameHalloran
 					result = false;
 				}
 			}
+#endif
 		}
 
 		return (result);
@@ -152,22 +152,18 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool EnvironmentSceneNode::VPostRender(SceneGraphManager *scenePtr)
+	bool EnvironmentSceneNode::VPostRender()
 	{
 		// Disable it now.
 		glDisable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-		if(!scenePtr)
-		{
-			return (false);
-		}
 
-		return (SceneNode::VPostRender(scenePtr));
+		return (SceneNode::VPostRender());
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool EnvironmentSceneNode::VOnRestore(SceneGraphManager *scenePtr)
+	bool EnvironmentSceneNode::VOnRestore()
 	{
 		return (true);
 	}
@@ -175,7 +171,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool EnvironmentSceneNode::VOnLostDevice(SceneGraphManager *scenePtr)
+	bool EnvironmentSceneNode::VOnLostDevice()
 	{
 		return (true);
 	}
@@ -183,7 +179,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool EnvironmentSceneNode::VOnUpdate(SceneGraphManager *scenePtr, const F32 elapsedTime)
+	bool EnvironmentSceneNode::VOnUpdate(const F32 elapsedTime)
 	{
 		return (true);
 	}

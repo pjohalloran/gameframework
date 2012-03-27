@@ -534,12 +534,12 @@ namespace GameHalloran
         I32 cSize = (h.cSize != 0 ? h.cSize : ( tmp.cSize != 0 ? tmp.cSize : -1 ));
         if(cSize == -1)
         {
-            I32 g = 0;
+            //I32 g = 0;
         }
         I32 ucSize = (h.ucSize != 0 ? h.ucSize : ( tmp.ucSize != 0 ? tmp.ucSize : -1 ));
         if(ucSize == -1)
         {
-            I32 g = 0;
+            //I32 g = 0;
         }
         
         // Alloc compressed data buffer and read the whole stream

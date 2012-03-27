@@ -34,7 +34,6 @@
 namespace GameHalloran
 {
 
-	// Forward delaration of the SceneGraphManager class.
 	class SceneGraphManager;
 
 	// /////////////////////////////////////////////////////////////////
@@ -62,9 +61,9 @@ namespace GameHalloran
 
 		TexHandle m_texHandle;										///< Handle to the CubeMap texture.
 		GLBatch m_cubeBatch;										///< Batch of geometry describing a 3D cube.
-		GLint m_mvpLocation;										///< Location of "mvpMatrix" shader uniform.
-		GLint m_cmLocation;											///< Location of "cubeMap" shader uniform.
-
+        ShaderUniformSPtr m_mvpUniform;                             ///< MVP uniform location.
+        ShaderUniformSPtr m_cmUniform;                              ///< Cubemap texture location.
+        
 		// /////////////////////////////////////////////////////////////////
 		// Constructor helper function.
 		//
@@ -88,6 +87,7 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The optional Actor ID.
 		// @param toWorld Position and orientation of node relative to its
 		//					parent.
@@ -100,11 +100,12 @@ namespace GameHalloran
 		//							names.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit EnvironmentSceneNode(boost::optional<ActorId> actorId, const Matrix4 &toWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &);
+		explicit EnvironmentSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const Matrix4 &toWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The optional Actor ID.
 		// @param toWorld Position and orientation of node relative to its
 		//					parent.
@@ -118,7 +119,7 @@ namespace GameHalloran
 		//							names.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit EnvironmentSceneNode(boost::optional<ActorId> actorId, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &);
+		explicit EnvironmentSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.
@@ -130,78 +131,72 @@ namespace GameHalloran
 		// Set the render state before rendering.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPreRender(SceneGraphManager *scenePtr);
+		virtual bool VPreRender();
 
 		// /////////////////////////////////////////////////////////////////
 		// Render the node.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VRender(SceneGraphManager *scenePtr);
+		virtual bool VRender();
 
 		// /////////////////////////////////////////////////////////////////
 		// Reset the render state after rendering.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPostRender(SceneGraphManager *scenePtr);
+		virtual bool VPostRender();
 
 		// /////////////////////////////////////////////////////////////////
-		// Overridden and disabled for camera node.
+		// Overridden and disabled for environment node.
 		//
 		// /////////////////////////////////////////////////////////////////
 		virtual bool VAddChild(boost::shared_ptr<ISceneNode> childNodePtr) { return (true); };
 
 		// /////////////////////////////////////////////////////////////////
-		// Overridden and disabled for camera node.
+		// Overridden and disabled for environment node.
 		//
 		// /////////////////////////////////////////////////////////////////
 		virtual bool VRemoveChild(const ActorId id) { return (true); };
 
 		// /////////////////////////////////////////////////////////////////
-		// Overridden and disabled for camera node.
+		// Overridden and disabled for environment node.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VRenderChildren(SceneGraphManager *scenePtr) { return (true); };
+		virtual bool VRenderChildren() { return (true); };
 
 		// /////////////////////////////////////////////////////////////////
 		// Called when application is restored.
 		//
-		// @param scenePtr SceneGraph manager pointer.
-		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnRestore(SceneGraphManager *scenePtr);
+		virtual bool VOnRestore();
 
 		// /////////////////////////////////////////////////////////////////
 		// Called when application loses focus.
 		//
-		// @param scenePtr SceneGraph manager pointer.
-		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnLostDevice(SceneGraphManager *scenePtr);
+		virtual bool VOnLostDevice();
 
 		// /////////////////////////////////////////////////////////////////
 		// The Environment node is rendering the extremities of the environment
 		// and so should always be visible.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VIsVisible(SceneGraphManager *scenePtr) const { return (true); };
+		virtual bool VIsVisible() const { return (true); };
 
 		// /////////////////////////////////////////////////////////////////
 		// Always returns false as you can't "pick" the background!
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		// @param ray Raycast.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPick(SceneGraphManager *scenePtr, const RayCast &ray) { return (false); };
+		virtual bool VPick(const RayCast &ray) { return (false); };
 
 		// /////////////////////////////////////////////////////////////////
 		// Updates the node once per main loop.
 		//
-		// @param scenePtr SceneGraph manager pointer.
 		// @param elapsedTime The number of seconds since the last update.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnUpdate(SceneGraphManager *scenePtr, const F32 elapsedTime);
+		virtual bool VOnUpdate(const F32 elapsedTime);
 
 	};
 

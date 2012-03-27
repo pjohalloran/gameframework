@@ -117,7 +117,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPreRender(SceneGraphManager *scenePtr) = 0;
+		virtual bool VPreRender() = 0;
 
 		// /////////////////////////////////////////////////////////////////
 		// Renders node.
@@ -125,7 +125,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VRender(SceneGraphManager *scenePtr) = 0;
+		virtual bool VRender() = 0;
 
 		// /////////////////////////////////////////////////////////////////
 		// Called after node is rendered.
@@ -133,7 +133,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPostRender(SceneGraphManager *scenePtr) = 0;
+		virtual bool VPostRender() = 0;
 
 		// /////////////////////////////////////////////////////////////////
 		// Adds a child to this node.
@@ -157,7 +157,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VRenderChildren(SceneGraphManager *scenePtr) = 0;
+		virtual bool VRenderChildren() = 0;
 
 		// /////////////////////////////////////////////////////////////////
 		// Called when application is restored.
@@ -165,7 +165,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnRestore(SceneGraphManager *scenePtr) = 0;
+		virtual bool VOnRestore() = 0;
 
 		// /////////////////////////////////////////////////////////////////
 		// Called when application loses focus.
@@ -173,7 +173,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnLostDevice(SceneGraphManager *scenePtr) = 0;
+		virtual bool VOnLostDevice() = 0;
 
 		// /////////////////////////////////////////////////////////////////
 		// Is the node currently visible.
@@ -181,7 +181,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VIsVisible(SceneGraphManager *scenePtr) const = 0;
+		virtual bool VIsVisible() const = 0;
 
 		// /////////////////////////////////////////////////////////////////
 		// Check if the ray intersects with this SceneNode.
@@ -190,7 +190,7 @@ namespace GameHalloran
 		// @param ray Raycast.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPick(SceneGraphManager *scenePtr, const RayCast &ray) = 0;
+		virtual bool VPick(const RayCast &ray) = 0;
 
 		// /////////////////////////////////////////////////////////////////
 		// Updates the node once per main loop.
@@ -199,7 +199,7 @@ namespace GameHalloran
 		// @param elapsedTime The number of seconds since the last update.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnUpdate(SceneGraphManager *scenePtr, const F32 deltaMilliseconds) = 0;
+		virtual bool VOnUpdate(const F32 deltaMilliseconds) = 0;
 
 		// /////////////////////////////////////////////////////////////////
 		// Get the nodes parent.
@@ -212,6 +212,12 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		virtual void VSetParentPtr(ISceneNode *parentPtr) = 0;
+        
+        // /////////////////////////////////////////////////////////////////
+        //
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VSetSceneManager(SceneGraphManager *sgmPtr) = 0;
 	};
 
 	// /////////////////////////////////////////////////////////////////

@@ -84,7 +84,7 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
-    ShaderUniform *GLSLShader::GetUniform(const std::string &name)
+    ShaderUniformSPtr GLSLShader::GetUniform(const std::string &name)
     {
         HashedString id(name.c_str());
         for (UniformArray::iterator i = m_uniforms.begin(), end = m_uniforms.end(); i != end; ++i)
@@ -95,7 +95,7 @@ namespace GameHalloran
             }
         }
         
-        return (NULL);
+        return (ShaderUniformSPtr());
     }
     
     // /////////////////////////////////////////////////////////////////
@@ -335,7 +335,7 @@ namespace GameHalloran
 							return (false);
 						}
 #endif
-                        m_uniforms.push_back(new ShaderUniform(loc, currVariableName, this));
+                        m_uniforms.push_back(boost::shared_ptr<ShaderUniform>(new ShaderUniform(loc, currVariableName, this)));
 					}
 					else
 					{
@@ -812,7 +812,7 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     bool GLSLShader::SetUniform(const std::string &name, const GLint value, const bool forceCopyToGpu)
     {
-        ShaderUniform *uniform = GetUniform(name);
+        boost::shared_ptr<ShaderUniform> uniform = GetUniform(name);
         if(!uniform)
         {
             return (false);
@@ -827,7 +827,7 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     bool GLSLShader::SetUniform(const std::string &name, const GLfloat value, const bool forceCopyToGpu)
     {
-        ShaderUniform *uniform = GetUniform(name);
+        boost::shared_ptr<ShaderUniform> uniform = GetUniform(name);
         if(!uniform)
         {
             return (false);
@@ -842,7 +842,7 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     bool GLSLShader::SetUniform(const std::string &name, const Vector3 &value, const bool forceCopyToGpu)
     {
-        ShaderUniform *uniform = GetUniform(name);
+        boost::shared_ptr<ShaderUniform> uniform = GetUniform(name);
         if(!uniform)
         {
             return (false);
@@ -857,7 +857,7 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     bool GLSLShader::SetUniform(const std::string &name, const Vector4 &value, const bool forceCopyToGpu)
     {
-        ShaderUniform *uniform = GetUniform(name);
+        boost::shared_ptr<ShaderUniform> uniform = GetUniform(name);
         if(!uniform)
         {
             return (false);
@@ -872,7 +872,7 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     bool GLSLShader::SetUniform(const std::string &name, const Point3 &value, const bool forceCopyToGpu)
     {
-        ShaderUniform *uniform = GetUniform(name);
+        boost::shared_ptr<ShaderUniform> uniform = GetUniform(name);
         if(!uniform)
         {
             return (false);
@@ -887,7 +887,7 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     bool GLSLShader::SetUniform(const std::string &name, const Matrix4 &value, const bool forceCopyToGpu)
     {
-        ShaderUniform *uniform = GetUniform(name);
+        boost::shared_ptr<ShaderUniform> uniform = GetUniform(name);
         if(!uniform)
         {
             return (false);
@@ -902,7 +902,7 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     bool GLSLShader::SetUniform(const std::string &name, const Matrix3x3 value, const bool forceCopyToGpu)
     {
-        ShaderUniform *uniform = GetUniform(name);
+        boost::shared_ptr<ShaderUniform> uniform = GetUniform(name);
         if(!uniform)
         {
             return (false);

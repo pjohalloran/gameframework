@@ -87,6 +87,7 @@ namespace GameHalloran
 
 	protected:
 
+        SceneGraphManager *m_sgmPtr;                    ///< Nodes SG manager.
 		SceneNodeList m_children;						///< The child nodes list.
 		boost::shared_ptr<GLSLShader> m_shaderPtr;		///< Custom GLSL shader program we are using to render the node (if this is NULL then the global SGM shader will be used).
 
@@ -104,13 +105,14 @@ namespace GameHalloran
 		// @param snPtr Pointer to the SceneNode to render.
 		//
 		// /////////////////////////////////////////////////////////////////
-		void RenderSceneNode(SceneGraphManager *scenePtr, ISceneNode *snPtr);
+		void RenderSceneNode(ISceneNode *snPtr);
 
 	public:
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The optional Actor ID.
 		// @param name Name of the node.
 		// @param renderPass What renderpass the node belongs to.
@@ -119,11 +121,12 @@ namespace GameHalloran
 		//					parent.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit SceneNode(boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld);
+		explicit SceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld);
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
+        // @param sgPtr SG manager pointer.
 		// @param actorId The optional Actor ID.
 		// @param name Name of the node.
 		// @param renderPass What renderpass the node belongs to.
@@ -133,7 +136,7 @@ namespace GameHalloran
 		// @param fromWorld Inverse of toWorld matrix.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit SceneNode(boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld);
+		explicit SceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.
@@ -151,19 +154,19 @@ namespace GameHalloran
 		// Set the render state before rendering.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPreRender(SceneGraphManager *scenePtr);
+		virtual bool VPreRender();
 
 		// /////////////////////////////////////////////////////////////////
 		// Render the node.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VRender(SceneGraphManager *scenePtr);
+		virtual bool VRender();
 
 		// /////////////////////////////////////////////////////////////////
 		// Reset the render state after rendering.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPostRender(SceneGraphManager *scenePtr);
+		virtual bool VPostRender();
 
 		// /////////////////////////////////////////////////////////////////
 		// Set the nodes transformation matrices.
@@ -211,7 +214,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VRenderChildren(SceneGraphManager *scenePtr);
+		virtual bool VRenderChildren();
 
 		// /////////////////////////////////////////////////////////////////
 		// Called when application is restored.
@@ -219,7 +222,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnRestore(SceneGraphManager *scenePtr);
+		virtual bool VOnRestore();
 
 		// /////////////////////////////////////////////////////////////////
 		// Called when application loses focus.
@@ -227,7 +230,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnLostDevice(SceneGraphManager *scenePtr);
+		virtual bool VOnLostDevice();
 
 		// /////////////////////////////////////////////////////////////////
 		// Is the node currently visible.
@@ -235,7 +238,7 @@ namespace GameHalloran
 		// @param scenePtr SceneGraph manager pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VIsVisible(SceneGraphManager *scenePtr) const;
+		virtual bool VIsVisible() const;
 
 		// /////////////////////////////////////////////////////////////////
 		// Check if the ray intersects with any of the children of this
@@ -245,7 +248,7 @@ namespace GameHalloran
 		// @param rayCastPtr Pointer to the RayCast class.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VPick(SceneGraphManager *scenePtr, const RayCast &ray);
+		virtual bool VPick(const RayCast &ray);
 
 		// /////////////////////////////////////////////////////////////////
 		// Updates the node once per main loop.
@@ -254,7 +257,7 @@ namespace GameHalloran
 		// @param elapsedTime The number of seconds since the last update.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnUpdate(SceneGraphManager *scenePtr, const F32 elapsedTime);
+		virtual bool VOnUpdate(const F32 elapsedTime);
 
 		// /////////////////////////////////////////////////////////////////
 		// Set the alpha value of the node.
@@ -317,13 +320,26 @@ namespace GameHalloran
 		// Set the radius of the node.
 		//
 		// /////////////////////////////////////////////////////////////////
-		void SetRadius(const F32 radius) { m_props.SetRadius(radius); };
+		inline void SetRadius(const F32 radius) { m_props.SetRadius(radius); };
 
 		// /////////////////////////////////////////////////////////////////
 		// Set the material of the node.
 		//
 		// /////////////////////////////////////////////////////////////////
-		void SetMaterial(const Material &material) { m_props.SetMaterial(material); };
+		inline void SetMaterial(const Material &material) { m_props.SetMaterial(material); };
+        
+        // /////////////////////////////////////////////////////////////////
+        //
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VSetSceneManager(SceneGraphManager *sgmPtr)
+        {
+            m_sgmPtr = sgmPtr;
+            for(SceneNodeList::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i)
+            {
+                (*i)->VSetSceneManager(sgmPtr);
+            }
+        };
 
 	};
 

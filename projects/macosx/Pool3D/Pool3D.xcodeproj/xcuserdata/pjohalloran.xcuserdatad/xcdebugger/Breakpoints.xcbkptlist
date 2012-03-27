@@ -177,11 +177,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dView.cpp"
-         timestampString = "351982071.347647"
+         timestampString = "353282070.519945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1258"
-         endingLineNumber = "1258"
+         startingLineNumber = "1257"
+         endingLineNumber = "1257"
          landmarkName = "Pool3dView::VOnEvent(GF_Event &amp;eventObj, const F32 elapsedTime)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -191,26 +191,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dView.cpp"
-         timestampString = "351982147.164847"
+         timestampString = "353282070.519945"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1311"
-         endingLineNumber = "1311"
+         startingLineNumber = "1310"
+         endingLineNumber = "1310"
          landmarkName = "Pool3dView::VOnEvent(GF_Event &amp;eventObj, const F32 elapsedTime)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
-         filePath = "/Users/pjohalloran/work/git/gameframework/src/gui/AbstractWidget.cpp"
-         timestampString = "351987369.834738"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "427"
-         endingLineNumber = "427"
-         landmarkName = "AbstractWidget::PreRenderTexturedWidget()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -267,6 +253,104 @@
          startingLineNumber = "119"
          endingLineNumber = "119"
          landmarkName = "GLSLShader::VNotifyDirty(ICleanable *ptr)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/ShaderUniform.cpp"
+         timestampString = "353176158.162318"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "27"
+         endingLineNumber = "27"
+         landmarkName = "ShaderUniform::VClean()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/GLSLShader.cpp"
+         timestampString = "353194864.129233"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "242"
+         endingLineNumber = "242"
+         landmarkName = "GLSLShader::ParseSrcForUniforms(const char *src)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/gui/AbstractWidget.cpp"
+         timestampString = "354062515.476437"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "140"
+         endingLineNumber = "140"
+         landmarkName = "AbstractWidget::Init(const std::string &amp;textureNameRef)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/include/CameraSceneNode.h"
+         timestampString = "354321150.588469"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
+         landmarkName = "CameraSceneNode(SceneGraphManager *sgPtr, Frustrum *frustrumPtr)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
+         timestampString = "354487812.179822"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "567"
+         endingLineNumber = "567"
+         landmarkName = "SceneGraphManager::AddChild(boost::shared_ptr&lt;ISceneNode&gt; nodePtr, boost::optional&lt;ActorId&gt; id)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dActors.cpp"
+         timestampString = "354359810.654551"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1158"
+         endingLineNumber = "1158"
+         landmarkName = "TableActorParams::VCreateSceneNode()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
+         timestampString = "354487812.179822"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "352"
+         endingLineNumber = "352"
+         landmarkName = "SceneGraphManager::PrepareAdsShader(const Material &amp;objectMaterial, const boost::optional&lt;TexHandle&gt; textureId)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

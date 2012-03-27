@@ -88,7 +88,7 @@ namespace GameHalloran
 		// B = 2 * (m_direction.Dot(P0 - c)) (P0 is ray origin, c is centre of sphere).
 		// C = (P0 -c).Dot(P0 - c) - r^2.
 		Vector3 originToCentreVec = Vector3(m_origin) - Vector3(sphere.GetCentre());
-		const F32 A = 1;
+		//const F32 A = 1;
 		const F32 B = 2.0f * m_direction.Dot(originToCentreVec);
 		const F32 C = originToCentreVec.Dot(originToCentreVec) - (sphere.GetRadius() * sphere.GetRadius());
 

@@ -98,7 +98,7 @@ namespace GameHalloran
 	void SoundProcess::InitializeVolume()
 	{
 		//See CProcess.h for the enum PROCESS_TYPE declaration
-		int typeOfSound = GetType();
+		//int typeOfSound = GetType();
 		
 		// TODO: SOmewhere set an adjusted volume based on game options
 		// m_volume = g_GraphicalApp->GetVolume(typeOfSound);

@@ -112,15 +112,40 @@ namespace GameHalloran
 		// @struct AdsUniformLocCache
 		// @author PJ O Halloran
 		//
-		// A cache of the uniform locations for the often used ADS phong
-		// shader so we don't have to perform expensive glGet operations
-		// many times per frame for every element in the scene.
-		//
-		// Used only in PrepareAdsShader().
+		// A cache of the ADS shader uniforms.
 		//
 		// /////////////////////////////////////////////////////////////////
 		struct AdsUniformLocCache
 		{
+            ShaderUniformSPtr m_applyTex;                   ///< Location for the uniform "u_applyTexture".
+            ShaderUniformSPtr m_texture2dMap;               ///< Location for the uniform "u_texture2dMap".
+            
+            ShaderUniformSPtr m_mvpMatrix;                  ///< Location for the uniform "u_mvpMatrix".
+            ShaderUniformSPtr m_mvMatrix;					///< Location for the uniform "u_mvMatrix".
+            ShaderUniformSPtr m_normalMatrix;				///< Location for the uniform "u_normalMatrix".
+            
+            ShaderUniformSPtr m_numLights;                  ///< Location for the uniform "u_numberLights".
+            ShaderUniformSPtr m_lightTypes;                 ///< Location for the uniform "u_lightTypesArr".
+            ShaderUniformSPtr m_lightPos;                   ///< Location for the uniform "u_lightPositionArr".
+            ShaderUniformSPtr m_lightAmb;                   ///< Location for the uniform "u_lightAmbientArr".
+            ShaderUniformSPtr m_lightDiff;                  ///< Location for the uniform "u_lightDiffuseArr".
+            ShaderUniformSPtr m_lightSpec;                  ///< Location for the uniform "u_lightSpecularArr".
+            ShaderUniformSPtr m_spotCutoff;                 ///< Location for the uniform "u_spotlightCutoffArr".
+            ShaderUniformSPtr m_spotExp;                    ///< Location for the uniform "u_spotlightExpArr".
+            ShaderUniformSPtr m_spotDir;                    ///< Location for the uniform "u_spotlightDirection".
+            ShaderUniformSPtr m_constantAtt;                ///< Location for the uniform "u_cAttArr".
+            ShaderUniformSPtr m_linearAtt;                  ///< Location for the uniform "u_lAttArr".
+            ShaderUniformSPtr m_quadAtt;                    ///< Location for the uniform "u_qAttArr".
+            ShaderUniformSPtr m_globalAmb;                  ///< Location for the uniform "u_globalAmbient".
+            
+            ShaderUniformSPtr m_materialEmiss;				///< Location for the uniform "u_materialE".
+            ShaderUniformSPtr m_materialAmb;				///< Location for the uniform "u_materialA".
+            ShaderUniformSPtr m_materialDiff;				///< Location for the uniform "u_materialD".
+            ShaderUniformSPtr m_materialSpec;				///< Location for the uniform "u_materialS".
+            ShaderUniformSPtr m_materialExp;				///< Location for the uniform "u_materialExp".
+            
+            ShaderUniformSPtr m_cameraPos;
+            
 			// Useful constants for PrepareAdsShader().
 			static const size_t FLOAT_SIZE = sizeof(GLfloat);
 			static const size_t FLOAT_ARR_SIZE = sizeof(GLfloat)*4;
@@ -172,29 +197,29 @@ namespace GameHalloran
 			// /////////////////////////////////////////////////////////////////
 			void Reset()
 			{
-				m_applyTexLoc = -1;
-				m_texture2dMapLoc = -1;
-				m_mvpLoc = -1;
-				m_mvLoc = -1;
-				m_normalLoc = -1;
-				m_numLightsLoc = -1;
-				m_lightTypesLoc = -1;
-				m_lightPosLoc = -1;
-				m_lightAmbLoc = -1;
-				m_lightDiffLoc = -1;
-				m_lightSpecLoc = -1;
-				m_spotCutoffLoc = -1;
-				m_spotExpLoc = -1;
-				m_spotDirLoc = -1;
-				m_constantAttLoc = -1;
-				m_linearAttLoc = -1;
-				m_quadAttLoc = -1;
-				m_globalAmbLoc = -1;
-				m_matEmmLoc = -1;
-				m_matAmbLoc = -1;
-				m_matDiffLoc = -1;
-				m_matSpecLoc = -1;
-				m_matExpLoc = -1;
+                m_applyTex.reset();
+                m_texture2dMap.reset();
+                m_mvpMatrix.reset();
+                m_mvMatrix.reset();
+                m_normalMatrix.reset();
+                m_numLights.reset();
+                m_lightTypes.reset();
+                m_lightPos.reset();
+                m_lightAmb.reset();
+                m_lightDiff.reset();
+                m_lightSpec.reset();
+                m_spotCutoff.reset();
+                m_spotExp.reset();
+                m_spotDir.reset();
+                m_constantAtt.reset();
+                m_linearAtt.reset();
+                m_quadAtt.reset();
+                m_globalAmb.reset();
+                m_materialEmiss.reset();
+                m_materialAmb.reset();
+                m_materialDiff.reset();
+                m_materialSpec.reset();
+                m_materialExp.reset();
 			};
 		};
 
@@ -433,7 +458,7 @@ namespace GameHalloran
 		//					and false otherwise.
 		//
 		// /////////////////////////////////////////////////////////////////
-		inline bool Pick(const RayCast &ray) { return (m_root->VPick(this, ray)); };
+		inline bool Pick(const RayCast &ray) { return (m_root->VPick(ray)); };
 
 		// /////////////////////////////////////////////////////////////////
 		// Gets a shader program.
