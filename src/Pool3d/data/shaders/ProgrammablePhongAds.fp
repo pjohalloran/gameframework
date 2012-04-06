@@ -57,6 +57,9 @@ smooth in vec3 vp_varyingLightDirArr[MAX_NUMBER_LIGHTS];	// Array of direction v
 flat in vec3 vp_flatVertexPosition;							// Vertex position (camera space) sent to the fragment shader.
 
 smooth in vec2 vp_texCoordsVec;								// Texture coordinates smoothly interpolated accross the triangle (TEXTURE mode).
+
+smooth in vec4 vp_varyingVertexPosition;
+
 // /////////////////////////////////////////////////////////////////
 
 
@@ -104,6 +107,21 @@ uniform sampler2D u_texture2dMap;							// The texture map sampler.
 // /////////////////////////////////////////////////////////////////
 
 uniform vec4 u_cameraPos;
+
+//struct Fog
+//{
+//    bool on;
+//    float minDistance;
+//    float maxDistance;
+//    vec3 color;
+//};
+//uniform Fog u_fog;
+
+uniform bool u_fogOn;
+uniform float u_fogMin;
+uniform float u_fogMax;
+uniform vec3 u_fogColor;
+
 
 // /////////////////////////////////////////////////////////////////
 
@@ -373,16 +391,26 @@ void main(void)
 	}
 
 	// Final fragment color is the primary color (which is combined with the tex color) + the secondary color.
-	fp_colorVec = vec4(primaryColor.xyz + secondaryColor.xyz, u_materialD.a);
+	vec3 adsColor = primaryColor.xyz + secondaryColor.xyz;
 
-    if(!gl_FrontFacing)
+    if(u_fogOn)
     {
-        fp_colorVec *= vec4(0.5, 0.5, 0.5, 1.0);
+        float dist = abs(vp_varyingVertexPosition.z);
+        //float dist = length(vp_varyingVertexPosition.xyz);
+        float fogFactor = (u_fogMax - dist) / (u_fogMax - u_fogMin);
+        fogFactor = clamp(fogFactor, 0.0, 1.0);
+
+        vec3 mixedColor = mix(u_fogColor, adsColor, fogFactor);
+    
+        fp_colorVec = vec4(mixedColor, u_materialD.a);
     }
-
-
-	// Ensure the final alpha value for the fragment is equal to the Materials diffuse alpha.
-	// TODO: What about the textures alpha component??
-	//fp_colorVec.a = u_materialD.a;
+    else
+        fp_colorVec = vec4(adsColor, u_materialD.a);
+        
+    
+    //if(!gl_FrontFacing)
+    //{
+    //    fp_colorVec *= vec4(0.25, 0.25, 0.25, 1.0);
+    //}
 }
 

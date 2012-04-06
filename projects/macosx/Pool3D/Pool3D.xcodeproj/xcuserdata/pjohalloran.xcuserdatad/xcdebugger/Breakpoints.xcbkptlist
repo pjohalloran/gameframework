@@ -317,11 +317,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
-         timestampString = "355264099.732328"
+         timestampString = "355431549.680494"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "448"
-         endingLineNumber = "448"
+         startingLineNumber = "461"
+         endingLineNumber = "461"
          landmarkName = "SceneGraphManager::AddChild(boost::shared_ptr&lt;ISceneNode&gt; nodePtr, boost::optional&lt;ActorId&gt; id)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -345,11 +345,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
-         timestampString = "355264099.732328"
+         timestampString = "355429877.585723"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "322"
-         endingLineNumber = "322"
+         startingLineNumber = "327"
+         endingLineNumber = "327"
          landmarkName = "SceneGraphManager::PrepareAdsShader(const Material &amp;objectMaterial, const boost::optional&lt;TexHandle&gt; textureId)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -429,11 +429,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
-         timestampString = "355264071.183794"
+         timestampString = "355429877.585723"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "278"
-         endingLineNumber = "278"
+         startingLineNumber = "283"
+         endingLineNumber = "283"
          landmarkName = "SceneGraphManager::PrepareAdsShader(const Material &amp;objectMaterial, const boost::optional&lt;TexHandle&gt; textureId)"
          landmarkType = "5">
       </FileBreakpoint>

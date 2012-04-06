@@ -1339,6 +1339,12 @@ namespace GameHalloran
 								
 							}
 							break;
+                                    
+                            case GLFW_KEY_F3:
+                            {
+                                m_sgm.ToggleFogEffect();    
+                                break;
+                            }
 
 							default:
 								break;

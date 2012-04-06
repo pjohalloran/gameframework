@@ -144,6 +144,11 @@ namespace GameHalloran
             ShaderUniformSPtr m_materialSpec;				///< Location for the uniform "u_materialS".
             ShaderUniformSPtr m_materialExp;				///< Location for the uniform "u_materialExp".
             
+            ShaderUniformSPtr m_fogEnabled;                 ///< "Fog.on" uniform.
+            ShaderUniformSPtr m_fogMinDist;                 ///< "Fog.minDistance" uniform.
+            ShaderUniformSPtr m_fogMaxDist;                 ///< "Fog.maxDistance" uniform.
+            ShaderUniformSPtr m_fogColor;                   ///< "Fog.color" uniform.
+            
             ShaderUniformSPtr m_cameraPos;
             
 			// Useful constants for PrepareAdsShader().
@@ -204,6 +209,8 @@ namespace GameHalloran
 		boost::shared_ptr<GLSLShader> m_globalShaderPtr;						///< The SGMs' main GLSL shader program (ADS model with phong or goraud shading) (nodes may still use their own shaders if they wish to).
 		LuaPlus::LuaObject m_metaTable;											///< LuaPlus metatable for opening up access to external scripts to some of the SGM functionality.
 
+        bool m_fogEffect;
+        
 		// /////////////////////////////////////////////////////////////////
 		// Find all the uniforms for the global ADS phong shader and cache
 		// them for later use.
@@ -469,6 +476,12 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		bool AddShader(boost::shared_ptr<GLSLShader> shaderPtr, const std::string &shaderNameRef);
+        
+        // /////////////////////////////////////////////////////////////////
+        // ...
+        //
+        // /////////////////////////////////////////////////////////////////
+        void ToggleFogEffect() { m_fogEffect = !m_fogEffect; };
 
 	};
 

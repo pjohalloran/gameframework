@@ -85,6 +85,9 @@ smooth out vec3 vp_varyingLightDirArr[MAX_NUMBER_LIGHTS];	// Array of direction 
 flat out vec3 vp_flatVertexPosition;						// Vertex position (camera space) sent to the fragment shader.
 
 smooth out vec2 vp_texCoordsVec;							// Texture coordinates smoothly interpolated accross the triangle.
+
+smooth out vec4 vp_varyingVertexPosition;
+
 // /////////////////////////////////////////////////////////////////
 
 
@@ -100,6 +103,10 @@ smooth out vec2 vp_texCoordsVec;							// Texture coordinates smoothly interpola
 vec3 GetCameraVertexPos()
 {
     vec4 cameraVertexPos4 = u_mvMatrix * va_position;
+    
+    // for fog
+    vp_varyingVertexPosition = cameraVertexPos4;
+    
     vec3 cameraVertexPos3 = cameraVertexPos4.xyz / cameraVertexPos4.w;
     return (cameraVertexPos3);
 }
