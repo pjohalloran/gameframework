@@ -317,11 +317,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
-         timestampString = "354487812.179822"
+         timestampString = "355264099.732328"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "567"
-         endingLineNumber = "567"
+         startingLineNumber = "448"
+         endingLineNumber = "448"
          landmarkName = "SceneGraphManager::AddChild(boost::shared_ptr&lt;ISceneNode&gt; nodePtr, boost::optional&lt;ActorId&gt; id)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -345,11 +345,95 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
-         timestampString = "354487812.179822"
+         timestampString = "355264099.732328"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "352"
-         endingLineNumber = "352"
+         startingLineNumber = "322"
+         endingLineNumber = "322"
+         landmarkName = "SceneGraphManager::PrepareAdsShader(const Material &amp;objectMaterial, const boost::optional&lt;TexHandle&gt; textureId)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/physics/BulletPhysicsDebugDrawer.cpp"
+         timestampString = "354578422.541252"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "195"
+         endingLineNumber = "195"
+         landmarkName = "BulletPhysicsDebugDrawer::BatchDraw()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dView.cpp"
+         timestampString = "354577849.516933"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "967"
+         endingLineNumber = "967"
+         landmarkName = "Pool3dView::VOnRender(const F64 time, const F32 elapsedTime)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/physics/BulletPhysicsDebugDrawer.cpp"
+         timestampString = "354662082.036502"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "227"
+         endingLineNumber = "227"
+         landmarkName = "BulletPhysicsDebugDrawer::drawLine(const btVector3 &amp;from, const btVector3 &amp;to, const btVector3 &amp;color)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/physics/BulletPhysics.cpp"
+         timestampString = "354662085.361941"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1060"
+         endingLineNumber = "1060"
+         landmarkName = "BulletPhysics::VRenderDiagnostics()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/physics/BulletPhysicsDebugDrawer.cpp"
+         timestampString = "354662179.509503"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "196"
+         endingLineNumber = "196"
+         landmarkName = "BulletPhysicsDebugDrawer::BatchDraw()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
+         timestampString = "355264071.183794"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "278"
+         endingLineNumber = "278"
          landmarkName = "SceneGraphManager::PrepareAdsShader(const Material &amp;objectMaterial, const boost::optional&lt;TexHandle&gt; textureId)"
          landmarkType = "5">
       </FileBreakpoint>

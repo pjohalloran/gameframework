@@ -962,7 +962,7 @@ namespace GameHalloran
 					m_cameraNode->VRender();
 					GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
 				}
-				if(!IsDrawModeOn(ePhysics))
+				if(IsDrawModeOn(ePhysics))
 				{
 					g_appPtr->GetLogicPtr()->VRenderDiagnostics();
 					GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");

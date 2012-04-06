@@ -71,36 +71,6 @@ namespace GameHalloran
 			m_adsUniformCache.Reset();
 			return;
 		}
-
-//		m_adsUniformCache.m_applyTexLoc = m_globalShaderPtr->GetUniformLocation("u_applyTexture");
-//		m_adsUniformCache.m_texture2dMapLoc = m_globalShaderPtr->GetUniformLocation("u_texture2dMap");
-//
-//		m_adsUniformCache.m_mvpLoc = m_globalShaderPtr->GetUniformLocation("u_mvpMatrix");
-//		m_adsUniformCache.m_mvLoc = m_globalShaderPtr->GetUniformLocation("u_mvMatrix");
-//		m_adsUniformCache.m_normalLoc = m_globalShaderPtr->GetUniformLocation("u_normalMatrix");
-//
-//		m_adsUniformCache.m_numLightsLoc = m_globalShaderPtr->GetUniformLocation("u_numberLights");
-//		m_adsUniformCache.m_lightTypesLoc = m_globalShaderPtr->GetUniformLocation("u_lightTypesArr");
-//		m_adsUniformCache.m_lightPosLoc = m_globalShaderPtr->GetUniformLocation("u_lightPositionArr");
-//		m_adsUniformCache.m_lightAmbLoc = m_globalShaderPtr->GetUniformLocation("u_lightAmbientArr");
-//		m_adsUniformCache.m_lightDiffLoc = m_globalShaderPtr->GetUniformLocation("u_lightDiffuseArr");
-//		m_adsUniformCache.m_lightSpecLoc = m_globalShaderPtr->GetUniformLocation("u_lightSpecularArr");
-//		m_adsUniformCache.m_spotCutoffLoc = m_globalShaderPtr->GetUniformLocation("u_spotlightCutoffArr");
-//		m_adsUniformCache.m_spotExpLoc = m_globalShaderPtr->GetUniformLocation("u_spotlightExpArr");
-//		m_adsUniformCache.m_spotDirLoc = m_globalShaderPtr->GetUniformLocation("u_spotlightDirection");
-//		m_adsUniformCache.m_constantAttLoc = m_globalShaderPtr->GetUniformLocation("u_cAttArr");
-//		m_adsUniformCache.m_linearAttLoc = m_globalShaderPtr->GetUniformLocation("u_lAttArr");
-//		m_adsUniformCache.m_quadAttLoc = m_globalShaderPtr->GetUniformLocation("u_qAttArr");
-//		m_adsUniformCache.m_globalAmbLoc = m_globalShaderPtr->GetUniformLocation("u_globalAmbient");
-//
-//		m_adsUniformCache.m_matEmmLoc = m_globalShaderPtr->GetUniformLocation("u_materialE");
-//		m_adsUniformCache.m_matAmbLoc = m_globalShaderPtr->GetUniformLocation("u_materialA");
-//		m_adsUniformCache.m_matDiffLoc = m_globalShaderPtr->GetUniformLocation("u_materialD");
-//		m_adsUniformCache.m_matSpecLoc = m_globalShaderPtr->GetUniformLocation("u_materialS");
-//		m_adsUniformCache.m_matExpLoc = m_globalShaderPtr->GetUniformLocation("u_materialExp");
-//        
-//		m_adsUniformCache.m_applyTexLoc = m_globalShaderPtr->GetUniformLocation("u_applyTexture");
-//		m_adsUniformCache.m_texture2dMapLoc = m_globalShaderPtr->GetUniformLocation("u_texture2dMap");
         
         m_adsUniformCache.m_applyTex = m_globalShaderPtr->GetUniform("u_applyTexture");
         m_adsUniformCache.m_texture2dMap = m_globalShaderPtr->GetUniform("u_texture2dMap");
@@ -374,95 +344,6 @@ namespace GameHalloran
         
 		// Activate the shader.
 		m_globalShaderPtr->Activate();
-
-//		// Set up texture uniforms.
-//		GLint applyTextureVal = GL_FALSE;
-//		if(textureId.is_initialized())
-//		{
-//			applyTextureVal = GL_TRUE;
-//			g_appPtr->GetTextureManagerPtr()->Bind(*textureId, GL_TEXTURE_2D);
-//		}
-//
-//		glUniform1i(m_adsUniformCache.m_applyTexLoc, applyTextureVal);
-//		glUniform1i(m_adsUniformCache.m_texture2dMapLoc, 0);
-//
-//		Matrix4 mvpMat, mvMat;
-//		Matrix3x3 normalMat3;
-//		m_stackManagerPtr->GetModelViewProjectionMatrix(mvpMat);
-//		m_stackManagerPtr->GetModelViewMatrixStack()->GetMatrix(mvMat);
-//		m_stackManagerPtr->GetNormalMatrix(normalMat3, true);
-//		glUniformMatrix4fv(m_adsUniformCache.m_mvpLoc, 1, GL_FALSE, mvpMat.GetComponentsConst());
-//		glUniformMatrix4fv(m_adsUniformCache.m_mvLoc, 1, GL_FALSE, mvMat.GetComponentsConst());
-//		glUniformMatrix3fv(m_adsUniformCache.m_normalLoc, 1, GL_FALSE, normalMat3);
-//
-//		// Set up Light uniforms.
-//		if(!m_dynamicLights.empty())
-//		{
-//			const GLuint numberLights(m_dynamicLights.size());
-//
-//			GLint lightTypesArr[MAX_LIGHTS][1];
-//			GLfloat lightPositionArr[MAX_LIGHTS][3];
-//			GLfloat lightAmbientArr[MAX_LIGHTS][4];
-//			GLfloat lightDiffuseArr[MAX_LIGHTS][4];
-//			GLfloat lightSpecularArr[MAX_LIGHTS][4];
-//			GLfloat lightCutoffArr[MAX_LIGHTS][1];
-//			GLfloat lightExpArr[MAX_LIGHTS][1];
-//			GLfloat lightDirectionArr[MAX_LIGHTS][3];
-//			GLfloat lightCAttArr[MAX_LIGHTS][1];
-//			GLfloat lightLAttArr[MAX_LIGHTS][1];
-//			GLfloat lightQAttArr[MAX_LIGHTS][1];
-//			I32 index = 0;
-//			Matrix4 viewMat(m_camera->VGet()->GetToWorld());
-//			for(LightVector::iterator i = m_dynamicLights.begin(), end = m_dynamicLights.end(); ((index < MAX_LIGHTS) && (i != end)); ++i, ++index)
-//			{
-//				boost::shared_ptr<Light> currLight = *i;
-//				if(currLight->IsOn())
-//				{
-//					lightTypesArr[index][0] = currLight->GetLightType();
-//					lightCutoffArr[index][0] = currLight->GetSpotlightCutoff();
-//					lightExpArr[index][0] = currLight->GetSpotlightExponent();
-//					lightCAttArr[index][0] = currLight->GetConstantAttenuation();
-//					lightLAttArr[index][0] = currLight->GetLinearAttenuation();
-//					lightQAttArr[index][0] = currLight->GetQuadraticAttenuation();
-//
-//					// Translate light position and direction vectors into View/Camera space.
-//					Vector4 lightWorldPos(currLight->GetPosition());
-//					Vector4 lightWorldDir(currLight->GetDirection());
-//					Vector4 lightViewPos(viewMat * lightWorldPos);
-//					Vector4 lightViewDir(viewMat * lightWorldDir);
-//					lightViewDir.Normalize();
-//					Vector3 lightViewPos3(lightViewPos);
-//					Vector3 lightViewDir3(lightViewDir);
-//
-//					memcpy(lightPositionArr[index], lightViewPos3.GetComponentsConst(), m_adsUniformCache.FLOAT_SIZE * 3);
-//					memcpy(lightDirectionArr[index], lightViewDir3.GetComponentsConst(), m_adsUniformCache.FLOAT_SIZE * 3);
-//					memcpy(lightAmbientArr[index], currLight->GetAmbient().GetComponentsConst(), m_adsUniformCache.FLOAT_ARR_SIZE);
-//					memcpy(lightDiffuseArr[index], currLight->GetDiffuse().GetComponentsConst(), m_adsUniformCache.FLOAT_ARR_SIZE);
-//					memcpy(lightSpecularArr[index], currLight->GetSpecular().GetComponentsConst(), m_adsUniformCache.FLOAT_ARR_SIZE);
-//				}
-//			}
-//
-//			glUniform1i(m_adsUniformCache.m_numLightsLoc, numberLights);
-//			glUniform1iv(m_adsUniformCache.m_lightTypesLoc, numberLights, (const GLint *)lightTypesArr);
-//			glUniform3fv(m_adsUniformCache.m_lightPosLoc, numberLights, (const GLfloat *)lightPositionArr);
-//			glUniform4fv(m_adsUniformCache.m_lightAmbLoc, numberLights, (const GLfloat *)lightAmbientArr);
-//			glUniform4fv(m_adsUniformCache.m_lightDiffLoc, numberLights, (const GLfloat *)lightDiffuseArr);
-//			glUniform4fv(m_adsUniformCache.m_lightSpecLoc, numberLights, (const GLfloat *)lightSpecularArr);
-//			glUniform1fv(m_adsUniformCache.m_spotCutoffLoc, numberLights, (const GLfloat *)lightCutoffArr);
-//			glUniform1fv(m_adsUniformCache.m_spotExpLoc, numberLights, (const GLfloat *)lightExpArr);
-//			glUniform3fv(m_adsUniformCache.m_spotDirLoc, numberLights, (const GLfloat *)lightDirectionArr);
-//			glUniform1fv(m_adsUniformCache.m_constantAttLoc, numberLights, (const GLfloat *)lightCAttArr);
-//			glUniform1fv(m_adsUniformCache.m_linearAttLoc, numberLights, (const GLfloat *)lightLAttArr);
-//			glUniform1fv(m_adsUniformCache.m_quadAttLoc, numberLights, (const GLfloat *)lightQAttArr);
-//			glUniform4fv(m_adsUniformCache.m_globalAmbLoc, 1, m_ambientLightSrc.GetAmbient().GetComponentsConst());
-//		}
-//
-//		// Set up Object/Scene Nodes material uniforms.
-//		glUniform4fv(m_adsUniformCache.m_matEmmLoc, 1, objectMaterial.GetEmissive().GetComponentsConst());
-//		glUniform4fv(m_adsUniformCache.m_matAmbLoc, 1, objectMaterial.GetAmbient().GetComponentsConst());
-//		glUniform4fv(m_adsUniformCache.m_lightDiffLoc, 1, objectMaterial.GetDiffuse().GetComponentsConst());
-//		glUniform4fv(m_adsUniformCache.m_matSpecLoc, 1, objectMaterial.GetSpecular().GetComponentsConst());
-//		glUniform1f(m_adsUniformCache.m_matExpLoc, objectMaterial.GetSpecularPower());
 
 		return (true);
 	}

@@ -185,6 +185,12 @@
 		1485DE2114140E490031966F /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = /opt/local/lib/libvorbisfile.a; sourceTree = "<absolute>"; };
 		1485DE2914140F100031966F /* libtinyxml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxml.a; path = ../../../../libs/Debug/libtinyxml.a; sourceTree = "<group>"; };
 		1485DE2B141415690031966F /* libgameframework.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgameframework.a; path = ../../../../libs/Release/libgameframework.a; sourceTree = "<group>"; };
+		14933E53152CE24400238111 /* phong.fp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = phong.fp; sourceTree = "<group>"; };
+		14933E54152CE24400238111 /* phong.vp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = phong.vp; sourceTree = "<group>"; };
+		14933E55152CE56700238111 /* multilight.fp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = multilight.fp; sourceTree = "<group>"; };
+		14933E56152CE56700238111 /* multilight.vp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = multilight.vp; sourceTree = "<group>"; };
+		14933E57152CE5E200238111 /* perfrag.fp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = perfrag.fp; sourceTree = "<group>"; };
+		14933E58152CE5E200238111 /* perfrag.vp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = perfrag.vp; sourceTree = "<group>"; };
 		14CAD1F914254B7B00D7865B /* gameframework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gameframework.xcodeproj; path = ../../gameframework/gameframework.xcodeproj; sourceTree = "<group>"; };
 		14E0A0C515177438002DB559 /* libBulletCollision.2.80.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libBulletCollision.2.80.dylib; path = ../../../../../../../../opt/local/lib/libBulletCollision.2.80.dylib; sourceTree = "<group>"; };
 		14E0A0C615177438002DB559 /* libBulletDynamics.2.80.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libBulletDynamics.2.80.dylib; path = ../../../../../../../../opt/local/lib/libBulletDynamics.2.80.dylib; sourceTree = "<group>"; };
@@ -276,6 +282,12 @@
 		142AC4391442101300B97B09 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				14933E57152CE5E200238111 /* perfrag.fp */,
+				14933E58152CE5E200238111 /* perfrag.vp */,
+				14933E55152CE56700238111 /* multilight.fp */,
+				14933E56152CE56700238111 /* multilight.vp */,
+				14933E53152CE24400238111 /* phong.fp */,
+				14933E54152CE24400238111 /* phong.vp */,
 				142AC43A1442101300B97B09 /* EnvironmentBox.fp */,
 				142AC43B1442101300B97B09 /* EnvironmentBox.vp */,
 				142AC43C1442101300B97B09 /* flat.fp */,

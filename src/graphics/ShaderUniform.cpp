@@ -27,8 +27,8 @@ namespace GameHalloran
         GF_CLEAR_GL_ERROR();
         
         
-        static int i(0);
-        printf("%i Cleaning uniform %s\n", ++i, m_id.getStr().c_str());
+        //static int i(0);
+        //printf("%i Cleaning uniform %s\n", ++i, m_id.getStr().c_str());
         
         switch(m_type)
         {

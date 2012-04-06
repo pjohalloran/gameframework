@@ -34,9 +34,9 @@
         <MinVideoRam>16</MinVideoRam>
         <MinVirtualMemory>16</MinVirtualMemory>
         <OpenGLDebug>0</OpenGLDebug>
-        <OpenGLMajor>2</OpenGLMajor>
-        <OpenGLMinor>1</OpenGLMinor>
-        <OpenGLProfile>compatibility</OpenGLProfile>
+        <OpenGLMajor>3</OpenGLMajor>
+        <OpenGLMinor>2</OpenGLMinor>
+        <OpenGLProfile>core</OpenGLProfile>
         <PhysicsSystem>Bullet</PhysicsSystem>
         <ResCacheSize>1</ResCacheSize>
         <ResFile>Pool3D.zip</ResFile>

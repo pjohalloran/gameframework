@@ -249,8 +249,8 @@ vec3 GetAmbientTerm(vec4 lightAmbientColor)
 vec3 GetDiffuseTerm(vec4 lightDiffuseColor, vec3 dirToLight, vec3 vertexCameraNormal)
 {
     return (vec3(0.0));
-	float dotProduct = min(dot(vertexCameraNormal, dirToLight), 0.0);
-    //float dotProduct = dot(vertexCameraNormal, dirToLight);
+	//float dotProduct = min(dot(vertexCameraNormal, dirToLight), 0.0);
+    float dotProduct = dot(vertexCameraNormal, dirToLight);
 	return (dotProduct * lightDiffuseColor.rgb * u_materialD.rgb);
 }
 
@@ -272,7 +272,7 @@ vec3 GetDiffuseTerm(vec4 lightDiffuseColor, vec3 dirToLight, vec3 vertexCameraNo
 vec3 GetSpecularTermGlBlue(vec4 lightSpecularColor, vec3 dirFromLight, vec3 vertexCameraNormal)
 {
 	vec3 reflectedLightVec = reflect(dirFromLight, vertexCameraNormal);
-	float dotProduct = min(dot(vertexCameraNormal, reflectedLightVec), 0.0);
+	float dotProduct = max(dot(vertexCameraNormal, reflectedLightVec), 0.0);
 //    if(dotProduct == 0.0)
 //    {
 //        return (vec3(0.0, 0.0, 0.0));
@@ -339,12 +339,12 @@ void main(void)
 
 	vec4 primaryColor;							// Color of fragment (Material emission, Global Ambient Light + Diffuse 
 												//  and Ambient components of each light in the scene as well as the texture color.)
-	vec3 secondaryColor;						// Specular highlight from each light in the scene.
+	vec3 secondaryColor = vec3(0.0);						// Specular highlight from each light in the scene.
 	float attTermArr[MAX_NUMBER_LIGHTS];		// Attenuation factor array (calculated once during primary loop and used again in secondary loop).
 	float spotTermArr[MAX_NUMBER_LIGHTS];		// Spotlight factor array (calculated once during primary loop and used again in secondary loop).
 
 	// Apply first two light independant terms.
-    primaryColor.rgb = u_materialE.rgb + GetScaledGlobalAmbientLight();
+    primaryColor = vec4(u_materialE.xyz + GetScaledGlobalAmbientLight(), 1.0);
 
     // For each light in the scene, Apply the ambient and diffuse terms scaled by the attenuation and spotlight factors.
     for(int i = 0; i < numberLights; ++i)
@@ -354,7 +354,7 @@ void main(void)
 		vec3 ambientTerm = GetAmbientTerm(u_lightAmbientArr[i]);
 		vec3 diffuseTerm = GetDiffuseTerm(u_lightDiffuseArr[i], normalize(vp_varyingLightDirArr[i]), normalize(vp_varyingNormalVec));
 		
-		primaryColor.rgb += (attTermArr[i] * spotTermArr[i]) * (ambientTerm + diffuseTerm);
+		primaryColor.xyz += (attTermArr[i] * spotTermArr[i]) * vec3(ambientTerm + diffuseTerm);
 	}
 
 	// If we are applying a texture.
@@ -365,20 +365,24 @@ void main(void)
 
 
 	// For each light in the scene, Apply the specular terms scaled by the attenuation and spotlight factors.
-    /*for(int i = 0; i < numberLights; ++i)
+    for(int j = 0; j < numberLights; ++j)
     {
-		vec3 specularTerm = GetSpecularTermGlBlue(u_lightSpecularArr[i], normalize(-vp_varyingLightDirArr[i]), normalize(vp_varyingNormalVec));
-        //vec3 specularTerm = GetSpecularTermGlRed(u_lightSpecularArr[i], normalize(vp_varyingLightDirArr[i]), u_cameraPos, vp_flatVertexPosition);
-		secondaryColor += (attTermArr[i] * spotTermArr[i]) * specularTerm;
-	}*/
-
+		vec3 specularTerm = GetSpecularTermGlBlue(u_lightSpecularArr[j], normalize(-vp_varyingLightDirArr[j]), normalize(vp_varyingNormalVec));
+        //vec3 specularTerm = GetSpecularTermGlRed(u_lightSpecularArr[j], normalize(vp_varyingLightDirArr[j]), vec3(u_cameraPos.xyz), vp_flatVertexPosition);
+		secondaryColor += (attTermArr[j] * spotTermArr[j]) * specularTerm;
+	}
 
 	// Final fragment color is the primary color (which is combined with the tex color) + the secondary color.
-	fp_colorVec.rgb = primaryColor.rgb + secondaryColor;
+	fp_colorVec = vec4(primaryColor.xyz + secondaryColor.xyz, u_materialD.a);
+
+    if(!gl_FrontFacing)
+    {
+        fp_colorVec *= vec4(0.5, 0.5, 0.5, 1.0);
+    }
 
 
 	// Ensure the final alpha value for the fragment is equal to the Materials diffuse alpha.
 	// TODO: What about the textures alpha component??
-	fp_colorVec.a = u_materialD.a;
+	//fp_colorVec.a = u_materialD.a;
 }
 

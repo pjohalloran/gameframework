@@ -20,7 +20,7 @@ uniform sampler2D colorMap;
 uniform float uiAlpha;
 
 // Input texture coordinates.
-in vec2 varyTexCoords;
+smooth in vec2 varyTexCoords;
 
 // Output fragment color
 out vec4 fragmentColorVec;

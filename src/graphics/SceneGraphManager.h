@@ -151,37 +151,6 @@ namespace GameHalloran
 			static const size_t FLOAT_ARR_SIZE = sizeof(GLfloat)*4;
 			static const size_t INT_SIZE = sizeof(GLint);
 
-			// Texture uniforms.
-			GLint m_applyTexLoc;			///< Location for the uniform "u_applyTexture".
-			GLint m_texture2dMapLoc;		///< Location for the uniform "u_texture2dMap".
-
-			// Transformation uniforms.
-			GLint m_mvpLoc;					///< Location for the uniform "u_mvpMatrix".
-			GLint m_mvLoc;					///< Location for the uniform "u_mvMatrix".
-			GLint m_normalLoc;				///< Location for the uniform "u_normalMatrix".
-
-			// Lighting uniforms.
-			GLint m_numLightsLoc;			///< Location for the uniform "u_numberLights".
-			GLint m_lightTypesLoc;			///< Location for the uniform "u_lightTypesArr".
-			GLint m_lightPosLoc;			///< Location for the uniform "u_lightPositionArr".
-			GLint m_lightAmbLoc;			///< Location for the uniform "u_lightAmbientArr".
-			GLint m_lightDiffLoc;			///< Location for the uniform "u_lightDiffuseArr".
-			GLint m_lightSpecLoc;			///< Location for the uniform "u_lightSpecularArr".
-			GLint m_spotCutoffLoc;			///< Location for the uniform "u_spotlightCutoffArr".
-			GLint m_spotExpLoc;				///< Location for the uniform "u_spotlightExpArr".
-			GLint m_spotDirLoc;				///< Location for the uniform "u_spotlightDirection".
-			GLint m_constantAttLoc;			///< Location for the uniform "u_cAttArr".
-			GLint m_linearAttLoc;			///< Location for the uniform "u_lAttArr".
-			GLint m_quadAttLoc;				///< Location for the uniform "u_qAttArr".
-			GLint m_globalAmbLoc;			///< Location for the uniform "u_globalAmbient".
-
-			// Scene object material uniforms.
-			GLint m_matEmmLoc;				///< Location for the uniform "u_materialE".
-			GLint m_matAmbLoc;				///< Location for the uniform "u_materialA".
-			GLint m_matDiffLoc;				///< Location for the uniform "u_materialD".
-			GLint m_matSpecLoc;				///< Location for the uniform "u_materialS".
-			GLint m_matExpLoc;				///< Location for the uniform "u_materialExp".
-
 			// /////////////////////////////////////////////////////////////////
 			// Constructor.
 			//

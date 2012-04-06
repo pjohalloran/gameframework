@@ -45,6 +45,8 @@ namespace GameHalloran
 	class BulletPhysicsDebugDrawer : public btIDebugDraw
 	{
 	private:
+        
+        static const U32 MAX_LINES = 500;
 
 		GLuint m_vaoId;															///< Vertex attribute array object.
 		GLuint m_vboId;															///< Vertex buffer object.
@@ -53,6 +55,8 @@ namespace GameHalloran
 		I32 m_debugMode;														///< Current debug mode.
 		ShaderUniformSPtr m_mvpUniform;                                         ///< 
         ShaderUniformSPtr m_colorUniform;                                       ///< 
+        U32 m_numberLines;                                                      ///< 
+        
         
 		// /////////////////////////////////////////////////////////////////
 		// Creates the Vertex Buffer and Vertex attribute objects.
@@ -72,6 +76,12 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		bool LoadVertexBuffer(const btVector3 &from, const btVector3 &to);
 
+        // /////////////////////////////////////////////////////////////////
+        //
+        //
+        // /////////////////////////////////////////////////////////////////
+        void ResetLines();
+        
 	public:
 
 		// /////////////////////////////////////////////////////////////////
@@ -130,6 +140,12 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		virtual void draw3dText(const btVector3 &location, const char *textString);
 
+        // /////////////////////////////////////////////////////////////////
+        //
+        //
+        // /////////////////////////////////////////////////////////////////
+        void BatchDraw();
+        
 		// /////////////////////////////////////////////////////////////////
 		// Set the debug mode.
 		//

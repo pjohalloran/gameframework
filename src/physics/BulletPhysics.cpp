@@ -1058,6 +1058,7 @@ namespace GameHalloran
 	void BulletPhysics::VRenderDiagnostics()
 	{
 		m_dynamicsWorld->debugDrawWorld();
+        m_debugDrawer->BatchDraw();
 	}
 
 	// /////////////////////////////////////////////////////////////////
