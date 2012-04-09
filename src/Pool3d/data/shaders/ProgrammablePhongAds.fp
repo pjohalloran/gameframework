@@ -117,11 +117,16 @@ uniform vec4 u_cameraPos;
 //};
 //uniform Fog u_fog;
 
-uniform bool u_fogOn;
+uniform int u_fogType;
 uniform float u_fogMin;
 uniform float u_fogMax;
+uniform float u_fogDensity;
 uniform vec3 u_fogColor;
 
+const int FOG_OFF = 0;
+const int FOG_LINEAR = 1;
+const int FOG_EXPONENTIAL = 2;
+const int FOG_EXPONENTIAL_BY_TWO = 3;
 
 // /////////////////////////////////////////////////////////////////
 
@@ -393,19 +398,31 @@ void main(void)
 	// Final fragment color is the primary color (which is combined with the tex color) + the secondary color.
 	vec3 adsColor = primaryColor.xyz + secondaryColor.xyz;
 
-    if(u_fogOn)
+    
+    if(u_fogType != FOG_OFF)
     {
         float dist = abs(vp_varyingVertexPosition.z);
         //float dist = length(vp_varyingVertexPosition.xyz);
-        float fogFactor = (u_fogMax - dist) / (u_fogMax - u_fogMin);
+        
+        float fogFactor = 0.0f;
+        if(u_fogType == FOG_LINEAR)
+        {
+            fogFactor = (u_fogMax - dist) / (u_fogMax - u_fogMin);
+        }
+        else if(u_fogType == FOG_EXPONENTIAL)
+        {
+            fogFactor = exp(-u_fogDensity * dist);
+        }
+        else if(u_fogType == FOG_EXPONENTIAL_BY_TWO)
+        {
+            fogFactor = exp(-pow(u_fogDensity * dist, 2));
+        }
+        
         fogFactor = clamp(fogFactor, 0.0, 1.0);
-
-        vec3 mixedColor = mix(u_fogColor, adsColor, fogFactor);
-    
-        fp_colorVec = vec4(mixedColor, u_materialD.a);
+        adsColor = mix(u_fogColor, adsColor, fogFactor);
     }
-    else
-        fp_colorVec = vec4(adsColor, u_materialD.a);
+    
+    fp_colorVec = vec4(adsColor, u_materialD.a);
         
     
     //if(!gl_FrontFacing)

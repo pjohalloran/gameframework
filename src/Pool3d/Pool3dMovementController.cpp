@@ -821,7 +821,9 @@ namespace GameHalloran
 
 			// Get the distance to the cue ball and ensure it is within the max limits.
 			F32 distanceToCueBall = m_cueBallPos.Distance(cuePos) - (m_cueDepth / 2.0f);
-			std::cout << "distanceToCueBall: " << distanceToCueBall << std::endl;
+#if defined(DEBUG)
+			//std::cout << "distanceToCueBall: " << distanceToCueBall << std::endl;
+#endif
 			if(distanceToCueBall > m_minCueDistance && distanceToCueBall < m_maxCueDistance)
 			{
 				m_currCueDistance = distanceToCueBall;

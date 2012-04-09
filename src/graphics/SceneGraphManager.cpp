@@ -101,9 +101,10 @@ namespace GameHalloran
         
         m_adsUniformCache.m_cameraPos = m_globalShaderPtr->GetUniform("u_cameraPos");
         
-        m_adsUniformCache.m_fogEnabled = m_globalShaderPtr->GetUniform("u_fogOn");
+        m_adsUniformCache.m_fogType = m_globalShaderPtr->GetUniform("u_fogType");
         m_adsUniformCache.m_fogMinDist = m_globalShaderPtr->GetUniform("u_fogMin");
         m_adsUniformCache.m_fogMaxDist = m_globalShaderPtr->GetUniform("u_fogMax");
+        m_adsUniformCache.m_fogDensity = m_globalShaderPtr->GetUniform("u_fogDensity");
         m_adsUniformCache.m_fogColor = m_globalShaderPtr->GetUniform("u_fogColor");
 	}
 
@@ -188,7 +189,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	SceneGraphManager::SceneGraphManager(boost::shared_ptr<ModelViewProjStackManager> stackManagerPtr)\
 		: m_adsUniformCache(), m_root(), m_camera(), m_stackManagerPtr(stackManagerPtr), m_alphaNodeList(), m_actorMap(), m_shaderMap(),\
-			m_ambientLightSrc(), m_dynamicLights(), m_globalShaderPtr(), m_metaTable(), m_fogEffect(false)
+			m_ambientLightSrc(), m_dynamicLights(), m_globalShaderPtr(), m_metaTable(), m_fogAtt()
 	{
 		m_root.reset(GCC_NEW RootSceneNode(this));
 
@@ -347,12 +348,24 @@ namespace GameHalloran
 		m_adsUniformCache.m_materialSpec->SetValue((GLfloat * const)objectMaterial.GetSpecular().GetComponentsConst(), 4);
 		m_adsUniformCache.m_materialExp->SetValue((GLfloat)objectMaterial.GetSpecularPower());
         
-        m_adsUniformCache.m_fogEnabled->SetValue(m_fogEffect ? GL_TRUE : GL_FALSE);
-        if(m_fogEffect)
+        m_adsUniformCache.m_fogType->SetValue(m_fogAtt.m_type);
+        switch(m_fogAtt.m_type)
         {
-            m_adsUniformCache.m_fogMinDist->SetValue(1.0f);
-            m_adsUniformCache.m_fogMaxDist->SetValue(5.0f);
-            m_adsUniformCache.m_fogColor->SetValue((GLfloat * const)g_gcLightGray.GetComponentsConst(), 3);
+            case FogEffectAttributes::eLinear:
+            {
+                m_adsUniformCache.m_fogMinDist->SetValue(m_fogAtt.m_minDistance);
+                m_adsUniformCache.m_fogMaxDist->SetValue(m_fogAtt.m_maxDistance);
+                m_adsUniformCache.m_fogColor->SetValue((GLfloat * const)m_fogAtt.m_color.GetComponentsConst(), 3);
+                break;
+            }
+                
+            case FogEffectAttributes::eExponential:
+            case FogEffectAttributes::eExponentialByTwo:
+            {
+                m_adsUniformCache.m_fogDensity->SetValue(m_fogAtt.m_density);
+                m_adsUniformCache.m_fogColor->SetValue((GLfloat * const)m_fogAtt.m_color.GetComponentsConst(), 3);
+                break;
+            }
         }
         
 		// Activate the shader.

@@ -317,11 +317,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
-         timestampString = "355431549.680494"
+         timestampString = "355662035.384567"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "461"
-         endingLineNumber = "461"
+         startingLineNumber = "474"
+         endingLineNumber = "474"
          landmarkName = "SceneGraphManager::AddChild(boost::shared_ptr&lt;ISceneNode&gt; nodePtr, boost::optional&lt;ActorId&gt; id)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -345,11 +345,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
-         timestampString = "355429877.585723"
+         timestampString = "355662035.384567"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "327"
-         endingLineNumber = "327"
+         startingLineNumber = "328"
+         endingLineNumber = "328"
          landmarkName = "SceneGraphManager::PrepareAdsShader(const Material &amp;objectMaterial, const boost::optional&lt;TexHandle&gt; textureId)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -429,12 +429,54 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/SceneGraphManager.cpp"
-         timestampString = "355429877.585723"
+         timestampString = "355662035.384567"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "283"
-         endingLineNumber = "283"
+         startingLineNumber = "284"
+         endingLineNumber = "284"
          landmarkName = "SceneGraphManager::PrepareAdsShader(const Material &amp;objectMaterial, const boost::optional&lt;TexHandle&gt; textureId)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dView.cpp"
+         timestampString = "355676819.731673"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1345"
+         endingLineNumber = "1345"
+         landmarkName = "Pool3dView::VOnEvent(GF_Event &amp;eventObj, const F32 elapsedTime)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dView.cpp"
+         timestampString = "355681219.88298"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1363"
+         endingLineNumber = "1363"
+         landmarkName = "Pool3dView::VOnEvent(GF_Event &amp;eventObj, const F32 elapsedTime)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dView.cpp"
+         timestampString = "355681413.117079"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1388"
+         endingLineNumber = "1388"
+         landmarkName = "Pool3dView::VOnEvent(GF_Event &amp;eventObj, const F32 elapsedTime)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

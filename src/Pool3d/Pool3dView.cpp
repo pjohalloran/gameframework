@@ -1342,7 +1342,67 @@ namespace GameHalloran
                                     
                             case GLFW_KEY_F3:
                             {
-                                m_sgm.ToggleFogEffect();    
+                                SceneGraphManager::FogEffectAttributes att(m_sgm.GetFogEffectAttributes());
+                                if(att.m_type == SceneGraphManager::FogEffectAttributes::eTYPE_COUNT-1)
+                                {
+                                    printf("Turning FOG off\n");
+                                    m_sgm.EnableFogEffect(SceneGraphManager::FogEffectAttributes::eOff);
+                                }
+                                else
+                                {
+                                    printf("Turning FOG %i on\n", att.m_type+1);
+                                    m_sgm.EnableFogEffect(att.m_type+1);
+                                }
+                                break;
+                            }
+                                    
+                            case GLFW_KEY_F8:
+                            {
+                                if(m_sgm.IsFogOn())
+                                {
+                                    SceneGraphManager::FogEffectAttributes att(m_sgm.GetFogEffectAttributes());
+                                    switch(att.m_type)
+                                    {
+                                        case SceneGraphManager::FogEffectAttributes::eLinear:
+                                        {
+                                            att.m_minDistance += 0.1f;
+                                            att.m_maxDistance -= 0.1f;
+                                            break;
+                                        }
+                                        case SceneGraphManager::FogEffectAttributes::eExponential:
+                                        case SceneGraphManager::FogEffectAttributes::eExponentialByTwo:
+                                        {
+                                            att.m_density += 0.1f;
+                                            break;
+                                        }
+                                    }
+                                    m_sgm.SetFogEffectAttributes(att);
+                                }
+                                break;
+                            }
+                                    
+                            case GLFW_KEY_F9:
+                            {
+                                if(m_sgm.IsFogOn())
+                                {
+                                    SceneGraphManager::FogEffectAttributes att(m_sgm.GetFogEffectAttributes());
+                                    switch(att.m_type)
+                                    {
+                                        case SceneGraphManager::FogEffectAttributes::eLinear:
+                                        {
+                                            att.m_minDistance -= 0.1f;
+                                            att.m_maxDistance += 0.1f;
+                                            break;
+                                        }
+                                        case SceneGraphManager::FogEffectAttributes::eExponential:
+                                        case SceneGraphManager::FogEffectAttributes::eExponentialByTwo:
+                                        {
+                                            att.m_density -= 0.1f;
+                                            break;
+                                        }
+                                    }
+                                    m_sgm.SetFogEffectAttributes(att);
+                                }
                                 break;
                             }
 

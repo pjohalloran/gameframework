@@ -104,6 +104,36 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	class SceneGraphManager
 	{
+    public:
+        
+        // /////////////////////////////////////////////////////////////////
+        // @struct FogEffectAttributes
+        // 
+        // Data def for applying a Fog effect in game similar to the fixed
+        // function fog effect.
+        //
+        // /////////////////////////////////////////////////////////////////
+        struct FogEffectAttributes
+        {
+            enum Type
+            {
+                eOff = 0,
+                eLinear,
+                eExponential,
+                eExponentialByTwo,
+                eTYPE_COUNT
+            };
+            
+            FogEffectAttributes() : m_type(0), m_color(g_gcLightGray), m_minDistance(1.0f),\
+            m_maxDistance(5.0f), m_density(0.5f) {};
+            
+            int m_type;                 ///< Type of effect.
+            Vector3 m_color;            ///< Color of the fog (alpha is ignored).
+            float m_minDistance;        ///< Min fog distance where fog is applied when eLinear is used.
+            float m_maxDistance;        ///< Max fog distance where fog saturates fragment color when eLinear is used.
+            float m_density;            ///< fog density when eExponential or eExponentialByTwo is used.
+        };
+        
 	private:
 
 		static const I32 MAX_LIGHTS = 8;
@@ -144,12 +174,13 @@ namespace GameHalloran
             ShaderUniformSPtr m_materialSpec;				///< Location for the uniform "u_materialS".
             ShaderUniformSPtr m_materialExp;				///< Location for the uniform "u_materialExp".
             
-            ShaderUniformSPtr m_fogEnabled;                 ///< "Fog.on" uniform.
+            ShaderUniformSPtr m_fogType;                    ///< "Fog.type" uniform.
             ShaderUniformSPtr m_fogMinDist;                 ///< "Fog.minDistance" uniform.
             ShaderUniformSPtr m_fogMaxDist;                 ///< "Fog.maxDistance" uniform.
             ShaderUniformSPtr m_fogColor;                   ///< "Fog.color" uniform.
+            ShaderUniformSPtr m_fogDensity;                 ///< "Fog.density" uniform.
             
-            ShaderUniformSPtr m_cameraPos;
+            ShaderUniformSPtr m_cameraPos;                  ///< 
             
 			// Useful constants for PrepareAdsShader().
 			static const size_t FLOAT_SIZE = sizeof(GLfloat);
@@ -194,6 +225,12 @@ namespace GameHalloran
                 m_materialDiff.reset();
                 m_materialSpec.reset();
                 m_materialExp.reset();
+                m_cameraPos.reset();
+                m_fogType.reset();
+                m_fogColor.reset();
+                m_fogMinDist.reset();
+                m_fogMaxDist.reset();
+                m_fogDensity.reset();
 			};
 		};
 
@@ -208,8 +245,8 @@ namespace GameHalloran
 		LightVector m_dynamicLights;											///< List of dynamic lights attached to the scene.
 		boost::shared_ptr<GLSLShader> m_globalShaderPtr;						///< The SGMs' main GLSL shader program (ADS model with phong or goraud shading) (nodes may still use their own shaders if they wish to).
 		LuaPlus::LuaObject m_metaTable;											///< LuaPlus metatable for opening up access to external scripts to some of the SGM functionality.
-
-        bool m_fogEffect;
+        
+        FogEffectAttributes m_fogAtt;                                           ///< Attributes for the optinal fog effect in the ADS shader.
         
 		// /////////////////////////////////////////////////////////////////
 		// Find all the uniforms for the global ADS phong shader and cache
@@ -477,11 +514,37 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		bool AddShader(boost::shared_ptr<GLSLShader> shaderPtr, const std::string &shaderNameRef);
         
+        // Fog effect scene API...
+        
         // /////////////////////////////////////////////////////////////////
         // ...
         //
         // /////////////////////////////////////////////////////////////////
-        void ToggleFogEffect() { m_fogEffect = !m_fogEffect; };
+        inline void EnableFogEffect(const int type) { if(type >= 0 && type < FogEffectAttributes::eTYPE_COUNT) m_fogAtt.m_type = type; };
+        
+        // /////////////////////////////////////////////////////////////////
+        // ...
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline void DisableFogEffect() { m_fogAtt.m_type = 0; };
+        
+        // /////////////////////////////////////////////////////////////////
+        // ...
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline bool IsFogOn() const { return (m_fogAtt.m_type != FogEffectAttributes::eOff); };
+        
+        // /////////////////////////////////////////////////////////////////
+        // ...
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline void SetFogEffectAttributes(const struct FogEffectAttributes &att) { m_fogAtt = att; }
+        
+        // /////////////////////////////////////////////////////////////////
+        // ...
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline struct FogEffectAttributes GetFogEffectAttributes() { return (m_fogAtt); };
 
 	};
 
