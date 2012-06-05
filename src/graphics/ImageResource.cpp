@@ -17,6 +17,8 @@
 
 #include "GameMain.h"
 
+#include <boost/algorithm/string/case_conv.hpp>
+
 
 namespace GameHalloran
 {
@@ -62,6 +64,29 @@ namespace GameHalloran
 		
 		return (IMAGE_TYPE_UNKNOWN);
 	}
+    
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    ImageMode FindImageModeFromString(const std::string &imageModeRef)
+    {
+		if(imageModeRef.empty())
+			return (eIMAGE_MODE_UNKNOWN);
+        
+        std::string copy(imageModeRef);
+        boost::algorithm::to_lower(copy);
+        
+		if(copy.compare("rgb") == 0)
+        {
+            return (eRGB);
+        }
+		else if(copy.compare("rgba") == 0)
+        {
+            return (eRGBA);
+        }
+		
+		return (eIMAGE_MODE_UNKNOWN);
+    }
 
 	// ////////////////////////////////////////////////////////////////////
 	// 

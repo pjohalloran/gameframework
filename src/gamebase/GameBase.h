@@ -23,6 +23,7 @@
 #include "GameLog.h"
 
 #include <boost/shared_ptr.hpp>
+#include <memory>
 
 // Define the version of new we are going to use depending on the build mode.
 #if _WINDOWS && (defined(_DEBUG) || defined(DEBUG))
