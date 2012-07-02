@@ -46,10 +46,11 @@ namespace GameHalloran
 									const boost::shared_ptr<GLSLShader> shaderTexObj,\
 									const std::string &textRef,\
 									const std::string &textureNameRef,\
+                                    const std::string &atlasNameRef,\
 									const bool visible,\
 									const ScreenElementId id,\
 									const bool enabled) throw (GameException &)\
-									: ControlWidget(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, textureNameRef, visible, id, enabled),\
+									: ControlWidget(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, textureNameRef, atlasNameRef, visible, id, enabled),\
 										m_text(textRef)
 	{
 		VSetText(textRef);

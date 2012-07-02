@@ -35,9 +35,10 @@ namespace GameHalloran
 										const boost::shared_ptr<GLSLShader> shaderFlatObj,\
 										const boost::shared_ptr<GLSLShader> shaderTexObj,\
 										const std::string &textureNameRef,\
+                                        const std::string &atlasNameRef,\
 										const bool visible,\
 										const ScreenElementId id) throw (GameException &)\
-										: AbstractWidget(posRef, colorRef, mvpStackManPtr, width, height, shaderFlatObj, shaderTexObj, textureNameRef, visible, id),\
+										: AbstractWidget(posRef, colorRef, mvpStackManPtr, width, height, shaderFlatObj, shaderTexObj, textureNameRef, atlasNameRef, visible, id),\
 											m_list()
 	{
 	}

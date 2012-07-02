@@ -12,7 +12,7 @@
 		1481441A1424F01800B969A5 /* GameTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 148144191424F01800B969A5 /* GameTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1481441D1424F0B700B969A5 /* GamePlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 1481441C1424F0B700B969A5 /* GamePlatform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1481441F1424F2E000B969A5 /* GameEndianConv.h in Headers */ = {isa = PBXBuildFile; fileRef = 1481441E1424F2E000B969A5 /* GameEndianConv.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		149459441540B5E500AC7F71 /* TextureAtlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 149459431540B5E500AC7F71 /* TextureAtlas.h */; };
+		149459441540B5E500AC7F71 /* TextureAtlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 149459431540B5E500AC7F71 /* TextureAtlas.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		149553591558105C00E8A444 /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 149553581558105C00E8A444 /* TextureAtlas.cpp */; };
 		14AB121E1448A39E00390E7A /* GameMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AB121D1448A39E00390E7A /* GameMemory.cpp */; };
 		14AB12211448ABFA00390E7A /* GameAllocater.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AB12201448ABF900390E7A /* GameAllocater.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1091,13 +1091,13 @@
 				14C6B77E13F9CBA2005130FC /* IGameView.h in Headers */,
 				141733D814478DA50031AC96 /* GameMemory.h in Headers */,
 				14AB12211448ABFA00390E7A /* GameAllocater.h in Headers */,
+				149459441540B5E500AC7F71 /* TextureAtlas.h in Headers */,
 				143044E81448BE9100E06967 /* MemoryManager.h in Headers */,
 				14B5AA42144B5302000EFA8D /* DefaultAllocater.h in Headers */,
 				14C6B77F13F9CBA2005130FC /* IScreenElement.h in Headers */,
 				14F701551481298D00B44AE6 /* ICleanable.h in Headers */,
 				14F70157148129F800B44AE6 /* ICleanableObserver.h in Headers */,
 				14F7015914812DA700B44AE6 /* ShaderUniform.h in Headers */,
-				149459441540B5E500AC7F71 /* TextureAtlas.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

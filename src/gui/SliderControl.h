@@ -167,6 +167,7 @@ namespace GameHalloran
 								const F32 sliderPos,\
 								const I32 eventTypeId,\
 								const std::string &textureNameRef = std::string(),\
+                                const std::string &atlasNameRef = std::string(),\
 								const bool visible = true,\
 								const ScreenElementId id = SCREEN_ELEMENT_ID_NOT_ASSIGNED,\
 								const bool enabled = true) throw (GameException &);

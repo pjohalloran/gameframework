@@ -64,7 +64,7 @@ mmGameLogo =
 		r = 0.0,
 		g = 0.0,
 		b = 0.0,
-		a = 0.1
+		a = 0.9
 	},
 	Dimension =
 	{
@@ -73,8 +73,9 @@ mmGameLogo =
 		Height = 0.2,
 		Depth = 0.0
 	},
-	TextureName = "textures/Pool3dLogo.tga",
-	--TextureName = "",
+	--TextureName = "textures/Pool3dLogo.tga",
+	TextureName = "Pool3dLogo.tga",
+	AtlasName = "ALL",
 	Visible = true,
 	Enabled = true,
 	Text = ""

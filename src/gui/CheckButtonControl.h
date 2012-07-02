@@ -162,6 +162,7 @@ namespace GameHalloran
 									const boost::shared_ptr<GLSLShader> shaderTexObj,\
 									const I32 eventTypeId,
 									const std::string &textureNameRef,\
+                                    const std::string &atlasNameRef,\
 									const std::string &hoverNameRef,\
 									const std::string &checkNameRef,\
 									const std::string &checkHoverNameRef,\

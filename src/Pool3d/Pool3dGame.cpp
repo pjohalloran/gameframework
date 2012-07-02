@@ -163,6 +163,8 @@ namespace GameHalloran
 			m_texManagerPtr.reset(GCC_NEW TextureManager(10, 1024*1024*20));
 			m_texManagerPtr->SetTextureFilterMode(TextureManager::eAnisotropic);
 			m_texManagerPtr->SetAnisotropicLinearLevel(1.0f);
+            
+            GameMain::SetupTextureAtlasManager(std::string("atlases") + ZipFile::ZIP_PATH_SEPERATOR + std::string("atlasDictionary.xml"));
 		}
 
 		return (result);

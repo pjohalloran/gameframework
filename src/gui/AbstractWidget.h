@@ -37,6 +37,7 @@
 #include "GameException.h"
 #include "Matrix.h"
 #include "BoundingCube.h"
+#include "TextureAtlas.h"
 
 // /////////////////////////////////////////////////////////////////
 //
@@ -58,6 +59,7 @@ namespace GameHalloran
 
 		static const I32 NUM_VERTICES = 4;										///< Number of vertices required for a quad.
 
+        AtlasImage m_quadDim;                                                   ///< Texture quad dimensions.
 		Point3 m_position;														///< 2D Position and z depth.
 		bool m_visible;															///< Visible flag.
 		Vector4 m_color;														///< Color and Alpha of quad background.
@@ -65,7 +67,6 @@ namespace GameHalloran
 		F32 m_width;															///< Width of the widget.
 		F32 m_height;															///< Height of the widget.
 		bool m_applyTexture;													///< Is the widget rendered with a texture?
-
 		GLuint m_vaoId;															///< This widgets GL VAO state array ID.
 		GLuint m_vboId;															///< VBO buffer ID.
 
@@ -114,6 +115,8 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		bool PreRenderFlatWidget(boost::optional<Vector4> opColor = boost::optional<Vector4>());
 
+        std::string m_atlasName;                                                ///< The name of the image atlas.
+        std::string m_imageName;                                                ///< The name of the image file/atlas image.
 		TexHandle m_tHandle;													///< Handle to the texture to render on the quad (0 if no texture).
 		boost::shared_ptr<ModelViewProjStackManager> m_mvpStackManagerPtr;		///< Pointer to the global MVP stack manager.
 		const boost::shared_ptr<GLSLShader> m_texShaderProg;					///< The GLSL shader program used to render textured widgets.
@@ -164,6 +167,7 @@ namespace GameHalloran
 		// @param shaderFlatObj The GLSL shader object used to render the un-textured widget.
 		// @param shaderTexObj The GLSL shader object used to render the textured widget.
 		// @param textureNameRef Name of texture to apply. An empty string disables it.
+        // @param atlasNameRef Name of the image atlas (if any).
 		// @param visible Is the widget visible.
 		// @param id Unique ID of widget.
 		//
@@ -178,6 +182,7 @@ namespace GameHalloran
 								const boost::shared_ptr<GLSLShader> shaderFlatObj,\
 								const boost::shared_ptr<GLSLShader> shaderTexObj,\
 								const std::string &textureNameRef = std::string(),\
+                                const std::string &atlasNameRef = std::string(),\
 								const bool visible = true,\
 								const ScreenElementId id = SCREEN_ELEMENT_ID_NOT_ASSIGNED) throw (GameException &);
 
@@ -380,6 +385,8 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		inline bool IsTextured() const { return (m_applyTexture); };
+        
+        inline bool IsAtlased() const { return (!m_atlasName.empty()); };
 
 		// /////////////////////////////////////////////////////////////////
 		// Method that returns the value/setting data of the widget.  This

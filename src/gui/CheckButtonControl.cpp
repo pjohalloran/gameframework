@@ -192,13 +192,14 @@ namespace GameHalloran
 								const boost::shared_ptr<GLSLShader> shaderTexObj,\
 								const I32 eventTypeId,
 								const std::string &textureNameRef,\
+                                const std::string &atlasNameRef,\
 								const std::string &hoverNameRef,\
 								const std::string &checkNameRef,\
 								const std::string &checkHoverNameRef,\
 								const bool visible,\
 								const ScreenElementId id,\
 								const bool enabled) throw (GameException &)\
-								: AbstractButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId, textureNameRef,\
+								: AbstractButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId, textureNameRef, atlasNameRef,\
 									visible, id, enabled), m_checked(false), m_hoverHandle(0), m_checkHandle(0), m_checkHoverHandle(0)
 	{
 		Init(hoverNameRef, checkNameRef, checkHoverNameRef);

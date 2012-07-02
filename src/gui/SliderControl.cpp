@@ -145,6 +145,7 @@ namespace GameHalloran
 													std::string("textures") + ZipFile::ZIP_PATH_SEPERATOR + std::string("sliderBut.tga"),\
 													std::string("textures") + ZipFile::ZIP_PATH_SEPERATOR + std::string("sliderBut.tga"),\
 													std::string("textures") + ZipFile::ZIP_PATH_SEPERATOR + std::string("sliderBut.tga"),\
+                                                    m_atlasName,
 													std::string(""),\
 													visible,\
 													0,\
@@ -169,10 +170,11 @@ namespace GameHalloran
 									const F32 sliderPos,\
 									const I32 eventTypeId,\
 									const std::string &textureNameRef,\
+                                    const std::string &atlasNameRef,\
 									const bool visible,\
 									const ScreenElementId id,\
 									const bool enabled) throw (GameException &)\
-									: ControlWidget(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, textureNameRef, visible, id, enabled),
+									: ControlWidget(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, textureNameRef, atlasNameRef, visible, id, enabled),
 										m_sliderPos(sliderPos), m_sliderButPtr(), m_sliderLineBatch(), m_sliding(false), m_eventTypeId(eventTypeId), m_lineColor(0.0f, 0.0f, 0.0f, 1.0f)
 	{
 		Clamp(m_sliderPos, 0.0f, 1.0f);

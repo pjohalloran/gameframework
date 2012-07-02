@@ -162,13 +162,14 @@ namespace GameHalloran
 									const std::string &textureNameRef,\
 									const std::string &texturePressedRef,\
 									const std::string &textureHoverRef,\
+                                    const std::string &atlasNameRef,\
 									const std::string &textRef,\
 									const bool visible,\
 									const ScreenElementId id,
 									const bool enabled,
 									const bool sendEvent) throw (GameException &)\
 									: AbstractButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId,\
-										textureNameRef, visible, id, enabled), m_hoverHandle(0), m_pressedHandle(0), m_sendEvent(sendEvent), m_text(textRef)
+										textureNameRef, atlasNameRef, visible, id, enabled), m_hoverHandle(0), m_pressedHandle(0), m_sendEvent(sendEvent), m_text(textRef)
 	{
 		Init(textureHoverRef, texturePressedRef);
 	}

@@ -130,11 +130,12 @@ namespace GameHalloran
 											const std::string &textureNameRef,\
 											const std::string &texturePressedRef,\
 											const std::string &textureHoverRef,\
+                                            const std::string &atlasNameRef,\
 											const std::list<std::string> &list,\
 											const bool visible,\
 											const ScreenElementId id,\
 											const bool enabled) throw (GameException &)\
-											: ButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId, textureNameRef,\
+											: ButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId, textureNameRef, atlasNameRef,\
 												texturePressedRef, textureHoverRef, std::string(""), visible, id, enabled), m_list(list), m_curr(m_list.begin())
 	{
 		Init();

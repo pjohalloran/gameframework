@@ -601,6 +601,20 @@ namespace GameHalloran
 
 		return (true);
 	}
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool GameMain::SetupTextureAtlasManager(const std::string &resourceId)
+    {
+        if(!m_resourceCachePtr)
+            return (false);
+        
+        m_atlasPtr = boost::shared_ptr<TextureAtlasManager>(new TextureAtlasManager());
+        
+        return (m_atlasPtr && m_atlasPtr->LoadFromResourceCache(resourceId));
+    }
 
 	// /////////////////////////////////////////////////////////////////
 	//
@@ -682,7 +696,7 @@ namespace GameHalloran
 	GameMain::GameMain(shared_ptr<GameLog> loggerPtr, shared_ptr<GameOptions> optionsPtr)\
 		throw (GameException &) : m_lastRenderTime(0.0), m_lastUpdateTime(0.0), m_lastEventTime(0.0), m_frameRateTimer(), m_frameCount(0),\
 			m_framesInPastSecond(0), m_appTimer(), m_startTime(0.0), m_isRunning(true), m_resourceCachePtr(), m_luaStateManagerPtr(),\
-				m_eventManagerPtr(), m_logicPtr(), m_loggerPtr(loggerPtr), m_windowManagerPtr(), m_optionsPtr(optionsPtr),\
+				m_eventManagerPtr(), m_logicPtr(), m_atlasPtr(), m_loggerPtr(loggerPtr), m_windowManagerPtr(), m_optionsPtr(optionsPtr),\
 					m_eventQueue(), m_prevX(0), m_prevY(0), m_prevActiveState(false), m_joystickList(), m_metaTable(),\
 					m_texManagerPtr(), m_gameRootDir(), m_dataDir(), m_appDataDir(), m_luaCommonDir(), m_saveGameDir()
 	{
@@ -1041,14 +1055,14 @@ namespace GameHalloran
 			// Flip the screen back buffer.
 			m_windowManagerPtr->SwapBuffers();
 
-			// Regulate fps by sleeping for a short period
-			//  if this frame took less than FRAME_TIME_MS to update and render.
-			if(m_frameRateTimer->VGetTime() < FRAME_TIME_MS)
-			{
-				F64 milliseconds = FRAME_TIME_MS - m_frameRateTimer->VGetTime();
-				// Sleep the remaining frame time
-				Sleep(milliseconds);
-			}
+//			// Regulate fps by sleeping for a short period
+//			//  if this frame took less than FRAME_TIME_MS to update and render.
+//			if(m_frameRateTimer->VGetTime() < FRAME_TIME_MS)
+//			{
+//				F64 milliseconds = FRAME_TIME_MS - m_frameRateTimer->VGetTime();
+//				// Sleep the remaining frame time
+//				Sleep(milliseconds);
+//			}
 
 			// Poll for input events (implemented by derived classes).
 			VPollEvents();

@@ -37,6 +37,7 @@
 #include "Point.h"
 #include "OsInputEvents.h"
 #include "TextureManager.h"
+#include "TextureAtlas.h"
 
 // /////////////////////////////////////////////////////////////////
 //
@@ -78,6 +79,7 @@ namespace GameHalloran
 			boost::shared_ptr<LuaStateManager> m_luaStateManagerPtr;	///< LUA state manager.
 			boost::shared_ptr<EventManager> m_eventManagerPtr;			///< Event framework.
 			boost::shared_ptr<BaseGameLogic> m_logicPtr;				///< Pointer to the logic layer.
+            boost::shared_ptr<TextureAtlasManager> m_atlasPtr;          ///< TextureAtlas manager.
 
 			// GLFW/OS event data.
 			GfEventFactory m_eventFactoryObj;							///< Global OS input/window event factory object.
@@ -227,6 +229,12 @@ namespace GameHalloran
 			//
 			// /////////////////////////////////////////////////////////////////
 			virtual void VRender();
+        
+            // /////////////////////////////////////////////////////////////////
+            //
+            //
+            // /////////////////////////////////////////////////////////////////
+            virtual bool SetupTextureAtlasManager(const std::string &resourceId);
 
 		public:
 			
@@ -380,6 +388,12 @@ namespace GameHalloran
 			//
 			// /////////////////////////////////////////////////////////////////
 			boost::shared_ptr<TextureManager> GetTextureManagerPtr() { return (m_texManagerPtr); };
+
+            // /////////////////////////////////////////////////////////////////
+            // Get the TextureAtlas Manager object.
+            //
+            // /////////////////////////////////////////////////////////////////
+            boost::shared_ptr<TextureAtlasManager> GetAtlasManagerPtr() { return (m_atlasPtr); };
 
 			// /////////////////////////////////////////////////////////////////
 			// Parses a directory and returns a list of all the game files that

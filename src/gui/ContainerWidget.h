@@ -83,6 +83,7 @@ namespace GameHalloran
 									const boost::shared_ptr<GLSLShader> shaderFlatObj,\
 									const boost::shared_ptr<GLSLShader> shaderTexObj,\
 									const std::string &textureNameRef = std::string(),\
+                                    const std::string &atlasNameRef = std::string(),\
 									const bool visible = true,\
 									const ScreenElementId id = SCREEN_ELEMENT_ID_NOT_ASSIGNED) throw (GameException &);
 

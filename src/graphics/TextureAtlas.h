@@ -46,12 +46,13 @@ namespace GameHalloran
         F32 m_width;                    ///< Width of image inside atlas.
         F32 m_height;                   ///< Height of image inside atlas.
         HashedString m_id;              ///< ID of the image.
+        bool m_flipped;                 ///< Is the tex coordinates flipped 90 degrees.
         
         // /////////////////////////////////////////////////////////////////
         //
         //
         // /////////////////////////////////////////////////////////////////
-        AtlasImage(const char *name) : m_x(0.0f), m_y(0.0f), m_width(0.0f), m_height(0.0f), m_id(name) {};
+        AtlasImage(const char *name) : m_x(0.0f), m_y(0.0f), m_width(0.0f), m_height(0.0f), m_id(name), m_flipped(false) {};
     };
     
     typedef boost::shared_ptr<AtlasImage> AtlasImageSPtr;
@@ -188,9 +189,15 @@ namespace GameHalloran
         //
         // /////////////////////////////////////////////////////////////////
         bool UseImage(const std::string &imgName);
+
+        // /////////////////////////////////////////////////////////////////
+        // Get the currently selected atlas data.
+        //
+        // /////////////////////////////////////////////////////////////////
+        const TextureAtlas * const GetCurrentAtlasData() const { return (m_currAtlasPtr); };
         
         // /////////////////////////////////////////////////////////////////
-        // Get the currently selected atlas image.
+        // Get the currently selected atlas image data.
         //
         // /////////////////////////////////////////////////////////////////
         const AtlasImage * const GetCurrentAtlasImage() const { return (m_currImagePtr); };

@@ -69,7 +69,7 @@ namespace GameHalloran
         }
         else
         {
-            boost::optional<TexHandle> handle = g_appPtr->GetTextureManagerPtr()->Load2D(std::string("atlases\\") + atlas->m_id.getStr() + std::string(".") + type);
+            boost::optional<TexHandle> handle = g_appPtr->GetTextureManagerPtr()->Load2D(std::string("atlases") + ZipFile::ZIP_PATH_SEPERATOR + atlas->m_id.getStr() + std::string(".") + type);
             if(!handle)
                 return (false);
             
@@ -83,13 +83,20 @@ namespace GameHalloran
             // If the current element pointer is valid and it is not an xml comment, then parse it further.
             if(currChildPtr && !currChildPtr->ToComment() && strcmp(currChildPtr->Value(), "image") == 0)
             {
-                // <image height="0.125" imagefile="ball01.tga" width="0.125" x="0.0009765625" y="0.0009765625"/>
+                // <image flipped="False" height="0.125" imagefile="ball01.tga" width="0.125" x="0.0009765625" y="0.0009765625"/>
+                double tmp(0.0);
                 
                 AtlasImageSPtr image(new AtlasImage(currChildPtr->Attribute("imagefile")));
-                currChildPtr->Attribute("x", (double *)&image->m_x);
-                currChildPtr->Attribute("y", (double *)&image->m_y);
-                currChildPtr->Attribute("width", (double *)&image->m_width);
-                currChildPtr->Attribute("height", (double *)&image->m_height);
+                currChildPtr->Attribute("x", &tmp);
+                image->m_x = (float)tmp;
+                currChildPtr->Attribute("y", &tmp);
+                image->m_y = (float)tmp;
+                currChildPtr->Attribute("width", &tmp);
+                image->m_width = (float)tmp;
+                currChildPtr->Attribute("height", &tmp);
+                image->m_height = (float)tmp;
+                if(strcmp("True", currChildPtr->Attribute("flipped")) == 0)
+                    image->m_flipped = true;
                 
                 atlas->m_images[image->m_id.getHashValue()] = image;
             }
@@ -168,8 +175,7 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     bool TextureAtlasManager::LoadFromResourceCache(const std::string &resourceId)
     {
-        Resource atlasRes(resourceId);
-        
+        TextResource atlasRes(resourceId);
         boost::shared_ptr<TextResHandle> atlasHandle = boost::static_pointer_cast<TextResHandle>(g_appPtr->GetResourceCache()->GetHandle(&atlasRes));
         if(!atlasHandle || !atlasHandle->VInitialize())
         {

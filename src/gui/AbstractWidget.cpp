@@ -18,6 +18,8 @@
 #include "TextResource.h"
 #include "LuaStateManager.h"
 
+#include "TextureAtlas.h"
+
 ////////////////////////// TEMPORARY TEMPORARY TEMPORARY - On SnowLeopard this is suppored, but GLEW doens't hook up properly
 ////////////////////////// Fixed probably in 10.6.3
 //#ifdef __APPLE__
@@ -82,12 +84,20 @@ namespace GameHalloran
 		//							0.0f, 1.0f, /* Bottom Right */
 		//							0.0f, 0.0f /* Top Right */
 		//							};
-		GLfloat texCoords[] = {0.0f, 1.0f, /* Top Left */
-									0.0f, 0.0f, /* Bottom Left */
-									1.0f, 0.0f, /* Bottom Right */
-									1.0f, 1.0f /* Top Right */
-									};
+        
+//		GLfloat texCoords[] = {0.0f, 1.0f, /* Top Left */
+//									0.0f, 0.0f, /* Bottom Left */
+//									1.0f, 0.0f, /* Bottom Right */
+//									1.0f, 1.0f /* Top Right */
+//									};
 
+		GLfloat texCoords[] = {m_quadDim.m_x, m_quadDim.m_y + m_quadDim.m_height, /* Top Left */
+                                m_quadDim.m_x, m_quadDim.m_y, /* Bottom Left */
+                                m_quadDim.m_x + m_quadDim.m_width, m_quadDim.m_y, /* Bottom Right */
+                                m_quadDim.m_x + m_quadDim.m_width, m_quadDim.m_y + m_quadDim.m_height /* Top Right */
+                            };
+
+        
 		// Allocate memory and a type for the currently bound VBO.
 		glBufferData(GL_ARRAY_BUFFER, sizeof(positions) + sizeof(texCoords), NULL, GL_STATIC_DRAW);
 
@@ -118,7 +128,12 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void AbstractWidget::Init(const std::string &textureNameRef) throw (GameException &)
 	{
-		m_applyTexture = !textureNameRef.empty();
+        m_quadDim.m_x = 0.0f;
+        m_quadDim.m_y = 0.0f;
+        m_quadDim.m_width = 1.0f;
+        m_quadDim.m_height = 1.0f;
+        
+		m_applyTexture = !textureNameRef.empty() || !m_atlasName.empty();
 		if(!m_applyTexture && !m_flatShaderProg)
 			throw GameException(std::string("Flat Shader object passed to widget is NULL"));
 		else if(m_applyTexture && !m_texShaderProg)
@@ -150,7 +165,7 @@ namespace GameHalloran
 		m_bb.SetMin(Point3(m_position.GetX(), m_position.GetY() - m_height, 0.0f));
 		m_bb.SetMax(Point3(m_position.GetX() + m_width, m_position.GetY(), 0.0f));
 
-		if(m_applyTexture)
+		if(m_applyTexture && !IsAtlased()) // img already loaded if atlased
 		{
 			boost::optional<TexHandle> th = g_appPtr->GetTextureManagerPtr()->Load2D(textureNameRef, GL_CLAMP_TO_EDGE);
 			if(th.is_initialized())
@@ -167,6 +182,32 @@ namespace GameHalloran
 #endif
 			}
 		}
+        else if(IsAtlased())
+        {
+            if(!g_appPtr->GetAtlasManagerPtr()->UseAtlas(m_atlasName) || !g_appPtr->GetAtlasManagerPtr()->UseImage(m_imageName))
+            {
+#if DEBUG
+				std::string idStr;
+				try { idStr = boost::lexical_cast<std::string, ScreenElementId>(m_id); } catch(...) { }
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to get the atlas for the widget " + idStr);
+#endif
+            }
+            
+            const AtlasImage * const atlasImageData = g_appPtr->GetAtlasManagerPtr()->GetCurrentAtlasImage();
+            if(!atlasImageData)
+            {
+#if DEBUG
+				std::string idStr;
+				try { idStr = boost::lexical_cast<std::string, ScreenElementId>(m_id); } catch(...) { }
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to get the atlas image data for the widget " + idStr);
+#endif
+            }
+            
+            m_quadDim = *atlasImageData;
+            
+            m_tHandle = g_appPtr->GetAtlasManagerPtr()->GetCurrentAtlasData()->m_atlasId;
+            m_currentTextureHandle = m_tHandle;
+        }
 
 		glGenVertexArrays(1, &m_vaoId);
 		if(m_vaoId == 0)
@@ -295,10 +336,11 @@ namespace GameHalloran
 									const boost::shared_ptr<GLSLShader> shaderFlatObj,\
 									const boost::shared_ptr<GLSLShader> shaderTexObj,\
 									const std::string &textureNameRef,\
+                                    const std::string &atlasNameRef,\
 									const bool visible,\
 									const ScreenElementId id) throw (GameException &)\
-		: m_position(posRef), m_visible(visible), m_color(colorRef), m_id(id), m_width(width), m_height(height), m_applyTexture(false),\
-			m_vaoId(0), m_vboId(0), m_tHandle(0), m_mvpStackManagerPtr(mvpStackManPtr), m_texShaderProg(shaderTexObj), m_flatShaderProg(shaderFlatObj),\
+		: m_quadDim(""), m_position(posRef), m_visible(visible), m_color(colorRef), m_id(id), m_width(width), m_height(height), m_applyTexture(false),\
+			m_vaoId(0), m_vboId(0), m_atlasName(atlasNameRef), m_imageName(textureNameRef), m_tHandle(0), m_mvpStackManagerPtr(mvpStackManPtr), m_texShaderProg(shaderTexObj), m_flatShaderProg(shaderFlatObj),\
                 m_projMatrix(), m_bb(), m_currentTextureHandle(0), m_colorMapUniform(), m_alphaUniform(), m_projUniform(), m_colorUniform()
 	{
 		if(m_width < 0.0f)
@@ -321,7 +363,7 @@ namespace GameHalloran
 									const boost::shared_ptr<GLSLShader> shaderFlatObj,\
 									const boost::shared_ptr<GLSLShader> shaderTexObj,\
 									const ScreenElementId id) throw (GameException &)\
-		: m_position(), m_visible(true), m_color(), m_id(id), m_width(0.0f), m_height(0.0f), m_applyTexture(false),	m_vaoId(0), m_vboId(0), m_tHandle(0),\
+		: m_quadDim(""), m_position(), m_visible(true), m_color(), m_id(id), m_width(0.0f), m_height(0.0f), m_applyTexture(false), m_vaoId(0), m_vboId(0), m_atlasName(), m_imageName(), m_tHandle(0),\
 			m_mvpStackManagerPtr(mvpStackManPtr), m_texShaderProg(shaderTexObj), m_flatShaderProg(shaderFlatObj), m_projMatrix(), m_bb(), m_currentTextureHandle(0), m_colorMapUniform(), m_alphaUniform(), m_projUniform(), m_colorUniform()
 	{
 		if(!widgetScriptData.IsTable())
@@ -329,14 +371,14 @@ namespace GameHalloran
 			throw GameException(std::string("Lua data is of an invalid type"));
 		}
 
-		std::string texName;
 		SetLuaPosition(widgetScriptData["Position"]);
 		SetColorFromLua(widgetScriptData["Color"], m_color);
 		SetLuaDimensions(widgetScriptData["Dimension"]);
-		SetStringFromLua(widgetScriptData["TextureName"], texName);
+		SetStringFromLua(widgetScriptData["TextureName"], m_imageName);
+        SetStringFromLua(widgetScriptData["AtlasName"], m_atlasName);
 		SetBoolFromLua(widgetScriptData["Visible"], m_visible);
 
-		Init(texName);
+		Init(m_imageName);
 	}
 
 	// /////////////////////////////////////////////////////////////////

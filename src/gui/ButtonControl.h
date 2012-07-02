@@ -156,6 +156,7 @@ namespace GameHalloran
 								const std::string &textureNameRef,\
 								const std::string &texturePressedRef,\
 								const std::string &textureHoverRef,\
+                                const std::string &atlasNameRef,\
 								const std::string &textRef,\
 								const bool visible = true,\
 								const ScreenElementId id = SCREEN_ELEMENT_ID_NOT_ASSIGNED,

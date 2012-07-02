@@ -103,6 +103,7 @@
 		14E5562A13E5AC4C00E7D741 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = n/a;
 			};
 			buildConfigurationList = 14E5562D13E5AC4C00E7D741 /* Build configuration list for PBXProject "tinyxml" */;
