@@ -48,7 +48,10 @@ namespace GameHalloran
 		TexHandle m_hoverHandle;							///< Handle to the hover texture.
 		TexHandle m_checkHandle;							///< Handle to the checked texture.
 		TexHandle m_checkHoverHandle;						///< Handle to the checked/hover handle.
-
+        AtlasImage m_hoverDim;                              ///< Atlas image dim for hover image.
+        AtlasImage m_checkDim;                              ///< Atlas image dim for checked image.
+        AtlasImage m_checkHoverDim;                         ///< Atlas image dim for hover/checked image.
+        
 		// /////////////////////////////////////////////////////////////////
 		// Constructor helper function.
 		//

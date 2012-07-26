@@ -88,13 +88,14 @@ namespace GameHalloran
                 
                 AtlasImageSPtr image(new AtlasImage(currChildPtr->Attribute("imagefile")));
                 currChildPtr->Attribute("x", &tmp);
-                image->m_x = (float)tmp;
+                image->m_x = (float)tmp / atlas->m_width;
                 currChildPtr->Attribute("y", &tmp);
-                image->m_y = (float)tmp;
+                image->m_y = (float)tmp / atlas->m_height;
+                image->m_y = 1.0f - image->m_y;
                 currChildPtr->Attribute("width", &tmp);
-                image->m_width = (float)tmp;
+                image->m_width = (float)tmp / atlas->m_width;
                 currChildPtr->Attribute("height", &tmp);
-                image->m_height = (float)tmp;
+                image->m_height = (float)tmp / atlas->m_height;
                 if(strcmp("True", currChildPtr->Attribute("flipped")) == 0)
                     image->m_flipped = true;
                 

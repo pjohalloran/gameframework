@@ -44,8 +44,9 @@ newmScreenContainer =
 		Height = 1.0,
 		Depth = 0.0
 	},
+	AtlasName = "UI",
 	--TextureName = "textures/greenfelt.tga",
-	TextureName = "textures/MainMenuBackground.tga",
+	TextureName = "MainMenuBackground.tga",
 	--TextureName = "",
 	Visible = true
 }
@@ -76,13 +77,14 @@ newmTutorialGameButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 2,
 	Text = "How to play",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -112,13 +114,14 @@ newmQuickButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 1,
 	Text = "Pool",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -148,13 +151,14 @@ newmBackButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 4,
 	Text = "Back",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 

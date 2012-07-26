@@ -47,7 +47,9 @@ namespace GameHalloran
 		TexHandle m_hoverHandle;							///< ID of texture while the mouse is hovering over.
 		TexHandle m_pressedHandle;							///< ID of texture while the button is pressed.
 		bool m_sendEvent;									///< Should this button send an event when the button is clicked?
-
+        AtlasImage m_hoverDim;                              ///< Tex coords for hover image.
+        AtlasImage m_pressedDim;                            ///< Tex coords for pressed image.
+        
 		// /////////////////////////////////////////////////////////////////
 		// Constructor helper function.
 		//

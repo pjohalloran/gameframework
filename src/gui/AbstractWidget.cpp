@@ -73,28 +73,32 @@ namespace GameHalloran
 		// Bind to the VBO so we can copy data to the area of GPU memory.
 		glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
 
-		// Geometry setup here for a quad
-		GLfloat positions[] = {m_position.GetX(), m_position.GetY(), 0.0f, 1.0f, /* Top Left */
-									m_position.GetX(), m_position.GetY() - m_height, 0.0f, 1.0f, /* Bottom Left */
-									m_position.GetX() + m_width, m_position.GetY() - m_height, 0.0f, 1.0f, /* Bottom Right */
-									m_position.GetX() + m_width, m_position.GetY(), 0.0f, 1.0f /* Top Right */
-								};
-		//GLfloat texCoords[] = {1.0f, 0.0f, /* Top Left */
-		//							1.0f, 1.0f, /* Bottom Left */
-		//							0.0f, 1.0f, /* Bottom Right */
-		//							0.0f, 0.0f /* Top Right */
-		//							};
+//		// Geometry setup here for a quad
+//		GLfloat positions[] = {m_position.GetX(), m_position.GetY(), 0.0f, 1.0f, /* Top Left */
+//									m_position.GetX(), m_position.GetY() - m_height, 0.0f, 1.0f, /* Bottom Left */
+//									m_position.GetX() + m_width, m_position.GetY() - m_height, 0.0f, 1.0f, /* Bottom Right */
+//									m_position.GetX() + m_width, m_position.GetY(), 0.0f, 1.0f /* Top Right */
+//								};
+//		GLfloat texCoords[] = {m_quadDim.m_x, m_quadDim.m_y + m_quadDim.m_height, /* Top Left */
+//                                m_quadDim.m_x, m_quadDim.m_y, /* Bottom Left */
+//                                m_quadDim.m_x + m_quadDim.m_width, m_quadDim.m_y, /* Bottom Right */
+//                                m_quadDim.m_x + m_quadDim.m_width, m_quadDim.m_y + m_quadDim.m_height /* Top Right */
+//                            };
         
-//		GLfloat texCoords[] = {0.0f, 1.0f, /* Top Left */
-//									0.0f, 0.0f, /* Bottom Left */
-//									1.0f, 0.0f, /* Bottom Right */
-//									1.0f, 1.0f /* Top Right */
-//									};
-
-		GLfloat texCoords[] = {m_quadDim.m_x, m_quadDim.m_y + m_quadDim.m_height, /* Top Left */
-                                m_quadDim.m_x, m_quadDim.m_y, /* Bottom Left */
-                                m_quadDim.m_x + m_quadDim.m_width, m_quadDim.m_y, /* Bottom Right */
-                                m_quadDim.m_x + m_quadDim.m_width, m_quadDim.m_y + m_quadDim.m_height /* Top Right */
+		// Geometry setup here for a quad
+		GLfloat positions[] = {m_position.GetX(), m_position.GetY(), 0.0f, 1.0f,
+                                m_position.GetX(), m_position.GetY() - m_height, 0.0f, 1.0f,
+                                m_position.GetX() + m_width, m_position.GetY() - m_height, 0.0f, 1.0f,
+                                m_position.GetX(), m_position.GetY(), 0.0f, 1.0f,
+                                m_position.GetX() + m_width, m_position.GetY() - m_height, 0.0f, 1.0f,
+                                m_position.GetX() + m_width, m_position.GetY(), 0.0f, 1.0f
+                            };
+		GLfloat texCoords[] = {m_currQuadDim.m_x, m_currQuadDim.m_y + m_currQuadDim.m_height - (IsAtlased() ? m_currQuadDim.m_height : 0.f),
+                                m_currQuadDim.m_x, m_currQuadDim.m_y - (IsAtlased() ? m_currQuadDim.m_height : 0.f),
+                                m_currQuadDim.m_x + m_currQuadDim.m_width, m_currQuadDim.m_y - (IsAtlased() ? m_currQuadDim.m_height : 0.f),
+                                m_currQuadDim.m_x, m_currQuadDim.m_y + m_currQuadDim.m_height - (IsAtlased() ? m_currQuadDim.m_height : 0.f),
+                                m_currQuadDim.m_x + m_currQuadDim.m_width, m_currQuadDim.m_y - (IsAtlased() ? m_currQuadDim.m_height : 0.f),
+                                m_currQuadDim.m_x + m_currQuadDim.m_width, m_currQuadDim.m_y + m_quadDim.m_height - (IsAtlased() ? m_currQuadDim.m_height : 0.f)
                             };
 
         
@@ -204,6 +208,7 @@ namespace GameHalloran
             }
             
             m_quadDim = *atlasImageData;
+            m_currQuadDim = m_quadDim;
             
             m_tHandle = g_appPtr->GetAtlasManagerPtr()->GetCurrentAtlasData()->m_atlasId;
             m_currentTextureHandle = m_tHandle;
@@ -339,7 +344,7 @@ namespace GameHalloran
                                     const std::string &atlasNameRef,\
 									const bool visible,\
 									const ScreenElementId id) throw (GameException &)\
-		: m_quadDim(""), m_position(posRef), m_visible(visible), m_color(colorRef), m_id(id), m_width(width), m_height(height), m_applyTexture(false),\
+		: m_quadDim(""), m_currQuadDim(""), m_position(posRef), m_visible(visible), m_color(colorRef), m_id(id), m_width(width), m_height(height), m_applyTexture(false),\
 			m_vaoId(0), m_vboId(0), m_atlasName(atlasNameRef), m_imageName(textureNameRef), m_tHandle(0), m_mvpStackManagerPtr(mvpStackManPtr), m_texShaderProg(shaderTexObj), m_flatShaderProg(shaderFlatObj),\
                 m_projMatrix(), m_bb(), m_currentTextureHandle(0), m_colorMapUniform(), m_alphaUniform(), m_projUniform(), m_colorUniform()
 	{
@@ -363,7 +368,7 @@ namespace GameHalloran
 									const boost::shared_ptr<GLSLShader> shaderFlatObj,\
 									const boost::shared_ptr<GLSLShader> shaderTexObj,\
 									const ScreenElementId id) throw (GameException &)\
-		: m_quadDim(""), m_position(), m_visible(true), m_color(), m_id(id), m_width(0.0f), m_height(0.0f), m_applyTexture(false), m_vaoId(0), m_vboId(0), m_atlasName(), m_imageName(), m_tHandle(0),\
+		: m_quadDim(""), m_currQuadDim(""), m_position(), m_visible(true), m_color(), m_id(id), m_width(0.0f), m_height(0.0f), m_applyTexture(false), m_vaoId(0), m_vboId(0), m_atlasName(), m_imageName(), m_tHandle(0),\
 			m_mvpStackManagerPtr(mvpStackManPtr), m_texShaderProg(shaderTexObj), m_flatShaderProg(shaderFlatObj), m_projMatrix(), m_bb(), m_currentTextureHandle(0), m_colorMapUniform(), m_alphaUniform(), m_projUniform(), m_colorUniform()
 	{
 		if(!widgetScriptData.IsTable())
@@ -510,7 +515,8 @@ namespace GameHalloran
 			// Bind to the VAO used to assemble the widgets geometry.
 			glBindVertexArray(m_vaoId);
 			// Send the geometry to the vertex shader.
-			glDrawArrays(GL_TRIANGLE_FAN, 0, NUM_VERTICES);
+			//glDrawArrays(GL_TRIANGLE_FAN, 0, NUM_VERTICES);
+            glDrawArrays(GL_TRIANGLES, 0, NUM_VERTICES);
 			// Unbind after render
 			glBindVertexArray(0);
 		}

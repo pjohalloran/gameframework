@@ -24,30 +24,67 @@
 // /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
-
+    
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
 	void ButtonControl::Init(const std::string &textureHoverRef, const std::string &texturePressedRef) throw (GameException &)
 	{
-		boost::optional<TexHandle> th = g_appPtr->GetTextureManagerPtr()->Load2D(texturePressedRef, GL_CLAMP_TO_EDGE);
-		if(!th.is_initialized())
-		{
-            GF_LOG_TRACE_ERR("ButtonControl::Init()", std::string("Failed to create the texture: ") + texturePressedRef);
-		}
-		else
-		{
-			m_pressedHandle = *th;
-		}
-		th = g_appPtr->GetTextureManagerPtr()->Load2D(textureHoverRef, GL_CLAMP_TO_EDGE);
-		if(!th.is_initialized())
-		{
-            GF_LOG_TRACE_ERR("ButtonControl::Init()",std::string("Failed to create the texture: ") + textureHoverRef);
-		}
-		else
-		{
-			m_hoverHandle = *th;
-		}
+        boost::optional<TexHandle> th;
+        
+        if(!IsAtlased())
+        {
+            th = g_appPtr->GetTextureManagerPtr()->Load2D(texturePressedRef, GL_CLAMP_TO_EDGE);
+            if(!th.is_initialized())
+            {
+                GF_LOG_TRACE_ERR("ButtonControl::Init()", std::string("Failed to create the texture: ") + texturePressedRef);
+            }
+            else
+            {
+                m_pressedHandle = *th;
+            }
+        }
+        else
+        {
+            if(!g_appPtr->GetAtlasManagerPtr()->UseAtlas(m_atlasName) || !g_appPtr->GetAtlasManagerPtr()->UseImage(texturePressedRef))
+            {
+#if DEBUG
+                std::string idStr;
+                try { idStr = boost::lexical_cast<std::string, ScreenElementId>(GetId()); } catch(...) { }
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to get the atlas for the widget " + idStr);
+                return;
+#endif
+            }
+            
+            m_pressedDim = *g_appPtr->GetAtlasManagerPtr()->GetCurrentAtlasImage();
+        }
+        
+        if(!IsAtlased())
+        {
+            th = g_appPtr->GetTextureManagerPtr()->Load2D(textureHoverRef, GL_CLAMP_TO_EDGE);
+            if(!th.is_initialized())
+            {
+                GF_LOG_TRACE_ERR("ButtonControl::Init()",std::string("Failed to create the texture: ") + textureHoverRef);
+            }
+            else
+            {
+                m_hoverHandle = *th;
+            }
+        }
+        else
+        {
+            if(!g_appPtr->GetAtlasManagerPtr()->UseAtlas(m_atlasName) || !g_appPtr->GetAtlasManagerPtr()->UseImage(textureHoverRef))
+            {
+#if DEBUG
+                std::string idStr;
+                try { idStr = boost::lexical_cast<std::string, ScreenElementId>(GetId()); } catch(...) { }
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to get the atlas for the widget " + idStr);
+                return;
+#endif
+            }
+            
+            m_hoverDim = *g_appPtr->GetAtlasManagerPtr()->GetCurrentAtlasImage();
+        }
 
 		// Trigger the change size to ensure the widget is big enough to display all the text.
 		std::string copy(m_text);
@@ -62,7 +99,7 @@ namespace GameHalloran
 		bool result = false;
 		if(hoverTable.IsString())
 		{
-			hoverRef.assign(hoverTable.GetString());
+			hoverRef = hoverTable.GetString();
 			result = true;
 		}
 		if(pressTable.IsString())
@@ -100,7 +137,10 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool ButtonControl::VOnMouseEnter()
 	{
-		AbstractWidget::SetCurrentTexture(m_hoverHandle);
+        if(IsAtlased())
+            SetQuadDim(m_hoverDim);
+        else
+            AbstractWidget::SetCurrentTexture(m_hoverHandle);
 		return (true);
 	}
 
@@ -109,7 +149,10 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool ButtonControl::VOnMouseLeave()
 	{
-		AbstractWidget::SetCurrentTexture(m_tHandle);
+        if(IsAtlased())
+            SetQuadDim(GetQuadDim());
+        else
+            AbstractWidget::SetCurrentTexture(m_tHandle);
 		return (true);
 	}
 
@@ -118,7 +161,10 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool ButtonControl::VOnMousePressed(const U32 buttonId)
 	{
-		AbstractWidget::SetCurrentTexture(m_pressedHandle);
+        if(IsAtlased())
+            SetQuadDim(m_pressedDim);
+        else
+            AbstractWidget::SetCurrentTexture(m_pressedHandle);
 		return (true);
 	}
 
@@ -129,11 +175,17 @@ namespace GameHalloran
 	{
 		if(AbstractButtonControl::IsMouseOver())
 		{
-			AbstractWidget::SetCurrentTexture(m_hoverHandle);
+            if(IsAtlased())
+                SetQuadDim(m_hoverDim);
+            else
+                AbstractWidget::SetCurrentTexture(m_hoverHandle);
 		}
 		else
 		{
-			AbstractWidget::SetCurrentTexture(m_tHandle);
+            if(IsAtlased())
+                SetQuadDim(GetQuadDim());
+            else
+                AbstractWidget::SetCurrentTexture(m_tHandle);
 		}
 		return (true);
 	}
@@ -143,7 +195,10 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool ButtonControl::VOnMouseReleasedCancel(const U32 buttonId)
 	{
-		AbstractWidget::SetCurrentTexture(m_tHandle);
+        if(IsAtlased())
+            SetQuadDim(GetQuadDim());
+        else
+            AbstractWidget::SetCurrentTexture(m_tHandle);
 		return (true);
 	}
 
@@ -169,7 +224,7 @@ namespace GameHalloran
 									const bool enabled,
 									const bool sendEvent) throw (GameException &)\
 									: AbstractButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId,\
-										textureNameRef, atlasNameRef, visible, id, enabled), m_hoverHandle(0), m_pressedHandle(0), m_sendEvent(sendEvent), m_text(textRef)
+										textureNameRef, atlasNameRef, visible, id, enabled), m_hoverHandle(0), m_pressedHandle(0), m_sendEvent(sendEvent), m_hoverDim(textureHoverRef.c_str()), m_pressedDim(texturePressedRef.c_str()), m_text(textRef)
 	{
 		Init(textureHoverRef, texturePressedRef);
 	}
@@ -184,7 +239,7 @@ namespace GameHalloran
 									boost::shared_ptr<FTFont> fontPtr,\
 									const ScreenElementId id) throw (GameException &)\
 									: AbstractButtonControl(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id),\
-										m_hoverHandle(0), m_pressedHandle(0), m_sendEvent(true), m_text("--Text Not Set--")
+										m_hoverHandle(0), m_pressedHandle(0), m_sendEvent(true), m_hoverDim(""), m_pressedDim(""), m_text("--Text Not Set--")
 	{
 		std::string textureHoverRef, texturePressedRef;
 		SetLuaTextures(widgetScriptData.GetByName("HoverTexture"),\

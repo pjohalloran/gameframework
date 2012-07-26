@@ -44,7 +44,8 @@ dlgScreenRootContainer =
 		Height = 1.0,
 		Depth = 0.0
 	},
-	TextureName = "textures/PanelOutline.tga",
+	AtlasName = "UI",
+	TextureName = "PanelOutline.tga",
 	--TextureName = "",
 	Visible = true
 }
@@ -73,7 +74,8 @@ dlgTitleText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	-- Title text depends on dialog type!
@@ -106,13 +108,14 @@ dlgConfirmButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 1,
 	Text = "Confirm",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -142,13 +145,14 @@ dlgCancelButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 2,
 	Text = "Cancel",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 

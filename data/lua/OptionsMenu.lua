@@ -44,7 +44,8 @@ opmScreenContainer =
 		Height = 1.0,
 		Depth = 0.0
 	},
-	TextureName = "textures/MainMenuBackground.tga",
+	AtlasName = "UI",
+	TextureName = "MainMenuBackground.tga",
 	--TextureName = "",
 	Visible = true
 }
@@ -73,7 +74,8 @@ opmTitleText =
 		y = 0.9,
 		z = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "Game Options"
@@ -105,13 +107,14 @@ opmGraphicsButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 1,
 	Text = "Graphics",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -141,13 +144,14 @@ opmSoundButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 1,
 	Text = "Sound",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -251,13 +255,14 @@ opmConfirmButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 1,
 	Text = "OK",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -287,13 +292,14 @@ opmCancelButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 2,
 	Text = "Cancel",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -323,7 +329,8 @@ opmGraphicsPaneContainer =
 		Height = 0.6,
 		Depth = 0.0
 	},
-	TextureName = "textures/PanelOutline.tga",
+	AtlasName = "ALL",
+	TextureName = "PanelOutline.tga",
 	Visible = true
 }
 
@@ -351,7 +358,8 @@ opmGPTitleText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "Graphics"
@@ -381,7 +389,8 @@ opmGPResolutionText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "Screen Resolution"
@@ -411,12 +420,13 @@ opmGPResolutionListButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 111111,
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true,
 	TextTable =
 	{
@@ -450,7 +460,8 @@ opmGPTexFilterText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "Texture Filter Mode"
@@ -480,12 +491,13 @@ opmGPTexFilterListButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 111111,
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true,
 	TextTable =
 	{
@@ -521,7 +533,8 @@ opmGPFsaaText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "FSAA Level"
@@ -551,12 +564,13 @@ opmGPFsaaListButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 111111,
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true,
 	TextTable =
 	{
@@ -592,7 +606,8 @@ opmGPShadowsText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "Render Shadows?"
@@ -622,13 +637,14 @@ opmGPShadowsCheckButton =
 		Height = 0.025,
 		Depth = 0.0
 	},
-	TextureName = "textures/checkDefault.tga",
+	AtlasName = "ALL",
+	TextureName = "checkDefault.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 771168,
-	CheckedTexture = "textures/checkDefaultChecked.tga",
-	HoverTexture = "textures/checkHover.tga",
-	HoverCheckedTexture = "textures/checkHoverChecked.tga",
+	CheckedTexture = "checkDefaultChecked.tga",
+	HoverTexture = "checkHover.tga",
+	HoverCheckedTexture = "checkHoverChecked.tga",
 	Checked = true,
 	SendCodeEventOnClick = true
 }
@@ -659,7 +675,8 @@ opmSoundPaneContainer =
 		Height = 0.6,
 		Depth = 0.0
 	},
-	TextureName = "textures/PanelOutline.tga",
+	AtlasName = "ALL",
+	TextureName = "PanelOutline.tga",
 	Visible = true
 }
 
@@ -687,7 +704,8 @@ opmSPTitleText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "Sound"
@@ -717,7 +735,8 @@ opmSPVolumeText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "Volume"
@@ -747,7 +766,8 @@ opmSPVolumeSlider =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	SliderPosition = 0.5,
@@ -763,9 +783,10 @@ opmSPVolumeSlider =
 			b = 0.0,
 			a = 1.0
 		},
-		TextureName = "textures/dBut.tga",
-		PressedTexture = "textures/dBut.tga",
-		HoverTexture = "textures/dBut.tga",
+		AtlasName = "UI",
+		TextureName = "dBut.tga",
+		PressedTexture = "dBut.tga",
+		HoverTexture = "dBut.tga",
 		SendCodeEventOnClick = false
 	}
 }
@@ -794,7 +815,8 @@ opmSPMusicText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "Music"
@@ -824,13 +846,14 @@ opmSPMusicCheckButton =
 		Height = 0.025,
 		Depth = 0.0
 	},
-	TextureName = "textures/checkDefault.tga",
+	AtlasName = "ALL",
+	TextureName = "checkDefault.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 92763,
-	CheckedTexture = "textures/checkDefaultChecked.tga",
-	HoverTexture = "textures/checkHover.tga",
-	HoverCheckedTexture = "textures/checkHoverChecked.tga",
+	CheckedTexture = "checkDefaultChecked.tga",
+	HoverTexture = "checkHover.tga",
+	HoverCheckedTexture = "checkHoverChecked.tga",
 	Checked = true,
 	SendCodeEventOnClick = true
 }
@@ -859,7 +882,8 @@ opmSPSoundText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackground.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackground.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "Sound"
@@ -889,13 +913,14 @@ opmSPSoundCheckButton =
 		Height = 0.025,
 		Depth = 0.0
 	},
-	TextureName = "textures/checkDefault.tga",
+	AtlasName = "ALL",
+	TextureName = "checkDefault.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 88383,
-	CheckedTexture = "textures/checkDefaultChecked.tga",
-	HoverTexture = "textures/checkHover.tga",
-	HoverCheckedTexture = "textures/checkHoverChecked.tga",
+	CheckedTexture = "checkDefaultChecked.tga",
+	HoverTexture = "checkHover.tga",
+	HoverCheckedTexture = "checkHoverChecked.tga",
 	Checked = true,
 	SendCodeEventOnClick = true
 }

@@ -44,7 +44,8 @@ isctScreenContainer =
 		Height = 1.0,
 		Depth = 0.0
 	},
-	TextureName = "textures/MainMenuBackground.tga",
+	AtlasName = "UI",
+	TextureName = "MainMenuBackground.tga",
 	Visible = true
 }
 
@@ -74,13 +75,14 @@ isctConfirmButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 2,
 	Text = "OK",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -109,7 +111,8 @@ isctInstructionsTextBox =
 		y = 0.925,
 		z = 0.0
 	},
-	TextureName = "textures/Instructions.tga",
+	AtlasName = "UI",
+	TextureName = "Instructions.tga",
 	Visible = true,
 	Enabled = true,
 	Text = ""

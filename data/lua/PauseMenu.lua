@@ -44,7 +44,8 @@ pmScreenContainer =
 		Height = 1.0,
 		Depth = 0.0
 	},
-	TextureName = "textures/greenfelt.tga",
+	AtlasName = "ALL",
+	TextureName = "greenfelt.tga",
 	--TextureName = "",
 	Visible = true
 }
@@ -73,7 +74,8 @@ pmTitleText =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/fontBackgroundA.tga",
+	AtlasName = "UI",
+	TextureName = "fontBackgroundA.tga",
 	Visible = true,
 	Enabled = true,
 	Text = "Pause Menu"
@@ -105,13 +107,14 @@ pmResumeButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 1,
 	Text = "Resume",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -141,13 +144,14 @@ pmOptionsButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 1,
 	Text = "Options",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -215,13 +219,14 @@ pmQuitGameButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 1,
 	Text = "Quit Game",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 

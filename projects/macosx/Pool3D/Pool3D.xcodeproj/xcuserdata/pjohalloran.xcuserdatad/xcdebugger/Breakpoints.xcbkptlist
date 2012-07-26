@@ -289,11 +289,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/gui/AbstractWidget.cpp"
-         timestampString = "362955057.015112"
+         timestampString = "364910160.012125"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "153"
-         endingLineNumber = "153"
+         startingLineNumber = "171"
+         endingLineNumber = "171"
          landmarkName = "AbstractWidget::Init(const std::string &amp;textureNameRef)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -527,11 +527,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/TextureAtlas.cpp"
-         timestampString = "362352184.018797"
+         timestampString = "364911858.148383"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "202"
-         endingLineNumber = "202"
+         startingLineNumber = "203"
+         endingLineNumber = "203"
          landmarkName = "TextureAtlasManager::LoadFromResourceCache(const std::string &amp;resourceId)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -550,44 +550,44 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/TextureAtlas.cpp"
-         timestampString = "362955762.369873"
+         timestampString = "364911858.148383"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "213"
-         endingLineNumber = "213"
+         startingLineNumber = "214"
+         endingLineNumber = "214"
          landmarkName = "TextureAtlasManager::UseAtlas(const std::string &amp;atlasId)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/graphics/TextureAtlas.cpp"
-         timestampString = "362955766.077013"
+         timestampString = "364911858.148383"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "229"
-         endingLineNumber = "229"
+         startingLineNumber = "230"
+         endingLineNumber = "230"
          landmarkName = "TextureAtlasManager::UseImage(const std::string &amp;imgName)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/gui/AbstractWidget.cpp"
-         timestampString = "362956115.826868"
+         timestampString = "364937730.452067"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "206"
-         endingLineNumber = "206"
+         startingLineNumber = "225"
+         endingLineNumber = "225"
          landmarkName = "AbstractWidget::Init(const std::string &amp;textureNameRef)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -597,12 +597,54 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/pjohalloran/work/git/gameframework/src/gui/AbstractWidget.cpp"
-         timestampString = "362956956.295911"
+         timestampString = "364937730.452067"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "94"
-         endingLineNumber = "94"
-         landmarkName = "AbstractWidget::SetupQuad()"
+         startingLineNumber = "386"
+         endingLineNumber = "386"
+         landmarkName = "m_colorUniform()"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/gui/AbstractWidget.cpp"
+         timestampString = "364937730.452067"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "210"
+         endingLineNumber = "210"
+         landmarkName = "AbstractWidget::Init(const std::string &amp;textureNameRef)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/Pool3d/Pool3dMenuView.cpp"
+         timestampString = "364938093.457727"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "449"
+         endingLineNumber = "449"
+         landmarkName = "Pool3dMenuView::AddScreen(const char *screenType, LuaPlus::LuaObject containerDataTable)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/pjohalloran/work/git/gameframework/src/gui/AbstractWidget.cpp"
+         timestampString = "364939433.900545"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "150"
+         endingLineNumber = "150"
+         landmarkName = "AbstractWidget::Init(const std::string &amp;textureNameRef)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

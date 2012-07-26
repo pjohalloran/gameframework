@@ -57,9 +57,10 @@ namespace GameHalloran
 	{
 	private:
 
-		static const I32 NUM_VERTICES = 4;										///< Number of vertices required for a quad.
+		static const I32 NUM_VERTICES = 6;										///< Number of vertices required for a quad.
 
         AtlasImage m_quadDim;                                                   ///< Texture quad dimensions.
+        AtlasImage m_currQuadDim;                                               ///< Texture quad dimensions.
 		Point3 m_position;														///< 2D Position and z depth.
 		bool m_visible;															///< Visible flag.
 		Vector4 m_color;														///< Color and Alpha of quad background.
@@ -100,9 +101,21 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		void SetupQuad();
-
+        
 	protected:
-
+        
+        // /////////////////////////////////////////////////////////////////
+        //
+        //
+        // /////////////////////////////////////////////////////////////////
+        AtlasImage GetQuadDim() const { return (m_quadDim); };
+        
+        // /////////////////////////////////////////////////////////////////
+        //
+        //
+        // /////////////////////////////////////////////////////////////////
+        void SetQuadDim(const AtlasImage &dim) { m_currQuadDim = dim; SetupQuad(); };
+        
 		// /////////////////////////////////////////////////////////////////
 		// PreRender the widget with a texture.
 		//
@@ -154,6 +167,12 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		void SetHeightHelper(const F32 height);
 
+        // /////////////////////////////////////////////////////////////////
+        //
+        //
+        // /////////////////////////////////////////////////////////////////
+        ScreenElementId GetId() const { return (m_id); };
+        
 	public:
 
 		// /////////////////////////////////////////////////////////////////

@@ -44,8 +44,9 @@ mmScreenContainer =
 		Height = 1.0,
 		Depth = 0.0
 	},
-	TextureName = "textures/MainMenuBackground.tga",
-	--TextureName = "",
+	TextureName = "MainMenuBackground.tga",
+
+	AtlasName = "UI",
 	Visible = true
 }
 
@@ -64,7 +65,7 @@ mmGameLogo =
 		r = 0.0,
 		g = 0.0,
 		b = 0.0,
-		a = 0.9
+		a = 0.2
 	},
 	Dimension =
 	{
@@ -75,7 +76,8 @@ mmGameLogo =
 	},
 	--TextureName = "textures/Pool3dLogo.tga",
 	TextureName = "Pool3dLogo.tga",
-	AtlasName = "ALL",
+
+	AtlasName = "UI",
 	Visible = true,
 	Enabled = true,
 	Text = ""
@@ -108,13 +110,16 @@ mmNewButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	--TextureName = "textures/dBut.tga",
+	TextureName = "dBut.tga",
+
+	AtlasName = "UI",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 1,
 	Text = "New",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -182,13 +187,14 @@ mmOptionsButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 3,
 	Text = "Options",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -218,13 +224,14 @@ mmCreditsButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 4,
 	Text = "Credits",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 
@@ -254,13 +261,14 @@ mmExitButton =
 		Height = 0.05,
 		Depth = 0.0
 	},
-	TextureName = "textures/dBut.tga",
+	AtlasName = "UI",
+	TextureName = "dBut.tga",
 	Visible = true,
 	Enabled = true,
 	EventTypeId = 5,
 	Text = "Exit",
-	PressedTexture = "textures/pBut.tga",
-	HoverTexture = "textures/hBut.tga",
+	PressedTexture = "pBut.tga",
+	HoverTexture = "hBut.tga",
 	SendCodeEventOnClick = true
 }
 

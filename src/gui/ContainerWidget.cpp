@@ -273,7 +273,7 @@ namespace GameHalloran
 		bool found = false;
 		for(WidgetList::iterator i = m_list.begin(), end = m_list.end(); ((!found) && (i != end)); ++i)
 		{
-			if((*i)->VGetId() == controlPtr->VGetId())
+			if((*i) && (*i)->VGetId() == controlPtr->VGetId())
 			{
 				found = true;
 			}

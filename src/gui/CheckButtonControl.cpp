@@ -68,42 +68,93 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void CheckButtonControl::Init(const std::string &hoverNameRef, const std::string &checkNameRef, const std::string &checkHoverNameRef)
 	{
-		boost::optional<TexHandle> th = g_appPtr->GetTextureManagerPtr()->Load2D(hoverNameRef, GL_CLAMP_TO_EDGE);
-		if(!th.is_initialized())
-		{
-            GF_LOG_TRACE_ERR("CheckButtonControl::Init()", std::string("Failed to create the texture: ") + hoverNameRef);
-		}
-		else
-		{
-			m_hoverHandle = *th;
-		}
-		th = g_appPtr->GetTextureManagerPtr()->Load2D(checkNameRef, GL_CLAMP_TO_EDGE);
-		if(!th.is_initialized())
-		{
-            GF_LOG_TRACE_ERR("CheckButtonControl::Init()", std::string("Failed to create the texture: ") + checkNameRef);
-		}
-		else
-		{
-			m_checkHandle = *th;
-		}
-		th = g_appPtr->GetTextureManagerPtr()->Load2D(checkHoverNameRef, GL_CLAMP_TO_EDGE);
-		if(!th.is_initialized())
-		{
-            GF_LOG_TRACE_ERR("CheckButtonControl::Init()", std::string("Failed to create the texture: ") + checkHoverNameRef);
-		}
-		else
-		{
-			m_checkHoverHandle = *th;
-		}
+		boost::optional<TexHandle> th;
+        
+        if(!IsAtlased())
+        {
+            th = g_appPtr->GetTextureManagerPtr()->Load2D(hoverNameRef, GL_CLAMP_TO_EDGE);
+            if(!th.is_initialized())
+            {
+                GF_LOG_TRACE_ERR("CheckButtonControl::Init()", std::string("Failed to create the texture: ") + hoverNameRef);
+            }
+            else
+            {
+                m_hoverHandle = *th;
+            }
+        }
+        else
+        {
+            if(!g_appPtr->GetAtlasManagerPtr()->UseAtlas(m_atlasName) || !g_appPtr->GetAtlasManagerPtr()->UseImage(hoverNameRef))
+            {
+    #if DEBUG
+                std::string idStr;
+                try { idStr = boost::lexical_cast<std::string, ScreenElementId>(GetId()); } catch(...) { }
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to get the atlas for the widget " + idStr);
+                return;
+    #endif
+            }
+            
+            m_hoverDim = *g_appPtr->GetAtlasManagerPtr()->GetCurrentAtlasImage();
+        }
+        
+        if(!IsAtlased())
+        {
+            th = g_appPtr->GetTextureManagerPtr()->Load2D(checkNameRef, GL_CLAMP_TO_EDGE);
+            if(!th.is_initialized())
+            {
+                GF_LOG_TRACE_ERR("CheckButtonControl::Init()", std::string("Failed to create the texture: ") + checkNameRef);
+            }
+            else
+            {
+                m_checkHandle = *th;
+            }
+        }
+        else
+        {
+            if(!g_appPtr->GetAtlasManagerPtr()->UseAtlas(m_atlasName) || !g_appPtr->GetAtlasManagerPtr()->UseImage(checkNameRef))
+            {
+    #if DEBUG
+                std::string idStr;
+                try { idStr = boost::lexical_cast<std::string, ScreenElementId>(GetId()); } catch(...) { }
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to get the atlas for the widget " + idStr);
+                return;
+    #endif
+            }
+            
+            m_checkDim = *g_appPtr->GetAtlasManagerPtr()->GetCurrentAtlasImage();
+        }
+        
+        if(!IsAtlased())
+        {
+            th = g_appPtr->GetTextureManagerPtr()->Load2D(checkHoverNameRef, GL_CLAMP_TO_EDGE);
+            if(!th.is_initialized())
+            {
+                GF_LOG_TRACE_ERR("CheckButtonControl::Init()", std::string("Failed to create the texture: ") + checkHoverNameRef);
+            }
+            else
+            {
+                m_checkHoverHandle = *th;
+            }
+        }
+        else
+        {
+            if(!g_appPtr->GetAtlasManagerPtr()->UseAtlas(m_atlasName) || !g_appPtr->GetAtlasManagerPtr()->UseImage(checkHoverNameRef))
+            {
+    #if DEBUG
+                std::string idStr;
+                try { idStr = boost::lexical_cast<std::string, ScreenElementId>(GetId()); } catch(...) { }
+                GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to get the atlas for the widget " + idStr);
+                return;
+    #endif
+            }
+            
+            m_checkHoverDim = *g_appPtr->GetAtlasManagerPtr()->GetCurrentAtlasImage();
+        }
 
 		if(m_checked)
-		{
 			AbstractWidget::SetCurrentTexture(m_checkHandle);
-		}
 		else
-		{
 			AbstractWidget::SetCurrentTexture(m_tHandle);
-		}
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -113,11 +164,17 @@ namespace GameHalloran
 	{
 		if(m_checked)
 		{
-			AbstractWidget::SetCurrentTexture(m_checkHoverHandle);
+            if(IsAtlased())
+                SetQuadDim(m_checkHoverDim);
+            else
+                AbstractWidget::SetCurrentTexture(m_checkHoverHandle);
 		}
 		else
 		{
-			AbstractWidget::SetCurrentTexture(m_hoverHandle);
+            if(IsAtlased())
+                SetQuadDim(m_hoverDim);
+            else
+                AbstractWidget::SetCurrentTexture(m_hoverHandle);
 		}
 		return (true);
 	}
@@ -129,11 +186,17 @@ namespace GameHalloran
 	{
 		if(m_checked)
 		{
-			AbstractWidget::SetCurrentTexture(m_checkHandle);
+            if(IsAtlased())
+                SetQuadDim(m_checkDim);
+            else
+                AbstractWidget::SetCurrentTexture(m_checkHandle);
 		}
 		else
 		{
-			AbstractWidget::SetCurrentTexture(m_tHandle);
+            if(IsAtlased())
+                SetQuadDim(GetQuadDim());
+            else
+                AbstractWidget::SetCurrentTexture(m_tHandle);
 		}
 		return (true);
 	}
@@ -154,11 +217,17 @@ namespace GameHalloran
 		m_checked = !m_checked;
 		if(m_checked)
 		{
-			AbstractWidget::SetCurrentTexture(m_checkHoverHandle);
+            if(IsAtlased())
+                SetQuadDim(m_checkHoverDim);
+            else
+                AbstractWidget::SetCurrentTexture(m_checkHoverHandle);
 		}
 		else
 		{
-			AbstractWidget::SetCurrentTexture(m_tHandle);
+            if(IsAtlased())
+                SetQuadDim(GetQuadDim());
+            else
+                AbstractWidget::SetCurrentTexture(m_tHandle);
 		}
 		return (true);
 	}
@@ -170,11 +239,17 @@ namespace GameHalloran
 	{
 		if(m_checked)
 		{
-			AbstractWidget::SetCurrentTexture(m_checkHandle);
+            if(IsAtlased())
+                SetQuadDim(m_checkDim);
+            else
+                AbstractWidget::SetCurrentTexture(m_checkHandle);
 		}
 		else
 		{
-			AbstractWidget::SetCurrentTexture(m_tHandle);
+            if(IsAtlased())
+                SetQuadDim(GetQuadDim());
+            else
+                AbstractWidget::SetCurrentTexture(m_tHandle);
 		}
 		return (true);
 	}
@@ -200,7 +275,8 @@ namespace GameHalloran
 								const ScreenElementId id,\
 								const bool enabled) throw (GameException &)\
 								: AbstractButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId, textureNameRef, atlasNameRef,\
-									visible, id, enabled), m_checked(false), m_hoverHandle(0), m_checkHandle(0), m_checkHoverHandle(0)
+									visible, id, enabled), m_checked(false), m_hoverHandle(0), m_checkHandle(0), m_checkHoverHandle(0), m_hoverDim(""),
+                                        m_checkDim(""), m_checkHoverDim("")
 	{
 		Init(hoverNameRef, checkNameRef, checkHoverNameRef);
 	}
@@ -215,7 +291,8 @@ namespace GameHalloran
 											boost::shared_ptr<FTFont> fontPtr,\
 											const ScreenElementId id) throw (GameException &)
 											: AbstractButtonControl(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id),\
-												m_checked(false), m_hoverHandle(0), m_checkHandle(0), m_checkHoverHandle(0)
+                                            m_checked(false), m_hoverHandle(0), m_checkHandle(0), m_checkHoverHandle(0), m_hoverDim(""),\
+                                            m_checkDim(""), m_checkHoverDim("")
 	{
 		SetLuaChecked(widgetScriptData.GetByName("Checked"));
 		std::string hover, check, hoverCheck;
