@@ -12,7 +12,7 @@
 
 #include "GameMain.h"
 
-#include <tinyxml.h>
+#include <tinyxml/tinyxml.h>
 #include <string>
 
 #include "ImageResource.h"
@@ -191,7 +191,7 @@ namespace GameHalloran
         }
         
         TiXmlDocument xmlDoc;
-        xmlDoc.Parse(atlasHandle->GetTextBuffer());
+        xmlDoc.Parse(atlasHandle->GetTextBuffer(), 0, TIXML_DEFAULT_ENCODING);
         
         if(xmlDoc.Error())
         {

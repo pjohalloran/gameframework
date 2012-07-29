@@ -27,7 +27,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include <tinyxml.h>
+#include <tinyxml/tinyxml.h>
 
 // Project Headers
 #include "GameException.h"
