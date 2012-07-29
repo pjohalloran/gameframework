@@ -21,7 +21,7 @@
         <FontDebugSize>26</FontDebugSize>
         <FontUi>freesansbold.ttf</FontUi>
         <FontUiSize>40</FontUiSize>
-        <FullScreen>1</FullScreen>
+        <FullScreen>0</FullScreen>
         <GameName>Pool3D</GameName>
         <GameRoot>/Users/pjohalloran/work/git/gameframework/</GameRoot>
         <GameSaveDir>c:/temp/savedir</GameSaveDir>

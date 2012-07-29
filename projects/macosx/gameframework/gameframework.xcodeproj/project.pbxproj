@@ -8,12 +8,44 @@
 
 /* Begin PBXBuildFile section */
 		141733D814478DA50031AC96 /* GameMemory.h in Headers */ = {isa = PBXBuildFile; fileRef = 141733D714478DA50031AC96 /* GameMemory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		142AA95915C5AF560036E0DF /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 142AA95415C5AF560036E0DF /* tinystr.cpp */; };
+		142AA95A15C5AF560036E0DF /* tinystr.h in Headers */ = {isa = PBXBuildFile; fileRef = 142AA95515C5AF560036E0DF /* tinystr.h */; };
+		142AA95B15C5AF560036E0DF /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 142AA95615C5AF560036E0DF /* tinyxml.cpp */; };
+		142AA95C15C5AF560036E0DF /* tinyxml.h in Headers */ = {isa = PBXBuildFile; fileRef = 142AA95715C5AF560036E0DF /* tinyxml.h */; };
+		142AA98C15C5B6640036E0DF /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 142AA98A15C5B6640036E0DF /* tinyxmlerror.cpp */; };
+		142AA98D15C5B6640036E0DF /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 142AA98B15C5B6640036E0DF /* tinyxmlparser.cpp */; };
 		143044E81448BE9100E06967 /* MemoryManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 143044E71448BE9100E06967 /* MemoryManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1481441A1424F01800B969A5 /* GameTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 148144191424F01800B969A5 /* GameTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1481441D1424F0B700B969A5 /* GamePlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 1481441C1424F0B700B969A5 /* GamePlatform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1481441F1424F2E000B969A5 /* GameEndianConv.h in Headers */ = {isa = PBXBuildFile; fileRef = 1481441E1424F2E000B969A5 /* GameEndianConv.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		149459441540B5E500AC7F71 /* TextureAtlas.h in Headers */ = {isa = PBXBuildFile; fileRef = 149459431540B5E500AC7F71 /* TextureAtlas.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		149553591558105C00E8A444 /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 149553581558105C00E8A444 /* TextureAtlas.cpp */; };
+		1497EA4C15C5CF0900464F41 /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA2D15C5CF0900464F41 /* adler32.c */; };
+		1497EA4D15C5CF0900464F41 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA2E15C5CF0900464F41 /* compress.c */; };
+		1497EA4E15C5CF0900464F41 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA2F15C5CF0900464F41 /* crc32.c */; };
+		1497EA4F15C5CF0900464F41 /* crc32.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3015C5CF0900464F41 /* crc32.h */; };
+		1497EA5015C5CF0900464F41 /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3115C5CF0900464F41 /* deflate.c */; };
+		1497EA5115C5CF0900464F41 /* deflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3215C5CF0900464F41 /* deflate.h */; };
+		1497EA5215C5CF0900464F41 /* gzclose.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3315C5CF0900464F41 /* gzclose.c */; };
+		1497EA5315C5CF0900464F41 /* gzguts.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3415C5CF0900464F41 /* gzguts.h */; };
+		1497EA5415C5CF0900464F41 /* gzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3515C5CF0900464F41 /* gzlib.c */; };
+		1497EA5515C5CF0900464F41 /* gzread.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3615C5CF0900464F41 /* gzread.c */; };
+		1497EA5615C5CF0900464F41 /* gzwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3715C5CF0900464F41 /* gzwrite.c */; };
+		1497EA5715C5CF0900464F41 /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3815C5CF0900464F41 /* infback.c */; };
+		1497EA5815C5CF0900464F41 /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3915C5CF0900464F41 /* inffast.c */; };
+		1497EA5915C5CF0900464F41 /* inffast.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3A15C5CF0900464F41 /* inffast.h */; };
+		1497EA5A15C5CF0900464F41 /* inffixed.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3B15C5CF0900464F41 /* inffixed.h */; };
+		1497EA5B15C5CF0900464F41 /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3C15C5CF0900464F41 /* inflate.c */; };
+		1497EA5C15C5CF0900464F41 /* inflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3D15C5CF0900464F41 /* inflate.h */; };
+		1497EA5D15C5CF0900464F41 /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3E15C5CF0900464F41 /* inftrees.c */; };
+		1497EA5E15C5CF0900464F41 /* inftrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3F15C5CF0900464F41 /* inftrees.h */; };
+		1497EA5F15C5CF0900464F41 /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA4015C5CF0900464F41 /* trees.c */; };
+		1497EA6015C5CF0900464F41 /* trees.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4115C5CF0900464F41 /* trees.h */; };
+		1497EA6115C5CF0900464F41 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA4215C5CF0900464F41 /* uncompr.c */; };
+		1497EA6215C5CF0900464F41 /* zconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4415C5CF0900464F41 /* zconf.h */; };
+		1497EA6315C5CF0900464F41 /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4715C5CF0900464F41 /* zlib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1497EA6415C5CF0900464F41 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA4A15C5CF0900464F41 /* zutil.c */; };
+		1497EA6515C5CF0900464F41 /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4B15C5CF0900464F41 /* zutil.h */; };
 		14AB121E1448A39E00390E7A /* GameMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AB121D1448A39E00390E7A /* GameMemory.cpp */; };
 		14AB12211448ABFA00390E7A /* GameAllocater.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AB12201448ABF900390E7A /* GameAllocater.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14AEC90215C472EA00B06081 /* glfw.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AEC8C915C472EA00B06081 /* glfw.h */; };
@@ -242,12 +274,49 @@
 
 /* Begin PBXFileReference section */
 		141733D714478DA50031AC96 /* GameMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameMemory.h; sourceTree = "<group>"; };
+		142AA95415C5AF560036E0DF /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
+		142AA95515C5AF560036E0DF /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
+		142AA95615C5AF560036E0DF /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		142AA95715C5AF560036E0DF /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		142AA98A15C5B6640036E0DF /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		142AA98B15C5B6640036E0DF /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		143044E71448BE9100E06967 /* MemoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryManager.h; sourceTree = "<group>"; };
 		148144191424F01800B969A5 /* GameTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GameTypes.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		1481441C1424F0B700B969A5 /* GamePlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlatform.h; sourceTree = "<group>"; };
 		1481441E1424F2E000B969A5 /* GameEndianConv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GameEndianConv.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		149459431540B5E500AC7F71 /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlas.h; sourceTree = "<group>"; };
 		149553581558105C00E8A444 /* TextureAtlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureAtlas.cpp; sourceTree = "<group>"; };
+		1497EA2D15C5CF0900464F41 /* adler32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = adler32.c; sourceTree = "<group>"; };
+		1497EA2E15C5CF0900464F41 /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compress.c; sourceTree = "<group>"; };
+		1497EA2F15C5CF0900464F41 /* crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crc32.c; sourceTree = "<group>"; };
+		1497EA3015C5CF0900464F41 /* crc32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crc32.h; sourceTree = "<group>"; };
+		1497EA3115C5CF0900464F41 /* deflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = deflate.c; sourceTree = "<group>"; };
+		1497EA3215C5CF0900464F41 /* deflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deflate.h; sourceTree = "<group>"; };
+		1497EA3315C5CF0900464F41 /* gzclose.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzclose.c; sourceTree = "<group>"; };
+		1497EA3415C5CF0900464F41 /* gzguts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gzguts.h; sourceTree = "<group>"; };
+		1497EA3515C5CF0900464F41 /* gzlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzlib.c; sourceTree = "<group>"; };
+		1497EA3615C5CF0900464F41 /* gzread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzread.c; sourceTree = "<group>"; };
+		1497EA3715C5CF0900464F41 /* gzwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gzwrite.c; sourceTree = "<group>"; };
+		1497EA3815C5CF0900464F41 /* infback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = infback.c; sourceTree = "<group>"; };
+		1497EA3915C5CF0900464F41 /* inffast.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inffast.c; sourceTree = "<group>"; };
+		1497EA3A15C5CF0900464F41 /* inffast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inffast.h; sourceTree = "<group>"; };
+		1497EA3B15C5CF0900464F41 /* inffixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inffixed.h; sourceTree = "<group>"; };
+		1497EA3C15C5CF0900464F41 /* inflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inflate.c; sourceTree = "<group>"; };
+		1497EA3D15C5CF0900464F41 /* inflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inflate.h; sourceTree = "<group>"; };
+		1497EA3E15C5CF0900464F41 /* inftrees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inftrees.c; sourceTree = "<group>"; };
+		1497EA3F15C5CF0900464F41 /* inftrees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inftrees.h; sourceTree = "<group>"; };
+		1497EA4015C5CF0900464F41 /* trees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = trees.c; sourceTree = "<group>"; };
+		1497EA4115C5CF0900464F41 /* trees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trees.h; sourceTree = "<group>"; };
+		1497EA4215C5CF0900464F41 /* uncompr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = uncompr.c; sourceTree = "<group>"; };
+		1497EA4315C5CF0900464F41 /* VERSION.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = VERSION.rtf; sourceTree = "<group>"; };
+		1497EA4415C5CF0900464F41 /* zconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zconf.h; sourceTree = "<group>"; };
+		1497EA4515C5CF0900464F41 /* zconf.h.cmakein */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zconf.h.cmakein; sourceTree = "<group>"; };
+		1497EA4615C5CF0900464F41 /* zconf.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zconf.h.in; sourceTree = "<group>"; };
+		1497EA4715C5CF0900464F41 /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
+		1497EA4815C5CF0900464F41 /* zlib.pc.cmakein */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zlib.pc.cmakein; sourceTree = "<group>"; };
+		1497EA4915C5CF0900464F41 /* zlib.pc.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = zlib.pc.in; sourceTree = "<group>"; };
+		1497EA4A15C5CF0900464F41 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zutil.c; sourceTree = "<group>"; };
+		1497EA4B15C5CF0900464F41 /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zutil.h; sourceTree = "<group>"; };
 		149C7F5A14AB4274008A2C63 /* AtlasGenerator.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = AtlasGenerator.py; sourceTree = "<group>"; };
 		149C7F5C14AB8CA9008A2C63 /* ModuleList.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = ModuleList.py; sourceTree = "<group>"; };
 		14A5333E13D4F33D00F9B3B1 /* libgameframework.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libgameframework.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -533,6 +602,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		142AA95315C5AF560036E0DF /* tinyxml */ = {
+			isa = PBXGroup;
+			children = (
+				142AA98A15C5B6640036E0DF /* tinyxmlerror.cpp */,
+				142AA98B15C5B6640036E0DF /* tinyxmlparser.cpp */,
+				142AA95415C5AF560036E0DF /* tinystr.cpp */,
+				142AA95515C5AF560036E0DF /* tinystr.h */,
+				142AA95615C5AF560036E0DF /* tinyxml.cpp */,
+				142AA95715C5AF560036E0DF /* tinyxml.h */,
+			);
+			path = tinyxml;
+			sourceTree = "<group>";
+		};
+		1497EA2C15C5CF0900464F41 /* zlib */ = {
+			isa = PBXGroup;
+			children = (
+				1497EA2D15C5CF0900464F41 /* adler32.c */,
+				1497EA2E15C5CF0900464F41 /* compress.c */,
+				1497EA2F15C5CF0900464F41 /* crc32.c */,
+				1497EA3015C5CF0900464F41 /* crc32.h */,
+				1497EA3115C5CF0900464F41 /* deflate.c */,
+				1497EA3215C5CF0900464F41 /* deflate.h */,
+				1497EA3315C5CF0900464F41 /* gzclose.c */,
+				1497EA3415C5CF0900464F41 /* gzguts.h */,
+				1497EA3515C5CF0900464F41 /* gzlib.c */,
+				1497EA3615C5CF0900464F41 /* gzread.c */,
+				1497EA3715C5CF0900464F41 /* gzwrite.c */,
+				1497EA3815C5CF0900464F41 /* infback.c */,
+				1497EA3915C5CF0900464F41 /* inffast.c */,
+				1497EA3A15C5CF0900464F41 /* inffast.h */,
+				1497EA3B15C5CF0900464F41 /* inffixed.h */,
+				1497EA3C15C5CF0900464F41 /* inflate.c */,
+				1497EA3D15C5CF0900464F41 /* inflate.h */,
+				1497EA3E15C5CF0900464F41 /* inftrees.c */,
+				1497EA3F15C5CF0900464F41 /* inftrees.h */,
+				1497EA4015C5CF0900464F41 /* trees.c */,
+				1497EA4115C5CF0900464F41 /* trees.h */,
+				1497EA4215C5CF0900464F41 /* uncompr.c */,
+				1497EA4315C5CF0900464F41 /* VERSION.rtf */,
+				1497EA4415C5CF0900464F41 /* zconf.h */,
+				1497EA4515C5CF0900464F41 /* zconf.h.cmakein */,
+				1497EA4615C5CF0900464F41 /* zconf.h.in */,
+				1497EA4715C5CF0900464F41 /* zlib.h */,
+				1497EA4815C5CF0900464F41 /* zlib.pc.cmakein */,
+				1497EA4915C5CF0900464F41 /* zlib.pc.in */,
+				1497EA4A15C5CF0900464F41 /* zutil.c */,
+				1497EA4B15C5CF0900464F41 /* zutil.h */,
+			);
+			path = zlib;
+			sourceTree = "<group>";
+		};
 		149C7F5914AB4274008A2C63 /* tools */ = {
 			isa = PBXGroup;
 			children = (
@@ -599,6 +719,8 @@
 		14AEC8C515C472E900B06081 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				1497EA2C15C5CF0900464F41 /* zlib */,
+				142AA95315C5AF560036E0DF /* tinyxml */,
 				14AEC8C615C472EA00B06081 /* glfw */,
 			);
 			name = 3rdParty;
@@ -1220,9 +1342,22 @@
 				14F701551481298D00B44AE6 /* ICleanable.h in Headers */,
 				14F70157148129F800B44AE6 /* ICleanableObserver.h in Headers */,
 				14F7015914812DA700B44AE6 /* ShaderUniform.h in Headers */,
+				1497EA6315C5CF0900464F41 /* zlib.h in Headers */,
 				14AEC90215C472EA00B06081 /* glfw.h in Headers */,
 				14AEC90B15C472EA00B06081 /* platform.h in Headers */,
 				14AEC91215C472EA00B06081 /* internal.h in Headers */,
+				142AA95A15C5AF560036E0DF /* tinystr.h in Headers */,
+				142AA95C15C5AF560036E0DF /* tinyxml.h in Headers */,
+				1497EA4F15C5CF0900464F41 /* crc32.h in Headers */,
+				1497EA5115C5CF0900464F41 /* deflate.h in Headers */,
+				1497EA5315C5CF0900464F41 /* gzguts.h in Headers */,
+				1497EA5915C5CF0900464F41 /* inffast.h in Headers */,
+				1497EA5A15C5CF0900464F41 /* inffixed.h in Headers */,
+				1497EA5C15C5CF0900464F41 /* inflate.h in Headers */,
+				1497EA5E15C5CF0900464F41 /* inftrees.h in Headers */,
+				1497EA6015C5CF0900464F41 /* trees.h in Headers */,
+				1497EA6215C5CF0900464F41 /* zconf.h in Headers */,
+				1497EA6515C5CF0900464F41 /* zutil.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1387,6 +1522,25 @@
 				14AEC91615C472EA00B06081 /* thread.c in Sources */,
 				14AEC91715C472EA00B06081 /* time.c in Sources */,
 				14AEC92215C472EA00B06081 /* window.c in Sources */,
+				142AA95915C5AF560036E0DF /* tinystr.cpp in Sources */,
+				142AA95B15C5AF560036E0DF /* tinyxml.cpp in Sources */,
+				142AA98C15C5B6640036E0DF /* tinyxmlerror.cpp in Sources */,
+				142AA98D15C5B6640036E0DF /* tinyxmlparser.cpp in Sources */,
+				1497EA4C15C5CF0900464F41 /* adler32.c in Sources */,
+				1497EA4D15C5CF0900464F41 /* compress.c in Sources */,
+				1497EA4E15C5CF0900464F41 /* crc32.c in Sources */,
+				1497EA5015C5CF0900464F41 /* deflate.c in Sources */,
+				1497EA5215C5CF0900464F41 /* gzclose.c in Sources */,
+				1497EA5415C5CF0900464F41 /* gzlib.c in Sources */,
+				1497EA5515C5CF0900464F41 /* gzread.c in Sources */,
+				1497EA5615C5CF0900464F41 /* gzwrite.c in Sources */,
+				1497EA5715C5CF0900464F41 /* infback.c in Sources */,
+				1497EA5815C5CF0900464F41 /* inffast.c in Sources */,
+				1497EA5B15C5CF0900464F41 /* inflate.c in Sources */,
+				1497EA5D15C5CF0900464F41 /* inftrees.c in Sources */,
+				1497EA5F15C5CF0900464F41 /* trees.c in Sources */,
+				1497EA6115C5CF0900464F41 /* uncompr.c in Sources */,
+				1497EA6415C5CF0900464F41 /* zutil.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1465,7 +1619,6 @@
 					DEBUG,
 					_DEBUG,
 					TARGET_OS_MAC,
-					TIXML_USE_STL,
 					LUAPLUS_ENABLE_INLINES,
 				);
 				GCC_VERSION = "";
@@ -1505,7 +1658,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
 					TARGET_OS_MAC,
-					TIXML_USE_STL,
 					LUAPLUS_ENABLE_INLINES,
 				);
 				GCC_VERSION = "";
