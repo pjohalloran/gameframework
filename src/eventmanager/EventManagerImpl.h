@@ -518,7 +518,7 @@ namespace GameHalloran
 		typedef std::map<U32, EventListenerTable>	EventListenerMap;
 
 		// entry in the event listener map
-		typedef std::pair<unsigned I32, EventListenerTable>	EventListenerMapEnt;
+		typedef std::pair<U32, EventListenerTable>	EventListenerMapEnt;
 
 		// insert result into listener map
 		typedef std::pair<EventListenerMap::iterator, bool>	EventListenerMapIRes;
@@ -631,7 +631,7 @@ namespace GameHalloran
 
 		// Holds all allocated script ACTOR listeners.
 		typedef boost::shared_ptr<ScriptActorEventListener> ScriptActorEventListenerPtr;
-		typedef std::multimap<unsigned I32, ScriptActorEventListenerPtr> ScriptActorEventListenerMap;
+		typedef std::multimap<U32, ScriptActorEventListenerPtr> ScriptActorEventListenerMap;
 		ScriptActorEventListenerMap m_ScriptActorEventListenerMap;
 
 		// Holds all registered script event types.

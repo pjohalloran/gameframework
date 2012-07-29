@@ -21,9 +21,7 @@
 		428645170A08038100BB42A4 /* LuaPlusAddons.c in Sources */ = {isa = PBXBuildFile; fileRef = 428644FD0A08038100BB42A4 /* LuaPlusAddons.c */; };
 		428645180A08038100BB42A4 /* LuaPlusCD.h in Headers */ = {isa = PBXBuildFile; fileRef = 428644FE0A08038100BB42A4 /* LuaPlusCD.h */; };
 		428645190A08038100BB42A4 /* LuaPlusFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 428644FF0A08038100BB42A4 /* LuaPlusFunctions.cpp */; };
-		4286451A0A08038100BB42A4 /* LuaPlusFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 428645000A08038100BB42A4 /* LuaPlusFunctions.h */; };
 		4286451B0A08038100BB42A4 /* LuaPlusInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 428645010A08038100BB42A4 /* LuaPlusInternal.h */; };
-		4286451C0A08038100BB42A4 /* LuaStackObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 428645020A08038100BB42A4 /* LuaStackObject.cpp */; };
 		4286451D0A08038100BB42A4 /* LuaStackObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 428645030A08038100BB42A4 /* LuaStackObject.h */; };
 		4286451E0A08038100BB42A4 /* LuaStackTableIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 428645050A08038100BB42A4 /* LuaStackTableIterator.h */; };
 		4286451F0A08038100BB42A4 /* LuaState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 428645060A08038100BB42A4 /* LuaState.cpp */; };
@@ -102,9 +100,7 @@
 		428644FD0A08038100BB42A4 /* LuaPlusAddons.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = LuaPlusAddons.c; sourceTree = "<group>"; };
 		428644FE0A08038100BB42A4 /* LuaPlusCD.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LuaPlusCD.h; sourceTree = "<group>"; };
 		428644FF0A08038100BB42A4 /* LuaPlusFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LuaPlusFunctions.cpp; sourceTree = "<group>"; };
-		428645000A08038100BB42A4 /* LuaPlusFunctions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LuaPlusFunctions.h; sourceTree = "<group>"; };
 		428645010A08038100BB42A4 /* LuaPlusInternal.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LuaPlusInternal.h; sourceTree = "<group>"; };
-		428645020A08038100BB42A4 /* LuaStackObject.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LuaStackObject.cpp; sourceTree = "<group>"; };
 		428645030A08038100BB42A4 /* LuaStackObject.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LuaStackObject.h; sourceTree = "<group>"; };
 		428645040A08038100BB42A4 /* LuaStackObject.inl */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = LuaStackObject.inl; sourceTree = "<group>"; };
 		428645050A08038100BB42A4 /* LuaStackTableIterator.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LuaStackTableIterator.h; sourceTree = "<group>"; };
@@ -167,7 +163,7 @@
 		428645560A08039900BB42A4 /* lzio.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = lzio.c; path = src/lzio.c; sourceTree = "<group>"; };
 		428645570A08039900BB42A4 /* lzio.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = lzio.h; path = src/lzio.h; sourceTree = "<group>"; };
 		428645580A08039900BB42A4 /* print.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = print.c; path = src/print.c; sourceTree = "<group>"; };
-		D2AAC0630554660B00DB518D /* libLuaPlus.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libLuaPlus.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC0630554660B00DB518D /* libLuaPlus.a */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libLuaPlus.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,9 +257,7 @@
 				428644FD0A08038100BB42A4 /* LuaPlusAddons.c */,
 				428644FE0A08038100BB42A4 /* LuaPlusCD.h */,
 				428644FF0A08038100BB42A4 /* LuaPlusFunctions.cpp */,
-				428645000A08038100BB42A4 /* LuaPlusFunctions.h */,
 				428645010A08038100BB42A4 /* LuaPlusInternal.h */,
-				428645020A08038100BB42A4 /* LuaStackObject.cpp */,
 				428645030A08038100BB42A4 /* LuaStackObject.h */,
 				428645040A08038100BB42A4 /* LuaStackObject.inl */,
 				428645050A08038100BB42A4 /* LuaStackTableIterator.h */,
@@ -280,7 +274,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC0630554660B00DB518D /* libLuaPlus.dylib */,
+				D2AAC0630554660B00DB518D /* libLuaPlus.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -302,7 +296,6 @@
 				428645140A08038100BB42A4 /* LuaObject.h in Headers */,
 				428645160A08038100BB42A4 /* LuaPlus.h in Headers */,
 				428645180A08038100BB42A4 /* LuaPlusCD.h in Headers */,
-				4286451A0A08038100BB42A4 /* LuaPlusFunctions.h in Headers */,
 				4286451B0A08038100BB42A4 /* LuaPlusInternal.h in Headers */,
 				4286451D0A08038100BB42A4 /* LuaStackObject.h in Headers */,
 				4286451E0A08038100BB42A4 /* LuaStackTableIterator.h in Headers */,
@@ -352,7 +345,7 @@
 			);
 			name = LuaPlus;
 			productName = LuaPlus;
-			productReference = D2AAC0630554660B00DB518D /* libLuaPlus.dylib */;
+			productReference = D2AAC0630554660B00DB518D /* libLuaPlus.a */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -385,7 +378,6 @@
 				428645150A08038100BB42A4 /* LuaPlus.cpp in Sources */,
 				428645170A08038100BB42A4 /* LuaPlusAddons.c in Sources */,
 				428645190A08038100BB42A4 /* LuaPlusFunctions.cpp in Sources */,
-				4286451C0A08038100BB42A4 /* LuaStackObject.cpp in Sources */,
 				4286451F0A08038100BB42A4 /* LuaState.cpp in Sources */,
 				428645230A08038100BB42A4 /* lwstrlib.c in Sources */,
 				428645590A08039900BB42A4 /* lapi.c in Sources */,
@@ -440,8 +432,8 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = 4.2;
+				GCC_PREPROCESSOR_DEFINITIONS = LUAPLUS_ENABLE_INLINES;
+				GCC_VERSION = "";
 				INSTALL_PATH = ./;
 				MACH_O_TYPE = staticlib;
 				OBJROOT = "$(SYMROOT)";
@@ -465,8 +457,8 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = 4.2;
+				GCC_PREPROCESSOR_DEFINITIONS = LUAPLUS_ENABLE_INLINES;
+				GCC_VERSION = "";
 				INSTALL_PATH = ../../bin/macosx;
 				MACH_O_TYPE = staticlib;
 				OBJROOT = "$(SYMROOT)";
@@ -482,7 +474,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1)";
 				ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1 = x86_64;
 				GCC_PREPROCESSOR_DEFINITIONS = LUAPLUS_LIB;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -496,7 +488,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1)";
 				ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1 = x86_64;
 				GCC_PREPROCESSOR_DEFINITIONS = LUAPLUS_LIB;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;

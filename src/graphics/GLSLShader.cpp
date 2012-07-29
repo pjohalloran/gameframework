@@ -759,13 +759,13 @@ namespace GameHalloran
 			return (true);
 		}
 
-#ifdef DEBUG
-		// Validate the program, if it fails then dont set it as the current program and return false.
-		if(!ValidateProgram())
-		{
-			return (false);
-		}
-#endif
+//#ifdef DEBUG
+//		// Validate the program, if it fails then dont set it as the current program and return false.
+//		if(!ValidateProgram())
+//		{
+//			return (false);
+//		}
+//#endif
 
 		GF_CLEAR_GL_ERROR();
 

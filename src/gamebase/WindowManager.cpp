@@ -327,8 +327,8 @@ namespace GameHalloran
 			glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, m_params.GetGlMinorVersion());
 		}
 
-		//glfwOpenWindowHint(GLFW_OPENGL_PROFILE, m_params.GetGlProfile());
-        glfwOpenWindowHint(GLFW_OPENGL_PROFILE, 0);
+		glfwOpenWindowHint(GLFW_OPENGL_PROFILE, m_params.GetGlProfile());
+        //glfwOpenWindowHint(GLFW_OPENGL_PROFILE, 0);
 		glfwOpenWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, m_params.IsGlDebugContext() ? 1 : 0);
 
 		// Init and open the window with the parameters passed in.

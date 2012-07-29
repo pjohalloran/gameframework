@@ -69,6 +69,8 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
+#include <LuaPlus/LuaLink.h>
+#include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
 #include <cstring>

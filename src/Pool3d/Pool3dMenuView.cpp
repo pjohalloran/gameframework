@@ -993,6 +993,7 @@ namespace GameHalloran
 		if(m_specialDialogScreenPtr || m_currScreenPtr)
 		{
             GF_CLEAR_GL_ERROR();
+            //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
             
 			// Note: We clear the GL buffers from the GameView only as the menu view is rendered on top of it!
 

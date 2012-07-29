@@ -16,6 +16,29 @@
 		149553591558105C00E8A444 /* TextureAtlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 149553581558105C00E8A444 /* TextureAtlas.cpp */; };
 		14AB121E1448A39E00390E7A /* GameMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AB121D1448A39E00390E7A /* GameMemory.cpp */; };
 		14AB12211448ABFA00390E7A /* GameAllocater.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AB12201448ABF900390E7A /* GameAllocater.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		14AEC90215C472EA00B06081 /* glfw.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AEC8C915C472EA00B06081 /* glfw.h */; };
+		14AEC90315C472EA00B06081 /* cocoa_enable.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8CC15C472EA00B06081 /* cocoa_enable.m */; };
+		14AEC90415C472EA00B06081 /* cocoa_fullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8CD15C472EA00B06081 /* cocoa_fullscreen.m */; };
+		14AEC90515C472EA00B06081 /* cocoa_glext.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8CE15C472EA00B06081 /* cocoa_glext.m */; };
+		14AEC90615C472EA00B06081 /* cocoa_init.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8CF15C472EA00B06081 /* cocoa_init.m */; };
+		14AEC90715C472EA00B06081 /* cocoa_joystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D015C472EA00B06081 /* cocoa_joystick.m */; };
+		14AEC90815C472EA00B06081 /* cocoa_thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D115C472EA00B06081 /* cocoa_thread.c */; };
+		14AEC90915C472EA00B06081 /* cocoa_time.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D215C472EA00B06081 /* cocoa_time.m */; };
+		14AEC90A15C472EA00B06081 /* cocoa_window.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D315C472EA00B06081 /* cocoa_window.m */; };
+		14AEC90B15C472EA00B06081 /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AEC8D615C472EA00B06081 /* platform.h */; };
+		14AEC90C15C472EA00B06081 /* enable.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D715C472EA00B06081 /* enable.c */; };
+		14AEC90D15C472EA00B06081 /* fullscreen.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D815C472EA00B06081 /* fullscreen.c */; };
+		14AEC90E15C472EA00B06081 /* glext.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D915C472EA00B06081 /* glext.c */; };
+		14AEC90F15C472EA00B06081 /* image.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8DA15C472EA00B06081 /* image.c */; };
+		14AEC91015C472EA00B06081 /* init.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8DB15C472EA00B06081 /* init.c */; };
+		14AEC91115C472EA00B06081 /* input.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8DC15C472EA00B06081 /* input.c */; };
+		14AEC91215C472EA00B06081 /* internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AEC8DD15C472EA00B06081 /* internal.h */; };
+		14AEC91315C472EA00B06081 /* joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8DE15C472EA00B06081 /* joystick.c */; };
+		14AEC91415C472EA00B06081 /* stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8DF15C472EA00B06081 /* stream.c */; };
+		14AEC91515C472EA00B06081 /* tga.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8E015C472EA00B06081 /* tga.c */; };
+		14AEC91615C472EA00B06081 /* thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8E115C472EA00B06081 /* thread.c */; };
+		14AEC91715C472EA00B06081 /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8E215C472EA00B06081 /* time.c */; };
+		14AEC92215C472EA00B06081 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8F515C472EA00B06081 /* window.c */; };
 		14B5AA42144B5302000EFA8D /* DefaultAllocater.h in Headers */ = {isa = PBXBuildFile; fileRef = 14B5AA41144B5302000EFA8D /* DefaultAllocater.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14C1BE3014F16FAC00F922E1 /* ShaderUniform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14C1BE2F14F16FAC00F922E1 /* ShaderUniform.cpp */; };
 		14C6B6BC13F9CBA1005130FC /* DynamicArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B5C113F9CBA1005130FC /* DynamicArray.cpp */; };
@@ -232,6 +255,31 @@
 		14A5334413D4F33D00F9B3B1 /* gameframeworkTarget.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = gameframeworkTarget.xcconfig; sourceTree = "<group>"; };
 		14AB121D1448A39E00390E7A /* GameMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameMemory.cpp; sourceTree = "<group>"; };
 		14AB12201448ABF900390E7A /* GameAllocater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameAllocater.h; sourceTree = "<group>"; };
+		14AEC8C915C472EA00B06081 /* glfw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw.h; sourceTree = "<group>"; };
+		14AEC8CC15C472EA00B06081 /* cocoa_enable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocoa_enable.m; sourceTree = "<group>"; };
+		14AEC8CD15C472EA00B06081 /* cocoa_fullscreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocoa_fullscreen.m; sourceTree = "<group>"; };
+		14AEC8CE15C472EA00B06081 /* cocoa_glext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocoa_glext.m; sourceTree = "<group>"; };
+		14AEC8CF15C472EA00B06081 /* cocoa_init.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocoa_init.m; sourceTree = "<group>"; };
+		14AEC8D015C472EA00B06081 /* cocoa_joystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocoa_joystick.m; sourceTree = "<group>"; };
+		14AEC8D115C472EA00B06081 /* cocoa_thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cocoa_thread.c; sourceTree = "<group>"; };
+		14AEC8D215C472EA00B06081 /* cocoa_time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocoa_time.m; sourceTree = "<group>"; };
+		14AEC8D315C472EA00B06081 /* cocoa_window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocoa_window.m; sourceTree = "<group>"; };
+		14AEC8D415C472EA00B06081 /* libglfw.pc.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libglfw.pc.in; sourceTree = "<group>"; };
+		14AEC8D515C472EA00B06081 /* Makefile.cocoa */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.cocoa; sourceTree = "<group>"; };
+		14AEC8D615C472EA00B06081 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
+		14AEC8D715C472EA00B06081 /* enable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = enable.c; sourceTree = "<group>"; };
+		14AEC8D815C472EA00B06081 /* fullscreen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fullscreen.c; sourceTree = "<group>"; };
+		14AEC8D915C472EA00B06081 /* glext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glext.c; sourceTree = "<group>"; };
+		14AEC8DA15C472EA00B06081 /* image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = image.c; sourceTree = "<group>"; };
+		14AEC8DB15C472EA00B06081 /* init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = init.c; sourceTree = "<group>"; };
+		14AEC8DC15C472EA00B06081 /* input.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = input.c; sourceTree = "<group>"; };
+		14AEC8DD15C472EA00B06081 /* internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = internal.h; sourceTree = "<group>"; };
+		14AEC8DE15C472EA00B06081 /* joystick.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = joystick.c; sourceTree = "<group>"; };
+		14AEC8DF15C472EA00B06081 /* stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stream.c; sourceTree = "<group>"; };
+		14AEC8E015C472EA00B06081 /* tga.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tga.c; sourceTree = "<group>"; };
+		14AEC8E115C472EA00B06081 /* thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = thread.c; sourceTree = "<group>"; };
+		14AEC8E215C472EA00B06081 /* time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = time.c; sourceTree = "<group>"; };
+		14AEC8F515C472EA00B06081 /* window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = window.c; sourceTree = "<group>"; };
 		14B5AA41144B5302000EFA8D /* DefaultAllocater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultAllocater.h; sourceTree = "<group>"; };
 		14C1BE2F14F16FAC00F922E1 /* ShaderUniform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderUniform.cpp; sourceTree = "<group>"; };
 		14C6B5BC13F9CBA1005130FC /* .project */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = .project; sourceTree = "<group>"; };
@@ -513,6 +561,7 @@
 		14A5334013D4F33D00F9B3B1 /* gameframework */ = {
 			isa = PBXGroup;
 			children = (
+				14AEC8C515C472E900B06081 /* 3rdParty */,
 				14C6B5BA13F9CBA1005130FC /* ai */,
 				14C6B5BB13F9CBA1005130FC /* build */,
 				14C6B5C013F9CBA1005130FC /* datastructures */,
@@ -545,6 +594,79 @@
 			children = (
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14AEC8C515C472E900B06081 /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				14AEC8C615C472EA00B06081 /* glfw */,
+			);
+			name = 3rdParty;
+			path = ../../../../src/3rdParty;
+			sourceTree = "<group>";
+		};
+		14AEC8C615C472EA00B06081 /* glfw */ = {
+			isa = PBXGroup;
+			children = (
+				14AEC8C715C472EA00B06081 /* include */,
+				14AEC8CA15C472EA00B06081 /* lib */,
+			);
+			path = glfw;
+			sourceTree = "<group>";
+		};
+		14AEC8C715C472EA00B06081 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				14AEC8C815C472EA00B06081 /* GL */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		14AEC8C815C472EA00B06081 /* GL */ = {
+			isa = PBXGroup;
+			children = (
+				14AEC8C915C472EA00B06081 /* glfw.h */,
+			);
+			path = GL;
+			sourceTree = "<group>";
+		};
+		14AEC8CA15C472EA00B06081 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				14AEC8CB15C472EA00B06081 /* cocoa */,
+				14AEC8D715C472EA00B06081 /* enable.c */,
+				14AEC8D815C472EA00B06081 /* fullscreen.c */,
+				14AEC8D915C472EA00B06081 /* glext.c */,
+				14AEC8DA15C472EA00B06081 /* image.c */,
+				14AEC8DB15C472EA00B06081 /* init.c */,
+				14AEC8DC15C472EA00B06081 /* input.c */,
+				14AEC8DD15C472EA00B06081 /* internal.h */,
+				14AEC8DE15C472EA00B06081 /* joystick.c */,
+				14AEC8DF15C472EA00B06081 /* stream.c */,
+				14AEC8E015C472EA00B06081 /* tga.c */,
+				14AEC8E115C472EA00B06081 /* thread.c */,
+				14AEC8E215C472EA00B06081 /* time.c */,
+				14AEC8F515C472EA00B06081 /* window.c */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		14AEC8CB15C472EA00B06081 /* cocoa */ = {
+			isa = PBXGroup;
+			children = (
+				14AEC8CC15C472EA00B06081 /* cocoa_enable.m */,
+				14AEC8CD15C472EA00B06081 /* cocoa_fullscreen.m */,
+				14AEC8CE15C472EA00B06081 /* cocoa_glext.m */,
+				14AEC8CF15C472EA00B06081 /* cocoa_init.m */,
+				14AEC8D015C472EA00B06081 /* cocoa_joystick.m */,
+				14AEC8D115C472EA00B06081 /* cocoa_thread.c */,
+				14AEC8D215C472EA00B06081 /* cocoa_time.m */,
+				14AEC8D315C472EA00B06081 /* cocoa_window.m */,
+				14AEC8D415C472EA00B06081 /* libglfw.pc.in */,
+				14AEC8D515C472EA00B06081 /* Makefile.cocoa */,
+				14AEC8D615C472EA00B06081 /* platform.h */,
+			);
+			path = cocoa;
 			sourceTree = "<group>";
 		};
 		14C6B5BA13F9CBA1005130FC /* ai */ = {
@@ -1098,6 +1220,9 @@
 				14F701551481298D00B44AE6 /* ICleanable.h in Headers */,
 				14F70157148129F800B44AE6 /* ICleanableObserver.h in Headers */,
 				14F7015914812DA700B44AE6 /* ShaderUniform.h in Headers */,
+				14AEC90215C472EA00B06081 /* glfw.h in Headers */,
+				14AEC90B15C472EA00B06081 /* platform.h in Headers */,
+				14AEC91215C472EA00B06081 /* internal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1242,6 +1367,26 @@
 				14AB121E1448A39E00390E7A /* GameMemory.cpp in Sources */,
 				14C1BE3014F16FAC00F922E1 /* ShaderUniform.cpp in Sources */,
 				149553591558105C00E8A444 /* TextureAtlas.cpp in Sources */,
+				14AEC90315C472EA00B06081 /* cocoa_enable.m in Sources */,
+				14AEC90415C472EA00B06081 /* cocoa_fullscreen.m in Sources */,
+				14AEC90515C472EA00B06081 /* cocoa_glext.m in Sources */,
+				14AEC90615C472EA00B06081 /* cocoa_init.m in Sources */,
+				14AEC90715C472EA00B06081 /* cocoa_joystick.m in Sources */,
+				14AEC90815C472EA00B06081 /* cocoa_thread.c in Sources */,
+				14AEC90915C472EA00B06081 /* cocoa_time.m in Sources */,
+				14AEC90A15C472EA00B06081 /* cocoa_window.m in Sources */,
+				14AEC90C15C472EA00B06081 /* enable.c in Sources */,
+				14AEC90D15C472EA00B06081 /* fullscreen.c in Sources */,
+				14AEC90E15C472EA00B06081 /* glext.c in Sources */,
+				14AEC90F15C472EA00B06081 /* image.c in Sources */,
+				14AEC91015C472EA00B06081 /* init.c in Sources */,
+				14AEC91115C472EA00B06081 /* input.c in Sources */,
+				14AEC91315C472EA00B06081 /* joystick.c in Sources */,
+				14AEC91415C472EA00B06081 /* stream.c in Sources */,
+				14AEC91515C472EA00B06081 /* tga.c in Sources */,
+				14AEC91615C472EA00B06081 /* thread.c in Sources */,
+				14AEC91715C472EA00B06081 /* time.c in Sources */,
+				14AEC92215C472EA00B06081 /* window.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1261,7 +1406,7 @@
 					_DEBUG,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1287,7 +1432,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1323,7 +1468,7 @@
 					TIXML_USE_STL,
 					LUAPLUS_ENABLE_INLINES,
 				);
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					../../../include/,
 					/opt/local/include/,
@@ -1363,7 +1508,7 @@
 					TIXML_USE_STL,
 					LUAPLUS_ENABLE_INLINES,
 				);
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					../../../include/,
 					/opt/local/include/,

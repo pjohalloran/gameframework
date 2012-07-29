@@ -86,7 +86,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
-#include "LuaPlus/LuaObject.h"
+#include <LuaPlus/LuaLink.h>
+#include <LuaPlus/LuaPlus.h>
+#include <LuaPlus/LuaObject.h>
 
 // Project Headers
 #include "IActors.h"

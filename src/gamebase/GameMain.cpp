@@ -1055,14 +1055,14 @@ namespace GameHalloran
 			// Flip the screen back buffer.
 			m_windowManagerPtr->SwapBuffers();
 
-//			// Regulate fps by sleeping for a short period
-//			//  if this frame took less than FRAME_TIME_MS to update and render.
-//			if(m_frameRateTimer->VGetTime() < FRAME_TIME_MS)
-//			{
-//				F64 milliseconds = FRAME_TIME_MS - m_frameRateTimer->VGetTime();
-//				// Sleep the remaining frame time
-//				Sleep(milliseconds);
-//			}
+			// Regulate fps by sleeping for a short period
+			//  if this frame took less than FRAME_TIME_MS to update and render.
+			if(m_frameRateTimer->VGetTime() < FRAME_TIME_MS)
+			{
+				F64 milliseconds = FRAME_TIME_MS - m_frameRateTimer->VGetTime();
+				// Sleep the remaining frame time
+				Sleep(milliseconds);
+			}
 
 			// Poll for input events (implemented by derived classes).
 			VPollEvents();

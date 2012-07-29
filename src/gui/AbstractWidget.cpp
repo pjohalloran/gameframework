@@ -223,6 +223,8 @@ namespace GameHalloran
             GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to generate the VAO for the widget " + idStr);
 #endif
 		}
+        else
+            glBindVertexArray(m_vaoId);
 		glGenBuffers(1, &m_vboId);
 		if(m_vboId == 0)
 		{
@@ -232,6 +234,8 @@ namespace GameHalloran
             GF_LOG_TRACE_ERR("AbstractWidget::Init()", "Failed to generate the VBO for the widget " + idStr);
 #endif
 		}
+        else
+            glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
 
 		SetupQuad();
 	}

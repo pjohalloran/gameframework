@@ -21,7 +21,7 @@
         <FontDebugSize>26</FontDebugSize>
         <FontUi>freesansbold.ttf</FontUi>
         <FontUiSize>40</FontUiSize>
-        <FullScreen>0</FullScreen>
+        <FullScreen>1</FullScreen>
         <GameName>Pool3D</GameName>
         <GameRoot>/Users/pjohalloran/work/git/gameframework/</GameRoot>
         <GameSaveDir>c:/temp/savedir</GameSaveDir>
@@ -38,9 +38,9 @@
         <OpenGLMinor>2</OpenGLMinor>
         <OpenGLProfile>core</OpenGLProfile>
         <PhysicsSystem>Bullet</PhysicsSystem>
-        <ResCacheSize>10</ResCacheSize>
+        <ResCacheSize>25</ResCacheSize>
         <ResFile>Pool3D.zip</ResFile>
-        <StencilBufferSize>8</StencilBufferSize>
+        <StencilBufferSize>0</StencilBufferSize>
         <UseDesktopSettings>0</UseDesktopSettings>
     </OptionType>
 </Options>

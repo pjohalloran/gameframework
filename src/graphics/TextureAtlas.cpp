@@ -87,6 +87,10 @@ namespace GameHalloran
                 double tmp(0.0);
                 
                 AtlasImageSPtr image(new AtlasImage(currChildPtr->Attribute("imagefile")));
+                
+                if(image->m_id.getStr().compare("MainMenuBackground.tga") == 0)
+                    int tmp = 0;
+                
                 currChildPtr->Attribute("x", &tmp);
                 image->m_x = (float)tmp / atlas->m_width;
                 currChildPtr->Attribute("y", &tmp);
@@ -102,6 +106,8 @@ namespace GameHalloran
                 atlas->m_images[image->m_id.getHashValue()] = image;
             }
         }
+        
+        return (true);
     }
     
     // /////////////////////////////////////////////////////////////////

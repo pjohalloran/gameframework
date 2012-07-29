@@ -44,7 +44,7 @@ dlgScreenRootContainer =
 		Height = 1.0,
 		Depth = 0.0
 	},
-	AtlasName = "UI",
+	AtlasName = "ALL",
 	TextureName = "PanelOutline.tga",
 	--TextureName = "",
 	Visible = true

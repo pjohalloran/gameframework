@@ -329,10 +329,10 @@ namespace GameHalloran
 
 		if(useOpenAL)
 		{
-            GF_LOG_TRACE_ERR("HumanView::InitAudio()", "Failed to set the Global OpenAL audio system pointer");
 			g_oalAudioPtr = dynamic_cast<OpenALAudio *>(g_audioPtr);
 			if(!g_oalAudioPtr)
 			{
+                GF_LOG_TRACE_ERR("HumanView::InitAudio()", "Failed to set the Global OpenAL audio system pointer");
 				return (false);
 			}
 		}

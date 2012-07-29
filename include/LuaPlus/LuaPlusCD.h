@@ -68,8 +68,8 @@ namespace LPCD
 	inline void Push(lua_State* L, const void* value)		{  lua_pushlightuserdata(L, (void*)value);  }
 	inline void Push(lua_State* L, const LuaLightUserData& value)	{  lua_pushlightuserdata(L, (void*)value.m_value);  }
     inline void Push(lua_State* L, const LuaUserData& value){  *(void **)(lua_newuserdata(L, sizeof(void *))) = (void*)value.m_value;  }
-    void Push(lua_State* L, LuaPlus::LuaObject& value);
     
+    void Push(lua_State* L, LuaPlus::LuaObject& value);
     
 	template<class T> struct TypeWrapper {};
 
@@ -147,6 +147,7 @@ namespace LPCD
 		{  return static_cast<void*>(lua_touserdata(L, idx));  }
 	inline lua_State*		Get(TypeWrapper<lua_State*>, lua_State* L, int /*idx*/)
 		{  return L;  }
+    
     LuaPlus::LuaObject Get(TypeWrapper<LuaPlus::LuaObject>, lua_State* L, int idx);
     
 	//////////////////////////////////////////////////////////////////////////
@@ -1416,8 +1417,11 @@ namespace LPCD
 			void* offset = lua_touserdata(L, lua_upvalueindex(1));
 
 			Object* obj = (Object*)LPCD::GetObjectUserData(L);
-
-			LPCD::Push(L, *(VarType*)((unsigned char*)obj + (unsigned int)offset));
+            
+            //LPCD::Push(L, *(VarType*)((unsigned char*)obj + (unsigned int)offset));
+            //pj replace
+            unsigned int offsetConcrete = *reinterpret_cast<unsigned int *>(offset);
+            LPCD::Push(L, *(VarType*)((unsigned char*)obj + offsetConcrete));
 
 			return 1;
 		}
@@ -1431,7 +1435,10 @@ namespace LPCD
 			if (!Match(TypeWrapper<VarType>(), L, 2))
 				luaL_argerror(L, 2, "bad argument");
 
-			*(VarType*)((unsigned char*)obj + (unsigned int)offset) = Get(TypeWrapper<VarType>(), L, 2);
+			//*(VarType*)((unsigned char*)obj + (unsigned int)offset) = Get(TypeWrapper<VarType>(), L, 2);
+            // pj replace
+            unsigned int offsetConcrete = *reinterpret_cast<unsigned int *>(offset);
+            *(VarType*)((unsigned char*)obj + offsetConcrete) = Get(TypeWrapper<VarType>(), L, 2);
 
 			return 1;
 		}
