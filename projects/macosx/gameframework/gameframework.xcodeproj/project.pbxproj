@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		141733D814478DA50031AC96 /* GameMemory.h in Headers */ = {isa = PBXBuildFile; fileRef = 141733D714478DA50031AC96 /* GameMemory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		142AA95915C5AF560036E0DF /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 142AA95415C5AF560036E0DF /* tinystr.cpp */; };
-		142AA95A15C5AF560036E0DF /* tinystr.h in Headers */ = {isa = PBXBuildFile; fileRef = 142AA95515C5AF560036E0DF /* tinystr.h */; };
+		142AA95A15C5AF560036E0DF /* tinystr.h in Headers */ = {isa = PBXBuildFile; fileRef = 142AA95515C5AF560036E0DF /* tinystr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		142AA95B15C5AF560036E0DF /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 142AA95615C5AF560036E0DF /* tinyxml.cpp */; };
-		142AA95C15C5AF560036E0DF /* tinyxml.h in Headers */ = {isa = PBXBuildFile; fileRef = 142AA95715C5AF560036E0DF /* tinyxml.h */; };
+		142AA95C15C5AF560036E0DF /* tinyxml.h in Headers */ = {isa = PBXBuildFile; fileRef = 142AA95715C5AF560036E0DF /* tinyxml.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		142AA98C15C5B6640036E0DF /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 142AA98A15C5B6640036E0DF /* tinyxmlerror.cpp */; };
 		142AA98D15C5B6640036E0DF /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 142AA98B15C5B6640036E0DF /* tinyxmlparser.cpp */; };
 		143044E81448BE9100E06967 /* MemoryManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 143044E71448BE9100E06967 /* MemoryManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,32 +23,32 @@
 		1497EA4C15C5CF0900464F41 /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA2D15C5CF0900464F41 /* adler32.c */; };
 		1497EA4D15C5CF0900464F41 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA2E15C5CF0900464F41 /* compress.c */; };
 		1497EA4E15C5CF0900464F41 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA2F15C5CF0900464F41 /* crc32.c */; };
-		1497EA4F15C5CF0900464F41 /* crc32.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3015C5CF0900464F41 /* crc32.h */; };
+		1497EA4F15C5CF0900464F41 /* crc32.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3015C5CF0900464F41 /* crc32.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1497EA5015C5CF0900464F41 /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3115C5CF0900464F41 /* deflate.c */; };
-		1497EA5115C5CF0900464F41 /* deflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3215C5CF0900464F41 /* deflate.h */; };
+		1497EA5115C5CF0900464F41 /* deflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3215C5CF0900464F41 /* deflate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1497EA5215C5CF0900464F41 /* gzclose.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3315C5CF0900464F41 /* gzclose.c */; };
-		1497EA5315C5CF0900464F41 /* gzguts.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3415C5CF0900464F41 /* gzguts.h */; };
+		1497EA5315C5CF0900464F41 /* gzguts.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3415C5CF0900464F41 /* gzguts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1497EA5415C5CF0900464F41 /* gzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3515C5CF0900464F41 /* gzlib.c */; };
 		1497EA5515C5CF0900464F41 /* gzread.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3615C5CF0900464F41 /* gzread.c */; };
 		1497EA5615C5CF0900464F41 /* gzwrite.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3715C5CF0900464F41 /* gzwrite.c */; };
 		1497EA5715C5CF0900464F41 /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3815C5CF0900464F41 /* infback.c */; };
 		1497EA5815C5CF0900464F41 /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3915C5CF0900464F41 /* inffast.c */; };
-		1497EA5915C5CF0900464F41 /* inffast.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3A15C5CF0900464F41 /* inffast.h */; };
-		1497EA5A15C5CF0900464F41 /* inffixed.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3B15C5CF0900464F41 /* inffixed.h */; };
+		1497EA5915C5CF0900464F41 /* inffast.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3A15C5CF0900464F41 /* inffast.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1497EA5A15C5CF0900464F41 /* inffixed.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3B15C5CF0900464F41 /* inffixed.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1497EA5B15C5CF0900464F41 /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3C15C5CF0900464F41 /* inflate.c */; };
-		1497EA5C15C5CF0900464F41 /* inflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3D15C5CF0900464F41 /* inflate.h */; };
+		1497EA5C15C5CF0900464F41 /* inflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3D15C5CF0900464F41 /* inflate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1497EA5D15C5CF0900464F41 /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA3E15C5CF0900464F41 /* inftrees.c */; };
-		1497EA5E15C5CF0900464F41 /* inftrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3F15C5CF0900464F41 /* inftrees.h */; };
+		1497EA5E15C5CF0900464F41 /* inftrees.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA3F15C5CF0900464F41 /* inftrees.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1497EA5F15C5CF0900464F41 /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA4015C5CF0900464F41 /* trees.c */; };
-		1497EA6015C5CF0900464F41 /* trees.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4115C5CF0900464F41 /* trees.h */; };
+		1497EA6015C5CF0900464F41 /* trees.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4115C5CF0900464F41 /* trees.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1497EA6115C5CF0900464F41 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA4215C5CF0900464F41 /* uncompr.c */; };
-		1497EA6215C5CF0900464F41 /* zconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4415C5CF0900464F41 /* zconf.h */; };
+		1497EA6215C5CF0900464F41 /* zconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4415C5CF0900464F41 /* zconf.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1497EA6315C5CF0900464F41 /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4715C5CF0900464F41 /* zlib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1497EA6415C5CF0900464F41 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 1497EA4A15C5CF0900464F41 /* zutil.c */; };
-		1497EA6515C5CF0900464F41 /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4B15C5CF0900464F41 /* zutil.h */; };
+		1497EA6515C5CF0900464F41 /* zutil.h in Headers */ = {isa = PBXBuildFile; fileRef = 1497EA4B15C5CF0900464F41 /* zutil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14AB121E1448A39E00390E7A /* GameMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AB121D1448A39E00390E7A /* GameMemory.cpp */; };
 		14AB12211448ABFA00390E7A /* GameAllocater.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AB12201448ABF900390E7A /* GameAllocater.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		14AEC90215C472EA00B06081 /* glfw.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AEC8C915C472EA00B06081 /* glfw.h */; };
+		14AEC90215C472EA00B06081 /* glfw.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AEC8C915C472EA00B06081 /* glfw.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14AEC90315C472EA00B06081 /* cocoa_enable.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8CC15C472EA00B06081 /* cocoa_enable.m */; };
 		14AEC90415C472EA00B06081 /* cocoa_fullscreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8CD15C472EA00B06081 /* cocoa_fullscreen.m */; };
 		14AEC90515C472EA00B06081 /* cocoa_glext.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8CE15C472EA00B06081 /* cocoa_glext.m */; };
@@ -57,14 +57,14 @@
 		14AEC90815C472EA00B06081 /* cocoa_thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D115C472EA00B06081 /* cocoa_thread.c */; };
 		14AEC90915C472EA00B06081 /* cocoa_time.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D215C472EA00B06081 /* cocoa_time.m */; };
 		14AEC90A15C472EA00B06081 /* cocoa_window.m in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D315C472EA00B06081 /* cocoa_window.m */; };
-		14AEC90B15C472EA00B06081 /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AEC8D615C472EA00B06081 /* platform.h */; };
+		14AEC90B15C472EA00B06081 /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AEC8D615C472EA00B06081 /* platform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14AEC90C15C472EA00B06081 /* enable.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D715C472EA00B06081 /* enable.c */; };
 		14AEC90D15C472EA00B06081 /* fullscreen.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D815C472EA00B06081 /* fullscreen.c */; };
 		14AEC90E15C472EA00B06081 /* glext.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8D915C472EA00B06081 /* glext.c */; };
 		14AEC90F15C472EA00B06081 /* image.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8DA15C472EA00B06081 /* image.c */; };
 		14AEC91015C472EA00B06081 /* init.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8DB15C472EA00B06081 /* init.c */; };
 		14AEC91115C472EA00B06081 /* input.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8DC15C472EA00B06081 /* input.c */; };
-		14AEC91215C472EA00B06081 /* internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AEC8DD15C472EA00B06081 /* internal.h */; };
+		14AEC91215C472EA00B06081 /* internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AEC8DD15C472EA00B06081 /* internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14AEC91315C472EA00B06081 /* joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8DE15C472EA00B06081 /* joystick.c */; };
 		14AEC91415C472EA00B06081 /* stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8DF15C472EA00B06081 /* stream.c */; };
 		14AEC91515C472EA00B06081 /* tga.c in Sources */ = {isa = PBXBuildFile; fileRef = 14AEC8E015C472EA00B06081 /* tga.c */; };
@@ -1332,17 +1332,6 @@
 				1481441F1424F2E000B969A5 /* GameEndianConv.h in Headers */,
 				14C6B77B13F9CBA2005130FC /* IGameTimer.h in Headers */,
 				14C6B77D13F9CBA2005130FC /* HumanView.h in Headers */,
-				14C6B77E13F9CBA2005130FC /* IGameView.h in Headers */,
-				141733D814478DA50031AC96 /* GameMemory.h in Headers */,
-				14AB12211448ABFA00390E7A /* GameAllocater.h in Headers */,
-				149459441540B5E500AC7F71 /* TextureAtlas.h in Headers */,
-				143044E81448BE9100E06967 /* MemoryManager.h in Headers */,
-				14B5AA42144B5302000EFA8D /* DefaultAllocater.h in Headers */,
-				14C6B77F13F9CBA2005130FC /* IScreenElement.h in Headers */,
-				14F701551481298D00B44AE6 /* ICleanable.h in Headers */,
-				14F70157148129F800B44AE6 /* ICleanableObserver.h in Headers */,
-				14F7015914812DA700B44AE6 /* ShaderUniform.h in Headers */,
-				1497EA6315C5CF0900464F41 /* zlib.h in Headers */,
 				14AEC90215C472EA00B06081 /* glfw.h in Headers */,
 				14AEC90B15C472EA00B06081 /* platform.h in Headers */,
 				14AEC91215C472EA00B06081 /* internal.h in Headers */,
@@ -1358,6 +1347,17 @@
 				1497EA6015C5CF0900464F41 /* trees.h in Headers */,
 				1497EA6215C5CF0900464F41 /* zconf.h in Headers */,
 				1497EA6515C5CF0900464F41 /* zutil.h in Headers */,
+				14C6B77E13F9CBA2005130FC /* IGameView.h in Headers */,
+				141733D814478DA50031AC96 /* GameMemory.h in Headers */,
+				14AB12211448ABFA00390E7A /* GameAllocater.h in Headers */,
+				149459441540B5E500AC7F71 /* TextureAtlas.h in Headers */,
+				143044E81448BE9100E06967 /* MemoryManager.h in Headers */,
+				14B5AA42144B5302000EFA8D /* DefaultAllocater.h in Headers */,
+				14C6B77F13F9CBA2005130FC /* IScreenElement.h in Headers */,
+				14F701551481298D00B44AE6 /* ICleanable.h in Headers */,
+				14F70157148129F800B44AE6 /* ICleanableObserver.h in Headers */,
+				14F7015914812DA700B44AE6 /* ShaderUniform.h in Headers */,
+				1497EA6315C5CF0900464F41 /* zlib.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1371,6 +1371,7 @@
 				14A5333A13D4F33D00F9B3B1 /* Sources */,
 				14A5333B13D4F33D00F9B3B1 /* Frameworks */,
 				14A5333C13D4F33D00F9B3B1 /* Headers */,
+				144202A715F4F32E00C60DE8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1406,6 +1407,22 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		144202A715F4F32E00C60DE8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Copy certain headers to correct location in $PROJECT_ROOT/include/ as xcode does not easily support copying headers to subdirs inside public headers location!\n\n#GLFW\nif [ ! -d ../../../include/GL/ ]; then\n    mkdir ../../../include/GL/\nfi\nmv ../../../include/glfw.h ../../../include/GL/\n\n#tinyxml\nif [ ! -d ../../../include/tinyxml/ ]; then\n    mkdir ../../../include/tinyxml/\nfi\nmv ../../../include/tinyxml.h ../../../include/tinyxml/\nmv ../../../include/tinystr.h ../../../include/tinyxml/\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		14A5333A13D4F33D00F9B3B1 /* Sources */ = {
@@ -1624,6 +1641,8 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					../../../include/,
+					../../../src/3rdParty/glfw/include/,
+					../../../src/3rdParty/,
 					/opt/local/include/,
 					/opt/local/include/freetype2/,
 					/opt/local/include/bullet/,
@@ -1663,6 +1682,8 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = (
 					../../../include/,
+					../../../src/3rdParty/glfw/include/,
+					../../../src/3rdParty/,
 					/opt/local/include/,
 					/opt/local/include/freetype2/,
 					/opt/local/include/bullet/,

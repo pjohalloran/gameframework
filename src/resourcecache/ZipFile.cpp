@@ -59,11 +59,7 @@
 #include <string.h>
 #include <boost/algorithm/string/case_conv.hpp>
 
-#if defined(WIN32) || defined(TARGET_OS_WINDOWS) || defined(_WINDOWS)
 #include "zlib/zlib.h"
-#else
-#include "zlib.h"
-#endif
 
 // Project headers
 #include "GameMain.h"

@@ -12,7 +12,7 @@
 
 #include "GameMain.h"
 
-#include <tinyxml/tinyxml.h>
+#include "tinyxml/tinyxml.h"
 #include <string>
 
 #include "ImageResource.h"

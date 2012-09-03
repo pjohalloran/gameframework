@@ -27,9 +27,6 @@
 #include "GameOptions.h"
 #include "Pool3dGame.h"
 
-// DEBUG
-#include "StackAllocater.h"
-
 // /////////////////////////////////////////////////////////////////////////////
 // Check if the actual game root directory matches that of the game root stored
 // in the options file and updates it if nessecary.  This might have changed if
@@ -123,29 +120,6 @@ int main(int args, char *argv[])
 
 	try
 	{
-		//// StackAllocater test
-		//GameHalloran::StackAllocater myAlloc(20 * 1024);
-		//GameHalloran::U32 sm = myAlloc.GetMarker();
-		//if(myAlloc.GetAvailableMemory() != 20 * 1024)
-		//	printf("Incorrect mem available\n");
-		//void *blockA = myAlloc.VAlloc(1*1024);
-		//GameHalloran::U32 mm = myAlloc.GetMarker();
-		//if(myAlloc.GetAvailableMemory() != (19 * 1024) - 8)
-		//	printf("Incorrect mem available\n");
-		//void *blockB = myAlloc.VAlloc(2*1024);
-		//GameHalloran::U32 em = myAlloc.GetMarker();
-		//if(myAlloc.GetAvailableMemory() != (17 * 1024) - 16)
-		//	printf("Incorrect mem available\n");
-		//myAlloc.FreeToMarker(em);
-		//if(myAlloc.GetAvailableMemory() != (17 * 1024) - 16)
-		//	printf("Incorrect mem available\n");
-		//myAlloc.FreeToMarker(mm);
-		//if(myAlloc.GetAvailableMemory() != (19 * 1024) - 8)
-		//	printf("Incorrect mem available\n");
-		//myAlloc.FreeToMarker(sm);
-		//if(myAlloc.GetAvailableMemory() != 20 * 1024)
-		//	printf("Incorrect mem available\n");
-
 #if defined(_DEBUG) || defined(DEBUG)
 		// To handle the current $GAMEROOT path for debugging comment in or out the following path set.
 
@@ -162,15 +136,17 @@ int main(int args, char *argv[])
 #endif
 		// Ensure path ends with trailing dir seperator.
 		if(!boost::algorithm::ends_with(rootDirPath.string(), std::string("/")) || !boost::algorithm::ends_with(rootDirPath.string(), std::string("\\")))
-		{
 			rootDirPath = boost::filesystem::path(rootDirPath.string() + std::string("/"));
-		}
 
 		path endOp(std::string("data/Pool3D/options.xml"));
 		path endLog(std::string("log/Pool3D.log"));
 		path optionsFilePath(rootDirPath.string() + endOp.string());
 		path logFilePath(rootDirPath.string() + endLog.string());
 
+        // Ensure the log directory exists!
+        if(!boost::filesystem::exists(rootDirPath.string() + std::string("log/")))
+            boost::filesystem::create_directory(boost::filesystem::path(rootDirPath.string() + std::string("log/")));
+        
 		std::cout << "optionsFilePath: " << optionsFilePath.string() << std::endl;
 		std::cout << "logFilePath: " << logFilePath.string() << std::endl;
 
