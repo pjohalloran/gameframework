@@ -1,4 +1,4 @@
- 					**** gameframework ****
+ 		**** gameframework ****
 
 Introduction:
 
@@ -37,6 +37,9 @@ Features:
  
  TODO:
  
+ - Fix the Windows build.
+ - Inline all 3rdParty code inside the library to remove the need to install anything.
+ - Get rid of dead and experimental code.
  - iOS platform support.
  - More 2D/3D game examples.
  - Custom memory management and allocation.
@@ -48,9 +51,14 @@ Features:
 
 Installation:
 
+ - Mac OSX:
+On Mac OSX, it is necessary to install certain 3rd party libs in order to build and run the framework and its examples.  
 
-On Mac OSX, it is necessary to install certain 3rd party libs in order to build and run the framework and its examples.
+Firstly, you will need to have macports installed.  See http://www.macports.org/
 
+Go into src/build/macosx/ and run the script 3rdPartyInstall.sh at the command line.  It will take a while to run.
+
+ - Windows:
 The windows build is currently broken due to my lack of a windows machine!
 
 
