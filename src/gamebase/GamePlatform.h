@@ -30,7 +30,7 @@
         #include <GL/glfw3.h>
         #define GLFW_FUNC_PRE GLFWAPI
     #else
-        #include <GL/glfw.h>
+        #include <glfw.h>
         #define GLFW_FUNC_PRE GLFWCALL
     #endif
 

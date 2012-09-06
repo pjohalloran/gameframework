@@ -11,20 +11,8 @@
 		142AA96115C5B2B20036E0DF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA95F15C5B2B20036E0DF /* OpenGL.framework */; };
 		142AA96315C5B2B90036E0DF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96215C5B2B90036E0DF /* CoreFoundation.framework */; };
 		142AA96515C5B2C00036E0DF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96415C5B2C00036E0DF /* IOKit.framework */; };
-		142AA97215C5B35B0036E0DF /* libboost_filesystem-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96615C5B35B0036E0DF /* libboost_filesystem-mt.a */; };
-		142AA97315C5B35B0036E0DF /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96715C5B35B0036E0DF /* libboost_system-mt.a */; };
-		142AA97415C5B35B0036E0DF /* libBulletCollision.2.80.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96815C5B35B0036E0DF /* libBulletCollision.2.80.dylib */; };
-		142AA97515C5B35B0036E0DF /* libBulletDynamics.2.80.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96915C5B35B0036E0DF /* libBulletDynamics.2.80.dylib */; };
 		142AA97615C5B35B0036E0DF /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96A15C5B35B0036E0DF /* libftgl.a */; };
-		142AA97715C5B35B0036E0DF /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96B15C5B35B0036E0DF /* libGLEW.a */; };
-		142AA97815C5B35B0036E0DF /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96C15C5B35B0036E0DF /* libjpeg.a */; };
-		142AA97915C5B35B0036E0DF /* libLinearMath.2.80.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96D15C5B35B0036E0DF /* libLinearMath.2.80.dylib */; };
-		142AA97A15C5B35B0036E0DF /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96E15C5B35B0036E0DF /* libogg.a */; };
-		142AA97B15C5B35B0036E0DF /* libpng14.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96F15C5B35B0036E0DF /* libpng14.a */; };
-		142AA97C15C5B35B0036E0DF /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA97015C5B35B0036E0DF /* libvorbis.a */; };
 		142AA98315C5B4640036E0DF /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA98215C5B4640036E0DF /* AppKit.framework */; };
-		142AA98715C5B4BF0036E0DF /* libLuaPlusLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA98615C5B4BF0036E0DF /* libLuaPlusLib.a */; };
-		142AA98915C5B4E20036E0DF /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA98815C5B4E20036E0DF /* libvorbisfile.a */; };
 		1442028215F4EA2800C60DE8 /* pool3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1442026E15F4EA2700C60DE8 /* pool3d.cpp */; };
 		1442028315F4EA2800C60DE8 /* Pool3dActors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1442027115F4EA2700C60DE8 /* Pool3dActors.cpp */; };
 		1442028415F4EA2800C60DE8 /* Pool3dEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1442027415F4EA2700C60DE8 /* Pool3dEvents.cpp */; };
@@ -71,23 +59,11 @@
 		142AA95F15C5B2B20036E0DF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		142AA96215C5B2B90036E0DF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		142AA96415C5B2C00036E0DF /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		142AA96615C5B35B0036E0DF /* libboost_filesystem-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_filesystem-mt.a"; path = "../../../../../../../../opt/local/lib/libboost_filesystem-mt.a"; sourceTree = "<group>"; };
-		142AA96715C5B35B0036E0DF /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "../../../../../../../../opt/local/lib/libboost_system-mt.a"; sourceTree = "<group>"; };
-		142AA96815C5B35B0036E0DF /* libBulletCollision.2.80.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libBulletCollision.2.80.dylib; path = ../../../../../../../../opt/local/lib/libBulletCollision.2.80.dylib; sourceTree = "<group>"; };
-		142AA96915C5B35B0036E0DF /* libBulletDynamics.2.80.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libBulletDynamics.2.80.dylib; path = ../../../../../../../../opt/local/lib/libBulletDynamics.2.80.dylib; sourceTree = "<group>"; };
 		142AA96A15C5B35B0036E0DF /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = ../../../../../../../../opt/local/lib/libftgl.a; sourceTree = "<group>"; };
-		142AA96B15C5B35B0036E0DF /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../../../../../opt/local/lib/libGLEW.a; sourceTree = "<group>"; };
-		142AA96C15C5B35B0036E0DF /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = ../../../../../../../../opt/local/lib/libjpeg.a; sourceTree = "<group>"; };
-		142AA96D15C5B35B0036E0DF /* libLinearMath.2.80.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLinearMath.2.80.dylib; path = ../../../../../../../../opt/local/lib/libLinearMath.2.80.dylib; sourceTree = "<group>"; };
-		142AA96E15C5B35B0036E0DF /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = ../../../../../../../../opt/local/lib/libogg.a; sourceTree = "<group>"; };
-		142AA96F15C5B35B0036E0DF /* libpng14.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng14.a; path = ../../../../../../../../opt/local/lib/libpng14.a; sourceTree = "<group>"; };
-		142AA97015C5B35B0036E0DF /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = ../../../../../../../../opt/local/lib/libvorbis.a; sourceTree = "<group>"; };
 		142AA97E15C5B3CC0036E0DF /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		142AA98015C5B41A0036E0DF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		142AA98215C5B4640036E0DF /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		142AA98415C5B4700036E0DF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		142AA98615C5B4BF0036E0DF /* libLuaPlusLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLuaPlusLib.a; path = ../../../libs/Release/libLuaPlusLib.a; sourceTree = "<group>"; };
-		142AA98815C5B4E20036E0DF /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../../../../../../../../opt/local/lib/libvorbisfile.a; sourceTree = "<group>"; };
 		144201C515F4EA2700C60DE8 /* ALL.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = ALL.tga; sourceTree = "<group>"; };
 		144201C615F4EA2700C60DE8 /* atlasDictionary.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = atlasDictionary.xml; sourceTree = "<group>"; };
 		144201C715F4EA2700C60DE8 /* INGAME.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = INGAME.tga; sourceTree = "<group>"; };
@@ -276,20 +252,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1442029615F4EA5300C60DE8 /* libgameframework.a in Frameworks */,
-				142AA98915C5B4E20036E0DF /* libvorbisfile.a in Frameworks */,
-				142AA98715C5B4BF0036E0DF /* libLuaPlusLib.a in Frameworks */,
 				142AA98315C5B4640036E0DF /* AppKit.framework in Frameworks */,
-				142AA97215C5B35B0036E0DF /* libboost_filesystem-mt.a in Frameworks */,
-				142AA97315C5B35B0036E0DF /* libboost_system-mt.a in Frameworks */,
-				142AA97415C5B35B0036E0DF /* libBulletCollision.2.80.dylib in Frameworks */,
-				142AA97515C5B35B0036E0DF /* libBulletDynamics.2.80.dylib in Frameworks */,
 				142AA97615C5B35B0036E0DF /* libftgl.a in Frameworks */,
-				142AA97715C5B35B0036E0DF /* libGLEW.a in Frameworks */,
-				142AA97815C5B35B0036E0DF /* libjpeg.a in Frameworks */,
-				142AA97915C5B35B0036E0DF /* libLinearMath.2.80.dylib in Frameworks */,
-				142AA97A15C5B35B0036E0DF /* libogg.a in Frameworks */,
-				142AA97B15C5B35B0036E0DF /* libpng14.a in Frameworks */,
-				142AA97C15C5B35B0036E0DF /* libvorbis.a in Frameworks */,
 				142AA96515C5B2C00036E0DF /* IOKit.framework in Frameworks */,
 				142AA96315C5B2B90036E0DF /* CoreFoundation.framework in Frameworks */,
 				142AA96015C5B2B20036E0DF /* OpenAL.framework in Frameworks */,
@@ -587,23 +551,11 @@
 			children = (
 				1442028B15F4EA3D00C60DE8 /* gameframework.xcodeproj */,
 				144201C215F4EA2700C60DE8 /* Pool3d */,
-				142AA98815C5B4E20036E0DF /* libvorbisfile.a */,
-				142AA98615C5B4BF0036E0DF /* libLuaPlusLib.a */,
 				142AA98415C5B4700036E0DF /* CoreData.framework */,
 				142AA98215C5B4640036E0DF /* AppKit.framework */,
 				142AA98015C5B41A0036E0DF /* QuartzCore.framework */,
 				142AA97E15C5B3CC0036E0DF /* Quartz.framework */,
-				142AA96615C5B35B0036E0DF /* libboost_filesystem-mt.a */,
-				142AA96715C5B35B0036E0DF /* libboost_system-mt.a */,
-				142AA96815C5B35B0036E0DF /* libBulletCollision.2.80.dylib */,
-				142AA96915C5B35B0036E0DF /* libBulletDynamics.2.80.dylib */,
 				142AA96A15C5B35B0036E0DF /* libftgl.a */,
-				142AA96B15C5B35B0036E0DF /* libGLEW.a */,
-				142AA96C15C5B35B0036E0DF /* libjpeg.a */,
-				142AA96D15C5B35B0036E0DF /* libLinearMath.2.80.dylib */,
-				142AA96E15C5B35B0036E0DF /* libogg.a */,
-				142AA96F15C5B35B0036E0DF /* libpng14.a */,
-				142AA97015C5B35B0036E0DF /* libvorbis.a */,
 				142AA96415C5B2C00036E0DF /* IOKit.framework */,
 				142AA96215C5B2B90036E0DF /* CoreFoundation.framework */,
 				142AA95E15C5B2B20036E0DF /* OpenAL.framework */,
@@ -839,10 +791,13 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				HEADER_SEARCH_PATHS = (
 					../../../include/,
+					../../../src/3rdParty/,
+					../../../src/3rdParty/boost/,
+					"../../../src/3rdParty/luaplus51-all/Src/",
+					"../../../src/3rdParty/bullet-2.80-rev2531/src/",
+					../../../src/3rdParty/glfw/include/,
 					/opt/local/include/,
 					/opt/local/include/freetype2/,
-					/opt/local/include/boost/,
-					/opt/local/include/bullet/,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -873,10 +828,13 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				HEADER_SEARCH_PATHS = (
 					../../../include/,
+					../../../src/3rdParty/,
+					../../../src/3rdParty/boost/,
+					"../../../src/3rdParty/luaplus51-all/Src/",
+					"../../../src/3rdParty/bullet-2.80-rev2531/src/",
+					../../../src/3rdParty/glfw/include/,
 					/opt/local/include/,
 					/opt/local/include/freetype2/,
-					/opt/local/include/boost/,
-					/opt/local/include/bullet/,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

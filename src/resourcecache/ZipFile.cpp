@@ -59,7 +59,7 @@
 #include <string.h>
 #include <boost/algorithm/string/case_conv.hpp>
 
-#include "zlib/zlib.h"
+#include "zlib.h"
 
 // Project headers
 #include "GameMain.h"
