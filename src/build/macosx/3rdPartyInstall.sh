@@ -22,7 +22,7 @@ main()
         return $FALSE
     fi
     
-    sudo port install boost libvorbis vorbis-tools bullet ftgl glew jpeg libogg libpng
+    sudo port install ftgl
     return $?
 }
 
