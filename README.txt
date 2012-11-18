@@ -50,11 +50,7 @@ Features:
 Installation:
 
  - Mac OSX:
-On Mac OSX, it is necessary to install certain 3rd party libs in order to build and run the framework and its examples.  
-
-Firstly, you will need to have macports installed.  See http://www.macports.org/
-
-Go into src/build/macosx/ and run the script 3rdPartyInstall.sh at the command line.
+Open the project file in Xcode inside projects/macosx and build.  To see an example of the engine in action, build and run the Pool3D project.
 
  - Windows:
 The windows build is currently broken due to my lack of a windows machine!  Currently, I am working on fixing this.
@@ -84,3 +80,5 @@ License:
 
 
 This library is free to use for anyone that wants it under the MIT license.
+
+Please see the 3rd party libraries themselves for their licences.
