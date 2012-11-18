@@ -797,7 +797,7 @@
 					"../../../src/3rdParty/bullet-2.80-rev2531/src/",
 					../../../src/3rdParty/glfw/include/,
 					/opt/local/include/,
-					/opt/local/include/freetype2/,
+					"../../../src/3rdParty/freetype-2.4.10/include/",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -834,7 +834,7 @@
 					"../../../src/3rdParty/bullet-2.80-rev2531/src/",
 					../../../src/3rdParty/glfw/include/,
 					/opt/local/include/,
-					/opt/local/include/freetype2/,
+					"../../../src/3rdParty/freetype-2.4.10/include/",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
