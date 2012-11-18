@@ -11,7 +11,6 @@
 		142AA96115C5B2B20036E0DF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA95F15C5B2B20036E0DF /* OpenGL.framework */; };
 		142AA96315C5B2B90036E0DF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96215C5B2B90036E0DF /* CoreFoundation.framework */; };
 		142AA96515C5B2C00036E0DF /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96415C5B2C00036E0DF /* IOKit.framework */; };
-		142AA97615C5B35B0036E0DF /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA96A15C5B35B0036E0DF /* libftgl.a */; };
 		142AA98315C5B4640036E0DF /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142AA98215C5B4640036E0DF /* AppKit.framework */; };
 		1442028215F4EA2800C60DE8 /* pool3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1442026E15F4EA2700C60DE8 /* pool3d.cpp */; };
 		1442028315F4EA2800C60DE8 /* Pool3dActors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1442027115F4EA2700C60DE8 /* Pool3dActors.cpp */; };
@@ -253,7 +252,6 @@
 			files = (
 				1442029615F4EA5300C60DE8 /* libgameframework.a in Frameworks */,
 				142AA98315C5B4640036E0DF /* AppKit.framework in Frameworks */,
-				142AA97615C5B35B0036E0DF /* libftgl.a in Frameworks */,
 				142AA96515C5B2C00036E0DF /* IOKit.framework in Frameworks */,
 				142AA96315C5B2B90036E0DF /* CoreFoundation.framework in Frameworks */,
 				142AA96015C5B2B20036E0DF /* OpenAL.framework in Frameworks */,
@@ -720,16 +718,8 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					../../../include/,
-					/opt/local/include/,
-					/opt/local/include/freetype2/,
-					/opt/local/include/boost/,
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"../../../libs/$(CONFIGURATION)",
-					/opt/local/lib/,
-				);
+				HEADER_SEARCH_PATHS = ../../../include/;
+				LIBRARY_SEARCH_PATHS = "../../../libs/$(CONFIGURATION)";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OBJROOT = ../../../obj/;
 				ONLY_ACTIVE_ARCH = YES;
@@ -756,16 +746,8 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					../../../include/,
-					/opt/local/include/,
-					/opt/local/include/freetype2/,
-					/opt/local/include/boost/,
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"../../../libs/$(CONFIGURATION)",
-					/opt/local/lib/,
-				);
+				HEADER_SEARCH_PATHS = ../../../include/;
+				LIBRARY_SEARCH_PATHS = "../../../libs/$(CONFIGURATION)";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OBJROOT = ../../../obj/;
 				OTHER_LDFLAGS = "";
@@ -791,17 +773,23 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				HEADER_SEARCH_PATHS = (
 					../../../include/,
-					../../../src/3rdParty/,
-					../../../src/3rdParty/boost/,
+					../../../src/3rdParty/libjpeg/,
 					../../../src/3rdParty/luaplus51/Src/,
 					"../../../src/3rdParty/bullet-2.80-rev2531/src/",
+					"../../../src/3rdParty/glew-1.8.0/include/",
 					../../../src/3rdParty/glfw/include/,
-					/opt/local/include/,
+					../../../src/3rdParty/libpng/,
+					../../../src/3rdParty/tinyxml/,
+					../../../src/3rdParty/zlib/,
+					"../../../src/3rdParty/libogg-1.3.0/include/",
+					"../../../src/3rdParty/libvorbis-1.3.3/include/",
+					"../../../src/3rdParty/libvorbis-1.3.3/lib/",
 					"../../../src/3rdParty/freetype-2.4.10/include/",
+					"../../../src/3rdParty/ftgl-2.1.3~rc5/src/",
+					../../../src/3rdParty/,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/local/lib,
 					"\"$(SRCROOT)/../../../libs/Debug\"",
 					"\"$(SRCROOT)/../../../libs/Release\"",
 				);
@@ -829,17 +817,23 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				HEADER_SEARCH_PATHS = (
 					../../../include/,
-					../../../src/3rdParty/,
-					../../../src/3rdParty/boost/,
+					../../../src/3rdParty/libjpeg/,
 					../../../src/3rdParty/luaplus51/Src/,
 					"../../../src/3rdParty/bullet-2.80-rev2531/src/",
+					"../../../src/3rdParty/glew-1.8.0/include/",
 					../../../src/3rdParty/glfw/include/,
-					/opt/local/include/,
+					../../../src/3rdParty/libpng/,
+					../../../src/3rdParty/tinyxml/,
+					../../../src/3rdParty/zlib/,
+					"../../../src/3rdParty/libogg-1.3.0/include/",
+					"../../../src/3rdParty/libvorbis-1.3.3/include/",
+					"../../../src/3rdParty/libvorbis-1.3.3/lib/",
 					"../../../src/3rdParty/freetype-2.4.10/include/",
+					"../../../src/3rdParty/ftgl-2.1.3~rc5/src/",
+					../../../src/3rdParty/,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/local/lib,
 					"\"$(SRCROOT)/../../../libs/Debug\"",
 					"\"$(SRCROOT)/../../../libs/Release\"",
 				);

@@ -16,7 +16,7 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <bullet/btBulletDynamicsCommon.h>
+#include <btBulletDynamicsCommon.h>
 
 // Project Headers
 #include "GameLogic.h"

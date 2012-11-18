@@ -22,8 +22,8 @@ main()
         return $FALSE
     fi
     
-    sudo port install ftgl
-    return $?
+    #sudo port install ftgl
+    return $TRUE
 }
 
 main $*
