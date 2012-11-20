@@ -1,42 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual C++ Express 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gameframework", "gameframework.vcproj", "{EBD12895-32A3-4FAF-8CDA-62C91976ACB5}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gameframework", "gameframework.vcxproj", "{EBD12895-32A3-4FAF-8CDA-62C91976ACB5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pingpong", "pingpong\pingpong.vcproj", "{CE25A96C-B53F-4F45-8ED9-D4FF25710F4E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CxxTest1Run", "unittests\CxxTest1Run.vcxproj", "{4FC1A6E5-A073-417E-9755-C90600F2FA6E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SdlOpenGlTests", "SdlOpenGlTests\SdlOpenGlTests.vcproj", "{59562FEB-093A-4272-B73E-9F9FC6933F3D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EBD12895-32A3-4FAF-8CDA-62C91976ACB5} = {EBD12895-32A3-4FAF-8CDA-62C91976ACB5}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CxxTest2Build", "unittests\CxxTest2Build.vcxproj", "{A057589F-08ED-4005-A7AB-C5BE14FBF496}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CxxTest1Run", "unittests\CxxTest1Run.vcproj", "{4FC1A6E5-A073-417E-9755-C90600F2FA6E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EBD12895-32A3-4FAF-8CDA-62C91976ACB5} = {EBD12895-32A3-4FAF-8CDA-62C91976ACB5}
-		{A057589F-08ED-4005-A7AB-C5BE14FBF496} = {A057589F-08ED-4005-A7AB-C5BE14FBF496}
-		{274D07C4-FF1A-4B95-B104-7E06C7DEECD8} = {274D07C4-FF1A-4B95-B104-7E06C7DEECD8}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CxxTest2Build", "unittests\CxxTest2Build.vcproj", "{A057589F-08ED-4005-A7AB-C5BE14FBF496}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EBD12895-32A3-4FAF-8CDA-62C91976ACB5} = {EBD12895-32A3-4FAF-8CDA-62C91976ACB5}
-		{274D07C4-FF1A-4B95-B104-7E06C7DEECD8} = {274D07C4-FF1A-4B95-B104-7E06C7DEECD8}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CxxTest3Generate", "unittests\CxxTest3Generate.vcproj", "{274D07C4-FF1A-4B95-B104-7E06C7DEECD8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EBD12895-32A3-4FAF-8CDA-62C91976ACB5} = {EBD12895-32A3-4FAF-8CDA-62C91976ACB5}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLSLCompiler", "GLSLCompiler\GLSLCompiler.vcproj", "{834ED548-B412-4666-884B-067893B4043E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EBD12895-32A3-4FAF-8CDA-62C91976ACB5} = {EBD12895-32A3-4FAF-8CDA-62C91976ACB5}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pool3d", "Pool3d\Pool3d.vcproj", "{4430832F-F9DF-463A-98D5-12AFFD9357D6}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EBD12895-32A3-4FAF-8CDA-62C91976ACB5} = {EBD12895-32A3-4FAF-8CDA-62C91976ACB5}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CxxTest3Generate", "unittests\CxxTest3Generate.vcxproj", "{274D07C4-FF1A-4B95-B104-7E06C7DEECD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,14 +19,6 @@ Global
 		{EBD12895-32A3-4FAF-8CDA-62C91976ACB5}.Debug|Win32.Build.0 = Debug|Win32
 		{EBD12895-32A3-4FAF-8CDA-62C91976ACB5}.Release|Win32.ActiveCfg = Release|Win32
 		{EBD12895-32A3-4FAF-8CDA-62C91976ACB5}.Release|Win32.Build.0 = Release|Win32
-		{CE25A96C-B53F-4F45-8ED9-D4FF25710F4E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{CE25A96C-B53F-4F45-8ED9-D4FF25710F4E}.Debug|Win32.Build.0 = Debug|Win32
-		{CE25A96C-B53F-4F45-8ED9-D4FF25710F4E}.Release|Win32.ActiveCfg = Release|Win32
-		{CE25A96C-B53F-4F45-8ED9-D4FF25710F4E}.Release|Win32.Build.0 = Release|Win32
-		{59562FEB-093A-4272-B73E-9F9FC6933F3D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{59562FEB-093A-4272-B73E-9F9FC6933F3D}.Debug|Win32.Build.0 = Debug|Win32
-		{59562FEB-093A-4272-B73E-9F9FC6933F3D}.Release|Win32.ActiveCfg = Release|Win32
-		{59562FEB-093A-4272-B73E-9F9FC6933F3D}.Release|Win32.Build.0 = Release|Win32
 		{4FC1A6E5-A073-417E-9755-C90600F2FA6E}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4FC1A6E5-A073-417E-9755-C90600F2FA6E}.Debug|Win32.Build.0 = Debug|Win32
 		{4FC1A6E5-A073-417E-9755-C90600F2FA6E}.Release|Win32.ActiveCfg = Release|Win32
@@ -68,14 +31,6 @@ Global
 		{274D07C4-FF1A-4B95-B104-7E06C7DEECD8}.Debug|Win32.Build.0 = Debug|Win32
 		{274D07C4-FF1A-4B95-B104-7E06C7DEECD8}.Release|Win32.ActiveCfg = Release|Win32
 		{274D07C4-FF1A-4B95-B104-7E06C7DEECD8}.Release|Win32.Build.0 = Release|Win32
-		{834ED548-B412-4666-884B-067893B4043E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{834ED548-B412-4666-884B-067893B4043E}.Debug|Win32.Build.0 = Debug|Win32
-		{834ED548-B412-4666-884B-067893B4043E}.Release|Win32.ActiveCfg = Release|Win32
-		{834ED548-B412-4666-884B-067893B4043E}.Release|Win32.Build.0 = Release|Win32
-		{4430832F-F9DF-463A-98D5-12AFFD9357D6}.Debug|Win32.ActiveCfg = Debug|Win32
-		{4430832F-F9DF-463A-98D5-12AFFD9357D6}.Debug|Win32.Build.0 = Debug|Win32
-		{4430832F-F9DF-463A-98D5-12AFFD9357D6}.Release|Win32.ActiveCfg = Release|Win32
-		{4430832F-F9DF-463A-98D5-12AFFD9357D6}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

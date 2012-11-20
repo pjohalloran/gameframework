@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EBD12895-32A3-4FAF-8CDA-62C91976ACB5}</ProjectGuid>
+    <RootNamespace>gameframework</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\libs\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\obj\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\libs\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\obj\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\..\src\datastructures;..\..\..\src\exceptions;..\..\..\src\gamebase;..\..\..\src\graphics;..\..\..\src\logging;..\..\..\src\timer;..\..\..\src\math;..\..\..\src\physics;..\..\..\src\ai;..\..\..\src\logic;..\..\..\src\views;..\..\..\src\resourcecache;..\..\..\..\src\eventmanager;..\..\..\src\scripting;..\..\..\src\input;..\..\..\src\gui;..\..\..\src\sound;..\..\..\src\fileio;..\..\..\src\3rdParty\glew-1.8.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;FTGL_LIBRARY_STATIC;ALUT_BUILD_LIBRARY;ALUT_BUILD_LIBRARY_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(ProjectName).lib</OutputFile>
+    </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>../3rdParty/include;gui;input;scripting;exceptions;gamebase;graphics;logging;timer;math;physics;ai;logic;views;resourcecache;eventmanager;sound;fileio;../3rdParty/BULLET_PHYSICS-2.77_Release/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;PROFILE;_WINDOWS;FTGL_LIBRARY_STATIC;ALUT_BUILD_LIBRARY;ALUT_BUILD_LIBRARY_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(ProjectName).lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\datastructures\DynamicArray.cpp" />
+    <ClCompile Include="..\..\..\src\datastructures\LinkedList.cpp" />
+    <ClCompile Include="..\..\..\src\datastructures\Tree.cpp" />
+    <ClCompile Include="..\..\..\src\eventmanager\EventManager.cpp" />
+    <ClCompile Include="..\..\..\src\eventmanager\EventManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\src\eventmanager\Events.cpp" />
+    <ClCompile Include="..\..\..\src\eventmanager\HashedString.cpp" />
+    <ClCompile Include="..\..\..\src\exceptions\GameException.cpp" />
+    <ClCompile Include="..\..\..\src\fileio\BaseModelFileLoader.cpp" />
+    <ClCompile Include="..\..\..\src\fileio\GameOptions.cpp" />
+    <ClCompile Include="..\..\..\src\fileio\ObjModelFileLoader.cpp" />
+    <ClCompile Include="..\..\..\src\gamebase\Actors.cpp" />
+    <ClCompile Include="..\..\..\src\gamebase\CProcess.cpp" />
+    <ClCompile Include="..\..\..\src\gamebase\GameBase.cpp" />
+    <ClCompile Include="..\..\..\src\gamebase\GameMain.cpp" />
+    <ClCompile Include="..\..\..\src\gamebase\SystemCheck.cpp" />
+    <ClCompile Include="..\..\..\src\gamebase\WindowManager.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\camera.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\CameraSceneNode.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\CommonBatchSceneNode.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\EnvironmentSceneNode.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\GameColors.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\GLBatch.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\GLFrame.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\GLMatrixStack.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\GLShaderManager.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\GLSLShader.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\GLTools.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\GLTriangleBatch.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\ImageResource.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\ParticleSystem.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\RootSceneNode.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\SceneGraphManager.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\SceneNode.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\SceneNodeProperties.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\ShaderUniform.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\SnowParticleSystem.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\TextureAtlas.cpp" />
+    <ClCompile Include="..\..\..\src\graphics\TextureManager.cpp" />
+    <ClCompile Include="..\..\..\src\gui\AbstractButtonControl.cpp" />
+    <ClCompile Include="..\..\..\src\gui\AbstractWidget.cpp" />
+    <ClCompile Include="..\..\..\src\gui\ButtonControl.cpp" />
+    <ClCompile Include="..\..\..\src\gui\CheckButtonControl.cpp" />
+    <ClCompile Include="..\..\..\src\gui\ContainerWidget.cpp" />
+    <ClCompile Include="..\..\..\src\gui\ControlWidget.cpp" />
+    <ClCompile Include="..\..\..\src\gui\ListButtonControl.cpp" />
+    <ClCompile Include="..\..\..\src\gui\SliderControl.cpp" />
+    <ClCompile Include="..\..\..\src\gui\TextBoxControl.cpp" />
+    <ClCompile Include="..\..\..\src\input\OsInputEvents.cpp" />
+    <ClCompile Include="..\..\..\src\logging\GameLog.cpp" />
+    <ClCompile Include="..\..\..\src\logic\GameLogic.cpp" />
+    <ClCompile Include="..\..\..\src\math\BoundingCube.cpp" />
+    <ClCompile Include="..\..\..\src\math\BoundingSphere.cpp" />
+    <ClCompile Include="..\..\..\src\math\Circle.cpp" />
+    <ClCompile Include="..\..\..\src\math\CMath.cpp" />
+    <ClCompile Include="..\..\..\src\math\CRandom.cpp" />
+    <ClCompile Include="..\..\..\src\math\Frustrum.cpp" />
+    <ClCompile Include="..\..\..\src\math\Matrix.cpp" />
+    <ClCompile Include="..\..\..\src\math\Plane.cpp" />
+    <ClCompile Include="..\..\..\src\math\Point.cpp" />
+    <ClCompile Include="..\..\..\src\math\Quaternion.cpp" />
+    <ClCompile Include="..\..\..\src\math\RayCast.cpp" />
+    <ClCompile Include="..\..\..\src\math\Rectangle.cpp" />
+    <ClCompile Include="..\..\..\src\math\Triangle.cpp" />
+    <ClCompile Include="..\..\..\src\math\Vector.cpp" />
+    <ClCompile Include="..\..\..\src\memory\GameMemory.cpp" />
+    <ClCompile Include="..\..\..\src\memory\StackAllocater.cpp" />
+    <ClCompile Include="..\..\..\src\physics\BulletPhysics.cpp" />
+    <ClCompile Include="..\..\..\src\physics\BulletPhysicsDebugDrawer.cpp" />
+    <ClCompile Include="..\..\..\src\physics\CustomPhysics.cpp" />
+    <ClCompile Include="..\..\..\src\physics\HavokPhysics.cpp" />
+    <ClCompile Include="..\..\..\src\physics\HavokPhysicsDebugDrawer.cpp" />
+    <ClCompile Include="..\..\..\src\physics\NullPhysics.cpp" />
+    <ClCompile Include="..\..\..\src\physics\PhysicsEvents.cpp" />
+    <ClCompile Include="..\..\..\src\resourcecache\ResCache2.cpp" />
+    <ClCompile Include="..\..\..\src\resourcecache\TextResource.cpp" />
+    <ClCompile Include="..\..\..\src\resourcecache\ZipFile.cpp" />
+    <ClCompile Include="..\..\..\src\scripting\LuaStateManager.cpp" />
+    <ClCompile Include="..\..\..\src\scripting\ScriptEventListener.cpp" />
+    <ClCompile Include="..\..\..\src\sound\CAudio.cpp" />
+    <ClCompile Include="..\..\..\src\sound\CSoundProcess.cpp" />
+    <ClCompile Include="..\..\..\src\sound\CSoundResource.cpp" />
+    <ClCompile Include="..\..\..\src\sound\DirectSoundAudio.cpp" />
+    <ClCompile Include="..\..\..\src\sound\OpenALAudio.cpp" />
+    <ClCompile Include="..\..\..\src\sound\OpenALAudioBuffer.cpp" />
+    <ClCompile Include="..\..\..\src\sound\OpenALAudioSource.cpp" />
+    <ClCompile Include="..\..\..\src\sound\SoundCommon.cpp" />
+    <ClCompile Include="..\..\..\src\timer\CommonTimer.cpp" />
+    <ClCompile Include="..\..\..\src\timer\GameTimer.cpp" />
+    <ClCompile Include="..\..\..\src\timer\GlfwGameTimer.cpp" />
+    <ClCompile Include="..\..\..\src\views\HumanView.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\datastructures\DynamicArray.h" />
+    <ClInclude Include="..\..\..\src\datastructures\LinkedList.h" />
+    <ClInclude Include="..\..\..\src\datastructures\Queue.h" />
+    <ClInclude Include="..\..\..\src\datastructures\Stack.h" />
+    <ClInclude Include="..\..\..\src\datastructures\Tree.h" />
+    <ClInclude Include="..\..\..\src\eventmanager\EventManager.h" />
+    <ClInclude Include="..\..\..\src\eventmanager\EventManagerImpl.h" />
+    <ClInclude Include="..\..\..\src\eventmanager\Events.h" />
+    <ClInclude Include="..\..\..\src\eventmanager\HashedString.h" />
+    <ClInclude Include="..\..\..\src\exceptions\GameException.h" />
+    <ClInclude Include="..\..\..\src\fileio\BaseModelFileLoader.h" />
+    <ClInclude Include="..\..\..\src\fileio\GameOptions.h" />
+    <ClInclude Include="..\..\..\src\fileio\IModelFileLoader.h" />
+    <ClInclude Include="..\..\..\src\fileio\ObjModelFileLoader.h" />
+    <ClInclude Include="..\..\..\src\gamebase\Actors.h" />
+    <ClInclude Include="..\..\..\src\gamebase\CProcess.h" />
+    <ClInclude Include="..\..\..\src\gamebase\GameBase.h" />
+    <ClInclude Include="..\..\..\src\gamebase\GameEndianConv.h" />
+    <ClInclude Include="..\..\..\src\gamebase\GameMain.h" />
+    <ClInclude Include="..\..\..\src\gamebase\GamePlatform.h" />
+    <ClInclude Include="..\..\..\src\gamebase\GameTypes.h" />
+    <ClInclude Include="..\..\..\src\gamebase\IActors.h" />
+    <ClInclude Include="..\..\..\src\gamebase\ICleanable.h" />
+    <ClInclude Include="..\..\..\src\gamebase\ICleanableObserver.h" />
+    <ClInclude Include="..\..\..\src\gamebase\SystemCheck.h" />
+    <ClInclude Include="..\..\..\src\gamebase\WindowManager.h" />
+    <ClInclude Include="..\..\..\src\graphics\camera.h" />
+    <ClInclude Include="..\..\..\src\graphics\CameraSceneNode.h" />
+    <ClInclude Include="..\..\..\src\graphics\CommonBatchSceneNode.h" />
+    <ClInclude Include="..\..\..\src\graphics\CommonSceneNode.h" />
+    <ClInclude Include="..\..\..\src\graphics\EnvironmentSceneNode.h" />
+    <ClInclude Include="..\..\..\src\graphics\GameColors.h" />
+    <ClInclude Include="..\..\..\src\graphics\GLBatch.h" />
+    <ClInclude Include="..\..\..\src\graphics\GLFrame.h" />
+    <ClInclude Include="..\..\..\src\graphics\GLMatrixStack.h" />
+    <ClInclude Include="..\..\..\src\graphics\GLShaderManager.h" />
+    <ClInclude Include="..\..\..\src\graphics\GLSLShader.h" />
+    <ClInclude Include="..\..\..\src\graphics\GLTools.h" />
+    <ClInclude Include="..\..\..\src\graphics\GLTriangleBatch.h" />
+    <ClInclude Include="..\..\..\src\graphics\IGLBatchBase.h" />
+    <ClInclude Include="..\..\..\src\graphics\ImageResource.h" />
+    <ClInclude Include="..\..\..\src\graphics\ISceneNode.h" />
+    <ClInclude Include="..\..\..\src\graphics\ModelViewProjStackManager.h" />
+    <ClInclude Include="..\..\..\src\graphics\ParticleSystem.h" />
+    <ClInclude Include="..\..\..\src\graphics\RootSceneNode.h" />
+    <ClInclude Include="..\..\..\src\graphics\SceneGraphManager.h" />
+    <ClInclude Include="..\..\..\src\graphics\SceneNode.h" />
+    <ClInclude Include="..\..\..\src\graphics\SceneNodeProperties.h" />
+    <ClInclude Include="..\..\..\src\graphics\ShaderUniform.h" />
+    <ClInclude Include="..\..\..\src\graphics\SnowParticleSystem.h" />
+    <ClInclude Include="..\..\..\src\graphics\TextureAtlas.h" />
+    <ClInclude Include="..\..\..\src\graphics\TextureManager.h" />
+    <ClInclude Include="..\..\..\src\gui\AbstractButtonControl.h" />
+    <ClInclude Include="..\..\..\src\gui\AbstractWidget.h" />
+    <ClInclude Include="..\..\..\src\gui\ButtonControl.h" />
+    <ClInclude Include="..\..\..\src\gui\CheckButtonControl.h" />
+    <ClInclude Include="..\..\..\src\gui\ContainerWidget.h" />
+    <ClInclude Include="..\..\..\src\gui\ControlWidget.h" />
+    <ClInclude Include="..\..\..\src\gui\ListButtonControl.h" />
+    <ClInclude Include="..\..\..\src\gui\MyOpenGLUI.h" />
+    <ClInclude Include="..\..\..\src\gui\SliderControl.h" />
+    <ClInclude Include="..\..\..\src\gui\TextBoxControl.h" />
+    <ClInclude Include="..\..\..\src\input\IInputInterfaces.h" />
+    <ClInclude Include="..\..\..\src\input\OsInputEvents.h" />
+    <ClInclude Include="..\..\..\src\logging\GameLog.h" />
+    <ClInclude Include="..\..\..\src\logic\GameLogic.h" />
+    <ClInclude Include="..\..\..\src\logic\IGameLogic.h" />
+    <ClInclude Include="..\..\..\src\math\BoundingCube.h" />
+    <ClInclude Include="..\..\..\src\math\BoundingSphere.h" />
+    <ClInclude Include="..\..\..\src\math\Circle.h" />
+    <ClInclude Include="..\..\..\src\math\CMath.h" />
+    <ClInclude Include="..\..\..\src\math\CommonMath.h" />
+    <ClInclude Include="..\..\..\src\math\CRandom.h" />
+    <ClInclude Include="..\..\..\src\math\Frustrum.h" />
+    <ClInclude Include="..\..\..\src\math\Matrix.h" />
+    <ClInclude Include="..\..\..\src\math\Plane.h" />
+    <ClInclude Include="..\..\..\src\math\Point.h" />
+    <ClInclude Include="..\..\..\src\math\Quaternion.h" />
+    <ClInclude Include="..\..\..\src\math\RayCast.h" />
+    <ClInclude Include="..\..\..\src\math\Rectangle.h" />
+    <ClInclude Include="..\..\..\src\math\Triangle.h" />
+    <ClInclude Include="..\..\..\src\math\Vector.h" />
+    <ClInclude Include="..\..\..\src\memory\DefaultAllocater.h" />
+    <ClInclude Include="..\..\..\src\memory\DoubleBufferedStackAllocater.h" />
+    <ClInclude Include="..\..\..\src\memory\GameAllocater.h" />
+    <ClInclude Include="..\..\..\src\memory\GameMemory.h" />
+    <ClInclude Include="..\..\..\src\memory\MemoryManager.h" />
+    <ClInclude Include="..\..\..\src\memory\StackAllocater.h" />
+    <ClInclude Include="..\..\..\src\physics\BulletPhysics.h" />
+    <ClInclude Include="..\..\..\src\physics\BulletPhysicsDebugDrawer.h" />
+    <ClInclude Include="..\..\..\src\physics\CustomPhysics.h" />
+    <ClInclude Include="..\..\..\src\physics\HavokPhysics.h" />
+    <ClInclude Include="..\..\..\src\physics\HavokPhysicsDebugDrawer.h" />
+    <ClInclude Include="..\..\..\src\physics\IGamePhysics.h" />
+    <ClInclude Include="..\..\..\src\physics\NullPhysics.h" />
+    <ClInclude Include="..\..\..\src\physics\PhysicsCommon.h" />
+    <ClInclude Include="..\..\..\src\physics\PhysicsEvents.h" />
+    <ClInclude Include="..\..\..\src\resourcecache\ResCache2.h" />
+    <ClInclude Include="..\..\..\src\resourcecache\TextResource.h" />
+    <ClInclude Include="..\..\..\src\resourcecache\ZipFile.h" />
+    <ClInclude Include="..\..\..\src\scripting\LuaStateManager.h" />
+    <ClInclude Include="..\..\..\src\scripting\ScriptEventListener.h" />
+    <ClInclude Include="..\..\..\src\sound\CAudio.h" />
+    <ClInclude Include="..\..\..\src\sound\CSoundProcess.h" />
+    <ClInclude Include="..\..\..\src\sound\CSoundResource.h" />
+    <ClInclude Include="..\..\..\src\sound\DirectSoundAudio.h" />
+    <ClInclude Include="..\..\..\src\sound\IAudio.h" />
+    <ClInclude Include="..\..\..\src\sound\IAudioBuffer.h" />
+    <ClInclude Include="..\..\..\src\sound\OpenALAudio.h" />
+    <ClInclude Include="..\..\..\src\sound\OpenALAudioBuffer.h" />
+    <ClInclude Include="..\..\..\src\sound\OpenALAudioSource.h" />
+    <ClInclude Include="..\..\..\src\sound\SoundCommon.h" />
+    <ClInclude Include="..\..\..\src\timer\CommonTimer.h" />
+    <ClInclude Include="..\..\..\src\timer\GameTimer.h" />
+    <ClInclude Include="..\..\..\src\timer\GlfwGameTimer.h" />
+    <ClInclude Include="..\..\..\src\timer\IGameTimer.h" />
+    <ClInclude Include="..\..\..\src\views\HumanView.h" />
+    <ClInclude Include="..\..\..\src\views\IGameView.h" />
+    <ClInclude Include="..\..\..\src\views\IScreenElement.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

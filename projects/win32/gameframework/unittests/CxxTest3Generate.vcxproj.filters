@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="TestSuites">
+      <UniqueIdentifier>{8b108356-39f4-4dd6-b436-9704fce7d3fe}</UniqueIdentifier>
+      <Extensions>*.h</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\unittests\CircleTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\DynamicArrayTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\FrustrumTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\GameExceptionTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\GameLogTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\GameMainTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\GameOptionsTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\LinkedListTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\Matrix4TestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\Point3TestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\PointTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\QueueTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\StackAllocaterTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\StackTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\SystemCheckTestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\Vector3TestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\unittests\Vector4TestSuite.h">
+      <Filter>TestSuites</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
