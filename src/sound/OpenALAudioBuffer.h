@@ -22,8 +22,8 @@
 #include <boost/optional.hpp>
 
 #ifdef _WINDOWS || TARGET_WINDOWS || WIN32
-#include <AL/al.h>
-#include <AL/alc.h>
+#include <al.h>
+#include <alc.h>
 #elif defined (TARGET_OS_MAC)
 #include <OpenAL/al.h>
 #include <OpenAL/alc.h>

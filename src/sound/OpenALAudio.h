@@ -19,9 +19,9 @@
 
 #include <boost/shared_ptr.hpp>
 
-#ifdef _WINDOWS || TARGET_WINDOWS || WIN32
-#include <AL/al.h>
-#include <AL/alc.h>
+#if defined(_WINDOWS) || defined(TARGET_OS_WINDOWS) || defined(WIN32)
+#include <al.h>
+#include <alc.h>
 #elif defined (TARGET_OS_MAC)
 #include <OpenAL/al.h>
 #include <OpenAL/alc.h>

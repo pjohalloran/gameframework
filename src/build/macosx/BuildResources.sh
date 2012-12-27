@@ -81,7 +81,7 @@ main()
         return $?
     fi
 
-    BuildResourceFile
+    #BuildResourceFile
     return $?
 }
 

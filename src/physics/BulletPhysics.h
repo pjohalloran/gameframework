@@ -56,7 +56,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
-#include <btBulletDynamicsCommon.h>
+#include <bullet/btBulletDynamicsCommon.h>
 
 
 // Project Headers

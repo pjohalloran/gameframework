@@ -15,9 +15,9 @@
 
 
 // Building on WINDOWS...
-#if _WINDOWS || TARGET_OS_WIN32
-    #define WIN32_LEAN_AND_MEAN
-    #define NOMINMAX
+#if defined(_WINDOWS)
+    //#define WIN32_LEAN_AND_MEAN
+    //#define NOMINMAX
 
     #include <windows.h>
     #include <windowsx.h>
@@ -30,7 +30,7 @@
         #include <GL/glfw3.h>
         #define GLFW_FUNC_PRE GLFWAPI
     #else
-        #include <glfw.h>
+        #include <GL/glfw.h>
         #define GLFW_FUNC_PRE GLFWCALL
     #endif
 
