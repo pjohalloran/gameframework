@@ -151,6 +151,7 @@ project "Pool3d"
 		
 local ThirdPartyMakeScripts = {
 	--"3rdPartyPremake/boost.lua",
+	"3rdPartyPremake/zlib.lua",
 	"3rdPartyPremake/bullet.lua",
 	"3rdPartyPremake/glew.lua",
 	"3rdPartyPremake/glfw.lua",
@@ -158,7 +159,6 @@ local ThirdPartyMakeScripts = {
 	"3rdPartyPremake/ftgl.lua",
 	"3rdPartyPremake/libjpeg.lua",
 	"3rdPartyPremake/libogg.lua",
-	"3rdPartyPremake/zlib.lua",
 	"3rdPartyPremake/libpng.lua",
 	"3rdPartyPremake/libvorbis.lua",
 	"3rdPartyPremake/luaplus.lua",

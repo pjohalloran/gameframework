@@ -1,5 +1,3 @@
-#!/bin/sh
-
 #
 # CopyDataList.sh
 # PJ O Halloran
@@ -7,14 +5,11 @@
 #
 # Copy the files listed in config file into the directory
 #
-
 EXCLUDE_FILE=""
 DATA_DIR=""
 OUTPUT_FILE=""
-
 TRUE=0
 FALSE=1
-
 VERBOSE=FALSE
 
 Usage()
@@ -81,7 +76,7 @@ main()
         return $?
     fi
 
-    #BuildResourceFile
+    BuildResourceFile
     return $?
 }
 

@@ -78,6 +78,7 @@ project "jpeg"
 			"_LIB"
 		}
 	configuration "windows"
+		includedirs { "../../src/3rdParty/jpeg-8d/win32"}
 		defines {
 			"WIN32",
 			"_CRT_SECURE_NO_WARNINGS"
@@ -86,6 +87,8 @@ project "jpeg"
 			"mkdir ..\\..\\include\\jpeg",
 			"copy /Y ..\\..\\src\\3rdParty\\jpeg-8d\\*.h ..\\..\\include\\jpeg"
 		}
+	configuration "macosx"
+		includedirs { "../../src/3rdParty/jpeg-8d/macosx"}
 	configuration "not windows"
 		postbuildcommands {
 			"[ -d \"../../include/jpeg\" ] || mkdir ../../include/jpeg",

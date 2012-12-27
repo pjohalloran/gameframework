@@ -23,7 +23,7 @@
         <FontUiSize>40</FontUiSize>
         <FullScreen>0</FullScreen>
         <GameName>Pool3D</GameName>
-        <GameRoot>/Users/pjohalloran/work/tmp/gameframework/</GameRoot>
+        <GameRoot>/Users/pjohalloran/work/tmp/tmp2/gameframework/</GameRoot>
         <GameSaveDir>c:/temp/savedir</GameSaveDir>
         <GlobalDataDir>data/</GlobalDataDir>
         <LogLevel>4</LogLevel>
