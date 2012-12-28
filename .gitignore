@@ -1,0 +1,10 @@
+/include
+/obj
+/projects/tmp
+/projects/ipch
+/bin
+*.suo
+*.sdf
+*.sln
+/log
+*.log

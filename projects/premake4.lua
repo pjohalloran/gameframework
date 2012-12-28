@@ -47,7 +47,8 @@ project "gameframework"
 			"_WINDOWS",
 			"WIN32_LEAN_AND_MEAN",
 			"NOMINMAX",
-			"GLEW_STATIC"
+			"GLEW_STATIC",
+			"FTGL_LIBRARY_STATIC"
 		}
 		includedirs { OPENAL_INCLUDE_DIR }
 		prebuildcommands {
@@ -134,7 +135,9 @@ project "Pool3d"
 			"WIN32",
 			"_WINDOWS",
 			"WIN32_LEAN_AND_MEAN",
-			"NOMINMAX"
+			"NOMINMAX",
+			"GLEW_STATIC",
+			"FTGL_LIBRARY_STATIC"
 		}
 		includedirs { OPENAL_INCLUDE_DIR }
 		libdirs { OPENAL_LIB_DIR, BOOST_LIB_DIR }
