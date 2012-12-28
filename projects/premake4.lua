@@ -1,9 +1,11 @@
--- Config variables for the Windows build, you wont have to change these unless you installed OpenAL to a different location
+-- Config variables for the Windows build, you wont have to change these unless you installed OpenAL/boost to a different location
 -- on your system.  The windows SDK and the DirectX SDK should already be in your path if your using Visual Studio.  If you are
 -- using an environment other than VS then you may have to tweak this file...
-OPENAL_INCLUDE_DIR="C:/Program Files (x86)/OpenAL 1.1 SDK/include/"
-OPENAL_LIB_DIR="C:/Program Files (x86)/OpenAL 1.1 SDK/libs/WIN32/"
-
+if os.is("windows") then
+	OPENAL_INCLUDE_DIR="C:/Program Files (x86)/OpenAL 1.1 SDK/include/"
+	OPENAL_LIB_DIR="C:/Program Files (x86)/OpenAL 1.1 SDK/libs/WIN32/"
+	BOOST_LIB_DIR="C:/Program Files/boost/boost_1_51/lib"
+end
 
 solution "gameframework"
   configurations { "Debug", "Release" }
@@ -30,7 +32,6 @@ project "gameframework"
 		defines {
 			"DEBUG"
 		}
-		libdirs { "../libs/Debug" }
 	configuration "Release"
 		defines {
 			"RELEASE",
@@ -39,17 +40,16 @@ project "gameframework"
 		flags { "FloatFast", "OptimizeSpeed", "StaticRuntime" }
 		targetdir ("../libs/Release")
 		objdir ("../obj/Release/" .. "gameframework")
-		libdirs { "../libs/Release" }
 	
 	configuration "windows"
 		defines {
 			"WIN32",
 			"_WINDOWS",
 			"WIN32_LEAN_AND_MEAN",
-			"NOMINMAX"
+			"NOMINMAX",
+			"GLEW_STATIC"
 		}
 		includedirs { OPENAL_INCLUDE_DIR }
-		libdirs { OPENAL_LIB_DIR }
 		prebuildcommands {
 			"copy /Y ..\\..\\src\\datastructures\\*.h ..\\..\\include",
 			"copy /Y ..\\..\\src\\eventmanager\\*.h ..\\..\\include",
@@ -137,13 +137,19 @@ project "Pool3d"
 			"NOMINMAX"
 		}
 		includedirs { OPENAL_INCLUDE_DIR }
-		libdirs { OPENAL_LIB_DIR }
-		links { "opengl32", "glu32", "dsound", "OpenAL32", "boost_filesystem-vc100-mt-1_51", "boost_system-vc100-mt-1_51" }
-	
+		libdirs { OPENAL_LIB_DIR, BOOST_LIB_DIR }
+		links { "opengl32", "glu32", "dsound", "OpenAL32" }
+	configuration { "windows", "Debug" }
+		links { "libboost_filesystem-vc100-mt-sgd-1_51", "libboost_system-vc100-mt-sgd-1_51" }
+		linkoptions { "/NODEFAULTLIB:\"libcmtd.lib\"" }
+	configuration { "windows", "Release" }
+		links { "libboost_filesystem-vc100-mt-s-1_51", "libboost_system-vc100-mt-s-1_51" }
+		linkoptions { "/NODEFAULTLIB:\"libcmt.lib\"" }
 	configuration "macosx"
 		defines {
 			"TARGET_OS_MAC"
 		}
+
 		links { "boost_filesystem-mt", "boost_system-mt", "OpenGL.framework", "OpenAL.framework", "CoreFoundation.framework", "IOKit.framework", "AppKit.framework" }
 		postbuildcommands {
 			"../../src/build/macosx/BuildResources.sh ../../src/Pool3d/data/ExcludeList.txt ../../src/Pool3d/data/ ../../data/Pool3D/Pool3D.zip"

@@ -16,7 +16,6 @@ project "luaplus51"
 		"../../src/3rdParty/luaplus51/Src/LuaPlus/LuaPlusAll.cpp",
 		"../../src/3rdParty/luaplus51/Src/LuaPlus/LuaStackTableIterator.inl",
 		"../../src/3rdParty/luaplus51/Src/LuaPlus/luathread.*",
-		"../../src/3rdParty/luaplus51/Src/LuaPlus/popen.c",
 		"../../src/3rdParty/luaplus51/Src/LuaPlus/pt.*",
 		"../../src/3rdParty/luaplus51/Src/LuaPlus/srm.*",
 		"../../src/3rdParty/luaplus51/Src/LuaPlus/src/luac.c",
@@ -40,6 +39,10 @@ project "luaplus51"
 			"LUAPLUS_ENABLE_INLINES"
 		}
 	configuration "windows"
+		defines {
+			"WIN32",
+			"LUA_PT_POPEN"
+		}
 		postbuildcommands {
 			"mkdir ..\\..\\include\\LuaPlus",
 			"xcopy /Y /E ..\\..\\src\\3rdParty\\luaplus51\\Src\\LuaPlus ..\\..\\include\\LuaPlus"
@@ -48,4 +51,7 @@ project "luaplus51"
 		postbuildcommands {
 			"[ -d \"../../include/LuaPlus\" ] || mkdir ../../include/LuaPlus",
 			"cp -R ../../src/3rdParty/luaplus51/Src/LuaPlus ../../include"
+		}
+		excludes {
+			"../../src/3rdParty/luaplus51/Src/LuaPlus/popen.c"
 		}

@@ -38,14 +38,14 @@ project "glfw"
 	os.mkdir("../../include/GL")
 	
 	configuration "Debug"
-		flags { "FloatStrict", "StaticRuntime", "Symbols" }
+		flags { "FloatStrict", "Symbols" }
 		targetdir ("../../libs/Debug")
 		objdir ("../../obj/Debug/" .. "glfw")
 		defines {
 			"DEBUG"
 		}
 	configuration "Release"
-		flags { "FloatFast", "OptimizeSpeed", "StaticRuntime" }
+		flags { "FloatFast", "OptimizeSpeed" }
 		targetdir ("../../libs/Release")
 		objdir ("../../obj/Release/" .. "glfw")
 		defines {

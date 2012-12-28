@@ -27,6 +27,9 @@ project "glew"
 			"GLEW_STATIC"
 		}
 	configuration "windows"
+		excludes {
+			"../../src/3rdParty/glew-1.8.0/include/glxew.h",
+		}
 		defines {
 			"WIN32",
 			"WIN32_LEAN_AND_MEAN",
