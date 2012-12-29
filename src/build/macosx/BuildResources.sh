@@ -15,23 +15,25 @@ VERBOSE=FALSE
 Usage()
 {
     echo $0 "Help Data:"
-    echo $0 "EXCLUDE_FILE OUTPUT_FILE DATA_DIR [-hv]"
+    echo $0 "DATA_DIR OUTPUT_FILE [-hv]"
 }
 
 ParseArgs()
 {
     # Check input
-    if [ $# -ne 3 ]; then
+    if [ $# -ne 2 ]; then
         echo "Invalid arguments ($#)"
         Usage
         return $FALSE
     fi
 
-    EXCLUDE_FILE=$1
-    DATA_DIR=$2
-    OUTPUT_FILE=$3
+    DATA_DIR=$1
+    OUTPUT_FILE=$2
 
-    echo "EXCLUDE_FILE = " $EXCLUDE_FILE
+    if [ -e $DATA_DIR/ExcludeList.txt ]; then
+        EXCLUDE_FILE=$DATA_DIR/ExcludeList.txt
+        echo "EXCLUDE_FILE = " $EXCLUDE_FILE
+    fi
     echo "DATA_DIR = " $DATA_DIR
     echo "OUTPUT_FILE = " $OUTPUT_FILE
 
@@ -45,26 +47,27 @@ BuildResourceFile()
         rm $OUTPUT_FILE
     fi
 
+    oldDir=`pwd`
     cd $DATA_DIR
     echo `pwd`
 
-    excludeList="-x "
-    for line in $(cat $EXCLUDE_FILE); do
-        echo $line
-        excludeList="$excludeList $line"
-    done
+    if [ -e $EXCLUDE_FILE ]; then
+        excludeList="-x "
+        for line in $(cat $EXCLUDE_FILE); do
+            echo $line
+            excludeList="$excludeList $line"
+        done
 
-    if [ ${#excludeList} -gt 3 ]; then
-        echo "Excluding some files... (zip $excludeList -r $OUTPUT_FILE $DATA_DIR)"
         zip $excludeList -r $OUTPUT_FILE *
     else
-        echo "Building zip... (zip -r $OUTPUT_FILE $DATA_DIR)"
         zip -r $OUTPUT_FILE *
     fi
 
-#    if [ $? -eq $TRUE ]; then
-#        cp $OUTPUT_FILE 
-#    fi
+    #if [ $? -eq $TRUE ]; then
+    #    cp $OUTPUT_FILE 
+    #fi
+
+    cd $oldDir
 
     return $?
 }

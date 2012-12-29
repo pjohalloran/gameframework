@@ -13,6 +13,7 @@ solution "gameframework"
 project "gameframework"
 	kind "StaticLib"
 	language "C++"
+	links { "zlib", "tinyxml", "bullet", "png", "jpeg", "luaplus51", "ogg", "vorbis", "glew", "glfw", "freetype", "ftgl" }
 	location ("tmp")
 	includedirs { "../include", "../include/bullet", "../src/3rdParty" }
 	files {
@@ -155,7 +156,7 @@ project "Pool3d"
 
 		links { "boost_filesystem-mt", "boost_system-mt", "OpenGL.framework", "OpenAL.framework", "CoreFoundation.framework", "IOKit.framework", "AppKit.framework" }
 		postbuildcommands {
-			"../../src/build/macosx/BuildResources.sh ../../src/Pool3d/data/ExcludeList.txt ../../src/Pool3d/data/ ../../data/Pool3D/Pool3D.zip"
+			". ../../src/build/macosx/BuildResources.sh ../../src/Pool3d/data/ ../../../data/Pool3D/Pool3D.zip"
 		}
 		
 local ThirdPartyMakeScripts = {
