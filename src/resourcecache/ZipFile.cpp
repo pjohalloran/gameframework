@@ -154,11 +154,11 @@ struct GameHalloran::ZipFile::TZipDirFileHeader
 namespace GameHalloran
 {
     
-#if defined(WINDOWS) || defined(WIN32)
-    const std::string ZipFile::ZIP_PATH_SEPERATOR("\\");
-#elif defined(TARGET_OS_MAC) || defined(TARGET_IPHONE) || defined(TARGET_PHONE_SIMULATOR)
+//#if defined(WINDOWS) || defined(WIN32)
+//    const std::string ZipFile::ZIP_PATH_SEPERATOR("\\");
+//#elif defined(TARGET_OS_MAC) || defined(TARGET_IPHONE) || defined(TARGET_PHONE_SIMULATOR)
     const std::string ZipFile::ZIP_PATH_SEPERATOR("/");
-#endif
+//#endif
     
     // /////////////////////////////////////////////////////////////////
     //
@@ -373,16 +373,16 @@ namespace GameHalloran
                 //I32 tmp2 = sizeof(TZipDirFileHeader);
                 pfh += tmp1;
 
-#if defined(WINDOWS)
-                // Convert UNIX slashes to DOS backlashes.
-                for (I32 j = 0; j < fh.fnameLen; ++j)
-                {
-                    if (pfh[j] == '/')
-                    {
-                        pfh[j] = '\\';
-                    }
-                }
-#endif
+//#if defined(WINDOWS)
+//                // Convert UNIX slashes to DOS backlashes.
+//                for (I32 j = 0; j < fh.fnameLen; ++j)
+//                {
+//                    if (pfh[j] == '/')
+//                    {
+//                        pfh[j] = '\\';
+//                    }
+//                }
+//#endif
 
                 // pjohalloran - Used to use _MAX_PATH macro here for the array length, but its not available
                 //  on other platforms!

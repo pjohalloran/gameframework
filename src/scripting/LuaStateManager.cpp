@@ -125,14 +125,15 @@ namespace GameHalloran
             boost::shared_ptr<GameOptions> opPtr = g_appPtr->GetGameOptions();
             
 			// Write out the location of the game root directory.
-			if(GameHalloran::RetrieveAndConvertOption<std::string>(opPtr, std::string("GameRoot"), GameHalloran::GameOptions::PROGRAMMER, currOpVal))
-			{
-				luaCommand = std::string("INIT_GAME_ROOT_PATH = \"") + currOpVal + std::string("\";");
-				if(!ExecuteString(luaCommand.c_str()))
-					return (false);
-				currOpVal.clear();
-				luaCommand.clear();
-			}
+			boost::filesystem::path gameRoot(g_appPtr->GetGameRootDir());
+			//if(GameHalloran::RetrieveAndConvertOption<std::string>(opPtr, std::string("GameRoot"), GameHalloran::GameOptions::PROGRAMMER, currOpVal))
+			//{
+			luaCommand = std::string("INIT_GAME_ROOT_PATH = \"") + gameRoot.generic_string() + std::string("\";");
+			if(!ExecuteString(luaCommand.c_str()))
+				return (false);
+			currOpVal.clear();
+			luaCommand.clear();
+			//}
 
 			// Write out what type of build is running.
 #ifdef DEBUG
