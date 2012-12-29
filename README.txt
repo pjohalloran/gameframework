@@ -28,14 +28,13 @@ Features:
  
  TODO:
  
- - Fix the Windows build.
  - Get rid of dead and experimental code.
  - iOS platform support.
  - More 2D/3D game examples.
  - Custom memory management and allocation.
  - Removal of exceptions.
  - Replace STL with custom data structures and algorithms.
- - Implement shadows in the Pool3D 
+ - Implement shadows in the Pool3D.
 
 
 Building:
@@ -48,15 +47,15 @@ git clone https://github.com/pjohalloran/gameframework.git
 
  - MacOSX:
 Generate an xcode project by:
-cd $PROJECT_ROOT\projects
-premake4 xcode3
+ * cd $PROJECT_ROOT\projects
+ * premake4 xcode3
 
 Then open the Pool3D project and build and run.
 
  - Windows:
 Generate a Visual Studio project (e.g. 2010) by:
-cd $PROJECT_ROOT/project
-premake4 vs2010
+ * cd $PROJECT_ROOT/project
+ * premake4 vs2010
 
 Then open the gameframework solution file and build and run.
 

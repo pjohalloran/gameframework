@@ -35,19 +35,13 @@ Here is a few ideas for the future direction of my personal project...
 
  - Seperate SceneGraph code out from rendering.  It should use the proposed batch class to batch up drawing requests.
 
- - Remove all unneeded 3rd party code.
-
  - Write a console type class where the developer can see log output in real time and can input in LUA commands.  See the developer console in the game Max Payne for something like what I am aiming for...
 
  ***** Scripting ***** 
 
  - Remove Pool3d specific stuff from LuaStateManager.
 
- - Write a squirrel state manager.  Give the user freedom to use eiher lua or squirrel in their game (or neither).  Will possibly have to write some sort of luaplus like squirrel c++ binder for that.
-
  - Maybe move away from luaplus as its not updated very often - just write my own C++ wrapper for lua and depend only on lua itself.
-
- - Write a script language independent event system interface for the event manager so the framework doesn't know or care what scripting language the devs are using.
 
  ***** Physics ***** 
 
