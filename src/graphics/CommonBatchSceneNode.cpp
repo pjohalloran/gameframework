@@ -65,7 +65,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	CommonBatchSceneNode::CommonBatchSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &nodeName, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, boost::shared_ptr<IGLBatchBase> batchPtr)\
+	CommonBatchSceneNode::CommonBatchSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &nodeName, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, boost::shared_ptr<IGLBatchBase> &batchPtr)\
 		: SceneNode(sgPtr, actorId, nodeName, renderPass, material, toWorld, fromWorld), m_batchPtr(batchPtr), m_texHandle(), m_mvpUniform(), m_colorUniform()
 	{
 		Init(textureName, shaderNameRef);

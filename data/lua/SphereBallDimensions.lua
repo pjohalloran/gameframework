@@ -29,8 +29,8 @@ SphereBallDimensions =
 	OnDestroyFunc = "",
 	TextureName = "",
 	ShaderName = "",
-	Radius = 0.025,
-	Slices = 50,
-	Stacks = 25,
+	Radius = 0.02125,
+	Slices = 20,
+	Stacks = 10,
 	Group = "cue"
 };

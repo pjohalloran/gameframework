@@ -216,7 +216,7 @@ namespace GameHalloran
 			// @throw GameException& If the windows parameters are not supplied.
 			//
 			// /////////////////////////////////////////////////////////////////
-			WindowManager(const WindowParameters &params, boost::shared_ptr<GameLog> loggerPtr) throw (GameException &);
+			WindowManager(const WindowParameters &params, boost::shared_ptr<GameLog> &loggerPtr) throw (GameException &);
 
 			// /////////////////////////////////////////////////////////////////
 			// Destructor.

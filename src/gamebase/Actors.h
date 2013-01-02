@@ -267,7 +267,7 @@ namespace GameHalloran
 		// @param errorMessages The error messages (maybe passed back from the script?)
 		// 
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages);
+		virtual bool VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages);
 
 		// /////////////////////////////////////////////////////////////////
 		// Initialize the parameters from a stream.

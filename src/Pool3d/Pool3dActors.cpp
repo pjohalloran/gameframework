@@ -168,7 +168,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool Pool3dActorParams::VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages)
+	bool Pool3dActorParams::VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages)
 	{
 		if (!ActorParams::VInit(srcData, errorMessages))
 		{
@@ -422,7 +422,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool BallActorParams::VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages)
+	bool BallActorParams::VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages)
 	{
 		if (!Pool3dActorParams::VInit(srcData, errorMessages))
 		{
@@ -796,7 +796,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool TableActorParams::VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages)
+	bool TableActorParams::VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages)
 	{
 		if (!Pool3dActorParams::VInit(srcData, errorMessages))
 		{
@@ -1230,7 +1230,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool CueActorParams::VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages)
+	bool CueActorParams::VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages)
 	{
 		if (!Pool3dActorParams::VInit(srcData, errorMessages))
 		{

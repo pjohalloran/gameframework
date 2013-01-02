@@ -693,7 +693,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	GameMain::GameMain(shared_ptr<GameLog> loggerPtr, shared_ptr<GameOptions> optionsPtr)\
+	GameMain::GameMain(shared_ptr<GameLog> &loggerPtr, shared_ptr<GameOptions> &optionsPtr)\
 		throw (GameException &) : m_lastRenderTime(0.0), m_lastUpdateTime(0.0), m_lastEventTime(0.0), m_frameRateTimer(), m_frameCount(0),\
 			m_framesInPastSecond(0), m_appTimer(), m_startTime(0.0), m_isRunning(true), m_resourceCachePtr(), m_luaStateManagerPtr(),\
 				m_eventManagerPtr(), m_logicPtr(), m_atlasPtr(), m_loggerPtr(loggerPtr), m_windowManagerPtr(), m_optionsPtr(optionsPtr),\

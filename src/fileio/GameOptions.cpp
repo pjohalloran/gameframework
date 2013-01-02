@@ -330,7 +330,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	GameOptions::GameOptions(shared_ptr<GameLog> logPtr, const path &filePathRef) throw (GameException &) :	m_isModified(false),\
+	GameOptions::GameOptions(shared_ptr<GameLog> &logPtr, const path &filePathRef) throw (GameException &) :	m_isModified(false),\
 																				m_isValidFileOpen(false),\
 																				m_optionsFilePath(filePathRef),\
 																				m_optionsMap(),\
@@ -638,7 +638,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	void GameOptions::SetLoggingPtr(shared_ptr<GameLog> loggerPtr)
+	void GameOptions::SetLoggingPtr(shared_ptr<GameLog> &loggerPtr)
 	{
 		m_logPtr = loggerPtr;
 	}

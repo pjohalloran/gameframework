@@ -248,7 +248,7 @@ namespace GameHalloran
 			//						manager are invalid.
 			//
 			// /////////////////////////////////////////////////////////////////
-			GameMain(boost::shared_ptr<GameLog> loggerPtr, boost::shared_ptr<GameOptions> optionsPtr) throw (GameException &);
+			GameMain(boost::shared_ptr<GameLog> &loggerPtr, boost::shared_ptr<GameOptions> &optionsPtr) throw (GameException &);
 			
 			// /////////////////////////////////////////////////////////////////
 			// Destructor.

@@ -314,7 +314,7 @@ namespace GameHalloran
 		// @param errorMessages The error messages (maybe passed back from the script?)
 		// 
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages) = 0;
+		virtual bool VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages) = 0;
 
 		// /////////////////////////////////////////////////////////////////
 		// The logic layers create function.  Creates an Actor in respect to

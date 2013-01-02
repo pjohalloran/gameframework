@@ -189,7 +189,7 @@ INIT_PHYSICS_TTEST_MATERIAL = { Restitution = 0.1, Friction = 0.5 };
 
 INIT_POOLBALL_PHYSICS_INFORMATION =
 {
-	Restitution = 0.75,
+	Restitution = 0.7,
 	Friction = 0.5,
 	Density = INIT_PHYSICS_DENSITY_CARBON,
 	LinearDamping = 0.35,
@@ -198,7 +198,7 @@ INIT_POOLBALL_PHYSICS_INFORMATION =
 
 INIT_POOLTABLE_PHYSICS_INFORMATION =
 {
-	Restitution = 0.5,
+	Restitution = 0.55,
 	Friction = 0.5,
 	Density = INIT_PHYSICS_DENSITY_STATIC,
 	LinearDamping = 0.0,

@@ -167,7 +167,7 @@ namespace GameHalloran
 		// Set the target node of the camera.
 		//
 		// /////////////////////////////////////////////////////////////////
-		inline void SetTarget(boost::shared_ptr<SceneNode> target){ m_target = target; };
+		inline void SetTarget(boost::shared_ptr<SceneNode> &target){ m_target = target; };
 
 		// /////////////////////////////////////////////////////////////////
 		// Clear the target.
@@ -207,7 +207,7 @@ namespace GameHalloran
 		// Overridden and disabled for camera node.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VAddChild(boost::shared_ptr<ISceneNode> childNodePtr) { return (true); };
+		virtual bool VAddChild(boost::shared_ptr<ISceneNode> &childNodePtr) { return (true); };
 
 		// /////////////////////////////////////////////////////////////////
 		// Overridden and disabled for camera node.

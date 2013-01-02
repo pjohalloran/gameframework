@@ -120,7 +120,7 @@ namespace GameHalloran
 		// @param batchPtr Pointer to the batch (created externally).
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit CommonBatchSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &nodeName, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, boost::shared_ptr<IGLBatchBase> batchPtr);
+		explicit CommonBatchSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &nodeName, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, boost::shared_ptr<IGLBatchBase> &batchPtr);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.

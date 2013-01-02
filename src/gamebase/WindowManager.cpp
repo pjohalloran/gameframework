@@ -298,7 +298,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	WindowManager::WindowManager(const WindowParameters &params, boost::shared_ptr<GameLog> loggerPtr) throw (GameException &) \
+	WindowManager::WindowManager(const WindowParameters &params, boost::shared_ptr<GameLog> &loggerPtr) throw (GameException &) \
     : \
     m_params(params),\
     m_loggerPtr(loggerPtr),\

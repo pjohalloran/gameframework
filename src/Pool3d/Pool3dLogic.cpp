@@ -77,7 +77,7 @@ namespace GameHalloran
 		if(actorParamsPtr)
 		{
 			TErrorMessageList errorMessages;
-			if(!actorParamsPtr->VInit(srcData, errorMessages))
+			if(!actorParamsPtr->VInit((LuaPlus::LuaObject &)srcData, errorMessages))
 			{
 				// Clean up memory allocated.
 				delete actorParamsPtr;

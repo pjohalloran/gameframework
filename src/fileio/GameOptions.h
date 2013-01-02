@@ -174,7 +174,7 @@ namespace GameHalloran
 		// @throw GameException& If we failed to open the file.
 		//
 		// /////////////////////////////////////////////////////////////////
-		GameOptions(boost::shared_ptr<GameLog> logPtr, const boost::filesystem::path &filePathRef) throw (GameException &);
+		GameOptions(boost::shared_ptr<GameLog> &logPtr, const boost::filesystem::path &filePathRef) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.
@@ -321,7 +321,7 @@ namespace GameHalloran
 		// Sets the game logging pointer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		void SetLoggingPtr(boost::shared_ptr<GameLog> loggerPtr);
+		void SetLoggingPtr(boost::shared_ptr<GameLog> &loggerPtr);
 
 	};
 

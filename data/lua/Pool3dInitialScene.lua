@@ -39,7 +39,7 @@ end
 p3diGlobaPoolBallData =
 {
 	-- For ball placing function...
-	Radius = 0.025,
+	Radius = 0.0243,
 };
 
 --print("B");
@@ -710,7 +710,7 @@ p3diPoolTableLight =
 	LinearAttenuation = 1.0,
 	QuadraticAttenuation = 0.5,
 	SpotlightCutoff = 50.0,
-	SpotlightExponent = 128.0,
+	SpotlightExponent = 32.0,
 	On = true
 };
 
@@ -757,7 +757,7 @@ p3diTestSpotLight =
 	LinearAttenuation = 1.0,
 	QuadraticAttenuation = 0.0,
 	SpotlightCutoff = 25.0,
-	SpotlightExponent = 128.0,
+	SpotlightExponent = 32.0,
 	On = true
 };
 

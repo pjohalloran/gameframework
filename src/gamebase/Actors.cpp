@@ -133,7 +133,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool ActorParams::VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages)
+	bool ActorParams::VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages)
 	{
 		LuaPlus::LuaObject actorIDObj = srcData["ActorId"];
 		if(actorIDObj.IsInteger())
