@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_PARTICLE_SYSTEM_H
+#define __GF_PARTICLE_SYSTEM_H
+
 // /////////////////////////////////////////////////////////////////
 // @file ParticleSystem.h
 // @author PJ O Halloran
@@ -8,15 +12,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_PARTICLE_SYSTEM_H
-#define __GF_PARTICLE_SYSTEM_H
-
-// External Headers
 #include <boost/shared_ptr.hpp>
-
 #include <list>
 
-// Project Headers
 #include "GameBase.h"
 #include "Matrix.h"
 #include "Vector.h"
@@ -29,11 +27,6 @@
 #include "ImageResource.h"
 #include "CRandom.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -47,21 +40,17 @@ namespace GameHalloran
 	class Particle
 	{
 		private:
-
 			Point3 m_position;						///< Current position of the particle.
 			Vector3 m_velocity;						///< Current velocity.
 			Vector3 m_acceleration;					///< Current acceleration.
-			F32 m_lifetime;						///< Total lifetime of the particle in seconds.
-			F32 m_age;							///< The current age of the particle in seconds.
+			F32 m_lifetime;							///< Total lifetime of the particle in seconds.
+			F32 m_age;								///< The current age of the particle in seconds.
 			bool m_alive;							///< Is the particle currently active/alive.
 			GameColor m_color;						///< Current color of the particle.
 			bool m_rotate;							///< Should the particle rotate?
-			F32 m_rotateAngle;					///< The angle of rotation in degrees per second that the particle rotates at.
+			F32 m_rotateAngle;						///< The angle of rotation in degrees per second that the particle rotates at.
 			Vector3 m_rotationAxis;					///< The axis that the particle should rotate about.
-			F32 m_size;							///< The size of the particle.
-
-		protected:
-
+			F32 m_size;								///< The size of the particle.
 
 		public:
 		
@@ -69,8 +58,20 @@ namespace GameHalloran
 			// Constructor.
 			//
 			// /////////////////////////////////////////////////////////////////
-			inline explicit Particle() : m_position(), m_velocity(), m_acceleration(), m_lifetime(0.0f),\
-				m_age(0.0f), m_alive(true), m_color(), m_rotate(false), m_rotateAngle(0.0f), m_rotationAxis(), m_size(0.0f) { };
+			inline explicit Particle()
+								: m_position()
+								, m_velocity()
+								, m_acceleration()
+								, m_lifetime(0.0f)
+								, m_age(0.0f)
+								, m_alive(true)
+								, m_color()
+								, m_rotate(false)
+								, m_rotateAngle(0.0f)
+								, m_rotationAxis()
+								, m_size(0.0f)
+			{
+			};
 
 			// /////////////////////////////////////////////////////////////////
 			// Constructor.
@@ -87,9 +88,28 @@ namespace GameHalloran
 			// @param size The size of the particle.
 			//
 			// /////////////////////////////////////////////////////////////////
-			inline explicit Particle(const Point3 &pos, const GameColor &col, const Vector3 &v, const Vector3 &a, const F32 lifetime, const bool rotate, const F32 rotateAngle, const Vector3 &rotationAxis, const F32 size)\
-				: m_position(pos), m_velocity(v), m_acceleration(a), m_lifetime(lifetime), m_age(0.0f), m_alive(true), m_color(col),\
-					m_rotate(rotate), m_rotateAngle(rotateAngle), m_rotationAxis(rotationAxis), m_size(size)  { };
+			inline explicit Particle(const Point3 &pos,
+										const GameColor &col,
+										const Vector3 &v,
+										const Vector3 &a,
+										const F32 lifetime,
+										const bool rotate,
+										const F32 rotateAngle,
+										const Vector3 &rotationAxis,
+										const F32 size)
+										: m_position(pos)
+										, m_velocity(v)
+										, m_acceleration(a)
+										, m_lifetime(lifetime)
+										, m_age(0.0f)
+										, m_alive(true)
+										, m_color(col)
+										, m_rotate(rotate)
+										, m_rotateAngle(rotateAngle)
+										, m_rotationAxis(rotationAxis)
+										, m_size(size)
+			{
+			};
 
 			// /////////////////////////////////////////////////////////////////
 			// Destructor.
@@ -272,17 +292,15 @@ namespace GameHalloran
 	class ParticleSystem
 	{
 	private:
-
 		Point3 m_origin;									///< The emit position of the particles.
 		BoundingCube m_boundBox;							///< The area in the scene where the particles are allowed.
-		F32 m_emitRate;									///< The rate at which particles are emitted per second.
-		U32 m_maxParticles;						///< The maximum number of particles in the system.
+		F32 m_emitRate;										///< The rate at which particles are emitted per second.
+		U32 m_maxParticles;									///< The maximum number of particles in the system.
 		Vector3 m_windDir;									///< Direction and magnitude of wind in the system.
-		F32 m_gravity;									///< Strength of gravity on the system.
+		F32 m_gravity;										///< Strength of gravity on the system.
 		ImageResource m_textureResource;					///< The texture resource.
 
 	protected:
-
 		GLuint m_textureId;									///< The ID of the texture to apply to all the particles.
 		ParticleList m_list;								///< List of particles.
 		GLBatch m_pointSpritesBatch;						///< Batch of point sprites to render.
@@ -327,7 +345,13 @@ namespace GameHalloran
 		// @param gravity The strength of gravity in the system.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit ParticleSystem(const Point3 &pt, const BoundingCube &bb, const F32 emitRate, const U32 maxParticles, const ImageResource &textureResource, const Vector3 &windVec, const F32 gravity);
+		explicit ParticleSystem(const Point3 &pt,
+								const BoundingCube &bb,
+								const F32 emitRate,
+								const U32 maxParticles,
+								const ImageResource &textureResource,
+								const Vector3 &windVec,
+								const F32 gravity);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __C_PROCESS_H
+#define __C_PROCESS_H
+
 //========================================================================
 // CProcess.h : Defines a simple cooperative multitasker
 //
@@ -35,7 +39,6 @@
 //
 //========================================================================
 
-
 // /////////////////////////////////////////////////////////////////
 // @file CProcess.h
 // @author Mike McShaffry (edited by PJ O Halloran)
@@ -60,31 +63,13 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
-#ifndef __C_PROCESS_H
-#define __C_PROCESS_H
-
-// External Headers
-#include <boost/utility.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include <list>
 
-// Project Headers
-#include "GameTypes.h"
-
+#include "GameBase.h"
 
 namespace GameHalloran
 {
 
-	//////////////////////////////////////////////////////////////////////
-	// Enums
-	//////////////////////////////////////////////////////////////////////
-	// This process type enumeration is obviously subject to changes
-	// based on the game design, for example, we are assuming the game will
-	// have separate behaviors for voice, music, and sound effects
-	// when in actuality, this engine will play all sound processes the same way
-	//
 	enum PROCESS_TYPE
 	{
 		PROC_NONE,
@@ -95,26 +80,17 @@ namespace GameHalloran
 		PROC_SOUNDFX,
 		PROC_ACTOR,
 		PROC_INTERPOLATOR,
-		// These AI state proc id's shouldn't live here!  Game-specific stuff in the engine is bad!  I promise I'll move them....
-		PROC_AISTATE_ATTACK,
-		PROC_AISTATE_CHASETARGET,
-		PROC_AISTATE_WANDER,
-		PROC_AISTATE_SPIN,
-		PROC_AISTATE_WAIT,
-		PROC_GAMESPECIFIC,
-
-		PROC_REALTIME,		// added for Chapter 18!
+		NUMBER_PROCESS_TYPES
 	};
 
 	// /////////////////////////////////////////////////////////////////
 	// @class CProcess
-	// @author Mike McShaffry
 	//
 	// Represents a time shared process for a task that is updated once
 	// per frame.
 	//
 	// /////////////////////////////////////////////////////////////////
-	class CProcess : public boost::noncopyable
+	class CProcess : public NonCopyable
 	{
 	private:
 
@@ -269,7 +245,6 @@ namespace GameHalloran
 
 	// /////////////////////////////////////////////////////////////////
 	// @class CProcessManager
-	// @author Mike McShaffry
 	//
 	// CProcessManager is a container for CProcess objects.
 	//
@@ -278,10 +253,7 @@ namespace GameHalloran
 	{
 	private:
 
-		// Declare the ProcessList typedef known only to CProcessManager.
-		//  Its a list of CProcess objects.
 		typedef std::list<boost::shared_ptr<CProcess> > ProcessList;
-
 		ProcessList	m_processList;							///< A list of CProcess objects.
 
 		// /////////////////////////////////////////////////////////////////

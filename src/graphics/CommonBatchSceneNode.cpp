@@ -7,15 +7,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <cstdio>
 #include <cstdlib>
 
 #include "GameBase.h"
-
-// Project Headers
 #include "CommonBatchSceneNode.h"
-
 #include "GameMain.h"
 #include "ZipFile.h"
 #include "SceneGraphManager.h"
@@ -56,8 +52,20 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	CommonBatchSceneNode::CommonBatchSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &nodeName, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, boost::shared_ptr<IGLBatchBase> batchPtr)\
-		: SceneNode(sgPtr, actorId, nodeName, renderPass, material, toWorld), m_batchPtr(batchPtr), m_texHandle(), m_mvpUniform(), m_colorUniform()
+	CommonBatchSceneNode::CommonBatchSceneNode(SceneGraphManager *sgPtr,
+												boost::optional<ActorId> actorId,
+												const std::string &nodeName,
+												const RenderPass renderPass,
+												const Material &material,
+												const Matrix4 &toWorld,
+												const std::string &textureName,
+												const std::string &shaderNameRef,
+												boost::shared_ptr<IGLBatchBase> batchPtr)\
+												: SceneNode(sgPtr, actorId, nodeName, renderPass, material, toWorld)
+												, m_batchPtr(batchPtr)
+												, m_texHandle()
+												, m_mvpUniform()
+												, m_colorUniform()
 	{
 		Init(textureName, shaderNameRef);
 	}
@@ -65,8 +73,21 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	CommonBatchSceneNode::CommonBatchSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &nodeName, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, boost::shared_ptr<IGLBatchBase> &batchPtr)\
-		: SceneNode(sgPtr, actorId, nodeName, renderPass, material, toWorld, fromWorld), m_batchPtr(batchPtr), m_texHandle(), m_mvpUniform(), m_colorUniform()
+	CommonBatchSceneNode::CommonBatchSceneNode(SceneGraphManager *sgPtr,
+												boost::optional<ActorId> actorId,
+												const std::string &nodeName,
+												const RenderPass renderPass,
+												const Material &material,
+												const Matrix4 &toWorld,
+												const Matrix4 &fromWorld,
+												const std::string &textureName,
+												const std::string &shaderNameRef,
+												boost::shared_ptr<IGLBatchBase> &batchPtr)\
+												: SceneNode(sgPtr, actorId, nodeName, renderPass, material, toWorld, fromWorld)
+												, m_batchPtr(batchPtr)
+												, m_texHandle()
+												, m_mvpUniform()
+												, m_colorUniform()
 	{
 		Init(textureName, shaderNameRef);
 	}

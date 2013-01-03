@@ -7,20 +7,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <string>
 
-
-// Project Headers
 #include "SnowParticleSystem.h"
-
 #include "TextResource.h"
 #include "GameMain.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -46,7 +38,6 @@ namespace GameHalloran
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", "Failed to initialize the SnowPointShader.vp shader source handle");
 			return;
 		}
-
 		if(!fpSrcH->VInitialize())
 		{
             GF_LOG_TRACE_ERR("SnowParticleSystem::PrepareShader()", "Failed to initialize the SnowPointShader.fp shader source handle");
@@ -96,7 +87,17 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	SnowParticleSystem::SnowParticleSystem(boost::shared_ptr<ModelViewProjStackManager> mvpStackPtr, const GLFrame &cameraFrame) : ParticleSystem(), m_mvpMatrixLoc(0), m_snowColorLoc(0), m_pointImageLoc(0), m_mvMatrixLoc(0), m_cameraPosLoc(0), m_state(SNOW_CONSTANT), m_mvpStackPtr(mvpStackPtr), m_cameraFrame(cameraFrame)
+	SnowParticleSystem::SnowParticleSystem(boost::shared_ptr<ModelViewProjStackManager> mvpStackPtr,
+											const GLFrame &cameraFrame)
+											: ParticleSystem()
+											, m_mvpMatrixLoc(0)
+											, m_snowColorLoc(0)
+											, m_pointImageLoc(0)
+											, m_mvMatrixLoc(0)
+											, m_cameraPosLoc(0)
+											, m_state(SNOW_CONSTANT)
+											, m_mvpStackPtr(mvpStackPtr)
+											, m_cameraFrame(cameraFrame)
 	{
 		PrepareShader();
 	}
@@ -104,8 +105,26 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	SnowParticleSystem::SnowParticleSystem(const BoundingCube &bb, const F32 emitRate, const U32 maxParticles, const ImageResource &textureResource, const Vector3 &windVec, const F32 gravity, const U32 numParticles, boost::shared_ptr<ModelViewProjStackManager> mvpStackPtr, GLShaderManager &stockShaders, const GLFrame &cameraFrame)
-		: ParticleSystem(Point3(), bb, emitRate, maxParticles, textureResource, windVec, gravity), m_mvpMatrixLoc(0), m_snowColorLoc(0), m_pointImageLoc(0), m_mvMatrixLoc(0), m_cameraPosLoc(0), m_state(SNOW_CONSTANT), m_mvpStackPtr(mvpStackPtr), m_stockShaders(stockShaders), m_cameraFrame(cameraFrame)
+	SnowParticleSystem::SnowParticleSystem(const BoundingCube &bb,
+											const F32 emitRate,
+											const U32 maxParticles,
+											const ImageResource &textureResource,
+											const Vector3 &windVec,
+											const F32 gravity,
+											const U32 numParticles,
+											boost::shared_ptr<ModelViewProjStackManager> mvpStackPtr,
+											GLShaderManager &stockShaders,
+											const GLFrame &cameraFrame)
+											: ParticleSystem(Point3(), bb, emitRate, maxParticles, textureResource, windVec, gravity)
+											, m_mvpMatrixLoc(0)
+											, m_snowColorLoc(0)
+											, m_pointImageLoc(0)
+											, m_mvMatrixLoc(0)
+											, m_cameraPosLoc(0)
+											, m_state(SNOW_CONSTANT)
+											, m_mvpStackPtr(mvpStackPtr)
+											, m_stockShaders(stockShaders)
+											, m_cameraFrame(cameraFrame)
 	{
 		PrepareShader();
 
@@ -130,7 +149,6 @@ namespace GameHalloran
 	bool SnowParticleSystem::VOnRestore()
 	{
 		bool result = ParticleSystem::VOnRestore();
-		// Do snow specific restore operations...
 		return (result);
 	}
 
@@ -271,8 +289,6 @@ namespace GameHalloran
 		// Generate random size, position velocity and acceleration and set color to white.
 		F32 size = (m_rng.Random() * 4.0f) + 1.0f;
 		Vector4 color(GameHalloran::g_gcWhite);
-
-		//m_rng.Randomize();
 
 		// Starts from the same height but random X and Z values inside the BB.
 		BoundingCube bb = ParticleSystem::GetBoundingCube();

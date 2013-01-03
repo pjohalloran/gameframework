@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __HASHED_STRING_H
+#define __HASHED_STRING_H
+
 //========================================================================
 // HashedString.h : Defines a class to hash strings.
 //
@@ -63,22 +67,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __HASHED_STRING_H
-#define __HASHED_STRING_H
-
-// External Headers
 #include <string>
 
-
-// Project Headers
 #include "GameTypes.h"
-
 
 namespace GameHalloran
 {
-
-	#pragma warning(push)
-	#pragma warning(disable : 4311)
 
 	// /////////////////////////////////////////////////////////////////
 	// @class HashedString
@@ -92,11 +86,6 @@ namespace GameHalloran
 	{
 	private:
 
-		// note: m_ident is stored as a void* not an int, so that in
-		// the debugger it will show up as hex-values instead of
-		// integer values. This is a bit more representative of what
-		// we're doing here and makes it easy to allow external code
-		// to assign event types as desired.
 		void *m_ident;							///< The hashed string (in hex characters).
 		std::string m_identStr;					///< The original string.
 
@@ -160,9 +149,6 @@ namespace GameHalloran
 			return (r);
 		}
 	};
-
-	//Remove the warning for warning #4311...
-	#pragma warning(pop)
 
 }
 

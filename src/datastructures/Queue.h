@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _GF_QUEUE_H
 #define _GF_QUEUE_H
 
@@ -10,14 +11,8 @@
 //
 // ////////////////////////////////////////////////////////////
 
-
-// External Headers
-
-
-// Project Headers
 #include "GameBase.h"
 #include "LinkedList.h"
-
 
 // ////////////////////////////////////////////////////////////
 //

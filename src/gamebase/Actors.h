@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __ACTORS_H
+#define __ACTORS_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -59,31 +63,22 @@
 // in with the rest of my code.
 //
 // I have added/modified the following functionality:
-// - I commented out game specific code and DirectX code for now.
-// - I commented out the LuaState header until i get scripting
-//		into the framework.
 // - I moved all implementation code to the .cpp file.
 // 
 // BaseActor:
 // - I removed the reference to the BaseGameState friend.
 //
 // ActorParams:
-// - I changed it to be a class instead of a struct. Why was it a struct??
+// - I changed it to be a class instead of a struct.
 // - I used boost::optional instead of the custom one used in GCC3.
-// - I commeneted out the position and color members for now as
-//		they are DirectX specific.
 //
 // /////////////////////////////////////////////////////////////////
-
-#ifndef __ACTORS_H
-#define __ACTORS_H
 
 // External Headers
 #include <sstream>
 #include <string>
 #include <cstring>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
 #include <LuaPlus/LuaLink.h>
@@ -95,10 +90,6 @@
 #include "Matrix.h"
 #include "Vector.h"
 #include "ISceneNode.h"
-
-// Disable depreciated function strcpy() warning as we dont want to use strcpy_s to keep our code 
-//  platform independant.
-#pragma warning( disable:4996 )
 
 namespace GameHalloran
 {
@@ -149,71 +140,57 @@ namespace GameHalloran
 		{
 			return (m_Id);
 		};
+
 		virtual void VSetId(boost::optional<ActorId> id)
 		{
 			m_Id = id;
 		};
 
-		// /////////////////////////////////////////////////////////////////
-		// Get/Set the size of the parameters.
-		//
-		// /////////////////////////////////////////////////////////////////
 		virtual I32 VGetSize() const
 		{
 			return (m_Size);
 		};
+
 		virtual void VSetSize(const I32 size)
 		{
 			m_Size = size;
 		};
 
-		// /////////////////////////////////////////////////////////////////
-		// Get/Set the position.
-		//
-		// /////////////////////////////////////////////////////////////////
 		virtual Point3 VGetPos() const
 		{
 			return (m_Pos);
 		};
+
 		virtual void VSetPos(const Point3 &position)
 		{
 			m_Pos = position;
 		};
 
-		// /////////////////////////////////////////////////////////////////
-		// Get/Set the color.
-		//
-		// /////////////////////////////////////////////////////////////////
 		virtual Vector4 VGetColor() const
 		{
 			return (m_Color);
 		};
+
 		virtual void VSetColor(const Vector4 &color)
 		{
 			m_Color = color;
 		};
 
-		// /////////////////////////////////////////////////////////////////
-		// Get/Set the actor type.
-		//
-		// /////////////////////////////////////////////////////////////////
 		virtual ActorType VGetType() const
 		{
 			return (m_Type);
 		};
+
 		virtual void VSetType(const ActorType type)
 		{
 			m_Type = type;
 		};
 
-		// /////////////////////////////////////////////////////////////////
-		// Get/Set the Create Function name.
-		//
-		// /////////////////////////////////////////////////////////////////
 		virtual const char * const VGetCreateFuncName() const
 		{
 			return (m_OnCreateLuaFunctionName);
 		};
+
 		virtual bool VSetCreateFuncName(const char * const createFuncName)
 		{
 			if(strlen(createFuncName) > MAX_FUNC_NAME_SIZE)
@@ -224,14 +201,11 @@ namespace GameHalloran
 			return (true);
 		};
 
-		// /////////////////////////////////////////////////////////////////
-		// Get/Set the Destroy Function name.
-		//
-		// /////////////////////////////////////////////////////////////////
 		virtual const char * const VGetDestroyFuncName() const
 		{
 			return (m_OnDestroyLuaFunctionName);
 		};
+
 		virtual bool VSetDestroyFuncName(const char * const destroyFuncName)
 		{
 			if(strlen(destroyFuncName) > MAX_FUNC_NAME_SIZE)

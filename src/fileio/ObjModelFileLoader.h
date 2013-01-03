@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_OBJ_MODEL_FILE_LOADER_H
+#define __GF_OBJ_MODEL_FILE_LOADER_H
+
 // /////////////////////////////////////////////////////////////////
 // @file ObjModelFileLoader.h
 // @author PJ O Halloran
@@ -8,30 +12,17 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_OBJ_MODEL_FILE_LOADER_H
-#define __GF_OBJ_MODEL_FILE_LOADER_H
-
 #ifdef WIN32
 #	pragma warning( push )
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <string>
 
-#include <boost/filesystem.hpp>
-#include <boost/shared_ptr.hpp>
-
-
-// Project Headers
 #include "BaseModelFileLoader.h"
 #include "Triangle.h"
 #include "GameException.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

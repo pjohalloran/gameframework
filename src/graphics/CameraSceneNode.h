@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_CAMERA_SCENE_NODE_H
+#define __GF_CAMERA_SCENE_NODE_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -43,33 +47,19 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_CAMERA_SCENE_NODE_H
-#define __GF_CAMERA_SCENE_NODE_H
-
-// External Headers
 #include <boost/shared_ptr.hpp>
-
 #include <string>
 
-
-// Project Headers
 #include "Matrix.h"
 #include "IActors.h"
 #include "Frustrum.h"
 #include "GLFrame.h"
 #include "SceneNode.h"
 #include "ZipFile.h"
+#include "GLSLShader.h"
 
-// DEBUG
-//#include "camera.h"
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
-
 	class SceneGraphManager;
 
 	// /////////////////////////////////////////////////////////////////
@@ -83,7 +73,6 @@ namespace GameHalloran
 	class CameraSceneNode : public SceneNode
 	{
 	private:
-
 		GLFrame m_frame;							///< The cameras FoR class.
 		bool m_updateCameraMatrix;					///< Did some outside user access the FOR class to move the camera??
 		Frustrum *m_frustrumPtr;					///< Viewing frustrum.
@@ -91,20 +80,26 @@ namespace GameHalloran
 		bool m_debugCamera;							///< Is the camera in debug mode?
 		boost::shared_ptr<SceneNode> m_target;		///< The target node of the camera.
 		Vector4 m_camOffsetVector;					///< Direction of camera relative to target.
-		//Camera m_camera;
 		ShaderUniformSPtr m_mvpUniform;             ///< flat shader uniform locations.
         ShaderUniformSPtr m_colorUniform;           ///< 
         
 	public:
-
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
 		//
 		// @param frustrum The viewing frustrum.
 		//
 		// /////////////////////////////////////////////////////////////////
-		inline explicit CameraSceneNode(SceneGraphManager *sgPtr, Frustrum *frustrumPtr) : SceneNode(sgPtr, boost::optional<ActorId>(), std::string("Camera"), RenderPassFirst, Material(), GameHalloran::g_identityMat),\
-			m_frame(), m_updateCameraMatrix(false), m_frustrumPtr(frustrumPtr), m_active(true), m_debugCamera(false), m_target(), m_camOffsetVector(0.0f, 0.0f, -10.0f, 0.0f)
+		inline explicit CameraSceneNode(SceneGraphManager *sgPtr,
+										Frustrum *frustrumPtr)
+										: SceneNode(sgPtr, boost::optional<ActorId>(), std::string("Camera"), RenderPassFirst, Material(), GameHalloran::g_identityMat)
+										, m_frame()
+										, m_updateCameraMatrix(false)
+										, m_frustrumPtr(frustrumPtr)
+										, m_active(true)
+										, m_debugCamera(false)
+										, m_target()
+										, m_camOffsetVector(0.0f, 0.0f, -10.0f, 0.0f)
 		{
 			Matrix4 camMat;
 			m_frame.GetCameraMatrix(camMat);

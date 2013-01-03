@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_BASE_MODEL_FILE_LOADER_H
+#define __GF_BASE_MODEL_FILE_LOADER_H
+
 // /////////////////////////////////////////////////////////////////
 // @file BaseModelFileLoader.h
 // @author PJ O Halloran
@@ -8,9 +12,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_BASE_MODEL_FILE_LOADER_H
-#define __GF_BASE_MODEL_FILE_LOADER_H
-
 #ifdef WIN32
 #	pragma warning( push )
 #	pragma warning( disable:4290 )
@@ -20,18 +21,12 @@
 #include <string>
 #include <map>
 
-#include <boost/shared_ptr.hpp>
-
 // Project Headers
 #include "GameBase.h"
 #include "IModelFileLoader.h"
 #include "Triangle.h"
 #include "GLTriangleBatch.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

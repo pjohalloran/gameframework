@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_I_SCENE_NODE_H
+#define __GF_I_SCENE_NODE_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -43,29 +47,19 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_I_SCENE_NODE_H
-#define __GF_I_SCENE_NODE_H
-
-// External Headers
 #include <boost/shared_ptr.hpp>
-
 #include <vector>
 #include <map>
 
-// Project Headers
-#include "Matrix.h"
 #include "IActors.h"
-#include "RayCast.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
 	class SceneNodeProperties;
 	class SceneGraphManager;
+	class Matrix4;
+	class RayCast;
 
 	// /////////////////////////////////////////////////////////////////
 	// @class ISceneNode

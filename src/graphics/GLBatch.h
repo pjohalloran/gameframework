@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GL_BATCH__
+#define __GL_BATCH__
+
 /*
 GLBatch.h
  
@@ -39,20 +43,12 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GL_BATCH__
-#define __GL_BATCH__
-
 #include "GamePlatform.h"
 
-// Project Headers
 #include "IGLBatchBase.h"
 #include "Matrix.h"
 #include "Vector.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -72,21 +68,16 @@ namespace GameHalloran
 	class GLBatch : public IGLBatchBase
     {
     private:
-
 		GLenum m_primitiveType;				///< What type of primitive is the batch constructing/drawing.
-        
 		GLuint m_uiVertexArray;				///< Vertex array buffer ID.
 		GLuint m_uiNormalArray;				///< Normal array buffer ID.
 		GLuint m_uiColorArray;				///< Color array buffer ID.
 		GLuint *m_uiTextureCoordArray;		///< Texture coordinate array buffer IDs.
 		GLuint m_vertexArrayObject;			///< Vertex array buffer object ID.
-        
         GLuint m_nVertsBuilding;			///< Building up vertices counter (immediate mode emulator)
         GLuint m_nNumVerts;					///< Number of verticies in this batch
         GLuint m_nNumTextureUnits;			///< Number of texture coordinate sets
-		
         bool m_bBatchDone;					///< Batch has been built
- 
 		VertexArr *m_pVerts;				///< Array of vertices arrays.
 		NormalArr *m_pNormals;				///< Array of normals arrays.
 		ColorArr *m_pColors;				///< Array of colors arrays.
@@ -158,13 +149,12 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		void CopyTexCoordData2f(TextureArr *vTexCoords, const GLuint uiTextureLayer);
 
-		// /////////////////////////////////////////////////////////////////
-		// Just to make life easier...
-		//
-		// /////////////////////////////////////////////////////////////////
 		inline void CopyVertexData3f(GLfloat *vVerts) { CopyVertexData3f(reinterpret_cast<VertexArr *>(vVerts)); }
+
 		inline void CopyNormalDataf(GLfloat *vNorms) { CopyNormalDataf(reinterpret_cast<NormalArr *>(vNorms)); }
+
 		inline void CopyColorData4f(GLfloat *vColors) { CopyColorData4f(reinterpret_cast<ColorArr *>(vColors)); }
+
 		inline void CopyTexCoordData2f(GLfloat *vTex, const GLuint uiTextureLayer) { CopyTexCoordData2f(reinterpret_cast<TextureArr *>(vTex), uiTextureLayer); }
 
 		// /////////////////////////////////////////////////////////////////
@@ -189,6 +179,7 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
         void Vertex3f(const GLfloat x, const GLfloat y, const GLfloat z);
+
         void Vertex3fv(VertexArr vVertex);
         
 		// /////////////////////////////////////////////////////////////////
@@ -197,6 +188,7 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
         void Normal3f(const GLfloat x, const GLfloat y, const GLfloat z);
+
         void Normal3fv(NormalArr vNormal);
         
 		// /////////////////////////////////////////////////////////////////
@@ -204,6 +196,7 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
         void Color4f(const GLfloat r, const GLfloat g, const GLfloat b, const GLfloat a);
+
         void Color4fv(ColorArr vColor);
         
 		// /////////////////////////////////////////////////////////////////
@@ -212,6 +205,7 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
         void MultiTexCoord2f(const GLuint texture, const GLclampf s, const GLclampf t);
+
         void MultiTexCoord2fv(const GLuint texture, TextureArr vTexCoord);
 	
 	};

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_COMMON_BATCH_SCENE_NODE_H
+#define __GF_COMMON_BATCH_SCENE_NODE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file CommonBatchSceneNode.h
 // @author PJ O Halloran
@@ -7,29 +11,23 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_COMMON_BATCH_SCENE_NODE_H
-#define __GF_COMMON_BATCH_SCENE_NODE_H
+#include <string>
+#include <vector>
 
-// External Headers
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
 #include "GameBase.h"
-
-#include <string>
-#include <vector>
-
-// Project Headers
 #include "ISceneNode.h"
 #include "SceneNodeProperties.h"
 #include "SceneNode.h"
 #include "TextureManager.h"
 #include "IGLBatchBase.h"
 #include "GameException.h"
+#include "GLSLShader.h"
 
 namespace GameHalloran
 {
-
 	class SceneGraphManager;
 
 	// /////////////////////////////////////////////////////////////////
@@ -51,7 +49,6 @@ namespace GameHalloran
 
 		boost::shared_ptr<IGLBatchBase> m_batchPtr;				///< Batch of geometry.
 		boost::optional<TexHandle> m_texHandle;					///< Handle for the texture to apply to the geometry.
-
         ShaderUniformSPtr m_mvpUniform;                         ///< 
         ShaderUniformSPtr m_colorUniform;                       ///< Default shader uniforms.
         
@@ -102,7 +99,15 @@ namespace GameHalloran
 		// @param batchPtr Pointer to the batch (created externally).
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit CommonBatchSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &nodeName, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const std::string &textureName, const std::string &shaderNameRef, boost::shared_ptr<IGLBatchBase> batchPtr);
+		explicit CommonBatchSceneNode(SceneGraphManager *sgPtr,
+										boost::optional<ActorId> actorId,
+										const std::string &nodeName,
+										const RenderPass renderPass,
+										const Material &material,
+										const Matrix4 &toWorld,
+										const std::string &textureName,
+										const std::string &shaderNameRef,
+										boost::shared_ptr<IGLBatchBase> batchPtr);
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
@@ -120,7 +125,16 @@ namespace GameHalloran
 		// @param batchPtr Pointer to the batch (created externally).
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit CommonBatchSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &nodeName, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::string &textureName, const std::string &shaderNameRef, boost::shared_ptr<IGLBatchBase> &batchPtr);
+		explicit CommonBatchSceneNode(SceneGraphManager *sgPtr,
+										boost::optional<ActorId> actorId,
+										const std::string &nodeName,
+										const RenderPass renderPass,
+										const Material &material,
+										const Matrix4 &toWorld,
+										const Matrix4 &fromWorld,
+										const std::string &textureName,
+										const std::string &shaderNameRef,
+										boost::shared_ptr<IGLBatchBase> &batchPtr);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.

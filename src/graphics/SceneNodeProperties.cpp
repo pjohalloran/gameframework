@@ -44,12 +44,7 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
-
-
-// Project Headers
 #include "SceneNodeProperties.h"
-
 
 namespace GameHalloran
 {

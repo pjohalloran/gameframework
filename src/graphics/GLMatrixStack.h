@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GLT_MATRIX_STACK
+#define __GLT_MATRIX_STACK
+
 // GLMatrixStack.h
 // Matrix stack functionality
 /*
@@ -39,28 +43,18 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GLT_MATRIX_STACK
-#define __GLT_MATRIX_STACK
-
 #ifdef WIN32
 #	pragma warning( push )
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <string>
 #include <boost/shared_ptr.hpp>
 
-
-// Project Headers
 #include "GameException.h"
 #include "Matrix.h"
 #include "GLFrame.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -109,8 +103,8 @@ namespace GameHalloran
 	private:
 
 		GLT_STACK_ERROR m_lastError;			///< Last error type.
-		U32 m_stackDepth;				///< Stack size.
-		U32 m_stackPointer;			///< Pointer to current location on stack.
+		U32 m_stackDepth;						///< Stack size.
+		U32 m_stackPointer;						///< Pointer to current location on stack.
 		Matrix4 **m_pStack;						///< Array of matrices.
 
 	public:

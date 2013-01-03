@@ -20,7 +20,7 @@
 #include "GLTools.h"
 #include "GameMain.h"
 #include "SceneGraphManager.h"
-
+#include "RayCast.h"
 
 namespace GameHalloran
 {

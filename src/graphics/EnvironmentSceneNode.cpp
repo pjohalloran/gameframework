@@ -7,27 +7,22 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <boost/optional.hpp>
 
-
-// Project Headers
 #include "EnvironmentSceneNode.h"
 #include "SceneGraphManager.h"
 #include "GameMain.h"
 #include "GLTools.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	void EnvironmentSceneNode::Init(const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &)
+	void EnvironmentSceneNode::Init(const std::vector<std::string> &cubemapTextureNameVec,
+									const std::string &shaderNameRef,
+									const F32 cmRadius) throw (GameException &)
 	{
 		// Load the textures for the sides of the cubemap.
 		boost::optional<TexHandle> tHandle = g_appPtr->GetTextureManagerPtr()->LoadCubeMap(cubemapTextureNameVec, GL_CLAMP_TO_EDGE);
@@ -55,8 +50,16 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	EnvironmentSceneNode::EnvironmentSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const Matrix4 &toWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &)\
-		: SceneNode(sgPtr, actorId, std::string("EnvironmentSceneNode"), RenderPassSky, Material(), toWorld), m_texHandle(0), m_mvpUniform(), m_cmUniform()
+	EnvironmentSceneNode::EnvironmentSceneNode(SceneGraphManager *sgPtr,
+												boost::optional<ActorId> actorId,
+												const Matrix4 &toWorld,
+												const std::vector<std::string> &cubemapTextureNameVec,
+												const std::string &shaderNameRef,
+												const F32 cmRadius) throw (GameException &)
+												: SceneNode(sgPtr, actorId, std::string("EnvironmentSceneNode"), RenderPassSky, Material(), toWorld)
+												, m_texHandle(0)
+												, m_mvpUniform()
+												, m_cmUniform()
 	{
 		Init(cubemapTextureNameVec, shaderNameRef, cmRadius);
 	}
@@ -64,8 +67,17 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	EnvironmentSceneNode::EnvironmentSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &)\
-		: SceneNode(sgPtr, actorId, std::string("EnvironmentSceneNode"), RenderPassSky, Material(), toWorld, fromWorld), m_texHandle(0), m_mvpUniform(), m_cmUniform()
+	EnvironmentSceneNode::EnvironmentSceneNode(SceneGraphManager *sgPtr,
+												boost::optional<ActorId> actorId,
+												const Matrix4 &toWorld,
+												const Matrix4 &fromWorld,
+												const std::vector<std::string> &cubemapTextureNameVec,
+												const std::string &shaderNameRef,
+												const F32 cmRadius) throw (GameException &)
+												: SceneNode(sgPtr, actorId, std::string("EnvironmentSceneNode"), RenderPassSky, Material(), toWorld, fromWorld)
+												, m_texHandle(0)
+												, m_mvpUniform()
+												, m_cmUniform()
 	{
 		Init(cubemapTextureNameVec, shaderNameRef, cmRadius);
 	}
@@ -87,14 +99,12 @@ namespace GameHalloran
 
 		result = SceneNode::VPreRender();
 
-		// Activate the cubemap texture on the first texture unit/layer.
 		if(result && !g_appPtr->GetTextureManagerPtr()->Bind(m_texHandle, GL_TEXTURE_CUBE_MAP, GL_TEXTURE0))
 		{
             GF_LOG_TRACE_ERR("EnvironmentSceneNode::VPreRender()", "Failed to activate the CubeMap texture");
 			result = false;
 		}
 
-		// Enable seemless smoothing along the edges of the cubemap.
 		if(result)
 		{
 			glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
@@ -120,7 +130,6 @@ namespace GameHalloran
 
 		if(result)
 		{
-			// Send the uniforms to the shader.
 			Matrix4 mvp;
 			m_sgmPtr->GetStackManager()->GetModelViewProjectionMatrix(mvp);
 			
@@ -128,12 +137,9 @@ namespace GameHalloran
             m_cmUniform->SetValue(0);
 
             m_shaderPtr->Activate();
-            
-			// Draw the cubemap.
 			m_cubeBatch.VDraw();
 
 #if defined(_DEBUG)
-			// Check if we are in debug mode, if so we should query OpenGL To see if the draw succeeded!
 			if(g_appPtr->GetLoggerPtr() && g_appPtr->GetLoggerPtr()->GetLogLevel() >= GameLog::DEB)
 			{
 				GLenum error = glGetError();
@@ -154,9 +160,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool EnvironmentSceneNode::VPostRender()
 	{
-		// Disable it now.
 		glDisable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-
 		return (SceneNode::VPostRender());
 	}
 

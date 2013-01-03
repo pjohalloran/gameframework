@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GAME_FRAMEWORK_COLOURS_H
+#define __GAME_FRAMEWORK_COLOURS_H
+
 // /////////////////////////////////////////////////////////////////
 // @file GameColors.h
 // @author PJ O Halloran
@@ -11,15 +15,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GAME_FRAMEWORK_COLOURS_H
-#define __GAME_FRAMEWORK_COLOURS_H
-
 #ifdef WIN32
 #	pragma warning( push )
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <string>
 #include <vector>
 
@@ -29,21 +29,13 @@
 #include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
-
-// Project Headers
 #include "CommonMath.h"
 #include "Vector.h"
 #include "GameException.h"
 #include "LuaStateManager.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
-
 	// An OpenGL color needs 4 componenets (rgba) so we will just use our Vector4 class.
 	typedef Vector4 GameColor;
 
@@ -77,7 +69,6 @@ namespace GameHalloran
 	class Material
 	{
 	private:
-
 		GameColor m_ambient;				///< Ambient color of a material.
 		GameColor m_diffuse;				///< Diffuse color of a material (light shading, dependant on object position with respect to light position).
 		GameColor m_specular;				///< Specular color of a material (shininess).
@@ -85,7 +76,6 @@ namespace GameHalloran
 		GameColor m_emissive;				///< Emissive color of a material (how much light it reflects or emits).
 
 	public:
-
 		// /////////////////////////////////////////////////////////////////
 		// Default constructor.
 		//
@@ -102,7 +92,11 @@ namespace GameHalloran
 		// @param emissiveEmissive color of a material.
 		//
 		// /////////////////////////////////////////////////////////////////
-		Material(const GameColor &ambient, const GameColor &diffuse, const GameColor &specular, const F32 specPower, const GameColor &emissive);
+		Material(const GameColor &ambient,
+					const GameColor &diffuse,
+					const GameColor &specular,
+					const F32 specPower,
+					const GameColor &emissive);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.
@@ -240,10 +234,10 @@ namespace GameHalloran
 		GameColor m_ambient;				///< Ambient property.
 		GameColor m_diffuse;				///< Diffuse property.
 		GameColor m_specular;				///< Specular property.
-		F32 m_cAtt;						///< Constant attenuation factor.
-		F32 m_lAtt;						///< Linear attenuation factor.
-		F32 m_qAtt;						///< Quadratic attenuation factor.
-		F32 m_slCutoff;					///< Angle of the cone of light for a spotlight.
+		F32 m_cAtt;							///< Constant attenuation factor.
+		F32 m_lAtt;							///< Linear attenuation factor.
+		F32 m_qAtt;							///< Quadratic attenuation factor.
+		F32 m_slCutoff;						///< Angle of the cone of light for a spotlight.
 		F32 m_slExponent;					///< Concentation factor of a spotlight.
 		bool m_on;							///< Flag telling us if the light is currently on or off.
 

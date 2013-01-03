@@ -1,3 +1,4 @@
+#pragma once
 #ifndef GF_I_CLEANABLE_OBSERVER_H
 #define GF_I_CLEANABLE_OBSERVER_H
 
@@ -10,9 +11,7 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
 #include "ICleanable.h"
-
 
 namespace GameHalloran
 {

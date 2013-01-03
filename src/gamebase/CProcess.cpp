@@ -47,14 +47,10 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
-
-// Project headers
 #include "CProcess.h"
 
 // Namespace Declarations
 using boost::shared_ptr;
-
 
 namespace GameHalloran
 {
@@ -66,8 +62,15 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	CProcess::CProcess(I32 nType, U32 uOrder) : m_uProcessFlags(0), m_iType(nType), m_bKill(false),\
-		m_bActive(true), m_bPaused(false), m_bInitialUpdate(true), m_pNext()
+	CProcess::CProcess(I32 nType,
+						U32 uOrder)
+						: m_uProcessFlags(0)
+						, m_iType(nType)
+						, m_bKill(false)
+						, m_bActive(true)
+						, m_bPaused(false)
+						, m_bInitialUpdate(true)
+						, m_pNext()
 	{
 	}
 
@@ -255,7 +258,6 @@ namespace GameHalloran
 		shared_ptr<CProcess> pNext;								// The current processes NEXT process 
 																//  to run after it has completed.
 
-		// Iterate through all the processes in the list.
 		while (i != end)
 		{
 			shared_ptr<CProcess> p(*i);
@@ -263,7 +265,6 @@ namespace GameHalloran
 
 			if(p->IsDead())
 			{
-				// Check for a child process and add if exists
 				pNext = p->GetNext();
 				if(pNext)
 				{
@@ -284,13 +285,10 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool CProcessManager::IsProcessActive(const I32 nType)
 	{
-		bool foundActiveProcess = false;				// Have we found the process yet?
+		bool foundActiveProcess = false;
 
-		// Iterate through the list until the list is exhausted or we have found what we are searching for.
 		for(ProcessList::iterator i = m_processList.begin(); ((!foundActiveProcess) && (i != m_processList.end())); ++i)
 		{
-			// Check for living processes.  If they are dead, make sure no children 
-			// are attached as they will be brought to life on next cycle.
 			if ((*i)->GetType() == nType && 
 				 (((*i)->IsDead() == false) || (*i)->GetNext()))
 			{

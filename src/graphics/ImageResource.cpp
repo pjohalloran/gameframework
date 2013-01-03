@@ -3,22 +3,13 @@
 // @author PJ O Halloran
 // @date 27/09/2010
 //
-// 
-//
 // ////////////////////////////////////////////////////////////////////
-
-// External Headers
-
-
-// Project Headers
-#include "ImageResource.h"
-
-#include "GLTools.h"
-
-#include "GameMain.h"
 
 #include <boost/algorithm/string/case_conv.hpp>
 
+#include "ImageResource.h"
+#include "GLTools.h"
+#include "GameMain.h"
 
 namespace GameHalloran
 {
@@ -87,10 +78,6 @@ namespace GameHalloran
 		
 		return (eIMAGE_MODE_UNKNOWN);
     }
-
-	// ////////////////////////////////////////////////////////////////////
-	// 
-	// ////////////////////////////////////////////////////////////////////
 
 	// ////////////////////////////////////////////////////////////////////
 	// 

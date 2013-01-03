@@ -35,7 +35,6 @@
 //
 //========================================================================
 
-
 // /////////////////////////////////////////////////////////////////
 // @file HashedString.h
 // @author Mike McShaffry
@@ -55,10 +54,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// Externel Headers
-
-
-// Project Headers
 #include "HashedString.h"
 
 namespace GameHalloran
@@ -125,12 +120,7 @@ namespace GameHalloran
 			s2 %= BASE;
 		}
 
-		#pragma warning(push)
-		#pragma warning(disable : 4312)
-
 		return reinterpret_cast<void *>( (s2 << 16) | s1 );
-
-		#pragma warning(pop)
 		#undef DO1
 		#undef DO2
 		#undef DO4

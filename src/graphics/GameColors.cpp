@@ -8,12 +8,10 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
 #include <string>
 
 #include <boost/algorithm/string/case_conv.hpp>
 
-// Project headers
 #include "GameColors.h"
 #include "GameMain.h"
 
@@ -48,15 +46,28 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	Material::Material() : m_ambient(g_gcWhite), m_diffuse(g_gcWhite), m_specular(g_gcWhite), m_specPower(128.0f), m_emissive(g_gcBlack)
+	Material::Material()
+				: m_ambient(g_gcWhite)
+				, m_diffuse(g_gcWhite)
+				, m_specular(g_gcWhite)
+				, m_specPower(128.0f)
+				, m_emissive(g_gcBlack)
 	{
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	Material::Material(const GameColor &ambient, const GameColor &diffuse, const GameColor &specular, const F32 specPower, const GameColor &emissive)\
-		: m_ambient(ambient), m_diffuse(diffuse), m_specular(specular), m_specPower(specPower), m_emissive(emissive)
+	Material::Material(const GameColor &ambient,
+						const GameColor &diffuse,
+						const GameColor &specular,
+						const F32 specPower,
+						const GameColor &emissive)
+						: m_ambient(ambient)
+						, m_diffuse(diffuse)
+						, m_specular(specular)
+						, m_specPower(specPower)
+						, m_emissive(emissive)
 	{
 	}
 
@@ -218,16 +229,38 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	Light::Light() : m_type(eDirectional), m_position(g_originPt), m_direction(g_forward), m_ambient(g_gcBlack), m_diffuse(g_gcWhite),\
-		m_specular(g_gcWhite), m_cAtt(1.0f), m_lAtt(0.0f), m_qAtt(0.0f), m_slCutoff(180.0f), m_slExponent(0.0f), m_on(true)
+	Light::Light()
+			: m_type(eDirectional)
+			, m_position(g_originPt)
+			, m_direction(g_forward)
+			, m_ambient(g_gcBlack)
+			, m_diffuse(g_gcWhite)
+			, m_specular(g_gcWhite)
+			, m_cAtt(1.0f)
+			, m_lAtt(0.0f)
+			, m_qAtt(0.0f)
+			, m_slCutoff(180.0f)
+			, m_slExponent(0.0f)
+			, m_on(true)
 	{
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	Light::Light(LuaPlus::LuaObject &srcData) throw (GameException &) : m_type(eDirectional), m_position(g_originPt), m_direction(g_forward), m_ambient(g_gcBlack), m_diffuse(g_gcWhite),\
-		m_specular(g_gcWhite), m_cAtt(1.0f), m_lAtt(0.0f), m_qAtt(0.0f), m_slCutoff(180.0f), m_slExponent(0.0f), m_on(true)
+	Light::Light(LuaPlus::LuaObject &srcData) throw (GameException &)
+						: m_type(eDirectional)
+						, m_position(g_originPt)
+						, m_direction(g_forward)
+						, m_ambient(g_gcBlack)
+						, m_diffuse(g_gcWhite)
+						, m_specular(g_gcWhite)
+						, m_cAtt(1.0f)
+						, m_lAtt(0.0f)
+						, m_qAtt(0.0f)
+						, m_slCutoff(180.0f)
+						, m_slExponent(0.0f)
+						, m_on(true)
 	{
 		if(!srcData.IsTable())
 		{
@@ -259,19 +292,29 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	Light::Light(const LightType type,\
-					const Point3 &position,\
-					const Vector3 &direction,\
-					const GameColor &ambient,\
-					const GameColor &diffuse,\
-					const GameColor &specular,\
-					const F32 constantAttenuation,\
-					const F32 linearAttenuation,\
-					const F32 quadraticAttenuation,\
-					const F32 spotlightCutoff,\
-					const F32 spotlightExponent) : m_type(type), m_position(position), m_direction(direction), m_ambient(ambient), m_diffuse(diffuse),\
-						m_specular(specular), m_cAtt(constantAttenuation), m_lAtt(linearAttenuation), m_qAtt(quadraticAttenuation), m_slCutoff(spotlightCutoff),\
-							m_slExponent(spotlightExponent), m_on(true)
+	Light::Light(const LightType type,
+					const Point3 &position,
+					const Vector3 &direction,
+					const GameColor &ambient,
+					const GameColor &diffuse,
+					const GameColor &specular,
+					const F32 constantAttenuation,
+					const F32 linearAttenuation,
+					const F32 quadraticAttenuation,
+					const F32 spotlightCutoff,
+					const F32 spotlightExponent)
+					: m_type(type)
+					, m_position(position)
+					, m_direction(direction)
+					, m_ambient(ambient)
+					, m_diffuse(diffuse)
+					, m_specular(specular)
+					, m_cAtt(constantAttenuation)
+					, m_lAtt(linearAttenuation)
+					, m_qAtt(quadraticAttenuation)
+					, m_slCutoff(spotlightCutoff)
+					, m_slExponent(spotlightExponent)
+					, m_on(true)
 	{
 	}
 

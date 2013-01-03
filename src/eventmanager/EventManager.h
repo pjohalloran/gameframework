@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __EVENT_MANAGER_H
+#define __EVENT_MANAGER_H
+
 //========================================================================
 // EventManager.h : implements a multi-listener multi-sender event system
 //
@@ -57,19 +61,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __EVENT_MANAGER_H
-#define __EVENT_MANAGER_H
-
-// External Headers
-#include <boost/shared_ptr.hpp>
 #include <sstream>
 
-// Project Headers
 #include "GameBase.h"
 #include "LuaStateManager.h"
 #include "HashedString.h"
 #include "GameException.h"
-//#include "CriticalSection.h"
 
 // Disable exception throw specification warning VS complains about.
 //  It doesn't like "throw (somexception)", it likes either "throw()"

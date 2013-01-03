@@ -7,20 +7,15 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
-#include "TextureAtlas.h"
-
-#include "GameMain.h"
-
-#include "tinyxml/tinyxml.h"
 #include <string>
 
+#include "tinyxml/tinyxml.h"
+
+#include "TextureAtlas.h"
+#include "GameMain.h"
 #include "ImageResource.h"
 #include "TextResource.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
     
@@ -50,8 +45,6 @@ namespace GameHalloran
     {
         assert(atlasNodePtr != NULL && strcmp(atlasNodePtr->Value(), "Atlas") == 0);
         
-        // <Atlas border="1" height="1024" mode="RGBA" name="INGAME" type="png" width="1024">
-        
         TextureAtlasSPtr atlas(new TextureAtlas(atlasNodePtr->Attribute("name")));
         std::string mode(atlasNodePtr->Attribute("mode"));
         std::string type(atlasNodePtr->Attribute("type"));
@@ -64,7 +57,6 @@ namespace GameHalloran
         // Load atlas image from location using TextureManager.
         if(m_loadingFromFilesystem)
         {
-            // TODO:
             assert(false);
         }
         else
@@ -80,10 +72,8 @@ namespace GameHalloran
         
         for(TiXmlElement *currChildPtr = atlasNodePtr->FirstChildElement(); currChildPtr; currChildPtr = currChildPtr->NextSiblingElement())
         {
-            // If the current element pointer is valid and it is not an xml comment, then parse it further.
             if(currChildPtr && !currChildPtr->ToComment() && strcmp(currChildPtr->Value(), "image") == 0)
             {
-                // <image flipped="False" height="0.125" imagefile="ball01.tga" width="0.125" x="0.0009765625" y="0.0009765625"/>
                 double tmp(0.0);
                 
                 AtlasImageSPtr image(new AtlasImage(currChildPtr->Attribute("imagefile")));
@@ -113,14 +103,24 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
-    TextureAtlasManager::TextureAtlasManager() : m_loadingFromFilesystem(false), m_loaded(false), m_atlasMap(), m_currAtlasPtr(NULL), m_currImagePtr(NULL)
+    TextureAtlasManager::TextureAtlasManager()
+								: m_loadingFromFilesystem(false)
+								, m_loaded(false)
+								, m_atlasMap()
+								, m_currAtlasPtr(NULL)
+								, m_currImagePtr(NULL)
     {
     }
     
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
-    TextureAtlasManager::TextureAtlasManager(const boost::filesystem::path &atlasFilename) : m_loadingFromFilesystem(false), m_loaded(false), m_atlasMap(), m_currAtlasPtr(NULL), m_currImagePtr(NULL)
+    TextureAtlasManager::TextureAtlasManager(const boost::filesystem::path &atlasFilename)
+								: m_loadingFromFilesystem(false)
+								, m_loaded(false)
+								, m_atlasMap()
+								, m_currAtlasPtr(NULL)
+								, m_currImagePtr(NULL)
     {
         LoadFromFile(atlasFilename);
     }
@@ -128,7 +128,12 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
-    TextureAtlasManager::TextureAtlasManager(const std::string &resourceId) : m_loadingFromFilesystem(false), m_loaded(false), m_atlasMap(), m_currAtlasPtr(NULL), m_currImagePtr(NULL)
+    TextureAtlasManager::TextureAtlasManager(const std::string &resourceId)
+								: m_loadingFromFilesystem(false)
+								, m_loaded(false)
+								, m_atlasMap()
+								, m_currAtlasPtr(NULL)
+								, m_currImagePtr(NULL)
     {
         LoadFromResourceCache(resourceId);
     }

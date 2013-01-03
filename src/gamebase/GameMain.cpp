@@ -14,16 +14,19 @@
 #include <sstream>
 #include <algorithm>
 
-#include <boost/optional.hpp>
 #include <boost/algorithm/string.hpp>
 
 // Project headers
-#include "GameBase.h"
 #include "GameMain.h"
 #include "GlfwGameTimer.h"
 #include "SystemCheck.h"
 #include "Events.h"
 #include "PhysicsEvents.h"
+#include "GameLog.h"
+#include "GameOptions.h"
+#include "ResCache2.h"
+#include "TextureManager.h"
+#include "TextureAtlas.h"
 
 // Namespace Declarations
 using std::string;
@@ -93,7 +96,6 @@ namespace GameHalloran
 		m_saveGameDir.assign(saveGame.begin(), saveGame.end());
 #endif
 
-		// Check that they are all valid and existing directories on the filesystem.
 		if(!boost::filesystem::is_directory(m_gameRootDir))
 		{
             GF_LOG_FAT(m_gameRootDir.string() + string(" is not a valid directory"));
@@ -196,11 +198,10 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool GameMain::SetUpResourceCache()
 	{
-		bool result = true;								// Result of method.
-		string resFilename;								// Name of the resource file.
+		bool result = true;						// Result of method.
+		string resFilename;						// Name of the resource file.
 		U32 resCacheSize = 0;					// Size of the resource cache.
 
-		// Retrieve the game options for the resource cache.
 		if(result && !RetrieveAndConvertOption<U32>(m_optionsPtr, string("ResCacheSize"), GameOptions::PROGRAMMER, resCacheSize))
 		{
             GF_LOG_ERR("Failed to get the ResCacheSize option so using a default value instead (5)");
@@ -212,7 +213,6 @@ namespace GameHalloran
 			result = false;
 		}
 
-		// Open the resource file (the memory allocated here will be reclaimed in ResCache::~ResCache()).
 		IResourceFile *resContainerPtr;
 		if(result)
 		{
@@ -227,7 +227,6 @@ namespace GameHalloran
 			}
 		}
 
-		// Initialize the ResCache.
 		if(result)
 		{
 			m_resourceCachePtr.reset(GCC_NEW ResCache(resCacheSize, resContainerPtr, m_loggerPtr));
@@ -255,7 +254,6 @@ namespace GameHalloran
 	{
 		bool result = true;				// Result of method.
 
-		// Create the LUA state manager.
 		m_luaStateManagerPtr.reset(GCC_NEW LuaStateManager());
 		if(!m_luaStateManagerPtr)
 		{
@@ -268,15 +266,10 @@ namespace GameHalloran
 			// Setup access to certain functions for the LUA scripts to some vital global application functions.
 			m_metaTable = m_luaStateManagerPtr->GetGlobalState()->GetGlobals().CreateTable("GameMain");
 			m_metaTable.SetObject("__index", m_metaTable);
-
-			// Here we register two functions to make them accessible to script (we allow scripts to shut down the application).
 			m_metaTable.RegisterObjectDirect("IsRunning", (GameMain *)0, &GameMain::IsRunning);
 			m_metaTable.RegisterObjectDirect("SetRunning", (GameMain *)0, &GameMain::SetRunning);
-			
 			LuaPlus::LuaObject gmStateManObj = g_appPtr->GetLuaStateManager()->GetGlobalState()->BoxPointer(this);
 			gmStateManObj.SetMetaTable(m_metaTable);
-
-			// And here we expose the metatable as a named entity.
 			m_luaStateManagerPtr->GetGlobalState()->GetGlobals().SetObject("GameMain", gmStateManObj);
 		}
 
@@ -290,7 +283,6 @@ namespace GameHalloran
 	{
 		bool result = true;				// Result of method.
 
-		// Create the EventManager.
 		m_eventManagerPtr.reset(GCC_NEW EventManager("GameEventManager", true));
 		if(!m_eventManagerPtr)
 		{
@@ -326,13 +318,6 @@ namespace GameHalloran
 		m_eventManagerPtr->RegisterCodeOnlyEvent(EvtData_Move_Kinematic_Actor::sk_EventType);
 		m_eventManagerPtr->RegisterEvent<EvtData_Request_New_Actor>(EvtData_Request_New_Actor::sk_EventType);
 		m_eventManagerPtr->RegisterEvent<EvtData_UpdateActorParams>(EvtData_UpdateActorParams::sk_EventType);
-
-		// TODO: Network events
-		//m_eventManagerPtr->RegisterCodeOnlyEvent(EvtData_Remote_Client::sk_EventType);
-		//m_eventManagerPtr->RegisterCodeOnlyEvent(EvtData_Network_Player_Actor_Assignment::sk_EventType);
-		
-		// TODO: AI events
-		//m_eventManagerPtr->RegisterCodeOnlyEvent(EvtData_AiSteer::sk_EventType);
 
 		// General game events
 		m_eventManagerPtr->RegisterCodeOnlyEvent(EvtData_Video_Resolution_Change::sk_EventType);
@@ -373,7 +358,6 @@ namespace GameHalloran
 		bool useDesktopSettings(true);								// Should we use desktop settings?
 		bool glDebugContext(false);									// Should we use an OpenGL debug context?
 
-		// Get the various window and GL context configurable options.
 		if(!RetrieveAndConvertOption<bool>(m_optionsPtr, string("UseDesktopSettings"), GameOptions::PROGRAMMER, useDesktopSettings))
 		{
             GF_LOG_ERR("Failed to get the UseDesktopSettings option so using a default value instead (true)");
@@ -456,12 +440,10 @@ namespace GameHalloran
 			profile = GLFW_OPENGL_CORE_PROFILE;
 		}
 
-		// Create user defined window and OpenGL context parameters.
 		WindowParameters params;
 
 		if(!useDesktopSettings)
 		{
-			// Set the SW, SH, CB size, DB size and fullscreen parameters from the options.
 			params.SetDimensions(screenWidth, screenHeight);
 			params.SetFullscreen((fullscreen == 0) ? false : true);
 			if(cbSize == 24)
@@ -487,7 +469,6 @@ namespace GameHalloran
 			params.SetDepthBufferSize(dbSize);
 		}
 
-		// Set the remainder of the parameters from the options.
 		params.SetTitle(gameName);
 		params.SetGlVersion(glMajor, glMinor);
 		params.SetGlProfile(profile);
@@ -500,7 +481,6 @@ namespace GameHalloran
 		result = CreateOpenGLWindow(params, useDesktopSettings);
 		if(result)
 		{
-			// Set up the GLFW window and input callbacks now.
 #ifdef USE_NEW_GLFW
 			glfwSetWindowCloseCallback(OnGlfwWindowCloseCallback);
 			glfwSetWindowSizeCallback(OnGlfwWindowResizeCallback);
@@ -521,9 +501,8 @@ namespace GameHalloran
 			glfwSetMouseWheelCallback(OnGlfwMouseWheelCallback);
 #endif
 
-			// Check if there are any joysticks plugged in now (after GLFW has been initialized...)
 			SystemCheck systemCheckObj;
-			I32 numJoysticks = 0;
+			U32 numJoysticks = 0;
 			if(!systemCheckObj.CheckForJoysticks(m_joystickList, numJoysticks))
 			{
                 GF_LOG_INF("There are no joysticks plugged into the system");
@@ -544,7 +523,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	WindowParameters GameMain::GetMinimumWindowParameters()
 	{
-		// TODO: Get these parameters from the xml configuration file.
 		WindowParameters minParams;
 
 		string gameName;
@@ -563,7 +541,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool GameMain::CreateOpenGLWindow(struct WindowParameters &userParams, const bool useDesktopSettings)
 	{
-		// Get current desktop settings if we are configured to use them.
 		if(useDesktopSettings)
 		{
 			// Create a temporary min spec window to determine the current desktop mode params.
@@ -588,7 +565,7 @@ namespace GameHalloran
 			userParams.SetDepthBufferSize(desktopParams.GetDepthBufferSize());
 		}
 
-		// 1) Try to setup window with user defined parameters.
+		// Try to setup window with user defined parameters.
 		try
 		{
 			m_windowManagerPtr.reset(GCC_NEW WindowManager(userParams, m_loggerPtr));
@@ -623,59 +600,37 @@ namespace GameHalloran
 	{
 		bool result = true;			// Result of setup calls.
 
-		// Check the system.
 		CheckSystemResources();
-
-		// Set the global wide directories.
 		result = SetGlobalDirectories();
-
-		// Create the game resource cache.
 		if(result)
 		{
 			result = SetUpResourceCache();
 		}
-
-		// Initialize the LUA scripting manager.
 		if(result)
 		{
 			result = SetUpScriptManager();
 		}
-
-		// Initialize the event framework.
 		if(result)
 		{
 			result = SetUpEventManager();
 		}
-
-		// Register the core game events
 		if(result)
 		{
 			result = RegisterBaseGameEvents();
 		}
-
-		// Load the startup script 
 		if(result)
 		{
 			string initScript(m_luaCommonDir.string() + string("init.lua"));
 			result = m_luaStateManagerPtr->Init(initScript.c_str());
 		}
-
-		// Create the window and display.
 		if(result)
 		{
 			result = SetUpWindowManager();
 		}
-
-		// Initialize the OpenGL drawing library and the OpenGL extensions required for the application.
-		//  Please note that the TextureManager should be initialized in here after all other OpenGL
-		//  specifics are set up.
 		if(result)
 		{
 			result = VInitOpenGL();
 		}
-
-		// Initialize the game logic and views subsystem (implemented
-		//  by all derived classes).
 		if(result)
 		{
 			m_logicPtr = VCreateLogicAndViews();
@@ -686,21 +641,44 @@ namespace GameHalloran
 			}
 		}
 
-		// If we failed, ensure the memory allocated by VCreateLogicAndViews() is cleaned up.
 		return (result);
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	GameMain::GameMain(shared_ptr<GameLog> &loggerPtr, shared_ptr<GameOptions> &optionsPtr)\
-		throw (GameException &) : m_lastRenderTime(0.0), m_lastUpdateTime(0.0), m_lastEventTime(0.0), m_frameRateTimer(), m_frameCount(0),\
-			m_framesInPastSecond(0), m_appTimer(), m_startTime(0.0), m_isRunning(true), m_resourceCachePtr(), m_luaStateManagerPtr(),\
-				m_eventManagerPtr(), m_logicPtr(), m_atlasPtr(), m_loggerPtr(loggerPtr), m_windowManagerPtr(), m_optionsPtr(optionsPtr),\
-					m_eventQueue(), m_prevX(0), m_prevY(0), m_prevActiveState(false), m_joystickList(), m_metaTable(),\
-					m_texManagerPtr(), m_gameRootDir(), m_dataDir(), m_appDataDir(), m_luaCommonDir(), m_saveGameDir()
+	GameMain::GameMain(shared_ptr<GameLog> &loggerPtr,
+						shared_ptr<GameOptions> &optionsPtr) throw (GameException &)
+						: m_lastRenderTime(0.0)
+						, m_lastUpdateTime(0.0)
+						, m_lastEventTime(0.0)
+						, m_frameRateTimer()
+						, m_frameCount(0)
+						, m_framesInPastSecond(0)
+						, m_appTimer()
+						, m_startTime(0.0)
+						, m_isRunning(true)
+						, m_resourceCachePtr()
+						, m_luaStateManagerPtr()
+						, m_eventManagerPtr()
+						, m_logicPtr()
+						, m_atlasPtr()
+						, m_loggerPtr(loggerPtr)
+						, m_windowManagerPtr()
+						, m_optionsPtr(optionsPtr)
+						, m_eventQueue()
+						, m_prevX(0)
+						, m_prevY(0)
+						, m_prevActiveState(false)
+						, m_joystickList()
+						, m_metaTable()
+						, m_texManagerPtr()
+						, m_gameRootDir()
+						, m_dataDir()
+						, m_appDataDir()
+						, m_luaCommonDir()
+						, m_saveGameDir()
 	{
-		// Set the global game application pointer here!
 		g_appPtr = this;
 
 		m_frameRateTimer = shared_ptr<IGameTimer>(GCC_NEW GlfwGameTimer());
@@ -761,20 +739,14 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void GameMain::VPollEvents()
 	{
-		// The total elapsed time so far.
 		F64 time = m_appTimer->VGetTime();
-		// The time elapsed since the last successfull poll events call.
 		F32 elapsedTime = F32(time) - F32(m_lastEventTime);
 
 		// Check for new events from glfw (this will fill up the event queue again).
 		glfwPollEvents();
 
-		// Bugfix: GLFW close window bug, Check if the user clicked on the close window button.
 		if(!m_isRunning)
-		{
-			// no need to poll for more events, just shutdown as quickly as possible...
 			return;
-		}
 
 		// Poll for events we are not able to receive by callback from GLFW.
 		// Active window, joystick events, etc.
@@ -788,12 +760,10 @@ namespace GameHalloran
 		//  and also check for input events for any joysticks connected.
 		PollJoysticks();
 
-		// Pump each event in the queue through the system.
 		for(GfEventQueue::iterator curr = m_eventQueue.begin(); curr != m_eventQueue.end(); ++curr)
 		{
 			switch(curr->id)
 			{
-				// Handle imporatant global input/OS window events here.
 				case GF_ACTIVE_EVENT:
 				{
 					VOnActiveEvent((curr->active.focus == 1 ? true : false));
@@ -869,18 +839,6 @@ namespace GameHalloran
 						SetRunning(false);
 					}
 
-					// Note the reverse order! User input is grabbed first from the view that is on top, 
-					// which is the last one in the list.
-					//GameViewList viewList = m_logicPtr->GetGameViewList();
-					//bool topViewHandled = false;
-					//for(GameViewList::reverse_iterator i = viewList.rbegin(); ((!topViewHandled) && (i != viewList.rend())); ++i)
-					//{
-					//	if((*i)->VOnEvent(*curr))
-					//	{
-					//		// The events must be passed to the top view only so exit loop now!
-					//		topViewHandled = true;
-					//	}
-					//}
 					GameViewList viewList = m_logicPtr->GetGameViewList();
 					for(GameViewList::reverse_iterator i = viewList.rbegin(); i != viewList.rend(); ++i)
 					{
@@ -891,10 +849,7 @@ namespace GameHalloran
 			}
 		}
 
-		// Clear event queue as all events have been handled.
 		m_eventQueue.clear();
-
-		// Record the last time the events were polled.
 		m_lastEventTime = m_appTimer->VGetTime();
 	}
 
@@ -903,7 +858,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void GameMain::PollJoysticks()
 	{
-		// Poll for every possible joystick.
 		for(GfJoyCont::const_iterator curr = m_joystickList.begin(), end = m_joystickList.end(); curr != end; ++curr)
 		{
 			(*curr)->PollJoystickState(m_eventQueue, &m_eventFactoryObj);
@@ -947,18 +901,13 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void GameMain::VUpdate()
 	{
-		// The total elapsed time so far.
 		F64 time = m_appTimer->VGetTime();
-		// The time elapsed since the last successfull update call.
 		F32 elapsedTime = F32(time) - F32(m_lastUpdateTime);
 
 		// allow event queue to process for a maximum of 20 ms to deal with game events.
 		safeTickEventManager(20);
 
-		// Update the logic layer.
 		m_logicPtr->VOnUpdate(time, elapsedTime);
-
-		// Record the end time of the last successfull update.
 		m_lastUpdateTime = m_appTimer->VGetTime();
 	}
 
@@ -967,19 +916,15 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void GameMain::VRender()
 	{
-		// The total elapsed time so far in seconds.
 		F64 time = m_appTimer->VGetTime();
-		// The time elapsed since the last successfull render call (in seconds).
 		F32 elapsedTime = F32(time) - F32(m_lastRenderTime);
 
-		// Render all the game views in the order in which they were added.
 		GameViewList viewList = m_logicPtr->GetGameViewList();
 		for(GameViewList::iterator i = viewList.begin(); i != viewList.end(); ++i)
 		{
 			(*i)->VOnRender(time, elapsedTime);
 		}
 
-		// Record the end time of the last successfull render.
 		m_lastRenderTime = m_appTimer->VGetTime();
 	}
     
@@ -1014,7 +959,6 @@ namespace GameHalloran
 		// Timer used to calculate the number of frames drawn in the past second.
 		shared_ptr<IGameTimer> secondTimer(GCC_NEW GlfwGameTimer());
 
-		// Reset timers and variables required for loop.
 		m_framesInPastSecond = 0;
 		m_frameCount = 0;
 		m_appTimer->VStart();
@@ -1028,10 +972,8 @@ namespace GameHalloran
 		// The main game loop.
 		while(m_isRunning)
 		{
-			// Start frame update and draw timer
 			m_frameRateTimer->VStart();
 
-			// Calculate statistics
 			if(secondTimer->VGetTime() >= 1.0)
 			{
 				m_framesInPastSecond = m_frameCount;
@@ -1046,25 +988,17 @@ namespace GameHalloran
 				++m_frameCount;
 			}
 
-			// Update the state of the game objects (implemented by all derived classes).
 			VUpdate();
-
-			// Render the scene (implemented by all derived classes).
 			VRender();
-
-			// Flip the screen back buffer.
 			m_windowManagerPtr->SwapBuffers();
 
-			// Regulate fps by sleeping for a short period
-			//  if this frame took less than FRAME_TIME_MS to update and render.
+			// Regulate fps
 			if(m_frameRateTimer->VGetTime() < FRAME_TIME_MS)
 			{
 				F64 milliseconds = FRAME_TIME_MS - m_frameRateTimer->VGetTime();
-				// Sleep the remaining frame time
 				Sleep(milliseconds);
 			}
 
-			// Poll for input events (implemented by derived classes).
 			VPollEvents();
 
 #ifdef DEBUG
@@ -1115,13 +1049,6 @@ namespace GameHalloran
 	void GameMain::OnGlfwCloseWindowEvent()
 	{
 		SetRunning(false);
-
-		// Bugfix: GLFW shutdown on window close bug, Instead of broadcasting an event, 
-		// we will just set the running flag to false.
-		//GF_Event eventObj;
-		//eventObj.id = GF_QUIT_EVENT;
-		//m_eventFactoryObj.CreateCloseWindowEvent(eventObj.quit);
-		//m_eventQueue.push_back(eventObj);
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -1401,7 +1328,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void ConvertWindowCoordinates(Point3 &pt)
 	{
-		//pt.SetY(abs(pt.GetY() - static_cast<F32>(g_appPtr->GetWindowManager()->GetHeight())));
 		pt.SetY(abs(static_cast<F32>(g_appPtr->GetWindowManager()->GetHeight()) - pt.GetY()));
 	}
 

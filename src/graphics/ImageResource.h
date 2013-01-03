@@ -1,3 +1,7 @@
+#pragma once
+#ifndef _GF_IMAGE_RESOURCE_H
+#define _GF_IMAGE_RESOURCE_H
+
 // ////////////////////////////////////////////////////////////////////
 // @file ImageResource.h
 // @author PJ O Halloran
@@ -8,17 +12,10 @@
 //
 // ////////////////////////////////////////////////////////////////////
 
-#ifndef _GF_IMAGE_RESOURCE_H
-#define _GF_IMAGE_RESOURCE_H
-
-// External Headers
 #include <string>
 
-
-// Project Headers
 #include "GameBase.h"
 #include "ResCache2.h"
-
 
 namespace GameHalloran
 {

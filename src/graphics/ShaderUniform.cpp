@@ -7,10 +7,8 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
 #include "ShaderUniform.h"
 #include "GameBase.h"
-
 #include "CommonMath.h"
 
 // /////////////////////////////////////////////////////////////////
@@ -25,10 +23,6 @@ namespace GameHalloran
     void ShaderUniform::VClean()
     {
         GF_CLEAR_GL_ERROR();
-        
-        
-        //static int i(0);
-        //printf("%i Cleaning uniform %s\n", ++i, m_id.getStr().c_str());
         
         switch(m_type)
         {

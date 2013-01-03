@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GLT_GEOMETRY_PIPELINE
+#define __GLT_GEOMETRY_PIPELINE
+
 /*
 Copyright (c) 2009, Richard S. Wright Jr.
 All rights reserved.
@@ -56,22 +60,11 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GLT_GEOMETRY_PIPELINE
-#define __GLT_GEOMETRY_PIPELINE
-
-
-// External Headers
 #include <boost/shared_ptr.hpp>
 
+#include "Matrix.h"
+#include "GLMatrixStack.h"
 
-// Project Headers
-#include <Matrix.h>
-#include <GLMatrixStack.h>
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -96,8 +89,12 @@ namespace GameHalloran
 		// Constructor.
 		//
 		// /////////////////////////////////////////////////////////////////
-		ModelViewProjStackManager(boost::shared_ptr<GLMatrixStack> mvStack, boost::shared_ptr<GLMatrixStack> projStack)
-			: m_modelViewStack(mvStack), m_projectionStack(projStack) {};
+		ModelViewProjStackManager(boost::shared_ptr<GLMatrixStack> mvStack,
+									boost::shared_ptr<GLMatrixStack> projStack)
+									: m_modelViewStack(mvStack)
+									, m_projectionStack(projStack)
+		{
+		};
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor (non virtual so you shouldnt derive from this class).

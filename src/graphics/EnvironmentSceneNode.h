@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_ENVIRONMENT_SCENE_NODE_H
+#define __GF_ENVIRONMENT_SCENE_NODE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file EnvironmentSceneNode.h
 // @author PJ O Halloran
@@ -7,22 +11,17 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_ENVIRONMENT_SCENE_NODE_H
-#define __GF_ENVIRONMENT_SCENE_NODE_H
-
 #ifdef WIN32
 #	pragma warning( push )
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
 #include <string>
 #include <vector>
 
-// Project Headers
 #include "GameBase.h"
 #include "ISceneNode.h"
 #include "SceneNodeProperties.h"
@@ -30,10 +29,10 @@
 #include "TextureManager.h"
 #include "GLBatch.h"
 #include "GameException.h"
+#include "GLSLShader.h"
 
 namespace GameHalloran
 {
-
 	class SceneGraphManager;
 
 	// /////////////////////////////////////////////////////////////////
@@ -58,7 +57,6 @@ namespace GameHalloran
 	class EnvironmentSceneNode : public SceneNode
 	{
 	private:
-
 		TexHandle m_texHandle;										///< Handle to the CubeMap texture.
 		GLBatch m_cubeBatch;										///< Batch of geometry describing a 3D cube.
         ShaderUniformSPtr m_mvpUniform;                             ///< MVP uniform location.
@@ -100,7 +98,12 @@ namespace GameHalloran
 		//							names.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit EnvironmentSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const Matrix4 &toWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &);
+		explicit EnvironmentSceneNode(SceneGraphManager *sgPtr,
+										boost::optional<ActorId> actorId,
+										const Matrix4 &toWorld,
+										const std::vector<std::string> &cubemapTextureNameVec,
+										const std::string &shaderNameRef,
+										const F32 cmRadius) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
@@ -119,7 +122,13 @@ namespace GameHalloran
 		//							names.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit EnvironmentSceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const Matrix4 &toWorld, const Matrix4 &fromWorld, const std::vector<std::string> &cubemapTextureNameVec, const std::string &shaderNameRef, const F32 cmRadius) throw (GameException &);
+		explicit EnvironmentSceneNode(SceneGraphManager *sgPtr,
+										boost::optional<ActorId> actorId,
+										const Matrix4 &toWorld,
+										const Matrix4 &fromWorld,
+										const std::vector<std::string> &cubemapTextureNameVec,
+										const std::string &shaderNameRef,
+										const F32 cmRadius) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.

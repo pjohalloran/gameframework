@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __TRIANGLE_BATCH_H
+#define __TRIANGLE_BATCH_H
+
 /*
  *  GLTriangleBatch.h
  *  OpenGL SuperBible
@@ -52,16 +56,8 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __TRIANGLE_BATCH_H
-#define __TRIANGLE_BATCH_H
-
-
-// External Headers
 #include "GamePlatform.h"
-
-// Project Headers
 #include "IGLBatchBase.h"
-
 #include "Triangle.h"
 
 // /////////////////////////////////////////////////////////////////
@@ -101,10 +97,8 @@ namespace GameHalloran
         GLuint m_nMaxIndexes;				///< Maximum workspace
         GLuint m_nNumIndexes;				///< Number of indexes currently used
         GLuint m_nNumVerts;					///< Number of vertices actually used
-        
         GLuint m_bufferObjects[4];			///< GL buffer objects for the batchs' indices, vertices, normals and texture coordinates.
 		GLuint m_vertexArrayBufferObject;	///< GL VBO array buffer object ID.
-
 		bool m_batchComplete;				///< Has the batch been completed and sent to the GPU?
 		const GLfloat m_epsilon;			///< How small a difference between floats are allowed until they are deemed equal (for generating indices).
 

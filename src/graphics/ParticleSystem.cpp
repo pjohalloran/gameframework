@@ -8,20 +8,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <string>
 
-
-// Project Headers
 #include "ParticleSystem.h"
-
 #include "GameBase.h"
 #include "GameMain.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -53,12 +45,10 @@ namespace GameHalloran
 		{
 			if(!(*curr)->IsAlive())
 			{
-				// Remove element and point to the next one in the list.
 				curr = m_list.erase(curr);
 			}
 			else
 			{
-				// Check the next element.
 				++curr;
 			}
 		}
@@ -67,8 +57,19 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	ParticleSystem::ParticleSystem() : m_origin(), m_boundBox(), m_emitRate(0.0f), m_maxParticles(0), m_windDir(), m_gravity(0.0f), m_textureResource(std::string("")), m_textureId(0), m_shaderProg(), m_list(),\
-		m_pointSpritesBatch(), m_rng()
+	ParticleSystem::ParticleSystem()
+							: m_origin()
+							, m_boundBox()
+							, m_emitRate(0.0f)
+							, m_maxParticles(0)
+							, m_windDir()
+							, m_gravity(0.0f)
+							, m_textureResource(std::string(""))
+							, m_textureId(0)
+							, m_shaderProg()
+							, m_list()
+							, m_pointSpritesBatch()
+							, m_rng()
 	{
 		glGenTextures(1, &m_textureId);
 		m_rng.Randomize();
@@ -77,9 +78,25 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	ParticleSystem::ParticleSystem(const Point3 &pt, const BoundingCube &bb, const F32 emitRate, const U32 maxParticles, const ImageResource &textureResource, const Vector3 &windVec, const F32 gravity)\
-		: m_origin(pt), m_boundBox(bb), m_emitRate(emitRate), m_maxParticles(maxParticles), m_windDir(windVec), m_gravity(gravity), m_textureResource(textureResource),  m_textureId(0), m_shaderProg(), m_list(),\
-			m_pointSpritesBatch(), m_rng()
+	ParticleSystem::ParticleSystem(const Point3 &pt,
+									const BoundingCube &bb,
+									const F32 emitRate,
+									const U32 maxParticles,
+									const ImageResource &textureResource,
+									const Vector3 &windVec,
+									const F32 gravity)
+									: m_origin(pt)
+									, m_boundBox(bb)
+									, m_emitRate(emitRate)
+									, m_maxParticles(maxParticles)
+									, m_windDir(windVec)
+									, m_gravity(gravity)
+									, m_textureResource(textureResource)
+									,  m_textureId(0)
+									, m_shaderProg()
+									, m_list()
+									, m_pointSpritesBatch()
+									, m_rng()
 	{
 		glGenTextures(1, &m_textureId);
 		m_rng.Randomize();
@@ -99,7 +116,6 @@ namespace GameHalloran
 				glDeleteTextures(1, &m_textureId);
 			}
 
-			// Explicitly clear the list of particles and reset the batch of point sprites rather than leaving them go out of scope.
 			m_list.clear();
 			m_pointSpritesBatch.Reset();
 		}
@@ -113,7 +129,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool ParticleSystem::VOnRestore()
 	{
-		// Restore lost texture here.
 		bool result = true;
 
 		if(m_textureResource.GetName().empty())
@@ -169,10 +184,6 @@ namespace GameHalloran
 								GL_UNSIGNED_BYTE,
 								imgH->GetImageBuffer());
 				result = GF_CHECK_GL_ERROR();
-
-				// Note: Mipmap filtering not used so not generating mipmaps, probably particles are too
-				// small for mipmaps to be of any benefit anyway.
-				//glGenerateMipmap(GL_TEXTURE_2D);
 			}
 		}
 
@@ -184,7 +195,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void ParticleSystem::VOnLostDevice()
 	{
-		// Free texture memory here when we lose the graphical device.
 		if(IsTextureAssigned())
 		{
             GF_CLEAR_GL_ERROR();
@@ -199,7 +209,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool ParticleSystem::VOnPreRender()
 	{
-		// Let the point sprite size be adjusted in the GLSL shader.
         GF_CLEAR_GL_ERROR();
 		glEnable(GL_PROGRAM_POINT_SIZE);
         GF_CHECK_GL_ERROR();
@@ -211,7 +220,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool ParticleSystem::VOnRender(const F64 time, const F32 elapsedTime)
 	{
-		// Bind to the current texture.
 		if(IsTextureAssigned())
 		{
             GF_CLEAR_GL_ERROR();

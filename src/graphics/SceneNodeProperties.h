@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_SCENE_NODE_PROPERTIES_H
+#define __GF_SCENE_NODE_PROPERTIES_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -44,24 +48,16 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_SCENE_NODE_PROPERTIES_H
-#define __GF_SCENE_NODE_PROPERTIES_H
-
-// External Headers
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
-
 #include <string>
 
-
-// Project Headers
 #include "Matrix.h"
 #include "IActors.h"
 #include "BoundingSphere.h"
 #include "BoundingCube.h"
 #include "GameColors.h"
 #include "CommonSceneNode.h"
-
 
 namespace GameHalloran
 {
@@ -96,8 +92,19 @@ namespace GameHalloran
 		// Constructor.
 		//
 		// /////////////////////////////////////////////////////////////////
-		inline explicit SceneNodeProperties() : m_actorId(), m_name(), m_toWorld(), m_fromWorld(),\
-			m_radius(0.0f), m_renderPass(RenderPassFirst), m_alphaType(AlphaOpaque), m_alpha(g_OPAQUE), m_shaderName(), m_material() { };
+		inline explicit SceneNodeProperties()
+								: m_actorId()
+								, m_name()
+								, m_toWorld()
+								, m_fromWorld()
+								, m_radius(0.0f)
+								, m_renderPass(RenderPassFirst)
+								, m_alphaType(AlphaOpaque)
+								, m_alpha(g_OPAQUE)
+								, m_shaderName()
+								, m_material()
+		{
+		};
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
@@ -114,8 +121,28 @@ namespace GameHalloran
 		// @param material The nodes material.
 		//
 		// /////////////////////////////////////////////////////////////////
-		inline explicit SceneNodeProperties(const boost::optional<ActorId> id, const std::string &nameRef, const Matrix4 &toWorld, const Matrix4 &fromWorld, const F32 radius, const RenderPass rp, const AlphaType at, const F32 alpha, const std::string shaderName, const Material material)\
-			: m_actorId(id), m_name(nameRef), m_toWorld(toWorld), m_fromWorld(fromWorld), m_radius(radius), m_renderPass(rp), m_alphaType(at), m_alpha(alpha), m_shaderName(shaderName), m_material(material) { };
+		inline explicit SceneNodeProperties(const boost::optional<ActorId> id,
+											const std::string &nameRef,
+											const Matrix4 &toWorld,
+											const Matrix4 &fromWorld,
+											const F32 radius,
+											const RenderPass rp,
+											const AlphaType at,
+											const F32 alpha,
+											const std::string &shaderName,
+											const Material &material)\
+											: m_actorId(id)
+											, m_name(nameRef)
+											, m_toWorld(toWorld)
+											, m_fromWorld(fromWorld)
+											, m_radius(radius)
+											, m_renderPass(rp)
+											, m_alphaType(at)
+											, m_alpha(alpha)
+											, m_shaderName(shaderName)
+											, m_material(material)
+		{
+		};
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_COMMON_SCENE_NODE_H
+#define __GF_COMMON_SCENE_NODE_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -43,22 +47,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_COMMON_SCENE_NODE_H
-#define __GF_COMMON_SCENE_NODE_H
-
-// External Headers
 #include <boost/shared_ptr.hpp>
-
 #include <list>
 
-// Project Headers
 #include "Matrix.h"
 #include "ISceneNode.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -146,12 +140,7 @@ namespace GameHalloran
 		boost::shared_ptr<ISceneNode> GetNode() { return (m_node); };
 	};
 
-	// /////////////////////////////////////////////////////////////////
-	// List of alpha scene nodes.
-	//
-	// /////////////////////////////////////////////////////////////////
 	typedef std::list<boost::shared_ptr<AlphaSceneNode> > AlphaSceneNodeList;
-
 }
 
 #endif

@@ -41,45 +41,37 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 //
 // /////////////////////////////////////////////////////////////////
 
-
-// External Headers
-
-
-// Project Headers
 #include "GameBase.h"
 #include "GLBatch.h"
 #include "GLShaderManager.h"
 
-
-////////////////////////// TEMPORARY TEMPORARY TEMPORARY - On SnowLeopard this is suppored, but GLEW doens't hook up properly
-////////////////////////// Fixed probably in 10.6.3
-//#ifdef __APPLE__
-//	#define glGenVertexArrays glGenVertexArraysAPPLE
-//	#define glDeleteVertexArrays  glDeleteVertexArraysAPPLE
-//	#define glBindVertexArray	glBindVertexArrayAPPLE
-//#endif
-
-/////////////////////// OpenGL ES support on iPhone/iPad
 #ifdef OPENGL_ES
 	#define GL_WRITE_ONLY   GL_WRITE_ONLY_OES
 	#define glMapBuffer     glMapBufferOES
 	#define glUnmapBuffer   glUnmapBufferOES
 #endif
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	GLBatch::GLBatch(void) : m_primitiveType(0), m_uiVertexArray(0), m_uiNormalArray(0), m_uiColorArray(0), m_uiTextureCoordArray(NULL),\
-		m_vertexArrayObject(0), m_nVertsBuilding(0), m_nNumVerts(0), m_nNumTextureUnits(0), m_bBatchDone(false), m_pVerts(NULL), m_pNormals(NULL),\
-			m_pColors(NULL), m_pTexCoords(NULL)
+	GLBatch::GLBatch(void)
+				: m_primitiveType(0)
+				, m_uiVertexArray(0)
+				, m_uiNormalArray(0)
+				, m_uiColorArray(0)
+				, m_uiTextureCoordArray(NULL)
+				, m_vertexArrayObject(0)
+				, m_nVertsBuilding(0)
+				, m_nNumVerts(0)
+				, m_nNumTextureUnits(0)
+				, m_bBatchDone(false)
+				, m_pVerts(NULL)
+				, m_pNormals(NULL)
+				, m_pColors(NULL)
+				, m_pTexCoords(NULL)
 	{
 	}
 

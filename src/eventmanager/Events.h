@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GAME_EVENTS_H
+#define __GAME_EVENTS_H
+
 //========================================================================
 // Events.h : defines common game events
 //
@@ -35,9 +39,6 @@
 //
 //========================================================================
 
-#ifndef __GAME_EVENTS_H
-#define __GAME_EVENTS_H
-
 // /////////////////////////////////////////////////////////////////
 // @file Events.h
 // @author Mike McShaffry
@@ -58,10 +59,8 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <sstream>
 
-// Project Headers
 #include "GameBase.h"
 #include "EventManager.h"
 #include "GameMain.h"
@@ -71,14 +70,6 @@
 
 namespace GameHalloran
 {
-	// Auxillary data decls ...
-	//
-	// data that is passed per-event in the userData parameter
-	// 
-	// ( for some, but not all, events )
-
-	//-- new object notification
-
 	// /////////////////////////////////////////////////////////////////
 	// @class EvtData_New_Actor
 	// @author Mike McShaffry

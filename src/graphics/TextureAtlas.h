@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_TEXTURE_ATLAS_H
+#define __GF_TEXTURE_ATLAS_H
+
 // /////////////////////////////////////////////////////////////////
 // @file TextureAtlas.h
 // @author PJ O Halloran
@@ -11,17 +15,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_TEXTURE_ATLAS_H
-#define __GF_TEXTURE_ATLAS_H
-
-
 #include <map>
-
 
 #include "GameBase.h"
 #include "HashedString.h"
 #include "TextureManager.h"
-
 
 class TiXmlElement;
 
@@ -205,6 +203,5 @@ namespace GameHalloran
     };
     
 }
-
 
 #endif // END __GF_TEXTURE_ATLAS_H

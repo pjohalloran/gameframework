@@ -1,5 +1,9 @@
+#pragma once
+#ifndef __EVENT_MANAGER_IMPL_H
+#define __EVENT_MANAGER_IMPL_H
+
 //========================================================================
-// EventMangerImpl.cpp : implementation side of the event system
+// EventMangerImpl.h : implementation side of the event system
 //
 // Part of the GameCode3 Application
 //
@@ -58,25 +62,18 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __EVENT_MANAGER_IMPL_H
-#define __EVENT_MANAGER_IMPL_H
-
-// External Headers
 #include <vector>
 #include <list>
 #include <map>
 #include <set>
 
-// Project Headers
 #include "EventManager.h"
-
 #include "ScriptEventListener.h"
 
 namespace GameHalloran
 {
-
 	typedef std::vector<EventListenerPtr> EventListenerList;
-	typedef std::vector<EventType>      EventTypeList;
+	typedef std::vector<EventType> EventTypeList;
 
 	// /////////////////////////////////////////////////////////////////
 	// @class EventManager

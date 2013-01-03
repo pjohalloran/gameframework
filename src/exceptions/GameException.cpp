@@ -7,13 +7,8 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
-#include <exception>
-
-// Project headers
 #include "GameException.h"
 
-// Namespace Declarations
 using std::exception;
 
 namespace GameHalloran

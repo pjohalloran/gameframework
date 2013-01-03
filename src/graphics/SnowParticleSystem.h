@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_SNOW_PARTICLE_SYSTEM_H
+#define __GF_SNOW_PARTICLE_SYSTEM_H
+
 // /////////////////////////////////////////////////////////////////
 // @file SnowParticleSystem.h
 // @author PJ O Halloran
@@ -7,13 +11,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_SNOW_PARTICLE_SYSTEM_H
-#define __GF_SNOW_PARTICLE_SYSTEM_H
-
-// External Headers
-#include <boost/shared_ptr.hpp>
-
-// Project Headers
 #include "GameBase.h"
 #include "Matrix.h"
 #include "Vector.h"
@@ -24,14 +21,8 @@
 #include "GameColors.h"
 #include "ParticleSystem.h"
 #include "ModelViewProjStackManager.h"
-
-
 #include "GLShaderManager.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -108,8 +99,16 @@ namespace GameHalloran
 		// @param mvStackPtr Pointer to the MVP stack manager.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit SnowParticleSystem(const BoundingCube &bb, const F32 emitRate, const U32 maxParticles, const ImageResource &textureResource,\
-			const Vector3 &windVec, const F32 gravity, const U32 numParticles, boost::shared_ptr<ModelViewProjStackManager> mvpStackPtr, GLShaderManager &stockShaders, const GLFrame &cameraFrame);
+		explicit SnowParticleSystem(const BoundingCube &bb,
+									const F32 emitRate,
+									const U32 maxParticles,
+									const ImageResource &textureResource,
+									const Vector3 &windVec,
+									const F32 gravity,
+									const U32 numParticles,
+									boost::shared_ptr<ModelViewProjStackManager> mvpStackPtr,
+									GLShaderManager &stockShaders,
+									const GLFrame &cameraFrame);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.

@@ -7,18 +7,16 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
 
-// Project headers
 #include "GameOptions.h"
 #include "GameBase.h"
 #include "GameMain.h"
+#include "GameException.h"
+#include "GameLog.h"
 
-// Namespace Declarations
 using std::string;
 using std::map;
 using std::vector;
@@ -33,14 +31,9 @@ using boost::lexical_cast;
 using boost::bad_lexical_cast;
 using boost::shared_ptr;
 
-
-// /////////////////////////////////////////////////////////////////
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
-	// Definition of static class constants.
 	const std::string GameOptions::XML_EXT = string(".xml");
 	const std::string GameOptions::ROOT_NODE = string("Options");
 	const std::string GameOptions::OPTION_TYPE_NODE = string("OptionType");
@@ -54,21 +47,18 @@ namespace GameHalloran
 	{
 		bool result = true;						// Result of the method.
 		
-		// Check if the path exists.
 		if(!exists(filePathRef))
 		{
             GF_LOG_ERR(string("The path ") + filePathRef.string() + string(" does not exist"));
 			result = false;
 		}
 
-		// Check the path has a filename.
 		if(result && !filePathRef.has_filename())
 		{
             GF_LOG_INF(string("The path ") + filePathRef.string() + string(" is not a file"));
 			result = false;
 		}
 
-		// Check the filename has an xml extension.
 		if(result)
 		{
 			const string fileExt = filePathRef.extension().string();
@@ -94,23 +84,19 @@ namespace GameHalloran
 			throw GameException(string("Failed to load the options file supplied: ") + string(doc.ErrorDesc()));
 		}
 
-		// Handle to the document.
 		TiXmlHandle docHandle(&doc);
 
-		// Perform some standerd output for debugging if the debug level of the app is above a certain level.
 		if(m_logPtr && (m_logPtr->GetLogLevel() >= GameLog::TRC))
 		{
 			doc.Print();
 		}
 
-		// Get the Options root node.
 		TiXmlElement *rootElemPtr = docHandle.FirstChild(ROOT_NODE.c_str()).ToElement();
 		if(!rootElemPtr)
 		{
 			throw (GameException(string("The file is not a valid game options file (No \"Options\" root node)")));
 		}
 
-		// Parse Options children (OptionType)
 		for(TiXmlElement *currElemPtr = rootElemPtr->FirstChildElement(); currElemPtr; currElemPtr = currElemPtr->NextSiblingElement())
 		{
 			if(currElemPtr && !currElemPtr->ToComment())
@@ -134,7 +120,6 @@ namespace GameHalloran
 			throw GameException(string("The pointer to the ") + OPTION_TYPE_NODE + string(" is NULL"));
 		}
 
-		// Get the ID value.
 		const char *idValueStr = optionsTypeElementPtr->Attribute(OPTION_TYPE_ID.c_str());
 		if(IsValidGameOptionId(idValueStr))
 		{
@@ -144,7 +129,6 @@ namespace GameHalloran
 				key.clear();
 				value.clear();
 				
-				// If the current element pointer is valid and it is not an xml comment, then parse it further.
 				if(currChildPtr && !currChildPtr->ToComment())
 				{
 					name.assign(currChildPtr->Value());
@@ -155,12 +139,10 @@ namespace GameHalloran
 
 					if(!CreateKey(idValueStr, name, key))
 					{
-						// Log this and skip the option.
                         GF_LOG_ERR(string("Failed to create the key for the ") + name + string(" option so we will not add it"));
 					}
 					else
 					{
-//                        GF_LOG_TRC(string("Adding [") + key + string("] = ") + value + string(" to the game options"));
 						m_optionsMap[key] = value;
 					}
 				}
@@ -179,14 +161,12 @@ namespace GameHalloran
 	{
 		bool result = true;					// Result of the method.
 
-		// Ensure the ID is not NULL.
 		if(!optionIdStr)
 		{
             GF_LOG_TRACE_DEB("GameOptions::IsValidGameOptionId()", "The option ID string retrieved from the options file is NULL");
 			result = false;
 		}
 
-		// Ensure the ID is a valid number
 		if(result)
 		{
 			try
@@ -210,13 +190,11 @@ namespace GameHalloran
 	{
 		bool result = true;				// Result of the method.
 
-		// Clear the output parameter on entry.
 		if(!keyRef.empty())
 		{
 			keyRef.clear();
 		}
 
-		// Check input parameters.
 		if(optionIdStr.empty())
 		{
 			result = false;
@@ -228,10 +206,8 @@ namespace GameHalloran
             GF_LOG_TRACE_DEB("GameOptions::CreateKey()", "The option name was an empty string");
 		}
 
-		// Generate the key.
 		if(result)
 		{
-			// The key = id number + "." + option name (e.g. 0.Width, 1.UpMovement, etc.).
 			keyRef.assign(optionIdStr + DOT_SEPERATOR + optionNameRef);
             GF_LOG_TRACE_TRC("GameOptions::CreateKey()", string("Created the key: ") + keyRef);
 		}
@@ -247,7 +223,6 @@ namespace GameHalloran
 		bool result = true;					// Result of method.
 		string idStr;						// String to store the converted ID inside.
 
-		// Convert the type to a string.
 		try
 		{
 			idStr = lexical_cast<string, I32>(optionType);
@@ -258,7 +233,6 @@ namespace GameHalloran
 			result = false;
 		}
 
-		// Create the key to access the value.
 		if(result && !CreateKey(idStr, optionNameRef, keyRef))
 		{
             GF_LOG_TRACE_ERR("GameOptions::AssembleKey()", string("Failed to generate the key from the option type id (") + idStr + string(" and option name supplied: ") + optionNameRef);
@@ -285,8 +259,7 @@ namespace GameHalloran
 			optionsName.clear();
 		}
 
-		vector<string> tokens;			// Vector of strings returned by the split algorithm.
-		// Split the key into tokens
+		vector<string> tokens;
 		if(result)
 		{
 			split(tokens, keyRef, is_any_of(GameOptions::DOT_SEPERATOR));
@@ -319,22 +292,24 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	GameOptions::GameOptions() : m_isModified(false),\
-									m_isValidFileOpen(false),\
-									m_optionsFilePath(),\
-									m_optionsMap(),\
-									m_logPtr()
+	GameOptions::GameOptions() : m_isModified(false)
+									, m_isValidFileOpen(false)
+									, m_optionsFilePath()
+									, m_optionsMap()
+									, m_logPtr()
 	{
 	}
 
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	GameOptions::GameOptions(shared_ptr<GameLog> &logPtr, const path &filePathRef) throw (GameException &) :	m_isModified(false),\
-																				m_isValidFileOpen(false),\
-																				m_optionsFilePath(filePathRef),\
-																				m_optionsMap(),\
-																				m_logPtr(logPtr)
+	GameOptions::GameOptions(shared_ptr<GameLog> &logPtr,
+								const path &filePathRef) throw (GameException &)
+								: m_isModified(false)
+								, m_isValidFileOpen(false)
+								, m_optionsFilePath(filePathRef)
+								, m_optionsMap()
+								, m_logPtr(logPtr)
 	{
 		ParseFile(m_optionsFilePath);
 	}
@@ -344,13 +319,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	GameOptions::~GameOptions()
 	{
-		try
-		{
-			
-		}
-		catch(...)
-		{
-		}
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -358,17 +326,14 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void GameOptions::ParseFile(const path &filePathRef) throw (GameException &)
 	{
-		// If there is a file already loaded into memory, then discard it.
 		if(!m_isValidFileOpen)
 		{
-//            GF_LOG_INF("Clearing the previous options file from memory");
 			m_optionsFilePath = filePathRef;
 			m_optionsMap.clear();
 			m_isModified = false;
 			m_isValidFileOpen = false;
 		}
 
-		// Check the path supplied is a valid xml file.
 		if(!IsValidXmlFilePath(m_optionsFilePath))
 		{
 			throw GameException(string("The filepath ") + m_optionsFilePath.string() \
@@ -376,10 +341,6 @@ namespace GameHalloran
 		}
 		
 		ParseXmlFileHelper();
-
-		// Set the file valid flag on exit, we will never get here unless the 
-		//  file was loaded into memory successfully.
-//        GF_LOG_INF(string("Options file ") + m_optionsFilePath.string() + string(" loaded successfully"));
 		m_isValidFileOpen = true;
 	}
 
@@ -390,7 +351,6 @@ namespace GameHalloran
 	{
 		string key;							// The key generated from the id and option name.
 
-		// If the option name is empty then exit.
 		if(optionNameRef.empty())
 		{
 			return;
@@ -398,7 +358,6 @@ namespace GameHalloran
 
 		if(AssembleKey(optionType, optionNameRef, key))
 		{
-			// Get the value (please note if no value matching the key is found in the set then a new blank value will be added with the invalid key name!)
 			valueRef.assign(m_optionsMap[key]);
             GF_LOG_TRC(string("Got value ") + valueRef + string(" from the option ") + key);
 		}
@@ -411,7 +370,6 @@ namespace GameHalloran
 	{
 		string key;							// The key generated from the id and option name.
 
-		// If the option name is empty then exit.
 		if(optionNameRef.empty())
 		{
 			return;
@@ -419,7 +377,6 @@ namespace GameHalloran
 
 		if(AssembleKey(optionType, optionNameRef, key))
 		{
-			// Add/Set the value (please note if no value matching the key is found in the set then a new blank value will be added with the invalid key name!)
 			m_optionsMap[key] = valueRef;
             GF_LOG_DEB(string("Set value ") + valueRef + string(" for the option ") + key);
 
@@ -437,7 +394,6 @@ namespace GameHalloran
 	{
 		string key;							// The key generated from the id and option name.
 
-		// If the option name is empty then exit.
 		if(optionNameRef.empty())
 		{
 			return;
@@ -445,11 +401,9 @@ namespace GameHalloran
 
 		if(AssembleKey(optionType, optionNameRef, key))
 		{
-			// Search for the key in the container first.
 			std::map<std::string, std::string>::iterator i = m_optionsMap.find(key);
 			if(i != m_optionsMap.end())
 			{
-				// Set the new value (please note if no value matching the key is found in the set then a new blank value will be added with the invalid key name!)
 				m_optionsMap[key] = valueRef;
                 GF_LOG_DEB(string("Set value ") + valueRef + string(" for the option ") + key);
 
@@ -468,7 +422,6 @@ namespace GameHalloran
 	{
 		string key;							// The key generated from the id and option name.
 
-		// If the option name is empty then exit.
 		if(optionNameRef.empty())
 		{
 			return;
@@ -495,7 +448,6 @@ namespace GameHalloran
 		string key;						// The current key.
 		string typeStr;					// OptionType converted to a string.
 
-		// Convert option type to a string.
 		try
 		{
 			typeStr = lexical_cast<string, I32>((I32) optionType);
@@ -508,7 +460,6 @@ namespace GameHalloran
 
 		if(!error)
 		{
-			// Remove all options in map beginning with the OptionType ID.
 			bool memberErased = false;
 			for(map<string, string>::iterator curr = m_optionsMap.begin(); curr != m_optionsMap.end(); (memberErased ? curr = m_optionsMap.begin() : ++curr))
 			{
@@ -536,7 +487,6 @@ namespace GameHalloran
 			throw (GameException(string("There is no options file loaded so cannot perform the save")));
 		}
 
-		// Create the directory if it does not exist.
 		if(!exists(fileDir))
 		{
             GF_LOG_TRACE_INF("GameOptions::Save()", string("The directory ") + fileDir.string() + string(" does not exist so will attempt to create it"));
@@ -546,7 +496,6 @@ namespace GameHalloran
 			}
 		}
 
-		// Set the file path to save the new options file to and commit the changes to it.
 		m_optionsFilePath = newFilePathRef;
 		Commit(true);
 	}
@@ -561,31 +510,22 @@ namespace GameHalloran
 			throw (GameException(string("There is no options file loaded so cannot perform the commit")));
 		}
 
-		// Save data in the map to the xml file if there has been any changes
-		//  or if we are being forced to commit.
 		if(m_isModified || forceCommit)
 		{
 			TiXmlDocument doc;												// XML document object for building XML file.
 			string key;														// The current key.
 			string value;													// The current value.
 			string name;													// The current option name.
-			OptionType id = PLAYER;	// The current 
+			OptionType id = PLAYER;											// The current 
 			vector<TiXmlElement *> optionTypeVec;							// Vector of OptionType's
 
-			// NB: tinyxml takes in pointers allocated off the heap and frees the memory internally
-			//  so theres no need to worry about all the LinkEndChild(GCC_NEW TiXmlElement()) calls here.
-
-			// Create XML declaration node.
 			doc.LinkEndChild(GCC_NEW TiXmlDeclaration("1.0", "utf-8", ""));
 
-			// Create rules comment node and add to the doc.
 			doc.LinkEndChild(GCC_NEW TiXmlComment("If you are manually editing the file, remember that the OptionsType id must be unique, must start at 0 and be incremented according to how the OptionsType are layed out in the file!"));
 
-			// Create ROOT node and add to the doc.
 			TiXmlElement *rootPtr = GCC_NEW TiXmlElement(GameOptions::ROOT_NODE.c_str());
 			doc.LinkEndChild(rootPtr);
 
-			// Create various child OptionsType nodes and add them to the root element.
 			for(map<string, string>::iterator curr = m_optionsMap.begin(); curr != m_optionsMap.end(); ++curr)
 			{
 				name.clear();
@@ -595,34 +535,25 @@ namespace GameHalloran
 
 				if(!ExtractIdAndOptionsName(key, name, id))
 				{
-					// skip this option and log error
                     GF_LOG_TRACE_ERR("GameOptions::Commit()", string("Failed to extract id and name from the key ") + key);
 				}
 				else
 				{
 					if((id + 1) > ((I32)optionTypeVec.size()))
 					{
-						// Create new OptionsType element and add the id attribute.
 						TiXmlElement *elemPtr = GCC_NEW TiXmlElement(GameOptions::OPTION_TYPE_NODE.c_str());
 						elemPtr->SetAttribute(GameOptions::OPTION_TYPE_ID.c_str(), (I32) id);
 
-						// Add element to the root Options node.
 						rootPtr->LinkEndChild(elemPtr);
-
-						// Add element to the vector managing the OptionType nodes created.
 						optionTypeVec.push_back(elemPtr);
 					}
 
-					// Create the name/value element called "name" and add the text element with the text "value" to it
 					TiXmlElement *nameValueElemPtr = GCC_NEW TiXmlElement(name.c_str());
 					nameValueElemPtr->LinkEndChild(GCC_NEW TiXmlText(value.c_str()));
-
-					// Add the name/value element to the OptionsType node.
 					optionTypeVec[id]->LinkEndChild(nameValueElemPtr);
 				}
 			}
 
-			// Save the xml file to the path.
 			doc.SaveFile(m_optionsFilePath.string().c_str());
 		}
 	}

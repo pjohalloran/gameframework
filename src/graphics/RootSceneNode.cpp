@@ -43,18 +43,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <boost/optional.hpp>
-
 #include <string>
 
-// Project Headers
 #include "RootSceneNode.h"
-#include "Matrix.h"
 #include "ZipFile.h"
-
 #include "GameMain.h"
-
 
 namespace GameHalloran
 {
@@ -62,7 +56,8 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	RootSceneNode::RootSceneNode(SceneGraphManager *sgPtr) : SceneNode(sgPtr, boost::optional<ActorId>(), std::string(), RenderPassFirst, Material(), GameHalloran::g_identityMat)
+	RootSceneNode::RootSceneNode(SceneGraphManager *sgPtr)
+								: SceneNode(sgPtr, boost::optional<ActorId>(), std::string(), RenderPassFirst, Material(), GameHalloran::g_identityMat)
 	{
 		boost::shared_ptr<SceneNode> staticGroup(GCC_NEW SceneNode(sgPtr, boost::optional<ActorId>(), std::string("StaticGroup"), RenderPassStatic, Material(), GameHalloran::g_identityMat));
 		m_children.push_back(staticGroup);	// RenderPass_Static = 0

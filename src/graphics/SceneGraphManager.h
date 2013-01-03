@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_SCENE_GRAPH_MANAGER_H
+#define __GF_SCENE_GRAPH_MANAGER_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -46,10 +50,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_SCENE_GRAPH_MANAGER_H
-#define __GF_SCENE_GRAPH_MANAGER_H
-
-// External Headers
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
@@ -61,7 +61,6 @@
 #include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
-// Project Headers
 #include "Matrix.h"
 #include "IActors.h"
 #include "ISceneNode.h"
@@ -73,10 +72,6 @@
 #include "LuaStateManager.h"
 #include "TextureManager.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -149,11 +144,9 @@ namespace GameHalloran
 		{
             ShaderUniformSPtr m_applyTex;                   ///< Location for the uniform "u_applyTexture".
             ShaderUniformSPtr m_texture2dMap;               ///< Location for the uniform "u_texture2dMap".
-            
             ShaderUniformSPtr m_mvpMatrix;                  ///< Location for the uniform "u_mvpMatrix".
             ShaderUniformSPtr m_mvMatrix;					///< Location for the uniform "u_mvMatrix".
             ShaderUniformSPtr m_normalMatrix;				///< Location for the uniform "u_normalMatrix".
-            
             ShaderUniformSPtr m_numLights;                  ///< Location for the uniform "u_numberLights".
             ShaderUniformSPtr m_lightTypes;                 ///< Location for the uniform "u_lightTypesArr".
             ShaderUniformSPtr m_lightPos;                   ///< Location for the uniform "u_lightPositionArr".
@@ -167,19 +160,16 @@ namespace GameHalloran
             ShaderUniformSPtr m_linearAtt;                  ///< Location for the uniform "u_lAttArr".
             ShaderUniformSPtr m_quadAtt;                    ///< Location for the uniform "u_qAttArr".
             ShaderUniformSPtr m_globalAmb;                  ///< Location for the uniform "u_globalAmbient".
-            
             ShaderUniformSPtr m_materialEmiss;				///< Location for the uniform "u_materialE".
             ShaderUniformSPtr m_materialAmb;				///< Location for the uniform "u_materialA".
             ShaderUniformSPtr m_materialDiff;				///< Location for the uniform "u_materialD".
             ShaderUniformSPtr m_materialSpec;				///< Location for the uniform "u_materialS".
             ShaderUniformSPtr m_materialExp;				///< Location for the uniform "u_materialExp".
-            
             ShaderUniformSPtr m_fogType;                    ///< "Fog.type" uniform.
             ShaderUniformSPtr m_fogMinDist;                 ///< "Fog.minDistance" uniform.
             ShaderUniformSPtr m_fogMaxDist;                 ///< "Fog.maxDistance" uniform.
             ShaderUniformSPtr m_fogColor;                   ///< "Fog.color" uniform.
             ShaderUniformSPtr m_fogDensity;                 ///< "Fog.density" uniform.
-            
             ShaderUniformSPtr m_cameraPos;                  ///< 
             
 			// Useful constants for PrepareAdsShader().
@@ -245,7 +235,6 @@ namespace GameHalloran
 		LightVector m_dynamicLights;											///< List of dynamic lights attached to the scene.
 		boost::shared_ptr<GLSLShader> m_globalShaderPtr;						///< The SGMs' main GLSL shader program (ADS model with phong or goraud shading) (nodes may still use their own shaders if they wish to).
 		LuaPlus::LuaObject m_metaTable;											///< LuaPlus metatable for opening up access to external scripts to some of the SGM functionality.
-        
         FogEffectAttributes m_fogAtt;                                           ///< Attributes for the optinal fog effect in the ADS shader.
         
 		// /////////////////////////////////////////////////////////////////

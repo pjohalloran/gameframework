@@ -43,29 +43,18 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
-
-
-// Project Headers
 #include "CameraSceneNode.h"
-
 #include "GameMain.h"
-
 #include "SceneGraphManager.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
-
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
 	bool CameraSceneNode::VOnUpdate(const F32 elapsedTime)
 	{
-		// If somebod moved the camera using the FoR class then we must update it now before rendering occurs.
+		// If somebody moved the camera using the FoR class then we must update it now before rendering occurs.
 		if(m_updateCameraMatrix)
 		{
 			Matrix4 newCamMat;
@@ -101,7 +90,6 @@ namespace GameHalloran
             m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->PopMatrix();
             m_sgmPtr->GetStackManager()->GetModelViewProjectionMatrix(mvp);
 
-            // Inefficient but just for debugging
             m_mvpUniform = m_shaderPtr->GetUniform("mvpMatrix");
             m_colorUniform = m_shaderPtr->GetUniform("colorVec");
             m_mvpUniform->SetValue((GLfloat * const)mvp.GetComponentsConst(), 16);

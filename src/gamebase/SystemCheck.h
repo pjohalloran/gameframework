@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __SYSTEM_CHECK_H
+#define __SYSTEM_CHECK_H
+
 // /////////////////////////////////////////////////////////////////
 // @file SystemCheck.h
 // @author PJ O Halloran
@@ -7,14 +11,8 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __SYSTEM_CHECK_H
-#define __SYSTEM_CHECK_H
-
 #include "GameBase.h"
-
-// Project Headers
 #include "OsInputEvents.h"
-
 
 namespace GameHalloran
 {
@@ -28,7 +26,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	class SystemCheck
 	{
-
 	public:
 
 		// /////////////////////////////////////////////////////////////////
@@ -53,7 +50,7 @@ namespace GameHalloran
 		//					HD.
 		//
 		// /////////////////////////////////////////////////////////////////
-		bool CheckHardDiskSpace(const I64 minFreeSpace);
+		bool CheckHardDiskSpace(const U64 minFreeSpace);
 
 		// /////////////////////////////////////////////////////////////////
 		// Check if the CPU is fast enough to run the application.
@@ -63,7 +60,7 @@ namespace GameHalloran
 		// @return bool True if the CPU is faster than the minimum specified.
 		//
 		// /////////////////////////////////////////////////////////////////
-		bool CheckCpuSpeed(const I64 minSpeed);
+		bool CheckCpuSpeed(const U64 minSpeed);
 
 		// /////////////////////////////////////////////////////////////////
 		// Check if there is enough available system RAM on the system to run
@@ -76,7 +73,7 @@ namespace GameHalloran
 		//				specified.
 		//
 		// /////////////////////////////////////////////////////////////////
-		bool CheckPhysicalMemory(const I64 minFreeSRam);
+		bool CheckPhysicalMemory(const U64 minFreeSRam);
 
 		// /////////////////////////////////////////////////////////////////
 		// Check if there is enough available video RAM on the system to run
@@ -89,7 +86,7 @@ namespace GameHalloran
 		//				minimum specified.
 		//
 		// /////////////////////////////////////////////////////////////////
-		bool CheckVideoMemory(const I64 minFreeVRam);
+		bool CheckVideoMemory(const U64 minFreeVRam);
 
 		// /////////////////////////////////////////////////////////////////
 		// Check for all joysticks detected by the system.
@@ -101,7 +98,7 @@ namespace GameHalloran
 		// @return bool True if any joysticks were detected.
 		//
 		// /////////////////////////////////////////////////////////////////
-		bool CheckForJoysticks(GfJoyCont &joystickList, I32 &numJoysticksDetected);
+		bool CheckForJoysticks(GfJoyCont &joystickList, U32 &numJoysticksDetected);
 
 		// /////////////////////////////////////////////////////////////////
 		// Check if there is enough available virtual memory on the system to
@@ -116,7 +113,7 @@ namespace GameHalloran
 		//				than the minimum specified.
 		//
 		// /////////////////////////////////////////////////////////////////
-		bool CheckVirtualMemory(const I64 minFreeVirtualMemory);
+		bool CheckVirtualMemory(const U64 minFreeVirtualMemory);
 
 	};
 }

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GAME_OPTIONS_H
+#define __GAME_OPTIONS_H
+
 // /////////////////////////////////////////////////////////////////
 // @file GameOptions.h
 // @author PJ O Halloran
@@ -10,15 +14,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GAME_OPTIONS_H
-#define __GAME_OPTIONS_H
-
 #ifdef WIN32
 #	pragma warning( push )
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <map>
 #include <string>
 #include <exception>
@@ -29,12 +29,10 @@
 
 #include "tinyxml/tinyxml.h"
 
-// Project Headers
-#include "GameException.h"
-#include "GameLog.h"
-
 namespace GameHalloran
 {
+	class GameLog;
+	class GameException;
 
 	// /////////////////////////////////////////////////////////////////
 	// @class GameOptions

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef GF_I_CLEANABLE_H
 #define GF_I_CLEANABLE_H
 
@@ -39,7 +40,6 @@ namespace GameHalloran
         
         // /////////////////////////////////////////////////////////////////
         // Check if we need to take action to clean or update this element.
-        // (explicitly not virtual for speed)
         //
         // /////////////////////////////////////////////////////////////////
         bool IsDirty() { return (false); };

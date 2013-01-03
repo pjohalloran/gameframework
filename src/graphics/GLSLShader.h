@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_GLSL_SHADER_H
+#define __GF_GLSL_SHADER_H
+
 // /////////////////////////////////////////////////////////////////
 // @file GLSLShader.h
 // @author PJ O Halloran
@@ -8,12 +12,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_GLSL_SHADER_H
-#define __GF_GLSL_SHADER_H
-
-// External Headers
-#include "GameBase.h"
-
 #include <map>
 #include <string>
 #include <vector>
@@ -21,17 +19,12 @@
 
 #include <boost/filesystem.hpp>
 
-// Project Headers
+#include "GameBase.h"
 #include "ICleanableObserver.h"
 #include "ShaderUniform.h"
 #include "Vector.h"
 #include "Matrix.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

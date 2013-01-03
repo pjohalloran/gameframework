@@ -8,22 +8,13 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <cstring>
 
-
-// Project Headers
 #include "TextureManager.h"
-
 #include "ResCache2.h"
 #include "ImageResource.h"
 #include "GameMain.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -38,14 +29,11 @@ namespace GameHalloran
 			return;
 		}
 
-		//const unsigned I32 EXTEND_SIZE = (m_extendSize == 0 ? 1 : m_extendSize);
-
 		GLuint newTexObjects[DEFAULT_EXTEND_SIZE];				// Array of new texture objects.
-		const U64 oldSize(m_glIdVec.size());			// Old size of the vector of texture IDs.
+		const U64 oldSize(m_glIdVec.size());					// Old size of the vector of texture IDs.
 
 		GF_CLEAR_GL_ERROR();
 
-		// Generate the new texture objects.
 		glGenTextures(DEFAULT_EXTEND_SIZE, newTexObjects);
 
 		if(!GF_CHECK_GL_ERROR_TRC("TextureManager::ResizeTextureVector(): "))
@@ -54,10 +42,7 @@ namespace GameHalloran
 			return;
 		}
 
-		// Resize the tex vector by the amount required to add the new texture objects.
 		m_glIdVec.resize(oldSize + DEFAULT_EXTEND_SIZE);
-
-		// Copy the texture Ids into the vector.
 		if(oldSize > 0)
 		{
 			memcpy(&m_glIdVec[oldSize], newTexObjects, DEFAULT_EXTEND_SIZE * sizeof(GLuint));
@@ -71,10 +56,22 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	TextureManager::TextureManager(const U32 expectedNumTextures, const U32 maxSize) throw (GameException &)\
-		: m_elementsMap(), m_glIdVec(), m_usedTextureCount(0), m_currTexLayer(0), m_maxTexLayers(0), m_currTexFilterMode(eBasic),\
-			m_currMinFilter(GL_NEAREST), m_currMagFilter(GL_NEAREST), m_anisotropicLinearLevel(0.0f), m_maxAnisotropicValue(0.0f),\
-				m_extendSize(DEFAULT_EXTEND_SIZE), m_maxSize(maxSize), m_currSize(0), m_curBindTex(99999)
+	TextureManager::TextureManager(const U32 expectedNumTextures,
+									const U32 maxSize) throw (GameException &)
+									: m_elementsMap()
+									, m_glIdVec()
+									, m_usedTextureCount(0)
+									, m_currTexLayer(0)
+									, m_maxTexLayers(0)
+									, m_currTexFilterMode(eBasic)
+									, m_currMinFilter(GL_NEAREST)
+									, m_currMagFilter(GL_NEAREST)
+									, m_anisotropicLinearLevel(0.0f)
+									, m_maxAnisotropicValue(0.0f)
+									, m_extendSize(DEFAULT_EXTEND_SIZE)
+									, m_maxSize(maxSize)
+									, m_currSize(0)
+									, m_curBindTex(99999)
 	{
 		m_glIdVec.resize(expectedNumTextures);
 
@@ -119,7 +116,6 @@ namespace GameHalloran
 			TextureFilterMode oldMode(m_currTexFilterMode);
 			m_currTexFilterMode = mode;
 
-			// Update all loaded textures with the new filter mode.
 			switch(m_currTexFilterMode)
 			{
 				case eBasic: m_currMinFilter = GL_NEAREST; m_currMagFilter = GL_NEAREST; break;
@@ -133,7 +129,6 @@ namespace GameHalloran
 				break;
 			}
 
-			// Update the filter levels of all the textures to match the new filter levels.
 			UpdateTextureFilters(boost::optional<TextureFilterMode>(oldMode));
 		}
 	}
@@ -149,7 +144,6 @@ namespace GameHalloran
 
 		if(m_currTexFilterMode == eAnisotropic)
 		{
-			// Update the anisotropic level for all managed textures.
 			UpdateTextureFilters();
 		}
 #endif
@@ -191,7 +185,6 @@ namespace GameHalloran
 				}
 				else if(oldMode.is_initialized() && *oldMode == eAnisotropic)
 				{
-					// Turn down ani level if we are switching away from it.
 					glTexParameterf(currTarget, GL_TEXTURE_MAX_ANISOTROPY_EXT, 0.0f);
                     GF_CHECK_GL_ERROR_TRC("TextureManager::UpdateTextureFilters(): ");
 				}
@@ -230,7 +223,6 @@ namespace GameHalloran
 
 		if(!imgnameRef.empty())
 		{
-			// Search for the texture loaded from the filename.
 			for(ElementMap::const_iterator i = m_elementsMap.begin(), end = m_elementsMap.end(); ((!texturePublicId.is_initialized()) && (i != end)); ++i)
 			{
 				if(((*i).second).m_filename.compare(imgnameRef.c_str()) == 0)
@@ -253,10 +245,9 @@ namespace GameHalloran
 		if(!m_elementsMap.empty())
 		{
 			//F32 minTs(FLT_MAX);										// Record of minimum ts found to date.
-            F32 minTs(999999999.9999);										// Record of minimum ts found to date.
+            F32 minTs(999999999.9999);									// Record of minimum ts found to date.
 			ElementMap::iterator lruElementIter(m_elementsMap.end());	// Iterator into element map.
 
-			// Search for the texture accessed least recently.
 			for(ElementMap::iterator i = m_elementsMap.begin(), end = m_elementsMap.end(); (i != end); ++i)
 			{
 				if(((*i).second).m_timestamp < minTs)
@@ -266,7 +257,6 @@ namespace GameHalloran
 				}
 			}
 
-			// Unload the LRU texture.
 			bytesFreed = UnloadTexture(lruElementIter);
 		}
 
@@ -314,7 +304,6 @@ namespace GameHalloran
 			}
 		}
 
-		// Success!
 		return (bytesFreed);
 	}
 
@@ -329,7 +318,6 @@ namespace GameHalloran
 		{
 			ElementMap::iterator elementIter(m_elementsMap.end());	// Iterator into element map.
 
-			// Search for the texture by the public handle.
 			for(ElementMap::iterator i = m_elementsMap.begin(), end = m_elementsMap.end(); (i != end); ++i)
 			{
 				if(((*i).second).m_id < textureHandle)
@@ -338,7 +326,6 @@ namespace GameHalloran
 				}
 			}
 
-			// Unload the texture.
 			bytesFreed = UnloadTexture(elementIter);
 		}
 
@@ -352,22 +339,18 @@ namespace GameHalloran
 	{
 		boost::optional<TexHandle> tHandle;				// The texture handle.
 
-		// Check input parameters
 		if((textureData == NULL) || (w == 0) || (imgnameRef.empty()))
 		{
             GF_LOG_TRACE_ERR("TextureManager::Load1D()", "Invalid parameters");
 			return (tHandle);
 		}
 
-		// Check if we have already loaded a texture with this texture name.
 		tHandle = Find(imgnameRef);
 		if(tHandle.is_initialized())
 		{
-			// We loaded this texture already! So we will simply return the textures outside/public ID.
 			return (tHandle);
 		}
 
-		// Check if we need to swap out textures from memory.
 		if(m_maxSize != 0)
 		{
 			if(w > m_maxSize)
@@ -394,7 +377,6 @@ namespace GameHalloran
 		glBindTexture(GL_TEXTURE_1D, m_glIdVec[m_usedTextureCount]);
         GF_CHECK_GL_ERROR_TRC("TextureManager::Load1D(): ");
 
-		// Set the textures filtering and wrap mode.
 		glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MIN_FILTER, m_currMinFilter);
         GF_CHECK_GL_ERROR_TRC("TextureManager::Load1D(): ");
 		glTexParameteri(GL_TEXTURE_1D, GL_TEXTURE_MAG_FILTER, m_currMagFilter);
@@ -409,7 +391,6 @@ namespace GameHalloran
 			return (tHandle);
 		}
 
-		// Should we ask OpenGL to generate mipmaps for us?
 		if(m_currTexFilterMode >= eBasicMipMap)
 		{
 			glGenerateMipmap(GL_TEXTURE_1D);
@@ -421,8 +402,6 @@ namespace GameHalloran
 
 		// increment the current size of the textures stored in the GPU.
 		m_currSize += w;
-
-		// Set the public texture ID.
 		tHandle = m_usedTextureCount;
 
 		// Fill out the data struct for the texture we have loaded onto the GPU.
@@ -441,7 +420,6 @@ namespace GameHalloran
 		newTexElement.m_imgType = GL_UNSIGNED_BYTE;
 		newTexElement.m_unpackAlignment = -1;
 
-		// Append the struct to the map.
 		m_elementsMap[*tHandle] = newTexElement;
 		++m_usedTextureCount;
 
@@ -454,7 +432,6 @@ namespace GameHalloran
 	bool TextureManager::LoadCommon2D(const GLenum target, const GLint level, const GLint internalFormat, const GLsizei width, const GLsizei height,\
 		const GLint border, const GLenum format, const GLenum type, void *data, const bool tightlyPack)
 	{
-		// Ensure the target is a 2D texture.
 		if((target != GL_TEXTURE_2D)\
 			&& (target != GL_TEXTURE_RECTANGLE)\
 			&& (target != GL_TEXTURE_CUBE_MAP_POSITIVE_X)\
@@ -470,7 +447,6 @@ namespace GameHalloran
 
         GF_CLEAR_GL_ERROR();
         
-		// Check if we should change the GL_UNPACK_ALIGNMENT value.
 		GLint oldUnpackAlignment(0);
 		if(tightlyPack)
 		{
@@ -482,18 +458,15 @@ namespace GameHalloran
                 return (false);
 		}
 
-		// Send the texture data to the GPU.
 		glTexImage2D(target, level, internalFormat, width, height, border, format, type, data);
         bool glError = !GF_CHECK_GL_ERROR_TRC("TextureManager::LoadCommon2D(): ");
 
-		// Reset the GL_UNPACK_ALIGNMENT value back to the default value after.
 		if(tightlyPack)
 		{
 			glPixelStorei(GL_UNPACK_ALIGNMENT, oldUnpackAlignment);
             GF_CHECK_GL_ERROR_TRC("TextureManager::LoadCommon2D(): ");
 		}
 
-        // increment the current size of the textures stored in the GPU.
         if(!glError)
             m_currSize += width * height;
 
@@ -507,22 +480,18 @@ namespace GameHalloran
 	{
 		boost::optional<TexHandle> tHandle;				// The texture handle.
 
-		// Check input parameters
 		if(imgnameRef.empty())
 		{
             GF_LOG_TRACE_ERR("TextureManager::Load2D()", "Invalid parameters");
 			return (tHandle);
 		}
 
-		// Check if we have already loaded a texture with this texture name.
 		tHandle = Find(imgnameRef);
 		if(tHandle.is_initialized())
 		{
-			// We loaded this texture already! So we will simply return the textures outside/public ID.
 			return (tHandle);
 		}
 
-		// Load the texture from the resource cache and initialize its data.
 		ImageResource imgRes(imgnameRef);
 		boost::shared_ptr<ImageResHandle> imgResHandle = boost::static_pointer_cast<ImageResHandle>(g_appPtr->GetResourceCache()->GetHandle(&imgRes));
 		if(!imgResHandle || !imgResHandle->VInitialize())
@@ -546,7 +515,6 @@ namespace GameHalloran
 			}
 		}
 
-		// Ensure we have generated enough texture objects.
 		if(m_usedTextureCount >= m_glIdVec.size())
 		{
 			ResizeTextureVector();
@@ -554,13 +522,11 @@ namespace GameHalloran
 
 		GF_CLEAR_GL_ERROR();
 
-		// Bind to the next available texture object.
 		glBindTexture(GL_TEXTURE_2D, m_glIdVec[m_usedTextureCount]);
         GF_CHECK_GL_ERROR_TRC("TextureManager::Load2D(): ");
 
 		bool pack = (FindImageTypeFromFile(imgnameRef) == IMAGE_TYPE_TGA);
 
-		// Set the textures filtering and wrap mode.
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_currMinFilter);
         GF_CHECK_GL_ERROR_TRC("TextureManager::Load2D(): ");
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, m_currMagFilter);
@@ -576,7 +542,6 @@ namespace GameHalloran
 			return (tHandle);
 		}
 
-		// Should we ask OpenGL to generate mipmaps for us?
 		if(m_currTexFilterMode >= eBasicMipMap)
 		{
 			glGenerateMipmap(GL_TEXTURE_2D);
@@ -626,22 +591,18 @@ namespace GameHalloran
 	{
 		boost::optional<TexHandle> tHandle;				// The texture handle.
 
-		// Check input parameters
 		if(imgnameRef.empty() || wrapMode == GL_REPEAT)
 		{
             GF_LOG_TRACE_ERR("TextureManager::LoadRectangle()", "Invalid parameters");
 			return (tHandle);
 		}
 
-		// Check if we have already loaded a texture with this texture name.
 		tHandle = Find(imgnameRef);
 		if(tHandle.is_initialized())
 		{
-			// We loaded this texture already! So we will simply return the textures outside/public ID.
 			return (tHandle);
 		}
 
-		// Load the texture from the resource cache and initialize its data.
 		ImageResource imgRes(imgnameRef);
 		boost::shared_ptr<ImageResHandle> imgResHandle = boost::static_pointer_cast<ImageResHandle>(g_appPtr->GetResourceCache()->GetHandle(&imgRes));
 		if(!imgResHandle || !imgResHandle->VInitialize())
@@ -676,13 +637,11 @@ namespace GameHalloran
 
 		GF_CLEAR_GL_ERROR();
 
-		// Bind to the next available texture object.
 		glBindTexture(GL_TEXTURE_RECTANGLE, m_glIdVec[m_usedTextureCount]);
         GF_CHECK_GL_ERROR_TRC("TextureManager::LoadRectangle(): ");
 
 		bool pack = (FindImageTypeFromFile(imgnameRef) == IMAGE_TYPE_TGA);
 
-		// Set the textures filtering and wrap mode (basic filtering only for rectangle textures and no mipmaps).
 		glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         GF_CHECK_GL_ERROR_TRC("TextureManager::LoadRectangle(): ");
 		glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -737,10 +696,9 @@ namespace GameHalloran
 	boost::optional<TexHandle> TextureManager::LoadCubeMap(const std::vector<std::string> &cubeImgVec, const GLenum wrapMode)
 	{
 		boost::optional<TexHandle> tHandle;				// The texture handle.
-		const U32 CUBE_SIDES = 6;				// Number of sides in a 3D cube.
+		const U32 CUBE_SIDES = 6;						// Number of sides in a 3D cube.
 		std::string concatStr;							// string ID for string lookup map.
 
-		// Check input parameters
 		if(cubeImgVec.size() != CUBE_SIDES)
 		{
             GF_LOG_TRACE_ERR("TextureManager::LoadCubeMap()", "Invalid parameters");
@@ -755,16 +713,13 @@ namespace GameHalloran
 			}
 			else
 			{
-				// Create string ID for lookup map.
 				concatStr += *i;
 			}
 		}
 
-		// Check if we have already loaded a texture with this texture name.
 		tHandle = Find(concatStr);
 		if(tHandle.is_initialized())
 		{
-			// We loaded this texture already! So we will simply return the textures outside/public ID.
 			return (tHandle);
 		}
 
@@ -783,11 +738,9 @@ namespace GameHalloran
 
 		GF_CLEAR_GL_ERROR();
 
-		// Bind to the next available texture object.
 		glBindTexture(GL_TEXTURE_CUBE_MAP, m_glIdVec[m_usedTextureCount]);
         GF_CHECK_GL_ERROR_TRC("TextureManager::LoadCubeMap(): ");
 
-		// Set the textures filtering and wrap mode.
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, m_currMinFilter);
         GF_CHECK_GL_ERROR_TRC("TextureManager::LoadCubeMap(): ");
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, m_currMagFilter);
@@ -805,7 +758,6 @@ namespace GameHalloran
 		// Initialize cubemap images and calculate total size required.
 		for(U32 i = 0; i < CUBE_SIDES; ++i)
 		{
-			// Load the texture from the resource cache and initialize its data.
 			ImageResource imgRes(cubeImgVec[i]);
 			imgResArr[i] = boost::static_pointer_cast<ImageResHandle>(g_appPtr->GetResourceCache()->GetHandle(&imgRes));
 			if(!imgResArr[i] || !imgResArr[i]->VInitialize())
@@ -816,7 +768,6 @@ namespace GameHalloran
 			totalSize += imgResArr[i]->GetImageWidth() * imgResArr[i]->GetImageHeight();
 		}
 
-		// Check if we have to swap out textures.
 		if(m_maxSize != 0)
 		{
 			if(totalSize > m_maxSize)
@@ -830,7 +781,6 @@ namespace GameHalloran
 			}
 		}
 
-		// Load in the cubemap textures.
 		for(U32 i = 0; i < CUBE_SIDES; ++i)
 		{
 			bool pack = (FindImageTypeFromFile(cubeImgVec[i]) == IMAGE_TYPE_TGA);
@@ -841,7 +791,6 @@ namespace GameHalloran
 			}
 		}
 
-		// Should we ask OpenGL to generate mipmaps for us?
 		if(m_currMinFilter >= eBasicMipMap)
 		{
 			glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
@@ -889,7 +838,6 @@ namespace GameHalloran
 	{
 		GF_CLEAR_GL_ERROR();
 
-		// Change to a different texture layer if its different to the cached value!
 		if(textureLayer != m_currTexLayer)
 		{
 			glActiveTexture(m_currTexLayer);
@@ -899,7 +847,6 @@ namespace GameHalloran
             }
 		}
 
-		// Search for the texture with the handle supplied (also timestamp the tex element!).
 		boost::optional<GLuint> textureId = Find(textureHandle, true);
 		if(!textureId.is_initialized())
 		{
@@ -907,11 +854,9 @@ namespace GameHalloran
 			return (false);
 		}
 
-        // Optimization to stop trying to switch textures when the current GL texture is the one we want.
         if(m_curBindTex == *textureId)
             return (true);
         
-		// Bind to the texture.
 		glBindTexture(target, *textureId);
 		if(!GF_CHECK_GL_ERROR_TRC("TextureManager::Bind(): "))
 		{

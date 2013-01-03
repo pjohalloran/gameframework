@@ -7,14 +7,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
 #include <string>
 
 #include <boost/lexical_cast.hpp>
 
-// Project headers
 #include "WindowManager.h"
-
 #include "GameMain.h"
 #include "Events.h"
 
@@ -179,7 +176,6 @@ namespace GameHalloran
 #if DEBUG
         GF_LOG_DEB("Logging GLFW properties");
 
-		// List GLFW and OpenGL version in use.
 		string majorStr, minorStr, revStr;
 		I32 major, minor, rev;
 		glfwGetVersion(&major, &minor, &rev);
@@ -207,7 +203,6 @@ namespace GameHalloran
 		}
 #endif
 
-		// List current video mode, desktop mode and all available video modes.
 		GLFWvidmode mode;
 		glfwGetDesktopMode(&mode);
 		string rStr, gStr, bStr, wStr, hStr;
@@ -273,7 +268,6 @@ namespace GameHalloran
 		{
 		}
 
-		// List other system information.
 		string numStr;
 		try
 		{
@@ -298,24 +292,20 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	WindowManager::WindowManager(const WindowParameters &params, boost::shared_ptr<GameLog> &loggerPtr) throw (GameException &) \
-    : \
-    m_params(params),\
-    m_loggerPtr(loggerPtr),\
-    m_metaTable()
+	WindowManager::WindowManager(const WindowParameters &params,
+								boost::shared_ptr<GameLog> &loggerPtr) throw (GameException &)
+								: m_params(params)
+								, m_loggerPtr(loggerPtr)
+								, m_metaTable()
 #ifdef USE_NEW_GLFW
-    , m_glfwPtr(NULL)
+								, m_glfwPtr(NULL)
 #endif
 	{
 		glfwInit();
-
-		// Set the window hI32s so GLFW can initialize the OpenGL profile and context we require
-		//  in a platform independant way.
+		
 		glfwOpenWindowHint(GLFW_STEREO, m_params.IsStereoRendering() ? 1 : 0);
-		//I32 fsaa = m_params.GetFsaaSamplesNumber();
 		glfwOpenWindowHint(GLFW_FSAA_SAMPLES, m_params.GetFsaaSamplesNumber());
 
-		// Ensure we request at least a 3.2 OpenGL context if we are specifying the GL profile to use.
 		if(m_params.GetGlProfile() != 0 && (m_params.GetGlMajorVersion() < 3 || (m_params.GetGlMajorVersion() == 3 && m_params.GetGlMinorVersion() < 2)))
 		{
 			glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
@@ -331,7 +321,6 @@ namespace GameHalloran
         //glfwOpenWindowHint(GLFW_OPENGL_PROFILE, 0);
 		glfwOpenWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, m_params.IsGlDebugContext() ? 1 : 0);
 
-		// Init and open the window with the parameters passed in.
 #if USE_NEW_GLFW
 		if((m_glfwPtr = glfwOpenWindow(m_params.GetWidth(),\
                                       m_params.GetHeight(),\
@@ -354,7 +343,6 @@ namespace GameHalloran
 			throw GameException(string("Failed to open the application window.  Please check your OpenGL/Window settings."));
 		}
 
-		// Check we set up the window.
 		if(!CheckGlfwParameters())
 		{
 #ifdef USE_NEW_GLFW
@@ -364,7 +352,6 @@ namespace GameHalloran
 			throw GameException(string("Serious error occurred initializing the window.  Please check the log file."));
 		}
 
-		// Set the other GLFW attributes now.
 		if(!m_params.IsFullscreen())
 		{
 #ifdef USE_NEW_GLFW
@@ -413,28 +400,19 @@ namespace GameHalloran
 #endif
 		}
 		
-		// Log various statistics.  Save ourselves the trouble if the log level is too low...
-		if(m_loggerPtr && m_loggerPtr->GetLogLevel() >= GameLog::DEB)
-		{
-			LogWindowProperties();
-		}
+		LogWindowProperties();
 
-		// Setup access to certain functions for the LUA scripts...
+		// Lua scripting access.
 		m_metaTable = g_appPtr->GetLuaStateManager()->GetGlobalState()->GetGlobals().CreateTable("WindowManager");
 		m_metaTable.SetObject("__index", m_metaTable);
-
-		// Here we register two functions to make them accessible to script.
 		m_metaTable.RegisterObjectDirect("SetVideoMode", (WindowManager *)0, &WindowManager::SetVideoMode);
 		m_metaTable.RegisterObjectDirect("GetWidth", (WindowManager *)0, &WindowManager::GetWidth);
 		m_metaTable.RegisterObjectDirect("GetHeight", (WindowManager *)0, &WindowManager::GetHeight);
 		m_metaTable.RegisterObjectDirect("ToggleIconify", (WindowManager *)0, &WindowManager::ToggleIconify);
 		m_metaTable.RegisterObjectDirect("IsIconified", (WindowManager *)0, &WindowManager::IsIconified);
 		m_metaTable.RegisterObjectDirect("SetLuaVideoResolutionsTable", (WindowManager *)0, &WindowManager::SetLuaVideoResolutionsTable);
-
 		LuaPlus::LuaObject wmStateManObj = g_appPtr->GetLuaStateManager()->GetGlobalState()->BoxPointer(this);
 		wmStateManObj.SetMetaTable(m_metaTable);
-
-		// And here we expose the metatable as a named entity.
 		g_appPtr->GetLuaStateManager()->GetGlobalState()->GetGlobals().SetObject("WindowManager", wmStateManObj);
 	}
 
@@ -578,7 +556,6 @@ namespace GameHalloran
 	{
 		WindowParameters desktopModeParams;
 
-		// Query current desktop resolution and display buffer size from GLFW.
 		GLFWvidmode mode;
 		glfwGetDesktopMode(&mode);
 
@@ -613,8 +590,6 @@ namespace GameHalloran
 			glfwSetWindowSize(screenWidth, screenHeight);
 #endif
 
-			// Send out a platform wide event here to notify the app that the video resolution has changed.
-			// if the video mode is different to before.
 			I32 newW, newH;
 #ifdef USE_NEW_GLFW
             glfwGetWindowSize(m_glfwPtr, &newW, &newH);
@@ -676,11 +651,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool CheckGlVersionIsMinimumSupported(const I32 majGot, const I32 minGot)
 	{
-		// A Maj is less = false
-		// B Maj is equal
-			// 1 Min is less = false
-			// 2 Min is equal or greater = true
-		// C Maj is greater = true.
 		if(majGot < GF_GL_MAJOR_VERSION)
 		{
 			return (false);

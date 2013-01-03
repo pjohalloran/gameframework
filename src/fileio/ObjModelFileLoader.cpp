@@ -8,29 +8,18 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <iostream>
 #include <fstream>
-
 #include <string>
 
-#include <boost/filesystem.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
-// Project Headers
 #include "ObjModelFileLoader.h"
 #include "Triangle.h"
 #include "TextResource.h"
-
 #include "GameMain.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -63,7 +52,6 @@ namespace GameHalloran
 		numTexCoords = 0;
 		numTriangles = 0;
 
-		// Iterate through each line in the file.
 		for(std::vector<std::string>::const_iterator i = linesVec.begin(), end = linesVec.end(); i != end; ++i)
 		{
 			++numLines;
@@ -90,7 +78,6 @@ namespace GameHalloran
 			}
 		}
 
-		// If any vertices were found but there was no group line...
 		if(numVertices > 0 && numGroups == 0)
 		{
 			numGroups = 1;
@@ -117,15 +104,12 @@ namespace GameHalloran
 		U64 count, groups, vertices, normals, texCoords, triangles;
 		GenerateFileStatistics(linesVec, count, groups, vertices, normals, texCoords, triangles, true);
 
-		// Reserve space for the basic types to read in on the first pass.
 		m_vertices.reserve(vertices);
 		m_normals.reserve(normals);
 		m_texCoords.reserve(texCoords);
 
 		try
 		{
-			// unused F32 progress = 0.0f;
-
 			// First pass - Read in triangle vertices, normals and tex Coords first.
 			// Second pass - Read in faces and construct triangles from the v,n and tcs its refers to.
 			U32 passNumber = 1;
@@ -135,7 +119,6 @@ namespace GameHalloran
 			bool validLine = true;
 			for(std::vector<std::string>::iterator i = linesVec.begin(); ((passNumber <= 2) && (i != linesVec.end())); ++currIteration)
 			{
-				// Knock out lines we are ignoring (comments, material info and empty lines)
 				if((!(*i).empty()) &&\
 					(!boost::algorithm::starts_with(*i, MATERIAL_GROUP_STR)) &&\
 					(!boost::algorithm::starts_with(*i, COMMENT_STR)) &&\
@@ -143,7 +126,6 @@ namespace GameHalloran
 				{
 					if(ParseLine(*i, passNumber, anyGroups))
 					{
-						// Erase element now that we have parsed it
 						i = linesVec.erase(i);
 						validLine = false;
 					}
@@ -154,7 +136,6 @@ namespace GameHalloran
 				}
 				else
 				{
-					// remove these unnessecary lines.
 					i = linesVec.erase(i);
 					validLine = false;
 				}
@@ -165,7 +146,6 @@ namespace GameHalloran
 					++passNumber;
 					i = linesVec.begin();
 
-					// If no group IDs were found on the first pass, create a default one!
 					if(!anyGroups)
 					{
 						// Create the one default group now.
@@ -174,7 +154,6 @@ namespace GameHalloran
 					}
 				}
 
-				// Report model loading progress
 				if(validLine && m_callbackObjPtr)
 				{
 					m_callbackObjPtr->VReportProgress(F32(currIteration) / F32(totalIterations));
@@ -182,7 +161,6 @@ namespace GameHalloran
 				validLine = true;
 			}
 		}
-		// Some fatal error occurred (usually bad file data)
 		catch(GameException &ge)
 		{
             GF_LOG_TRACE_ERR("ObjModelFileLoader::BuildTriangleLists()", std::string("Failed to build the triangle lists: ") + std::string(ge.what()));
@@ -199,7 +177,6 @@ namespace GameHalloran
 	{	
 		bool result = true;
 
-		// Read in all vertices, normals and tex coords first.
 		if(passNumber == 1)
 		{
 			if(boost::algorithm::starts_with(line, VERTEX_STR))
@@ -266,7 +243,6 @@ namespace GameHalloran
 			throw GameException(std::string("Failed to convert a component to a F32 ") + vertexStr);
 		}
 
-		// Add new vertex.
 		m_vertices.push_back(Vector3(x, y, z));
 	}
 
@@ -296,7 +272,6 @@ namespace GameHalloran
 			throw GameException(std::string("Failed to convert a component to a F32 ") + normalStr);
 		}
 
-		// Add new normal.
 		m_normals.push_back(Vector3(x, y, z));
 	}
 
@@ -325,7 +300,6 @@ namespace GameHalloran
 			throw GameException(std::string("Failed to convert a component to a F32 ") + tcStr);
 		}
 
-		// Add new tex coordinate.
 		m_texCoords.push_back(Vector3(u, v, 0.0f));
 	}
 
@@ -359,7 +333,6 @@ namespace GameHalloran
 				throw GameException(std::string("Invalid number of components in vertex ") + tokens[tokenIndex] + std::string(" from line ") + faceStr);
 			}
 
-			// Vertex index
 			if(!triangleTokens[0].empty())
 			{
 				U32 vIndex = 0;
@@ -389,7 +362,6 @@ namespace GameHalloran
 
 		boost::shared_ptr<Triangle> triPtr(GCC_NEW Triangle(vArr[0], vArr[1], vArr[2]));
 
-		// If we were instructed to generate our own normals...
 		if(m_calculateNormals)
 		{
 			Vector3 triangleNormal(triPtr->CalculateNormal());
@@ -400,7 +372,6 @@ namespace GameHalloran
 			}
 		}
 
-		// Finally, add the triangle to the current triangle list.
 		m_objectMap[m_currentGroup].push_back(triPtr);
 	}
 
@@ -417,7 +388,6 @@ namespace GameHalloran
 			throw GameException(std::string("Invalid number of components in line ") + groupStr);
 		}
 
-		// Create a new TriangleList group.
 		if(!tokens[1].empty())
 		{
 			m_currentGroup.assign(tokens[1]);
@@ -446,8 +416,7 @@ namespace GameHalloran
 
 		std::string objFileData(thPtr->GetTextBuffer());
 
-		// Split up the file by the newline character.
-#if _WINDOWS || WIN32 || TARGET_OS_WINDOWS
+#if defined(_WINDOWS)
 		std::string newLine("\n");
 #else
 		std::string newLine("\t\n");
@@ -467,15 +436,6 @@ namespace GameHalloran
 		{
 			return (false);
 		}
-
-		//for(ObjectGroupMap::iterator i = m_objectMap.begin(), end = m_objectMap.end(); i != end; ++i)
-		//{
-		//	std::cout << "Group Name: " << i->first << std::endl;
-		//	for(TriangleList::iterator ti = (i->second).begin(), te = (i->second).end(); ti != te; ++ti)
-		//	{
-		//		std::cout << (*ti)->ToString() << std::endl;
-		//	}
-		//}
 
 		BaseModelFileLoader::SetFileLoaded(true);
 		return (true);
@@ -504,7 +464,6 @@ namespace GameHalloran
 			return (false);
 		}
 
-		// NB. Max supported line size is set to 1024.
 		const U32 SIZE = 1024;
 		char buffer[SIZE];
 		memset(buffer, 0, sizeof(char) * SIZE);
@@ -524,15 +483,6 @@ namespace GameHalloran
 		{
 			return (false);
 		}
-
-		//for(ObjectGroupMap::iterator i = m_objectMap.begin(), end = m_objectMap.end(); i != end; ++i)
-		//{
-		//	std::cout << "Group Name: " << i->first << std::endl;
-		//	for(TriangleList::iterator ti = (i->second).begin(), te = (i->second).end(); ti != te; ++ti)
-		//	{
-		//		std::cout << (*ti)->ToString() << std::endl;
-		//	}
-		//}
 
 		BaseModelFileLoader::SetFileLoaded(true);
 		return (true);

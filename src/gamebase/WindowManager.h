@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_WINDOW_MANAGER_H
+#define __GF_WINDOW_MANAGER_H
+
 // /////////////////////////////////////////////////////////////////
 // @file WindowManager.h
 // @author PJ O Halloran
@@ -7,29 +11,13 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_WINDOW_MANAGER_H
-#define __GF_WINDOW_MANAGER_H
-
-#ifdef WIN32
-#	pragma warning( push )
-#	pragma warning( disable:4290 )
-#endif
-
-// External Headers
 #include <stdexcept>
-
-#include <cstdlib>
-#include <cstdio>
-
-#include "GameBase.h"
-
-#include <boost/shared_ptr.hpp>
 
 #include <LuaPlus/LuaLink.h>
 #include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
-// Project Headers
+#include "GameBase.h"
 #include "GameException.h"
 #include "GameLog.h"
 
@@ -343,7 +331,7 @@ namespace GameHalloran
 #endif
 	};
 
-	// The minimum OpenGL version my demos will support (I think its fair to assume that most recent PCs support GL 2.1 at least).
+	// The minimum OpenGL version supported (I think its fair to assume that most recent PCs support GL 2.1 at least).
 	#define GF_GL_MAJOR_VERSION	2
 	#define GF_GL_MINOR_VERSION	1
 
@@ -370,10 +358,6 @@ namespace GameHalloran
 	bool CheckGlVersionMatches(const I32 majGot, const I32 minGot, const I32 majReq, const I32 minReq);
 
 }
-
-#ifdef WIN32
-#	pragma warning( pop )
-#endif
 
 #endif
 

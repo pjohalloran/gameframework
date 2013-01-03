@@ -7,18 +7,15 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
 #include <cstring>
 #include <iostream>
 
-#include <boost/shared_ptr.hpp>
-
-// Project headers
 #include "SystemCheck.h"
 #include "GameBase.h"
 
-// Namespace Declarations
-
+#if defined(__linux__) || defined(__unix__) || defined(TARGET_OS_MAC) || defined(TARGET_OS_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
+	#include <sys/statvfs.h>
+#endif
 
 namespace GameHalloran
 {
@@ -30,9 +27,10 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool SystemCheck::CheckHardDiskSpace(const I64 minFreeSpace)
+	bool SystemCheck::CheckHardDiskSpace(const U64 minFreeSpace)
 	{
         bool result = false;						// Result of method.
+
 #ifdef _WINDOWS
 		I32 const drive = _getdrive();			// HD drive ID/number.
 		struct _diskfree_t diskfree;			// Disk check struct.
@@ -44,10 +42,19 @@ namespace GameHalloran
 		unsigned __int64 const neededClusters = 
 			minFreeSpace /(diskfree.sectors_per_cluster*diskfree.bytes_per_sector);
 
-		if(diskfree.avail_clusters < neededClusters)
+		result = diskfree.avail_clusters >= neededClusters;
+#else
+		U64 mb = 0;
+		struct statvfs sfs;
+
+		memset((void *)&sfs, 0, sizeof(sfs));
+
+		if(statvfs("/", &sfs) != -1)
 		{
-			result = false;
+			mb = (U64)sfs.f_bsize * sfs.f_bfree;
 		}
+
+		result = mb >= minFreeSpace;
 #endif
 
 		return (result);
@@ -56,7 +63,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool SystemCheck::CheckCpuSpeed(const I64 minSpeed)
+	bool SystemCheck::CheckCpuSpeed(const U64 minSpeed)
 	{
 		// Cannot compile the GetCpuSpeed.cpp file.  Google to see what
 		// this system is missing...
@@ -77,7 +84,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool SystemCheck::CheckPhysicalMemory(const I64 minFreeSRam)
+	bool SystemCheck::CheckPhysicalMemory(const U64 minFreeSRam)
 	{
 		bool result = true;
 
@@ -102,7 +109,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool SystemCheck::CheckVideoMemory(const I64 minFreeVRam)
+	bool SystemCheck::CheckVideoMemory(const U64 minFreeVRam)
 	{
 		// TODO: Implement with OpenGL.
 		return (false);
@@ -111,7 +118,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool SystemCheck::CheckForJoysticks(GfJoyCont &joystickList, I32 &numJoysticksDetected)
+	bool SystemCheck::CheckForJoysticks(GfJoyCont &joystickList, U32 &numJoysticksDetected)
 	{
 		// NB This code uses GLFW to check for joysticks which is a 
 		//  cross platform window library for OpenGL applications.
@@ -140,7 +147,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	bool SystemCheck::CheckVirtualMemory(const I64 minFreeVirtualMemory)
+	bool SystemCheck::CheckVirtualMemory(const U64 minFreeVirtualMemory)
 	{
 		bool result = true;
 #ifdef _WINDOWS

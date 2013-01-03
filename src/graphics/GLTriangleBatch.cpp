@@ -53,10 +53,8 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <cstring>
 
-// Project Headers
 #include "GLTriangleBatch.h"
 #include "GLShaderManager.h"
 #include "GameBase.h"
@@ -64,22 +62,9 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 #include "Vector.h"
 
 #ifdef _DEBUG
-	// TEST (for PrintDebugInfo member)
 	#include <iostream>
 #endif
 
-////////////////////////// TEMPORARY TEMPORARY TEMPORARY - On SnowLeopard this is suppored, but GLEW doens't hook up properly
-////////////////////////// Fixed probably in 10.6.3
-//#ifdef __APPLE__
-//	#define glGenVertexArrays glGenVertexArraysAPPLE
-//	#define glDeleteVertexArrays  glDeleteVertexArraysAPPLE
-//	#define glBindVertexArray	glBindVertexArrayAPPLE
-//#endif
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

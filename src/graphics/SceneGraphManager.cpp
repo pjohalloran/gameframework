@@ -43,20 +43,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
-
-
-// Project Headers
 #include "SceneGraphManager.h"
-
 #include "GameBase.h"
 #include "GameMain.h"
-
 #include "RootSceneNode.h"
-
 #include "ZipFile.h"
 #include "TextResource.h"
-
 
 namespace GameHalloran
 {
@@ -119,7 +111,6 @@ namespace GameHalloran
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		// Ensure the alpha nodes are sorted.
 		m_alphaNodeList.sort();
 
 		while (!m_alphaNodeList.empty())
@@ -130,7 +121,6 @@ namespace GameHalloran
 			(*i)->GetNode()->VRender();
 			m_stackManagerPtr->GetModelViewMatrixStack()->PopMatrix();
 
-			// Since they are shared ptrs, this frees the alpha node and reduces the lists length.
 			m_alphaNodeList.pop_back();
 		}
 
@@ -187,9 +177,19 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	SceneGraphManager::SceneGraphManager(boost::shared_ptr<ModelViewProjStackManager> stackManagerPtr)\
-		: m_adsUniformCache(), m_root(), m_camera(), m_stackManagerPtr(stackManagerPtr), m_alphaNodeList(), m_actorMap(), m_shaderMap(),\
-			m_ambientLightSrc(), m_dynamicLights(), m_globalShaderPtr(), m_metaTable(), m_fogAtt()
+	SceneGraphManager::SceneGraphManager(boost::shared_ptr<ModelViewProjStackManager> stackManagerPtr)
+											: m_adsUniformCache()
+											, m_root()
+											, m_camera()
+											, m_stackManagerPtr(stackManagerPtr)
+											, m_alphaNodeList()
+											, m_actorMap()
+											, m_shaderMap()
+											, m_ambientLightSrc()
+											, m_dynamicLights()
+											, m_globalShaderPtr()
+											, m_metaTable()
+											, m_fogAtt()
 	{
 		m_root.reset(GCC_NEW RootSceneNode(this));
 
@@ -199,18 +199,13 @@ namespace GameHalloran
 		m_ambientLightSrc.SetDiffuse(g_gcBlack);
 		m_ambientLightSrc.SetSpecular(g_gcWhite);
 
-		//Create our metatable...
+		// Lua scripting...
 		m_metaTable = g_appPtr->GetLuaStateManager()->GetGlobalState()->GetGlobals().CreateTable("SceneGraphManager");
 		m_metaTable.SetObject("__index", m_metaTable);
-
-		// Provide access to some SGM methods to scripters.
 		m_metaTable.RegisterObjectDirect("AddDynamicLight", (SceneGraphManager *)0, &SceneGraphManager::ScriptAddDynamicLight);
 		m_metaTable.RegisterObjectDirect("SetGlobalIllumination", (SceneGraphManager *)0, &SceneGraphManager::ScriptSetGlobalIllumination);
-		
 		LuaPlus::LuaObject sgmManObj = g_appPtr->GetLuaStateManager()->GetGlobalState()->BoxPointer(this);
 		sgmManObj.SetMetaTable(m_metaTable);
-
-		// And here we expose the metatable as a named entity.
 		g_appPtr->GetLuaStateManager()->GetGlobalState()->GetGlobals().SetObject("SceneGraphManager", sgmManObj);
 	}
 
@@ -387,14 +382,6 @@ namespace GameHalloran
 
 		if (m_root && m_camera)
 		{
-			// The scene root could be anything, but it
-			// is usually a SceneNode with the identity
-			// matrix
-
-			// Moved to View Render call now...
-			//// Apply the view transformation to the global matrix stack (i.e. point the camera in some direction in the scene).
-			//m_camera->VSetViewTransform(this);
-
 			if (m_root->VPreRender())
 			{
 				m_root->VRender();
@@ -544,7 +531,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool AddShadersToSceneGraphManager(SceneGraphManager &sgm, const std::vector<std::string> &shaderNameVec, const std::vector<VSAttributeNameList> &vsAttNameListVec)
 	{
-		// Check input parameters.
 		if(shaderNameVec.empty())
 		{
             GF_LOG_TRACE_ERR("AddShadersToSceneGraphManager()", "The shader name vector is empty");
@@ -561,7 +547,6 @@ namespace GameHalloran
 			return (false);
 		}
 
-		// Deal with every shader name/ID in the vector.
 		bool error = false;
 		std::vector<VSAttributeNameList>::const_iterator currentAttIter = vsAttNameListVec.begin();
 		for(std::vector<std::string>::const_iterator i = shaderNameVec.begin(), end = shaderNameVec.end(); i != end; ++i, ++currentAttIter)

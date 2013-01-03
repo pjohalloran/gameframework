@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _GF_DYNAMIC_ARRAY_H
 #define _GF_DYNAMIC_ARRAY_H
 
@@ -10,13 +11,9 @@
 //
 // ////////////////////////////////////////////////////////////
 
-// External headers.
 #include <cstring>
 
-
-// Project headers.
 #include "GameBase.h"
-
 
 namespace GameHalloran
 {
@@ -29,13 +26,6 @@ namespace GameHalloran
 	//
 	// Usage of it and its Iterator type is very similar to std::vector
 	// and std::vector::iterator.
-	//
-	// Tip: Set the array capacity to the best fit size from the
-	// start to prevent many reallocations and ensure maximum
-	// performance!
-	// By default we double the internal array capacity when
-	// resizing it so use SetCapacity() manually to avoid these
-	// reallocations and potential memory wastage.
 	//
 	// advatages:
 	// - Data stored contiguosly in memory.
@@ -61,13 +51,6 @@ namespace GameHalloran
 		//
 		// Iterator for the DynamicArray container.  Similar in
 		// functionality to an STL bidirectional iterator.
-		//
-		// Tip:
-		// Be careful about keeping Iterators around too long.
-		// In general, if you perform any operations on the DynamicArray
-		// that are non const then the Iterators will become
-		// invalidated.  The result of using invalidated iterators is 
-		// undefined.
 		//
 		// ////////////////////////////////////////////////////////////
 		class Iterator

@@ -54,15 +54,10 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
-
-
-// Project Headers
 #include "Events.h"
 
 namespace GameHalloran
 {
-
 	const EventType EvtData_New_Game::sk_EventType("new_game");
 	const EventType EvtData_End_Game::sk_EventType("end_game");
 	const EventType EvtData_New_Actor::sk_EventType("new_actor");
@@ -78,8 +73,6 @@ namespace GameHalloran
 	const EventType EvtData_Decompression_Progress::sk_EventType("decompression_progress");
 	const EventType EvtData_Request_New_Actor::sk_EventType("request_new_actor");
 	const EventType EvtData_UpdateActorParams::sk_EventType("update_actor_params");
-
-	// New events added by PJ
 	const EventType EvtData_Pause_Game_Event::sk_EventType("pause_game_event");
 	const EventType EvtData_Button_Action::sk_EventType("button_action");
 	const EventType EvtData_List_Button_Action::sk_EventType("list_button_action");
@@ -92,5 +85,4 @@ namespace GameHalloran
 	const EventType EvtData_Move_Kinematic_Actor::sk_EventType("user_move_actor_event");
 	const EventType EvtData_Video_Resolution_Change::sk_EventType("video_resolution_change");
 	const EventType EvtData_Physics_Diagnostics::sk_EventType("physics_diagnostic_mode");
-
 }

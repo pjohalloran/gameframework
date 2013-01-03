@@ -8,16 +8,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
-// External Headers
 #include <iostream>
 #include <fstream>
 
 #include <boost/algorithm/string.hpp>
 
-// Project Headers
 #include "GLSLShader.h"
-
 #include "GameBase.h"
 #include "GameMain.h"
 #include "TextResource.h"
@@ -25,10 +21,6 @@
 
 using std::string;
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -758,14 +750,6 @@ namespace GameHalloran
             UpdateUniformsToGPU();
 			return (true);
 		}
-
-//#ifdef DEBUG
-//		// Validate the program, if it fails then dont set it as the current program and return false.
-//		if(!ValidateProgram())
-//		{
-//			return (false);
-//		}
-//#endif
 
 		GF_CLEAR_GL_ERROR();
 

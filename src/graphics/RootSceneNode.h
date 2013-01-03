@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_ROOT_SCENE_NODE_H
+#define __GF_ROOT_SCENE_NODE_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -43,23 +47,14 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_ROOT_SCENE_NODE_H
-#define __GF_ROOT_SCENE_NODE_H
-
-// External Headers
 #include <boost/shared_ptr.hpp>
 
-
-// Project Headers
 #include "SceneNode.h"
 #include "Matrix.h"
 #include "IActors.h"
 
-
 namespace GameHalloran
 {
-
-	// Forward declaration of the SceneGraphManager object.
 	class SceneGraphManager;
 
 	// /////////////////////////////////////////////////////////////////

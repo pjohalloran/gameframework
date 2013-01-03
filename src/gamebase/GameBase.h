@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GAME_BASE_H
 #define __GAME_BASE_H
 
@@ -10,8 +11,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
-// STD C/C++ Headers
 #include <string>
 #include <new>
 #include <cstring>
@@ -25,18 +24,9 @@
 #include <boost/shared_ptr.hpp>
 #include <memory>
 
-// Define the version of new we are going to use depending on the build mode.
-#if _WINDOWS && (defined(_DEBUG) || defined(DEBUG))
-	#define GCC_NEW new(_NORMAL_BLOCK,__FILE__, __LINE__)
-#else
-	#define GCC_NEW new
-#endif
-
-
 // Global includes for removing some unnessecary and/or risky functionality from the builds for submission to games companies.
 // Comment out for test builds!
 #define GF_DEMO_BUILD
-
 
 namespace GameHalloran
 {
@@ -97,7 +87,6 @@ namespace GameHalloran
 
 	// /////////////////////////////////////////////////////////////////
 	// @class SortBy_SharedPtr_Content
-	// @author Mike McShaffry
 	//
 	// This is a functor which is a helper function for sorting elements
 	// stored in shared pointers.
@@ -122,7 +111,6 @@ namespace GameHalloran
 	};
     
     // /////////////////////////////////////////////////////////////////
-    // Copied from boost to reduce dependancies - please don't sue!
     //
     // /////////////////////////////////////////////////////////////////
     class NonCopyable
@@ -149,13 +137,13 @@ namespace GameHalloran
 // Define OpenGL check and clear error macros so that this slow error checking can be compiled out for the release build!
     bool GfCheckGlError();
     bool GfCheckGlErrorTrc(const char *msg);
-#define GF_CHECK_GL_ERROR() GfCheckGlError()
-#define GF_CHECK_GL_ERROR_TRC(msg) GfCheckGlErrorTrc(msg)
+	#define GF_CHECK_GL_ERROR() GfCheckGlError()
+	#define GF_CHECK_GL_ERROR_TRC(msg) GfCheckGlErrorTrc(msg)
     
 #if DEBUG
-#define GF_CLEAR_GL_ERROR() { GLenum err; do { err = glGetError(); } while(err != GL_NO_ERROR); }
+	#define GF_CLEAR_GL_ERROR() { GLenum err; do { err = glGetError(); } while(err != GL_NO_ERROR); }
 #else
-#define GF_CLEAR_GL_ERROR()
+	#define GF_CLEAR_GL_ERROR()
 #endif
 
 }

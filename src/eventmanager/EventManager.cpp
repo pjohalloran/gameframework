@@ -34,7 +34,6 @@
 //
 //========================================================================
 
-
 // /////////////////////////////////////////////////////////////////
 // @file EventManager.cpp
 // @author Mike McShaffry
@@ -55,14 +54,10 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <cstring>
 #include <assert.h>
 
-// Project Headers
 #include "EventManager.h"
-
-// For global app pointer.
 #include "GameMain.h"
 
 namespace GameHalloran
@@ -75,17 +70,11 @@ namespace GameHalloran
 	{
 		assert( ( false == m_bHasLuaEventData ) && "Already built lua event data!" );
 
-		//Get the global state.
 		LuaPlus::LuaState *pState = g_appPtr->GetLuaStateManager()->GetGlobalState().Get();
-
-		//We just set a nil object.
 		m_LuaEventData.AssignNil( pState );
-
-		//Now we've "got data".
 		m_bHasLuaEventData = true;
 	}
 
-	// 
 	static IEventManager * g_pEventMgr = NULL;
 
 	// /////////////////////////////////////////////////////////////////

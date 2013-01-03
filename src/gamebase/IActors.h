@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __I_ACTORS_H
+#define __I_ACTORS_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -63,27 +67,18 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __I_ACTORS_H
-#define __I_ACTORS_H
-
-// External Headers
 #include <string>
 #include <sstream>
 #include <deque>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
-
-
 #include <LuaPlus/LuaLink.h>
 #include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
-// Project Headers
-#include "GameTypes.h"
+#include "GameBase.h"
 #include "Matrix.h"
 #include "Vector.h"
-
 
 namespace GameHalloran
 {
@@ -106,7 +101,6 @@ namespace GameHalloran
 		AT_Static
 	};
 
-	// Forward declaration of IActorParams for IActor to compile.
 	class IActorParams;
 
 	// /////////////////////////////////////////////////////////////////

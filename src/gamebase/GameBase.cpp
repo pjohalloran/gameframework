@@ -8,14 +8,8 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
-
-// Project headers
 #include "GameBase.h"
 #include "GameMain.h"
-
-// Namespace Declarations
-
 
 namespace GameHalloran
 {	

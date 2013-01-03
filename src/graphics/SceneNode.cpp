@@ -43,34 +43,33 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <string>
 
-
-// Project Headers
 #include "SceneNode.h"
-
 #include "GameMain.h"
-
 #include "SceneGraphManager.h"
+#include "GLSLShader.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	SceneNode::SceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld)\
-		: m_sgmPtr(sgPtr), m_parentPtr(NULL), m_props(), m_useCustomShader(false), m_children(), m_shaderPtr()
+	SceneNode::SceneNode(SceneGraphManager *sgPtr,
+							boost::optional<ActorId> actorId,
+							const std::string &name,
+							const RenderPass renderPass,
+							const Material &material,
+							const Matrix4 &toWorld)\
+							: m_sgmPtr(sgPtr)
+							, m_parentPtr(NULL)
+							, m_props()
+							, m_useCustomShader(false)
+							, m_children()
+							, m_shaderPtr()
 	{
-        //assert(m_sgmPtr != NULL);
-        
-		m_props.SetActorId(actorId);
+        m_props.SetActorId(actorId);
 		m_props.SetName(name);
 		m_props.SetRenderPass(renderPass);
 		m_props.SetMaterial(material);
@@ -80,12 +79,21 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	SceneNode::SceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld)\
-		: m_sgmPtr(sgPtr), m_parentPtr(NULL), m_props(), m_useCustomShader(false), m_children(), m_shaderPtr()
+	SceneNode::SceneNode(SceneGraphManager *sgPtr,
+							boost::optional<ActorId> actorId,
+							const std::string &name,
+							const RenderPass renderPass,
+							const Material &material,
+							const Matrix4 &toWorld,
+							const Matrix4 &fromWorld)\
+							: m_sgmPtr(sgPtr)
+							, m_parentPtr(NULL)
+							, m_props()
+							, m_useCustomShader(false)
+							, m_children()
+							, m_shaderPtr()
 	{
-        //assert(m_sgmPtr != NULL);
-        
-		m_props.SetActorId(actorId);
+        m_props.SetActorId(actorId);
 		m_props.SetName(name);
 		m_props.SetRenderPass(renderPass);
 		m_props.SetMaterial(material);
@@ -97,7 +105,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	SceneNode::~SceneNode()
 	{
-		// All children are shared ptrs so theres no need to explicitly clear the list.
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -124,8 +131,6 @@ namespace GameHalloran
                 GF_LOG_TRACE_ERR("SceneNode::VPreRender()", std::string("Failed to activate the custom shader: ") + m_props.GetShaderName());
                 return (false);
 			}
-
-			// Uniforms for the custom shader should be set in derived classes.
 		}
 
 		// Save the transformation state of the modelview matrix stack before we render 
@@ -140,7 +145,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool SceneNode::VRender()
 	{
-		// Base implementation, TO be implemented by derived classes as only they will know exactly what to render.
 		return (true);
 	}
 
@@ -149,7 +153,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool SceneNode::VPostRender()
 	{
-		// Restore the ModelView stacks state after render.
 		m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->PopMatrix();
 		return (true);
 	}
@@ -190,11 +193,8 @@ namespace GameHalloran
 		}
 
 		m_children.push_back(childNodePtr); 
-
-		// Set the childs parent pointer to point to this SceneNode.
 		childNodePtr->VSetParentPtr(this);
 
-		// Calculate the new radius of the sphere enclosing this node and all children!
 		Matrix4 childToWorld = childNodePtr->VGet()->GetToWorld();
 		F32 childRadius = childNodePtr->VGet()->GetRadius();
 		
@@ -202,7 +202,6 @@ namespace GameHalloran
 		childToWorld.GetPosition(childPos);
 		m_props.GetToWorld().GetPosition(myPos);
 		
-		// Vector to the child node.
 		Vector3 dirToChild = childPos - myPos;
 
 		F32 newRadius = dirToChild.Magnitude() + childRadius;
@@ -249,26 +248,17 @@ namespace GameHalloran
 		}
 		else if (!FloatCmp(alpha, g_TRANSPARENT))
 		{
-			// The object isn't totally transparent...
 			Matrix4 mat;
 			F32 z;
 
-			// Get the top most MV transformation matrix.
 			m_sgmPtr->GetStackManager()->GetModelViewMatrixStack()->GetMatrix(mat);
 			
-			// Get our nodes position.
 			Vector4 worldPos4;
 			mat.GetPosition(worldPos4);
 			
-			// Get the camera matrix.
 			Matrix4 toWorldCamera(m_sgmPtr->GetCamera()->VGet()->GetToWorld());
 
-			// Transform the nodes position into eye space.
 			Vector4 eyePos4 = toWorldCamera * worldPos4;
-
-//			// TODO: Should we take into account the W component?? (remove this check when we resolve this...)
-//			if(!FloatCmp(eyePos4.GetW(), 1.0f))
-//                GF_LOG_TRACE_DEB("SceneNode::VRenderChildren()", "The W component is non zero, recheck your work!!!!");
 			z = eyePos4.GetZ();
 
 			boost::shared_ptr<AlphaSceneNode> asn(GCC_NEW AlphaSceneNode(boost::shared_ptr<ISceneNode>(snPtr), mat, z));
@@ -291,7 +281,6 @@ namespace GameHalloran
 		bool result = true;
 		for(SceneNodeList::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i)
 		{
-			// Don't render this node if you can't see it
 			if ((*i)->VIsVisible())
 				RenderSceneNode((*i).get());
 
@@ -336,18 +325,13 @@ namespace GameHalloran
 		Matrix4 cameraTransform(m_sgmPtr->GetCamera()->VGet()->GetToWorld());
 		Matrix4 cameraInvTransform(m_sgmPtr->GetCamera()->VGet()->GetFromWorld());
 		
-		// Position of the node in world space.
 		Vector4 posWorld4;
 		m_props.GetToWorld().GetPosition(posWorld4);
 
-		// Transform the nodes position into camera space.
 		Vector4 posCamEyeSpace4 = cameraTransform * posWorld4;
-
-		// Convert position to Point3 by way of Vector3 first.
 		Vector3 posCamEyeSpace3(posCamEyeSpace4);
 		Point3 eyePt(posCamEyeSpace3);
 
-		// Check if the node is inside the camera nodes Frustrum!
 		return (m_sgmPtr->GetCamera()->GetFrustum()->Inside(eyePt, m_props.GetRadius()));
 	}
 
@@ -411,7 +395,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void SceneNode::SetShaderName(const std::string &shaderNameRef)
 	{
-		// Mark the node as using a custom GLSL shader from now on.
 		m_useCustomShader = true;
 		m_props.SetShaderName(shaderNameRef);
         m_shaderPtr = m_sgmPtr->GetShader(m_props.GetShaderName());

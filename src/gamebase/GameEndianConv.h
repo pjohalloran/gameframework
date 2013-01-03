@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GAME_ENDIAN_CONV_H
 #define __GAME_ENDIAN_CONV_H
 
@@ -12,18 +13,15 @@
 
 #include "GameTypes.h"
 
-
 namespace GameHalloran
 {
     
-    // For swapping endianness of floats.
     union U32F32
     {
         U32 m_asU32;
         F32 m_asF32;
     };
     
-    // For swapping endianness of doubles.
     union U64F64
     {
         U64 m_asU64;

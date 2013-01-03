@@ -8,17 +8,10 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <string>
-
 #include <cstring>
 
-#include <boost/filesystem.hpp>
-#include <boost/shared_ptr.hpp>
-
-// Project Headers
 #include "BaseModelFileLoader.h"
-
 #include "Triangle.h"
 #include "GameMain.h"
 #include "Events.h"
@@ -69,7 +62,6 @@ namespace GameHalloran
 			return (false);
 		}
 
-		// Return first list of triangles.
 		tList = m_objectMap.begin()->second;
 		return (true);
 	}
@@ -138,7 +130,7 @@ namespace GameHalloran
 			{
 				m_currOperation = eNumberOperations;
 			}
-			// Report progress event.
+			
 			IEventDataPtr eventDataPtr(GCC_NEW EvtData_Loading_Progress(m_loadId, m_totalProgress));
 			safeQueEvent(eventDataPtr);
 			return (true);
@@ -158,7 +150,6 @@ namespace GameHalloran
 		m_currentProgress = 0.0f;
 		m_modelIndex = 0;
 
-		// Broadcast event.
 		IEventDataPtr eventDataPtr(GCC_NEW EvtData_Loading_Progress(m_loadId, m_totalProgress, boost::optional<std::string>(errorMsg)));
 		safeQueEvent(eventDataPtr);
 	}
@@ -194,10 +185,8 @@ namespace GameHalloran
 
 		U32 count = 0;
 		F32 totalSize(tList.size());
-		// For each triangle in the list, add a corresponding triangle to the batch of geometry container.
 		for(TriangleList::const_iterator i = tList.begin(), end = tList.end(); i != end; ++i, ++count)
 		{
-			// For each vertex of the current triangle, Copy vertex, normal and tex coord data into the format GLTriangleBatch likes.
 			for(U32 index(0); index < NUM_VERTICES; ++index)
 			{
 				memset(vArr[index], 0, sizeof(F32) * 3);
@@ -270,7 +259,6 @@ namespace GameHalloran
 
 		loadProgressObj.NextStage();
 
-		// Retrieve the mesh from the 3D mesh file loader and clear the loaders state.
 		modelLoadingObjPtr->VGetTriangleList(mesh);
 		modelLoadingObjPtr->VClear();
 
@@ -289,10 +277,8 @@ namespace GameHalloran
 			return (boost::shared_ptr<GLTriangleBatch>());
 		}
 
-		// Calculate the BoundingBox of the mesh before we dispose of it forever.
 		CalculateTriangleListBoundingBox(mesh, bb);
 		
-		// Create the child mesh.
 		boost::shared_ptr<GLTriangleBatch> batch = ConvertTriangleListToBatch(mesh, &loadProgressObj, retainData);
 		if(!batch)
 		{

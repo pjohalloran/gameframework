@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GAME_PLATFORM_H
 #define __GAME_PLATFORM_H
 
@@ -10,15 +11,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
+#include <cstdlib>
+#include <cstdio>
 
 #include "GameTypes.h"
 
-
-// Building on WINDOWS...
 #if defined(_WINDOWS)
-    //#define WIN32_LEAN_AND_MEAN
-    //#define NOMINMAX
-
     #include <windows.h>
     #include <windowsx.h>
     #include <mmsystem.h>
@@ -35,6 +33,8 @@
     #endif
 
     #define STRCPY char *strcpy_s(char *, size_t, const char *);
+
+	#define GCC_NEW new(_NORMAL_BLOCK,__FILE__, __LINE__)
 #else
     // Defining handy mmioFOURCC macro for non WIN32 platforms...
     #ifndef mmioFOURCC
@@ -44,6 +44,8 @@
     #endif
 
     #define STRCPY char *strcpy(char *, const char *);
+
+	#define GCC_NEW new
 
     // BUILDING ON MACOSX
     #if TARGET_OS_MAC
@@ -77,7 +79,5 @@
         #error "Platform not yet supported!"
     #endif
 #endif
-
-
 
 #endif

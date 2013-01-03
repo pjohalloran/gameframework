@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_TEXTURE_MANAGER_H
+#define __GF_TEXTURE_MANAGER_H
+
 // /////////////////////////////////////////////////////////////////
 // @file TextureManager.h
 // @author PJ O Halloran
@@ -8,23 +12,14 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_TEXTURE_MANAGER_H
-#define __GF_TEXTURE_MANAGER_H
-
-// External Headers
-#include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
-#include <boost/noncopyable.hpp>
 
 #include <map>
 #include <vector>
 #include <string>
 
-
-// Project Headers
 #include "GameBase.h"
 #include "GameException.h"
-
 
 // /////////////////////////////////////////////////////////////////
 //
@@ -59,7 +54,7 @@ namespace GameHalloran
 	// prevent trashing.  Use a MRU strategy temporarily to avoid this.
 	//
 	// /////////////////////////////////////////////////////////////////
-	class TextureManager : public boost::noncopyable
+	class TextureManager : public NonCopyable
 	{
 	public:
 

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_SCENE_NODE_H
+#define __GF_SCENE_NODE_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -43,31 +47,21 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_SCENE_NODE_H
-#define __GF_SCENE_NODE_H
-
-// External Headers
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
-
 #include <string>
 
-
-// Project Headers
 #include "ISceneNode.h"
 #include "Matrix.h"
 #include "Vector.h"
 #include "IActors.h"
 #include "Actors.h"
 #include "SceneNodeProperties.h"
-#include "GLSLShader.h"
-
 
 namespace GameHalloran
 {
-
-	// Forward delaration of the SceneGraphManager class.
 	class SceneGraphManager;
+	class GLSLShader;
 
 	// /////////////////////////////////////////////////////////////////
 	// @class SceneNode
@@ -80,13 +74,11 @@ namespace GameHalloran
 	class SceneNode : public ISceneNode
 	{
 	private:
-
 		ISceneNode *m_parentPtr;						///< Pointer to the nodes parent.
 		SceneNodeProperties m_props;					///< Nodes properties.
 		bool m_useCustomShader;							///< Are we using a custom shader to render this node (if not the SGMs' default GLSL program will be used)?
 
 	protected:
-
         SceneGraphManager *m_sgmPtr;                    ///< Nodes SG manager.
 		SceneNodeList m_children;						///< The child nodes list.
 		boost::shared_ptr<GLSLShader> m_shaderPtr;		///< Custom GLSL shader program we are using to render the node (if this is NULL then the global SGM shader will be used).
@@ -121,7 +113,12 @@ namespace GameHalloran
 		//					parent.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit SceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld);
+		explicit SceneNode(SceneGraphManager *sgPtr,
+							boost::optional<ActorId> actorId,
+							const std::string &name,
+							const RenderPass renderPass,
+							const Material &material,
+							const Matrix4 &toWorld);
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
@@ -136,7 +133,13 @@ namespace GameHalloran
 		// @param fromWorld Inverse of toWorld matrix.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit SceneNode(SceneGraphManager *sgPtr, boost::optional<ActorId> actorId, const std::string &name, const RenderPass renderPass, const Material &material, const Matrix4 &toWorld, const Matrix4 &fromWorld);
+		explicit SceneNode(SceneGraphManager *sgPtr,
+							boost::optional<ActorId> actorId,
+							const std::string &name,
+							const RenderPass renderPass,
+							const Material &material,
+							const Matrix4 &toWorld,
+							const Matrix4 &fromWorld);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.
@@ -329,7 +332,6 @@ namespace GameHalloran
 		inline void SetMaterial(const Material &material) { m_props.SetMaterial(material); };
         
         // /////////////////////////////////////////////////////////////////
-        //
         //
         // /////////////////////////////////////////////////////////////////
         virtual void VSetSceneManager(SceneGraphManager *sgmPtr)

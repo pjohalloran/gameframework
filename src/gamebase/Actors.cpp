@@ -33,7 +33,6 @@
 //
 //========================================================================
 
-
 // /////////////////////////////////////////////////////////////////
 // @file Actors.cpp
 // @author Michael L. McShaffry (edited by PJ O Halloran)
@@ -62,24 +61,8 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
-// External Headers
-#include <sstream>
-
-#include <boost/shared_ptr.hpp>
-#include <boost/optional.hpp>
-
-#include <LuaPlus/LuaLink.h>
-#include <LuaPlus/LuaPlus.h>
-#include <LuaPlus/LuaObject.h>
-
-#include <cstring>
-
-// Project Headers
 #include "Actors.h"
-
 #include "GameMain.h"
-
 
 using boost::shared_ptr;
 using boost::optional;
@@ -96,7 +79,12 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	ActorParams::ActorParams() : m_Size(sizeof(ActorParams)), m_Id(0), m_Pos(), m_Type(AT_Unknown), m_Color()
+	ActorParams::ActorParams()
+						: m_Size(sizeof(ActorParams))
+						, m_Id(0)
+						, m_Pos()
+						, m_Type(AT_Unknown)
+						, m_Color()
 	{
 		strcpy(m_OnCreateLuaFunctionName, "");
 		strcpy(m_OnDestroyLuaFunctionName, "");
@@ -248,45 +236,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
     ActorParams *ActorParams::CreateFromStream(std::istringstream &in)
 	{
-		//I32 actorType;
-		//in >> actorType;
-		//
-		//ActorParams *actor = NULL;
-		//switch (actorType)
-		//{
-		//	case AT_Sphere:
-		//	case AT_Teapot:
-		//	case AT_TestObject:
-		//	case AT_Grid:
-		//	case AT_GenericMeshObject:
-		//		break;
-		//
-		//	case AT_PP_Paddle:
-		//		{
-		//			// error: Can't see Game specific classes from here
-		//		}
-		//		break;
-		//
-		//	case AT_PP_Ball:
-		//		{
-		//
-		//		}
-		//		break;
-		//
-		//	default:
-		//		SafeGameLogAndPrefix(g_appPtr->GetLoggerPtr(), GameLog::ERR, string("ActorParams::CreateFromStream()"), string("Attempted to create unimplemented actor type from a stream."));
-		//		return 0;
-		//}
-		//
-		//if (! actor->VInit(in))
-		//{
-		//	// something went wrong with the serialization...
-		//	assert(0 && _T("Error in Actor stream initialization"));
-		//	Delete(actor);
-		//}
-		//
-		//return actor;
-
 		return (NULL);
 	}
 
@@ -305,8 +254,13 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	BaseActor::BaseActor(const Matrix4 &mat, const I32 type, shared_ptr<ActorParams> params)\
-		: m_id(0), m_Mat(mat), m_Type(type), m_Params(params)
+	BaseActor::BaseActor(const Matrix4 &mat,
+							const I32 type,
+							shared_ptr<ActorParams> params)
+							: m_id(0)
+							, m_Mat(mat)
+							, m_Type(type)
+							, m_Params(params)
 	{
 	}
 

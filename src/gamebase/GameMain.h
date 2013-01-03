@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GAME_MAIN_H
+#define __GAME_MAIN_H
+
 // /////////////////////////////////////////////////////////////////
 // @file GameMain.h
 // @author PJ O Halloran
@@ -7,10 +11,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GAME_MAIN_H
-#define __GAME_MAIN_H
-
-// External Headers
 #include <stdexcept>
 #include <vector>
 #include <deque>
@@ -23,21 +23,15 @@
 #include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
-// Project Headers
 #include "GameBase.h"
 #include "GameException.h"
-#include "GameLog.h"
 #include "WindowManager.h"
-#include "GameOptions.h"
-//#include "ResCache2.h"
 #include "LuaStateManager.h"
 #include "EventManagerImpl.h"
 #include "GameLogic.h"
 #include "IGameTimer.h"
 #include "Point.h"
 #include "OsInputEvents.h"
-#include "TextureManager.h"
-#include "TextureAtlas.h"
 
 // /////////////////////////////////////////////////////////////////
 //
@@ -47,6 +41,10 @@ namespace GameHalloran
 {
     
     class ResCache;
+	class TextureManager;
+	class TextureAtlasManager;
+	class GameOptions;
+	class GameLog;
 
 	// /////////////////////////////////////////////////////////////////
 	// @class GameMain
@@ -60,16 +58,16 @@ namespace GameHalloran
 	{
 		private:
 		
-			static const F64 MAX_FRAMES_PER_SECOND;					///< Max fps drawn by the game.
-			static const F64 FRAME_TIME_MS;							///< Time allowed to draw one frame.
+			static const F64 MAX_FRAMES_PER_SECOND;						///< Max fps drawn by the game.
+			static const F64 FRAME_TIME_MS;								///< Time allowed to draw one frame.
 			
 			// Main loop management data.	
-			F64 m_lastRenderTime;									///< Timestamp of the last render call.
-			F64 m_lastUpdateTime;									///< Timestamp of the last update call.
+			F64 m_lastRenderTime;										///< Timestamp of the last render call.
+			F64 m_lastUpdateTime;										///< Timestamp of the last update call.
 			F64 m_lastEventTime;										///< Timestamp of the last OS event call.
 			boost::shared_ptr<IGameTimer> m_frameRateTimer;				///< Timer to regulate the frame rate.
-			U32 m_frameCount;									///< Number of frames rendered so far in the current second.													
-			U32 m_framesInPastSecond;							///< Number of frames rendered in the past second.
+			U32 m_frameCount;											///< Number of frames rendered so far in the current second.													
+			U32 m_framesInPastSecond;									///< Number of frames rendered in the past second.
 			boost::shared_ptr<IGameTimer> m_appTimer;					///< Timer used to record the application start time, etc.
 			F64 m_startTime;											///< Start time of the game loop.
 			bool m_isRunning;											///< Flag indicating if the game is currently running.
@@ -83,7 +81,7 @@ namespace GameHalloran
 
 			// GLFW/OS event data.
 			GfEventFactory m_eventFactoryObj;							///< Global OS input/window event factory object.
-			GfEventQueue m_eventQueue;									///< The OS window/input event queue ( ** Please note this is different from the game event queue and manager ** ).
+			GfEventQueue m_eventQueue;									///< The OS window/input event queue.
 			I32 m_prevX;												///< Previous X screen position of the mouse.
 			I32 m_prevY;												///< Previous Y screen position of the mouse.
 			bool m_prevActiveState;										///< Previous active state of the window.

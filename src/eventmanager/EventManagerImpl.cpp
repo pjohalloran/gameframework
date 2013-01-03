@@ -54,29 +54,16 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <string>
-
 #include <boost/shared_ptr.hpp>
 
-//// For WIN32 version of VTicks() using GetTickCount()
-//#define WIN32_LEAN_AND_MEAN
-//#include <windows.h>
-
-// Project Headers
 #include "EventManagerImpl.h"
-
-// For the global game/application pointer.
 #include "GameMain.h"
-
 #include "IGameTimer.h"
 #include "GlfwGameTimer.h"
 
-
 using boost::shared_ptr;
-
 using std::string;
-
 using LuaPlus::LuaObject;
 
 namespace GameHalloran
@@ -98,13 +85,8 @@ namespace GameHalloran
 			throw GameException(string("Cannot setup the EventManager as the global application pointer is NULL."));
 		}
 
-		//Open up access to script.
 		{
 			shared_ptr<LuaStateManager> luaStateManager = g_appPtr->GetLuaStateManager();
-
-			// Note that this is slightly different than in the book, since the
-			// Lua chapter was AFTER the event manager chapter.
-			//Create our metatable...
 			m_MetaTable = luaStateManager->GetGlobalState()->GetGlobals().CreateTable("EventManager");
 			m_MetaTable.SetObject("__index", m_MetaTable);
 			
