@@ -1052,8 +1052,7 @@ namespace GameHalloran
 			return;
 		}
 
-#ifdef _DEBUG
-
+#if defined(DEBUG)
 		//F64 startTime = g_appPtr->GetCurrTime();
 #endif
 
@@ -1095,7 +1094,7 @@ namespace GameHalloran
 
 		ResetMouseMovements();
 
-#ifdef _DEBUG
+#if defined(DEBUG)
 		//F64 endTime = g_appPtr->GetCurrTime();
 		//std::cout << "Pool3dMovementController::Update(): Time Taken (ms): " << (endTime - startTime) * 1000.0 << std::endl;
 #endif

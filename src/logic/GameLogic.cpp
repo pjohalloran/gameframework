@@ -70,8 +70,6 @@
 #include "GameMain.h"
 #include "NullPhysics.h"
 #include "BulletPhysics.h"
-#include "CustomPhysics.h"
-#include "HavokPhysics.h"
 
 using boost::optional;
 using boost::shared_ptr;
@@ -118,14 +116,6 @@ namespace GameHalloran
 			}
 			m_pPhysics.reset(GCC_NEW BulletPhysics(stackManagerPtr));
 			m_physicsDiagnosticMode = GetBulletDiagnosticOptions();
-		}
-		else if(physicsNameStr.compare(CUSTOM_SYSTEM.c_str()) == 0)
-		{
-			m_pPhysics.reset(GCC_NEW CustomPhysics());
-		}
-		else if(physicsNameStr.compare(HAVOK_SYSTEM.c_str()) == 0)
-		{
-			m_pPhysics.reset(GCC_NEW HavokPhysics());
 		}
 		else
 		{

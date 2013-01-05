@@ -7,20 +7,16 @@
 //
 // /////////////////////////////////////////////////////////////////////////////
 
-
-// External Headers
 #include <iostream>
 #include <string>
+#ifdef _WINDOWS
+#	include <crtdbg.h>
+#endif
 
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
 
-#ifdef _WINDOWS
-#	include <crtdbg.h>
-#endif
-
-// Project Headers
 #include "GameBase.h"
 #include "GameLog.h"
 #include "GameException.h"
@@ -99,7 +95,7 @@ int main(int args, char *argv[])
 	shared_ptr<Pool3dGame> gamePtr;				// Game application class (starts up the logic and view layers and manages the game subsystems).
 	int value = 0;								// Main function return value.
 
-#if defined(_DEBUG) || defined(DEBUG)
+#if defined(DEBUG)
 #	if defined(_WINDOWS)
 		// Perform a memory leak check on exit when we are running on Windows
 		int tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
@@ -120,7 +116,7 @@ int main(int args, char *argv[])
 
 	try
 	{
-#if defined(_DEBUG) || defined(DEBUG)
+#if defined(DEBUG)
 		// To handle the current $GAMEROOT path for debugging comment in or out the following path set.
 
 #if defined(WIN32)

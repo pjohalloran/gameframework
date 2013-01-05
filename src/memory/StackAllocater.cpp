@@ -13,7 +13,7 @@
     #include <cstdlib>
 #endif
 
-#ifdef _DEBUG
+#ifdef DEBUG
 	#include <cstring>
 	#include <cstdio>
 #endif
@@ -31,7 +31,7 @@ namespace GameHalloran
 		if(m_size != 0)
 		{
 			m_data = static_cast<unsigned char *>(malloc(m_size));
-#ifdef _DEBUG
+#ifdef DEBUG
 			if(!IsValid())
 			{
 				printf("StackAllocater::StackAllocater(): Failed to allocate a block of memory of %u bytes with malloc.", m_size);
@@ -51,7 +51,7 @@ namespace GameHalloran
 	{
 		try
 		{
-//#ifdef _DEBUG
+//#ifdef DEBUG
 //			if(!VerifyStack())
 //			{
 //				printf("StackAllocater::~StackAllocater(): The stack was corrupted during its lifetime!\n");
@@ -71,7 +71,7 @@ namespace GameHalloran
 	void *StackAllocater::VAlloc(const U64 blockSize)
 	{
 		// Not enough space to allocate the block!
-#ifdef _DEBUG
+#ifdef DEBUG
 		if(!IsValid() || m_topMarker + blockSize + 8 > m_endMarker)
 		{
 			printf("StackAllocater::Alloc(): Failed to allocate %u bytes.  Not enough free space!", blockSize);
@@ -84,7 +84,7 @@ namespace GameHalloran
 
 		unsigned char *topStack = m_data + m_topMarker;
 
-#ifdef _DEBUG
+#ifdef DEBUG
 		++m_numBlocks;
 
 		m_topMarker += blockSize + 8;
@@ -106,7 +106,7 @@ namespace GameHalloran
 	void *StackAllocater::AllocEnd(const U64 blockSize)
 	{
 		// Not enough space to allocate the block!
-#ifdef _DEBUG
+#ifdef DEBUG
 		if(!IsValid() || m_endMarker - blockSize - 8 < m_topMarker)
 		{
 			printf("StackAllocater::AllocEnd(): Failed to allocate %u bytes.  Not enough free space!", blockSize);
@@ -119,7 +119,7 @@ namespace GameHalloran
 
 		unsigned char *topStack = m_data + m_endMarker - blockSize;
 
-#ifdef _DEBUG
+#ifdef DEBUG
 		topStack -= 8;
 
 		++m_numBlocks;
@@ -146,7 +146,7 @@ namespace GameHalloran
 		{
 			if(marker < m_topMarker)
 			{
-#ifdef _DEBUG
+#ifdef DEBUG
 				--m_numBlocks;
 				U64 bytesToClear(m_topMarker - marker);
 				memset(m_data + marker, FREE_BLOCK_VALUE, bytesToClear);
@@ -155,7 +155,7 @@ namespace GameHalloran
 			}
 			else if(marker > m_endMarker)
 			{
-#ifdef _DEBUG
+#ifdef DEBUG
 				--m_numBlocks;
 				U64 bytesToClear(m_endMarker - marker);
 				memset(m_data + marker, FREE_BLOCK_VALUE, bytesToClear);
@@ -165,7 +165,7 @@ namespace GameHalloran
 		}
 	}
 
-#ifdef _DEBUG
+#ifdef DEBUG
 
 	// ////////////////////////////////////////////////////////////
 	//

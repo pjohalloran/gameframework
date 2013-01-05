@@ -80,7 +80,6 @@
 #include "GameLog.h"
 #include "GameOptions.h"
 #include "GameException.h"
-#include "IGameTimer.h"
 #include "OsInputEvents.h"
 #include "Vector.h"
 

@@ -23,7 +23,6 @@
 #include "GameLog.h"
 #include "GameOptions.h"
 #include "GameException.h"
-#include "IGameTimer.h"
 #include "OsInputEvents.h"
 #include "GLMatrixStack.h"
 #include "Frustrum.h"

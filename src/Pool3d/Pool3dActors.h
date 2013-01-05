@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __POOL_3D_ACTORS_H
+#define __POOL_3D_ACTORS_H
+
 // /////////////////////////////////////////////////////////////////
 // @file Pool3dActors.h
 // @author PJ O Halloran
@@ -7,21 +11,14 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __POOL_3D_ACTORS_H
-#define __POOL_3D_ACTORS_H
-
-// External Headers
 #include <strstream>
 #include <string>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
-
-// Project Headers
 #include "Actors.h"
 #include "GameColors.h"
-
 
 namespace GameHalloran
 {
@@ -39,8 +36,8 @@ namespace GameHalloran
 		F32 m_restitution;			///< Actors "bounce".
 		F32 m_friction;				///< Actors friction.
 		F32 m_density;				///< Actors density.
-		F32 m_linearDamping;			///< Linear velocity damping factor.
-		F32 m_angularDamping;			///< Angular velocity damping factor.
+		F32 m_linearDamping;		///< Linear velocity damping factor.
+		F32 m_angularDamping;		///< Angular velocity damping factor.
 
 		PhysicsActorInfo() : m_restitution(0.0f), m_friction(0.0f), m_density(0.0f), m_linearDamping(0.0f), m_angularDamping(0.0f) {};
 	};

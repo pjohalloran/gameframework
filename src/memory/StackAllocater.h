@@ -40,7 +40,7 @@ namespace GameHalloran
 		Marker m_topMarker;				///< Current top of the stack from the beginning of the stack.
 		Marker m_endMarker;				///< Current top of the stack from the end of the stack.
 
-#ifdef _DEBUG
+#ifdef DEBUG
 		U32 m_numBlocks;				///< Number of blocks allocated on the stack to date.
 
 		// In the debug build we will ensure all currently free blocks have the same value.
@@ -189,7 +189,7 @@ namespace GameHalloran
 		// ////////////////////////////////////////////////////////////
 		inline U64 GetAvailableMemory() const { return (m_size - m_topMarker); };
 
-#ifdef _DEBUG
+#ifdef DEBUG
 
 		// ////////////////////////////////////////////////////////////
 		// Verifies that a block of memory has not had any buffer

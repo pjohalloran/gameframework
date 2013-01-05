@@ -826,7 +826,7 @@ namespace GameHalloran
 		m_cameraNode.reset(GCC_NEW CameraSceneNode(&m_sgm, m_viewFrustrumPtr));
 		m_sgm.SetCamera(m_cameraNode);
 
-#ifdef _DEBUG
+#if defined(DEBUG)
 		m_cameraNode->SetDebug(true);
 #endif
 

@@ -139,7 +139,7 @@ namespace GameHalloran
             m_shaderPtr->Activate();
 			m_cubeBatch.VDraw();
 
-#if defined(_DEBUG)
+#if defined(DEBUG)
 			if(g_appPtr->GetLoggerPtr() && g_appPtr->GetLoggerPtr()->GetLogLevel() >= GameLog::DEB)
 			{
 				GLenum error = glGetError();

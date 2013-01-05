@@ -1030,7 +1030,7 @@ namespace GameHalloran
 				}
 			}
 
-#ifdef _DEBUG
+#if defined(DEBUG)
 			m_gameStateObj.LogState();
 #endif
 			m_gameStateObj.m_shotState.Reset();

@@ -61,7 +61,7 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 #include "CommonMath.h"
 #include "Vector.h"
 
-#ifdef _DEBUG
+#ifdef DEBUG
 	#include <iostream>
 #endif
 
@@ -358,7 +358,7 @@ namespace GameHalloran
 		m_pTexCoords = NULL;
 	}
 
-#ifdef _DEBUG
+#ifdef DEBUG
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
