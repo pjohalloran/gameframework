@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GAME_EXCEPTION_TEST_SUITE_H
+#define __GAME_EXCEPTION_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file GameExceptionTestSuite.h
 // @author PJ O Halloran
@@ -7,15 +11,10 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GAME_EXCEPTION_TEST_SUITE_H
-#define __GAME_EXCEPTION_TEST_SUITE_H
-
-// External Headers
-#include <cxxtest/TestSuite.h>
-
 #include <string>
 
-// Project Headers
+#include <cxxtest/TestSuite.h>
+
 #include "GameException.h"
 
 // /////////////////////////////////////////////////////////////////

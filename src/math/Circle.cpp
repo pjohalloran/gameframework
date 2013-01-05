@@ -7,13 +7,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
 #include <cmath>
 
-// Project headers
 #include "Circle.h"
-
-// Namespace Declarations
 
 namespace GameHalloran
 {

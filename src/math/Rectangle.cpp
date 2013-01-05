@@ -7,13 +7,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
 #include <cmath>
 
-// Project headers
 #include "Rectangle.h"
-
-// Namespace Declarations
 
 namespace GameHalloran
 {
@@ -208,14 +204,8 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	const Point Rectangle::GetCentre() const
 	{
-		// Try to minize F32ing point error by rounding up.
-		//  We round up as its either going to be X.0 in the case the Width/Height is even
-		//		or X.5 in the case that Width/Height is odd. When a value is 0.5 or larger
-		//			its better to round up than to truncate the value as C casting does.
-		//				(Even this solution is not entirely accurate).
 		I32 xC = m_tl.GetX() + static_cast<I32>(ceil(static_cast<F32>(GetWidth()) / 2.0f));
 		I32 yC = m_br.GetY() + static_cast<I32>(ceil(static_cast<F32>(GetHeight()) / 2.0f));
-
 		return (Point(xC, yC));
 	}
 

@@ -20,7 +20,6 @@
 
 #include "StackAllocater.h"
 
-
 namespace GameHalloran
 {
 

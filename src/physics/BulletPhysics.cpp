@@ -42,27 +42,17 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
-// External Headers
 #include <string>
 
 #include <boost/optional.hpp>
 #include <boost/lexical_cast.hpp>
 
-
-// Project Headers
 #include "BulletPhysics.h"
-
 #include "EventManager.h"
 #include "GameMain.h"
 #include "GameBase.h"
 #include "PhysicsEvents.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -636,9 +626,17 @@ namespace GameHalloran
 	//
 	// /////////////////////////////////////////////////////////////////
 	BulletPhysics::BulletPhysics(boost::shared_ptr<ModelViewProjStackManager> mvpStackManagerPtr)\
-		: m_dynamicsWorld(), m_broadphase(), m_dispatcher(), m_solver(), m_collisionConfiguration(),\
-			m_debugDrawer(), m_actorBodies(), m_rigidBodyToActorId(), m_previousTickCollisionPairs(),\
-				m_mvpStackManagerPtr(mvpStackManagerPtr), m_meshMap()
+		: m_dynamicsWorld()
+		, m_broadphase()
+		, m_dispatcher()
+		, m_solver()
+		, m_collisionConfiguration()
+		, m_debugDrawer()
+		, m_actorBodies()
+		, m_rigidBodyToActorId()
+		, m_previousTickCollisionPairs()
+		, m_mvpStackManagerPtr(mvpStackManagerPtr)
+		, m_meshMap()
 	{
 	}
 
@@ -789,26 +787,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void BulletPhysics::VOnUpdate(const F32 deltaSeconds)
 	{
-		// TODO: Determine if 4 is a good number for the number of substeps....
-		//  it probably depends on game to game, depending on the desired/expected fps.
-
-		//std::cout << "deltaSeconds: " << deltaSeconds << std::endl;
-
-		// Bullet uses an internal fixed timestep (default 1/60th of a second)
-		//  We pass in 4 as a max number of sub steps.  Bullet will run the simulation
-		//   in increments of the fixed timestep until "deltaSeconds" amount of time has
-		//    passed, but will only run a maximum of 4 steps this way.
-		
-		// min 5 fps d=0.2f
-		// max 60 fps d=0.0166666f
-		// max 120 fps d=0.008333333
-		// ss = 1
-		// fixedTs = 1/60
-		// d < ss*fixedTs
-		// min case 0.2 < fixedTs (ss=12).
-		// max case ss=1
-
-		//m_dynamicsWorld->stepSimulation(deltaSeconds*4.0f, 4, 1.0f/240.0f);
 		m_dynamicsWorld->stepSimulation(deltaSeconds, 12, 1.0f/240.0f);
 	}
 

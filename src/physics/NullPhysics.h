@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_NULL_PHYSICS_H
+#define __GF_NULL_PHYSICS_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -42,18 +46,8 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_NULL_PHYSICS_H
-#define __GF_NULL_PHYSICS_H
-
-// External Headers
-
-// Project Headers
 #include "IGamePhysics.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

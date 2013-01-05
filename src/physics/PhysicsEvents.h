@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_PHYSICS_EVENTS_H
+#define __GF_PHYSICS_EVENTS_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -43,22 +47,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_PHYSICS_EVENTS_H
-#define __GF_PHYSICS_EVENTS_H
-
-// External Headers
 #include <string>
 #include <boost/optional.hpp>
 
-
-// Project Headers
 #include "EventManager.h"
 #include "Events.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

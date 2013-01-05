@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __STACK_TEST_SUITE_H
+#define __STACK_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file StackTestSuite.h
 // @author PJ O Halloran
@@ -7,17 +11,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __STACK_TEST_SUITE_H
-#define __STACK_TEST_SUITE_H
-
-// External Headers
-#include <cxxtest/TestSuite.h>
-
 #include <string>
-
 #include <iostream>
 
-// Project Headers
+#include <cxxtest/TestSuite.h>
+
 #include "Stack.h"
 
 using std::cout;

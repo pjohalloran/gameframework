@@ -24,7 +24,10 @@ project "gameframework"
 		"../src/3rdParty/**",
 		"../src/GLSLCompiler/**",
 		"../src/build/**",
-		"../src/Pool3d/**"
+		"../src/Pool3d/**",
+		"../src/unittests/**",
+		"../src/sound/DirectSoundAudio.h",
+		"../src/sound/DirectSoundAudio.cpp"
 	}
 	configuration "Debug"
 		flags { "FloatStrict", "StaticRuntime", "Symbols" }

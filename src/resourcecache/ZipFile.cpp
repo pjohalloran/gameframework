@@ -54,14 +54,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
-// External heades
 #include <string.h>
-#include <boost/algorithm/string/case_conv.hpp>
 
+#include <boost/algorithm/string/case_conv.hpp>
 #include "zlib/zlib.h"
 
-// Project headers
 #include "GameMain.h"
 #include "GameLog.h"
 #include "ZipFile.h"
@@ -72,15 +69,12 @@ using boost::optional;
 // --------------------------------------------------------------------------
 // ZIP file structures. Note these have to be packed (on windows!).
 // --------------------------------------------------------------------------
-//#pragma push(pack, 1)
 #pragma pack(1)
 struct GameHalloran::ZipFile::TZipLocalHeader
 {
     enum
     {
-        //67324752
         SIGNATURE = 0x04034b50,
-        //SIZE = sizeof(U64)*4 + sizeof(U16)*7
         SIZE = sizeof(DWORD)*4 + sizeof(WORD)*7
     };
     DWORD sig;
@@ -100,11 +94,8 @@ struct GameHalloran::ZipFile::TZipDirHeader
 {
     enum
     {
-        //101010256
         SIGNATURE = 0x06054b50,
         SIZE = sizeof(DWORD)*3 + sizeof(WORD)*5
-        //SIZE = 22
-
     };
     DWORD sig;
     WORD nDisk;
@@ -120,7 +111,6 @@ struct GameHalloran::ZipFile::TZipDirFileHeader
 {
     enum
     {
-        //33639248
         SIGNATURE   = 0x02014b50,
         // NB Size here does not take into account extra padding info at the end of the header..
         SIZE = sizeof(DWORD)*6 + sizeof(WORD)*11
@@ -154,19 +144,13 @@ struct GameHalloran::ZipFile::TZipDirFileHeader
 namespace GameHalloran
 {
     
-//#if defined(WINDOWS) || defined(WIN32)
-//    const std::string ZipFile::ZIP_PATH_SEPERATOR("\\");
-//#elif defined(TARGET_OS_MAC) || defined(TARGET_IPHONE) || defined(TARGET_PHONE_SIMULATOR)
-    const std::string ZipFile::ZIP_PATH_SEPERATOR("/");
-//#endif
+	const std::string ZipFile::ZIP_PATH_SEPERATOR("/");
     
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
     bool ZipFile::ReadDirHeader(TZipDirHeader * const headerPtr, I64 &offset)
     {
-        //I32 ft = sizeof(TZipDirHeader);
-        
         if(!headerPtr || !m_pFile)
         {
             GF_LOG_TRACE_ERR("ZipFile::ReadDirHeader()", "Invalid parameters");
@@ -174,36 +158,14 @@ namespace GameHalloran
         }
         
         I32 tmp = TZipDirHeader::SIZE;
-        //printf("tmp = %i\n", tmp);
-        
         memset(headerPtr, 0, tmp);
         
         fseek(m_pFile, -TZipDirHeader::SIZE, SEEK_END);
         
         // Save the offset to the Dir Header.
         offset = ftell(m_pFile);
-        
-//#if !defined(WINDOWS)
-////        fread(&headerPtr->sig, sizeof(headerPtr->sig), 1, m_pFile);
-////        fread(&headerPtr->nDisk, sizeof(headerPtr->nDisk), 1, m_pFile);
-////        fread(&headerPtr->nStartDisk, sizeof(headerPtr->nStartDisk), 1, m_pFile);
-////        fread(&headerPtr->nDirEntries, sizeof(headerPtr->nDirEntries), 1, m_pFile);
-////        fread(&headerPtr->totalDirEntries, sizeof(headerPtr->totalDirEntries), 1, m_pFile);
-////        fread(&headerPtr->dirSize, sizeof(headerPtr->dirSize), 1, m_pFile);
-////        fread(&headerPtr->dirOffset, sizeof(headerPtr->dirOffset), 1, m_pFile);
-////        fread(&headerPtr->cmntLen, sizeof(headerPtr->cmntLen), 1, m_pFile);
-//        
-//        fread(&headerPtr->sig, 4, 1, m_pFile);
-//        fread(&headerPtr->nDisk, 2, 1, m_pFile);
-//        fread(&headerPtr->nStartDisk, 2, 1, m_pFile);
-//        fread(&headerPtr->nDirEntries, 2, 1, m_pFile);
-//        fread(&headerPtr->totalDirEntries, 2, 1, m_pFile);
-//        fread(&headerPtr->dirSize, 4, 1, m_pFile);
-//        fread(&headerPtr->dirOffset, 4, 1, m_pFile);
-//        fread(&headerPtr->cmntLen, 2, 1, m_pFile);
-//#else // structures are tightly packed on windows...
+
         fread(headerPtr, TZipDirHeader::SIZE, 1, m_pFile);
-//#endif
         
         if(headerPtr->sig != TZipDirHeader::SIGNATURE)
         {
@@ -219,12 +181,7 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     bool ZipFile::ReadDirFileHeader(TZipDirFileHeader * const headerPtr, const I64 offset)
     {
-//        if(!headerPtr || offset > )
-//        {
-//            return (false);
-//        }
-        
-        return (false);
+		return (false);
     }
     
     // /////////////////////////////////////////////////////////////////
@@ -242,22 +199,7 @@ namespace GameHalloran
         fseek(m_pFile, offset, SEEK_SET);
         
         memset(headerPtr, 0, TZipLocalHeader::SIZE);
-        
-//#if !defined(WINDOWS)
-//        fread(&headerPtr->sig, sizeof(headerPtr->sig), 1, m_pFile);
-//        fread(&headerPtr->version, sizeof(headerPtr->version), 1, m_pFile);
-//        fread(&headerPtr->flag, sizeof(headerPtr->flag), 1, m_pFile);
-//        fread(&headerPtr->compression, sizeof(headerPtr->compression), 1, m_pFile);
-//        fread(&headerPtr->modTime, sizeof(headerPtr->modTime), 1, m_pFile);
-//        fread(&headerPtr->modDate, sizeof(headerPtr->modDate), 1, m_pFile);
-//        fread(&headerPtr->crc32, sizeof(headerPtr->crc32), 1, m_pFile);
-//        fread(&headerPtr->cSize, sizeof(headerPtr->cSize), 1, m_pFile);
-//        fread(&headerPtr->ucSize, sizeof(headerPtr->ucSize), 1, m_pFile);
-//        fread(&headerPtr->fnameLen, sizeof(headerPtr->fnameLen), 1, m_pFile);
-//        fread(&headerPtr->xtraLen, sizeof(headerPtr->xtraLen), 1, m_pFile);
-//#else
         fread(headerPtr, TZipLocalHeader::SIZE, 1, m_pFile);
-//#endif
         
         if (headerPtr->sig != TZipLocalHeader::SIGNATURE)
         {
@@ -271,14 +213,26 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	ZipFile::ZipFile() : m_pFile(NULL), m_pDirData(NULL), m_nEntries(0), m_ZipContentsMap(), m_papDir(NULL), m_localVec()
+	ZipFile::ZipFile()
+			: m_pFile(NULL)
+			, m_pDirData(NULL)
+			, m_nEntries(0)
+			, m_ZipContentsMap()
+			, m_papDir(NULL)
+			, m_localVec()
 	{
 	}
     
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
-    ZipFile::ZipFile(const path &resFileName) : m_pFile(NULL), m_pDirData(NULL), m_nEntries(0), m_ZipContentsMap(), m_papDir(NULL), m_localVec()
+    ZipFile::ZipFile(const path &resFileName)
+			: m_pFile(NULL)
+			, m_pDirData(NULL)
+			, m_nEntries(0)
+			, m_ZipContentsMap()
+			, m_papDir(NULL)
+			, m_localVec()
 	{
         Init(resFileName);
 	}
@@ -310,7 +264,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool ZipFile::Init(const path &resFileName)
 	{
-        // Ensure any previous zip file is closed.
         End();
 
         m_pFile = fopen(resFileName.string().c_str(), "rb");
@@ -368,24 +321,8 @@ namespace GameHalloran
             }
             else
             {
-                //pfh += TZipDirFileHeader::SIZE;
-                I32 tmp1 = TZipDirFileHeader::SIZE;
-                //I32 tmp2 = sizeof(TZipDirFileHeader);
-                pfh += tmp1;
+                pfh += TZipDirFileHeader::SIZE;
 
-//#if defined(WINDOWS)
-//                // Convert UNIX slashes to DOS backlashes.
-//                for (I32 j = 0; j < fh.fnameLen; ++j)
-//                {
-//                    if (pfh[j] == '/')
-//                    {
-//                        pfh[j] = '\\';
-//                    }
-//                }
-//#endif
-
-                // pjohalloran - Used to use _MAX_PATH macro here for the array length, but its not available
-                //  on other platforms!
                 char fileName[255];
                 memcpy(fileName, pfh, fh.fnameLen);
                 fileName[fh.fnameLen]=0;
@@ -394,8 +331,6 @@ namespace GameHalloran
                 boost::algorithm::to_lower(spath);
                 
                 m_ZipContentsMap[spath] = i;
-                
-                //printf("%s: %i) Found %s\n", __FILE__, i+1, spath.c_str());
 
                 // Skip name, extra and comment fields.
                 pfh += fh.fnameLen + fh.xtraLen + fh.cmntLen;
@@ -424,7 +359,6 @@ namespace GameHalloran
             return (optional<I32>());
         }
         
-        // pjohalloran: replacing _MAX_PATH and _strlwr with non WIN32 constant!
         std::string lwrPath(path.string());
         boost::algorithm::to_lower(lwrPath);
 		ZipContentsMap::const_iterator i = m_ZipContentsMap.find(lwrPath);
@@ -464,13 +398,8 @@ namespace GameHalloran
             return (false);
         }
 		
-        //m_localVec
-        //std::string filename(m_papDir[i]->GetName());
         std::string filename(m_localVec[i].GetName());
         pathRef = path(filename);
-        
-//        memcpy(pszDest, m_papDir[i]->GetName(), m_papDir[i]->fnameLen);
-//        pszDest[m_papDir[i]->fnameLen] = '\0';
         return (true);
 	}
 
@@ -484,8 +413,7 @@ namespace GameHalloran
             GF_LOG_TRACE_ERR("ZipFile::GetFileLen()", "ZIP index out of bounds");
             return (false);
         }
-	  
-        //fileLen = m_papDir[i]->ucSize;
+		
         fileLen = m_localVec[i].ucSize;
         return (true);
 	}
@@ -501,12 +429,8 @@ namespace GameHalloran
             return (false);
         }
 
-        // Quick'n dirty read, the whole file at once.
-        // Ungood if the ZIP has huge files inside
-        
         TZipDirFileHeader tmp = m_localVec[i];
         TZipLocalHeader h;
-        //if(!ReadLocalHeader(&h, m_papDir[i]->hdrOffset))
         if(!ReadLocalHeader(&h, m_localVec[i].hdrOffset))
         {
             return (false);
@@ -528,15 +452,7 @@ namespace GameHalloran
         }
 
         I32 cSize = (h.cSize != 0 ? h.cSize : ( tmp.cSize != 0 ? tmp.cSize : -1 ));
-        if(cSize == -1)
-        {
-            //I32 g = 0;
-        }
         I32 ucSize = (h.ucSize != 0 ? h.ucSize : ( tmp.ucSize != 0 ? tmp.ucSize : -1 ));
-        if(ucSize == -1)
-        {
-            //I32 g = 0;
-        }
         
         // Alloc compressed data buffer and read the whole stream
         char *pcData = GCC_NEW char[cSize];
@@ -582,97 +498,8 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     bool ZipFile::WriteFile(const bool compress, const void * const pBuf)
     {
-        // TODO
         GF_LOG_TRACE_ERR("ZipFile::WriteFile()", "Not yet implemented...");
         return (false);
     }
-
-//	// /////////////////////////////////////////////////////////////////
-//	//
-//	// /////////////////////////////////////////////////////////////////
-//	bool ZipFile::ReadLargeFile(I32 i, void *pBuf, void (*callback)(I32, bool &))
-//
-//	{
-//	  if (pBuf == NULL || i < 0 || i >= m_nEntries)
-//		return false;
-//
-//	  // Quick'n dirty read, the whole file at once.
-//	  // Ungood if the ZIP has huge files inside
-//
-//	  // Go to the actual file and read the local header.
-//	  fseek(m_pFile, m_papDir[i]->hdrOffset, SEEK_SET);
-//	  TZipLocalHeader h;
-//
-//	  memset(&h, 0, sizeof(h));
-//	  fread(&h, sizeof(h), 1, m_pFile);
-//	  if (h.sig != TZipLocalHeader::SIGNATURE)
-//		return false;
-//
-//	  // Skip extra fields
-//	  fseek(m_pFile, h.fnameLen + h.xtraLen, SEEK_CUR);
-//
-//	  if (h.compression == Z_NO_COMPRESSION)
-//	  {
-//		// Simply read in raw stored data.
-//		fread(pBuf, h.cSize, 1, m_pFile);
-//		return true;
-//	  }
-//	  else if (h.compression != Z_DEFLATED)
-//		return false;
-//
-//	  // Alloc compressed data buffer and read the whole stream
-//	  char *pcData = GCC_NEW char[h.cSize];
-//	  if (!pcData)
-//		return false;
-//
-//	  memset(pcData, 0, h.cSize);
-//	  fread(pcData, h.cSize, 1, m_pFile);
-//
-//	  bool ret = true;
-//
-//	  // Setup the inflate stream.
-//	  z_stream stream;
-//	  I32 err;
-//
-//	  stream.next_in = (Bytef*)pcData;
-//	  stream.avail_in = (uInt)h.cSize;
-//	  stream.next_out = (Bytef*)pBuf;
-//	  stream.avail_out = (128 * 1024); //  read 128k at a time h.ucSize;
-//	  stream.zalloc = (alloc_func)0;
-//	  stream.zfree = (free_func)0;
-//
-//	  // Perform inflation. wbits < 0 indicates no zlib header inside the data.
-//	  err = inflateInit2(&stream, -MAX_WBITS);
-//	  if (err == Z_OK)
-//	  {
-//		  uInt count = 0;
-//		  bool cancel = false;
-//			while (stream.total_in < (uInt)h.cSize && !cancel)
-//			{
-//				err = inflate(&stream, Z_SYNC_FLUSH);
-//				if (err == Z_STREAM_END)
-//				{
-//					err = Z_OK;
-//					break;
-//				}
-//				else if (err != Z_OK)
-//				{
-//					assert(0 && "Something happened.");
-//					break;
-//				}
-//
-//				stream.avail_out = (128 * 1024); 
-//				stream.next_out += stream.total_out;
-//
-//				callback(count * 100 / h.cSize, cancel);
-//			}
-//			inflateEnd(&stream);
-//	  }
-//	  if (err != Z_OK)
-//		ret = false;
-//
-//	  delete[] pcData;
-//	  return ret;
-//	}
 
 }

@@ -35,13 +35,9 @@
 //
 //========================================================================
 
-// External Headers
 #include <string>
-
-#ifdef _WINDOWS || TARGET_OS_WINDOWS
-#include <io.h>
-#else
-
+#if defined(_WINDOWS)
+	#include <io.h>
 #endif
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -50,13 +46,9 @@
 #include <vorbis/codec.h>
 #include <vorbis/vorbisfile.h>
 
-// Project Headers
 #include "CSoundResource.h"
-
 #include "GameBase.h"
 #include "GameLog.h"
-
-// For the global app pointer
 #include "GameMain.h"
 
 using std::string;
@@ -73,7 +65,6 @@ namespace GameHalloran
 	// ////////////////////////////////////////////////////////////////////
 	ResHandle *SoundResource::VCreateHandle(const char *buffer, U32 size, ResCache *pResCache) 
 	{
-		// Cast away the const-ness of the buffer for the SoundResHandle.
 		char *bufferNoConst = const_cast<char *>(buffer);
 		return (GCC_NEW SoundResHandle(*this, bufferNoConst, size, pResCache)); 
 	}

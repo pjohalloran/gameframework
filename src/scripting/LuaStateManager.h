@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __LUA_STATE_MANAGER_H
+#define __LUA_STATE_MANAGER_H
+
 //========================================================================
 // GameCode3 is the sample application that encapsulates much of the source code
 // discussed in "Game Coding Complete - 3rd Edition" by Mike McShaffry, published by
@@ -51,21 +55,14 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __LUA_STATE_MANAGER_H
-#define __LUA_STATE_MANAGER_H
-
-// External Headers
 #include <string>
 
 #include <LuaPlus/LuaLink.h>
 #include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
-
-// Project Headers
 #include "Vector.h"
 #include "ResCache2.h"
-
 
 namespace GameHalloran
 {

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __QUEUE_TEST_SUITE_H
+#define __QUEUE_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file QueueTestSuite.h
 // @author PJ O Halloran
@@ -7,17 +11,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __QUEUE_TEST_SUITE_H
-#define __QUEUE_TEST_SUITE_H
-
-// External Headers
-#include <cxxtest/TestSuite.h>
-
 #include <string>
-
 #include <iostream>
 
-// Project Headers
+#include <cxxtest/TestSuite.h>
+
 #include "Queue.h"
 
 using std::cout;

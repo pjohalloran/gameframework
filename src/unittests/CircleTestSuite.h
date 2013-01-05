@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __CIRCLE_TEST_SUITE_H
+#define __CIRCLE_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file CircleTestSuite.h
 // @author PJ O Halloran
@@ -7,15 +11,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __CIRCLE_TEST_SUITE_H
-#define __CIRCLE_TEST_SUITE_H
-
-// External Headers
 #include <cxxtest/TestSuite.h>
-
 #include <boost/scoped_ptr.hpp>
 
-// Project Headers
 #include "Circle.h"
 
 // /////////////////////////////////////////////////////////////////
@@ -30,8 +28,6 @@ class CircleTestSuite : public CxxTest::TestSuite
 {
 
 private:
-	
-
 
 	bool IsTestDataReady()
 	{

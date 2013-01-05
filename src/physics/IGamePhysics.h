@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_I_GAME_PHYSICS_H
+#define __GF_I_GAME_PHYSICS_H
+
 //========================================================================
 // IGamePhysics.h -  Physics class interface.
 //
@@ -35,7 +39,6 @@
 //
 //========================================================================
 
-
 // /////////////////////////////////////////////////////////////////
 // @file IGamePhysics.h
 // @author Michael L. McShaffry (edited by PJ O Halloran)
@@ -55,16 +58,10 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_I_GAME_PHYSICS_H
-#define __GF_I_GAME_PHYSICS_H
-
-// External Headers
 #include <vector>
 
 #include <boost/shared_ptr.hpp>
 
-
-// Project Headers
 #include "IActors.h"
 #include "Vector.h"
 #include "Matrix.h"
@@ -72,11 +69,6 @@
 #include "GLTriangleBatch.h"
 #include "PhysicsCommon.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -147,8 +139,8 @@ namespace GameHalloran
 		enum PhysicsObjectType m_objectType;		///< Object type.
 		boost::optional<ActorId> m_actorId;			///< Game actor ID (link to the games logic layer actors).
 		bool m_active;								///< Is it currently active/asleep.
-		F32 m_friction;							///< Friction parameter.
-		F32 m_restitution;						///< Restitution parameter.
+		F32 m_friction;								///< Friction parameter.
+		F32 m_restitution;							///< Restitution parameter.
 		I32 m_collisionGroup;						///< Collision group object belongs to (for high level collision filtering).
 		I32 m_collisionMask;						///< Collision group object interacts with (for high level collision filtering).
 		Matrix4 m_objMatrix;						///< The orientation and position of the object.
@@ -158,7 +150,7 @@ namespace GameHalloran
 		F32 m_linearDamping;						///< Linear damping.
 		Vector3 m_angularVelocity;					///< Angular velocity.
 		F32 m_angularDamping;						///< Angular damping.
-		F32 m_mass;								///< Body mass.
+		F32 m_mass;									///< Body mass.
 		Vector3 m_inertia;							///< The bodies inertia tensor.
 
 		// Parameters for SoftBody types only (TODO: Add these later...).
@@ -479,8 +471,6 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		virtual void VTranslate(const ActorId actorId, const Vector3 &vec) = 0;
 	};
-
-
 }
 
 #endif

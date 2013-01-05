@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __FRUSTRUM_TEST_SUITE_H
+#define __FRUSTRUM_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file FrustrumTestSuite.h
 // @author PJ O Halloran
@@ -7,15 +11,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __FRUSTRUM_TEST_SUITE_H
-#define __FRUSTRUM_TEST_SUITE_H
-
-// External Headers
 #include <cxxtest/TestSuite.h>
-
 #include <boost/scoped_ptr.hpp>
 
-// Project Headers
 #include "CommonMath.h"
 #include "Frustrum.h"
 #include "Vector.h"
@@ -33,11 +31,8 @@ using GameHalloran::Point3;
 // /////////////////////////////////////////////////////////////////
 class FrustrumTestSuite : public CxxTest::TestSuite
 {
-
 private:
 	
-
-
 	bool IsTestDataReady()
 	{
 		return (true);

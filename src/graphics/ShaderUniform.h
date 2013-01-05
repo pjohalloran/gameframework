@@ -76,7 +76,14 @@ namespace GameHalloran
         // General constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver *observer) : m_type(eInt), m_location(location), m_size(1), m_arrayCount(1), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver *observer)
+						: m_type(eInt)
+						, m_location(location)
+						, m_size(1)
+						, m_arrayCount(1)
+						, m_observer(observer)
+						, m_dirty(true)
+						, m_id(name.c_str())
         {
             assert(observer != NULL);
             m_observer->VNotifyDirty(this);
@@ -86,7 +93,14 @@ namespace GameHalloran
         // GLint Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const GLint val) : m_type(eInt), m_location(location), m_size(1), m_arrayCount(1), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const GLint val)
+						: m_type(eInt)
+						, m_location(location)
+						, m_size(1)
+						, m_arrayCount(1)
+						, m_observer(observer)
+						, m_dirty(true)
+						, m_id(name.c_str())
         {
             assert(observer != NULL);
             m_value.m_intArr[0] = val;
@@ -97,7 +111,14 @@ namespace GameHalloran
         // GLint [] Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const U32 arrCount, const GLint *arr) : m_type(eIntArr), m_location(location), m_size(size), m_arrayCount(arrCount), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const U32 arrCount, const GLint *arr)
+						: m_type(eIntArr)
+						, m_location(location)
+						, m_size(size)
+						, m_arrayCount(arrCount)
+						, m_observer(observer)
+						, m_dirty(true)
+						, m_id(name.c_str())
         {
             assert(m_size != 0 && m_size <= 4 && m_arrayCount > 0);
             assert(observer != NULL);
@@ -110,7 +131,14 @@ namespace GameHalloran
         // GLfloat Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const GLfloat val) : m_type(eFloat), m_location(location), m_size(size), m_arrayCount(1), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const GLfloat val)
+						: m_type(eFloat)
+						, m_location(location)
+						, m_size(size)
+						, m_arrayCount(1)
+						, m_observer(observer)
+						, m_dirty(true)
+						, m_id(name.c_str())
         {
             assert(m_observer != NULL);
             m_value.m_floatArr[0] = val;
@@ -121,7 +149,14 @@ namespace GameHalloran
         // GLfloat [] Constructor.
         //
         // /////////////////////////////////////////////////////////////////
-        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const U32 arrCount, const GLfloat *arr) : m_type(eFloatArr), m_location(location), m_size(size), m_arrayCount(arrCount), m_observer(observer), m_dirty(true), m_id(name.c_str())
+        ShaderUniform(const GLint location, const std::string &name, ICleanableObserver * observer, const U32 size, const U32 arrCount, const GLfloat *arr)
+						: m_type(eFloatArr)
+						, m_location(location)
+						, m_size(size)
+						, m_arrayCount(arrCount)
+						, m_observer(observer)
+						, m_dirty(true)
+						, m_id(name.c_str())
         {
             assert(m_size != 0 && m_size <= 16 && m_arrayCount > 0);
             assert(observer != NULL);

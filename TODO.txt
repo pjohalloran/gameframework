@@ -18,8 +18,6 @@ Here is a few ideas for the future direction of my personal project...
 
  - Add custom allocaters to the data structures so that we can avid using the OS heap for them.
 
- - 
-
  ***** Graphics *****
  - Learn DirectX 10/11.
 
@@ -74,3 +72,36 @@ Here is a few ideas for the future direction of my personal project...
  - Port Pool3d to be runnable in Linux.
 
  - Setup a website to show off my work.
+
+ **** bugs/misc ****
+
+openal update seems to be not working
+
+put menu specific scripting stuff in pool3d into framework
+
+impl font rendering
+
+impl base level graphics batching manaement system like in GEA
+
+finish data structures
+
+finish memory management
+override new, delete throughout framework like bullet does maybe
+
+remove boost as its a pain to install or bundle in.
+write filesystem portable class
+write path portable class
+
+remove exceptions
+turn off exceptions and rtti
+
+Fix shader uniform bugs
+
+optimize graphics, especially SGM and GUI system
+
+Fix RayCast, Plane
+
+Write Quaternions
+
+Add unit testing project for all platforms.
+

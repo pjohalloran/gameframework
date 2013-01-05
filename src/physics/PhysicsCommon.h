@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_PHYSICS_COMMON_H
+#define __GF_PHYSICS_COMMON_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -42,19 +46,8 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_PHYSICS_COMMON_H
-#define __GF_PHYSICS_COMMON_H
+#include "GameTypes.h"
 
-// External Headers
-
-
-// Project Headers
-
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

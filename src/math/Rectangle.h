@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __RECTANGLE_H
+#define __RECTANGLE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file Rectangle.h
 // @author PJ O Halloran
@@ -7,12 +11,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __RECTANGLE_H
-#define __RECTANGLE_H
-
-// External Headers
-
-// Project Headers
 #include "Point.h"
 
 namespace GameHalloran

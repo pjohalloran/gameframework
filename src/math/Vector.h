@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_VECTOR_H
+#define __GF_VECTOR_H
+
 // /////////////////////////////////////////////////////////////////
 // @file Vector.h
 // @author PJ O Halloran
@@ -53,25 +57,17 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_VECTOR_H
-#define __GF_VECTOR_H
-
-// External Headers
 #include <cmath>
 #include <cstring>
-
 #include <string>
 #include <ostream>
 #include <sstream>
-
 #include <list>
 
 #include <boost/shared_ptr.hpp>
 
-// Project Headers
 #include "CommonMath.h"
 #include "CRandom.h"
-
 
 namespace GameHalloran
 {
@@ -522,15 +518,6 @@ namespace GameHalloran
 				strStream << "[" << m_vec[0] << ", " << m_vec[1] << ", " << m_vec[2] << "]";
 				return (strStream.str());
 			};
-
-			//// /////////////////////////////////////////////////////////////////
-			//// Overloading the operator to return a string representing the vector
-			//// for easier logging and debugging using std::cout.
-			////
-			//// @return std::ostream Output stream.
-			////
-			//// /////////////////////////////////////////////////////////////////
-			//friend std::ostream &operator<< (std::ostream &output, const Vector3 &vec3);
 
 			// /////////////////////////////////////////////////////////////////
 			// Get a read only pointer to the array of components of the object.
@@ -1071,15 +1058,6 @@ namespace GameHalloran
 				return (strStream.str());
 			};
 
-			//// /////////////////////////////////////////////////////////////////
-			//// Overloading the operator to return a string representing the vector
-			//// for easier logging and debugging using std::cout.
-			////
-			//// @return std::ostream Output stream.
-			////
-			//// /////////////////////////////////////////////////////////////////
-			//friend std::ostream &operator<< (std::ostream &output, const Vector4 vec4);
-
 			// /////////////////////////////////////////////////////////////////
 			// Get a read only pointer to the array of components of the object.
 			//
@@ -1459,15 +1437,6 @@ namespace GameHalloran
 				return (strStream.str());
 			};
 
-			//// /////////////////////////////////////////////////////////////////
-			//// Overloading the operator to return a string representing the point
-			//// for easier logging and debugging using std::cout.
-			////
-			//// @return std::ostream Output stream.
-			////
-			//// /////////////////////////////////////////////////////////////////
-			//friend std::ostream &operator<< (std::ostream &output, const Point3 &pt);
-
 			// /////////////////////////////////////////////////////////////////
 			// Get a read only pointer to the array of components of the object.
 			//
@@ -1513,28 +1482,6 @@ namespace GameHalloran
 	extern const Vector3 g_v3XunitVec;
 	extern const Vector3 g_v3YunitVec;
 	extern const Vector3 g_v3ZunitVec;
-
-	//// /////////////////////////////////////////////////////////////////
-	//// Template method to print out objects easily to
-	//// the console with a standerd c++ stream class such as std::cout.
-	////
-	//// The object must have a public method with the prototype
-	//// "std::string ToString() const" in order to be compatible
-	//// with this template function.
-	////
-	//// @param output The stream to output the string of the object to.
-	//// @param obj The object to serialize to a string.
-	////
-	//// @return std::ostream& The stream that the string has been written
-	////							out to.
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//template<class T>
-	//	std::ostream &operator<< (std::ostream &output, const T &obj)
-	//{
-	//	output << obj.ToString();
-	//	return (output);
-	//};
 
 	// /////////////////////////////////////////////////////////////////
 	// Given three points in 3D space, calulate the normal vector.

@@ -29,7 +29,7 @@
 #include "LuaStateManager.h"
 #include "EventManagerImpl.h"
 #include "GameLogic.h"
-#include "IGameTimer.h"
+#include "Timer.h"
 #include "Point.h"
 #include "OsInputEvents.h"
 
@@ -65,10 +65,10 @@ namespace GameHalloran
 			F64 m_lastRenderTime;										///< Timestamp of the last render call.
 			F64 m_lastUpdateTime;										///< Timestamp of the last update call.
 			F64 m_lastEventTime;										///< Timestamp of the last OS event call.
-			boost::shared_ptr<IGameTimer> m_frameRateTimer;				///< Timer to regulate the frame rate.
+			boost::shared_ptr<Timer> m_frameRateTimer;					///< Timer to regulate the frame rate.
 			U32 m_frameCount;											///< Number of frames rendered so far in the current second.													
 			U32 m_framesInPastSecond;									///< Number of frames rendered in the past second.
-			boost::shared_ptr<IGameTimer> m_appTimer;					///< Timer used to record the application start time, etc.
+			boost::shared_ptr<Timer> m_appTimer;						///< Timer used to record the application start time, etc.
 			F64 m_startTime;											///< Start time of the game loop.
 			bool m_isRunning;											///< Flag indicating if the game is currently running.
 

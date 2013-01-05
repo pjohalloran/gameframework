@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _GF_STACK_ALLOCATER_H
 #define _GF_STACK_ALLOCATER_H
 

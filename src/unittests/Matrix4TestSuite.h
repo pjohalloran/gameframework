@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __MATRIX4_TEST_SUITE_H
+#define __MATRIX4_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file Matrix4TestSuite.h
 // @author PJ O Halloran
@@ -7,15 +11,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __MATRIX4_TEST_SUITE_H
-#define __MATRIX4_TEST_SUITE_H
-
-// External Headers
 #include <cxxtest/TestSuite.h>
-
 #include <boost/scoped_ptr.hpp>
 
-// Project Headers
 #include "CommonMath.h"
 #include "Matrix.h"
 
@@ -35,11 +33,8 @@ using GameHalloran::Matrix4;
 // /////////////////////////////////////////////////////////////////
 class Matrix4TestSuite : public CxxTest::TestSuite
 {
-
 private:
 	
-
-
 	bool IsTestDataReady()
 	{
 		return (true);

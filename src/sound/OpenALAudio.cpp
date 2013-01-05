@@ -7,18 +7,13 @@
 //
 // ////////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <string>
 #include <cstring>
 
 #include <boost/lexical_cast.hpp>
 
-
-// Project Headers
 #include "OpenALAudio.h"
-
 #include "GameMain.h"
-
 
 namespace GameHalloran
 {
@@ -31,13 +26,6 @@ namespace GameHalloran
     // ////////////////////////////////////////////////////////////////////
     ALboolean OpenALAudio::AlSanityCheck(void)
     {
-        // maybe not needed here????
-//        if(!Audio::IsInitialized())
-//        {
-//            GF_LOG_TRACE_ERR("OpenALAudio::AlSanityCheck()", alGetErrorString(AL_INVALID_OPERATION));
-//            return (AL_FALSE);
-//        }
-        
         ALCcontext *context = alcGetCurrentContext();
         if(context == NULL)
         {
@@ -596,7 +584,6 @@ namespace GameHalloran
 			return (false);
 		}
 
-		// Search for the source in the container and remove it if its in there.
 		bool removed(false);
 		for(SceneAudioSourceVector::iterator vecIter = m_sourceVec.begin(), endIter = m_sourceVec.end(); ((!removed) && (vecIter != endIter)); )
 		{
@@ -639,7 +626,6 @@ namespace GameHalloran
 	// ////////////////////////////////////////////////////////////////////
 	bool OpenALAudio::VActive()
 	{
-		// Check if the default context has been made.
 		return (alcGetCurrentContext() != NULL);
 	}
 

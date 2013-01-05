@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __DEFAULT_ALLOCATER_H
 #define __DEFAULT_ALLOCATER_H
 
@@ -11,17 +12,11 @@
 //
 // ////////////////////////////////////////////////////////////
 
-
-// For malloc and free
 #include <cstdlib>
 
 #include "GameTypes.h"
 #include "GameBase.h"
 
-
-// ////////////////////////////////////////////////////////////
-//
-// ////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
     
@@ -100,6 +95,5 @@ namespace GameHalloran
         virtual F32 VDefrag(const F32 seconds) { return (0.0f); };
     };
 }
-
 
 #endif

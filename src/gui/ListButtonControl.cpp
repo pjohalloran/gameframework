@@ -8,23 +8,15 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 
-
-// Project Headers
 #include "ListButtonControl.h"
-
 #include "GameMain.h"
 #include "GameBase.h"
 #include "EventManager.h"
 #include "Events.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -41,14 +33,9 @@ namespace GameHalloran
 			for(I64 i = 1; i <= size; ++i)
 			{
 				LuaPlus::LuaObject currTable = table[i];
-//				if(currTable.IsNil())
-//				{
-//					I32 g = 0;
-//				}
 				if(currTable.IsString())
 				{
 					error = false;
-					// Add the found string to the list!
 					m_list.push_back(std::string(currTable.GetString()));
 				}
 			}
@@ -136,7 +123,9 @@ namespace GameHalloran
 											const ScreenElementId id,\
 											const bool enabled) throw (GameException &)\
 											: ButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId, textureNameRef, atlasNameRef,\
-												texturePressedRef, textureHoverRef, std::string(""), visible, id, enabled), m_list(list), m_curr(m_list.begin())
+												texturePressedRef, textureHoverRef, std::string(""), visible, id, enabled)
+											, m_list(list)
+											, m_curr(m_list.begin())
 	{
 		Init();
 	}
@@ -150,7 +139,9 @@ namespace GameHalloran
 											const boost::shared_ptr<GLSLShader> shaderTexObj,\
 											boost::shared_ptr<FTFont> fontPtr,\
 											const ScreenElementId id) throw (GameException &)\
-											: ButtonControl(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id), m_list(), m_curr()
+											: ButtonControl(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id)
+											, m_list()
+											, m_curr()
 	{
 		SetLuaTextList(widgetScriptData.GetByName("TextTable"));
 		if(!m_list.empty())
@@ -165,7 +156,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool ListButtonControl::VOnAction()
 	{
-		//std::cout << "ListButtonControl::VOnAction(): Current selection: " << *m_curr << std::endl;
 		std::string text;
 		if(!m_list.empty())
 		{
@@ -197,7 +187,6 @@ namespace GameHalloran
 	void ListButtonControl::VOnUpdate(const F32 elapsedTime)
 	{
 		ButtonControl::VOnUpdate(elapsedTime);
-		// TODO:
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -233,7 +222,6 @@ namespace GameHalloran
 
 		if(a && b)
 		{
-			// Search for the text string in the list of strings.
 			boost::algorithm::to_lower(tmpText);
 			for(std::list<std::string>::iterator i = m_list.begin(), end = m_list.end(); ((!found) && (i != end)); ++i)
 			{

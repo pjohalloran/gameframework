@@ -1,38 +1,31 @@
 // /////////////////////////////////////////////////////////////////
-// @file CommonTimer.cpp
+// @file Timer.cpp
 // @author PJ O Halloran
 // @date 16/08/2010
 //
-// File contains the implementation of the CommonTimer class.
+// File contains the implementation of the Timer class.
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
-
-
-// Project headers
-#include "CommonTimer.h"
-
-
-// Namespace Declarations
+#include "Timer.h"
 
 namespace GameHalloran
 {	
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	void CommonTimer::VStart()
+	void Timer::Start()
 	{
 		// Get the current clock time and start the timer.
 		m_started = true;
 		m_paused = false;
-		m_startTicks = VGetTicks(); 
+		m_startTicks = GetTicks(); 
 	}
 	
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	void CommonTimer::VStop()
+	void Timer::Stop()
 	{
 		// Stop and unpause the timer
 		m_started = false;
@@ -42,26 +35,26 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	void CommonTimer::VPause()
+	void Timer::Pause()
 	{
 		if((m_started) && (!m_paused))
 		{
 			//Pause the timer and calculate the paused ticks
 			m_paused = true;
-			m_pausedTicks = VGetTicks() - m_startTicks;
+			m_pausedTicks = GetTicks() - m_startTicks;
 		} 
 	}
 	
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	void CommonTimer::VUnPause()
+	void Timer::UnPause()
 	{
 		if(m_paused)
 		{
 			// Unpause the timer, reset the paused ticks and recalculate the start ticks
 			m_paused = false;
-			m_startTicks = VGetTicks() - m_pausedTicks;
+			m_startTicks = GetTicks() - m_pausedTicks;
 			m_pausedTicks = 0;
 		}
 	}
@@ -69,7 +62,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	F64 CommonTimer::VGetTime()
+	F64 Timer::GetTime()
 	{
 		if(m_started)
 		{
@@ -80,19 +73,19 @@ namespace GameHalloran
 			else
 			{
 				// Return the current time minus the start time
-				F64 currTime = VGetTicks();
+				F64 currTime = GetTicks();
 				return (currTime - m_startTicks);
 			}
 		}
 		
 		// The timer is not currently running
-		return (0);
+		return (0.0);
 	}
 	
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool CommonTimer::VIsStarted() const
+	bool Timer::IsStarted() const
 	{
 		return (m_started);
 	}
@@ -100,7 +93,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	// 
 	// /////////////////////////////////////////////////////////////////
-	bool CommonTimer::VIsPaused() const
+	bool Timer::IsPaused() const
 	{
 		return (m_paused);
 	}

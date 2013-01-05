@@ -7,20 +7,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <cmath>
 
-
-// Project Headers
 #include "RayCast.h"
-
 #include "GameBase.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -45,7 +36,6 @@ namespace GameHalloran
 		// Get distance from V0 to ray origin.
 		Vector3 distanceVec = m_origin - ptA;
 
-		// Calculate u
 		F32 u = distanceVec.Dot(perpendicularVec);
 		if((u < 0.0f) || (u > determinant))
 		{
@@ -55,14 +45,12 @@ namespace GameHalloran
 		Vector3 tmp;
 		distanceVec.Cross(edge1, tmp);
 
-		// Calculate v
 		F32 v = m_direction.Dot(tmp);
 		if((v < 0.0f) || (u + v > determinant))
 		{
 			return (false);
 		}
 
-		// Calculate t now
 		t = edge2.Dot(tmp);
 		determinant = 1.0f / determinant;
 		t *= determinant;
@@ -88,11 +76,9 @@ namespace GameHalloran
 		// B = 2 * (m_direction.Dot(P0 - c)) (P0 is ray origin, c is centre of sphere).
 		// C = (P0 -c).Dot(P0 - c) - r^2.
 		Vector3 originToCentreVec = Vector3(m_origin) - Vector3(sphere.GetCentre());
-		//const F32 A = 1;
 		const F32 B = 2.0f * m_direction.Dot(originToCentreVec);
 		const F32 C = originToCentreVec.Dot(originToCentreVec) - (sphere.GetRadius() * sphere.GetRadius());
 
-		// find the discriminant
 		F32 discriminant = (B * B) - (4.0f * C);
 
 		// test for imaginary number
@@ -104,7 +90,6 @@ namespace GameHalloran
 
 		discriminant = sqrtf(discriminant);
 
-		// Calculate t0 and t1.
 		t0 = (-B + discriminant) / 2.0f;
 		t1 = (-B - discriminant) / 2.0f;
 

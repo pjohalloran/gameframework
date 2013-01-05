@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __CIRCLE_H
+#define __CIRCLE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file Circle.h
 // @author PJ O Halloran
@@ -7,12 +11,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __CIRCLE_H
-#define __CIRCLE_H
-
-// External Headers
-
-// Project Headers
 #include "GameTypes.h"
 #include "Point.h"
 

@@ -7,31 +7,14 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <boost/lexical_cast.hpp>
 
-
-// Project Headers
 #include "AbstractWidget.h"
-
 #include "GameMain.h"
 #include "TextResource.h"
 #include "LuaStateManager.h"
-
 #include "TextureAtlas.h"
 
-////////////////////////// TEMPORARY TEMPORARY TEMPORARY - On SnowLeopard this is suppored, but GLEW doens't hook up properly
-////////////////////////// Fixed probably in 10.6.3
-//#ifdef __APPLE__
-//#define glGenVertexArrays glGenVertexArraysAPPLE
-//#define glDeleteVertexArrays  glDeleteVertexArraysAPPLE
-//#define glBindVertexArray	glBindVertexArrayAPPLE
-//#endif
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -337,20 +320,41 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	AbstractWidget::AbstractWidget(const Point3 &posRef,\
-									const Vector4 &colorRef,\
-									boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,\
-									const F32 width,\
-									const F32 height,\
-									const boost::shared_ptr<GLSLShader> shaderFlatObj,\
-									const boost::shared_ptr<GLSLShader> shaderTexObj,\
-									const std::string &textureNameRef,\
-                                    const std::string &atlasNameRef,\
-									const bool visible,\
-									const ScreenElementId id) throw (GameException &)\
-		: m_quadDim(""), m_currQuadDim(""), m_position(posRef), m_visible(visible), m_color(colorRef), m_id(id), m_width(width), m_height(height), m_applyTexture(false),\
-			m_vaoId(0), m_vboId(0), m_atlasName(atlasNameRef), m_imageName(textureNameRef), m_tHandle(0), m_mvpStackManagerPtr(mvpStackManPtr), m_texShaderProg(shaderTexObj), m_flatShaderProg(shaderFlatObj),\
-                m_projMatrix(), m_bb(), m_currentTextureHandle(0), m_colorMapUniform(), m_alphaUniform(), m_projUniform(), m_colorUniform()
+	AbstractWidget::AbstractWidget(const Point3 &posRef,
+									const Vector4 &colorRef,
+									boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,
+									const F32 width,
+									const F32 height,
+									const boost::shared_ptr<GLSLShader> shaderFlatObj,
+									const boost::shared_ptr<GLSLShader> shaderTexObj,
+									const std::string &textureNameRef,
+                                    const std::string &atlasNameRef,
+									const bool visible,
+									const ScreenElementId id) throw (GameException &)
+									: m_quadDim("")
+									, m_currQuadDim("")
+									, m_position(posRef)
+									, m_visible(visible)
+									, m_color(colorRef)
+									, m_id(id)
+									, m_width(width)
+									, m_height(height)
+									, m_applyTexture(false)
+									, m_vaoId(0)
+									, m_vboId(0)
+									, m_atlasName(atlasNameRef)
+									, m_imageName(textureNameRef)
+									, m_tHandle(0)
+									, m_mvpStackManagerPtr(mvpStackManPtr)
+									, m_texShaderProg(shaderTexObj)
+									, m_flatShaderProg(shaderFlatObj)
+									, m_projMatrix()
+									, m_bb()
+									, m_currentTextureHandle(0)
+									, m_colorMapUniform()
+									, m_alphaUniform()
+									, m_projUniform()
+									, m_colorUniform()
 	{
 		if(m_width < 0.0f)
 		{
@@ -367,13 +371,35 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	AbstractWidget::AbstractWidget(const LuaPlus::LuaObject &widgetScriptData,\
-									boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,\
-									const boost::shared_ptr<GLSLShader> shaderFlatObj,\
-									const boost::shared_ptr<GLSLShader> shaderTexObj,\
-									const ScreenElementId id) throw (GameException &)\
-		: m_quadDim(""), m_currQuadDim(""), m_position(), m_visible(true), m_color(), m_id(id), m_width(0.0f), m_height(0.0f), m_applyTexture(false), m_vaoId(0), m_vboId(0), m_atlasName(), m_imageName(), m_tHandle(0),\
-			m_mvpStackManagerPtr(mvpStackManPtr), m_texShaderProg(shaderTexObj), m_flatShaderProg(shaderFlatObj), m_projMatrix(), m_bb(), m_currentTextureHandle(0), m_colorMapUniform(), m_alphaUniform(), m_projUniform(), m_colorUniform()
+	AbstractWidget::AbstractWidget(const LuaPlus::LuaObject &widgetScriptData,
+									boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,
+									const boost::shared_ptr<GLSLShader> shaderFlatObj,
+									const boost::shared_ptr<GLSLShader> shaderTexObj,
+									const ScreenElementId id) throw (GameException &)
+									: m_quadDim("")
+									, m_currQuadDim("")
+									, m_position()
+									, m_visible(true)
+									, m_color()
+									, m_id(id)
+									, m_width(0.0f)
+									, m_height(0.0f)
+									, m_applyTexture(false)
+									, m_vaoId(0)
+									, m_vboId(0)
+									, m_atlasName()
+									, m_imageName()
+									, m_tHandle(0)
+									, m_mvpStackManagerPtr(mvpStackManPtr)
+									, m_texShaderProg(shaderTexObj)
+									, m_flatShaderProg(shaderFlatObj)
+									, m_projMatrix()
+									, m_bb()
+									, m_currentTextureHandle(0)
+									, m_colorMapUniform()
+									, m_alphaUniform()
+									, m_projUniform()
+									, m_colorUniform()
 	{
 		if(!widgetScriptData.IsTable())
 		{
@@ -445,7 +471,6 @@ namespace GameHalloran
 		F32 newX = InterpolateFloat(oldFactorX, 0.0, newWidth);
 		F32 newY = InterpolateFloat(oldFactorY, 0.0, newHeight);
 		Point3 newPosition(newX, newY, oldWidgetPos.GetZ());
-		//GameHalloran::ConvertWindowCoordinates(newPosition);
 		F32 newW = InterpolateFloat(oldFactorWidth, 0.0, newWidth);
 		F32 newH = InterpolateFloat(oldFactorHeight, 0.0, newHeight);
 
@@ -504,7 +529,6 @@ namespace GameHalloran
 
 		if(m_visible)
 		{
-			// Get the current proj matrix only.
 			m_mvpStackManagerPtr->GetModelViewProjectionMatrix(m_projMatrix);
 
 			if(m_applyTexture)
@@ -516,12 +540,8 @@ namespace GameHalloran
 				result = PreRenderFlatWidget();
 			}
 
-			// Bind to the VAO used to assemble the widgets geometry.
 			glBindVertexArray(m_vaoId);
-			// Send the geometry to the vertex shader.
-			//glDrawArrays(GL_TRIANGLE_FAN, 0, NUM_VERTICES);
             glDrawArrays(GL_TRIANGLES, 0, NUM_VERTICES);
-			// Unbind after render
 			glBindVertexArray(0);
 		}
 

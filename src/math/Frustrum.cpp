@@ -7,14 +7,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
-
-
-// Project Headers
 #include "Frustrum.h"
 #include "GLBatch.h"
 #include "GameColors.h"
-
 
 namespace GameHalloran
 {

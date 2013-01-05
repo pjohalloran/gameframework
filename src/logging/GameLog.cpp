@@ -7,7 +7,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External headers
 #include <exception>
 #include <stdexcept>
 #include <fstream>
@@ -15,26 +14,24 @@
 #include <cstdio>
 #include <ctime>
 
-// Project headers
 #include "GameException.h"
 #include "GameLog.h"
 
-// Namespace Declarations
 using std::ofstream;
 using std::endl;
 using std::string;
 using std::exception;
-
 using boost::filesystem::path;
 
 namespace GameHalloran
 {
-	
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	GameLog::GameLog(const path &filenameRef, const LogLevel initialLevel, const bool timestamp) 
-		throw (GameException &)	: m_logger(), m_logLevel(initialLevel), m_timestamp(timestamp)
+	GameLog::GameLog(const path &filenameRef, const LogLevel initialLevel, const bool timestamp) throw (GameException &)
+			: m_logger()
+			, m_logLevel(initialLevel)
+			, m_timestamp(timestamp)
 	{
 		m_logger.open(filenameRef.string().c_str());
 		if(!m_logger.is_open())
@@ -71,12 +68,10 @@ namespace GameHalloran
 		struct tm * timeinfo;		// More detailed time struct.
 		string timestamp("");		// timestamp to return.
 
-		// Get the time.
 		time(&rawtime);
 		timeinfo = localtime(&rawtime);
 		timestamp.assign(string(asctime(timeinfo)));
 		
-		// If last character is an endline, remove it.
 		if(timestamp.substr(timestamp.size()-1, timestamp.size()-1).compare("\n") == 0)
 		{
 			timestamp.erase(timestamp.size()-1);
@@ -95,10 +90,8 @@ namespace GameHalloran
 			return;
 		}
 		
-		// Check if message should be logged.
 		if(level <= m_logLevel)
 		{
-			// Create highlight text to make ERR or FAT logs stand out.
 			string highlightText("");
 			if(level == FAT)
 			{
@@ -109,7 +102,6 @@ namespace GameHalloran
 				highlightText.assign(string(" **** "));
 			}
 			
-			// Log error.
 			if(m_timestamp)
 			{
 				m_logger << GetTimeStamp() << ": " << highlightText << messageRef << "." << highlightText << endl;

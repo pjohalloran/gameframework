@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __VECTOR4_TEST_SUITE_H
+#define __VECTOR4_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file Vector4TestSuite.h
 // @author PJ O Halloran
@@ -7,15 +11,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __VECTOR4_TEST_SUITE_H
-#define __VECTOR4_TEST_SUITE_H
-
-// External Headers
 #include <cxxtest/TestSuite.h>
-
 #include <boost/scoped_ptr.hpp>
 
-// Project Headers
 #include "CommonMath.h"
 #include "Vector.h"
 
@@ -34,11 +32,8 @@ using GameHalloran::Point3;
 // /////////////////////////////////////////////////////////////////
 class Vector4TestSuite : public CxxTest::TestSuite
 {
-
 private:
 	
-
-
 	bool IsTestDataReady()
 	{
 		return (true);

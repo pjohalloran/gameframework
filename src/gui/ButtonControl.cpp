@@ -8,20 +8,10 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
-
-
-// Project Headers
 #include "ButtonControl.h"
-
 #include "EventManager.h"
 #include "Events.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
     
@@ -205,26 +195,32 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	ButtonControl::ButtonControl(const Point3 &posRef,\
-									const Vector4 &colorRef,\
-									boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,\
-									const F32 width,\
-									const F32 height,\
-									boost::shared_ptr<FTFont> fontPtr,\
-									const boost::shared_ptr<GLSLShader> shaderFlatObj,\
-									const boost::shared_ptr<GLSLShader> shaderTexObj,\
-									const I32 eventTypeId,\
-									const std::string &textureNameRef,\
-									const std::string &texturePressedRef,\
-									const std::string &textureHoverRef,\
-                                    const std::string &atlasNameRef,\
-									const std::string &textRef,\
-									const bool visible,\
+	ButtonControl::ButtonControl(const Point3 &posRef,
+									const Vector4 &colorRef,
+									boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,
+									const F32 width,
+									const F32 height,
+									boost::shared_ptr<FTFont> fontPtr,
+									const boost::shared_ptr<GLSLShader> shaderFlatObj,
+									const boost::shared_ptr<GLSLShader> shaderTexObj,
+									const I32 eventTypeId,
+									const std::string &textureNameRef,
+									const std::string &texturePressedRef,
+									const std::string &textureHoverRef,
+                                    const std::string &atlasNameRef,
+									const std::string &textRef,
+									const bool visible,
 									const ScreenElementId id,
 									const bool enabled,
-									const bool sendEvent) throw (GameException &)\
-									: AbstractButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId,\
-										textureNameRef, atlasNameRef, visible, id, enabled), m_hoverHandle(0), m_pressedHandle(0), m_sendEvent(sendEvent), m_hoverDim(textureHoverRef.c_str()), m_pressedDim(texturePressedRef.c_str()), m_text(textRef)
+									const bool sendEvent) throw (GameException &)
+									: AbstractButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId
+										, textureNameRef, atlasNameRef, visible, id, enabled)
+									,m_hoverHandle(0)
+									, m_pressedHandle(0)
+									, m_sendEvent(sendEvent)
+									, m_hoverDim(textureHoverRef.c_str())
+									, m_pressedDim(texturePressedRef.c_str())
+									, m_text(textRef)
 	{
 		Init(textureHoverRef, texturePressedRef);
 	}
@@ -232,14 +228,19 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	ButtonControl::ButtonControl(const LuaPlus::LuaObject &widgetScriptData,\
-									boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,\
-									const boost::shared_ptr<GLSLShader> shaderFlatObj,\
-									const boost::shared_ptr<GLSLShader> shaderTexObj,\
-									boost::shared_ptr<FTFont> fontPtr,\
-									const ScreenElementId id) throw (GameException &)\
-									: AbstractButtonControl(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id),\
-										m_hoverHandle(0), m_pressedHandle(0), m_sendEvent(true), m_hoverDim(""), m_pressedDim(""), m_text("--Text Not Set--")
+	ButtonControl::ButtonControl(const LuaPlus::LuaObject &widgetScriptData,
+									boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,
+									const boost::shared_ptr<GLSLShader> shaderFlatObj,
+									const boost::shared_ptr<GLSLShader> shaderTexObj,
+									boost::shared_ptr<FTFont> fontPtr,
+									const ScreenElementId id) throw (GameException &)
+									: AbstractButtonControl(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id)
+									, m_hoverHandle(0)
+									, m_pressedHandle(0)
+									, m_sendEvent(true)
+									, m_hoverDim("")
+									, m_pressedDim("")
+									, m_text("--Text Not Set--")
 	{
 		std::string textureHoverRef, texturePressedRef;
 		SetLuaTextures(widgetScriptData.GetByName("HoverTexture"),\

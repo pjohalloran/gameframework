@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GF_MY_OPENGL_UI_H
 #define __GF_MY_OPENGL_UI_H
 
@@ -11,9 +12,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
-
-// Project Headers
 #include "AbstractWidget.h"
 #include "ContainerWidget.h"
 #include "ControlWidget.h"

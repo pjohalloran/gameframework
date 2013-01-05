@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __I_GAME_VIEW_H
+#define __I_GAME_VIEW_H
+
 //========================================================================
 // IGameView.h -  Game view layer class interface.
 //
@@ -36,9 +40,6 @@
 //
 //========================================================================
 
-#ifndef __I_GAME_VIEW_H
-#define __I_GAME_VIEW_H
-
 // /////////////////////////////////////////////////////////////////
 // @file IGameView.h
 // @author Michael L. McShaffry (edited by PJ O Halloran)
@@ -59,15 +60,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <list>
 
 #include <boost/optional.hpp>
 
-// Project Headers
 #include "Actors.h"
 #include "OsInputEvents.h"
-
 
 namespace GameHalloran
 {
@@ -87,7 +85,6 @@ namespace GameHalloran
 		GameView_Other
 	};
 
-	// Define a type for identifying a game view.
 	typedef U32 GameViewId;
 
 	// ID for a dummy view.
@@ -174,7 +171,6 @@ namespace GameHalloran
 		virtual void VOnUpdate(const F32 elapsedTime) = 0;
 	};
 
-	// Define a type GameViewList - a list of boost IGameView pointers.
 	typedef std::list<boost::shared_ptr<IGameView> > GameViewList;
 
 }

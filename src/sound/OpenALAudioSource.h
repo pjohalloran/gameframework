@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_OPEN_AL_AUDIO_SOURCE_H
+#define __GF_OPEN_AL_AUDIO_SOURCE_H
+
 // ////////////////////////////////////////////////////////////////////
 // @file OpenALAudioSource.h
 // @author PJ O Halloran
@@ -7,34 +11,24 @@
 //
 // ////////////////////////////////////////////////////////////////////
 
-#ifndef __GF_OPEN_AL_AUDIO_SOURCE_H
-#define __GF_OPEN_AL_AUDIO_SOURCE_H
-
-// External Headers
 #include <vector>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
-#ifdef _WINDOWS || TARGET_WINDOWS || WIN32
-#include <al.h>
-#include <alc.h>
+#if defined(_WINDOWS) defined(WIN32)
+	#include <al.h>
+	#include <alc.h>
 #elif defined (TARGET_OS_MAC)
-#include <OpenAL/al.h>
-#include <OpenAL/alc.h>
+	#include <OpenAL/al.h>
+	#include <OpenAL/alc.h>
 #else
-#error "Target not supported yet!"
+	#error "Target not supported yet!"
 #endif
 
-// Project Headers
 #include "OpenALAudioBuffer.h"
 #include "Vector.h"
 
-
-// ////////////////////////////////////////////////////////////////////
-//
-//
-// ////////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

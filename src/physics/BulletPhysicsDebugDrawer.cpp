@@ -7,31 +7,14 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
-// External Headers
 #include "GameBase.h"
-
-// Project Headers
 #include "BulletPhysicsDebugDrawer.h"
-
 #include "GameMain.h"
 #include "TextResource.h"
 #include "Matrix.h"
 #include "GLBatch.h"
 #include "GameColors.h"
 
-////////////////////////// TEMPORARY TEMPORARY TEMPORARY - On SnowLeopard this is suppored, but GLEW doens't hook up properly
-////////////////////////// Fixed probably in 10.6.3
-//#ifdef __APPLE__
-//#define glGenVertexArrays glGenVertexArraysAPPLE
-//#define glDeleteVertexArrays  glDeleteVertexArraysAPPLE
-//#define glBindVertexArray	glBindVertexArrayAPPLE
-//#endif
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

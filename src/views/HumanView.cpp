@@ -56,25 +56,21 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <string.h>
 
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
 
-// Project Headers
 #include "HumanView.h"
-
 #include "GameBase.h"
 #include "GameColors.h"
-#include "GlfwGameTimer.h"
+#include "Timer.h"
 #include "GameOptions.h"
 
 #include "GameMain.h"
 
 #include "CAudio.h"
 #include "OpenALAudio.h"
-#include "DirectSoundAudio.h"
 
 using boost::shared_ptr;
 using boost::filesystem::path;
@@ -122,9 +118,22 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
-	HumanView::HumanView(shared_ptr<GameOptions> optionsPtr, shared_ptr<GameLog> loggerPtr, shared_ptr<WindowManager> screenManPtr) throw (GameException &)\
-		: m_viewId(0), m_actorId(), m_processManagerPtr(), m_timer(), m_lastDraw(0.0), m_runFullSpeed(true), m_ScreenElements(),\
-			m_currElemId(0), m_mouseHandler(NULL), m_keyboardHandler(NULL), m_optionsPtr(optionsPtr), m_loggerPtr(loggerPtr), m_screenManPtr(screenManPtr)
+	HumanView::HumanView(shared_ptr<GameOptions> optionsPtr,
+							shared_ptr<GameLog> loggerPtr,
+							shared_ptr<WindowManager> screenManPtr) throw (GameException &)\
+							: m_viewId(0)
+							, m_actorId()
+							, m_processManagerPtr()
+							, m_timer()
+							, m_lastDraw(0.0)
+							, m_runFullSpeed(true)
+							, m_ScreenElements()
+							, m_currElemId(0)
+							, m_mouseHandler(NULL)
+							, m_keyboardHandler(NULL)
+							, m_optionsPtr(optionsPtr)
+							, m_loggerPtr(loggerPtr)
+							, m_screenManPtr(screenManPtr)
 	{
 		if(!m_optionsPtr || !m_loggerPtr || !m_screenManPtr)
 		{
@@ -143,9 +152,8 @@ namespace GameHalloran
 			throw GameException(string("Failed to initialze the audio subsystem."));
 		}
 
-		// Start the view timer.
-		m_timer = shared_ptr<IGameTimer>(GCC_NEW GlfwGameTimer());
-		m_timer->VStart();
+		m_timer = shared_ptr<Timer>(GCC_NEW Timer());
+		m_timer->Start();
 	}
 
 
@@ -186,7 +194,7 @@ namespace GameHalloran
 	void HumanView::VOnRender(const F64 time, const F32 elapsedTime)
 	{
 		// Exit early, if no time has elapsed since the last render.
-		if (m_timer->VGetTime() == m_lastDraw)
+		if (m_timer->GetTime() == m_lastDraw)
 		{
 			return;
 		}
@@ -210,7 +218,7 @@ namespace GameHalloran
 		}
 
 		// record the last successful paint
-		m_lastDraw = m_timer->VGetTime();
+		m_lastDraw = m_timer->GetTime();
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -306,13 +314,13 @@ namespace GameHalloran
 			g_audioPtr = GCC_NEW OpenALAudio;
 			useOpenAL = true;
 		}
-		// DirectSound
-		else if(audioSystem.compare(DS_SYS.c_str()) == 0)
-		{
-            GF_LOG_TRACE_INF("HumanView::InitAudio()", "Using DirectSound as the audio system");
-			// TODO: HWND is a windows specific handle, I cant get this at present from my GLFW window manager...
-			//g_audioPtr = GCC_NEW DirectSound8Audio(g_appPtr->GetWindowManager()->GetHwnd());
-		}
+		//// DirectSound
+		//else if(audioSystem.compare(DS_SYS.c_str()) == 0)
+		//{
+		//  GF_LOG_TRACE_INF("HumanView::InitAudio()", "Using DirectSound as the audio system");
+		//	// TODO: HWND is a windows specific handle, I cant get this at present from my GLFW window manager...
+		//	g_audioPtr = GCC_NEW DirectSound8Audio(g_appPtr->GetWindowManager()->GetHwnd());
+		//}
 		// Default to OpenAL if audio system is not in file or its invalid...
 		else
 		{
@@ -362,8 +370,6 @@ namespace GameHalloran
 	{
 		bool result = true;				// Result of method.
 
-		// Iterate through the screen layers first in reverse
-		// order since we'll send input messages to the screen on top
 		for(ScreenElementList::reverse_iterator i = m_ScreenElements.rbegin(); i != m_ScreenElements.rend(); ++i)
 		{
 			if((*i)->VIsVisible() && !(*i)->VOnEvent(eventObj, elapsedTime))
@@ -455,11 +461,6 @@ namespace GameHalloran
 	void HumanView::VOnUpdate(const F32 elapsedTime)
 	{
 		m_processManagerPtr->UpdateProcesses(elapsedTime);
-
-		// This section of code was added post-press. It runs through the screenlist
-		// and calls VOnUpdate. Some screen elements need to update every frame, one 
-		// example of this is a 3D scene attached to the human view.
-		//
 		for(ScreenElementList::iterator i = m_ScreenElements.begin(); i != m_ScreenElements.end(); ++i)
 		{
 			(*i)->VOnUpdate(elapsedTime);

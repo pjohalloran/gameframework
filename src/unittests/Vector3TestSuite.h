@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __VECTOR3_TEST_SUITE_H
+#define __VECTOR3_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file Vector3TestSuite.h
 // @author PJ O Halloran
@@ -7,18 +11,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __VECTOR3_TEST_SUITE_H
-#define __VECTOR3_TEST_SUITE_H
-
-// External Headers
 #include <cmath>
 #include <string>
 
 #include <cxxtest/TestSuite.h>
-
 #include <boost/scoped_ptr.hpp>
 
-// Project Headers
 #include "CommonMath.h"
 #include "Vector.h"
 #include "CRandom.h"

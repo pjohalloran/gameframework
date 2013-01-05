@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_OPEN_AL_AUDIO_H
+#define __GF_OPEN_AL_AUDIO_H
+
 // ////////////////////////////////////////////////////////////////////
 // @file OpenALAudio.h
 // @author PJ O Halloran
@@ -7,29 +11,19 @@
 //
 // ////////////////////////////////////////////////////////////////////
 
-#ifndef __GF_OPEN_AL_AUDIO_H
-#define __GF_OPEN_AL_AUDIO_H
-
-//#ifdef __cplusplus
-//extern "C" {
-//#endif
-
-// External Headers
 #include <map>
 
 #include <boost/shared_ptr.hpp>
-
-#if defined(_WINDOWS) || defined(TARGET_OS_WINDOWS) || defined(WIN32)
-#include <al.h>
-#include <alc.h>
+#if defined(_WINDOWS) || defined(WIN32)
+	#include <al.h>
+	#include <alc.h>
 #elif defined (TARGET_OS_MAC)
-#include <OpenAL/al.h>
-#include <OpenAL/alc.h>
+	#include <OpenAL/al.h>
+	#include <OpenAL/alc.h>
 #else
-#error "Target not supported yet!"
+	#error "Target not supported yet!"
 #endif
 
-// Project Headers
 #include "IAudioBuffer.h"
 #include "CSoundResource.h"
 #include "CAudio.h"
@@ -54,10 +48,6 @@
 #define ALUT_ERROR_UNSUPPORTED_FILE_SUBTYPE    0x210
 #define ALUT_ERROR_CORRUPT_OR_TRUNCATED_DATA   0x211
 
-// ////////////////////////////////////////////////////////////////////
-//
-//
-// ////////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -373,21 +363,17 @@ namespace GameHalloran
     // Define OpenAL check and clear error macros so that this slow error checking can be compiled out for the release build!
     bool GfCheckAlError();
     bool GfCheckAlErrorTrc(const char *msg);
-#define GF_CHECK_AL_ERROR() GfCheckAlError()
-#define GF_CHECK_AL_ERROR_TRC(msg) GfCheckAlErrorTrc(msg)
-#if DEBUG
-#define GF_CLEAR_AL_ERROR() { ALenum err; do { err = alGetError(); } while(err != AL_NO_ERROR); }
-#else
-#define GF_CLEAR_AL_ERROR()
-#endif
+	#define GF_CHECK_AL_ERROR() GfCheckAlError()
+	#define GF_CHECK_AL_ERROR_TRC(msg) GfCheckAlErrorTrc(msg)
+	#if DEBUG
+		#define GF_CLEAR_AL_ERROR() { ALenum err; do { err = alGetError(); } while(err != AL_NO_ERROR); }
+	#else
+		#define GF_CLEAR_AL_ERROR()
+	#endif
     
     // Global OpenAL audio pointer.
     extern OpenALAudio *g_oalAudioPtr;
     
 }
-
-//#ifdef __cplusplus
-//}  /* extern "C" */
-//#endif
     
 #endif

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GF_ABSTRACT_WIDGET_H
 #define __GF_ABSTRACT_WIDGET_H
 
@@ -17,7 +18,6 @@
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <string>
 
 #include <boost/shared_ptr.hpp>
@@ -26,7 +26,6 @@
 #include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
-// Project Headers
 #include "GameBase.h"
 #include "IScreenElement.h"
 #include "Vector.h"
@@ -39,10 +38,6 @@
 #include "BoundingCube.h"
 #include "TextureAtlas.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

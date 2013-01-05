@@ -50,15 +50,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <assert.h>
 
 #include <boost/shared_ptr.hpp>
 
-// Project Headers
 #include "ScriptEventListener.h"
-
-// For the global application pointer.
 #include "GameMain.h"
 
 using LuaPlus::LuaObject;

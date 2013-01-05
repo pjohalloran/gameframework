@@ -8,17 +8,12 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
-// External Headers
 #include <string.h>
 
-// Project Headers
 #include "Matrix.h"
-
 
 namespace GameHalloran
 {
-
 	// Declare commonly used global matrices.
 	const Matrix4 g_identityMat(1.0f, 0.0f, 0.0f, 0.0f,\
 								0.0f, 1.0f, 0.0f, 0.0f,\
@@ -627,16 +622,6 @@ namespace GameHalloran
 		outMatrix.SetElement(Matrix4::C3, Matrix4::R2, -((2.0f * (zFar*zNear))/(zFar - zNear)));
 		outMatrix.SetElement(Matrix4::C3, Matrix4::R3, 0.0f);
 
-		//// From oolong engine 2 to verify that the matrix i am using is giving me the correct perspective projection matrix...
-		//F32 f = 1.0f / (F32)tan(m3dDegToRad(fov) * 0.5f);
-		//F32 n = 1.0f / (zNear - zFar);
-		//outMatrix.SetElement(Matrix4::C0, Matrix4::R0, f / aspect);
-		//outMatrix.SetElement(Matrix4::C1, Matrix4::R1, f);
-		//outMatrix.SetElement(Matrix4::C2, Matrix4::R2, (zFar + zNear) * n);
-		//outMatrix.SetElement(Matrix4::C2, Matrix4::R3, -1.0f);
-		//outMatrix.SetElement(Matrix4::C3, Matrix4::R2, (2 * zFar * zNear) * n);
-		//outMatrix.SetElement(Matrix4::C3, Matrix4::R3, 0.0f);
-
 		return (outMatrix);
 	}
 
@@ -656,12 +641,6 @@ namespace GameHalloran
 		outMatrix.SetElement(Matrix4::C3, Matrix4::R0, -((xMax + xMin) / (xMax - xMin)));
 		outMatrix.SetElement(Matrix4::C3, Matrix4::R1, -((yMax + yMin) / (yMax - yMin)));
 		outMatrix.SetElement(Matrix4::C3, Matrix4::R2, -((zMin + zMax) / (zMin - zMax)));
-
-		//// From oolong engine 2...
-		//outMatrix.SetElement(Matrix4::C0, Matrix4::R0, 2.0f / (xMax - xMin));
-		//outMatrix.SetElement(Matrix4::C1, Matrix4::R1, 2.0f / (yMax - yMin));
-		//outMatrix.SetElement(Matrix4::C2, Matrix4::R2, 1.0f / (zMin - zMax));
-		//outMatrix.SetElement(Matrix4::C2, Matrix4::R3, zMin / (zMin - zMax));
 
 		return (outMatrix);
 	}

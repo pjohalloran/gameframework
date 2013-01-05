@@ -1,5 +1,4 @@
-#ifdef TARGET_WINDOWS || _WINDOWS || WIN32
-
+#pragma once
 #ifndef __GCC3_DIRECT_SOUND_AUDIO_H
 #define __GCC3_DIRECT_SOUND_AUDIO_H
 
@@ -40,21 +39,12 @@
 //
 //========================================================================
 
-// External Headers
+#include "GameBase.h"
+
 #include <boost/shared_ptr.hpp>
-
-// For windows specific HRESULT, etc.
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
-// Windows Header Files:
-#define NOMINMAX
-#include <windows.h>
-#include <windowsx.h>
-
-// DirectSound includes
 #include <dsound.h>
 #include <mmsystem.h>
 
-// Project Headers
 #include "CAudio.h"
 
 // Guarantees that the directsound lib is included during build.
@@ -75,9 +65,7 @@ namespace GameHalloran
 	// @class DirectSound8AudioBuffer
 	// @author Mike McShaffry
 	//
-	// Implements the rest of the IAudioBuffer interface left out by AudioBuffer.  
-	// If you are interested in implementing a sound system using OpenAL 
-	// you'd create a class OpenALAudioBuffer from AudioBuffer.
+	// Implements the rest of the IAudioBuffer interface left out by AudioBuffer.
 	// 
 	// ////////////////////////////////////////////////////////////////////
 	class DirectSound8AudioBuffer : public AudioBuffer
@@ -207,9 +195,7 @@ namespace GameHalloran
 	// @class DirectSound8Audio
 	// @author Mike McShaffry
 	//
-	// Implements the rest of the IAudio interface left out by Audio.  
-	// If you are interested in implementing a sound system using OpenAL 
-	// you'd create a class OpenALAudioBuffer from AudioBuffer.
+	// Implements the rest of the IAudio interface left out by Audio.
 	// 
 	//////////////////////////////////////////////////////////////////////
 	class DirectSound8Audio : public Audio
@@ -287,7 +273,5 @@ namespace GameHalloran
 	};
 
 }
-
-#endif
 
 #endif

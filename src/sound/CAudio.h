@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GCC3_C_AUDIO_H
+#define __GCC3_C_AUDIO_H
+
 //========================================================================
 // Various classes and interfaces from the sound system.
 //
@@ -35,14 +39,8 @@
 //
 //========================================================================
 
-#ifndef __GCC3_C_AUDIO_H
-#define __GCC3_C_AUDIO_H
-
-// External Headers
 #include <boost/shared_ptr.hpp>
 
-
-// Project Headers
 #include "IAudioBuffer.h"
 #include "CSoundResource.h"
 #include "IAudio.h"

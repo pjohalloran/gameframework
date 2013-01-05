@@ -7,18 +7,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
-
-
-// Project Headers
 #include "TextBoxControl.h"
 #include "GameMain.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -50,8 +41,8 @@ namespace GameHalloran
 									const bool visible,\
 									const ScreenElementId id,\
 									const bool enabled) throw (GameException &)\
-									: ControlWidget(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, textureNameRef, atlasNameRef, visible, id, enabled),\
-										m_text(textRef)
+									: ControlWidget(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, textureNameRef, atlasNameRef, visible, id, enabled)
+									, m_text(textRef)
 	{
 		VSetText(textRef);
 	}
@@ -65,8 +56,8 @@ namespace GameHalloran
 									const boost::shared_ptr<GLSLShader> shaderTexObj,\
 									boost::shared_ptr<FTFont> fontPtr,\
 									const ScreenElementId id) throw (GameException &)
-									: ControlWidget(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id),\
-										m_text("--No Text--")
+									: ControlWidget(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id)
+									, m_text("--No Text--")
 	{
 		SetLuaText(widgetScriptData.GetByName("Text"));
 	}

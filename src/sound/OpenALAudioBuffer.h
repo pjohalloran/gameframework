@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_OPEN_AL_AUDIO_BUFFER_H
+#define __GF_OPEN_AL_AUDIO_BUFFER_H
+
 // ////////////////////////////////////////////////////////////////////
 // @file OpenALAudioBuffer.h
 // @author PJ O Halloran
@@ -7,41 +11,31 @@
 //
 // ////////////////////////////////////////////////////////////////////
 
-#ifndef __GF_OPEN_AL_AUDIO_BUFFER_H
-#define __GF_OPEN_AL_AUDIO_BUFFER_H
-
 #ifdef WIN32
 #	pragma warning( push )
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <deque>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
 #ifdef _WINDOWS || TARGET_WINDOWS || WIN32
-#include <al.h>
-#include <alc.h>
+	#include <al.h>
+	#include <alc.h>
 #elif defined (TARGET_OS_MAC)
-#include <OpenAL/al.h>
-#include <OpenAL/alc.h>
+	#include <OpenAL/al.h>
+	#include <OpenAL/alc.h>
 #else
-#error "Target not supported yet!"
+	#error "Target not supported yet!"
 #endif
 
-// Project Headers
 #include "IAudioBuffer.h"
 #include "CAudio.h"
 #include "GameException.h"
 #include "CSoundResource.h"
 
-
-// ////////////////////////////////////////////////////////////////////
-//
-//
-// ////////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

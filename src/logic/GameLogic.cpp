@@ -36,7 +36,6 @@
 //
 //========================================================================
 
-
 // /////////////////////////////////////////////////////////////////
 // @file GameLogic.cpp
 // @author Michael L. McShaffry (edited by PJ O Halloran)
@@ -57,24 +56,18 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string.hpp>
-
 #include <bullet/btBulletDynamicsCommon.h>
 
-// Project Headers
 #include "GameLogic.h"
 #include "GameBase.h"
 #include "Events.h"
 #include "TextResource.h"
-
-// For the global app pointer.
 #include "GameMain.h"
-
 #include "NullPhysics.h"
 #include "BulletPhysics.h"
 #include "CustomPhysics.h"
@@ -171,12 +164,9 @@ namespace GameHalloran
 		I32 diagnosticMode = 0;						// Diagnostic mode (0 = off).
 		std::vector<std::string> tokensVec;			// Vector to store tokens inside.
 
-		// Split up the tokens.
 		boost::algorithm::split(tokensVec, diagnosticOptions, boost::algorithm::is_any_of(std::string(",")));
-
 		if(tokensVec.empty())
 		{
-			// No diagnostics.
 			return (0);
 		}
 
@@ -195,7 +185,6 @@ namespace GameHalloran
 		const std::string DCL("drawconstraintslimits");
 		const std::string FWF("fastwireframe");
 
-		// Turn all requested debug options.
 		for(std::vector<std::string>::iterator i = tokensVec.begin(), end = tokensVec.end(); i != end; ++i)
 		{
 			if((*i).compare(WF.c_str()) == 0)
@@ -256,7 +245,6 @@ namespace GameHalloran
 			}
 			else
 			{
-				// unknown option...
                 GF_LOG_TRACE_ERR("BaseGameLogic::GetBulletDiagnosticOptions()", string("Unknown option: ") + *i);
 			}
 		}
@@ -268,10 +256,19 @@ namespace GameHalloran
 	//
 	// /////////////////////////////////////////////////////////////////
 	BaseGameLogic::BaseGameLogic(shared_ptr<GameOptions> optionsPtr, shared_ptr<GameLog> loggerPtr, shared_ptr<ModelViewProjStackManager> stackManagerPtr)\
-		throw (GameException &) : m_pProcessManager(), m_random(), m_ActorList(), m_LastActorId(0), m_State(BGS_Initializing),\
-			m_ExpectedPlayers(0), m_ExpectedRemotePlayers(0), m_ExpectedAI(0), m_gameViews()\
-				/*, m_pPathingGraph(), m_pAiEventListener()*/, m_bProxy(false), m_remotePlayerId(0),\
-					m_RenderDiagnostics(false),	m_physicsDiagnosticMode(0), m_prevState(BGS_Initializing), m_pPhysics(), m_loggerPtr(loggerPtr), m_optionsPtr(optionsPtr)
+					throw (GameException &)
+					: m_pProcessManager()
+					, m_random()
+					, m_ActorList()
+					, m_LastActorId(0)
+					, m_State(BGS_Initializing)
+					, m_gameViews()
+					, m_RenderDiagnostics(false)
+					, m_physicsDiagnosticMode(0)
+					, m_prevState(BGS_Initializing)
+					, m_pPhysics()
+					, m_loggerPtr(loggerPtr)
+					, m_optionsPtr(optionsPtr)
 	{
 		if(!optionsPtr)
 		{
@@ -290,12 +287,6 @@ namespace GameHalloran
 		{
 			throw GameException(string("Failed to setup the physics module"));
 		}
-
-		// Create AI module
-		//m_pPathingGraph.reset(CreatePathingGraph());
-		//m_pAiEventListener = EventListenerPtr (GCC_NEW AiEventListener ( ));
-		// Register AI event for the logic layers AI listener.
-		//safeAddListener(m_pAiEventListener, EvtData_AiSteer::sk_EventType);
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -305,14 +296,10 @@ namespace GameHalloran
 	{
 		try
 		{
-			// MrMike: 12-Apr-2009 
-			//   Added this to explicity remove views from the game logic list.
 			while (!m_gameViews.empty())
 			{
 				m_gameViews.pop_front();
 			}
-
-			// Print out an error to the log file if the programmer forgets to clear the Actor list in the derived classes.
 			if(!m_ActorList.empty())
 			{
                 GF_LOG_TRACE_ERR("BaseGameLogic::~BaseGameLogic()", "You should destroy the actor list in the inherited class!");
@@ -363,11 +350,8 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	ActorId BaseGameLogic::GetRandomActor(optional<ActorId> ignoreMe)
 	{
-		// choose a random element
 		U32 count = (U32)m_ActorList.size();
 		U32 choice = m_random.Random(count);
-		
-		// since this is a map, we have to walk the tree to find the item in question
 		ActorMap::iterator it = m_ActorList.begin();
 		for (U32 i = 0; i < choice; i++)
 		{
@@ -384,25 +368,15 @@ namespace GameHalloran
 				it = m_ActorList.begin();
 			}
 		}
-		
-		// found someone
+
 		return (it->first);
 	}
-
-	//// /////////////////////////////////////////////////////////////////
-	////
-	//// /////////////////////////////////////////////////////////////////
-	//shared_ptr<PathingGraph> BaseGameLogic::GetPathingGraph(void)
-	//{
-	//	return m_pPathingGraph;
-	//}
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// /////////////////////////////////////////////////////////////////
 	bool BaseGameLogic::VLoadGame(const string &gameNameRef)
 	{
-		// TODO: Implement.
         GF_LOG_ERR("BaseGameLogic::VLoadGame() is not implemented yet!");
 		return (false);
 	}
@@ -412,18 +386,8 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool BaseGameLogic::VSaveGame()
 	{
-		// TODO: Implement.
         GF_LOG_ERR("BaseGameLogic::VSaveGame() is not implemented yet!");
 		return (false);
-	}
-
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	void BaseGameLogic::VSetProxy()
-	{
-        GF_LOG_INF("The logic layer is acting as a proxy for a remote logic layer");
-		m_bProxy = true;
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -478,9 +442,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void BaseGameLogic::VRemoveActor(const ActorId aid)
 	{
-		if (m_bProxy)
-			return;
-
 		if(VGetActor(aid))
 		{
 			if(m_pPhysics)
@@ -568,16 +529,6 @@ namespace GameHalloran
 				// do nothing here but derived versions might do something.
 			break;
 
-			case BGS_SpawnAI:
-			if (this->m_ExpectedAI == 0)
-			{
-				// the base game logic doesn't spawn AI - your child class will do that.
-				// in the case no AI are coming, the base game logic will go ahead and move to 
-				// the next state.
-				VChangeState(BGS_Running);
-			}
-			break;
-
 			case BGS_Running:
 			{
 				m_pProcessManager->UpdateProcesses(elapsedTime);
@@ -608,55 +559,9 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void BaseGameLogic::VChangeState(const enum BaseGameState newState)
 	{
-		// TODO: Implement networking here!!!
-		// PJ - I have removed networking for now, might add it in later.
-
-		if (newState == BGS_WaitingForPlayers)
-		{
-			//RetrieveAndConvertOption<I32>(m_optionsPtr, string("ExpectedPlayers"), GameOptions::PROGRAMMER, m_ExpectedPlayers);
-			//RetrieveAndConvertOption<I32>(m_optionsPtr, string("ExpectedRemotePlayers"), GameOptions::PROGRAMMER, m_ExpectedRemotePlayers);
-			//RetrieveAndConvertOption<I32>(m_optionsPtr, string("ExpectedAiPlayers"), GameOptions::PROGRAMMER, m_ExpectedAI);
-			m_ExpectedPlayers = 2;
-			m_ExpectedRemotePlayers = 0;
-			m_ExpectedAI = 0;
-		
-			//if (!g_pApp->m_pOptions->m_gameHost.empty())
-			//{
-			//	VSetProxy();
-			//	m_ExpectedAI = 0;			// the server will create these
-			//	m_ExpectedRemotePlayers = 0;	// the server will create these
-			//	ClientSocketManager *pClient = GCC_NEW ClientSocketManager(g_pApp->m_pOptions->m_gameHost, g_pApp->m_pOptions->m_listenPort);
-			//	if (!pClient->Connect())
-			//	{
-			//		// Throw up a main menu
-			//		VChangeState(BGS_MainMenu);
-			//		return;
-			//	}
-			//	g_pApp->m_pBaseSocketManager = pClient;
-			//}
-			//else if (m_ExpectedRemotePlayers > 0)
-			//{
-			//	BaseSocketManager *pServer = GCC_NEW BaseSocketManager();
-			//	if (!pServer->Init())
-			//	{
-			//		// Throw up a main menu
-			//		VChangeState(BGS_MainMenu);	
-			//		return;
-			//	}
-			//	pServer->AddSocket(GCC_NEW GameServerListenSocket(g_pApp->m_pOptions->m_listenPort));
-			//	g_pApp->m_pBaseSocketManager = pServer;
-			//}
-		}
-
-		// Set the new state and the previous state.
 		m_prevState = m_State;
 		m_State = newState;
-
-		// Broadcast the game state change to all interested listeners.
-		if (!m_bProxy)
-		{
-			safeQueEvent(IEventDataPtr(GCC_NEW EvtData_Game_State(m_State)));
-		}
+		safeQueEvent(IEventDataPtr(GCC_NEW EvtData_Game_State(m_State)));
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -686,9 +591,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void BaseGameLogic::VRenderDiagnostics() 
 	{
-		// Chapter 19/20 refactor work
-		//   - move physics pointer into BaseGameLogic
-		//   - but make the inherited logic choose the implementation
 		if (m_RenderDiagnostics && m_pPhysics)
 		{
 			m_pPhysics->VRenderDiagnostics();
@@ -703,14 +605,12 @@ namespace GameHalloran
 		if(m_State == BGS_Running)
 		{
 			VChangeState(BGS_Paused);
-			// Broadcast event to all interested script side listeners.
 			IEventDataPtr pauseEventPtr(GCC_NEW EvtData_Pause_Game_Event(true));
 			safeQueEvent(pauseEventPtr);
 		}
 		else if(m_State == BGS_Paused)
 		{
 			VChangeState(BGS_Running);
-			// Broadcast event to all interested script side listeners.
 			IEventDataPtr unpauseEventPtr(GCC_NEW EvtData_Pause_Game_Event(false));
 			safeQueEvent(unpauseEventPtr);
 		}
@@ -729,7 +629,6 @@ namespace GameHalloran
 			return (id);
 		}
 
-		// This makes sure that all views have a non-zero view id.
 		id = static_cast<GameViewId>(m_gameViews.size());
 		m_gameViews.push_back(pView);
 		pView->VOnAttach(*id, actorId);
@@ -777,7 +676,8 @@ namespace GameHalloran
 	//
 	// /////////////////////////////////////////////////////////////////
 	BaseLuaGameLogic::BaseLuaGameLogic(shared_ptr<GameOptions> optionsPtr, shared_ptr<GameLog> loggerPtr, shared_ptr<ModelViewProjStackManager> stackManagerPtr)\
-		throw (GameException &) : BaseGameLogic(optionsPtr, loggerPtr, stackManagerPtr)
+				throw (GameException &)
+				: BaseGameLogic(optionsPtr, loggerPtr, stackManagerPtr)
 	{
 	}
 
@@ -798,13 +698,11 @@ namespace GameHalloran
 
 		if(!p || !actor)
 		{
-			// No need to log error as its done already in BaseGameLogic::VAddActor().
 			return;
 		}
 
 		shared_ptr<LuaStateManager> luaStateManPtr = g_appPtr->GetLuaStateManager();
 
-		// Ensure script knows about this actor, too.
 		LuaPlus::LuaState *pState = luaStateManPtr->GetGlobalState().Get();
 		LuaPlus::LuaObject globalActorTable = luaStateManPtr->GetGlobalActorTable();
 		if(!pState)
@@ -834,7 +732,6 @@ namespace GameHalloran
 		//If this actor has any script-specific functions to call, do so now.
 		if (0 != strlen(p->VGetCreateFuncName()))
 		{
-			// First attempt to FIND the function specified.
 			LuaPlus::LuaObject foundObj = luaStateManPtr->GetGlobalState()->GetGlobal(p->VGetCreateFuncName());
 			if(foundObj.IsNil())
 			{
@@ -842,14 +739,12 @@ namespace GameHalloran
 			}
 			else
 			{
-				// Make sure it actually *IS* a function.
 				if(!foundObj.IsFunction())
 				{
                     GF_LOG_TRACE_ERR("BaseLuaGameLogic::VAddActor()", "OnCreateFunc is not a LUA function - possibly some other script type");
 				}
 				else
 				{
-					// Attempt to call the function.
 					LuaPlus::LuaFunction<void> onCreateFunc(foundObj);
 					onCreateFunc(*p->VGetId(), addedActorData);
 				}
@@ -877,10 +772,8 @@ namespace GameHalloran
 			return;
 		}
 
-		// Get the global LUA state manager.
 		shared_ptr<LuaStateManager> luaStateManPtr = g_appPtr->GetLuaStateManager();
 
-		// Call any script-related destructor.
 		LuaPlus::LuaState *pState = luaStateManPtr->GetGlobalState().Get();
 		LuaPlus::LuaObject globalActorTable = luaStateManPtr->GetGlobalActorTable();
 		if(!pState)
@@ -899,7 +792,6 @@ namespace GameHalloran
 		shared_ptr<IActorParams> actorParams = actor->VGetParams();
 		if(0 != strlen(actorParams->VGetDestroyFuncName()))
 		{
-			// First attempt to FIND the function specified.
 			LuaPlus::LuaObject foundObj = luaStateManPtr->GetGlobalState()->GetGlobal(actorParams->VGetDestroyFuncName());
 			if (foundObj.IsNil())
 			{
@@ -907,24 +799,19 @@ namespace GameHalloran
 			}
 			else
 			{
-				//Make sure it actually *IS* a function.
 				if(!foundObj.IsFunction())
 				{
                     GF_LOG_TRACE_ERR("BaseLuaGameLogic::VRemoveActor()", "OnDestroyFunc not a valid script function");
 				}
 				else
 				{
-					//Attempt to call the function.
 					LuaPlus::LuaFunction<void> onDestroyFunc(foundObj);
-					onDestroyFunc(id, actorData);	//Pass in the actor ID and this actor's user-owned data table.
+					onDestroyFunc(id, actorData);
 				}
 			}
 		}
 
-		// Remove the actor from script's grubby little hands.
 		actorData.AssignNil(pState);
-
-		// Remove the actor from the logics container.
 		BaseGameLogic::VRemoveActor(id);
 	}
 

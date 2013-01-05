@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __HUMAN_VIEW_H
+#define __HUMAN_VIEW_H
+
 //========================================================================
 // GameCode.h : Defines the entry point for the application.
 //
@@ -34,9 +38,6 @@
 //
 //========================================================================
 
-#ifndef __HUMAN_VIEW_H
-#define __HUMAN_VIEW_H
-
 #ifdef WIN32
 #	pragma warning( push )
 #	pragma warning( disable:4290 )
@@ -66,30 +67,26 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <string>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
-// Project Headers
 #include "IGameView.h"
 #include "IScreenElement.h"
 #include "WindowManager.h"
 #include "CProcess.h"
-
 #include "IInputInterfaces.h"
-
 #include "GameLog.h"
 #include "GameOptions.h"
 #include "GameException.h"
 #include "IGameTimer.h"
 #include "OsInputEvents.h"
-
 #include "Vector.h"
 
 namespace GameHalloran
 {
+	class Timer;
 
 	// /////////////////////////////////////////////////////////////////
 	// @class HumanView
@@ -106,8 +103,8 @@ namespace GameHalloran
 		GameViewId m_viewId;										///< The ID of the view.
 		boost::optional<ActorId> m_actorId;							///< The ID of the actor attached to the view.
 		boost::shared_ptr<CProcessManager> m_processManagerPtr;		///< strictly for things like button animations, etc.
-		boost::shared_ptr<IGameTimer> m_timer;						///< View timer.
-		F64 m_lastDraw;											///< Last time the game rendered
+		boost::shared_ptr<Timer> m_timer;							///< View timer.
+		F64 m_lastDraw;												///< Last time the game rendered
 		bool m_runFullSpeed;										///< set to true if you want to run full speed
 		ScreenElementId m_currElemId;								///< The current elment ID.
 
@@ -168,7 +165,9 @@ namespace GameHalloran
 		// @throw GameException& Fail to initialize the audio subsystem.
 		//
 		// /////////////////////////////////////////////////////////////////
-		HumanView(boost::shared_ptr<GameOptions> optionsPtr, boost::shared_ptr<GameLog> loggerPtr, boost::shared_ptr<WindowManager> screenManPtr) throw (GameException &);
+		HumanView(boost::shared_ptr<GameOptions> optionsPtr
+					, boost::shared_ptr<GameLog> loggerPtr
+					, boost::shared_ptr<WindowManager> screenManPtr) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.

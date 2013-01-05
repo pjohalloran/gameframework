@@ -8,23 +8,14 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <boost/lexical_cast.hpp>
 
-
-// Project Headers
 #include "CheckButtonControl.h"
-
 #include "GameMain.h"
 #include "GameBase.h"
 #include "EventManager.h"
 #include "Events.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -274,9 +265,15 @@ namespace GameHalloran
 								const bool visible,\
 								const ScreenElementId id,\
 								const bool enabled) throw (GameException &)\
-								: AbstractButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, eventTypeId, textureNameRef, atlasNameRef,\
-									visible, id, enabled), m_checked(false), m_hoverHandle(0), m_checkHandle(0), m_checkHoverHandle(0), m_hoverDim(""),
-                                        m_checkDim(""), m_checkHoverDim("")
+								: AbstractButtonControl(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj
+									, shaderTexObj, eventTypeId, textureNameRef, atlasNameRef, visible, id, enabled)
+								, m_checked(false)
+								, m_hoverHandle(0)
+								, m_checkHandle(0)
+								, m_checkHoverHandle(0)
+								, m_hoverDim("")
+								, m_checkDim("")
+								, m_checkHoverDim("")
 	{
 		Init(hoverNameRef, checkNameRef, checkHoverNameRef);
 	}
@@ -290,9 +287,14 @@ namespace GameHalloran
 											const boost::shared_ptr<GLSLShader> shaderTexObj,\
 											boost::shared_ptr<FTFont> fontPtr,\
 											const ScreenElementId id) throw (GameException &)
-											: AbstractButtonControl(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id),\
-                                            m_checked(false), m_hoverHandle(0), m_checkHandle(0), m_checkHoverHandle(0), m_hoverDim(""),\
-                                            m_checkDim(""), m_checkHoverDim("")
+											: AbstractButtonControl(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id)
+											, m_checked(false)
+											, m_hoverHandle(0)
+											, m_checkHandle(0)
+											, m_checkHoverHandle(0)
+											, m_hoverDim("")
+											, m_checkDim("")
+											, m_checkHoverDim("")
 	{
 		SetLuaChecked(widgetScriptData.GetByName("Checked"));
 		std::string hover, check, hoverCheck;

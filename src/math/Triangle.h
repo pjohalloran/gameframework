@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_TRIANGLE_H
+#define __GF_TRIANGLE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file Triangle.h
 // @author PJ O Halloran
@@ -37,33 +41,20 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_TRIANGLE_H
-#define __GF_TRIANGLE_H
-
-// External Headers
 #include <string>
 #include <vector>
 #include <list>
-
 #include <ostream>
 #include <sstream>
-
 
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 
-
-// Project Headers
 #include "CommonMath.h"
 #include "Vector.h"
 #include "BoundingSphere.h"
 #include "BoundingCube.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -95,49 +86,6 @@ namespace GameHalloran
 		OpTexCoordsVec m_texCoordsVec;			///< Optional texture coordinate(s).
 		OpVector4 m_color;						///< Optional color.
 
-		//// /////////////////////////////////////////////////////////////////
-		//// @class CompareTextureVectorEqual
-		//// @author PJ O Halloran
-		////
-		//// Functor class predicate for comparing two TextureCoordinate
-		//// vectors with std::equal.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//class CompareTextureVectorEqual
-		//{
-		//private:
-		//public:
-		//	// /////////////////////////////////////////////////////////////////
-		//	// Return true if two vectors are equivalent.
-		//	//
-		//	// /////////////////////////////////////////////////////////////////
-		//	bool operator()(const Vector3 &one, const Vector3 &two)
-		//	{
-		//		return (one == two);
-		//	};
-		//};
-		//// /////////////////////////////////////////////////////////////////
-		//// @class CompareTextureVectorLessThan
-		//// @author PJ O Halloran
-		////
-		//// Functor class predicate for testing if two TextureCoordinate
-		//// vectors are less than with std::lexicographical_compare.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//class CompareTextureVectorLessThan
-		//{
-		//private:
-		//public:
-		//	// /////////////////////////////////////////////////////////////////
-		//	// Return true if two vectors are equivalent.
-		//	//
-		//	// /////////////////////////////////////////////////////////////////
-		//	bool operator()(const Vector3 &one, const Vector3 &two)
-		//	{
-		//		return (one < two);
-		//	};
-		//};
-
 	public:
 
 		// /////////////////////////////////////////////////////////////////
@@ -156,7 +104,12 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		explicit inline Vertex(const Point3 &pos, const OpTexCoordsVec &texCoord = OpTexCoordsVec(), const OpVector4 &color = OpVector4(), const OpVector3 &normal = OpVector3())\
-			: m_position(pos), m_normal(normal), m_texCoordsVec(texCoord), m_color(color) {};
+				: m_position(pos)
+				, m_normal(normal)
+				, m_texCoordsVec(texCoord)
+				, m_color(color)
+		{
+		};
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.

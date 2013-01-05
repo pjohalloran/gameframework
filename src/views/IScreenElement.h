@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __I_SCREEN_ELEMENT_H
+#define __I_SCREEN_ELEMENT_H
+
 //========================================================================
 // Interfaces.h : Defines interface classes defined throughout the book
 //
@@ -35,9 +39,6 @@
 //
 //========================================================================
 
-#ifndef __I_SCREEN_ELEMENT_H
-#define __I_SCREEN_ELEMENT_H
-
 // /////////////////////////////////////////////////////////////////
 // @file IScreenElement.h
 // @author Michael L. McShaffry (edited by PJ O Halloran)
@@ -55,18 +56,14 @@
 // I have added/modified the following functionality:
 // - Added interface under the GameHalloran namespace.
 // - I commented out virtual LRESULT CALLBACK VOnMsgProc(AppMsg msg) = 0;
-//		as its WIN32 specific, replaced with SDL equivalent.
+//		as its WIN32 specific, replaced with GLFW equivalent.
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <list>
-
 #include <boost/shared_ptr.hpp>
 
-// Project Headers
 #include "OsInputEvents.h"
-
 
 namespace GameHalloran
 {
@@ -194,7 +191,6 @@ namespace GameHalloran
 		};
 	};
 
-	// Define the ScreenElementList type.
 	typedef std::list<boost::shared_ptr<IScreenElement> > ScreenElementList;
 
 }

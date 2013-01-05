@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GAME_ALLOCATER_H
 #define __GAME_ALLOCATER_H
 
@@ -10,14 +11,9 @@
 //
 // ////////////////////////////////////////////////////////////
 
-
 #include "GameTypes.h"
 #include "GameBase.h"
 
-
-// ////////////////////////////////////////////////////////////
-//
-// ////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
     
@@ -131,6 +127,5 @@ namespace GameHalloran
         inline U32 GetId() { return (m_id); };
     };
 }
-
 
 #endif

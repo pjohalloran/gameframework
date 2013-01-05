@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_BULLET_PHYSICS_DEBUG_DRAWER_H
+#define __GF_BULLET_PHYSICS_DEBUG_DRAWER_H
+
 // /////////////////////////////////////////////////////////////////
 // @file BulletPhysicsDebugDrawer.h
 // @author PJ O Halloran
@@ -7,31 +11,22 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_BULLET_PHYSICS_DEBUG_DRAWER_H
-#define __GF_BULLET_PHYSICS_DEBUG_DRAWER_H
-
 #ifdef WIN32
 #	pragma warning( push )
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <string>
 
 #include <boost/shared_ptr.hpp>
 
 #include <bullet/btBulletDynamicsCommon.h>
 
-// Project Headers
 #include "GLSLShader.h"
 #include "ModelViewProjStackManager.h"
 #include "GameException.h"
 #include "ZipFile.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -46,7 +41,7 @@ namespace GameHalloran
 	{
 	private:
         
-        static const U32 MAX_LINES = 500;
+        static const U32 MAX_LINES = 5000;
 
 		GLuint m_vaoId;															///< Vertex attribute array object.
 		GLuint m_vboId;															///< Vertex buffer object.

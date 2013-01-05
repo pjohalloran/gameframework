@@ -18,7 +18,7 @@
 
 // Project headers
 #include "GameMain.h"
-#include "GlfwGameTimer.h"
+#include "Timer.h"
 #include "SystemCheck.h"
 #include "Events.h"
 #include "PhysicsEvents.h"
@@ -681,8 +681,8 @@ namespace GameHalloran
 	{
 		g_appPtr = this;
 
-		m_frameRateTimer = shared_ptr<IGameTimer>(GCC_NEW GlfwGameTimer());
-		m_appTimer = shared_ptr<IGameTimer>(GCC_NEW GlfwGameTimer());
+		m_frameRateTimer = shared_ptr<Timer>(GCC_NEW Timer());
+		m_appTimer = shared_ptr<Timer>(GCC_NEW Timer());
 
 		if(!optionsPtr)
 		{
@@ -739,7 +739,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void GameMain::VPollEvents()
 	{
-		F64 time = m_appTimer->VGetTime();
+		F64 time = m_appTimer->GetTime();
 		F32 elapsedTime = F32(time) - F32(m_lastEventTime);
 
 		// Check for new events from glfw (this will fill up the event queue again).
@@ -850,7 +850,7 @@ namespace GameHalloran
 		}
 
 		m_eventQueue.clear();
-		m_lastEventTime = m_appTimer->VGetTime();
+		m_lastEventTime = m_appTimer->GetTime();
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -901,14 +901,14 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void GameMain::VUpdate()
 	{
-		F64 time = m_appTimer->VGetTime();
+		F64 time = m_appTimer->GetTime();
 		F32 elapsedTime = F32(time) - F32(m_lastUpdateTime);
 
 		// allow event queue to process for a maximum of 20 ms to deal with game events.
 		safeTickEventManager(20);
 
 		m_logicPtr->VOnUpdate(time, elapsedTime);
-		m_lastUpdateTime = m_appTimer->VGetTime();
+		m_lastUpdateTime = m_appTimer->GetTime();
 	}
 
 	// /////////////////////////////////////////////////////////////////
@@ -916,7 +916,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void GameMain::VRender()
 	{
-		F64 time = m_appTimer->VGetTime();
+		F64 time = m_appTimer->GetTime();
 		F32 elapsedTime = F32(time) - F32(m_lastRenderTime);
 
 		GameViewList viewList = m_logicPtr->GetGameViewList();
@@ -925,7 +925,7 @@ namespace GameHalloran
 			(*i)->VOnRender(time, elapsedTime);
 		}
 
-		m_lastRenderTime = m_appTimer->VGetTime();
+		m_lastRenderTime = m_appTimer->GetTime();
 	}
     
     // /////////////////////////////////////////////////////////////////
@@ -957,13 +957,13 @@ namespace GameHalloran
 		}
 
 		// Timer used to calculate the number of frames drawn in the past second.
-		shared_ptr<IGameTimer> secondTimer(GCC_NEW GlfwGameTimer());
+		shared_ptr<Timer> secondTimer(GCC_NEW Timer());
 
 		m_framesInPastSecond = 0;
 		m_frameCount = 0;
-		m_appTimer->VStart();
-		m_startTime = m_appTimer->VGetTime();
-		secondTimer->VStart();
+		m_appTimer->Start();
+		m_startTime = m_appTimer->GetTime();
+		secondTimer->Start();
 
 #ifdef DEBUG
 		bool printed = false;
@@ -972,16 +972,16 @@ namespace GameHalloran
 		// The main game loop.
 		while(m_isRunning)
 		{
-			m_frameRateTimer->VStart();
+			m_frameRateTimer->Start();
 
-			if(secondTimer->VGetTime() >= 1.0)
+			if(secondTimer->GetTime() >= 1.0)
 			{
 				m_framesInPastSecond = m_frameCount;
 #ifdef DEBUG
 				std::cout << "FPS: " << m_framesInPastSecond << std::endl;
 #endif
 				m_frameCount = 0;
-				secondTimer->VStart();
+				secondTimer->Start();
 			}
 			else
 			{
@@ -993,9 +993,9 @@ namespace GameHalloran
 			m_windowManagerPtr->SwapBuffers();
 
 			// Regulate fps
-			if(m_frameRateTimer->VGetTime() < FRAME_TIME_MS)
+			if(m_frameRateTimer->GetTime() < FRAME_TIME_MS)
 			{
-				F64 milliseconds = FRAME_TIME_MS - m_frameRateTimer->VGetTime();
+				F64 milliseconds = FRAME_TIME_MS - m_frameRateTimer->GetTime();
 				Sleep(milliseconds);
 			}
 
@@ -1003,7 +1003,7 @@ namespace GameHalloran
 
 #ifdef DEBUG
 			//// Print out fps statistics every 5 seconds to console approx.
-			//I32 testVal = I32(m_appTimer->VGetTime()) % 5;
+			//I32 testVal = I32(m_appTimer->GetTime()) % 5;
 			//if(testVal == 4 && !printed)
 			//{
 			//	std::cout << "m_framesInPastSecond: " << m_framesInPastSecond << std::endl;
@@ -1033,7 +1033,7 @@ namespace GameHalloran
 	{
 		if(m_appTimer)
 		{
-			return (m_appTimer->VGetTime() - m_startTime);
+			return (m_appTimer->GetTime() - m_startTime);
 		}
 
 		return (0.0);

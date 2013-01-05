@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _GF_DOUBLE_BUFFERED_STACK_ALLOCATER_H
 #define _GF_DOUBLE_BUFFERED_STACK_ALLOCATER_H
 
@@ -9,7 +10,6 @@
 // Header and impl for the DoubleBufferedStackAllocater class.
 //
 // ////////////////////////////////////////////////////////////
-
 
 #include "GameAllocater.h"
 #include "StackAlocater.h"
@@ -29,7 +29,6 @@ namespace GameHalloran
 	class DoubleBufferedStackAllocater : public BaseGameAllocater
 	{
 	private:
-
 		U64 m_currStack;
 		StackAllocater m_stacks[2];
 
@@ -114,7 +113,6 @@ namespace GameHalloran
         //
         // ////////////////////////////////////////////////////////////
         virtual F32 VDefrag(const F32 seconds) { return (0.0f); };
-
 	};
 
 }

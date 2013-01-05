@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_OS_INPUT_EVENTS_H
+#define __GF_OS_INPUT_EVENTS_H
+
 // /////////////////////////////////////////////////////////////////
 // @file OsInputEvents.h
 // @author PJ O Halloran
@@ -19,31 +23,19 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_OS_INPUT_EVENTS_H
-#define __GF_OS_INPUT_EVENTS_H
-
-// External Headers
 #include <cmath>
-
 #include <deque>
 #include <string>
-
 #include <boost/shared_ptr.hpp>
 
 #include "GameBase.h"
 
-// Project Headers
-
-
 namespace GameHalloran
 {
-
 	// Joystick state changed values.
 	#define GF_JOYSTICK_DETECTED			0x00000010
 	#define GF_JOYSTICK_LOST				0x00000100
-
 	#define GF_AXIS_MIN_CHANGE_DELTA		0.00010f
-
 	#define GF_NUMBER_KEYS					GLFW_KEY_LAST
 
 	// /////////////////////////////////////////////////////////////////
@@ -77,7 +69,7 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	struct BaseEvent
 	{
-		I32 id;					///< ID of the event.
+		I32 id;						///< ID of the event.
 	};
 
 	// /////////////////////////////////////////////////////////////////
@@ -387,7 +379,6 @@ namespace GameHalloran
 	class JoystickInfo
 	{
 	private:
-
 		int m_id;						///< Joystick ID.
 		I32 m_numAxes;					///< Number of axes.
 		I32 m_numButtons;				///< Number of buttons.
@@ -436,8 +427,16 @@ namespace GameHalloran
 		// Constructor.
 		//
 		// /////////////////////////////////////////////////////////////////
-		JoystickInfo(const I32 id) : m_id(id), m_numAxes(0), m_numButtons(0), m_playerId(NO_PLAYER_ATTACHED), m_axisPositionsArr(NULL),\
-			m_buttonsArr(NULL), m_wasPluggedIn(false) { };
+		JoystickInfo(const I32 id)
+					: m_id(id)
+					, m_numAxes(0)
+					, m_numButtons(0)
+					, m_playerId(NO_PLAYER_ATTACHED)
+					, m_axisPositionsArr(NULL)
+					, m_buttonsArr(NULL)
+					, m_wasPluggedIn(false)
+		{
+		};
 
 		// /////////////////////////////////////////////////////////////////
 		// Constructor.
@@ -446,9 +445,16 @@ namespace GameHalloran
 		// the entire joysticks status.
 		//
 		// /////////////////////////////////////////////////////////////////
-		JoystickInfo(const I32 id, const I32 numAxes, const I32 numButtons, const I32 pId = NO_PLAYER_ATTACHED)\
-			: m_id(id), m_numAxes(numAxes), m_numButtons(numButtons), m_playerId(pId), m_axisPositionsArr(NULL),\
-				m_buttonsArr(NULL), m_wasPluggedIn(false) { };
+		JoystickInfo(const I32 id, const I32 numAxes, const I32 numButtons, const I32 pId = NO_PLAYER_ATTACHED)
+							: m_id(id)
+							, m_numAxes(numAxes)
+							, m_numButtons(numButtons)
+							, m_playerId(pId)
+							, m_axisPositionsArr(NULL)
+							, m_buttonsArr(NULL)
+							, m_wasPluggedIn(false)
+		{
+		};
 
 		// /////////////////////////////////////////////////////////////////
 		// Copy constructor.

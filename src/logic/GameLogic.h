@@ -1,6 +1,9 @@
+#pragma once
+#ifndef __GAME_LOGIC_H
+#define __GAME_LOGIC_H
+
 //========================================================================
 // GameLogic.h -  Logic layer interfaces and class definitions.
-//
 //
 // Part of the GameCode3 Application
 //
@@ -36,7 +39,6 @@
 //
 //========================================================================
 
-
 // /////////////////////////////////////////////////////////////////
 // @file GameLogic.h
 // @author Michael L. McShaffry (edited by PJ O Halloran)
@@ -58,21 +60,15 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GAME_LOGIC_H
-#define __GAME_LOGIC_H
-
 #ifdef WIN32
 #	pragma warning( push )
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <string>
 #include <map>
-
 #include <boost/shared_ptr.hpp>
 
-// Project Headers
 #include "IGameLogic.h"
 #include "Actors.h"
 #include "CProcess.h"
@@ -87,8 +83,6 @@
 
 namespace GameHalloran
 {
-
-	// ActorMap - a std::map with pointers to Actors with a key ActorId.
 	typedef std::map<ActorId, boost::shared_ptr<IActor> > ActorMap;
 
 	// /////////////////////////////////////////////////////////////////
@@ -104,15 +98,7 @@ namespace GameHalloran
 
 		ActorId m_LastActorId;									///< The ID of the last actor to be added.
 		BaseGameState m_State;									///< The current state of the game.
-		I32 m_ExpectedPlayers;									///< How many local human players.
-		I32 m_ExpectedRemotePlayers;							///< Expected remote human players.
-		I32 m_ExpectedAI;										///< How many AI players.
 		GameViewList m_gameViews;								///< Views that are attached to our game.
-		//boost::shared_ptr<PathingGraph> m_pPathingGraph;		///< The pathing graph.
-		//EventListenerPtr m_pAiEventListener;					///< AI event listener
-		bool m_bProxy;											///< Set if this is a proxy for a remote clients game logic.
-		I32 m_remotePlayerId;									///< If we are a remote player - what is out socket number on the server
-		// Refactor Chapter 19/20 work.
 		bool m_RenderDiagnostics;								///< Are we rendering diagnostics?
 		I32 m_physicsDiagnosticMode;							///< Diagnostic mode of the physics.
 		BaseGameState m_prevState;								///< The previous game state.
@@ -141,43 +127,6 @@ namespace GameHalloran
 		CRandom m_random;										///< Random number generator.
 		boost::shared_ptr<GameLog> m_loggerPtr;					///< Pointer to the global logging object.
 		boost::shared_ptr<GameOptions> m_optionsPtr;			///< Pointer to the global options.
-
-		// /////////////////////////////////////////////////////////////////
-		// Check if this logic layer is acting as a proxy for a logic layer
-		// located in a remote location.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VIsProxy()
-		{
-			return (m_bProxy);
-		};
-
-		// /////////////////////////////////////////////////////////////////
-		// Get the number of expected players.
-		//
-		// /////////////////////////////////////////////////////////////////
-		I32 GetExpectedPlayers()
-		{
-			return (m_ExpectedPlayers);
-		};
-
-		// /////////////////////////////////////////////////////////////////
-		// Get the number of expected remote players.
-		//
-		// /////////////////////////////////////////////////////////////////
-		I32 GetExpectedRemotePlayers()
-		{
-			return (m_ExpectedRemotePlayers);
-		};
-
-		// /////////////////////////////////////////////////////////////////
-		// Get the number of expected AI players.
-		//
-		// /////////////////////////////////////////////////////////////////
-		I32 GetExpectedAiPlayers()
-		{
-			return (m_ExpectedAI);
-		};
 
 		// /////////////////////////////////////////////////////////////////
 		// Should we render diagnostics information to the screen?
@@ -295,12 +244,6 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		ActorId GetRandomActor(boost::optional<ActorId> ignoreMe);
-		
-		//// /////////////////////////////////////////////////////////////////
-		//// Get the AI pathing graph.
-		////
-		//// /////////////////////////////////////////////////////////////////
-		//boost::shared_ptr<PathingGraph> GetPathingGraph(void) { return m_pPathingGraph; }
 
 		// /////////////////////////////////////////////////////////////////
 		// Build the initial scene.
@@ -381,12 +324,6 @@ namespace GameHalloran
 		virtual bool VSaveGame();
 
 		// /////////////////////////////////////////////////////////////////
-		// Set this logic object to be a proxy logic layer.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual void VSetProxy();
-
-		// /////////////////////////////////////////////////////////////////
 		// Called once per main loop to update the logic state of the game.
 		//
 		// @param time The total application time so far.
@@ -459,10 +396,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	class BaseLuaGameLogic : public BaseGameLogic
 	{
-	private:
-
-	protected:
-
 	public:
 
 		// /////////////////////////////////////////////////////////////////

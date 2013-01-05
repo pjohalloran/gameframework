@@ -8,13 +8,7 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-
-// External Headers
-
-
-// Project Headers
 #include "Vector.h"
-
 
 namespace GameHalloran
 {

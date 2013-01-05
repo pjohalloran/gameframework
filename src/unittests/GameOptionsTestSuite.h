@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GAME_OPTIONS_TEST_SUITE_H
+#define __GAME_OPTIONS_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file GameOptionsTestSuite.h
 // @author PJ O Halloran
@@ -7,19 +11,13 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GAME_OPTIONS_TEST_SUITE_H
-#define __GAME_OPTIONS_TEST_SUITE_H
-
-// External Headers
 #include <string>
 
 #include <cxxtest/TestSuite.h>
-
 #include <boost/shared_ptr.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/filesystem.hpp>
 
-// Project Headers
 #include "GameOptions.h"
 
 // /////////////////////////////////////////////////////////////////

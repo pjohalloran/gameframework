@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GCC3_I_AUDIO_BUFFER_H
 #define __GCC3_I_AUDIO_BUFFER_H
 
@@ -38,19 +39,15 @@
 //
 //========================================================================
 
-// External Headers
 #include <list>
 
 #include <boost/shared_ptr.hpp>
 
-// Project Headers
 #include "SoundCommon.h"
 #include "CSoundResource.h"
 
-
 namespace GameHalloran
 {
-
 	//////////////////////////////////////////////////////////////////////
 	// @class IAudioBuffer
 	// @author Mike McShaffry
@@ -170,9 +167,6 @@ namespace GameHalloran
 		virtual F32 VGetProgress() = 0;
 	};
 
-	//////////////////////////////////////////////////////////////////////
-	// This is the data structure of audio buffers managed by Audio.
-	//////////////////////////////////////////////////////////////////////
 	typedef std::list<boost::shared_ptr<IAudioBuffer> > AudioBufferList;
 
 }

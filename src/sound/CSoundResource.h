@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GCC_C_SOUND_RESOURCE_H
 #define __GCC_C_SOUND_RESOURCE_H
 
@@ -38,16 +39,14 @@
 //
 //========================================================================
 
-// External Headers
 #include <string>
 
-// Project Headers
 #include "ResCache2.h"
 #include "SoundCommon.h"
 #include "GameBase.h"
 
 
-#ifndef _WINDOWS || WIN32 || TARGET_OS_WINDOWS
+#if !defined(_WINDOWS) || !defined(WIN32)
 // Redefine the struct on platforms other than WIN32...
 typedef struct {
     GameHalloran::WORD  wFormatTag;

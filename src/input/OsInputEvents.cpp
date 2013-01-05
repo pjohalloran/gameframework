@@ -8,12 +8,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <cstring>
-
 #include <sstream>
 
-// Project Headers
 #include "OsInputEvents.h"
 #include "GameBase.h"
 #include "GameMain.h"
@@ -184,8 +181,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void JoystickInfo::CreateStateArrays()
 	{
-		//DestroyStateArrays();
-
 		if(m_numAxes > 0)
 		{
 			m_axisPositionsArr = GCC_NEW F32[m_numAxes];

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __DYNAMIC_ARRAY_TEST_SUITE_H
+#define __DYNAMIC_ARRAY_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file DynamicArrayTestSuite.h
 // @author PJ O Halloran
@@ -7,17 +11,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __DYNAMIC_ARRAY_TEST_SUITE_H
-#define __DYNAMIC_ARRAY_TEST_SUITE_H
-
-// External Headers
-#include <cxxtest/TestSuite.h>
-
 #include <string>
-
 #include <iostream>
 
-// Project Headers
+#include <cxxtest/TestSuite.h>
+
 #include "DynamicArray.h"
 
 using std::cout;

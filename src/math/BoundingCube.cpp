@@ -7,12 +7,7 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
-
-
-// Project Headers
 #include "BoundingCube.h"
-
 
 namespace GameHalloran
 {

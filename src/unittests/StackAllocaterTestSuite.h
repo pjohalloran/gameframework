@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __STACK_ALLOCATER_TEST_SUITE_H
+#define __STACK_ALLOCATER_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file StackAllocaterTestSuite.h
 // @author PJ O Halloran
@@ -7,15 +11,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __STACK_ALLOCATER_TEST_SUITE_H
-#define __STACK_ALLOCATER_TEST_SUITE_H
-
-// External Headers
 #include <cxxtest/TestSuite.h>
-
 #include <boost/scoped_ptr.hpp>
 
-// Project Headers
 #include "StackAllocater.h"
 
 // /////////////////////////////////////////////////////////////////

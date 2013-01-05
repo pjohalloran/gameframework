@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GF_TEXT_BOX_CONTROL_WIDGET_H
 #define __GF_TEXT_BOX_CONTROL_WIDGET_H
 
@@ -15,20 +16,12 @@
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <LuaPlus/LuaLink.h>
 #include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
-
-// Project Headers
 #include "ControlWidget.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

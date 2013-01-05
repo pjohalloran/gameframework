@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __LINKED_LIST_TEST_SUITE_H
+#define __LINKED_LIST_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file LinkedListTestSuite.h
 // @author PJ O Halloran
@@ -7,17 +11,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __LINKED_LIST_TEST_SUITE_H
-#define __LINKED_LIST_TEST_SUITE_H
-
-// External Headers
-#include <cxxtest/TestSuite.h>
-
 #include <string>
-
 #include <iostream>
 
-// Project Headers
+#include <cxxtest/TestSuite.h>
+
 #include "LinkedList.h"
 
 using std::cout;

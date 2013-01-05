@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_BULLET_PHYSICS_H
+#define __GF_BULLET_PHYSICS_H
+
 //========================================================================
 // Part of the GameCode3 Application
 //
@@ -42,12 +46,7 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_BULLET_PHYSICS_H
-#define __GF_BULLET_PHYSICS_H
-
-// External Headers
 #include <cstring>
-
 #include <vector>
 #include <map>
 #include <iterator>
@@ -58,19 +57,12 @@
 
 #include <bullet/btBulletDynamicsCommon.h>
 
-
-// Project Headers
 #include "IGamePhysics.h"
 #include "BulletPhysicsDebugDrawer.h"
 #include "ModelViewProjStackManager.h"
 #include "Triangle.h"
 #include "GLTriangleBatch.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 

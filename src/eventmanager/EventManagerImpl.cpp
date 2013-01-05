@@ -59,8 +59,7 @@
 
 #include "EventManagerImpl.h"
 #include "GameMain.h"
-#include "IGameTimer.h"
-#include "GlfwGameTimer.h"
+#include "Timer.h"
 
 using boost::shared_ptr;
 using std::string;
@@ -360,9 +359,8 @@ namespace GameHalloran
 		//// Reset listeners removed flag upon entry.
 		//m_listenersRemoved = false;
 
-		// Create and start a timer on entry.
-		shared_ptr<IGameTimer> timer(GCC_NEW GlfwGameTimer());
-		timer->VStart();
+		Timer timer;
+		timer.Start();
 
 		EventListenerMap::const_iterator itWC = m_registry.find( 0 );
 
@@ -441,7 +439,7 @@ namespace GameHalloran
 			if ( maxMillis != IEventManager::kINFINITE )
 			{
 
-				if ( static_cast<U64>(timer->VGetTime()) >= maxMillis )
+				if ( static_cast<U64>(timer.GetTime()) >= maxMillis )
 				{
 					// time ran about, abort processing loop
 					break;

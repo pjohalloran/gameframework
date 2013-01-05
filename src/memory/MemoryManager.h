@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __MEMORY_MANAGER_H
 #define __MEMORY_MANAGER_H
 
@@ -10,18 +11,12 @@
 //
 // ////////////////////////////////////////////////////////////
 
-
 #include "GameTypes.h"
 #include "GameBase.h"
 #include "GameAllocater.h"
 
-
-// ////////////////////////////////////////////////////////////
-//
-// ////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
-    
     static const U32 DEFAULT_MAX_MEMORY_ALLOCATERS = 20;
     
     // ////////////////////////////////////////////////////////////
@@ -138,6 +133,5 @@ namespace GameHalloran
     };
     
 }
-
 
 #endif

@@ -1,48 +1,36 @@
+#pragma once
+#ifndef __GF_TIMER_H
+#define __GF_TIMER_H
+
 // /////////////////////////////////////////////////////////////////
-// @file CommonTimer.h
+// @file Timer.h
 // @author PJ O Halloran
 // @date 16/08/2010
 //
-// File contains the header for the CommonTimer abstract game timer
-// class that all game timer classes should inherit from.
-//
-// Please note this class is adapted from the lazyfoo SDL (timer) 
-// tutorials:
-// http://www.lazyfoo.net/SDL_tutorials/index.php
-//
-// It was modified to strip out the SDL specifics for derived classes
-// to implement.
+// File contains the header for the Timer.
 // 
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_COMMON_TIMER_H
-#define __GF_COMMON_TIMER_H
-
-// External Headers
-
-
-// Project Headers
-#include "IGameTimer.h"
-
+#include "GameBase.h"
 
 namespace GameHalloran
 {
 	// /////////////////////////////////////////////////////////////////
-	// @class CommonTimer
+	// @class Timer
 	// @author PJ O Halloran
 	//
 	// This class defines and implements common functionality for game
 	// timer classes.
 	//
 	// /////////////////////////////////////////////////////////////////
-	class CommonTimer : public IGameTimer
+	class Timer
 	{
 	private:
 
 		F64 m_startTicks;				///< The number of ticks when the timer started.
 		F64 m_pausedTicks;				///< The number of ticks when the timer was paused.
-		bool m_started;						///< Has the timer been started.
-		bool m_paused;						///< Is the timer currently paused.
+		bool m_started;					///< Has the timer been started.
+		bool m_paused;					///< Is the timer currently paused.
 
 		// /////////////////////////////////////////////////////////////////
 		// Get the current tick count from the underlying OS in a platform 
@@ -51,7 +39,7 @@ namespace GameHalloran
 		// This can only be implemented by derived classes.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual F64 VGetTicks() = 0;
+		F64 GetTicks() { return (F64)glfwGetTime(); };
 
 	protected:
 
@@ -77,56 +65,56 @@ namespace GameHalloran
 		// Constructor.
 		//
 		// /////////////////////////////////////////////////////////////////
-		CommonTimer() : m_startTicks(0.0), m_pausedTicks(0.0), m_paused(false), m_started(false) { };
+		Timer() : m_startTicks(0.0), m_pausedTicks(0.0), m_paused(false), m_started(false) { };
 
 		// /////////////////////////////////////////////////////////////////
 		// Destructor.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual ~CommonTimer() { };
+		~Timer() { };
 		
 		// /////////////////////////////////////////////////////////////////
 		// Start the timer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual void VStart();
+		void Start();
 		
 		// /////////////////////////////////////////////////////////////////
 		// Stop the timer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual void VStop();
+		void Stop();
 		
 		// /////////////////////////////////////////////////////////////////
 		// Pause the timer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual void VPause();
+		void Pause();
 		
 		// /////////////////////////////////////////////////////////////////
 		// Unpause the timer.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual void VUnPause();
+		void UnPause();
 		
 		// /////////////////////////////////////////////////////////////////
 		// Get the current time since the timer was started (not including
 		// any time for which the timer was paused).
 		//
 		// /////////////////////////////////////////////////////////////////
-		F64 VGetTime();
+		F64 GetTime();
 		
 		// /////////////////////////////////////////////////////////////////
 		// Check if the timer has started.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VIsStarted() const;
+		bool IsStarted() const;
 		
 		// /////////////////////////////////////////////////////////////////
 		// Check if the timer is currently paused.
 		//
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VIsPaused() const;
+		bool IsPaused() const;
 			
 	};
 }

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __POINT_TEST_SUITE_H
+#define __POINT_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file PointTestSuite.h
 // @author PJ O Halloran
@@ -7,15 +11,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __POINT_TEST_SUITE_H
-#define __POINT_TEST_SUITE_H
-
-// External Headers
 #include <cxxtest/TestSuite.h>
-
 #include <boost/scoped_ptr.hpp>
 
-// Project Headers
 #include "Point.h"
 
 // /////////////////////////////////////////////////////////////////
@@ -28,7 +26,6 @@
 // /////////////////////////////////////////////////////////////////
 class PointTestSuite : public CxxTest::TestSuite
 {
-
 private:
 	
 	boost::scoped_ptr<GameHalloran::Point> m_testObjPtr;			///< Pointer to the object under test.

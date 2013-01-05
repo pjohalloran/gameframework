@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GF_BUTTON_CONTROL_WIDGET_H
 #define __GF_BUTTON_CONTROL_WIDGET_H
 
@@ -16,20 +17,12 @@
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <LuaPlus/LuaLink.h>
 #include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
-
-// Project Headers
 #include "AbstractButtonControl.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -146,21 +139,21 @@ namespace GameHalloran
 		// @throw GameException& If the shader object used is NULL.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit ButtonControl(const Point3 &posRef,\
-								const Vector4 &colorRef,\
-								boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,\
-								const F32 width,\
-								const F32 height,\
-								boost::shared_ptr<FTFont> fontPtr,\
-								const boost::shared_ptr<GLSLShader> shaderFlatObj,\
-								const boost::shared_ptr<GLSLShader> shaderTexObj,\
-								const I32 eventTypeId,\
-								const std::string &textureNameRef,\
-								const std::string &texturePressedRef,\
-								const std::string &textureHoverRef,\
-                                const std::string &atlasNameRef,\
-								const std::string &textRef,\
-								const bool visible = true,\
+		explicit ButtonControl(const Point3 &posRef,
+								const Vector4 &colorRef,
+								boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,
+								const F32 width,
+								const F32 height,
+								boost::shared_ptr<FTFont> fontPtr,
+								const boost::shared_ptr<GLSLShader> shaderFlatObj,
+								const boost::shared_ptr<GLSLShader> shaderTexObj,
+								const I32 eventTypeId,
+								const std::string &textureNameRef,
+								const std::string &texturePressedRef,
+								const std::string &textureHoverRef,
+                                const std::string &atlasNameRef,
+								const std::string &textRef,
+								const bool visible = true,
 								const ScreenElementId id = SCREEN_ELEMENT_ID_NOT_ASSIGNED,
 								const bool enabled = true,
 								const bool sendEvent = true) throw (GameException &);
@@ -181,11 +174,11 @@ namespace GameHalloran
 		// @throw GameException& If Lua data is invalid or incomplete.
 		//
 		// /////////////////////////////////////////////////////////////////
-		explicit ButtonControl(const LuaPlus::LuaObject &widgetScriptData,\
-								boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,\
-								const boost::shared_ptr<GLSLShader> shaderFlatObj,\
-								const boost::shared_ptr<GLSLShader> shaderTexObj,\
-								boost::shared_ptr<FTFont> fontPtr,\
+		explicit ButtonControl(const LuaPlus::LuaObject &widgetScriptData,
+								boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,
+								const boost::shared_ptr<GLSLShader> shaderFlatObj,
+								const boost::shared_ptr<GLSLShader> shaderTexObj,
+								boost::shared_ptr<FTFont> fontPtr,
 								const ScreenElementId id = SCREEN_ELEMENT_ID_NOT_ASSIGNED) throw (GameException &);
 
 		// /////////////////////////////////////////////////////////////////

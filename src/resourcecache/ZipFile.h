@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __ZIP_FILE_H
 #define __ZIP_FILE_H
 
@@ -60,16 +61,13 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <cstdio>
-
 #include <string>
 #include <map>
 
 #include <boost/optional.hpp>
 #include <boost/filesystem.hpp>
 
-// Project Headers
 #include "GameBase.h"
 
 namespace GameHalloran
@@ -211,22 +209,6 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		bool WriteFile(const bool compress, const void * const pBuf);
 
-//		// /////////////////////////////////////////////////////////////////
-//		// Read a large file at index i.  The callback will be called when
-//		// the file has been completely read in.
-//		//
-//		// Added to show multi-threaded decompression.
-//		//
-//		// @param i The index of the file.
-//		// @param pBuf The pointer to the file buffer.
-//		// @param callback Pointer to the function that will be called
-//		//					when the large file has been read.
-//		//
-//		// @return bool
-//		//
-//		// /////////////////////////////////////////////////////////////////
-//		bool ReadLargeFile(const I32 i, void *pBuf, void (*callback)(const I32, bool &));
-
 		// /////////////////////////////////////////////////////////////////
 		// Find the index of the file with the filename supplied.
 		//
@@ -239,7 +221,6 @@ namespace GameHalloran
 
     private:
 
-		// maps path to a zip content id
 		typedef std::map<std::string, I32> ZipContentsMap;
 
 		FILE *m_pFile;										///< Zip file
@@ -247,7 +228,6 @@ namespace GameHalloran
 		U32  m_nEntries;									///< Number of entries.
 		ZipContentsMap m_ZipContentsMap;					///< The contents of the zip file.
 		const TZipDirFileHeader **m_papDir;					///< Pointers to the dir entries in pDirData.
-        
         std::vector<TZipDirFileHeader> m_localVec;
 	};
 

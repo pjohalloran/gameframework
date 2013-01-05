@@ -50,18 +50,14 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <assert.h>
-
 #include <algorithm>
 #include <string>
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
 
-// Project Headers
 #include "LuaStateManager.h"
-
 #include "Events.h"
 #include "TextResource.h"
 #include "GameOptions.h"

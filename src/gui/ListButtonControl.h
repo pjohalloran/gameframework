@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __GF_LIST_BUTTON_CONTROL_WIDGET_H
 #define __GF_LIST_BUTTON_CONTROL_WIDGET_H
 
@@ -16,23 +17,14 @@
 #	pragma warning( disable:4290 )
 #endif
 
-// External Headers
 #include <LuaPlus/LuaLink.h>
 #include <LuaPlus/LuaPlus.h>
 #include <LuaPlus/LuaObject.h>
 
-
-// Project Headers
 #include "ButtonControl.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
-
 
 	// /////////////////////////////////////////////////////////////////
 	// @class ListButtonControl

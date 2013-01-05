@@ -35,17 +35,12 @@
 //
 //========================================================================
 
-// External Headers
 #include <string>
 
-// Project Headers
 #include "CAudio.h"
 #include "CSoundProcess.h"
 #include "CSoundResource.h"
-
 #include "GameLog.h"
-
-// for global app pointer.
 #include "GameMain.h"
 
 using boost::shared_ptr;

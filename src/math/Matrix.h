@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_MATRIX_H
+#define __GF_MATRIX_H
+
 // /////////////////////////////////////////////////////////////////
 // @file Matrix.h
 // @author PJ O Halloran
@@ -51,16 +55,10 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_MATRIX_H
-#define __GF_MATRIX_H
-
-// External Headers
 #include <string>
 #include <ostream>
 #include <sstream>
 
-
-// Project Headers
 #include "GameTypes.h"
 #include "CommonMath.h"
 #include "Vector.h"
@@ -527,12 +525,6 @@ namespace GameHalloran
 				conv << "|\t" << m_mat[M03] << "\t" << m_mat[M13] << "\t" << m_mat[M23] << "\t" << m_mat[M33] << "\t|";
 				return (conv.str());
 			};
-
-			//// /////////////////////////////////////////////////////////////////
-			//// Operator for outputting the matrix to a stream like std::cout.
-			////
-			//// /////////////////////////////////////////////////////////////////
-			//friend std::ostream &operator<< (std::ostream &output, const Matrix4 &mat);
 
 			// /////////////////////////////////////////////////////////////////
 			// Get a read only pointer to the array of components of the object.

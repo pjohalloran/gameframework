@@ -7,21 +7,13 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <algorithm>
 
 #include <boost/lexical_cast.hpp>
 
-
-// Project Headers
 #include "GameBase.h"
 #include "Triangle.h"
 
-
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -36,22 +28,18 @@ namespace GameHalloran
 	{
 		if(this == &rhs)
 		{
-			// rhs is an alias for this object!
 			return (true);
 		}
 
 		if(!m_texCoordsVec.is_initialized() || !rhs.m_texCoordsVec.is_initialized())
 		{
-			// One of them is not used so they can't be equal!
 			return (false);
 		}
 
 		TexCoordsVec thisVec = *m_texCoordsVec;
 		TexCoordsVec rhsVec = *rhs.m_texCoordsVec;
 
-		//bool result = std::lexicographical_compare(thisVec.begin(), thisVec.end(), rhsVec.begin(), rhsVec.end(), CompareTextureVectorEqual);
 		bool result = std::equal(thisVec.begin(), thisVec.end(), rhsVec.begin());
-
 		if(!result)
 		{
 			return (false);
@@ -67,13 +55,11 @@ namespace GameHalloran
 	{
 		if(this == &rhs)
 		{
-			// rhs is an alias for this object so it is NOT less than!
 			return (false);
 		}
 
 		if(!m_texCoordsVec.is_initialized() || !rhs.m_texCoordsVec.is_initialized())
 		{
-			// One of them is not used so they can't be less than!
 			return (false);
 		}
 
@@ -81,7 +67,6 @@ namespace GameHalloran
 		TexCoordsVec rhsVec = *rhs.m_texCoordsVec;
 
 		bool result = std::lexicographical_compare(thisVec.begin(), thisVec.end(), rhsVec.begin(), rhsVec.end());
-
 		if(!result)
 		{
 			return (false);
@@ -174,7 +159,6 @@ namespace GameHalloran
 		}
 		catch(...)
 		{
-			// Index out of bounds exception occurred in at()!
 			return (false);
 		}
 
@@ -188,7 +172,6 @@ namespace GameHalloran
 	{
 		if(!HasAnyTextureCoordinates())
 		{
-			// Initialize vector.
 			m_texCoordsVec = TexCoordsVec();
 		}
 
@@ -377,21 +360,18 @@ namespace GameHalloran
 	void CalculateTriangleListBoundingSphere(const TriangleMesh &tList, BoundingSphere &bs)
 	{
 		Vertex currVertex;				// Current vertex in the current triangle.
-		F32 currDistance;			// Distance from the origin point to the current vertex.
-		F32 maxDistance = 0.0f;	// Maximum distance found from the origin to any vertex in the mesh to date.
+		F32 currDistance;				// Distance from the origin point to the current vertex.
+		F32 maxDistance = 0.0f;			// Maximum distance found from the origin to any vertex in the mesh to date.
 
-		// Ensure the centre point of the bounding sphere is the origin (MODEL space).
 		bs.SetCentre(g_originPt);
 
 		if(tList.empty())
 		{
-			// Invalid sphere!
 			bs.SetRadius(-1.0f);
 			return;
 		}
 
 		// Finds the distance from the origin to the furthest away vertex in the mesh ( = BS radius).
-
 		for(TriangleMesh::const_iterator i = tList.begin(), end = tList.end(); i != end; ++i)
 		{
 			for(I32 vi = 0; vi < Triangle::eNumberVertices; ++vi)
@@ -414,19 +394,17 @@ namespace GameHalloran
 	void CalculateTriangleListBoundingBox(const TriangleMesh &tList, BoundingCube &bc)
 	{
 		Vertex currVertex;									// Current vertex in the current triangle.
-		F32 minX = 0.0f, minY = 0.0f, minZ = 0.0f;		// Minimum point found.
-		F32 maxX = 0.0f, maxY = 0.0f, maxZ = 0.0f;		// Maximum point found.
+		F32 minX = 0.0f, minY = 0.0f, minZ = 0.0f;			// Minimum point found.
+		F32 maxX = 0.0f, maxY = 0.0f, maxZ = 0.0f;			// Maximum point found.
 
 		if(tList.empty())
 		{
-			// Invalid box!
 			bc.SetMin(g_originPt);
 			bc.SetMax(Point3(-1.0f, -1.0f, -1.0f));
 			return;
 		}
 
 		// Finds the minimum and maximum vertex points in the mesh.
-
 		for(TriangleMesh::const_iterator i = tList.begin(), end = tList.end(); i != end; ++i)
 		{
 			for(I32 vi = 0; vi < Triangle::eNumberVertices; ++vi)
@@ -477,6 +455,7 @@ namespace GameHalloran
 		}
 
 		Vertex currVertex;					// Current vertex in the current triangle.
+
 		for(TriangleMesh::const_iterator i = tList.begin(), end = tList.end(); i != end; ++i)
 		{
 			for(I32 vi = 0; vi < Triangle::eNumberVertices; ++vi)

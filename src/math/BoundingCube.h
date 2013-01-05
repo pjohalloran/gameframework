@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_BOUNDING_CUBE_H
+#define __GF_BOUNDING_CUBE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file BoundingCube.h
 // @author PJ O Halloran
@@ -7,15 +11,7 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_BOUNDING_CUBE_H
-#define __GF_BOUNDING_CUBE_H
-
-// External Headers
-
-
-// Project Headers
 #include "Vector.h"
-
 
 namespace GameHalloran
 {

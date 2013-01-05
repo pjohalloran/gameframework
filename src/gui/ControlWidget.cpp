@@ -7,19 +7,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include "GameBase.h"
-
-// Project Headers
 #include "ControlWidget.h"
-
 #include "GameMain.h"
 #include "GameColors.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -42,8 +34,6 @@ namespace GameHalloran
 		m_outlineBatch.Reset();
 
 		const Point3 pos = AbstractWidget::VGetPosition();
-		// unused const F32 w = AbstractWidget::VGetWidth();
-		// unused const F32 h = AbstractWidget::VGetHeight();
 		m_outlineBatch.Begin(GL_LINES, 2);
 			// Defined in CCW order.
 			m_outlineBatch.Vertex3f(0.0f, 0.0f, 0.0f);
@@ -85,32 +75,12 @@ namespace GameHalloran
 			return (false);
 		}
 
-		//F32 halfWidgetWidth = VGetWidth() / 2.0f;
-		//F32 halfWidgetHeight = VGetHeight() / 2.0f;
-		//BoundingCube bb;
-		//GetTextRenderBoundingBox(textToRender, bb);
-		//F32 halfTextWidth = bb.GetWidth() / 2.0f;
-		//F32 halfTextHeight = bb.GetHeight() / 2.0f;
-		//Point3 windowPos;
-		//windowPos.SetX(VGetPosition().GetX() + (halfWidgetWidth - halfTextWidth));
-		//windowPos.SetY(VGetPosition().GetY() - (halfWidgetHeight - halfTextHeight) - halfWidgetHeight);
-		////windowPos.SetY(VGetPosition().GetY() - (halfWidgetHeight - halfTextHeight) - VGetHeight());
-
 		BoundingCube bb;
 		GetTextRenderBoundingBox(textToRender, bb);
 		Point3 windowPos;
 		windowPos.SetX(VGetPosition().GetX() + (VGetWidth() - bb.GetWidth()) / 2.0f);
 		windowPos.SetY(VGetPosition().GetY() - (VGetHeight() - bb.GetHeight()) / 2.0f - bb.GetHeight());
 
-//		glWindowPos3f(windowPos.GetX(), windowPos.GetY(), windowPos.GetZ());
-//		if(!m_ftglLayoutPtr)
-//		{
-//			m_fontPtr->Render(textToRender.c_str());
-//		}
-//		else
-//		{
-//			m_ftglLayoutPtr->Render(textToRender.c_str());
-//		}
 		return(true);
 	}
 
@@ -131,8 +101,10 @@ namespace GameHalloran
 									const ScreenElementId id,\
 									const bool enabled) throw (GameException &)\
 									: AbstractWidget(posRef, colorRef, mvpStackManPtr, width, height,\
-										shaderFlatObj, shaderTexObj, textureNameRef, atlasNameRef, visible, id), m_enabled(enabled),\
-											m_fontPtr(fontPtr), m_ftglLayoutPtr(NULL)
+										shaderFlatObj, shaderTexObj, textureNameRef, atlasNameRef, visible, id)
+									, m_enabled(enabled)
+									, m_fontPtr(fontPtr)
+									, m_ftglLayoutPtr(NULL)
 	{
 		BuildOutline();
 
@@ -155,7 +127,9 @@ namespace GameHalloran
 									boost::shared_ptr<FTFont> fontPtr,\
 									const ScreenElementId id) throw (GameException &)
 									: AbstractWidget(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, id)\
-										, m_enabled(true), m_fontPtr(fontPtr), m_ftglLayoutPtr(NULL)
+									, m_enabled(true)
+									, m_fontPtr(fontPtr)
+									, m_ftglLayoutPtr(NULL)
 	{
 		SetLuaEnabled(widgetScriptData.GetByName("Enabled"));
 		BuildOutline();

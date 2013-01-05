@@ -35,9 +35,6 @@
 //
 //========================================================================
 
-// External Headers
-
-// Project Headers
 #include "CAudio.h"
 
 namespace GameHalloran
@@ -59,7 +56,6 @@ namespace GameHalloran
 		{
 			(*i)->VStop();
 			++i;
-			//m_AllSamples.pop_front();
 		}
 		m_AllSamples.clear();
 	}

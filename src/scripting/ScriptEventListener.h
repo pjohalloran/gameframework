@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __SCRIPT_EVENT_LISTENER_H
+#define __SCRIPT_EVENT_LISTENER_H
+
 //========================================================================
 // GameCode3 is the sample application that encapsulates much of the source code
 // discussed in "Game Coding Complete - 3rd Edition" by Mike McShaffry, published by
@@ -51,16 +55,8 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __SCRIPT_EVENT_LISTENER_H
-#define __SCRIPT_EVENT_LISTENER_H
-
-// External Headers
-
-// Project Headers
 #include "Actors.h"
-
 #include "LuaStateManager.h"
-
 #include "EventManager.h"
 
 namespace GameHalloran

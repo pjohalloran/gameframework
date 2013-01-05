@@ -1,3 +1,7 @@
+#pragma once
+#ifndef _GF_TEXT_RESOURCE_H
+#define _GF_TEXT_RESOURCE_H
+
 // ////////////////////////////////////////////////////////////////////
 // @file TextResource.h
 // @author PJ O Halloran
@@ -7,17 +11,10 @@
 //
 // ////////////////////////////////////////////////////////////////////
 
-#ifndef _GF_TEXT_RESOURCE_H
-#define _GF_TEXT_RESOURCE_H
-
-// External Headers
 #include <string>
 #include <functional>
 
-
-// Project Headers
 #include "ResCache2.h"
-
 
 namespace GameHalloran
 {
@@ -67,7 +64,7 @@ namespace GameHalloran
 	private:
 
 		char *m_textBuffer;				///< The parsed text data.
-		U32 m_textSize;		///< The size of the text data.
+		U32 m_textSize;					///< The size of the text data.
 		std::string m_filename;			///< The name of the file or resource.
 		bool m_initialized;				///< Has the resource been initialized with proper data yet from the resource cache?
 

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GAME_LOG_TEST_SUITE_H
+#define __GAME_LOG_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file GameLogTestSuite.h
 // @author PJ O Halloran
@@ -7,15 +11,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GAME_LOG_TEST_SUITE_H
-#define __GAME_LOG_TEST_SUITE_H
-
-// External Headers
 #include <cxxtest/TestSuite.h>
-
 #include <boost/scoped_ptr.hpp>
 
-// Project Headers
 #include "GameLog.h"
 
 // /////////////////////////////////////////////////////////////////
@@ -28,11 +26,8 @@
 // /////////////////////////////////////////////////////////////////
 class GameLogTestSuite : public CxxTest::TestSuite
 {
-
 private:
 	
-
-
 	bool IsTestDataReady()
 	{
 		return (true);

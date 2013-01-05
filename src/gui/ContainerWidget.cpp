@@ -8,19 +8,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <boost/lexical_cast.hpp>
 
-
-// Project Headers
 #include "ContainerWidget.h"
-
 #include "GameMain.h"
 
-// /////////////////////////////////////////////////////////////////
-//
-//
-// /////////////////////////////////////////////////////////////////
 namespace GameHalloran
 {
 
@@ -38,8 +30,9 @@ namespace GameHalloran
                                         const std::string &atlasNameRef,\
 										const bool visible,\
 										const ScreenElementId id) throw (GameException &)\
-										: AbstractWidget(posRef, colorRef, mvpStackManPtr, width, height, shaderFlatObj, shaderTexObj, textureNameRef, atlasNameRef, visible, id),\
-											m_list()
+										: AbstractWidget(posRef, colorRef, mvpStackManPtr, width, height, shaderFlatObj
+											, shaderTexObj, textureNameRef, atlasNameRef, visible, id)
+										, m_list()
 	{
 	}
 
@@ -51,7 +44,8 @@ namespace GameHalloran
 										const boost::shared_ptr<GLSLShader> shaderFlatObj,\
 										const boost::shared_ptr<GLSLShader> shaderTexObj,\
 										const ScreenElementId id) throw (GameException &)
-										: AbstractWidget(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, id), m_list()
+										: AbstractWidget(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, id)
+										, m_list()
 	{
 	}
 
@@ -112,10 +106,8 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void ContainerWidget::VOnResolutionChange(const I32 oldWidth, const I32 oldHeight, const I32 newWidth, const I32 newHeight)
 	{
-		// Take care of the update for this container.
 		AbstractWidget::VOnResolutionChange(oldWidth, oldHeight, newWidth, newHeight);
 
-		// Update all widgets attached to this container.
 		for(WidgetList::iterator i = m_list.begin(), end = m_list.end(); i != end; ++i)
 		{
 			(*i)->VOnResolutionChange(oldWidth, oldHeight, newWidth, newHeight);
@@ -168,8 +160,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	void ContainerWidget::VOnUpdate(const F32 elapsedTime)
 	{
-		// TODO: You could check for and ensure all widgets are inside this containers drawing region by altering their positions in here.
-
 		for(WidgetList::iterator i = m_list.begin(), end = m_list.end(); i != end; ++i)
 		{
 			(*i)->VOnUpdate(elapsedTime);
@@ -181,11 +171,6 @@ namespace GameHalloran
 	// /////////////////////////////////////////////////////////////////
 	bool ContainerWidget::VOnEvent(GF_Event &eventObj, const F32 elapsedTime)
 	{
-		// Container event handling
-
-		// TODO: Allow the user to select widgets inside this container with the keyboard and joystick here...
-
-		// List event handling
 		bool result = true;
 		for(WidgetList::iterator i = m_list.begin(), end = m_list.end(); ((result) && (i != end)); ++i)
 		{
@@ -286,8 +271,6 @@ namespace GameHalloran
 			Point3 controlPos = controlPtr->VGetPosition();
 			if(!m_bb.IsPointInside(controlPos))
 			{
-				//Vector3 diff = AbstractWidget::VGetPosition() - controlPos;
-				//diff = -diff;
 				controlPtr->VSetPosition(AbstractWidget::VGetPosition());
 			}
 

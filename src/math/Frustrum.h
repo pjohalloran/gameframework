@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GF_FRUSTRUM_H
+#define __GF_FRUSTRUM_H
+
 // /////////////////////////////////////////////////////////////////
 // @file Frustrum.h
 // @author PJ O Halloran
@@ -51,19 +55,11 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GF_FRUSTRUM_H
-#define __GF_FRUSTRUM_H
-
-// External Headers
-
-
-// Project Headers
 #include "CommonMath.h"
 #include "Vector.h"
 #include "Matrix.h"
 #include "BoundingSphere.h"
 #include "Plane.h"
-
 
 namespace GameHalloran
 {
@@ -111,11 +107,10 @@ namespace GameHalloran
 		Plane m_Planes[NumPlanes];		// planes of the frustum in camera space
 		Point3 m_NearClip[4];			// verts of the near clip plane in camera space
 		Point3 m_FarClip[4];			// verts of the far clip plane in camera space
-
-		F32 m_Fov;					// field of view in radians
-		F32 m_Aspect;				// aspect ratio - width divided by height
-		F32 m_Near;				// near clipping distance
-		F32 m_Far;					// far clipping distance
+		F32 m_Fov;						// field of view in radians
+		F32 m_Aspect;					// aspect ratio - width divided by height
+		F32 m_Near;						// near clipping distance
+		F32 m_Far;						// far clipping distance
 
 	public:
 

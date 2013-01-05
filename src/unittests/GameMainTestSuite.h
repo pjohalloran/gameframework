@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GAME_MAIN_TEST_SUITE_H
+#define __GAME_MAIN_TEST_SUITE_H
+
 // /////////////////////////////////////////////////////////////////
 // @file GameMainTestSuite.h
 // @author PJ O Halloran
@@ -7,15 +11,9 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __GAME_MAIN_TEST_SUITE_H
-#define __GAME_MAIN_TEST_SUITE_H
-
-// External Headers
 #include <cxxtest/TestSuite.h>
-
 #include <boost/scoped_ptr.hpp>
 
-// Project Headers
 #include "GameMain.h"
 
 // /////////////////////////////////////////////////////////////////

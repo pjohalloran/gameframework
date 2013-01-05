@@ -1,6 +1,9 @@
+#pragma once
+#ifndef __I_GAME_LOGIC_H
+#define __I_GAME_LOGIC_H
+
 //========================================================================
 // IGameLogic.h -  Logic layer interface.
-//
 //
 // Part of the GameCode3 Application
 //
@@ -36,7 +39,6 @@
 //
 //========================================================================
 
-
 // /////////////////////////////////////////////////////////////////
 // @file IGameLogic.h
 // @author Michael L. McShaffry (edited by PJ O Halloran)
@@ -58,23 +60,15 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-#ifndef __I_GAME_LOGIC_H
-#define __I_GAME_LOGIC_H
-
-// External Headers
 #include <string>
 #include <map>
-
 #include <boost/shared_ptr.hpp>
 
-// Project Headers
 #include "IActors.h"
 #include "IGamePhysics.h"
-#include "Matrix.h"
 
 namespace GameHalloran
 {
-
 	// /////////////////////////////////////////////////////////////////
 	// @enum BaseGameState
 	//
@@ -108,6 +102,8 @@ namespace GameHalloran
 		BGS_Paused,
 		BGS_DialogPaused
 	};
+
+	class Matrix4;
 
 	// /////////////////////////////////////////////////////////////////
 	// @class IGameLogic
@@ -181,12 +177,6 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		virtual bool VSaveGame() = 0;
-
-		// /////////////////////////////////////////////////////////////////
-		// Set this Logic layer as a proxy for a remote client.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual void VSetProxy() = 0;	
 
 		// /////////////////////////////////////////////////////////////////
 		// Update the stte of the game.  Called once per game loop so the logic

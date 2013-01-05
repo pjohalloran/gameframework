@@ -54,9 +54,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
-
-// Project Headers
 #include "GameBase.h"
 #include "ResCache2.h"
 #include "GameMain.h"

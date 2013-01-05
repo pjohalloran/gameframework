@@ -1,5 +1,3 @@
-#ifdef TARGET_WINDOWS || _WINDOWS || WIN32
-
 //========================================================================
 // Various classes and interfaces from the sound system.
 //
@@ -37,21 +35,15 @@
 //
 //========================================================================
 
-// External Headers
 #include <string>
 
 #include <DXUT/DXUT.h>
 #include <Dxerr.h>
 
-// Project Headers
 #include "DirectSoundAudio.h"
 #include "CSoundResource.h"
-
-#include "GameBase.h"
 #include "GameLog.h"
 #include "SoundCommon.h"
-
-// For the global application pointer.
 #include "GameMain.h"
 
 using std::string;
@@ -86,7 +78,6 @@ namespace GameHalloran
 			return (false);
 		}
 
-		// Set DirectSound coop level 
 		if(FAILED(hr = m_pDS->SetCooperativeLevel(m_hWnd, DSSCL_PRIORITY)))
 		{
             GF_LOG_TRACE_ERR("DirectSound8Audio::VInitialize()", "Failed to set the coop level of the DirectSound interface");
@@ -373,8 +364,7 @@ namespace GameHalloran
 		}
 		else
 		{
-			result = VPause();				// note that the book code calls VStop().
-									//   It's better to call VPause() instead.
+			result = VPause();
 		}
 
 		return (result);
@@ -621,5 +611,3 @@ namespace GameHalloran
 	}
 
 }
-
-#endif

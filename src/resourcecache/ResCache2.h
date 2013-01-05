@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __GCC3_RES_CACHE_2_H
+#define __GCC3_RES_CACHE_2_H
+
 //========================================================================
 // ResCache.h : Defines a simple resource cache.
 //
@@ -34,9 +38,6 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 //========================================================================
-
-#ifndef __GCC3_RES_CACHE_2_H
-#define __GCC3_RES_CACHE_2_H
 
 // /////////////////////////////////////////////////////////////////
 // @file ResCache.h
@@ -88,7 +89,6 @@
 //
 // /////////////////////////////////////////////////////////////////
 
-// External Headers
 #include <string>
 #include <list>
 #include <map>
@@ -97,15 +97,11 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem.hpp>
 
-// Project Headers
 #include "ZipFile.h"
-
 #include "GameLog.h"
 
 namespace GameHalloran
 {
-
-	// Forward declaration of ResHandle and ResCache for Resource
 	class ResHandle;
 	class ResCache;
 
@@ -287,7 +283,7 @@ namespace GameHalloran
 
 		Resource m_resource;					///< The resource.
 		char *m_buffer;							///< The resource data.
-		U32 m_size;					///< The size of the resource.
+		U32 m_size;								///< The size of the resource.
 		ResCache *m_pResCache;					///< Pointer to the resource cache manager.
 
 	protected:
@@ -361,8 +357,8 @@ namespace GameHalloran
 		ResHandleList m_lru;						///< Least recently used list.
 		ResHandleMap m_resources;					///< Fast resource retrieval map.
 		IResourceFile *m_file;						///< Pointer to the interface for loading in resources from container.
-		U32 m_cacheSize;					///< Total cache size.
-		U32 m_allocated;					///< Total memory allocated.
+		U32 m_cacheSize;							///< Total cache size.
+		U32 m_allocated;							///< Total memory allocated.
 		boost::shared_ptr<GameLog> m_loggerPtr;		///< Pointer to the game logger.
 
 	protected:
