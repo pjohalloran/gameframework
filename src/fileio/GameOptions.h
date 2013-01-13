@@ -29,10 +29,11 @@
 
 #include "tinyxml/tinyxml.h"
 
+#include "GameException.h"
+
 namespace GameHalloran
 {
 	class GameLog;
-	class GameException;
 
 	// /////////////////////////////////////////////////////////////////
 	// @class GameOptions

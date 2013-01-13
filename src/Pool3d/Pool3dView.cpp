@@ -352,8 +352,8 @@ namespace GameHalloran
 		}
 		else
 		{
-			TErrorMessageList errMsgList;
-			if(!paramsPtr->VInit(eventData.VGetLuaEventData(), errMsgList))
+            TErrorMessageList errMsgList;
+            if(!paramsPtr->VInit(eventData.VGetLuaEventData(), errMsgList))
 			{
                 GF_LOG_TRACE_ERR("Pool3dViewEventListener::OnUpdateActorParametersEvent()", "Failed to reinitialize the actors SceneNode parameters (list of causes): ");
 				for(TErrorMessageList::iterator i = errMsgList.begin(), end = errMsgList.end(); i != end; ++i)

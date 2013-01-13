@@ -16,7 +16,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/optional.hpp>
 
-#if defined(_WINDOWS) defined(WIN32)
+#if defined(_WINDOWS) || defined(WIN32)
 	#include <al.h>
 	#include <alc.h>
 #elif defined (TARGET_OS_MAC)

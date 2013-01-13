@@ -82,7 +82,7 @@ namespace GameHalloran
 												const Matrix4 &fromWorld,
 												const std::string &textureName,
 												const std::string &shaderNameRef,
-												boost::shared_ptr<IGLBatchBase> &batchPtr)\
+												boost::shared_ptr<IGLBatchBase> batchPtr)\
 												: SceneNode(sgPtr, actorId, nodeName, renderPass, material, toWorld, fromWorld)
 												, m_batchPtr(batchPtr)
 												, m_texHandle()

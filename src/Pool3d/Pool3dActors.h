@@ -140,7 +140,7 @@ namespace GameHalloran
 		// @param errorMessages The error messages (maybe passed back from the script?)
 		// 
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages);
+		virtual bool VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages);
 
 		// /////////////////////////////////////////////////////////////////
 		// Get the texture name.
@@ -322,7 +322,7 @@ namespace GameHalloran
 		// @param errorMessages The error messages (maybe passed back from the script?)
 		// 
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages);
+		virtual bool VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages);
 
 		// /////////////////////////////////////////////////////////////////
 		// The logic layers create function.  Creates an Actor in respect to
@@ -515,7 +515,7 @@ namespace GameHalloran
 		// @param errorMessages The error messages (maybe passed back from the script?)
 		// 
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages);
+		virtual bool VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages);
 
 		// /////////////////////////////////////////////////////////////////
 		// The logic layers create function.  Creates an Actor in respect to
@@ -842,7 +842,7 @@ namespace GameHalloran
 		// @param errorMessages The error messages (maybe passed back from the script?)
 		// 
 		// /////////////////////////////////////////////////////////////////
-		virtual bool VInit(LuaPlus::LuaObject &srcData, TErrorMessageList &errorMessages);
+		virtual bool VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages);
 
 		// /////////////////////////////////////////////////////////////////
 		// The logic layers create function.  Creates an Actor in respect to
