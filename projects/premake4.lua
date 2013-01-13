@@ -13,7 +13,7 @@ solution "gameframework"
 project "gameframework"
 	kind "StaticLib"
 	language "C++"
-	links { "zlib", "tinyxml", "bullet", "png", "jpeg", "luaplus51", "ogg", "vorbis", "glew", "glfw", "freetype", "ftgl" }
+	links { "zlib", "tinyxml", "bullet", "png", "jpeg", "luaplus51", "ogg", "vorbis", "glew", "glfw", "freetype", "ftgl", "freetype-gl" }
 	location ("tmp")
 	includedirs { "../include", "../include/bullet", "../src/3rdParty" }
 	files {
@@ -109,7 +109,7 @@ project "Pool3d"
 	location ("tmp")
 	includedirs { "../include", "../include/bullet", "../src/3rdParty" }
 	targetdir ("../bin")
-	links { "zlib", "tinyxml", "bullet", "png", "jpeg", "luaplus51", "ogg", "vorbis", "glew", "glfw", "freetype", "ftgl", "gameframework" }
+	links { "zlib", "tinyxml", "bullet", "png", "jpeg", "luaplus51", "ogg", "vorbis", "glew", "glfw", "freetype", "ftgl", "freetype-gl", "gameframework" }
 	files {
 		"../src/Pool3d/**.h",
 		"../src/Pool3d/**.cpp"
@@ -176,6 +176,7 @@ local ThirdPartyMakeScripts = {
 	"3rdPartyPremake/libvorbis.lua",
 	"3rdPartyPremake/luaplus.lua",
 	"3rdPartyPremake/tinyxml.lua",
+	"3rdPartyPremake/freetype-gl.lua"
 	--"3rdPartyPremake/openal.lua",
 };
 		

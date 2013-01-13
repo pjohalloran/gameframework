@@ -1,0 +1,311 @@
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/185/branches/gl-3.0
+END
+text-buffer.h
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/171/branches/gl-3.0/text-buffer.h
+END
+demo-outline.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/179/branches/gl-3.0/demo-outline.c
+END
+texture-atlas.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/159/branches/gl-3.0/texture-atlas.c
+END
+texture-font.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/176/branches/gl-3.0/texture-font.c
+END
+demo-glyph.c
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/179/branches/gl-3.0/demo-glyph.c
+END
+texture-atlas.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/159/branches/gl-3.0/texture-atlas.h
+END
+texture-font.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/175/branches/gl-3.0/texture-font.h
+END
+demo-ansi.c
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/179/branches/gl-3.0/demo-ansi.c
+END
+font-manager.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/159/branches/gl-3.0/font-manager.c
+END
+arial-16.h
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/181/branches/gl-3.0/arial-16.h
+END
+demo-texture.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/179/branches/gl-3.0/demo-texture.c
+END
+font-manager.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/159/branches/gl-3.0/font-manager.h
+END
+demo-console.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/179/branches/gl-3.0/demo-console.c
+END
+vertex-buffer.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/177/branches/gl-3.0/vertex-buffer.c
+END
+platform.c
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/159/branches/gl-3.0/platform.c
+END
+demo-cartoon.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/179/branches/gl-3.0/demo-cartoon.c
+END
+demo-font.c
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/179/branches/gl-3.0/demo-font.c
+END
+vertex-buffer.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/160/branches/gl-3.0/vertex-buffer.h
+END
+platform.h
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/159/branches/gl-3.0/platform.h
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/179/branches/gl-3.0/Makefile
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/182/branches/gl-3.0/CMakeLists.txt
+END
+demo-cube.c
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/179/branches/gl-3.0/demo-cube.c
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/159/branches/gl-3.0/LICENSE
+END
+vector.c
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/159/branches/gl-3.0/vector.c
+END
+makefont.c
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/181/branches/gl-3.0/makefont.c
+END
+demo-gamma.c
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/179/branches/gl-3.0/demo-gamma.c
+END
+markup.h
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/159/branches/gl-3.0/markup.h
+END
+mat4.c
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/168/branches/gl-3.0/mat4.c
+END
+shader.c
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/159/branches/gl-3.0/shader.c
+END
+vector.h
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/159/branches/gl-3.0/vector.h
+END
+mat4.h
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/168/branches/gl-3.0/mat4.h
+END
+vec234.h
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/159/branches/gl-3.0/vec234.h
+END
+shader.h
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/167/branches/gl-3.0/shader.h
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/178/branches/gl-3.0/README
+END
+demo-benchmark.c
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/179/branches/gl-3.0/demo-benchmark.c
+END
+edtaa3func.c
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/159/branches/gl-3.0/edtaa3func.c
+END
+demo-subpixel.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/179/branches/gl-3.0/demo-subpixel.c
+END
+vertex-attribute.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/177/branches/gl-3.0/vertex-attribute.c
+END
+demo-markup.c
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/184/branches/gl-3.0/demo-markup.c
+END
+edtaa3func.h
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/159/branches/gl-3.0/edtaa3func.h
+END
+vertex-attribute.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/177/branches/gl-3.0/vertex-attribute.h
+END
+demo-lcd.c
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/179/branches/gl-3.0/demo-lcd.c
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/159/branches/gl-3.0/TODO
+END
+demo-atb-agg.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/179/branches/gl-3.0/demo-atb-agg.c
+END
+demo-makefont.c
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/159/branches/gl-3.0/demo-makefont.c
+END
+freetype-gl.h
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/159/branches/gl-3.0/freetype-gl.h
+END
+opengl.h
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/179/branches/gl-3.0/opengl.h
+END
+text-buffer.c
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/177/branches/gl-3.0/text-buffer.c
+END
+demo-distance-field-2.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/179/branches/gl-3.0/demo-distance-field-2.c
+END
+demo-distance-field-3.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/182/branches/gl-3.0/demo-distance-field-3.c
+END
+demo-distance-field.c
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/179/branches/gl-3.0/demo-distance-field.c
+END
