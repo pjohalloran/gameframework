@@ -1,0 +1,177 @@
+// /////////////////////////////////////////////////////////////////
+// @file ProgrammableAds.vp
+// @author PJ O Halloran.
+// @date 08/12/2010
+//
+// VERTEX SHADER
+//
+// Implementation of the ADS lighting model commonly used in 3D scenes.
+// This lighting model is the same as that used in the fixed function
+// pipeline of OpenGL and others.
+//
+// - Features:
+// - Phong shading.
+// - Texture application [optional].
+// - Dynamic number of lights (8 maximum - max may be increased by
+//		changing the constant below MAX_NUMBER_LIGHTS upto maximum
+//		allowable by your graphics hardware (8 is a good general number)).
+// - Light attenuation.
+// - Three different types of lights (Directional, Positional and
+//		spotlights).
+//
+// References:
+//  - This is mainly an implementation of the ADS lighting model as described
+// in the OpenGL Programming Guide (Red book) 7th edition by David
+// Shreiner et al.  See Chapter 5: Lighting: The Matematics of Lighting.
+//
+// I also referred to:
+//  - OpenGL Superbible, 5th edition by Richard Wright et al.
+// Chapter 6: Shaders: ADS lighting model.
+//
+// - Fundamentals of Computer Graphics 3rd Edition by Peter Shirley
+// et al.  Chapter 10: Surface shading, Chapter 20: Light and
+// Chapter 24: Global illumination.
+//
+// - Mathematics for Computer Graphics, 2nd edition by John Vince.
+//
+// /////////////////////////////////////////////////////////////////
+
+// Force use of GLSL version 3.3
+//#version 330
+#version 150
+
+// /////////////////////////////////////////////////////////////////
+// Program constants.
+const int MAX_NUMBER_LIGHTS = 8;							// Maximum number of lights allowed in the scene.
+// /////////////////////////////////////////////////////////////////
+
+
+// /////////////////////////////////////////////////////////////////
+// Incoming vertex attributes.
+in vec4 va_position;										// Vertex Position.
+in vec3 va_normal;											// Vertex Normal.
+in vec2 va_texCoords;										// Vertex Texture Coordinates.
+// /////////////////////////////////////////////////////////////////
+
+
+// /////////////////////////////////////////////////////////////////
+// GLSL shader uniforms.
+
+// /////////////////////////////////////////////////////////////////
+// 1) High level switches
+uniform bool u_applyTexture;								// Is there a texture being applied?
+// /////////////////////////////////////////////////////////////////
+
+// /////////////////////////////////////////////////////////////////
+// 2) Input matrices.
+uniform mat4 u_mvpMatrix;									// Current MV Projection matrix.
+uniform mat4 u_mvMatrix;									// Current MV matrix.
+uniform mat3 u_normalMatrix;								// Normal matrix (Current MV matrices rotation 3x3 matrix).
+// /////////////////////////////////////////////////////////////////
+
+// /////////////////////////////////////////////////////////////////
+// 3) Light(s) information.
+uniform int u_numberLights;									// Number of lights in the scene (should be <= MAX_NUMBER_LIGHTS constant!).
+uniform vec3 u_lightPositionArr[MAX_NUMBER_LIGHTS];			// Array of light positions in the scene (Must be in camera space, else the results will be wrong).
+// /////////////////////////////////////////////////////////////////
+
+// /////////////////////////////////////////////////////////////////
+
+
+// /////////////////////////////////////////////////////////////////
+// Vertex Shader output parameters.
+smooth out vec3 vp_varyingNormalVec;						// The vertex normal smoothly interpolated across the surface of the triangle.
+smooth out vec3 vp_varyingLightDirArr[MAX_NUMBER_LIGHTS];	// Array of direction vectors to the lights smoothly interpolated accross the triangle.
+flat out vec3 vp_flatVertexPosition;						// Vertex position (camera space) sent to the fragment shader.
+
+smooth out vec2 vp_texCoordsVec;							// Texture coordinates smoothly interpolated accross the triangle.
+
+smooth out vec4 vp_varyingVertexPosition;
+
+// /////////////////////////////////////////////////////////////////
+
+
+// /////////////////////////////////////////////////////////////////
+// Transforms the vertex position by the MV matrix to get the vertex
+// position in camera space.
+//
+// @param N/A
+//
+// @return vec3 Vertex position.
+//
+// /////////////////////////////////////////////////////////////////
+vec3 GetCameraVertexPos()
+{
+    vec4 cameraVertexPos4 = u_mvMatrix * va_position;
+    
+    // for fog
+    vp_varyingVertexPosition = cameraVertexPos4;
+    
+    vec3 cameraVertexPos3 = cameraVertexPos4.xyz / cameraVertexPos4.w;
+    return (cameraVertexPos3);
+}
+
+// /////////////////////////////////////////////////////////////////
+// Transforms the vertex normal by the MV rotation component matrix
+// to get the vertex normal in camera space.
+//
+// @param N/A
+//
+// @return vec3 Vertex normal.
+//
+// /////////////////////////////////////////////////////////////////
+vec3 GetCameraVertexNormal()
+{
+    return (u_normalMatrix * va_normal);
+}
+
+// /////////////////////////////////////////////////////////////////
+// Get the unit vector TO the light source from this vertex.
+//
+// @param lightPos The position of the light.
+// @param vertexCameraPos Position of vertex in camera space.
+//
+// @return A unit vector pointing to the light.
+//
+// /////////////////////////////////////////////////////////////////
+vec3 GetUnitVectorToLightSource(vec3 lightPos, vec3 vertexCameraPos)
+{
+	return(normalize(lightPos - vertexCameraPos));
+}
+
+// /////////////////////////////////////////////////////////////////
+// Main entry point of vertex shader.
+//
+// @param N/A
+//
+// @return void.
+//
+// /////////////////////////////////////////////////////////////////
+void main(void) 
+{
+	// Get the vertex position and normal in camera space.
+    vp_flatVertexPosition = GetCameraVertexPos();
+    vp_varyingNormalVec = GetCameraVertexNormal();
+
+	// Calculate the number of lights defined (ensure we only process the first MAX_NUMBER_LIGHTS in the arrays).
+    int numberLights = u_numberLights;
+    if(numberLights > MAX_NUMBER_LIGHTS)
+    {
+		numberLights = MAX_NUMBER_LIGHTS;
+    }
+    
+    // For each light in the scene, calculate the direction to that light source from this vertex.
+    for(int i = 0; i < numberLights; ++i)
+    {
+		vp_varyingLightDirArr[i] = GetUnitVectorToLightSource(u_lightPositionArr[i], vp_flatVertexPosition);
+	}
+
+    // Pass along the texture coordinates if a texture is being applied.
+    if(u_applyTexture)
+    {
+		vp_texCoordsVec = va_texCoords.st;
+	}
+
+    // Finally transform the geometry by setting the built in gl_Position parameter.
+    gl_Position = u_mvpMatrix * va_position;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--If you are manually editing the file, remember that the OptionsType id must be unique, must start at 0 and be incremented according to how the OptionsType are layed out in the file!-->
+<Options>
+    <OptionType id="0">
+        <MasterVolume>0.999999464</MasterVolume>
+        <Multisampling>2</Multisampling>
+        <Music>1</Music>
+        <RenderShadows>1</RenderShadows>
+        <ScreenHeight>900</ScreenHeight>
+        <ScreenWidth>1440</ScreenWidth>
+        <SoundFx>1</SoundFx>
+        <TextureFilteringType>Anisotropic</TextureFilteringType>
+    </OptionType>
+    <OptionType id="1">
+        <AlphaBits>8</AlphaBits>
+        <AudioSystem>OpenAL</AudioSystem>
+        <BulletPhysicsDebugMode>wireframe,aabb</BulletPhysicsDebugMode>
+        <ColorBufferSize>24</ColorBufferSize>
+        <DepthBufferSize>24</DepthBufferSize>
+        <FontDebug>lazy.ttf</FontDebug>
+        <FontDebugSize>26</FontDebugSize>
+        <FontUi>freesansbold.ttf</FontUi>
+        <FontUiSize>40</FontUiSize>
+        <FullScreen>0</FullScreen>
+        <GameName>Pool3D</GameName>
+        <GameRoot>/Users/pjohalloran/work/trunk/</GameRoot>
+        <GameSaveDir>c:/temp/savedir</GameSaveDir>
+        <GlobalDataDir>data/</GlobalDataDir>
+        <LogLevel>4</LogLevel>
+        <LuaGeneralRoot>lua/</LuaGeneralRoot>
+        <MinCpuSpeed>300</MinCpuSpeed>
+        <MinHdSpace>1</MinHdSpace>
+        <MinSysRam>128</MinSysRam>
+        <MinVideoRam>16</MinVideoRam>
+        <MinVirtualMemory>16</MinVirtualMemory>
+        <OpenGLDebug>0</OpenGLDebug>
+        <OpenGLMajor>3</OpenGLMajor>
+        <OpenGLMinor>2</OpenGLMinor>
+        <OpenGLProfile>core</OpenGLProfile>
+        <PhysicsSystem>Bullet</PhysicsSystem>
+        <ResCacheSize>25</ResCacheSize>
+        <ResFile>Pool3D.zip</ResFile>
+        <StencilBufferSize>0</StencilBufferSize>
+        <UseDesktopSettings>0</UseDesktopSettings>
+    </OptionType>
+</Options>

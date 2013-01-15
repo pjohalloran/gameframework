@@ -25,6 +25,7 @@ project "gameframework"
 		"../src/GLSLCompiler/**",
 		"../src/build/**",
 		"../src/Pool3d/**",
+		"../src/TestApp/**",
 		"../src/unittests/**",
 		"../src/sound/DirectSoundAudio.h",
 		"../src/sound/DirectSoundAudio.cpp"
@@ -161,7 +162,66 @@ project "Pool3d"
 		postbuildcommands {
 			". ../../src/build/macosx/BuildResources.sh ../../src/Pool3d/data/ ../../../data/Pool3D/Pool3D.zip"
 		}
-		
+
+project "TestApp"
+	kind "ConsoleApp"
+	language "C++"
+	location ("tmp")
+	includedirs { "../include", "../include/bullet", "../src/3rdParty" }
+	targetdir ("../bin")
+	links { "zlib", "tinyxml", "bullet", "png", "jpeg", "luaplus51", "ogg", "vorbis", "glew", "glfw", "freetype", "ftgl", "freetype-gl", "gameframework" }
+	files {
+		"../src/TestApp/**.h",
+		"../src/TestApp/**.cpp"
+	}
+	excludes {
+		"../src/data/**",
+		"../src/lua/**"
+	}
+	configuration "Debug"
+		flags { "FloatStrict", "StaticRuntime", "Symbols" }
+		objdir ("../obj/Debug/" .. "TestApp")
+		defines {
+			"DEBUG"
+		}
+		libdirs { "../libs/Debug" }
+	configuration "Release"
+		defines {
+			"RELEASE",
+			"NDEBUG"
+		}
+		flags { "FloatFast", "OptimizeSpeed", "StaticRuntime" }
+		objdir ("../obj/Release/" .. "TestApp")
+		libdirs { "../libs/Release" }
+	
+	configuration "windows"
+		defines {
+			"WIN32",
+			"_WINDOWS",
+			"WIN32_LEAN_AND_MEAN",
+			"NOMINMAX",
+			"GLEW_STATIC",
+			"FTGL_LIBRARY_STATIC"
+		}
+		includedirs { OPENAL_INCLUDE_DIR }
+		libdirs { OPENAL_LIB_DIR, BOOST_LIB_DIR }
+		links { "opengl32", "glu32", "dsound", "OpenAL32" }
+	configuration { "windows", "Debug" }
+		links { "libboost_filesystem-vc100-mt-sgd-1_51", "libboost_system-vc100-mt-sgd-1_51" }
+		linkoptions { "/NODEFAULTLIB:\"libcmtd.lib\"" }
+	configuration { "windows", "Release" }
+		links { "libboost_filesystem-vc100-mt-s-1_51", "libboost_system-vc100-mt-s-1_51" }
+		linkoptions { "/NODEFAULTLIB:\"libcmt.lib\"" }
+	configuration "macosx"
+		defines {
+			"TARGET_OS_MAC"
+		}
+
+		links { "boost_filesystem-mt", "boost_system-mt", "OpenGL.framework", "OpenAL.framework", "CoreFoundation.framework", "IOKit.framework", "AppKit.framework" }
+		postbuildcommands {
+			". ../../src/build/macosx/BuildResources.sh ../../src/TestApp/data/ ../../../data/TestApp/TestApp.zip"
+		}
+
 local ThirdPartyMakeScripts = {
 	--"3rdPartyPremake/boost.lua",
 	"3rdPartyPremake/zlib.lua",
