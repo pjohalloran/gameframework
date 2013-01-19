@@ -222,6 +222,58 @@ project "TestApp"
 			". ../../src/build/macosx/BuildResources.sh ../../src/TestApp/data/ ../../../data/TestApp/TestApp.zip"
 		}
 
+project "glslc"
+	kind "ConsoleApp"
+	language "C++"
+	location ("tmp")
+	includedirs { "../include", "../src/3rdParty" }
+	targetdir ("../bin")
+	links { "zlib", "tinyxml", "glew", "glfw", "gameframework" }
+	files {
+		"../src/GLSLCompiler/**.h",
+		"../src/GLSLCompiler/**.cpp",
+		"../src/GLSLCompiler/**.c"
+	}
+	excludes {
+		"../src/data/**",
+		"../src/lua/**"
+	}
+	configuration "Debug"
+		flags { "FloatStrict", "StaticRuntime", "Symbols" }
+		objdir ("../obj/Debug/" .. "glslc")
+		defines {
+			"DEBUG"
+		}
+		libdirs { "../libs/Debug" }
+	configuration "Release"
+		defines {
+			"RELEASE",
+			"NDEBUG"
+		}
+		flags { "FloatFast", "OptimizeSpeed", "StaticRuntime" }
+		objdir ("../obj/Release/" .. "glslc")
+		libdirs { "../libs/Release" }
+	
+	configuration "windows"
+		defines {
+			"WIN32",
+			"_WINDOWS",
+			"WIN32_LEAN_AND_MEAN",
+			"NOMINMAX"
+		}
+		links { "opengl32", "glu32" }
+	configuration { "windows", "Debug" }
+		links { "libboost_filesystem-vc100-mt-sgd-1_51", "libboost_system-vc100-mt-sgd-1_51" }
+		linkoptions { "/NODEFAULTLIB:\"libcmtd.lib\"" }
+	configuration { "windows", "Release" }
+		links { "libboost_filesystem-vc100-mt-s-1_51", "libboost_system-vc100-mt-s-1_51" }
+		linkoptions { "/NODEFAULTLIB:\"libcmt.lib\"" }
+	configuration "macosx"
+		defines {
+			"TARGET_OS_MAC"
+		}
+		links { "boost_filesystem-mt", "boost_system-mt", "OpenGL.framework", "OpenAL.framework", "CoreFoundation.framework", "IOKit.framework", "AppKit.framework" }
+
 local ThirdPartyMakeScripts = {
 	--"3rdPartyPremake/boost.lua",
 	"3rdPartyPremake/zlib.lua",
