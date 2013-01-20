@@ -70,9 +70,7 @@ namespace GameHalloran
 	// @class Matrix4
 	// @author PJ O Halloran
 	//
-	// This class represents a 4x4 Matrix.
-	// It is stored in column major order as it is to be used with OpenGL
-	// and that is how OpenGL stores matrices.
+	// This class represents a 4x4 Matrix stored in column major order.
 	//
 	// e.g. The matrix, M:
 	//	|m00	m10		m20		m30|
@@ -101,13 +99,6 @@ namespace GameHalloran
 	//
 	// To get the matrix in row major order for libraries other than OpenGL
 	// then you must get the transpose of the matrix.
-	//
-	// Please note:
-	// Some parts of this class were lifted from the math3d library from
-	// the OpenGL Superbible 5th Edition.  I had some difficulty understanding
-	// how to calculate the determinant and inverse of a 4x4 matrix so I
-	// copied the method employed by the Superbible and I learned about the
-	// method from the Fundamentals of Computer Graphics, Third Edition.
 	//
 	// /////////////////////////////////////////////////////////////////
 	class Matrix4

@@ -832,7 +832,7 @@ namespace GameHalloran
             return (false);
         }
         
-        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 3, forceCopyToGpu);
+        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 3, 1, forceCopyToGpu);
         return (true);
     }
     
@@ -847,7 +847,7 @@ namespace GameHalloran
             return (false);
         }
         
-        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 4, forceCopyToGpu);
+        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 4, 1, forceCopyToGpu);
         return (true);
     }
     
@@ -862,7 +862,7 @@ namespace GameHalloran
             return (false);
         }
         
-        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 3, forceCopyToGpu);
+        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 3, 1, forceCopyToGpu);
         return (true);
     }
     
@@ -877,7 +877,7 @@ namespace GameHalloran
             return (false);
         }
         
-        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 16, forceCopyToGpu);
+        uniform->SetValue((GLfloat*)value.GetComponentsConst(), 16, 1, forceCopyToGpu);
         return (true);
     }
     
@@ -892,7 +892,7 @@ namespace GameHalloran
             return (false);
         }
         
-        uniform->SetValue((GLfloat*)value, 9, forceCopyToGpu);
+        uniform->SetValue((GLfloat*)value, 9, 1, forceCopyToGpu);
         return (true);
     }
 

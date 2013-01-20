@@ -635,13 +635,27 @@ namespace GameHalloran
 		// Please see Fundamentals of Computer Graphics, 3rd Edition, Chapter 7
 		//  Viewing Transformations, pg.144 for details on the orthographic projection
 		//   matrix.
+        
+        // self->m00 = +2.0/(right-left);
 		outMatrix.SetElement(Matrix4::C0, Matrix4::R0, 2.0f / (xMax - xMin));
+        
+        // self->m11 = +2.0/(top-bottom);
 		outMatrix.SetElement(Matrix4::C1, Matrix4::R1, 2.0f / (yMax - yMin));
-		outMatrix.SetElement(Matrix4::C2, Matrix4::R2, 2.0f / (zMin - zMax));
+        
+        // self->m22 = -2.0/(zfar-znear);
+		//outMatrix.SetElement(Matrix4::C2, Matrix4::R2, 2.0f / (zMin - zMax));
+        outMatrix.SetElement(Matrix4::C2, Matrix4::R2, 2.0f / (zMax - zMin));
+        
+        // self->m30 = -(right+left)/(right-left);
 		outMatrix.SetElement(Matrix4::C3, Matrix4::R0, -((xMax + xMin) / (xMax - xMin)));
+        
+        // self->m31 = -(top+bottom)/(top-bottom);
 		outMatrix.SetElement(Matrix4::C3, Matrix4::R1, -((yMax + yMin) / (yMax - yMin)));
-		outMatrix.SetElement(Matrix4::C3, Matrix4::R2, -((zMin + zMax) / (zMin - zMax)));
-
+        
+        // self->m32 = -(zfar+znear)/(zfar-znear);
+		//outMatrix.SetElement(Matrix4::C3, Matrix4::R2, -((zMin + zMax) / (zMin - zMax)));
+        outMatrix.SetElement(Matrix4::C3, Matrix4::R2, -((zMax + zMin) / (zMax - zMin)));
+        
 		return (outMatrix);
 	}
 
