@@ -55,6 +55,7 @@
 // /////////////////////////////////////////////////////////////////
 
 #include <string.h>
+#include <regex>
 
 #include <boost/algorithm/string/case_conv.hpp>
 #include "zlib/zlib.h"
@@ -369,6 +370,10 @@ namespace GameHalloran
 
 		return (*i).second;
 	}
+    
+    bool ZipFile::Find(const std::string &filePattern, std::vector<boost::filesystem::path> &fileList) {
+        return false;
+    }
 
 	// /////////////////////////////////////////////////////////////////
 	//

@@ -64,6 +64,7 @@
 #include <cstdio>
 #include <string>
 #include <map>
+#include <vector>
 
 #include <boost/optional.hpp>
 #include <boost/filesystem.hpp>
@@ -218,6 +219,8 @@ namespace GameHalloran
 		//
 		// /////////////////////////////////////////////////////////////////
 		boost::optional<I32> Find(const boost::filesystem::path &filename) const;
+        
+        bool Find(const std::string &filePattern, std::vector<boost::filesystem::path> &fileList);
 
     private:
 

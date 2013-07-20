@@ -78,9 +78,6 @@ namespace GameHalloran
                 
                 AtlasImageSPtr image(new AtlasImage(currChildPtr->Attribute("imagefile")));
                 
-                if(image->m_id.getStr().compare("MainMenuBackground.tga") == 0)
-                    int tmp = 0;
-                
                 currChildPtr->Attribute("x", &tmp);
                 image->m_x = (float)tmp / atlas->m_width;
                 currChildPtr->Attribute("y", &tmp);
