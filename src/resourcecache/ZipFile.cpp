@@ -357,7 +357,6 @@ namespace GameHalloran {
 
         std::regex regex(filePattern);
         for(ZipContentsMap::const_iterator i = m_ZipContentsMap.begin(), end = m_ZipContentsMap.end(); i != end; ++i) {
-            printf("%s, %i\n", i->first.c_str(), i->second);
             if(std::regex_search(i->first.c_str(), regex)) {
                 fileList.push_back(boost::filesystem::path(i->first));
             }
