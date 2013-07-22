@@ -161,6 +161,13 @@ namespace GameHalloran
 		// Return true if the resource was in the ZIP directory and false otherwise.
 		return (resourceNum);
 	}
+    
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool ResourceZipFile::VGetResourceListing(const std::string &regex, ResourceListing &listings) {
+        return m_pZipFile->Find(regex, listings);
+    }
 
 	// /////////////////////////////////////////////////////////////////
 	//
@@ -488,4 +495,10 @@ namespace GameHalloran
 		m_allocated -= size;
 	}
 
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool ResCache::GetResourceListing(const std::string &regex, ResourceListing &listings) {
+        return m_file->VGetResourceListing(regex, listings);
+    }
 }
