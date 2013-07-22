@@ -5,7 +5,7 @@ if os.is("windows") then
 	-- using an environment other than VS then you may have to tweak this file...
 	OPENAL_INCLUDE_DIR="C:/Program Files (x86)/OpenAL 1.1 SDK/include/"
 	OPENAL_LIB_DIR="C:/Program Files (x86)/OpenAL 1.1 SDK/libs/WIN32/"
-	BOOST_INCLUDE_DIR="TODO"
+	BOOST_INCLUDE_DIR="C:/Program Files/boost/boost_1_51"
 	BOOST_LIB_DIR="C:/Program Files/boost/boost_1_51/lib"
 elseif os.is("macosx") then
 	-- Config variables for the macosx build, you wont have to change these unless you installed boost to a different location
