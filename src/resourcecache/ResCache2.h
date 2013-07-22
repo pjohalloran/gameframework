@@ -92,6 +92,7 @@
 #include <string>
 #include <list>
 #include <map>
+#include <vector>
 
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
@@ -146,7 +147,7 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		virtual ResHandle *VCreateHandle(const char *buffer, U32 size, ResCache *pResCache); 
 	};
-
+    
 	// /////////////////////////////////////////////////////////////////
 	// @class IResourceFile
 	// @author Michael L. McShaffry.
@@ -193,6 +194,17 @@ namespace GameHalloran
 		// 
 		// /////////////////////////////////////////////////////////////////
 		virtual bool VGetResource(const Resource &r, char *buffer) = 0;
+        
+        // /////////////////////////////////////////////////////////////////
+        // Get all resources in the cache file matching the pattern.
+        //
+        // @param std::string Regular expression file pattern.
+        // @param ResourceListing Array of Resources matching the pattern.
+        //
+        // @return bool True|False if there were any files fond|not found.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VGetResourceListing(const std::string &regex, ResourceListing &listings) = 0;
 	};
 
 	// /////////////////////////////////////////////////////////////////
@@ -268,6 +280,17 @@ namespace GameHalloran
 		// 
 		// /////////////////////////////////////////////////////////////////
 		virtual bool VGetResource(const Resource &r, char *buffer);
+        
+        // /////////////////////////////////////////////////////////////////
+        // Get all resources in the cache file matching the pattern.
+        //
+        // @param std::string Regular expression file pattern.
+        // @param ResourceListing Array of Resources matching the pattern.
+        //
+        // @return bool True|False if there were any files fond|not found.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VGetResourceListing(const std::string &regex, ResourceListing &listings);
 	};
 
 	// /////////////////////////////////////////////////////////////////
@@ -506,7 +529,17 @@ namespace GameHalloran
 		// 
 		// /////////////////////////////////////////////////////////////////
 		void MemoryHasBeenFreed(const U32 size, const std::string &resourceName);
-
+        
+        // /////////////////////////////////////////////////////////////////
+        // Get all resources in the cache file matching the pattern.
+        //
+        // @param std::string Regular expression file pattern.
+        // @param ResourceListing Array of Resources matching the pattern.
+        //
+        // @return bool True|False if there were any files fond|not found.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool GetResourceListing(const std::string &regex, ResourceListing &listings);
 	};
 
 }

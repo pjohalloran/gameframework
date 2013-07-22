@@ -73,6 +73,7 @@
 
 namespace GameHalloran
 {
+    typedef std::vector<boost::filesystem::path> ResourceListing;
     
 	// /////////////////////////////////////////////////////////////////
 	// @class ZipFile
@@ -220,7 +221,16 @@ namespace GameHalloran
 		// /////////////////////////////////////////////////////////////////
 		boost::optional<I32> Find(const boost::filesystem::path &filename) const;
         
-        bool Find(const std::string &filePattern, std::vector<boost::filesystem::path> &fileList);
+        // /////////////////////////////////////////////////////////////////
+        // Find all the files matching the pattern, e.g. *.txt
+        //
+        // @param filePattern Regular expresion
+        // @param fileList List of files matching the pattern.
+        //
+        // @return bool True|False if there were any files fond|not found.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool Find(const std::string &filePattern, ResourceListing &fileList);
 
     private:
 

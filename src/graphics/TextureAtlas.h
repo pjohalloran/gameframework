@@ -121,14 +121,6 @@ namespace GameHalloran
         //
         // /////////////////////////////////////////////////////////////////
         TextureAtlasManager(const boost::filesystem::path &atlasFilename);
-
-        // /////////////////////////////////////////////////////////////////
-        // Create and load a texture atlas from the resource cache.
-        //
-        // @param resourceId ID of the atlas dictionary in the RC.
-        //
-        // /////////////////////////////////////////////////////////////////
-        TextureAtlasManager(const std::string &resourceId);
         
         // /////////////////////////////////////////////////////////////////
         // Destructor.
@@ -159,14 +151,12 @@ namespace GameHalloran
         bool LoadFromFile(const boost::filesystem::path &atlasFilename);
         
         // /////////////////////////////////////////////////////////////////
-        // Load a texture atlas from the resource cache.
-        //
-        // @param resourceId The ID of the atlas xml dictionary for the RC.
+        // Load all texture atlases from the resource cache.
         //
         // @return bool True|False on success|failure.
         //
         // /////////////////////////////////////////////////////////////////
-        bool LoadFromResourceCache(const std::string &resourceId);
+        bool LoadFromResourceCache();
         
         // /////////////////////////////////////////////////////////////////
         // Make a texture atlas the currently bound image on the GPU.

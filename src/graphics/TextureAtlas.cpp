@@ -72,11 +72,11 @@ namespace GameHalloran
         
         for(TiXmlElement *currChildPtr = atlasNodePtr->FirstChildElement(); currChildPtr; currChildPtr = currChildPtr->NextSiblingElement())
         {
-            if(currChildPtr && !currChildPtr->ToComment() && strcmp(currChildPtr->Value(), "image") == 0)
+            if(currChildPtr && !currChildPtr->ToComment() && strcmp(currChildPtr->Value(), "Image") == 0)
             {
                 double tmp(0.0);
                 
-                AtlasImageSPtr image(new AtlasImage(currChildPtr->Attribute("imagefile")));
+                AtlasImageSPtr image(new AtlasImage(currChildPtr->Attribute("name")));
                 
                 currChildPtr->Attribute("x", &tmp);
                 image->m_x = (float)tmp / atlas->m_width;
@@ -120,19 +120,6 @@ namespace GameHalloran
 								, m_currImagePtr(NULL)
     {
         LoadFromFile(atlasFilename);
-    }
-    
-    // /////////////////////////////////////////////////////////////////
-    //
-    // /////////////////////////////////////////////////////////////////
-    TextureAtlasManager::TextureAtlasManager(const std::string &resourceId)
-								: m_loadingFromFilesystem(false)
-								, m_loaded(false)
-								, m_atlasMap()
-								, m_currAtlasPtr(NULL)
-								, m_currImagePtr(NULL)
-    {
-        LoadFromResourceCache(resourceId);
     }
     
     // /////////////////////////////////////////////////////////////////
@@ -182,36 +169,53 @@ namespace GameHalloran
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
-    bool TextureAtlasManager::LoadFromResourceCache(const std::string &resourceId)
-    {
-        TextResource atlasRes(resourceId);
-        boost::shared_ptr<TextResHandle> atlasHandle = boost::static_pointer_cast<TextResHandle>(g_appPtr->GetResourceCache()->GetHandle(&atlasRes));
-        if(!atlasHandle || !atlasHandle->VInitialize())
-        {
-            GF_LOG_TRACE_ERR("TextureAtlasManager::LoadFromResourceCache()", std::string("Failed to retrieve ") + resourceId + std::string(" from the resource cache"));
-            return (false);
-        }
-        
-        TiXmlDocument xmlDoc;
-        xmlDoc.Parse(atlasHandle->GetTextBuffer(), 0, TIXML_DEFAULT_ENCODING);
-        
-        if(xmlDoc.Error())
-        {
-            GF_LOG_TRACE_ERR("TextureAtlasManager::LoadFromResourceCache()", std::string("Failed to parse atlas xml file: ") + resourceId);
-            return (false);
-        }
-        
-        TiXmlHandle docHandle(&xmlDoc);
-        
-		TiXmlElement *rootElemPtr = docHandle.FirstChild("Root").ToElement();
-		if(!rootElemPtr)
-		{
-            GF_LOG_TRACE_ERR("TextureAtlasManager::LoadFromResourceCache()", std::string("Failed to find Root element node in atlas xml file: ") + resourceId);
-            return (false);
-		}
-        
+    bool TextureAtlasManager::LoadFromResourceCache() {
         m_loadingFromFilesystem = false;
-        return (m_loaded = ParseXml(rootElemPtr));
+        
+        ResourceListing fileList;
+        //if(!g_appPtr->GetResourceCache()->GetResourceListing("atlases" + ZipFile::ZIP_PATH_SEPERATOR + "*.xml", fileList)) {
+        if(!g_appPtr->GetResourceCache()->GetResourceListing("atlases/[a-zA-Z0-9]*.xml", fileList)) {
+            GF_LOG_TRACE_ERR("TextureAtlasManager::LoadFromResourceCache()",
+                             "Failed to get texture atlas xml data file listings from resource cache");
+            return false;
+        }
+        
+        for(ResourceListing::const_iterator i = fileList.begin(), end = fileList.end(); i != end; ++i) {
+            TextResource atlasRes(i->string());
+            boost::shared_ptr<TextResHandle> atlasHandle = boost::static_pointer_cast<TextResHandle>(g_appPtr->GetResourceCache()->GetHandle(&atlasRes));
+            if(!atlasHandle || !atlasHandle->VInitialize()) {
+                GF_LOG_TRACE_ERR("TextureAtlasManager::LoadFromResourceCache()", std::string("Failed to retrieve ") + atlasRes.GetName() + std::string(" from the resource cache"));
+                m_loaded = false;
+                return false;
+            }
+            
+            TiXmlDocument xmlDoc;
+            xmlDoc.Parse(atlasHandle->GetTextBuffer(), 0, TIXML_DEFAULT_ENCODING);
+            
+            if(xmlDoc.Error()) {
+                GF_LOG_TRACE_ERR("TextureAtlasManager::LoadFromResourceCache()", std::string("Failed to parse atlas xml file: ") + atlasRes.GetName());
+                m_loaded = false;
+                return false;
+            }
+            
+            TiXmlHandle docHandle(&xmlDoc);
+            
+            TiXmlElement *rootElemPtr = docHandle.FirstChild("Root").ToElement();
+            if(!rootElemPtr) {
+                GF_LOG_TRACE_ERR("TextureAtlasManager::LoadFromResourceCache()", std::string("Failed to find Root element node in atlas xml file: ") + atlasRes.GetName());
+                m_loaded = false;
+                return false;
+            }
+            
+            if(!ParseAtlasElement(rootElemPtr->FirstChildElement())) {
+                GF_LOG_TRACE_ERR("TextureAtlasManager::LoadFromResourceCache()", std::string("Failed to find Parse Atlas data") + atlasRes.GetName());
+                m_loaded = false;
+                return false;
+            }
+        }
+        
+        m_loaded = true;
+        return true;
     }
     
     // /////////////////////////////////////////////////////////////////
