@@ -583,14 +583,13 @@ namespace GameHalloran
     //
     //
     // /////////////////////////////////////////////////////////////////
-    bool GameMain::SetupTextureAtlasManager(const std::string &resourceId)
-    {
-        if(!m_resourceCachePtr)
+    bool GameMain::SetupTextureAtlasManager(const std::string &resourceId) {
+        if(!m_resourceCachePtr) {
             return (false);
+        }
         
         m_atlasPtr = boost::shared_ptr<TextureAtlasManager>(new TextureAtlasManager());
-        
-        return (m_atlasPtr && m_atlasPtr->LoadFromResourceCache(resourceId));
+        return (m_atlasPtr && m_atlasPtr->LoadFromResourceCache());
     }
 
 	// /////////////////////////////////////////////////////////////////

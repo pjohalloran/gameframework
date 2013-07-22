@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<Root>
+    <Atlas border="1" height="512" mode="RGBA" name="UI" type="tga" width="512">
+        <Image flipped="False" height="16" name="checkHover.tga" width="16" x="0" y="32"/>
+        <Image flipped="False" height="16" name="checkHoverChecked.tga" width="16" x="0" y="48"/>
+        <Image flipped="False" height="31" name="pBut.tga" width="108" x="108" y="91"/>
+        <Image flipped="False" height="16" name="checkDefault.tga" width="16" x="0" y="0"/>
+        <Image flipped="False" height="30" name="fontBackground.tga" width="100" x="16" y="0"/>
+        <Image flipped="False" height="256" name="Instructions.tga" width="256" x="216" y="0"/>
+        <Image flipped="False" height="128" name="Pool3dLogo.tga" width="128" x="0" y="122"/>
+        <Image flipped="False" height="16" name="checkDefaultChecked.tga" width="16" x="0" y="16"/>
+        <Image flipped="False" height="30" name="fontBackgroundA.tga" width="100" x="16" y="30"/>
+        <Image flipped="False" height="20" name="sliderBut.tga" width="16" x="0" y="95"/>
+        <Image flipped="False" height="31" name="hBut.tga" width="108" x="108" y="60"/>
+        <Image flipped="False" height="31" name="dBut.tga" width="108" x="0" y="64"/>
+        <Image flipped="False" height="31" name="tbBack.tga" width="108" x="256" y="256"/>
+        <Image flipped="False" height="256" name="MainMenuBackground.tga" width="256" x="0" y="256"/>
+    </Atlas>
+</Root>
