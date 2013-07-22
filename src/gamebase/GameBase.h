@@ -28,93 +28,86 @@
 // Comment out for test builds!
 #define GF_DEMO_BUILD
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
-	// /////////////////////////////////////////////////////////////////
-	// Clean up memory dynamically allocated with the new operator.
-	//
-	// This method is exception safe.
-	//
-	// @param ptr A pointer to a type dynamically allocated with new.
-	//
-	// /////////////////////////////////////////////////////////////////
-	template<class T>
-		void Delete(T *ptr) throw ()
-	{
-		if(ptr)
-		{
-			delete ptr;
-			ptr = NULL;
-		}
-	};
+    // /////////////////////////////////////////////////////////////////
+    // Clean up memory dynamically allocated with the new operator.
+    //
+    // This method is exception safe.
+    //
+    // @param ptr A pointer to a type dynamically allocated with new.
+    //
+    // /////////////////////////////////////////////////////////////////
+    template<class T>
+    void Delete(T *ptr) throw()
+    {
+        if(ptr) {
+            delete ptr;
+            ptr = NULL;
+        }
+    };
 
-	// /////////////////////////////////////////////////////////////////
-	// Clean up an array dynamically allocated with the new[] operator.
-	//
-	// This method is exception safe.
-	//
-	// @param arr A pointer to a type dynamically allocated with new[].
-	//
-	// /////////////////////////////////////////////////////////////////
-	template<class T>
-		void DeleteArray(T *arr) throw ()
-	{
-		if(arr)
-		{
-			delete [] arr;
-			arr = NULL;
-		}
-	};
+    // /////////////////////////////////////////////////////////////////
+    // Clean up an array dynamically allocated with the new[] operator.
+    //
+    // This method is exception safe.
+    //
+    // @param arr A pointer to a type dynamically allocated with new[].
+    //
+    // /////////////////////////////////////////////////////////////////
+    template<class T>
+    void DeleteArray(T *arr) throw()
+    {
+        if(arr) {
+            delete [] arr;
+            arr = NULL;
+        }
+    };
 
 #if defined(WIN32) || defined (TARGET_OS_WIN32) || defined(_WINDOWS)
-	// /////////////////////////////////////////////////////////////////
-	// Clean up a COM object.
-	//
-	// @param ptr A pointer to a COM object.
-	//
-	// /////////////////////////////////////////////////////////////////
-	template<class T>
-		void Release(T *ptr)
-	{
-		if(ptr)
-		{
-			ptr->Release();
-			ptr = NULL;
-		}
-	};
+    // /////////////////////////////////////////////////////////////////
+    // Clean up a COM object.
+    //
+    // @param ptr A pointer to a COM object.
+    //
+    // /////////////////////////////////////////////////////////////////
+    template<class T>
+    void Release(T *ptr)
+    {
+        if(ptr) {
+            ptr->Release();
+            ptr = NULL;
+        }
+    };
 #endif
 
-	// /////////////////////////////////////////////////////////////////
-	// @class SortBy_SharedPtr_Content
-	//
-	// This is a functor which is a helper function for sorting elements
-	// stored in shared pointers.
-	//
-	// /////////////////////////////////////////////////////////////////
-	template<class T>
-		class SortBy_SharedPtr_Content
-	{
-	public:
+    // /////////////////////////////////////////////////////////////////
+    // @class SortBy_SharedPtr_Content
+    //
+    // This is a functor which is a helper function for sorting elements
+    // stored in shared pointers.
+    //
+    // /////////////////////////////////////////////////////////////////
+    template<class T>
+    class SortBy_SharedPtr_Content {
+    public:
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the lesser object.
-		//
-		// @return bool True if the left object is less than the right object
-		//				or false otherwise.
-		//
-		// /////////////////////////////////////////////////////////////////
-		bool operator()(const boost::shared_ptr<T> &lhs, const boost::shared_ptr<T> &rhs) const
-		{
-			return (*lhs < *rhs);
-		};
-	};
-    
+        // /////////////////////////////////////////////////////////////////
+        // Get the lesser object.
+        //
+        // @return bool True if the left object is less than the right object
+        //              or false otherwise.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool operator()(const boost::shared_ptr<T> &lhs, const boost::shared_ptr<T> &rhs) const {
+            return (*lhs < *rhs);
+        };
+    };
+
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
-    class NonCopyable
-    {
+    class NonCopyable {
     protected:
         NonCopyable() {};
         ~NonCopyable() {};
@@ -123,27 +116,27 @@ namespace GameHalloran
         const NonCopyable& operator=(const NonCopyable&);
     };
 
-	// /////////////////////////////////////////////////////////////////
-	// Get a string giving us a OpenGL error code in a human readable 
-	// format.
-	//
-	// @param errorCode The OpenGL error code.
-	//
-	// @return std::string Human readable string.
-	//
-	// /////////////////////////////////////////////////////////////////
-	std::string GetOpenGLError(const GLenum errorCode);
-    
+    // /////////////////////////////////////////////////////////////////
+    // Get a string giving us a OpenGL error code in a human readable
+    // format.
+    //
+    // @param errorCode The OpenGL error code.
+    //
+    // @return std::string Human readable string.
+    //
+    // /////////////////////////////////////////////////////////////////
+    std::string GetOpenGLError(const GLenum errorCode);
+
 // Define OpenGL check and clear error macros so that this slow error checking can be compiled out for the release build!
     bool GfCheckGlError();
     bool GfCheckGlErrorTrc(const char *msg);
-	#define GF_CHECK_GL_ERROR() GfCheckGlError()
-	#define GF_CHECK_GL_ERROR_TRC(msg) GfCheckGlErrorTrc(msg)
-    
+#define GF_CHECK_GL_ERROR() GfCheckGlError()
+#define GF_CHECK_GL_ERROR_TRC(msg) GfCheckGlErrorTrc(msg)
+
 #if DEBUG
-	#define GF_CLEAR_GL_ERROR() { GLenum err; do { err = glGetError(); } while(err != GL_NO_ERROR); }
+#define GF_CLEAR_GL_ERROR() { GLenum err; do { err = glGetError(); } while(err != GL_NO_ERROR); }
 #else
-	#define GF_CLEAR_GL_ERROR()
+#define GF_CLEAR_GL_ERROR()
 #endif
 
 }

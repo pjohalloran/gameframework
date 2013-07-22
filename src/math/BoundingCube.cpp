@@ -9,7 +9,6 @@
 
 #include "BoundingCube.h"
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
 }

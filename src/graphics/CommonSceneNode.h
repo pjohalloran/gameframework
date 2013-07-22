@@ -10,14 +10,14 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at:
 // http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -53,94 +53,97 @@
 #include "Matrix.h"
 #include "ISceneNode.h"
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
-	// /////////////////////////////////////////////////////////////////
-	// @enum AlphaType
-	//
-	// List of blending types that can be set on a node of the SceneGraph.
-	//	
-	// /////////////////////////////////////////////////////////////////
-	enum AlphaType
-	{
-		AlphaOpaque,
-		AlphaTexture,
-		AlphaMaterial,
-		AlphaVertex
-	};
+    // /////////////////////////////////////////////////////////////////
+    // @enum AlphaType
+    //
+    // List of blending types that can be set on a node of the SceneGraph.
+    //
+    // /////////////////////////////////////////////////////////////////
+    enum AlphaType {
+        AlphaOpaque,
+        AlphaTexture,
+        AlphaMaterial,
+        AlphaVertex
+    };
 
-	/////////////////////////////////////////////////////////////////////////////
-	// @enum RenderPass
-	//
-	// 3D scenes are drawn in passes - this enum defines the render passes
-	// supported by the 3D scene graph created by class SceneGraphManager (defined
-	// elsewhere).
-	//
-	/////////////////////////////////////////////////////////////////////////////
-	enum RenderPass
-	{
-		RenderPassFirst,
-		RenderPassStatic = RenderPassFirst,
-		RenderPassActor,
-		RenderPassSky,
-		RenderPassLast
-	};
+    /////////////////////////////////////////////////////////////////////////////
+    // @enum RenderPass
+    //
+    // 3D scenes are drawn in passes - this enum defines the render passes
+    // supported by the 3D scene graph created by class SceneGraphManager (defined
+    // elsewhere).
+    //
+    /////////////////////////////////////////////////////////////////////////////
+    enum RenderPass {
+        RenderPassFirst,
+        RenderPassStatic = RenderPassFirst,
+        RenderPassActor,
+        RenderPassSky,
+        RenderPassLast
+    };
 
-	// /////////////////////////////////////////////////////////////////
-	// @class AlphaSceneNode
-	// @author Mike McShaffry & PJ O Halloran.
-	//
-	// A list of scene nodes that need to be drawn in the alpha pass.
-	//
-	// /////////////////////////////////////////////////////////////////
-	class AlphaSceneNode
-	{
-	private:
+    // /////////////////////////////////////////////////////////////////
+    // @class AlphaSceneNode
+    // @author Mike McShaffry & PJ O Halloran.
+    //
+    // A list of scene nodes that need to be drawn in the alpha pass.
+    //
+    // /////////////////////////////////////////////////////////////////
+    class AlphaSceneNode {
+    private:
 
-		boost::shared_ptr<ISceneNode> m_node;			///< Pointer to the node.
-		Matrix4 m_concatMat;							///< The transformation matrix state to render the node properly.
-		F32 m_z;										///< The depth of the node.
+        boost::shared_ptr<ISceneNode> m_node;           ///< Pointer to the node.
+        Matrix4 m_concatMat;                            ///< The transformation matrix state to render the node properly.
+        F32 m_z;                                        ///< The depth of the node.
 
-	public:
-		
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
-		// @param node Pointer to the SceneNode.
-		// @param mat 
-		// @param z The depth of the node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		AlphaSceneNode(boost::shared_ptr<ISceneNode> node, const Matrix4 &mat, const F32 z)\
-			: m_node(node), m_concatMat(mat), m_z(z) { };
+    public:
 
-		// /////////////////////////////////////////////////////////////////
-		// Destructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		~AlphaSceneNode() { };
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
+        // @param node Pointer to the SceneNode.
+        // @param mat
+        // @param z The depth of the node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        AlphaSceneNode(boost::shared_ptr<ISceneNode> node, const Matrix4 &mat, const F32 z)\
+    :
+        m_node(node), m_concatMat(mat), m_z(z) { };
 
-		// /////////////////////////////////////////////////////////////////
-		// Used to sort alpha nodes by depth.
-		//
-		// /////////////////////////////////////////////////////////////////
-		const bool operator <(const AlphaSceneNode &other) const { return (m_z < other.m_z); };
+        // /////////////////////////////////////////////////////////////////
+        // Destructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        ~AlphaSceneNode() { };
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the matrix state for rendering the node properly.
-		//
-		// /////////////////////////////////////////////////////////////////
-		const Matrix4 &GetMatrix() { return (m_concatMat); };
+        // /////////////////////////////////////////////////////////////////
+        // Used to sort alpha nodes by depth.
+        //
+        // /////////////////////////////////////////////////////////////////
+        const bool operator <(const AlphaSceneNode &other) const {
+            return (m_z < other.m_z);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the node to render.
-		//
-		// /////////////////////////////////////////////////////////////////
-		boost::shared_ptr<ISceneNode> GetNode() { return (m_node); };
-	};
+        // /////////////////////////////////////////////////////////////////
+        // Get the matrix state for rendering the node properly.
+        //
+        // /////////////////////////////////////////////////////////////////
+        const Matrix4 &GetMatrix() {
+            return (m_concatMat);
+        };
 
-	typedef std::list<boost::shared_ptr<AlphaSceneNode> > AlphaSceneNodeList;
+        // /////////////////////////////////////////////////////////////////
+        // Get the node to render.
+        //
+        // /////////////////////////////////////////////////////////////////
+        boost::shared_ptr<ISceneNode> GetNode() {
+            return (m_node);
+        };
+    };
+
+    typedef std::list<boost::shared_ptr<AlphaSceneNode> > AlphaSceneNodeList;
 }
 
 #endif

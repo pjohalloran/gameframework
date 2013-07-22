@@ -10,7 +10,6 @@
 #include "LinkedList.h"
 
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
 }

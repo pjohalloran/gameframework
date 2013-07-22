@@ -8,13 +8,13 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -40,9 +40,9 @@
 // @author Javier Arevalo and Michael L. McShaffry.
 // @date 12/07/2010
 //
-// File contains the implementation of the ZipFile class.  
+// File contains the implementation of the ZipFile class.
 // This class was extracted from the Game Coding Complete 3 code.
-// 
+//
 // The declaration of a quick'n dirty ZIP file reader class.
 // Original code from Javier Arevalo.
 // Get zlib from http://www.cdrom.com/pub/infozip/zlib/
@@ -70,12 +70,10 @@ using boost::optional;
 // ZIP file structures. Note these have to be packed (on windows!).
 // --------------------------------------------------------------------------
 #pragma pack(1)
-struct GameHalloran::ZipFile::TZipLocalHeader
-{
-    enum
-    {
+struct GameHalloran::ZipFile::TZipLocalHeader {
+    enum {
         SIGNATURE = 0x04034b50,
-        SIZE = sizeof(DWORD)*4 + sizeof(WORD)*7
+        SIZE = sizeof(DWORD) * 4 + sizeof(WORD) * 7
     };
     DWORD sig;
     WORD version;
@@ -90,12 +88,10 @@ struct GameHalloran::ZipFile::TZipLocalHeader
     WORD xtraLen;          // Extra field follows filename.
 };
 
-struct GameHalloran::ZipFile::TZipDirHeader
-{
-    enum
-    {
+struct GameHalloran::ZipFile::TZipDirHeader {
+    enum {
         SIGNATURE = 0x06054b50,
-        SIZE = sizeof(DWORD)*3 + sizeof(WORD)*5
+        SIZE = sizeof(DWORD) * 3 + sizeof(WORD) * 5
     };
     DWORD sig;
     WORD nDisk;
@@ -107,13 +103,11 @@ struct GameHalloran::ZipFile::TZipDirHeader
     WORD cmntLen;
 };
 
-struct GameHalloran::ZipFile::TZipDirFileHeader
-{
-    enum
-    {
+struct GameHalloran::ZipFile::TZipDirFileHeader {
+    enum {
         SIGNATURE   = 0x02014b50,
         // NB Size here does not take into account extra padding info at the end of the header..
-        SIZE = sizeof(DWORD)*6 + sizeof(WORD)*11
+        SIZE = sizeof(DWORD) * 6 + sizeof(WORD) * 11
     };
     DWORD sig;
     WORD verMade;
@@ -133,164 +127,159 @@ struct GameHalloran::ZipFile::TZipDirFileHeader
     DWORD extAttr;
     DWORD hdrOffset;
 
-    inline char *GetName() const { return (char *)(this + 1); };
-    inline char *GetExtra() const { return GetName() + fnameLen; };
-    inline char *GetComment() const { return GetExtra() + xtraLen; };
+    inline char *GetName() const {
+        return (char *)(this + 1);
+    };
+    inline char *GetExtra() const {
+        return GetName() + fnameLen;
+    };
+    inline char *GetComment() const {
+        return GetExtra() + xtraLen;
+    };
 };
 
 #pragma pack()
 //#pragma push(pop)
 
-namespace GameHalloran
-{
-    
-	const std::string ZipFile::ZIP_PATH_SEPERATOR("/");
-    
+namespace GameHalloran {
+
+    const std::string ZipFile::ZIP_PATH_SEPERATOR("/");
+
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
     bool ZipFile::ReadDirHeader(TZipDirHeader * const headerPtr, I64 &offset)
     {
-        if(!headerPtr || !m_pFile)
-        {
+        if(!headerPtr || !m_pFile) {
             GF_LOG_TRACE_ERR("ZipFile::ReadDirHeader()", "Invalid parameters");
             return (false);
         }
-        
+
         I32 tmp = TZipDirHeader::SIZE;
         memset(headerPtr, 0, tmp);
-        
+
         fseek(m_pFile, -TZipDirHeader::SIZE, SEEK_END);
-        
+
         // Save the offset to the Dir Header.
         offset = ftell(m_pFile);
 
         fread(headerPtr, TZipDirHeader::SIZE, 1, m_pFile);
-        
-        if(headerPtr->sig != TZipDirHeader::SIGNATURE)
-        {
+
+        if(headerPtr->sig != TZipDirHeader::SIGNATURE) {
             GF_LOG_TRACE_ERR("ZipFile::ReadDirHeader()", "Invalid TZipDirHeader signature encountered");
             return (false);
         }
-        
+
         return (true);
     }
-    
+
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
     bool ZipFile::ReadDirFileHeader(TZipDirFileHeader * const headerPtr, const I64 offset)
     {
-		return (false);
+        return (false);
     }
-    
+
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
     bool ZipFile::ReadLocalHeader(TZipLocalHeader * const headerPtr, const I64 offset)
     {
-        if(!headerPtr)
-        {
+        if(!headerPtr) {
             GF_LOG_TRACE_ERR("ZipFile::ReadLocalHeader()", "Invalid parameters");
             return (false);
         }
-        
+
         // Navigate to the byte offset in the file where the local header is stored.
         fseek(m_pFile, offset, SEEK_SET);
-        
+
         memset(headerPtr, 0, TZipLocalHeader::SIZE);
         fread(headerPtr, TZipLocalHeader::SIZE, 1, m_pFile);
-        
-        if (headerPtr->sig != TZipLocalHeader::SIGNATURE)
-        {
+
+        if(headerPtr->sig != TZipLocalHeader::SIGNATURE) {
             GF_LOG_TRACE_ERR("ZipFile::ReadLocalHeader()", "Local ZIP Header signature is invalid");
             return (false);
         }
-        
+
         return (true);
     }
-    
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	ZipFile::ZipFile()
-			: m_pFile(NULL)
-			, m_pDirData(NULL)
-			, m_nEntries(0)
-			, m_ZipContentsMap()
-			, m_papDir(NULL)
-			, m_localVec()
-	{
-	}
-    
+
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    ZipFile::ZipFile()
+        : m_pFile(NULL)
+        , m_pDirData(NULL)
+        , m_nEntries(0)
+        , m_ZipContentsMap()
+        , m_papDir(NULL)
+        , m_localVec()
+    {
+    }
+
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////
     ZipFile::ZipFile(const path &resFileName)
-			: m_pFile(NULL)
-			, m_pDirData(NULL)
-			, m_nEntries(0)
-			, m_ZipContentsMap()
-			, m_papDir(NULL)
-			, m_localVec()
-	{
+        : m_pFile(NULL)
+        , m_pDirData(NULL)
+        , m_nEntries(0)
+        , m_ZipContentsMap()
+        , m_papDir(NULL)
+        , m_localVec()
+    {
         Init(resFileName);
-	}
+    }
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	ZipFile::~ZipFile()
-	{
-		try
-		{
-			End();
-		}
-		catch(...)
-		{
-		}
-	}
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    ZipFile::~ZipFile()
+    {
+        try {
+            End();
+        } catch(...) {
+        }
+    }
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	I32 ZipFile::GetNumFiles() const
-	{
-		return (m_nEntries);
-	}
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    I32 ZipFile::GetNumFiles() const
+    {
+        return (m_nEntries);
+    }
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	bool ZipFile::Init(const path &resFileName)
-	{
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool ZipFile::Init(const path &resFileName)
+    {
         End();
 
         m_pFile = fopen(resFileName.string().c_str(), "rb");
-        if (!m_pFile)
-        {
+        if(!m_pFile) {
             GF_LOG_TRACE_ERR("ZipFile::Init()", std::string("Failed to open zip file ") + resFileName.string());
             return (false);
         }
-        
+
         TZipDirHeader dirHeader;
         I64 dirOffset;
-        if(!ReadDirHeader(&dirHeader, dirOffset))
-        {
+        if(!ReadDirHeader(&dirHeader, dirOffset)) {
             return (false);
         }
-        
+
         m_localVec.reserve(dirHeader.nDirEntries);
 
         // Go to the beginning of the directory.
         fseek(m_pFile, dirOffset - dirHeader.dirSize, SEEK_SET);
 
-        const U64 size(dirHeader.dirSize + dirHeader.nDirEntries*sizeof(*m_papDir)); 
-        
+        const U64 size(dirHeader.dirSize + dirHeader.nDirEntries * sizeof(*m_papDir));
+
         // Allocate the data buffer, and read the whole thing.
         m_pDirData = GCC_NEW char[size];
-        if (!m_pDirData)
-        {
+        if(!m_pDirData) {
             GF_LOG_TRACE_ERR("ZipFile::Init()", "Failed to allocate ZIP data buffer");
             return (false);
         }
@@ -303,165 +292,147 @@ namespace GameHalloran
 
         bool success = true;
 
-        for (I32 i = 0; ((i < dirHeader.nDirEntries) && (success)); ++i)
-        {
+        for(I32 i = 0; ((i < dirHeader.nDirEntries) && (success)); ++i) {
             TZipDirFileHeader &fh = *(TZipDirFileHeader*)pfh;
 
             m_localVec.push_back(fh);
-            
+
             // Store the address of nth file for quicker access.
             //m_papDir[i] = &fh;
             m_papDir[i] = (TZipDirFileHeader*)pfh;
 
-            
+
             // Check the directory entry integrity (33639248).
-            if (fh.sig != TZipDirFileHeader::SIGNATURE)
-            {
+            if(fh.sig != TZipDirFileHeader::SIGNATURE) {
                 success = false;
-            }
-            else
-            {
+            } else {
                 pfh += TZipDirFileHeader::SIZE;
 
                 char fileName[255];
                 memcpy(fileName, pfh, fh.fnameLen);
-                fileName[fh.fnameLen]=0;
+                fileName[fh.fnameLen] = 0;
 
                 std::string spath = fileName;
                 boost::algorithm::to_lower(spath);
-                
+
                 m_ZipContentsMap[spath] = i;
 
                 // Skip name, extra and comment fields.
                 pfh += fh.fnameLen + fh.xtraLen + fh.cmntLen;
             }
         }
-        
-        if (!success)
-        {
+
+        if(!success) {
             DeleteArray(m_pDirData);
-        }
-        else
-        {
+        } else {
             m_nEntries = dirHeader.nDirEntries;
         }
 
         return success;
-	}
+    }
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	optional<I32> ZipFile::Find(const path &path) const
-	{
-        if(path.empty())
-        {
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    optional<I32> ZipFile::Find(const path &path) const
+    {
+        if(path.empty()) {
             return (optional<I32>());
         }
-        
+
         std::string lwrPath(path.string());
         boost::algorithm::to_lower(lwrPath);
-		ZipContentsMap::const_iterator i = m_ZipContentsMap.find(lwrPath);
-		if (i==m_ZipContentsMap.end())
-        {
-			return optional<I32>();
+        ZipContentsMap::const_iterator i = m_ZipContentsMap.find(lwrPath);
+        if(i == m_ZipContentsMap.end()) {
+            return optional<I32>();
         }
 
-		return (*i).second;
-	}
+        return (*i).second;
+    }
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	void ZipFile::End()
-	{
-		m_ZipContentsMap.empty();
-		DeleteArray(m_pDirData);
-		m_nEntries = 0;
-        if(m_pFile)
-        {
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    void ZipFile::End()
+    {
+        m_ZipContentsMap.empty();
+        DeleteArray(m_pDirData);
+        m_nEntries = 0;
+        if(m_pFile) {
             fclose(m_pFile);
             m_pFile = NULL;
         }
-        
-        m_localVec.clear();
-	}
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	bool ZipFile::GetFilename(const U32 i, path &pathRef) const
-	{
-        if(i >= m_nEntries)
-        {
+        m_localVec.clear();
+    }
+
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool ZipFile::GetFilename(const U32 i, path &pathRef) const
+    {
+        if(i >= m_nEntries) {
             GF_LOG_TRACE_ERR("ZipFile::GetFilename()", "ZIP index out of bounds");
             return (false);
         }
-		
+
         std::string filename(m_localVec[i].GetName());
         pathRef = path(filename);
         return (true);
-	}
+    }
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	bool ZipFile::GetFileLen(const U32 i, U64 &fileLen) const
-	{
-        if (i >= m_nEntries)
-        {
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool ZipFile::GetFileLen(const U32 i, U64 &fileLen) const
+    {
+        if(i >= m_nEntries) {
             GF_LOG_TRACE_ERR("ZipFile::GetFileLen()", "ZIP index out of bounds");
             return (false);
         }
-		
+
         fileLen = m_localVec[i].ucSize;
         return (true);
-	}
+    }
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	bool ZipFile::ReadFile(const U32 i, void *pBuf)
-	{
-        if ((pBuf == NULL) || (i >= m_nEntries))
-        {
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool ZipFile::ReadFile(const U32 i, void *pBuf)
+    {
+        if((pBuf == NULL) || (i >= m_nEntries)) {
             GF_LOG_TRACE_ERR("ZipFile::ReadFile()", "Invalid ReadFile parameters");
             return (false);
         }
 
         TZipDirFileHeader tmp = m_localVec[i];
         TZipLocalHeader h;
-        if(!ReadLocalHeader(&h, m_localVec[i].hdrOffset))
-        {
+        if(!ReadLocalHeader(&h, m_localVec[i].hdrOffset)) {
             return (false);
         }
-        
+
         // Skip extra fields
         fseek(m_pFile, h.fnameLen + h.xtraLen, SEEK_CUR);
-        
-        if (h.compression == Z_NO_COMPRESSION)
-        {
+
+        if(h.compression == Z_NO_COMPRESSION) {
             // Simply read in raw stored data.
             fread(pBuf, h.cSize, 1, m_pFile);
             return (true);
-        }
-        else if (h.compression != Z_DEFLATED)
-        {
+        } else if(h.compression != Z_DEFLATED) {
             GF_LOG_TRACE_ERR("ZipFile::ReadFile()", "Unable to handle non Z_DEFLATED compressed data ZIP fil");
             return (false);
         }
 
-        I32 cSize = (h.cSize != 0 ? h.cSize : ( tmp.cSize != 0 ? tmp.cSize : -1 ));
-        I32 ucSize = (h.ucSize != 0 ? h.ucSize : ( tmp.ucSize != 0 ? tmp.ucSize : -1 ));
-        
+        I32 cSize = (h.cSize != 0 ? h.cSize : (tmp.cSize != 0 ? tmp.cSize : -1));
+        I32 ucSize = (h.ucSize != 0 ? h.ucSize : (tmp.ucSize != 0 ? tmp.ucSize : -1));
+
         // Alloc compressed data buffer and read the whole stream
         char *pcData = GCC_NEW char[cSize];
-        if (!pcData)
-        {
+        if(!pcData) {
             GF_LOG_TRACE_ERR("ZipFile::ReadFile()", "Failed to allocate memory for local ZIP file");
             return (false);
         }
-        
+
         memset(pcData, 0, cSize);
         fread(pcData, cSize, 1, m_pFile);
 
@@ -478,12 +449,10 @@ namespace GameHalloran
 
         // Perform inflation. wbits < 0 indicates no zlib header inside the data.
         err = inflateInit2(&stream, -MAX_WBITS);
-        if (err == Z_OK)
-        {
+        if(err == Z_OK) {
             err = inflate(&stream, Z_FINISH);
             inflateEnd(&stream);
-            if (err == Z_STREAM_END)
-            {
+            if(err == Z_STREAM_END) {
                 err = Z_OK;
             }
             inflateEnd(&stream);
@@ -491,8 +460,8 @@ namespace GameHalloran
 
         DeleteArray(pcData);
         return (err == Z_OK);
-	}
-    
+    }
+
     // /////////////////////////////////////////////////////////////////
     //
     // /////////////////////////////////////////////////////////////////

@@ -46,11 +46,11 @@
 // - Fundamentals of Computer Graphics 3rd Edition by Shirley et al.
 // - Mathworld (http://www.mathworld.com).
 // - Wolfgang Engels blog and oolong engine 2
-//		(http://wolfgang-engel.info/blogs).
+//      (http://wolfgang-engel.info/blogs).
 // - OpenGL Superbible, 5th Edition by Wright et al.
 // - OpenGL Programming Guide (red), 7th Edition by Shreiner et al.
 // - Bullet v2.76 Vector Math Library by Edwin Cousins
-//		(http://www.bulletphysics.com).
+//      (http://www.bulletphysics.com).
 // - Game Coding Complete, 3rd Edition by Mike McShaffry et al.
 //
 // /////////////////////////////////////////////////////////////////
@@ -61,166 +61,172 @@
 #include "BoundingSphere.h"
 #include "Plane.h"
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
-	// /////////////////////////////////////////////////////////////////
-	// @class Frustrum
-	// @author Mike McShaffry (edited by PJ O Halloran).
-	//
-	// This class represents a projection or viewing Frustrum.
-	//
-	// Please note:
-	// This class were lifted from the Frustrum class described in chapter
-	// 14 3D Scenes from Games Coding Complete, Third Edition by Mike
-	// McShaffry et al.
-	//
-	// I have changed it to use my math3d library and to use OpenGL for 
-	// rendering the frustrum in debug mode and also have changed
-	// the functionality and interface slightly.
-	//
-	// /////////////////////////////////////////////////////////////////
-	class Frustrum
-	{
+    // /////////////////////////////////////////////////////////////////
+    // @class Frustrum
+    // @author Mike McShaffry (edited by PJ O Halloran).
+    //
+    // This class represents a projection or viewing Frustrum.
+    //
+    // Please note:
+    // This class were lifted from the Frustrum class described in chapter
+    // 14 3D Scenes from Games Coding Complete, Third Edition by Mike
+    // McShaffry et al.
+    //
+    // I have changed it to use my math3d library and to use OpenGL for
+    // rendering the frustrum in debug mode and also have changed
+    // the functionality and interface slightly.
+    //
+    // /////////////////////////////////////////////////////////////////
+    class Frustrum {
 
-	public:
+    public:
 
-		// /////////////////////////////////////////////////////////////////
-		// @enum Side
-		//
-		// The ID/index for a plane around the Frustrum.
-		//
-		// /////////////////////////////////////////////////////////////////
-		enum Side
-		{
-			Near,
-			Far,
-			Top,
-			Right,
-			Bottom,
-			Left,
-			NumPlanes
-		};
+        // /////////////////////////////////////////////////////////////////
+        // @enum Side
+        //
+        // The ID/index for a plane around the Frustrum.
+        //
+        // /////////////////////////////////////////////////////////////////
+        enum Side {
+            Near,
+            Far,
+            Top,
+            Right,
+            Bottom,
+            Left,
+            NumPlanes
+        };
 
-	private:
+    private:
 
-		Plane m_Planes[NumPlanes];		// planes of the frustum in camera space
-		Point3 m_NearClip[4];			// verts of the near clip plane in camera space
-		Point3 m_FarClip[4];			// verts of the far clip plane in camera space
-		F32 m_Fov;						// field of view in radians
-		F32 m_Aspect;					// aspect ratio - width divided by height
-		F32 m_Near;						// near clipping distance
-		F32 m_Far;						// far clipping distance
+        Plane m_Planes[NumPlanes];      // planes of the frustum in camera space
+        Point3 m_NearClip[4];           // verts of the near clip plane in camera space
+        Point3 m_FarClip[4];            // verts of the far clip plane in camera space
+        F32 m_Fov;                      // field of view in radians
+        F32 m_Aspect;                   // aspect ratio - width divided by height
+        F32 m_Near;                     // near clipping distance
+        F32 m_Far;                      // far clipping distance
 
-	public:
+    public:
 
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		explicit Frustrum();
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        explicit Frustrum();
 
-		// /////////////////////////////////////////////////////////////////
-		// Destructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		~Frustrum() { };
+        // /////////////////////////////////////////////////////////////////
+        // Destructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        ~Frustrum() { };
 
-		// /////////////////////////////////////////////////////////////////
-		// Check if a 3D point is inside the Frustrum.
-		//
-		// The 3D point should be transformed to eye/camera space first.
-		//
-		// @param pt The point to check.
-		//
-		// @return bool True if the point is inside the frustrum and false
-		//				otherwise.
-		//
-		// /////////////////////////////////////////////////////////////////
-		bool Inside(const Point3 &pt) const;
+        // /////////////////////////////////////////////////////////////////
+        // Check if a 3D point is inside the Frustrum.
+        //
+        // The 3D point should be transformed to eye/camera space first.
+        //
+        // @param pt The point to check.
+        //
+        // @return bool True if the point is inside the frustrum and false
+        //              otherwise.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool Inside(const Point3 &pt) const;
 
-		// /////////////////////////////////////////////////////////////////
-		// Check if a BoundingSphere is inside the Frustrum.
-		//
-		// The position of the sphere should be transformed to eye/camera
-		// space first.
-		//
-		// @param pt The centre point of the sphere.
-		//
-		// @return bool True if the BoundingSphere is inside the frustrum and
-		//				false otherwise.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline bool Inside(const BoundingSphere &bs) const
-		{
-			return (Inside(bs.GetCentre(), bs.GetRadius()));
-		};
+        // /////////////////////////////////////////////////////////////////
+        // Check if a BoundingSphere is inside the Frustrum.
+        //
+        // The position of the sphere should be transformed to eye/camera
+        // space first.
+        //
+        // @param pt The centre point of the sphere.
+        //
+        // @return bool True if the BoundingSphere is inside the frustrum and
+        //              false otherwise.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline bool Inside(const BoundingSphere &bs) const {
+            return (Inside(bs.GetCentre(), bs.GetRadius()));
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Check if a sphere is inside the Frustrum.
-		//
-		// The location of the sphere should be transformed to eye/camera
-		// space first.
-		//
-		// @param pt The centre point of the sphere.
-		// @param radius The radius of the sphere.
-		//
-		// @return bool True if the sphere is inside the frustrum and false
-		//				otherwise.
-		//
-		// /////////////////////////////////////////////////////////////////
-		bool Inside(const Point3 &pt, const F32 radius) const;
+        // /////////////////////////////////////////////////////////////////
+        // Check if a sphere is inside the Frustrum.
+        //
+        // The location of the sphere should be transformed to eye/camera
+        // space first.
+        //
+        // @param pt The centre point of the sphere.
+        // @param radius The radius of the sphere.
+        //
+        // @return bool True if the sphere is inside the frustrum and false
+        //              otherwise.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool Inside(const Point3 &pt, const F32 radius) const;
 
-		// /////////////////////////////////////////////////////////////////
-		// Get a plane belonging to the Frustrum.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline const Plane &Get(const Side side) { return m_Planes[side]; };
+        // /////////////////////////////////////////////////////////////////
+        // Get a plane belonging to the Frustrum.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline const Plane &Get(const Side side) {
+            return m_Planes[side];
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Set a new field of view for the frustrum and reinitialize it.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline void SetFOV(const F32 fov) { Init(fov, m_Aspect, m_Near, m_Far); };
+        // /////////////////////////////////////////////////////////////////
+        // Set a new field of view for the frustrum and reinitialize it.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline void SetFOV(const F32 fov) {
+            Init(fov, m_Aspect, m_Near, m_Far);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Set a new aspect ratios for the frustrum and reinitialize it.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline void SetAspect(const F32 aspect) { Init(m_Fov, aspect, m_Near, m_Far); }
+        // /////////////////////////////////////////////////////////////////
+        // Set a new aspect ratios for the frustrum and reinitialize it.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline void SetAspect(const F32 aspect) {
+            Init(m_Fov, aspect, m_Near, m_Far);
+        }
 
-		// /////////////////////////////////////////////////////////////////
-		// Set a new near clipping distance for the frustrum and reinitialize it.
-		//
-		// /////////////////////////////////////////////////////////////////
-		void SetNear(const F32 nearClip) { Init(m_Fov, m_Aspect, nearClip, m_Far); }
+        // /////////////////////////////////////////////////////////////////
+        // Set a new near clipping distance for the frustrum and reinitialize it.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void SetNear(const F32 nearClip) {
+            Init(m_Fov, m_Aspect, nearClip, m_Far);
+        }
 
-		// /////////////////////////////////////////////////////////////////
-		// Set a new far clipping distance for the frustrum and reinitialize it.
-		//
-		// /////////////////////////////////////////////////////////////////
-		void SetFar(const F32 farClip) { Init(m_Fov, m_Aspect, m_Near, farClip); }
+        // /////////////////////////////////////////////////////////////////
+        // Set a new far clipping distance for the frustrum and reinitialize it.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void SetFar(const F32 farClip) {
+            Init(m_Fov, m_Aspect, m_Near, farClip);
+        }
 
-		// /////////////////////////////////////////////////////////////////
-		// Initialize the frustrum.
-		//
-		// @param fov The field of view (in degrees).
-		// @param aspect The aspect ratio of the display.
-		// @param near The near clipping distance.
-		// @param far The far clipping distance.
-		//
-		// /////////////////////////////////////////////////////////////////
-		void Init(const F32 fov, const F32 aspect, const F32 near, const F32 far);
+        // /////////////////////////////////////////////////////////////////
+        // Initialize the frustrum.
+        //
+        // @param fov The field of view (in degrees).
+        // @param aspect The aspect ratio of the display.
+        // @param near The near clipping distance.
+        // @param far The far clipping distance.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void Init(const F32 fov, const F32 aspect, const F32 near, const F32 far);
 
-		// /////////////////////////////////////////////////////////////////
-		// Render the sides of the frustrum.
-		//
-		// Please note that this method assumes a shader has been activated
-		// and set up and that the GL state is set appropriately to render.
-		//
-		// /////////////////////////////////////////////////////////////////
-		void Render();
-	};
+        // /////////////////////////////////////////////////////////////////
+        // Render the sides of the frustrum.
+        //
+        // Please note that this method assumes a shader has been activated
+        // and set up and that the GL state is set appropriately to render.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void Render();
+    };
 
 }
 

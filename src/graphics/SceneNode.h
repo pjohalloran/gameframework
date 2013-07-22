@@ -10,14 +10,14 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at:
 // http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -58,292 +58,306 @@
 #include "Actors.h"
 #include "SceneNodeProperties.h"
 
-namespace GameHalloran
-{
-	class SceneGraphManager;
-	class GLSLShader;
+namespace GameHalloran {
+    class SceneGraphManager;
+    class GLSLShader;
 
-	// /////////////////////////////////////////////////////////////////
-	// @class SceneNode
-	// @author Mike McShaffry & PJ O Halloran
-	//
-	// Implements ISceneNode. Forms the base class for any node that can
-	// exist in the 3D scene graph managed by class SceneGraphManager.
-	//
-	// /////////////////////////////////////////////////////////////////
-	class SceneNode : public ISceneNode
-	{
-	private:
-		ISceneNode *m_parentPtr;						///< Pointer to the nodes parent.
-		SceneNodeProperties m_props;					///< Nodes properties.
-		bool m_useCustomShader;							///< Are we using a custom shader to render this node (if not the SGMs' default GLSL program will be used)?
+    // /////////////////////////////////////////////////////////////////
+    // @class SceneNode
+    // @author Mike McShaffry & PJ O Halloran
+    //
+    // Implements ISceneNode. Forms the base class for any node that can
+    // exist in the 3D scene graph managed by class SceneGraphManager.
+    //
+    // /////////////////////////////////////////////////////////////////
+    class SceneNode : public ISceneNode {
+    private:
+        ISceneNode *m_parentPtr;                        ///< Pointer to the nodes parent.
+        SceneNodeProperties m_props;                    ///< Nodes properties.
+        bool m_useCustomShader;                         ///< Are we using a custom shader to render this node (if not the SGMs' default GLSL program will be used)?
 
-	protected:
+    protected:
         SceneGraphManager *m_sgmPtr;                    ///< Nodes SG manager.
-		SceneNodeList m_children;						///< The child nodes list.
-		boost::shared_ptr<GLSLShader> m_shaderPtr;		///< Custom GLSL shader program we are using to render the node (if this is NULL then the global SGM shader will be used).
+        SceneNodeList m_children;                       ///< The child nodes list.
+        boost::shared_ptr<GLSLShader> m_shaderPtr;      ///< Custom GLSL shader program we are using to render the node (if this is NULL then the global SGM shader will be used).
 
-		// /////////////////////////////////////////////////////////////////
-		// Are we using a custom shader to render this node?
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline bool IsUsingCustomShader() const { return (m_useCustomShader); };
+        // /////////////////////////////////////////////////////////////////
+        // Are we using a custom shader to render this node?
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline bool IsUsingCustomShader() const {
+            return (m_useCustomShader);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Render a scene node.  The SceneNode rendered may either be this
-		// node itself or one of its children Scene Nodes.
-		//
-		// @param scenePtr Pointer to the SGM.
-		// @param snPtr Pointer to the SceneNode to render.
-		//
-		// /////////////////////////////////////////////////////////////////
-		void RenderSceneNode(ISceneNode *snPtr);
+        // /////////////////////////////////////////////////////////////////
+        // Render a scene node.  The SceneNode rendered may either be this
+        // node itself or one of its children Scene Nodes.
+        //
+        // @param scenePtr Pointer to the SGM.
+        // @param snPtr Pointer to the SceneNode to render.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void RenderSceneNode(ISceneNode *snPtr);
 
-	public:
+    public:
 
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
         // @param sgPtr SG manager pointer.
-		// @param actorId The optional Actor ID.
-		// @param name Name of the node.
-		// @param renderPass What renderpass the node belongs to.
-		// @param material The objects material.
-		// @param toWorld Position and orientation of node relative to its
-		//					parent.
-		//
-		// /////////////////////////////////////////////////////////////////
-		explicit SceneNode(SceneGraphManager *sgPtr,
-							boost::optional<ActorId> actorId,
-							const std::string &name,
-							const RenderPass renderPass,
-							const Material &material,
-							const Matrix4 &toWorld);
+        // @param actorId The optional Actor ID.
+        // @param name Name of the node.
+        // @param renderPass What renderpass the node belongs to.
+        // @param material The objects material.
+        // @param toWorld Position and orientation of node relative to its
+        //                  parent.
+        //
+        // /////////////////////////////////////////////////////////////////
+        explicit SceneNode(SceneGraphManager *sgPtr,
+                           boost::optional<ActorId> actorId,
+                           const std::string &name,
+                           const RenderPass renderPass,
+                           const Material &material,
+                           const Matrix4 &toWorld);
 
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
         // @param sgPtr SG manager pointer.
-		// @param actorId The optional Actor ID.
-		// @param name Name of the node.
-		// @param renderPass What renderpass the node belongs to.
-		// @param material The objects material.
-		// @param toWorld Position and orientation of node relative to its
-		//					parent.
-		// @param fromWorld Inverse of toWorld matrix.
-		//
-		// /////////////////////////////////////////////////////////////////
-		explicit SceneNode(SceneGraphManager *sgPtr,
-							boost::optional<ActorId> actorId,
-							const std::string &name,
-							const RenderPass renderPass,
-							const Material &material,
-							const Matrix4 &toWorld,
-							const Matrix4 &fromWorld);
+        // @param actorId The optional Actor ID.
+        // @param name Name of the node.
+        // @param renderPass What renderpass the node belongs to.
+        // @param material The objects material.
+        // @param toWorld Position and orientation of node relative to its
+        //                  parent.
+        // @param fromWorld Inverse of toWorld matrix.
+        //
+        // /////////////////////////////////////////////////////////////////
+        explicit SceneNode(SceneGraphManager *sgPtr,
+                           boost::optional<ActorId> actorId,
+                           const std::string &name,
+                           const RenderPass renderPass,
+                           const Material &material,
+                           const Matrix4 &toWorld,
+                           const Matrix4 &fromWorld);
 
-		// /////////////////////////////////////////////////////////////////
-		// Destructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual ~SceneNode();
+        // /////////////////////////////////////////////////////////////////
+        // Destructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual ~SceneNode();
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the nodes properties.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual const SceneNodeProperties * const VGet() const { return (&m_props); };
+        // /////////////////////////////////////////////////////////////////
+        // Get the nodes properties.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual const SceneNodeProperties * const VGet() const {
+            return (&m_props);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the render state before rendering.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VPreRender();
+        // /////////////////////////////////////////////////////////////////
+        // Set the render state before rendering.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VPreRender();
 
-		// /////////////////////////////////////////////////////////////////
-		// Render the node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VRender();
+        // /////////////////////////////////////////////////////////////////
+        // Render the node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VRender();
 
-		// /////////////////////////////////////////////////////////////////
-		// Reset the render state after rendering.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VPostRender();
+        // /////////////////////////////////////////////////////////////////
+        // Reset the render state after rendering.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VPostRender();
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the nodes transformation matrices.
-		//
-		// This method will calculate the fromWorld inverse matrix of toWorld
-		// automatically.
-		//
-		// @param toWorld The nodes orientation and position relative to
-		//						its parent node (or to the world if there is
-		//						no parent).
-		// 
-		// /////////////////////////////////////////////////////////////////
-		virtual void VSetTransform(const Matrix4 &toWorld);
+        // /////////////////////////////////////////////////////////////////
+        // Set the nodes transformation matrices.
+        //
+        // This method will calculate the fromWorld inverse matrix of toWorld
+        // automatically.
+        //
+        // @param toWorld The nodes orientation and position relative to
+        //                      its parent node (or to the world if there is
+        //                      no parent).
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VSetTransform(const Matrix4 &toWorld);
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the nodes transformation matrices.
-		//
-		// @param toWorld The nodes orientation and position relative to
-		//						its parent node (or to the world if there is
-		//						no parent).
-		// @param fromWorld Inverse of toWorld.
-		// 
-		// /////////////////////////////////////////////////////////////////
-		virtual void VSetTransform(const Matrix4 &toWorld, const Matrix4 &fromWorld);
+        // /////////////////////////////////////////////////////////////////
+        // Set the nodes transformation matrices.
+        //
+        // @param toWorld The nodes orientation and position relative to
+        //                      its parent node (or to the world if there is
+        //                      no parent).
+        // @param fromWorld Inverse of toWorld.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VSetTransform(const Matrix4 &toWorld, const Matrix4 &fromWorld);
 
-		// /////////////////////////////////////////////////////////////////
-		// Adds a child to this node.
-		//
-		// @param childNodePtr Pointer to child node to add.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VAddChild(boost::shared_ptr<ISceneNode> childNodePtr);
+        // /////////////////////////////////////////////////////////////////
+        // Adds a child to this node.
+        //
+        // @param childNodePtr Pointer to child node to add.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VAddChild(boost::shared_ptr<ISceneNode> childNodePtr);
 
-		// /////////////////////////////////////////////////////////////////
-		// Searches for and removes a child from this node.
-		//
-		// @param id ID of the game actor the node represents.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VRemoveChild(const ActorId id);
+        // /////////////////////////////////////////////////////////////////
+        // Searches for and removes a child from this node.
+        //
+        // @param id ID of the game actor the node represents.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VRemoveChild(const ActorId id);
 
-		// /////////////////////////////////////////////////////////////////
-		// Render all child nodes.
-		//
-		// @param scenePtr SceneGraph manager pointer.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VRenderChildren();
+        // /////////////////////////////////////////////////////////////////
+        // Render all child nodes.
+        //
+        // @param scenePtr SceneGraph manager pointer.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VRenderChildren();
 
-		// /////////////////////////////////////////////////////////////////
-		// Called when application is restored.
-		//
-		// @param scenePtr SceneGraph manager pointer.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnRestore();
+        // /////////////////////////////////////////////////////////////////
+        // Called when application is restored.
+        //
+        // @param scenePtr SceneGraph manager pointer.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VOnRestore();
 
-		// /////////////////////////////////////////////////////////////////
-		// Called when application loses focus.
-		//
-		// @param scenePtr SceneGraph manager pointer.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnLostDevice();
+        // /////////////////////////////////////////////////////////////////
+        // Called when application loses focus.
+        //
+        // @param scenePtr SceneGraph manager pointer.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VOnLostDevice();
 
-		// /////////////////////////////////////////////////////////////////
-		// Is the node currently visible.
-		//
-		// @param scenePtr SceneGraph manager pointer.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VIsVisible() const;
+        // /////////////////////////////////////////////////////////////////
+        // Is the node currently visible.
+        //
+        // @param scenePtr SceneGraph manager pointer.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VIsVisible() const;
 
-		// /////////////////////////////////////////////////////////////////
-		// Check if the ray intersects with any of the children of this
-		// node.
-		//
-		// @param scenePtr SceneGraph manager pointer.
-		// @param rayCastPtr Pointer to the RayCast class.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VPick(const RayCast &ray);
+        // /////////////////////////////////////////////////////////////////
+        // Check if the ray intersects with any of the children of this
+        // node.
+        //
+        // @param scenePtr SceneGraph manager pointer.
+        // @param rayCastPtr Pointer to the RayCast class.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VPick(const RayCast &ray);
 
-		// /////////////////////////////////////////////////////////////////
-		// Updates the node once per main loop.
-		//
-		// @param scenePtr SceneGraph manager pointer.
-		// @param elapsedTime The number of seconds since the last update.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnUpdate(const F32 elapsedTime);
+        // /////////////////////////////////////////////////////////////////
+        // Updates the node once per main loop.
+        //
+        // @param scenePtr SceneGraph manager pointer.
+        // @param elapsedTime The number of seconds since the last update.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VOnUpdate(const F32 elapsedTime);
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the alpha value of the node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual void SetAlpha(const F32 alpha) { m_props.SetAlpha(alpha); };
+        // /////////////////////////////////////////////////////////////////
+        // Set the alpha value of the node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void SetAlpha(const F32 alpha) {
+            m_props.SetAlpha(alpha);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the position of the node.  The position will be in the world
-		// coordinate system.
-		//
-		// /////////////////////////////////////////////////////////////////
-		Point3 GetPosition() const;
+        // /////////////////////////////////////////////////////////////////
+        // Get the position of the node.  The position will be in the world
+        // coordinate system.
+        //
+        // /////////////////////////////////////////////////////////////////
+        Point3 GetPosition() const;
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the position of the node.  The position you set should be in
-		// the world coordinate system.
-		//
-		// /////////////////////////////////////////////////////////////////
-		void SetPosition(const Point3 &pos);
+        // /////////////////////////////////////////////////////////////////
+        // Set the position of the node.  The position you set should be in
+        // the world coordinate system.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void SetPosition(const Point3 &pos);
 
-		// /////////////////////////////////////////////////////////////////
-		// Most scene nodes will not have actor params, so they return 
-		// a NULL pointer.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual IActorParams *VGetActorParams(void) { return (NULL); };
+        // /////////////////////////////////////////////////////////////////
+        // Most scene nodes will not have actor params, so they return
+        // a NULL pointer.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual IActorParams *VGetActorParams(void) {
+            return (NULL);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Set a nodes actor parameters.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual void VSetActorParams(IActorParams *actorParamsPtr) { };
+        // /////////////////////////////////////////////////////////////////
+        // Set a nodes actor parameters.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VSetActorParams(IActorParams *actorParamsPtr) { };
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the nodes parent.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline virtual const ISceneNode * const VGetParentPtr() const { return (m_parentPtr); };
+        // /////////////////////////////////////////////////////////////////
+        // Get the nodes parent.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline virtual const ISceneNode * const VGetParentPtr() const {
+            return (m_parentPtr);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Sets the nodes parent.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline virtual void VSetParentPtr(ISceneNode *parentPtr) { m_parentPtr = parentPtr; };
+        // /////////////////////////////////////////////////////////////////
+        // Sets the nodes parent.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline virtual void VSetParentPtr(ISceneNode *parentPtr) {
+            m_parentPtr = parentPtr;
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Check if the node has a parent node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline bool HasParent() const { return (m_parentPtr != NULL); };
+        // /////////////////////////////////////////////////////////////////
+        // Check if the node has a parent node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline bool HasParent() const {
+            return (m_parentPtr != NULL);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the name of the shader to use to render the node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		void SetShaderName(const std::string &shaderNameRef);
+        // /////////////////////////////////////////////////////////////////
+        // Set the name of the shader to use to render the node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void SetShaderName(const std::string &shaderNameRef);
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the radius of the node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline void SetRadius(const F32 radius) { m_props.SetRadius(radius); };
+        // /////////////////////////////////////////////////////////////////
+        // Set the radius of the node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline void SetRadius(const F32 radius) {
+            m_props.SetRadius(radius);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the material of the node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline void SetMaterial(const Material &material) { m_props.SetMaterial(material); };
-        
+        // /////////////////////////////////////////////////////////////////
+        // Set the material of the node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline void SetMaterial(const Material &material) {
+            m_props.SetMaterial(material);
+        };
+
         // /////////////////////////////////////////////////////////////////
         //
         // /////////////////////////////////////////////////////////////////
-        virtual void VSetSceneManager(SceneGraphManager *sgmPtr)
-        {
+        virtual void VSetSceneManager(SceneGraphManager *sgmPtr) {
             m_sgmPtr = sgmPtr;
-            for(SceneNodeList::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i)
-            {
+            for(SceneNodeList::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i) {
                 (*i)->VSetSceneManager(sgmPtr);
             }
         };
 
-	};
+    };
 
 }
 

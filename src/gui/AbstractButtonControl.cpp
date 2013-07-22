@@ -12,127 +12,111 @@
 #include "OsInputEvents.h"
 #include "GameMain.h"
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	void AbstractButtonControl::SetLuaEventTypeId(const LuaPlus::LuaObject &table)
-	{
-		if(table.IsInteger())
-		{
-			m_eventTypeId = table.GetInteger();
-		}
-	}
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    void AbstractButtonControl::SetLuaEventTypeId(const LuaPlus::LuaObject &table)
+    {
+        if(table.IsInteger()) {
+            m_eventTypeId = table.GetInteger();
+        }
+    }
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	AbstractButtonControl::AbstractButtonControl(const Point3 &posRef,
-													const Vector4 &colorRef,
-													boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,
-													const F32 width,
-													const F32 height,
-													boost::shared_ptr<FTFont> fontPtr,
-													const boost::shared_ptr<GLSLShader> shaderFlatObj,
-													const boost::shared_ptr<GLSLShader> shaderTexObj,
-													const I32 eventTypeId,
-													const std::string &textureNameRef,
-                                                    const std::string &atlasNameRef,
-													const bool visible,
-													const ScreenElementId id,
-													const bool enabled) throw (GameException &)
-													: ControlWidget(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, textureNameRef, atlasNameRef, visible, id, enabled)
-													, m_pressed(false)
-													, m_mouseOver(false)
-													, m_eventTypeId(eventTypeId)
-	{
-	}
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    AbstractButtonControl::AbstractButtonControl(const Point3 &posRef,
+            const Vector4 &colorRef,
+            boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,
+            const F32 width,
+            const F32 height,
+            boost::shared_ptr<FTFont> fontPtr,
+            const boost::shared_ptr<GLSLShader> shaderFlatObj,
+            const boost::shared_ptr<GLSLShader> shaderTexObj,
+            const I32 eventTypeId,
+            const std::string &textureNameRef,
+            const std::string &atlasNameRef,
+            const bool visible,
+            const ScreenElementId id,
+            const bool enabled) throw(GameException &)
+        : ControlWidget(posRef, colorRef, mvpStackManPtr, width, height, fontPtr, shaderFlatObj, shaderTexObj, textureNameRef, atlasNameRef, visible, id, enabled)
+        , m_pressed(false)
+        , m_mouseOver(false)
+        , m_eventTypeId(eventTypeId)
+    {
+    }
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	AbstractButtonControl::AbstractButtonControl(const LuaPlus::LuaObject &widgetScriptData,
-												boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,
-												const boost::shared_ptr<GLSLShader> shaderFlatObj,
-												const boost::shared_ptr<GLSLShader> shaderTexObj,
-												boost::shared_ptr<FTFont> fontPtr,
-												const ScreenElementId id) throw (GameException &)
-												: ControlWidget(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id)
-												, m_pressed(false)
-												, m_mouseOver(false)
-												, m_eventTypeId(0)
-	{
-		SetLuaEventTypeId(widgetScriptData.GetByName("EventTypeId"));
-	}
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    AbstractButtonControl::AbstractButtonControl(const LuaPlus::LuaObject &widgetScriptData,
+            boost::shared_ptr<ModelViewProjStackManager> mvpStackManPtr,
+            const boost::shared_ptr<GLSLShader> shaderFlatObj,
+            const boost::shared_ptr<GLSLShader> shaderTexObj,
+            boost::shared_ptr<FTFont> fontPtr,
+            const ScreenElementId id) throw(GameException &)
+        : ControlWidget(widgetScriptData, mvpStackManPtr, shaderFlatObj, shaderTexObj, fontPtr, id)
+        , m_pressed(false)
+        , m_mouseOver(false)
+        , m_eventTypeId(0)
+    {
+        SetLuaEventTypeId(widgetScriptData.GetByName("EventTypeId"));
+    }
 
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	bool AbstractButtonControl::VOnEvent(GF_Event &eventObj, const F32 elapsedTime)
-	{
-		bool result = true;						// Result of method
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    bool AbstractButtonControl::VOnEvent(GF_Event &eventObj, const F32 elapsedTime)
+    {
+        bool result = true;                     // Result of method
 
-		if(VIsEnabled() && VIsVisible())
-		{
-			switch(eventObj.id)
-			{
-				case GF_MOUSE_MOVE_EVENT:
-				{
-					Point3 cursorPt(static_cast<F32>(eventObj.mouseMove.x), static_cast<F32>(eventObj.mouseMove.y), 0.0f);
-					ConvertWindowCoordinates(cursorPt);
+        if(VIsEnabled() && VIsVisible()) {
+            switch(eventObj.id) {
+                case GF_MOUSE_MOVE_EVENT: {
+                    Point3 cursorPt(static_cast<F32>(eventObj.mouseMove.x), static_cast<F32>(eventObj.mouseMove.y), 0.0f);
+                    ConvertWindowCoordinates(cursorPt);
 
-					if(!m_mouseOver && m_bb.IsPointInside(cursorPt))
-					{
-						m_mouseOver = true;
-						result = VOnMouseEnter();
-					}
-					else if(m_mouseOver && !m_bb.IsPointInside(cursorPt))
-					{
-						m_mouseOver = false;
-						result = VOnMouseLeave();
-					}
-				}
-				break;
+                    if(!m_mouseOver && m_bb.IsPointInside(cursorPt)) {
+                        m_mouseOver = true;
+                        result = VOnMouseEnter();
+                    } else if(m_mouseOver && !m_bb.IsPointInside(cursorPt)) {
+                        m_mouseOver = false;
+                        result = VOnMouseLeave();
+                    }
+                }
+                break;
 
-				case GF_MOUSE_BUTTON_EVENT:
-				{
-					Point3 cursorPt(static_cast<F32>(eventObj.mouseButton.x), static_cast<F32>(eventObj.mouseButton.y), 0.0f);
-					ConvertWindowCoordinates(cursorPt);
+                case GF_MOUSE_BUTTON_EVENT: {
+                    Point3 cursorPt(static_cast<F32>(eventObj.mouseButton.x), static_cast<F32>(eventObj.mouseButton.y), 0.0f);
+                    ConvertWindowCoordinates(cursorPt);
 
-					if(eventObj.mouseButton.state == GLFW_PRESS)
-					{
-						if(m_mouseOver || m_bb.IsPointInside(cursorPt))
-						{
-							m_mouseOver = true;
-							m_pressed = true;
-							result = VOnMousePressed(eventObj.mouseButton.buttonId);
-						}
-					}
-					else
-					{
-						if(m_mouseOver && m_pressed)
-						{
-							m_pressed = false;
-							VOnMouseReleased(eventObj.mouseButton.buttonId);
-							result = VOnAction();
-						}
-						else if(m_pressed)
-						{
-							m_pressed = false;
-							result = VOnMouseReleasedCancel(eventObj.mouseButton.buttonId);
-						}
-					}
-				}
-				break;
+                    if(eventObj.mouseButton.state == GLFW_PRESS) {
+                        if(m_mouseOver || m_bb.IsPointInside(cursorPt)) {
+                            m_mouseOver = true;
+                            m_pressed = true;
+                            result = VOnMousePressed(eventObj.mouseButton.buttonId);
+                        }
+                    } else {
+                        if(m_mouseOver && m_pressed) {
+                            m_pressed = false;
+                            VOnMouseReleased(eventObj.mouseButton.buttonId);
+                            result = VOnAction();
+                        } else if(m_pressed) {
+                            m_pressed = false;
+                            result = VOnMouseReleasedCancel(eventObj.mouseButton.buttonId);
+                        }
+                    }
+                }
+                break;
 
-				default: // do nothing for other types of events.
-				break;
-			}
-		}
+                default: // do nothing for other types of events.
+                    break;
+            }
+        }
 
-		return (result);
-	}
+        return (result);
+    }
 
 }
