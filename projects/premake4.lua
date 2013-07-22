@@ -1,10 +1,17 @@
--- Config variables for the Windows build, you wont have to change these unless you installed OpenAL/boost to a different location
--- on your system.  The windows SDK and the DirectX SDK should already be in your path if your using Visual Studio.  If you are
--- using an environment other than VS then you may have to tweak this file...
+-- System 3rd party lib paths
 if os.is("windows") then
+	-- Config variables for the Windows build, you wont have to change these unless you installed OpenAL/boost to a different location
+	-- on your system.  The windows SDK and the DirectX SDK should already be in your path if your using Visual Studio.  If you are
+	-- using an environment other than VS then you may have to tweak this file...
 	OPENAL_INCLUDE_DIR="C:/Program Files (x86)/OpenAL 1.1 SDK/include/"
 	OPENAL_LIB_DIR="C:/Program Files (x86)/OpenAL 1.1 SDK/libs/WIN32/"
+	BOOST_INCLUDE_DIR="C:/Program Files/boost/boost_1_51"
 	BOOST_LIB_DIR="C:/Program Files/boost/boost_1_51/lib"
+elseif os.is("macosx") then
+	-- Config variables for the macosx build, you wont have to change these unless you installed boost to a different location
+	-- on your system.  The defauls here assume you are using brew and its default install location.
+	BOOST_INCLUDE_DIR="/usr/local/Cellar/boost/1.54.0/include"
+	BOOST_LIB_DIR="/usr/local/Cellar/boost/1.54.0/lib"
 end
 
 solution "gameframework"
@@ -15,7 +22,7 @@ project "gameframework"
 	language "C++"
 	links { "zlib", "tinyxml", "bullet", "png", "jpeg", "luaplus51", "ogg", "vorbis", "glew", "glfw", "freetype", "ftgl", "freetype-gl" }
 	location ("tmp")
-	includedirs { "../include", "../include/bullet", "../src/3rdParty" }
+	includedirs { BOOST_INCLUDE_DIR, "../include", "../include/bullet" }
 	files {
 		"../src/**.h",
 		"../src/**.cpp"
@@ -103,12 +110,14 @@ project "gameframework"
 		defines {
 			"TARGET_OS_MAC"
 		}
+		buildoptions "-std=c++11 -stdlib=libc++"
 
 project "Pool3d"
 	kind "ConsoleApp"
 	language "C++"
 	location ("tmp")
-	includedirs { "../include", "../include/bullet", "../src/3rdParty" }
+	includedirs { BOOST_INCLUDE_DIR, "../include", "../include/bullet" }
+	libdirs { BOOST_LIB_DIR }
 	targetdir ("../bin")
 	links { "zlib", "tinyxml", "bullet", "png", "jpeg", "luaplus51", "ogg", "vorbis", "glew", "glfw", "freetype", "ftgl", "freetype-gl", "gameframework" }
 	files {
@@ -145,7 +154,7 @@ project "Pool3d"
 			"FTGL_LIBRARY_STATIC"
 		}
 		includedirs { OPENAL_INCLUDE_DIR }
-		libdirs { OPENAL_LIB_DIR, BOOST_LIB_DIR }
+		libdirs { OPENAL_LIB_DIR }
 		links { "opengl32", "glu32", "dsound", "OpenAL32" }
 	configuration { "windows", "Debug" }
 		links { "libboost_filesystem-vc100-mt-sgd-1_51", "libboost_system-vc100-mt-sgd-1_51" }
@@ -162,12 +171,14 @@ project "Pool3d"
 		postbuildcommands {
 			". ../../src/build/macosx/BuildResources.sh ../../src/Pool3d/data/ ../../../data/Pool3D/Pool3D.zip"
 		}
+		buildoptions "-std=c++11 -stdlib=libc++"
 
 project "TestApp"
 	kind "ConsoleApp"
 	language "C++"
 	location ("tmp")
-	includedirs { "../include", "../include/bullet", "../src/3rdParty" }
+	includedirs { BOOST_INCLUDE_DIR, "../include", "../include/bullet" }
+	libdirs { BOOST_LIB_DIR }
 	targetdir ("../bin")
 	links { "zlib", "tinyxml", "bullet", "png", "jpeg", "luaplus51", "ogg", "vorbis", "glew", "glfw", "freetype", "ftgl", "freetype-gl", "gameframework" }
 	files {
@@ -204,7 +215,7 @@ project "TestApp"
 			"FTGL_LIBRARY_STATIC"
 		}
 		includedirs { OPENAL_INCLUDE_DIR }
-		libdirs { OPENAL_LIB_DIR, BOOST_LIB_DIR }
+		libdirs { OPENAL_LIB_DIR }
 		links { "opengl32", "glu32", "dsound", "OpenAL32" }
 	configuration { "windows", "Debug" }
 		links { "libboost_filesystem-vc100-mt-sgd-1_51", "libboost_system-vc100-mt-sgd-1_51" }
@@ -221,12 +232,14 @@ project "TestApp"
 		postbuildcommands {
 			". ../../src/build/macosx/BuildResources.sh ../../src/TestApp/data/ ../../../data/TestApp/TestApp.zip"
 		}
+		buildoptions "-std=c++11 -stdlib=libc++"
 
 project "glslc"
 	kind "ConsoleApp"
 	language "C++"
 	location ("tmp")
-	includedirs { "../include", "../src/3rdParty" }
+	includedirs { BOOST_INCLUDE_DIR, "../include" }
+	libdirs { BOOST_LIB_DIR }
 	targetdir ("../bin")
 	links { "zlib", "tinyxml", "glew", "glfw", "gameframework" }
 	files {
@@ -273,9 +286,9 @@ project "glslc"
 			"TARGET_OS_MAC"
 		}
 		links { "boost_filesystem-mt", "boost_system-mt", "OpenGL.framework", "OpenAL.framework", "CoreFoundation.framework", "IOKit.framework", "AppKit.framework" }
+		buildoptions "-std=c++11 -stdlib=libc++"
 
 local ThirdPartyMakeScripts = {
-	--"3rdPartyPremake/boost.lua",
 	"3rdPartyPremake/zlib.lua",
 	"3rdPartyPremake/bullet.lua",
 	"3rdPartyPremake/glew.lua",
