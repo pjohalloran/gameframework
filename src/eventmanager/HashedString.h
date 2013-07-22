@@ -12,13 +12,13 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -49,21 +49,21 @@
 // This class was extracted from the Game Coding Complete 3 code.
 // Originally written by Mike McShaffry, author of Game
 // Coding Complete and games programmer.
-// 
+//
 // I have cleaned it up a little with better comments etc. to fit
 // in with the rest of my code.
 //
 // I have added/modified the following functionality:
 // - I added the class under the GameHalloran namespace.
 // - I removed all the string utility functions in this class as
-//		they are unnessecary for my work.
+//      they are unnessecary for my work.
 // - I have made note that there is a difference between the code
-//		and the book. On pg 276 the book has the wildcard reference in
-//		hash_string():
-//		if(strcmp(pIdentStr, kpWildcardEventType) == 0)
-//			return 0;
-//		The code does not have this.  Must investigate if it has been
-//		placed elsewhere...
+//      and the book. On pg 276 the book has the wildcard reference in
+//      hash_string():
+//      if(strcmp(pIdentStr, kpWildcardEventType) == 0)
+//          return 0;
+//      The code does not have this.  Must investigate if it has been
+//      placed elsewhere...
 //
 // /////////////////////////////////////////////////////////////////
 
@@ -71,84 +71,77 @@
 
 #include "GameTypes.h"
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
-	// /////////////////////////////////////////////////////////////////
-	// @class HashedString
-	// @author Mike McShaffry
-	//
-	// A hashed string.  It retains the initial (ANSI) string in addition
-	// to the hash value for easy reference.
-	//
-	// /////////////////////////////////////////////////////////////////
-	class HashedString
-	{
-	private:
+    // /////////////////////////////////////////////////////////////////
+    // @class HashedString
+    // @author Mike McShaffry
+    //
+    // A hashed string.  It retains the initial (ANSI) string in addition
+    // to the hash value for easy reference.
+    //
+    // /////////////////////////////////////////////////////////////////
+    class HashedString {
+    private:
 
-		void *m_ident;							///< The hashed string (in hex characters).
-		std::string m_identStr;					///< The original string.
+        void *m_ident;                          ///< The hashed string (in hex characters).
+        std::string m_identStr;                 ///< The original string.
 
-	public:
+    public:
 
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		explicit HashedString(char const * const pIdentString)
-			: m_ident(hash_name(pIdentString)), m_identStr(pIdentString)
-		{
-		}
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        explicit HashedString(char const * const pIdentString)
+            : m_ident(hash_name(pIdentString)), m_identStr(pIdentString) {
+        }
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the hash value of the string.
-		//
-		// /////////////////////////////////////////////////////////////////
-		U64 getHashValue(void) const
-		{
-			return (reinterpret_cast<U64>(m_ident));
-		}
+        // /////////////////////////////////////////////////////////////////
+        // Get the hash value of the string.
+        //
+        // /////////////////////////////////////////////////////////////////
+        U64 getHashValue(void) const {
+            return (reinterpret_cast<U64>(m_ident));
+        }
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the original string.
-		//
-		// /////////////////////////////////////////////////////////////////
-		const std::string &getStr() const
-		{
-			return (m_identStr);
-		}
+        // /////////////////////////////////////////////////////////////////
+        // Get the original string.
+        //
+        // /////////////////////////////////////////////////////////////////
+        const std::string &getStr() const {
+            return (m_identStr);
+        }
 
-		// /////////////////////////////////////////////////////////////////
-		// Hash the string.
-		//
-		// @param pIdentStr The string that we wish to create a hash of.
-		//
-		// /////////////////////////////////////////////////////////////////
-		static void * hash_name(char const *pIdentStr);
+        // /////////////////////////////////////////////////////////////////
+        // Hash the string.
+        //
+        // @param pIdentStr The string that we wish to create a hash of.
+        //
+        // /////////////////////////////////////////////////////////////////
+        static void * hash_name(char const *pIdentStr);
 
-		// /////////////////////////////////////////////////////////////////
-		// Check if this hash is less than the hash on the rhs.
-		//
-		// /////////////////////////////////////////////////////////////////
-		bool operator< (HashedString const &rhs) const
-		{
-			bool r = (getHashValue() < rhs.getHashValue());
-			return (r);
-		}
+        // /////////////////////////////////////////////////////////////////
+        // Check if this hash is less than the hash on the rhs.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool operator< (HashedString const &rhs) const {
+            bool r = (getHashValue() < rhs.getHashValue());
+            return (r);
+        }
 
-		// /////////////////////////////////////////////////////////////////
-		// Check if this hash is equal to the hash on the rhs.
-		// Please note that this does not guarantee that the original strings 
-		// are different.  The algorithm used means that hash collisions may
-		// occur.
-		//
-		// /////////////////////////////////////////////////////////////////
-		bool operator== (HashedString const &rhs) const
-		{
-			bool r = (getHashValue() == rhs.getHashValue());
-			return (r);
-		}
-	};
+        // /////////////////////////////////////////////////////////////////
+        // Check if this hash is equal to the hash on the rhs.
+        // Please note that this does not guarantee that the original strings
+        // are different.  The algorithm used means that hash collisions may
+        // occur.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool operator== (HashedString const &rhs) const {
+            bool r = (getHashValue() == rhs.getHashValue());
+            return (r);
+        }
+    };
 
 }
 

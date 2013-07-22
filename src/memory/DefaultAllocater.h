@@ -17,9 +17,8 @@
 #include "GameTypes.h"
 #include "GameBase.h"
 
-namespace GameHalloran
-{
-    
+namespace GameHalloran {
+
     // ////////////////////////////////////////////////////////////
     // @class DefaultAllocater
     // @author PJ O Halloran
@@ -27,24 +26,23 @@ namespace GameHalloran
     // Default game allocater.
     //
     // ////////////////////////////////////////////////////////////
-    class DefaultAllocater : public BaseGameAllocater
-    {
+    class DefaultAllocater : public BaseGameAllocater {
     private:
-        
+
     public:
-        
+
         // ////////////////////////////////////////////////////////////
         // Constructor.
         //
         // ////////////////////////////////////////////////////////////
         DefaultAllocater() {};
-        
+
         // ////////////////////////////////////////////////////////////
         // Destructor.
         //
         // ////////////////////////////////////////////////////////////
         virtual ~DefaultAllocater() {};
-        
+
         // ////////////////////////////////////////////////////////////
         // Allocate a block of memory.
         //
@@ -53,8 +51,10 @@ namespace GameHalloran
         // @return void* NULL on error.
         //
         // ////////////////////////////////////////////////////////////
-        virtual void *VAlloc(const U64 size) { return (malloc((size_t)size)); };
-        
+        virtual void *VAlloc(const U64 size) {
+            return (malloc((size_t)size));
+        };
+
         // ////////////////////////////////////////////////////////////
         // TODO (not currently implemented)
         //
@@ -66,21 +66,25 @@ namespace GameHalloran
         // @return void* NULL on error.
         //
         // ////////////////////////////////////////////////////////////
-        virtual void *VAllocAligned(const U64 size, const U32 alignment) { return (NULL); };
-        
+        virtual void *VAllocAligned(const U64 size, const U32 alignment) {
+            return (NULL);
+        };
+
         // ////////////////////////////////////////////////////////////
         // Deallocate a block of memory.
         //
         // ////////////////////////////////////////////////////////////
-        virtual void VDealloc(void *ptr) { free(ptr); };
-         
+        virtual void VDealloc(void *ptr) {
+            free(ptr);
+        };
+
         // ////////////////////////////////////////////////////////////
         // (not used)
         // Run defragmentation on the allocaters memory block.
         //
         // ////////////////////////////////////////////////////////////
         virtual void VDefrag() {};
-        
+
         // ////////////////////////////////////////////////////////////
         // (not used)
         // Run a partial defragmentation on the allocaters memory block.
@@ -92,7 +96,9 @@ namespace GameHalloran
         // @return F32 Percentage of memory block left to defragment.
         //
         // ////////////////////////////////////////////////////////////
-        virtual F32 VDefrag(const F32 seconds) { return (0.0f); };
+        virtual F32 VDefrag(const F32 seconds) {
+            return (0.0f);
+        };
     };
 }
 

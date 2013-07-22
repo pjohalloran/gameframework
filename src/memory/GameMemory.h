@@ -15,15 +15,14 @@
 
 #include "MemoryManager.h"
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
     // Global memory manager instance.
     MemoryManager g_memManObj;
-    
+
     // ////////////////////////////////////////////////////////////
     // Area to allocate memory from.
-    // 
+    //
     // - eNone:             Auto fail.
     // - eStack:            From custom StackAllocater.
     // - eDoubleBuffer:     From custom DoubleBuffered Stack Allocater.
@@ -32,8 +31,7 @@ namespace GameHalloran
     // - eSystem:           Direct from systems malloc/free.
     //
     // ////////////////////////////////////////////////////////////
-    enum AllocId
-    {
+    enum AllocId {
         eNone = 0,
         eStack,
         eDoubleBuffer,
@@ -41,19 +39,19 @@ namespace GameHalloran
         eHeap,
         eSystem
     };
-    
+
     // ////////////////////////////////////////////////////////////
     // Setup the games memory manager.
     //
     // ////////////////////////////////////////////////////////////
     void GameMemoryInit();
-    
+
     // ////////////////////////////////////////////////////////////
     // Shutdown the games memory manager.
     //
     // ////////////////////////////////////////////////////////////
     void GameMemoryShutdown();
-    
+
     // ////////////////////////////////////////////////////////////
     // Games Allocation routine.
     //
@@ -61,17 +59,17 @@ namespace GameHalloran
     //
     // @return void* Pointer to the allocated block of memory.
     //
-    // ////////////////////////////////////////////////////////////    
+    // ////////////////////////////////////////////////////////////
     void *GameDefaultAlloc(const U64 size);
-    
+
     // ////////////////////////////////////////////////////////////
     // Games deallocation routine.
     //
-    // @param ptr 
+    // @param ptr
     //
-    // ////////////////////////////////////////////////////////////    
+    // ////////////////////////////////////////////////////////////
     void GameDefaultDealloc(void *ptr);
-    
+
     // ////////////////////////////////////////////////////////////
     // Games Allocation routine.
     //
@@ -80,9 +78,9 @@ namespace GameHalloran
     //
     // @return void* Pointer to the allocated block of memory.
     //
-    // ////////////////////////////////////////////////////////////    
+    // ////////////////////////////////////////////////////////////
     void *GameAlloc(const U64 size, const enum AllocId area = eSystem);
-    
+
     // ////////////////////////////////////////////////////////////
     // Deallocate a memory block.
     //

@@ -12,13 +12,13 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -50,227 +50,229 @@
 // Guarantees that the directsound lib is included during build.
 #pragma comment( lib, "dsound" )
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
-	//#define GCC_DSBVOLUME_MIN (-2000)
-	// GCC_DSBVOLUME_MIN is defined as -5000 - why? Because DSBVOLUME_MIN, defined in dsound.h 
-	// is set to as -10000, which is just way too silent for a lower bound and many programmers find 
-	// -5000 to be a better minimum bound for the volume range to avoid an annoying silence for the 
-	// lower 50% of a volume slider that uses a logarithmic scale.
-	// This was contributed by BystanderKain!
-	#define GCC_DSBVOLUME_MIN (DSBVOLUME_MIN)
+    //#define GCC_DSBVOLUME_MIN (-2000)
+    // GCC_DSBVOLUME_MIN is defined as -5000 - why? Because DSBVOLUME_MIN, defined in dsound.h
+    // is set to as -10000, which is just way too silent for a lower bound and many programmers find
+    // -5000 to be a better minimum bound for the volume range to avoid an annoying silence for the
+    // lower 50% of a volume slider that uses a logarithmic scale.
+    // This was contributed by BystanderKain!
+#define GCC_DSBVOLUME_MIN (DSBVOLUME_MIN)
 
-	// ////////////////////////////////////////////////////////////////////
-	// @class DirectSound8AudioBuffer
-	// @author Mike McShaffry
-	//
-	// Implements the rest of the IAudioBuffer interface left out by AudioBuffer.
-	// 
-	// ////////////////////////////////////////////////////////////////////
-	class DirectSound8AudioBuffer : public AudioBuffer
-	{
-	private:
+    // ////////////////////////////////////////////////////////////////////
+    // @class DirectSound8AudioBuffer
+    // @author Mike McShaffry
+    //
+    // Implements the rest of the IAudioBuffer interface left out by AudioBuffer.
+    //
+    // ////////////////////////////////////////////////////////////////////
+    class DirectSound8AudioBuffer : public AudioBuffer {
+    private:
 
-		// ////////////////////////////////////////////////////////////////////
-		// Fill the sound buffer with sound data.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		HRESULT FillBufferWithSound( );
+        // ////////////////////////////////////////////////////////////////////
+        // Fill the sound buffer with sound data.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        HRESULT FillBufferWithSound();
 
-		// ////////////////////////////////////////////////////////////////////
-		// Restore the sound buffer.
-		//
-		// @param pbWasRestored True if the sound buffer was restored and false
-		//							otherwise.
-		//
-		// @return HRESULT 
-		//
-		// ////////////////////////////////////////////////////////////////////
-		HRESULT RestoreBuffer(BOOL *pbWasRestored);
+        // ////////////////////////////////////////////////////////////////////
+        // Restore the sound buffer.
+        //
+        // @param pbWasRestored True if the sound buffer was restored and false
+        //                          otherwise.
+        //
+        // @return HRESULT
+        //
+        // ////////////////////////////////////////////////////////////////////
+        HRESULT RestoreBuffer(BOOL *pbWasRestored);
 
-	protected:
+    protected:
 
-		LPDIRECTSOUNDBUFFER m_Sample;										///< DirectSound sound buffer.
+        LPDIRECTSOUNDBUFFER m_Sample;                                       ///< DirectSound sound buffer.
 
-	public:
+    public:
 
-		// ////////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
-		// @param sample 
-		// @param resource The sound resource.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		DirectSound8AudioBuffer(LPDIRECTSOUNDBUFFER sample, boost::shared_ptr<SoundResHandle> resource);
+        // ////////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
+        // @param sample
+        // @param resource The sound resource.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        DirectSound8AudioBuffer(LPDIRECTSOUNDBUFFER sample, boost::shared_ptr<SoundResHandle> resource);
 
-		// ////////////////////////////////////////////////////////////////////
-		// Destructor.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual ~DirectSound8AudioBuffer() { };
+        // ////////////////////////////////////////////////////////////////////
+        // Destructor.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual ~DirectSound8AudioBuffer() { };
 
-		// ////////////////////////////////////////////////////////////////////
-		// Get an implementation specific pointer to the audio buffer.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual void *VGet();
+        // ////////////////////////////////////////////////////////////////////
+        // Get an implementation specific pointer to the audio buffer.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual void *VGet();
 
-		// ////////////////////////////////////////////////////////////////////
-		// Called on an application restore to restore the sound buffer.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual bool VOnRestore();
+        // ////////////////////////////////////////////////////////////////////
+        // Called on an application restore to restore the sound buffer.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual bool VOnRestore();
 
-		// ////////////////////////////////////////////////////////////////////
-		// Play the sound buffer.
-		//
-		// @param volume The volume of the sound.
-		// @param looping Should the sound loop when played?
-		//
-		// @return bool True on success and false on failure.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual bool VPlay(const I32 volume, const bool looping);
+        // ////////////////////////////////////////////////////////////////////
+        // Play the sound buffer.
+        //
+        // @param volume The volume of the sound.
+        // @param looping Should the sound loop when played?
+        //
+        // @return bool True on success and false on failure.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual bool VPlay(const I32 volume, const bool looping);
 
-		// ////////////////////////////////////////////////////////////////////
-		// Pause the sound buffer.
-		//
-		// @return bool True on success and false on failure.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual bool VPause();
+        // ////////////////////////////////////////////////////////////////////
+        // Pause the sound buffer.
+        //
+        // @return bool True on success and false on failure.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual bool VPause();
 
-		// ////////////////////////////////////////////////////////////////////
-		// Stop the sound buffer.
-		//
-		// @return bool True on success and false on failure.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual bool VStop();
+        // ////////////////////////////////////////////////////////////////////
+        // Stop the sound buffer.
+        //
+        // @return bool True on success and false on failure.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual bool VStop();
 
-		// ////////////////////////////////////////////////////////////////////
-		// Resume playing the sound buffer.
-		//
-		// @return bool True on success and false on failure.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual bool VResume();
+        // ////////////////////////////////////////////////////////////////////
+        // Resume playing the sound buffer.
+        //
+        // @return bool True on success and false on failure.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual bool VResume();
 
-		// ////////////////////////////////////////////////////////////////////
-		// Toggle on/off pausing the sound buffer.
-		//
-		// @return bool True on success and false on failure.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual bool VTogglePause();
+        // ////////////////////////////////////////////////////////////////////
+        // Toggle on/off pausing the sound buffer.
+        //
+        // @return bool True on success and false on failure.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual bool VTogglePause();
 
-		// ////////////////////////////////////////////////////////////////////
-		// Check if the sound buffer is playing.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual bool VIsPlaying();
+        // ////////////////////////////////////////////////////////////////////
+        // Check if the sound buffer is playing.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual bool VIsPlaying();
 
-		// ////////////////////////////////////////////////////////////////////
-		// Set the volume of the sound.
-		//
-		// @param volume The new volume of the sound.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual void VSetVolume(const I32 volume);
+        // ////////////////////////////////////////////////////////////////////
+        // Set the volume of the sound.
+        //
+        // @param volume The new volume of the sound.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual void VSetVolume(const I32 volume);
 
-		// ////////////////////////////////////////////////////////////////////
-		// Get the progress of the playback.
-		//
-		// @return F32 A number between 0.0 and 1.0 indicating how much of
-		//					the sound has been played.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual F32 VGetProgress();
-	};
+        // ////////////////////////////////////////////////////////////////////
+        // Get the progress of the playback.
+        //
+        // @return F32 A number between 0.0 and 1.0 indicating how much of
+        //                  the sound has been played.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual F32 VGetProgress();
+    };
 
 
 
-	//////////////////////////////////////////////////////////////////////
-	// @class DirectSound8Audio
-	// @author Mike McShaffry
-	//
-	// Implements the rest of the IAudio interface left out by Audio.
-	// 
-	//////////////////////////////////////////////////////////////////////
-	class DirectSound8Audio : public Audio
-	{
-	private:
+    //////////////////////////////////////////////////////////////////////
+    // @class DirectSound8Audio
+    // @author Mike McShaffry
+    //
+    // Implements the rest of the IAudio interface left out by Audio.
+    //
+    //////////////////////////////////////////////////////////////////////
+    class DirectSound8Audio : public Audio {
+    private:
 
 
 
-	protected:
+    protected:
 
-		IDirectSound8* m_pDS;										///< Pointer to the DirectSound8 interface.
-		HWND		   m_hWnd;
+        IDirectSound8* m_pDS;                                       ///< Pointer to the DirectSound8 interface.
+        HWND           m_hWnd;
 
-		// ////////////////////////////////////////////////////////////////////
-		// Set the buffer format.
-		//
-		// @param dwPrimaryChannels The number of audio channels.
-		// @param dwPrimaryFreq The frequency.
-		// @param dwPrimaryBitRate The sampling bit rate.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		HRESULT SetPrimaryBufferFormat( DWORD dwPrimaryChannels, 
-										DWORD dwPrimaryFreq, 
-										DWORD dwPrimaryBitRate );
+        // ////////////////////////////////////////////////////////////////////
+        // Set the buffer format.
+        //
+        // @param dwPrimaryChannels The number of audio channels.
+        // @param dwPrimaryFreq The frequency.
+        // @param dwPrimaryBitRate The sampling bit rate.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        HRESULT SetPrimaryBufferFormat(DWORD dwPrimaryChannels,
+                                       DWORD dwPrimaryFreq,
+                                       DWORD dwPrimaryBitRate);
 
-	public:
+    public:
 
-		// ////////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		DirectSound8Audio(HWND hWnd) { m_pDS = NULL; m_hWnd = hWnd; };
+        // ////////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        DirectSound8Audio(HWND hWnd) {
+            m_pDS = NULL;
+            m_hWnd = hWnd;
+        };
 
-		// ////////////////////////////////////////////////////////////////////
-		// Destructor.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual ~DirectSound8Audio() { };
+        // ////////////////////////////////////////////////////////////////////
+        // Destructor.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual ~DirectSound8Audio() { };
 
-		// ////////////////////////////////////////////////////////////////////
-		// Check if the sound system has been initialized.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual bool VActive() { return (m_pDS != NULL); }
+        // ////////////////////////////////////////////////////////////////////
+        // Check if the sound system has been initialized.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual bool VActive() {
+            return (m_pDS != NULL);
+        }
 
-		// ////////////////////////////////////////////////////////////////////
-		// Initialize an audio buffer from a sound resource.
-		//
-		// @param soundResource The sound resource handle.
-		//
-		// @return boost::shared_ptr<IAudioBuffer> A pointer to an audio buffer.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual boost::shared_ptr<IAudioBuffer> VInitAudioBuffer(boost::shared_ptr<SoundResHandle> soundResource);
+        // ////////////////////////////////////////////////////////////////////
+        // Initialize an audio buffer from a sound resource.
+        //
+        // @param soundResource The sound resource handle.
+        //
+        // @return boost::shared_ptr<IAudioBuffer> A pointer to an audio buffer.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual boost::shared_ptr<IAudioBuffer> VInitAudioBuffer(boost::shared_ptr<SoundResHandle> soundResource);
 
-		// ////////////////////////////////////////////////////////////////////
-		// Release resources for an audio buffer.
-		//
-		// @param audioBuffer Pointer to an audio buffer.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual void VReleaseAudioBuffer(boost::shared_ptr<IAudioBuffer> audioBuffer);
+        // ////////////////////////////////////////////////////////////////////
+        // Release resources for an audio buffer.
+        //
+        // @param audioBuffer Pointer to an audio buffer.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual void VReleaseAudioBuffer(boost::shared_ptr<IAudioBuffer> audioBuffer);
 
-		// ////////////////////////////////////////////////////////////////////
-		// Shutdown the audio subsystem.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual void VShutdown();
+        // ////////////////////////////////////////////////////////////////////
+        // Shutdown the audio subsystem.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual void VShutdown();
 
-		// ////////////////////////////////////////////////////////////////////
-		// Initialize the audio subsystem.
-		//
-		// ////////////////////////////////////////////////////////////////////
-		virtual bool VInitialize();
-	};
+        // ////////////////////////////////////////////////////////////////////
+        // Initialize the audio subsystem.
+        //
+        // ////////////////////////////////////////////////////////////////////
+        virtual bool VInitialize();
+    };
 
 }
 

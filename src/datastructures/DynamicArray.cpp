@@ -10,7 +10,6 @@
 #include "DynamicArray.h"
 
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
 }

@@ -12,13 +12,13 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -44,9 +44,9 @@
 // @author Javier Arevalo, Michael L. McShaffry and PJ O Halloran.
 // @date 12/07/2010
 //
-// File contains the header for the ZipFile class.  
+// File contains the header for the ZipFile class.
 // This class was extracted from the Game Coding Complete 3 code.
-// 
+//
 // The declaration of a quick'n dirty ZIP file reader class.
 // Original code from Javier Arevalo.
 // Get zlib from http://www.cdrom.com/pub/infozip/zlib/
@@ -71,25 +71,23 @@
 
 #include "GameBase.h"
 
-namespace GameHalloran
-{
+namespace GameHalloran {
     typedef std::vector<boost::filesystem::path> ResourceListing;
-    
-	// /////////////////////////////////////////////////////////////////
-	// @class ZipFile
-	// @author Javier Arevalo and Michael L. McShaffry.
-	//
-	// Class for opening, reading and writing a ZIP file.
-	//
-	// /////////////////////////////////////////////////////////////////
-	class ZipFile
-	{
+
+    // /////////////////////////////////////////////////////////////////
+    // @class ZipFile
+    // @author Javier Arevalo and Michael L. McShaffry.
+    //
+    // Class for opening, reading and writing a ZIP file.
+    //
+    // /////////////////////////////////////////////////////////////////
+    class ZipFile {
     private:
-        
+
         struct TZipLocalHeader;
         struct TZipDirHeader;
         struct TZipDirFileHeader;
-        
+
         // /////////////////////////////////////////////////////////////////
         // Read in the main file directory header.
         //
@@ -99,7 +97,7 @@ namespace GameHalloran
         //
         // /////////////////////////////////////////////////////////////////
         bool ReadDirHeader(TZipDirHeader * const headerPtr, I64 &offset);
-        
+
         // /////////////////////////////////////////////////////////////////
         // Read in the main file directory header at the end of the file.
         //
@@ -111,7 +109,7 @@ namespace GameHalloran
         //
         // /////////////////////////////////////////////////////////////////
         bool ReadDirFileHeader(TZipDirFileHeader * const headerPtr, const I64 offset);
-        
+
         // /////////////////////////////////////////////////////////////////
         // Read in the local file header.
         //
@@ -123,104 +121,104 @@ namespace GameHalloran
         //
         // /////////////////////////////////////////////////////////////////
         bool ReadLocalHeader(TZipLocalHeader * const headerPtr, const I64 offset);
-        
-	public:
+
+    public:
 
         static const std::string ZIP_PATH_SEPERATOR;
-        
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		ZipFile();
-        
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
+
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        ZipFile();
+
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
         //
         // @param resFileName The filename of the zip file to load.
-		//
-		// /////////////////////////////////////////////////////////////////
-		ZipFile(const boost::filesystem::path &resFileName);
+        //
+        // /////////////////////////////////////////////////////////////////
+        ZipFile(const boost::filesystem::path &resFileName);
 
-		// /////////////////////////////////////////////////////////////////
-		// Destructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual ~ZipFile();
+        // /////////////////////////////////////////////////////////////////
+        // Destructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual ~ZipFile();
 
-		// /////////////////////////////////////////////////////////////////
-		// Open the zip directory with the path supplied.
-		//
-		// @param resFileName The filename of the zip file to load.
-		//
-		// @return bool True on success and false otherwise.
-		//
-		// /////////////////////////////////////////////////////////////////
-		bool Init(const boost::filesystem::path &resFileName);
+        // /////////////////////////////////////////////////////////////////
+        // Open the zip directory with the path supplied.
+        //
+        // @param resFileName The filename of the zip file to load.
+        //
+        // @return bool True on success and false otherwise.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool Init(const boost::filesystem::path &resFileName);
 
-		// /////////////////////////////////////////////////////////////////
-		// Close the file.
-		//
-		// /////////////////////////////////////////////////////////////////
-		void End();
+        // /////////////////////////////////////////////////////////////////
+        // Close the file.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void End();
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the number of files packed into the zip file.
-		//
-		// /////////////////////////////////////////////////////////////////
-		I32 GetNumFiles() const;
+        // /////////////////////////////////////////////////////////////////
+        // Get the number of files packed into the zip file.
+        //
+        // /////////////////////////////////////////////////////////////////
+        I32 GetNumFiles() const;
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the filename of the file at index i.
-		//
-		// @param i The index of the file.
-		// @param path The filename of the file at index i.
-		//
-		// /////////////////////////////////////////////////////////////////
-		bool GetFilename(const U32 i, boost::filesystem::path &path) const;
+        // /////////////////////////////////////////////////////////////////
+        // Get the filename of the file at index i.
+        //
+        // @param i The index of the file.
+        // @param path The filename of the file at index i.
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool GetFilename(const U32 i, boost::filesystem::path &path) const;
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the length of the file at index i.
-		//
-		// @param i The index of the file.
+        // /////////////////////////////////////////////////////////////////
+        // Get the length of the file at index i.
+        //
+        // @param i The index of the file.
         //
         // @return bool True|False on success|failure.
-		//
-		// /////////////////////////////////////////////////////////////////
-		bool GetFileLen(const U32 i, U64 &fileLen) const;
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool GetFileLen(const U32 i, U64 &fileLen) const;
 
-		// /////////////////////////////////////////////////////////////////
-		// Read the file at index i and uncompress it.
-		//
-		// @param i The index of the file.
-		// @param pBuf The pointer to the file buffer.
-		//
-		// @return bool 
-		//
-		// /////////////////////////////////////////////////////////////////
-		bool ReadFile(const U32 i, void *pBuf);
-        
-		// /////////////////////////////////////////////////////////////////
-		// Write the file to the end of the buffer.
-		//
-		// @param compress Should the file be compressedin the ZIP?
-		// @param pBuf The pointer to the file buffer.
-		//
-		// @return bool 
-		//
-		// /////////////////////////////////////////////////////////////////
-		bool WriteFile(const bool compress, const void * const pBuf);
+        // /////////////////////////////////////////////////////////////////
+        // Read the file at index i and uncompress it.
+        //
+        // @param i The index of the file.
+        // @param pBuf The pointer to the file buffer.
+        //
+        // @return bool
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool ReadFile(const U32 i, void *pBuf);
 
-		// /////////////////////////////////////////////////////////////////
-		// Find the index of the file with the filename supplied.
-		//
-		// @param path The filename of the file to find.
-		//
-		// @return boost:optional<int> The index of the file, if it was found.
-		//
-		// /////////////////////////////////////////////////////////////////
-		boost::optional<I32> Find(const boost::filesystem::path &filename) const;
-        
+        // /////////////////////////////////////////////////////////////////
+        // Write the file to the end of the buffer.
+        //
+        // @param compress Should the file be compressedin the ZIP?
+        // @param pBuf The pointer to the file buffer.
+        //
+        // @return bool
+        //
+        // /////////////////////////////////////////////////////////////////
+        bool WriteFile(const bool compress, const void * const pBuf);
+
+        // /////////////////////////////////////////////////////////////////
+        // Find the index of the file with the filename supplied.
+        //
+        // @param path The filename of the file to find.
+        //
+        // @return boost:optional<int> The index of the file, if it was found.
+        //
+        // /////////////////////////////////////////////////////////////////
+        boost::optional<I32> Find(const boost::filesystem::path &filename) const;
+
         // /////////////////////////////////////////////////////////////////
         // Find all the files matching the pattern, e.g. *.txt
         //
@@ -234,15 +232,15 @@ namespace GameHalloran
 
     private:
 
-		typedef std::map<std::string, I32> ZipContentsMap;
+        typedef std::map<std::string, I32> ZipContentsMap;
 
-		FILE *m_pFile;										///< Zip file
-		char *m_pDirData;									///< Raw data buffer.
-		U32  m_nEntries;									///< Number of entries.
-		ZipContentsMap m_ZipContentsMap;					///< The contents of the zip file.
-		const TZipDirFileHeader **m_papDir;					///< Pointers to the dir entries in pDirData.
+        FILE *m_pFile;                                      ///< Zip file
+        char *m_pDirData;                                   ///< Raw data buffer.
+        U32  m_nEntries;                                    ///< Number of entries.
+        ZipContentsMap m_ZipContentsMap;                    ///< The contents of the zip file.
+        const TZipDirFileHeader **m_papDir;                 ///< Pointers to the dir entries in pDirData.
         std::vector<TZipDirFileHeader> m_localVec;
-	};
+    };
 
 }
 

@@ -10,13 +10,13 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -46,25 +46,25 @@
 // game actors.  An actor is defined as any object in the game which
 // can change state.  e.g. Car in a racing game, candle in an action/
 // adventure, etc.
-// 
+//
 // Some important ground rules for Actors (from original code):
 // "1. No destructors.
 //  2. No pointers.
 //  3. Never break rules one, two, or three.
-// 
-//  Why? These parameters are marshalled over god knows what. 
+//
+//  Why? These parameters are marshalled over god knows what.
 //  Could be a function call - or it could be the internet."
 //
 // This class was extracted from the Game Coding Complete 3 code.
 // Originally written by Mike McShaffry, author of Game
 // Coding Complete and games programmer.
-// 
+//
 // I have cleaned it up a little with better comments etc. to fit
 // in with the rest of my code.
 //
 // I have added/modified the following functionality:
 // - I moved all implementation code to the .cpp file.
-// 
+//
 // BaseActor:
 // - I removed the reference to the BaseGameState friend.
 //
@@ -91,315 +91,300 @@
 #include "Vector.h"
 #include "ISceneNode.h"
 
-namespace GameHalloran
-{
-	
-	// /////////////////////////////////////////////////////////////////
-	// @class ActorParams
-	// @author Mike McShaffry & PJ O Halloran
-	//
-	// This class defines the parameters belonging to an actor.
-	// It is meant to be extended for different actor types.
-	//
-	// /////////////////////////////////////////////////////////////////
-	class ActorParams : public IActorParams
-	{
-	private:
+namespace GameHalloran {
 
-		static const I32 MAX_FUNC_NAME_SIZE = 64;				///< Max length of a LUA function name.
+    // /////////////////////////////////////////////////////////////////
+    // @class ActorParams
+    // @author Mike McShaffry & PJ O Halloran
+    //
+    // This class defines the parameters belonging to an actor.
+    // It is meant to be extended for different actor types.
+    //
+    // /////////////////////////////////////////////////////////////////
+    class ActorParams : public IActorParams {
+    private:
 
-		I32 m_Size;												///< The number of bytes required to store the class (sizeof(ActorParams)).
-		boost::optional<ActorId> m_Id;							///< The ID of the actor.
-		Point3 m_Pos;											///< The position.
-		ActorType m_Type;										///< The type of actor.
-		Vector4 m_Color;										///< The Color
-		char m_OnCreateLuaFunctionName[MAX_FUNC_NAME_SIZE];		///< Lua function name to call for this actor, upon creation.
-		char m_OnDestroyLuaFunctionName[MAX_FUNC_NAME_SIZE];	///< As above, but on destruction.
+        static const I32 MAX_FUNC_NAME_SIZE = 64;               ///< Max length of a LUA function name.
 
-	protected:
+        I32 m_Size;                                             ///< The number of bytes required to store the class (sizeof(ActorParams)).
+        boost::optional<ActorId> m_Id;                          ///< The ID of the actor.
+        Point3 m_Pos;                                           ///< The position.
+        ActorType m_Type;                                       ///< The type of actor.
+        Vector4 m_Color;                                        ///< The Color
+        char m_OnCreateLuaFunctionName[MAX_FUNC_NAME_SIZE];     ///< Lua function name to call for this actor, upon creation.
+        char m_OnDestroyLuaFunctionName[MAX_FUNC_NAME_SIZE];    ///< As above, but on destruction.
 
-	public:
+    protected:
 
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		ActorParams();
+    public:
 
-		// /////////////////////////////////////////////////////////////////
-		// Destructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual ~ActorParams() { };
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        ActorParams();
 
-		// /////////////////////////////////////////////////////////////////
-		// Get/Set the ID of the actor associated with these parameters.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual boost::optional<ActorId> VGetId()
-		{
-			return (m_Id);
-		};
+        // /////////////////////////////////////////////////////////////////
+        // Destructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual ~ActorParams() { };
 
-		virtual void VSetId(boost::optional<ActorId> id)
-		{
-			m_Id = id;
-		};
+        // /////////////////////////////////////////////////////////////////
+        // Get/Set the ID of the actor associated with these parameters.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual boost::optional<ActorId> VGetId() {
+            return (m_Id);
+        };
 
-		virtual I32 VGetSize() const
-		{
-			return (m_Size);
-		};
+        virtual void VSetId(boost::optional<ActorId> id) {
+            m_Id = id;
+        };
 
-		virtual void VSetSize(const I32 size)
-		{
-			m_Size = size;
-		};
+        virtual I32 VGetSize() const {
+            return (m_Size);
+        };
 
-		virtual Point3 VGetPos() const
-		{
-			return (m_Pos);
-		};
+        virtual void VSetSize(const I32 size) {
+            m_Size = size;
+        };
 
-		virtual void VSetPos(const Point3 &position)
-		{
-			m_Pos = position;
-		};
+        virtual Point3 VGetPos() const {
+            return (m_Pos);
+        };
 
-		virtual Vector4 VGetColor() const
-		{
-			return (m_Color);
-		};
+        virtual void VSetPos(const Point3 &position) {
+            m_Pos = position;
+        };
 
-		virtual void VSetColor(const Vector4 &color)
-		{
-			m_Color = color;
-		};
+        virtual Vector4 VGetColor() const {
+            return (m_Color);
+        };
 
-		virtual ActorType VGetType() const
-		{
-			return (m_Type);
-		};
+        virtual void VSetColor(const Vector4 &color) {
+            m_Color = color;
+        };
 
-		virtual void VSetType(const ActorType type)
-		{
-			m_Type = type;
-		};
+        virtual ActorType VGetType() const {
+            return (m_Type);
+        };
 
-		virtual const char * const VGetCreateFuncName() const
-		{
-			return (m_OnCreateLuaFunctionName);
-		};
+        virtual void VSetType(const ActorType type) {
+            m_Type = type;
+        };
 
-		virtual bool VSetCreateFuncName(const char * const createFuncName)
-		{
-			if(strlen(createFuncName) > MAX_FUNC_NAME_SIZE)
-			{
-				return (false);
-			}
-			strcpy(m_OnCreateLuaFunctionName, createFuncName);
-			return (true);
-		};
+        virtual const char * const VGetCreateFuncName() const {
+            return (m_OnCreateLuaFunctionName);
+        };
 
-		virtual const char * const VGetDestroyFuncName() const
-		{
-			return (m_OnDestroyLuaFunctionName);
-		};
+        virtual bool VSetCreateFuncName(const char * const createFuncName) {
+            if(strlen(createFuncName) > MAX_FUNC_NAME_SIZE) {
+                return (false);
+            }
+            strcpy(m_OnCreateLuaFunctionName, createFuncName);
+            return (true);
+        };
 
-		virtual bool VSetDestroyFuncName(const char * const destroyFuncName)
-		{
-			if(strlen(destroyFuncName) > MAX_FUNC_NAME_SIZE)
-			{
-				return (false);
-			}
-			strcpy(m_OnDestroyLuaFunctionName, destroyFuncName);
-			return (true);
-		};
+        virtual const char * const VGetDestroyFuncName() const {
+            return (m_OnDestroyLuaFunctionName);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Initialize the parameters from a stream.
-		//
-		// @param in The input stream to initialize the parameters from.
-		//
-		// @return bool True on success or false on failure.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VInit(std::istringstream &in);
+        virtual bool VSetDestroyFuncName(const char * const destroyFuncName) {
+            if(strlen(destroyFuncName) > MAX_FUNC_NAME_SIZE) {
+                return (false);
+            }
+            strcpy(m_OnDestroyLuaFunctionName, destroyFuncName);
+            return (true);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Serialize the parameters out to a stream.
-		//
-		// @param out The output stream 
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual void VSerialize(std::ostringstream &out) const;
+        // /////////////////////////////////////////////////////////////////
+        // Initialize the parameters from a stream.
+        //
+        // @param in The input stream to initialize the parameters from.
+        //
+        // @return bool True on success or false on failure.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VInit(std::istringstream &in);
 
-		// /////////////////////////////////////////////////////////////////
-		// Initialize the parameters from a Lua script.
-		// 
-		// @param srcData The Lua object containing the parameter data.
-		// @param errorMessages The error messages (maybe passed back from the script?)
-		// 
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages);
+        // /////////////////////////////////////////////////////////////////
+        // Serialize the parameters out to a stream.
+        //
+        // @param out The output stream
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VSerialize(std::ostringstream &out) const;
 
-		// /////////////////////////////////////////////////////////////////
-		// Initialize the parameters from a stream.
-		//
-		// @param in The stream to initlialize the stream from.
-		//
-		// @return ActorParams* A pointer to an ActorParams object initialized
-		//						from the stream.
-		//
-		// /////////////////////////////////////////////////////////////////
-		static ActorParams *CreateFromStream(std::istringstream &in);
+        // /////////////////////////////////////////////////////////////////
+        // Initialize the parameters from a Lua script.
+        //
+        // @param srcData The Lua object containing the parameter data.
+        // @param errorMessages The error messages (maybe passed back from the script?)
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VInit(LuaPlus::LuaObject srcData, TErrorMessageList &errorMessages);
 
-		// /////////////////////////////////////////////////////////////////
-		// Initialize an ActorParams object from a Lua script.
-		// 
-		// @param srcData The Lua object table containing the actor data.
-		//
-		// @return ActorParams* A pointer to an ActorParams object initialized
-		//						from the stream.
-		//
-		// /////////////////////////////////////////////////////////////////
-		static ActorParams *CreateFromLuaObj(LuaPlus::LuaObject &srcData);
+        // /////////////////////////////////////////////////////////////////
+        // Initialize the parameters from a stream.
+        //
+        // @param in The stream to initlialize the stream from.
+        //
+        // @return ActorParams* A pointer to an ActorParams object initialized
+        //                      from the stream.
+        //
+        // /////////////////////////////////////////////////////////////////
+        static ActorParams *CreateFromStream(std::istringstream &in);
 
-		// /////////////////////////////////////////////////////////////////
-		// The logic layers create function.  Creates an Actor in respect to
-		// the logic layer from the parameters.
-		//
-		// The actor created should be added manually to the logic layer.
-		//
-		// @return boost::shared_ptr<IActor> A pointer to an actor or NULL
-		//										on error.
-		// 
-		// /////////////////////////////////////////////////////////////////
-		virtual boost::shared_ptr<IActor> VCreate() { return (boost::shared_ptr<IActor>()); };
+        // /////////////////////////////////////////////////////////////////
+        // Initialize an ActorParams object from a Lua script.
+        //
+        // @param srcData The Lua object table containing the actor data.
+        //
+        // @return ActorParams* A pointer to an ActorParams object initialized
+        //                      from the stream.
+        //
+        // /////////////////////////////////////////////////////////////////
+        static ActorParams *CreateFromLuaObj(LuaPlus::LuaObject &srcData);
 
-		// /////////////////////////////////////////////////////////////////
-		// The view layers create function.  Creates an SceneNode representing
-		// the Actor in respect to the view layer from the parameters.
-		//
-		// @return boost::shared_ptr<ISceneNode> A pointer to a scene node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual boost::shared_ptr<ISceneNode> VCreateSceneNode() { return(boost::shared_ptr<ISceneNode>()); };
-	};
+        // /////////////////////////////////////////////////////////////////
+        // The logic layers create function.  Creates an Actor in respect to
+        // the logic layer from the parameters.
+        //
+        // The actor created should be added manually to the logic layer.
+        //
+        // @return boost::shared_ptr<IActor> A pointer to an actor or NULL
+        //                                      on error.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual boost::shared_ptr<IActor> VCreate() {
+            return (boost::shared_ptr<IActor>());
+        };
 
-	// /////////////////////////////////////////////////////////////////
-	// @class BaseActor
-	// @author Michael L. McShaffry (edited by PJ O Halloran).
-	//
-	// This is the base implementation of an actor that all actors will
-	// inherit from and extend.
-	//
-	// /////////////////////////////////////////////////////////////////
-	class BaseActor : public IActor
-	{
-	private:
+        // /////////////////////////////////////////////////////////////////
+        // The view layers create function.  Creates an SceneNode representing
+        // the Actor in respect to the view layer from the parameters.
+        //
+        // @return boost::shared_ptr<ISceneNode> A pointer to a scene node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual boost::shared_ptr<ISceneNode> VCreateSceneNode() {
+            return(boost::shared_ptr<ISceneNode>());
+        };
+    };
 
-		ActorId m_id;								///< The ID of the actor.
-		Matrix4 m_Mat;								///< The position/orientation of the actor.
-		I32 m_Type;									///< The type of the actor.
-		boost::shared_ptr<ActorParams> m_Params;	///< Pointer to the actors parameter object.
+    // /////////////////////////////////////////////////////////////////
+    // @class BaseActor
+    // @author Michael L. McShaffry (edited by PJ O Halloran).
+    //
+    // This is the base implementation of an actor that all actors will
+    // inherit from and extend.
+    //
+    // /////////////////////////////////////////////////////////////////
+    class BaseActor : public IActor {
+    private:
 
-	protected:
+        ActorId m_id;                               ///< The ID of the actor.
+        Matrix4 m_Mat;                              ///< The position/orientation of the actor.
+        I32 m_Type;                                 ///< The type of the actor.
+        boost::shared_ptr<ActorParams> m_Params;    ///< Pointer to the actors parameter object.
 
-	public:
+    protected:
 
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
-		// @param mat The position of the actor.
-		// @param type The type of actor.
-		// @param params The parameters belonging to the actor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		BaseActor(const Matrix4 &mat, const I32 type, boost::shared_ptr<ActorParams> params);
+    public:
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the ID of the actor.
-		//
-		// @param id The new ID of the actor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual void VSetID(const ActorId id);
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
+        // @param mat The position of the actor.
+        // @param type The type of actor.
+        // @param params The parameters belonging to the actor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        BaseActor(const Matrix4 &mat, const I32 type, boost::shared_ptr<ActorParams> params);
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the matrix encapsulating the actors orientation and position.
-		//
-		// @param newMat
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual void VSetMat(const Matrix4 &newMat);
+        // /////////////////////////////////////////////////////////////////
+        // Set the ID of the actor.
+        //
+        // @param id The new ID of the actor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VSetID(const ActorId id);
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the matrix encapsulating the actors orientation and position.
-		//
-		// @return Matrix4
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual Matrix4 VGetMat();
-		
-		// /////////////////////////////////////////////////////////////////
-		// Get the type of actor.
-		//
-		// @return const I32 The actor type.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual const I32 VGetType();
-		
-		// /////////////////////////////////////////////////////////////////
-		// Get the ID of the actor.
-		//
-		// @return ActorId The actor ID.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual const ActorId VGetID();
-		
-		// /////////////////////////////////////////////////////////////////
-		// Get the parameters associated with the actor.
-		//
-		// @return boost::shared_ptr<ActorParams> The parameters belonging to
-		//											the actor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual boost::shared_ptr<IActorParams> VGetParams();
-		
-		// /////////////////////////////////////////////////////////////////
-		// Check if the actor is physical.
-		//
-		// @return bool Is the actor physical?
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VIsPhysical();
-		
-		// /////////////////////////////////////////////////////////////////
-		// Check if the actor is geometrical.
-		//
-		// @return bool Is the actor geometrical?
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VIsGeometrical();
-		
-		// /////////////////////////////////////////////////////////////////
-		// Called once per main loop to update the state of the actor.
-		//
-		// @param deltaMilliseconds The number of milliseconds since the last
-		//								update.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual void VOnUpdate(const I32 deltaMilliseconds);
-		
-		// /////////////////////////////////////////////////////////////////
-		// Rotate the actor along the Y axis.
-		//
-		// @param angleRadians The angle to rotate the actor by.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual void VRotateY(const F32 angleRadians);
-	};
+        // /////////////////////////////////////////////////////////////////
+        // Set the matrix encapsulating the actors orientation and position.
+        //
+        // @param newMat
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VSetMat(const Matrix4 &newMat);
+
+        // /////////////////////////////////////////////////////////////////
+        // Get the matrix encapsulating the actors orientation and position.
+        //
+        // @return Matrix4
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual Matrix4 VGetMat();
+
+        // /////////////////////////////////////////////////////////////////
+        // Get the type of actor.
+        //
+        // @return const I32 The actor type.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual const I32 VGetType();
+
+        // /////////////////////////////////////////////////////////////////
+        // Get the ID of the actor.
+        //
+        // @return ActorId The actor ID.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual const ActorId VGetID();
+
+        // /////////////////////////////////////////////////////////////////
+        // Get the parameters associated with the actor.
+        //
+        // @return boost::shared_ptr<ActorParams> The parameters belonging to
+        //                                          the actor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual boost::shared_ptr<IActorParams> VGetParams();
+
+        // /////////////////////////////////////////////////////////////////
+        // Check if the actor is physical.
+        //
+        // @return bool Is the actor physical?
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VIsPhysical();
+
+        // /////////////////////////////////////////////////////////////////
+        // Check if the actor is geometrical.
+        //
+        // @return bool Is the actor geometrical?
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VIsGeometrical();
+
+        // /////////////////////////////////////////////////////////////////
+        // Called once per main loop to update the state of the actor.
+        //
+        // @param deltaMilliseconds The number of milliseconds since the last
+        //                              update.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VOnUpdate(const I32 deltaMilliseconds);
+
+        // /////////////////////////////////////////////////////////////////
+        // Rotate the actor along the Y axis.
+        //
+        // @param angleRadians The angle to rotate the actor by.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual void VRotateY(const F32 angleRadians);
+    };
 }
 
 #endif

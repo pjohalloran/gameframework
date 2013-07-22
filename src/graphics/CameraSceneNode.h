@@ -10,14 +10,14 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at:
 // http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -58,171 +58,187 @@
 #include "ZipFile.h"
 #include "GLSLShader.h"
 
-namespace GameHalloran
-{
-	class SceneGraphManager;
+namespace GameHalloran {
+    class SceneGraphManager;
 
-	// /////////////////////////////////////////////////////////////////
-	// @class CameraNode
-	// @author Mike McShaffry & PJ O Halloran.
-	//
-	// A camera node controls the view transform and holds the view
-	// frustum definition.
-	//
-	// /////////////////////////////////////////////////////////////////
-	class CameraSceneNode : public SceneNode
-	{
-	private:
-		GLFrame m_frame;							///< The cameras FoR class.
-		bool m_updateCameraMatrix;					///< Did some outside user access the FOR class to move the camera??
-		Frustrum *m_frustrumPtr;					///< Viewing frustrum.
-		bool m_active;								///< Is the camera active or not?
-		bool m_debugCamera;							///< Is the camera in debug mode?
-		boost::shared_ptr<SceneNode> m_target;		///< The target node of the camera.
-		Vector4 m_camOffsetVector;					///< Direction of camera relative to target.
-		ShaderUniformSPtr m_mvpUniform;             ///< flat shader uniform locations.
-        ShaderUniformSPtr m_colorUniform;           ///< 
-        
-	public:
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
-		//
-		// @param frustrum The viewing frustrum.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline explicit CameraSceneNode(SceneGraphManager *sgPtr,
-										Frustrum *frustrumPtr)
-										: SceneNode(sgPtr, boost::optional<ActorId>(), std::string("Camera"), RenderPassFirst, Material(), GameHalloran::g_identityMat)
-										, m_frame()
-										, m_updateCameraMatrix(false)
-										, m_frustrumPtr(frustrumPtr)
-										, m_active(true)
-										, m_debugCamera(false)
-										, m_target()
-										, m_camOffsetVector(0.0f, 0.0f, -10.0f, 0.0f)
-		{
-			Matrix4 camMat;
-			m_frame.GetCameraMatrix(camMat);
-			VSetTransform(camMat);
-			SetShaderName(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("flat"));
-            
-            if(m_shaderPtr)
-            {
+    // /////////////////////////////////////////////////////////////////
+    // @class CameraNode
+    // @author Mike McShaffry & PJ O Halloran.
+    //
+    // A camera node controls the view transform and holds the view
+    // frustum definition.
+    //
+    // /////////////////////////////////////////////////////////////////
+    class CameraSceneNode : public SceneNode {
+    private:
+        GLFrame m_frame;                            ///< The cameras FoR class.
+        bool m_updateCameraMatrix;                  ///< Did some outside user access the FOR class to move the camera??
+        Frustrum *m_frustrumPtr;                    ///< Viewing frustrum.
+        bool m_active;                              ///< Is the camera active or not?
+        bool m_debugCamera;                         ///< Is the camera in debug mode?
+        boost::shared_ptr<SceneNode> m_target;      ///< The target node of the camera.
+        Vector4 m_camOffsetVector;                  ///< Direction of camera relative to target.
+        ShaderUniformSPtr m_mvpUniform;             ///< flat shader uniform locations.
+        ShaderUniformSPtr m_colorUniform;           ///<
+
+    public:
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
+        //
+        // @param frustrum The viewing frustrum.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline explicit CameraSceneNode(SceneGraphManager *sgPtr,
+                                        Frustrum *frustrumPtr)
+            : SceneNode(sgPtr, boost::optional<ActorId>(), std::string("Camera"), RenderPassFirst, Material(), GameHalloran::g_identityMat)
+            , m_frame()
+            , m_updateCameraMatrix(false)
+            , m_frustrumPtr(frustrumPtr)
+            , m_active(true)
+            , m_debugCamera(false)
+            , m_target()
+            , m_camOffsetVector(0.0f, 0.0f, -10.0f, 0.0f) {
+            Matrix4 camMat;
+            m_frame.GetCameraMatrix(camMat);
+            VSetTransform(camMat);
+            SetShaderName(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("flat"));
+
+            if(m_shaderPtr) {
                 m_mvpUniform = m_shaderPtr->GetUniform("mvpMatrix");
                 m_colorUniform = m_shaderPtr->GetUniform("colorVec");
             }
-		};
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Destructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual ~CameraSceneNode() { };
+        // /////////////////////////////////////////////////////////////////
+        // Destructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual ~CameraSceneNode() { };
 
-		// /////////////////////////////////////////////////////////////////
-		// Updates the node once per main loop.
-		//
-		// @param elapsedTime The number of seconds since the last update.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnUpdate(const F32 elapsedTime);
+        // /////////////////////////////////////////////////////////////////
+        // Updates the node once per main loop.
+        //
+        // @param elapsedTime The number of seconds since the last update.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VOnUpdate(const F32 elapsedTime);
 
-		// /////////////////////////////////////////////////////////////////
-		// Renders node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VRender();
+        // /////////////////////////////////////////////////////////////////
+        // Renders node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VRender();
 
-		// /////////////////////////////////////////////////////////////////
-		// Called when application is restored.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VOnRestore();
+        // /////////////////////////////////////////////////////////////////
+        // Called when application is restored.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VOnRestore();
 
-		// /////////////////////////////////////////////////////////////////
-		// Special camera node is always visible.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline virtual bool VIsVisible() const { return (m_active); };
+        // /////////////////////////////////////////////////////////////////
+        // Special camera node is always visible.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline virtual bool VIsVisible() const {
+            return (m_active);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the ModelView matris stacks top most element to be this cameras
-		// matrix.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VSetViewTransform();
+        // /////////////////////////////////////////////////////////////////
+        // Set the ModelView matris stacks top most element to be this cameras
+        // matrix.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VSetViewTransform();
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the viewing frustrum.
-		//
-		// /////////////////////////////////////////////////////////////////
-		Frustrum *GetFrustum() { return (m_frustrumPtr); }
+        // /////////////////////////////////////////////////////////////////
+        // Get the viewing frustrum.
+        //
+        // /////////////////////////////////////////////////////////////////
+        Frustrum *GetFrustum() {
+            return (m_frustrumPtr);
+        }
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the target node of the camera.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline void SetTarget(boost::shared_ptr<SceneNode> &target){ m_target = target; };
+        // /////////////////////////////////////////////////////////////////
+        // Set the target node of the camera.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline void SetTarget(boost::shared_ptr<SceneNode> &target) {
+            m_target = target;
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Clear the target.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline void ClearTarget() { m_target.reset(); };
+        // /////////////////////////////////////////////////////////////////
+        // Clear the target.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline void ClearTarget() {
+            m_target.reset();
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the cameras target node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline boost::shared_ptr<SceneNode> GetTarget() { return (m_target); };
+        // /////////////////////////////////////////////////////////////////
+        // Get the cameras target node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline boost::shared_ptr<SceneNode> GetTarget() {
+            return (m_target);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Set the cameras offset vector.
-		//
-		// /////////////////////////////////////////////////////////////////
-		inline void SetCameraOffset(const Vector4 &cameraOffset) { m_camOffsetVector = cameraOffset; };
+        // /////////////////////////////////////////////////////////////////
+        // Set the cameras offset vector.
+        //
+        // /////////////////////////////////////////////////////////////////
+        inline void SetCameraOffset(const Vector4 &cameraOffset) {
+            m_camOffsetVector = cameraOffset;
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Get the camera frame of reference.  Do not store a reference to the
-		// alias returned as if the camera node goes out of scope then it does
-		// not exist anymore. Also any changes to the cameras FoR need to be
-		// communicated to the SceneNodes matrices also.
-		//
-		// Instead use this method directly to access the GLFrame interface to
-		// move the camera around, if required and these housekeeping tasks
-		// will be done automatically for you.
-		//
-		// e.g.
-		// camSceneNode->GetGlFrame().MoveUp(50.0f);
-		//
-		// /////////////////////////////////////////////////////////////////
-		GLFrame &GetGlFrame();
+        // /////////////////////////////////////////////////////////////////
+        // Get the camera frame of reference.  Do not store a reference to the
+        // alias returned as if the camera node goes out of scope then it does
+        // not exist anymore. Also any changes to the cameras FoR need to be
+        // communicated to the SceneNodes matrices also.
+        //
+        // Instead use this method directly to access the GLFrame interface to
+        // move the camera around, if required and these housekeeping tasks
+        // will be done automatically for you.
+        //
+        // e.g.
+        // camSceneNode->GetGlFrame().MoveUp(50.0f);
+        //
+        // /////////////////////////////////////////////////////////////////
+        GLFrame &GetGlFrame();
 
-		// /////////////////////////////////////////////////////////////////
-		// Overridden and disabled for camera node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VAddChild(boost::shared_ptr<ISceneNode> &childNodePtr) { return (true); };
+        // /////////////////////////////////////////////////////////////////
+        // Overridden and disabled for camera node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VAddChild(boost::shared_ptr<ISceneNode> &childNodePtr) {
+            return (true);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Overridden and disabled for camera node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VRemoveChild(const ActorId id) { return (true); };
+        // /////////////////////////////////////////////////////////////////
+        // Overridden and disabled for camera node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VRemoveChild(const ActorId id) {
+            return (true);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Overridden and disabled for camera node.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VRenderChildren() { return (true); };
+        // /////////////////////////////////////////////////////////////////
+        // Overridden and disabled for camera node.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VRenderChildren() {
+            return (true);
+        };
 
-		// /////////////////////////////////////////////////////////////////
-		// Turn on or off rendering the cameras' Frustrum to aid debugging
-		// scene culling problems.
-		//
-		// /////////////////////////////////////////////////////////////////
-		void SetDebug(const bool debug) { m_debugCamera = debug; };
-	};
+        // /////////////////////////////////////////////////////////////////
+        // Turn on or off rendering the cameras' Frustrum to aid debugging
+        // scene culling problems.
+        //
+        // /////////////////////////////////////////////////////////////////
+        void SetDebug(const bool debug) {
+            m_debugCamera = debug;
+        };
+    };
 
 }
 

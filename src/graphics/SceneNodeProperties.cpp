@@ -6,14 +6,14 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at:
 // http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -46,25 +46,24 @@
 
 #include "SceneNodeProperties.h"
 
-namespace GameHalloran
-{
-	// /////////////////////////////////////////////////////////////////
-	//
-	// /////////////////////////////////////////////////////////////////
-	BoundingCube &SceneNodeProperties::GetBoundingBox(BoundingCube &bb) const
-	{
-		// Get position of node in world space.
-		Point3 pos;
-		m_toWorld.GetPosition(pos);
+namespace GameHalloran {
+    // /////////////////////////////////////////////////////////////////
+    //
+    // /////////////////////////////////////////////////////////////////
+    BoundingCube &SceneNodeProperties::GetBoundingBox(BoundingCube &bb) const
+    {
+        // Get position of node in world space.
+        Point3 pos;
+        m_toWorld.GetPosition(pos);
 
-		// Two vectors that are in the direction of the two points of the nodes BB and whose
-		//  heads coinside with those points also.
-		Vector3 dirToMax(m_radius), dirToMin(-m_radius);
+        // Two vectors that are in the direction of the two points of the nodes BB and whose
+        //  heads coinside with those points also.
+        Vector3 dirToMax(m_radius), dirToMin(-m_radius);
 
-		// Calculate the BB min and max positions.
-		bb.SetMin(pos + dirToMin);
-		bb.SetMax(pos + dirToMax);
+        // Calculate the BB min and max positions.
+        bb.SetMin(pos + dirToMin);
+        bb.SetMax(pos + dirToMax);
 
-		return (bb);
-	}
+        return (bb);
+    }
 }

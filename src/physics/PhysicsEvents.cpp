@@ -6,13 +6,13 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -45,10 +45,9 @@
 
 #include "PhysicsEvents.h"
 
-namespace GameHalloran
-{
-	const EventType EvtData_PhysTrigger_Enter::sk_EventType("phys_trigger_enter");
-	const EventType EvtData_PhysTrigger_Leave::sk_EventType("phys_trigger_leave");
-	const EventType EvtData_PhysCollision::sk_EventType("phys_obj_collision");
-	const EventType EvtData_PhysSeparation::sk_EventType("phys_obj_separate");
+namespace GameHalloran {
+    const EventType EvtData_PhysTrigger_Enter::sk_EventType("phys_trigger_enter");
+    const EventType EvtData_PhysTrigger_Leave::sk_EventType("phys_trigger_leave");
+    const EventType EvtData_PhysCollision::sk_EventType("phys_obj_collision");
+    const EventType EvtData_PhysSeparation::sk_EventType("phys_obj_separate");
 }

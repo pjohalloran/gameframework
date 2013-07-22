@@ -10,14 +10,14 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at:
 // http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -53,66 +53,66 @@
 #include "Matrix.h"
 #include "IActors.h"
 
-namespace GameHalloran
-{
-	class SceneGraphManager;
+namespace GameHalloran {
+    class SceneGraphManager;
 
-	// /////////////////////////////////////////////////////////////////
-	// @class RootSceneNode
-	// @author Mike McShaffry & PJ O Halloran.
-	//
-	// This is the root node of the scene graph.
-	//
-	// Its a special node whos purpose is to provide control over the
-	// general rendering order in the 3D scene.  For example, static
-	// geometry drawn first, then game actors, finally the skybox.
-	//
-	// /////////////////////////////////////////////////////////////////
-	class RootSceneNode : public SceneNode
-	{
-	public:
+    // /////////////////////////////////////////////////////////////////
+    // @class RootSceneNode
+    // @author Mike McShaffry & PJ O Halloran.
+    //
+    // This is the root node of the scene graph.
+    //
+    // Its a special node whos purpose is to provide control over the
+    // general rendering order in the 3D scene.  For example, static
+    // geometry drawn first, then game actors, finally the skybox.
+    //
+    // /////////////////////////////////////////////////////////////////
+    class RootSceneNode : public SceneNode {
+    public:
 
-		// /////////////////////////////////////////////////////////////////
-		// Constructor.
+        // /////////////////////////////////////////////////////////////////
+        // Constructor.
         //
         // @param SG manager pointer.
-		//
-		// /////////////////////////////////////////////////////////////////
-		explicit RootSceneNode(SceneGraphManager *sgPtr);
+        //
+        // /////////////////////////////////////////////////////////////////
+        explicit RootSceneNode(SceneGraphManager *sgPtr);
 
-		// /////////////////////////////////////////////////////////////////
-		// Destructor.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual ~RootSceneNode() { };
+        // /////////////////////////////////////////////////////////////////
+        // Destructor.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual ~RootSceneNode() { };
 
-		// /////////////////////////////////////////////////////////////////
-		// Add a child to the root node.  The node is grouped according to
-		// its render pass property.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VAddChild(boost::shared_ptr<ISceneNode> childNodePtr);
+        // /////////////////////////////////////////////////////////////////
+        // Add a child to the root node.  The node is grouped according to
+        // its render pass property.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VAddChild(boost::shared_ptr<ISceneNode> childNodePtr);
 
-		// /////////////////////////////////////////////////////////////////
-		// Removes a child from the scene associated with the actor ID.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VRemoveChild(const ActorId id);
+        // /////////////////////////////////////////////////////////////////
+        // Removes a child from the scene associated with the actor ID.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VRemoveChild(const ActorId id);
 
-		// /////////////////////////////////////////////////////////////////
-		// Renders all child nodes in order of their render pass attributes.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VRenderChildren();
+        // /////////////////////////////////////////////////////////////////
+        // Renders all child nodes in order of their render pass attributes.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VRenderChildren();
 
-		// /////////////////////////////////////////////////////////////////
-		// Root node is always visible as it doesnt represent any actual
-		// 3D object in the scene.  It manages the renderpass order of the
-		// nodes only.
-		//
-		// /////////////////////////////////////////////////////////////////
-		virtual bool VIsVisible() const { return (true); };
-	};
+        // /////////////////////////////////////////////////////////////////
+        // Root node is always visible as it doesnt represent any actual
+        // 3D object in the scene.  It manages the renderpass order of the
+        // nodes only.
+        //
+        // /////////////////////////////////////////////////////////////////
+        virtual bool VIsVisible() const {
+            return (true);
+        };
+    };
 
 }
 

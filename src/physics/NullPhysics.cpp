@@ -9,7 +9,6 @@
 
 #include "NullPhysics.h"
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
 }
