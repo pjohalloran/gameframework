@@ -8,13 +8,13 @@
 // Charles River Media. ISBN-10: 1-58450-680-6   ISBN-13: 978-1-58450-680-5
 //
 // If this source code has found it's way to you, and you think it has helped you
-// in any way, do the author a favor and buy a new copy of the book - there are 
+// in any way, do the author a favor and buy a new copy of the book - there are
 // detailed explanations in it that compliment this code well. Buy a copy at Amazon.com
-// by clicking here: 
+// by clicking here:
 //    http://www.amazon.com/gp/product/1584506806?ie=UTF8&tag=gamecodecompl-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=1584506806
 //
 // There's a companion web site at http://www.mcshaffry.com/GameCode/
-// 
+//
 // The source code is managed and maintained through Google Code:
 // http://gamecode3.googlecode.com/svn/trunk/
 //
@@ -37,83 +37,78 @@
 
 #include "CAudio.h"
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
-	//////////////////////////////////////////////////////////////////////
-	// Globals
-	//////////////////////////////////////////////////////////////////////
-	Audio *g_audioPtr = NULL;
+    //////////////////////////////////////////////////////////////////////
+    // Globals
+    //////////////////////////////////////////////////////////////////////
+    Audio *g_audioPtr = NULL;
 
-	//////////////////////////////////////////////////////////////////////
-	//
-	//////////////////////////////////////////////////////////////////////
-	void Audio::VShutdown()
-	{
-		AudioBufferList::iterator i = m_AllSamples.begin();
+    //////////////////////////////////////////////////////////////////////
+    //
+    //////////////////////////////////////////////////////////////////////
+    void Audio::VShutdown()
+    {
+        AudioBufferList::iterator i = m_AllSamples.begin();
 
-		while(i != m_AllSamples.end())
-		{
-			(*i)->VStop();
-			++i;
-		}
-		m_AllSamples.clear();
-	}
+        while(i != m_AllSamples.end()) {
+            (*i)->VStop();
+            ++i;
+        }
+        m_AllSamples.clear();
+    }
 
-	//////////////////////////////////////////////////////////////////////
-	//
-	//////////////////////////////////////////////////////////////////////
-	void Audio::VPauseAllSounds()
-	{
-		AudioBufferList::iterator i;
-		AudioBufferList::iterator end;
+    //////////////////////////////////////////////////////////////////////
+    //
+    //////////////////////////////////////////////////////////////////////
+    void Audio::VPauseAllSounds()
+    {
+        AudioBufferList::iterator i;
+        AudioBufferList::iterator end;
 
-		for(i=m_AllSamples.begin(), end=m_AllSamples.end(); i!=end; ++i)
-		{
-			(*i)->VPause();
-		}
+        for(i = m_AllSamples.begin(), end = m_AllSamples.end(); i != end; ++i) {
+            (*i)->VPause();
+        }
 
-		m_AllPaused=true;
-	}
+        m_AllPaused = true;
+    }
 
-	//////////////////////////////////////////////////////////////////////
-	//
-	//////////////////////////////////////////////////////////////////////
-	void Audio::VResumeAllSounds()
-	{
-		AudioBufferList::iterator i;
-		AudioBufferList::iterator end;
+    //////////////////////////////////////////////////////////////////////
+    //
+    //////////////////////////////////////////////////////////////////////
+    void Audio::VResumeAllSounds()
+    {
+        AudioBufferList::iterator i;
+        AudioBufferList::iterator end;
 
-		for(i=m_AllSamples.begin(), end=m_AllSamples.end(); i!=end; ++i)
-		{
-			(*i)->VResume();
-		}
+        for(i = m_AllSamples.begin(), end = m_AllSamples.end(); i != end; ++i) {
+            (*i)->VResume();
+        }
 
-		m_AllPaused=false;
-	}
+        m_AllPaused = false;
+    }
 
-	//////////////////////////////////////////////////////////////////////
-	//
-	//////////////////////////////////////////////////////////////////////
-	void Audio::VStopAllSounds()
-	{
-		AudioBufferList::iterator i;
-		AudioBufferList::iterator end;
+    //////////////////////////////////////////////////////////////////////
+    //
+    //////////////////////////////////////////////////////////////////////
+    void Audio::VStopAllSounds()
+    {
+        AudioBufferList::iterator i;
+        AudioBufferList::iterator end;
 
-		for(i=m_AllSamples.begin(), end=m_AllSamples.end(); i!=end; ++i)
-		{
-			(*i)->VStop();
-		}
+        for(i = m_AllSamples.begin(), end = m_AllSamples.end(); i != end; ++i) {
+            (*i)->VStop();
+        }
 
-		m_AllPaused=false;
-	}
+        m_AllPaused = false;
+    }
 
-	//////////////////////////////////////////////////////////////////////
-	//
-	//////////////////////////////////////////////////////////////////////
-	bool Audio::HasSoundCard(void)
-	{
-		return (g_audioPtr && g_audioPtr->VActive());
-	}
+    //////////////////////////////////////////////////////////////////////
+    //
+    //////////////////////////////////////////////////////////////////////
+    bool Audio::HasSoundCard(void)
+    {
+        return (g_audioPtr && g_audioPtr->VActive());
+    }
 
 }

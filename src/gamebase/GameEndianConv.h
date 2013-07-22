@@ -13,21 +13,18 @@
 
 #include "GameTypes.h"
 
-namespace GameHalloran
-{
-    
-    union U32F32
-    {
+namespace GameHalloran {
+
+    union U32F32 {
         U32 m_asU32;
         F32 m_asF32;
     };
-    
-    union U64F64
-    {
+
+    union U64F64 {
         U64 m_asU64;
         F64 m_asF64;
     };
-    
+
     // /////////////////////////////////////////////////////////////////
     // Byte swap a I16.
     //
@@ -37,7 +34,7 @@ namespace GameHalloran
         return ((value & 0x00FF << 8) |
                 (value & 0xFF00 >> 8));
     };
-    
+
     // /////////////////////////////////////////////////////////////////
     // Byte swap a U16.
     //
@@ -47,7 +44,7 @@ namespace GameHalloran
         return ((value & 0x00FF << 8) |
                 (value & 0xFF00 >> 8));
     };
-    
+
     // /////////////////////////////////////////////////////////////////
     // Byte swap a I32.
     //
@@ -59,7 +56,7 @@ namespace GameHalloran
                 (value & 0x00FF0000 >> 8) |
                 (value & 0xFF000000 >> 8));
     };
-    
+
     // /////////////////////////////////////////////////////////////////
     // Byte swap a U32.
     //
@@ -71,7 +68,7 @@ namespace GameHalloran
                 (value & 0x00FF0000 >> 8) |
                 (value & 0xFF000000 >> 8));
     };
-    
+
     // /////////////////////////////////////////////////////////////////
     // Byte swap a U64.
     //
@@ -87,7 +84,7 @@ namespace GameHalloran
                 (value & 0x00FF000000000000 >> 8) |
                 (value & 0xFF00000000000000 >> 8));
     };
-    
+
     // /////////////////////////////////////////////////////////////////
     // Byte swap a I64.
     //
@@ -103,7 +100,7 @@ namespace GameHalloran
                 (value & 0x00FF000000000000 >> 8) |
                 (value & 0xFF00000000000000 >> 8));
     };
-    
+
     // /////////////////////////////////////////////////////////////////
     // Byte swap a F32.
     //
@@ -115,7 +112,7 @@ namespace GameHalloran
         u.m_asU32 = SwapU32(u.m_asU32);
         return (u.m_asF32);
     };
-    
+
     // /////////////////////////////////////////////////////////////////
     // Byte swap a F64.
     //
@@ -127,7 +124,7 @@ namespace GameHalloran
         u.m_asU64 = SwapU64(u.m_asU64);
         return (u.m_asF64);
     };
-    
+
 }
 
 #endif

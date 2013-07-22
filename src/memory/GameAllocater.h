@@ -14,9 +14,8 @@
 #include "GameTypes.h"
 #include "GameBase.h"
 
-namespace GameHalloran
-{
-    
+namespace GameHalloran {
+
     // ////////////////////////////////////////////////////////////
     // @class IGameAllocater
     // @author PJ O Halloran
@@ -24,18 +23,17 @@ namespace GameHalloran
     // Base memory allocater interface.
     //
     // ////////////////////////////////////////////////////////////
-    class IGameAllocater : public NonCopyable
-    {
+    class IGameAllocater : public NonCopyable {
     protected:
-        
+
         // ////////////////////////////////////////////////////////////
         // Destructor.
         //
         // ////////////////////////////////////////////////////////////
         virtual ~IGameAllocater() {};
-        
+
     public:
-        
+
         // ////////////////////////////////////////////////////////////
         // Allocate a block of memory.
         //
@@ -45,7 +43,7 @@ namespace GameHalloran
         //
         // ////////////////////////////////////////////////////////////
         virtual void *VAlloc(const U64 size) = 0;
-        
+
         // ////////////////////////////////////////////////////////////
         // Allocate an aligned block of memory.
         //
@@ -56,19 +54,19 @@ namespace GameHalloran
         //
         // ////////////////////////////////////////////////////////////
         virtual void *VAllocAligned(const U64 size, const U32 alignment) = 0;
-        
+
         // ////////////////////////////////////////////////////////////
         // Deallocate a block of memory.
         //
         // ////////////////////////////////////////////////////////////
         virtual void VDealloc(void *ptr) = 0;
-        
+
         // ////////////////////////////////////////////////////////////
         // Run defragmentation on the allocaters memory block.
         //
         // ////////////////////////////////////////////////////////////
         virtual void VDefrag() = 0;
-        
+
         // ////////////////////////////////////////////////////////////
         // Run a partial defragmentation on the allocaters memory block.
         // Useful when you want to defragment the block but want to spread
@@ -81,7 +79,7 @@ namespace GameHalloran
         // ////////////////////////////////////////////////////////////
         virtual F32 VDefrag(const F32 seconds) = 0;
     };
-    
+
     // ////////////////////////////////////////////////////////////
     // @class BaseGameAllocater
     // @author PJ O Halloran
@@ -90,28 +88,27 @@ namespace GameHalloran
     // games memory manager to store and retrieve the allocater.
     //
     // ////////////////////////////////////////////////////////////
-    class BaseGameAllocater : public IGameAllocater
-    {
+    class BaseGameAllocater : public IGameAllocater {
     private:
-        
+
         U32 m_id;                           ///< Allocater ID.
-        
+
     protected:
-        
+
         // ////////////////////////////////////////////////////////////
         // Constructor.
         //
         // ////////////////////////////////////////////////////////////
         explicit BaseGameAllocater() : m_id(0) {};
-        
+
         // ////////////////////////////////////////////////////////////
         // Destructor.
         //
         // ////////////////////////////////////////////////////////////
         virtual ~BaseGameAllocater() {};
-        
+
     public:
-        
+
         // ////////////////////////////////////////////////////////////
         // Constructor.
         //
@@ -119,12 +116,14 @@ namespace GameHalloran
         //
         // ////////////////////////////////////////////////////////////
         explicit BaseGameAllocater(const U32 bgaId) : m_id(bgaId) {};
-        
+
         // ////////////////////////////////////////////////////////////
         // Get the Allocater ID/slot.
         //
         // ////////////////////////////////////////////////////////////
-        inline U32 GetId() { return (m_id); };
+        inline U32 GetId() {
+            return (m_id);
+        };
     };
 }
 

@@ -13,9 +13,8 @@
 
 #include "ICleanable.h"
 
-namespace GameHalloran
-{
-    
+namespace GameHalloran {
+
     // /////////////////////////////////////////////////////////////////
     // @class ICleanableObserver
     // @author PJ O Halloran.
@@ -23,16 +22,15 @@ namespace GameHalloran
     // Cleanable Observer base interface.
     //
     // /////////////////////////////////////////////////////////////////
-    class ICleanableObserver
-    {
+    class ICleanableObserver {
     public:
-        
+
         // /////////////////////////////////////////////////////////////////
         //
         //
         // /////////////////////////////////////////////////////////////////
         virtual ~ICleanableObserver() {};
-        
+
         // /////////////////////////////////////////////////////////////////
         // Interface for dependants to notify this observer that it has changed.
         //

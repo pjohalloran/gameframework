@@ -28,39 +28,39 @@
 #include "EventManager.h"
 
 namespace GameHalloran {
-	class TestLogic;
+    class TestLogic;
 
-	class TestLogicEventListener : public IEventListener {
-		private:
-			TestLogic *m_logicPtr;
+    class TestLogicEventListener : public IEventListener {
+    private:
+        TestLogic *m_logicPtr;
 
-			ActorParams *CreateNewActorParams(const LuaPlus::LuaObject &srcData);
+        ActorParams *CreateNewActorParams(const LuaPlus::LuaObject &srcData);
 
-		public:
-			explicit TestLogicEventListener(TestLogic *logicPtr) throw (GameException &);
-			virtual	~TestLogicEventListener() { };
+    public:
+        explicit TestLogicEventListener(TestLogic *logicPtr) throw(GameException &);
+        virtual ~TestLogicEventListener() { };
 
-			virtual char const *VGetName(void);
-			virtual bool VHandleEvent(IEventData const &eventObj);
-	};
+        virtual char const *VGetName(void);
+        virtual bool VHandleEvent(IEventData const &eventObj);
+    };
 
-	class TestLogic : public BaseLuaGameLogic {
-		friend class TestLogicEventListener;
-	private:
-		boost::shared_ptr<IEventListener> m_listener;
+    class TestLogic : public BaseLuaGameLogic {
+        friend class TestLogicEventListener;
+    private:
+        boost::shared_ptr<IEventListener> m_listener;
 
-	public:
-		explicit TestLogic(boost::shared_ptr<GameOptions> optionsPtr
-							, boost::shared_ptr<GameLog> loggerPtr
-							, boost::shared_ptr<ModelViewProjStackManager> stackManagerPtr) throw (GameException &);
-		virtual ~TestLogic();
+    public:
+        explicit TestLogic(boost::shared_ptr<GameOptions> optionsPtr
+                           , boost::shared_ptr<GameLog> loggerPtr
+                           , boost::shared_ptr<ModelViewProjStackManager> stackManagerPtr) throw(GameException &);
+        virtual ~TestLogic();
 
-		virtual void VBuildInitialScene();
-		virtual bool VLoadGame(const std::string &gameNameRef);
-		virtual bool VSaveGame();
-		virtual void VOnUpdate(const F64 time, const F32 elapsedTime);
-		virtual void VChangeState(const enum BaseGameState newState);
-	};
+        virtual void VBuildInitialScene();
+        virtual bool VLoadGame(const std::string &gameNameRef);
+        virtual bool VSaveGame();
+        virtual void VOnUpdate(const F64 time, const F32 elapsedTime);
+        virtual void VChangeState(const enum BaseGameState newState);
+    };
 }
 
 #endif

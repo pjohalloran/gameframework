@@ -11,643 +11,606 @@
 #include "GLTools.h"
 #include "GameMain.h"
 
-namespace GameHalloran
-{
+namespace GameHalloran {
 
-	// Global array of image extensions.
-	const char * const gImageExtentions[] = { ".tga", ".bmp", ".png", ".jpeg" };
+    // Global array of image extensions.
+    const char * const gImageExtentions[] = { ".tga", ".bmp", ".png", ".jpeg" };
 
-	//////////////////////////////////////////////////////////////////////
-	//
-	//////////////////////////////////////////////////////////////////////
-	char const * const FindExtFromImageType(ImageType type)
-	{
-		// Global sound file extension lookup array bounds checking to make
-		//  invalid array index access impossible.
-		if(type >= IMAGE_TYPE_COUNT)
-		{
-			return ("");
-		}
+    //////////////////////////////////////////////////////////////////////
+    //
+    //////////////////////////////////////////////////////////////////////
+    char const * const FindExtFromImageType(ImageType type)
+    {
+        // Global sound file extension lookup array bounds checking to make
+        //  invalid array index access impossible.
+        if(type >= IMAGE_TYPE_COUNT) {
+            return ("");
+        }
 
-		return (gImageExtentions[type]);
-	}
+        return (gImageExtentions[type]);
+    }
 
-	//////////////////////////////////////////////////////////////////////
-	//
-	//////////////////////////////////////////////////////////////////////
-	ImageType FindImageTypeFromFile(const std::string &filenameRef)
-	{
-		if(filenameRef.empty())
-		{
-			return (IMAGE_TYPE_UNKNOWN);
-		}
+    //////////////////////////////////////////////////////////////////////
+    //
+    //////////////////////////////////////////////////////////////////////
+    ImageType FindImageTypeFromFile(const std::string &filenameRef)
+    {
+        if(filenameRef.empty()) {
+            return (IMAGE_TYPE_UNKNOWN);
+        }
 
-		I32 type = IMAGE_TYPE_FIRST;
-		while (type < IMAGE_TYPE_COUNT)
-		{
-			if(strstr(filenameRef.c_str(), gImageExtentions[type]))
-			{
-				return (static_cast<ImageType>(type));
-			}
+        I32 type = IMAGE_TYPE_FIRST;
+        while(type < IMAGE_TYPE_COUNT) {
+            if(strstr(filenameRef.c_str(), gImageExtentions[type])) {
+                return (static_cast<ImageType>(type));
+            }
 
-			++type;
-		}
-		
-		return (IMAGE_TYPE_UNKNOWN);
-	}
-    
+            ++type;
+        }
+
+        return (IMAGE_TYPE_UNKNOWN);
+    }
+
     // ////////////////////////////////////////////////////////////////////
     //
     // ////////////////////////////////////////////////////////////////////
     ImageMode FindImageModeFromString(const std::string &imageModeRef)
     {
-		if(imageModeRef.empty())
-			return (eIMAGE_MODE_UNKNOWN);
-        
+        if(imageModeRef.empty()) {
+            return (eIMAGE_MODE_UNKNOWN);
+        }
+
         std::string copy(imageModeRef);
         boost::algorithm::to_lower(copy);
-        
-		if(copy.compare("rgb") == 0)
-        {
+
+        if(copy.compare("rgb") == 0) {
             return (eRGB);
-        }
-		else if(copy.compare("rgba") == 0)
-        {
+        } else if(copy.compare("rgba") == 0) {
             return (eRGBA);
         }
-		
-		return (eIMAGE_MODE_UNKNOWN);
+
+        return (eIMAGE_MODE_UNKNOWN);
     }
 
-	// ////////////////////////////////////////////////////////////////////
-	// 
-	// ////////////////////////////////////////////////////////////////////
-	ImageResource::ImageResource(const std::string &name) : Resource(name)
-	{
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    ImageResource::ImageResource(const std::string &name) : Resource(name)
+    {
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	ResHandle *ImageResource::VCreateHandle(const char *buffer, U32 size, ResCache *pResCache)
-	{
-		// Cast away the const-ness of the buffer for the ImageResHandle.
-		char *bufferNoConst = const_cast<char *>(buffer);
-		return (GCC_NEW ImageResHandle(*this, bufferNoConst, size, pResCache)); 
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    ResHandle *ImageResource::VCreateHandle(const char *buffer, U32 size, ResCache *pResCache)
+    {
+        // Cast away the const-ness of the buffer for the ImageResHandle.
+        char *bufferNoConst = const_cast<char *>(buffer);
+        return (GCC_NEW ImageResHandle(*this, bufferNoConst, size, pResCache));
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	bool ImageResHandle::ParseTga(FILE *fd)
-	{
-		TGAHEADER tgaHeader;				// TGA file header
-	    
-		if(fd == NULL)
-		{
-			return (false);
-		}
-		
-		// Read in header (binary)
-		//fread(&tgaHeader, sizeof(TGAHEADER), 1, fd);
-		fread(&tgaHeader, 18, 1, fd);
-	    
-		// Put some validity checks here. Very simply, I only understand
-		// or care about 8, 24, or 32 bit targa's.
-		if(tgaHeader.bits != 8 && tgaHeader.bits != 24 && tgaHeader.bits != 32)
-		{
-			return (false);
-		}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    bool ImageResHandle::ParseTga(FILE *fd)
+    {
+        TGAHEADER tgaHeader;                // TGA file header
 
-		// Do byte swap for big vs little endian on APPLE platforms.
-		#ifdef __APPLE__
-			LITTLE_ENDIAN_WORD(&tgaHeader.colorMapStart);
-			LITTLE_ENDIAN_WORD(&tgaHeader.colorMapLength);
-			LITTLE_ENDIAN_WORD(&tgaHeader.xstart);
-			LITTLE_ENDIAN_WORD(&tgaHeader.ystart);
-			LITTLE_ENDIAN_WORD(&tgaHeader.width);
-			LITTLE_ENDIAN_WORD(&tgaHeader.height);
-		#endif
-		
-		// Get width, height, and depth of texture
-		m_width = tgaHeader.width;
-		m_height = tgaHeader.height;
-		m_depth = tgaHeader.bits / 8;
-		
-		// Calculate size of image buffer
-		m_imageSize = m_width * m_height * m_depth;
-	    
-		// Allocate memory and check for success
-		m_imageBuffer = GCC_NEW GLbyte[m_imageSize];
-		if(m_imageBuffer == NULL)
-		{
-			return (false);
-		}
+        if(fd == NULL) {
+            return (false);
+        }
 
-		// Read in the bits
-		// Check for read error. This should catch RLE or other 
-		// weird formats that I don't want to recognize
-		if(fread(m_imageBuffer, m_imageSize, 1, fd) != 1)
-		{
-			DeleteArray(m_imageBuffer);
-			return (false);
-		}
-	    
-		// Set OpenGL format expected
-		switch(m_depth)
-		{
-			#ifndef OPENGL_ES
-			case 3:     // Most likely case
-				m_format = GL_BGR;
-				m_components = GL_RGB;
-				break;
-			#endif
-			case 4:
-				m_format = GL_BGRA;
-				m_components = GL_RGBA;
-				break;
-			case 1:
-				m_format = GL_LUMINANCE;
-				m_components = GL_LUMINANCE;
-				break;
-			default:        // RGB
-				// If on the iPhone, TGA's are BGR, and the iPhone does not 
-				// support BGR without alpha, but it does support RGB,
-				// so a simple swizzle of the red and blue bytes will suffice.
-				// For faster iPhone loads however, save your TGA's with an Alpha!
-				#ifdef OPENGL_ES
-					for(I32 i = 0; i < m_imageSize; i+=3)
-					{
-						GLbyte temp = m_imageBuffer[i];
-						m_imageBuffer[i] = m_imageBuffer[i+2];
-						m_imageBuffer[i+2] = temp;
-					}
-				#endif
-			break;
-		}
+        // Read in header (binary)
+        //fread(&tgaHeader, sizeof(TGAHEADER), 1, fd);
+        fread(&tgaHeader, 18, 1, fd);
 
-		return (true);
-	}
+        // Put some validity checks here. Very simply, I only understand
+        // or care about 8, 24, or 32 bit targa's.
+        if(tgaHeader.bits != 8 && tgaHeader.bits != 24 && tgaHeader.bits != 32) {
+            return (false);
+        }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	bool ImageResHandle::ParseBmp(FILE *fd)
-	{
-		BMPInfo *pBitmapInfo = NULL;				/// BMP information.
-		U64 lInfoSize = 0;				/// Size of BMP information.
-		BMPHeader bitmapHeader;						/// BMP Header
+        // Do byte swap for big vs little endian on APPLE platforms.
+#ifdef __APPLE__
+        LITTLE_ENDIAN_WORD(&tgaHeader.colorMapStart);
+        LITTLE_ENDIAN_WORD(&tgaHeader.colorMapLength);
+        LITTLE_ENDIAN_WORD(&tgaHeader.xstart);
+        LITTLE_ENDIAN_WORD(&tgaHeader.ystart);
+        LITTLE_ENDIAN_WORD(&tgaHeader.width);
+        LITTLE_ENDIAN_WORD(&tgaHeader.height);
+#endif
 
-		if(fd == NULL)
-		{
-			return (false);
-		}
+        // Get width, height, and depth of texture
+        m_width = tgaHeader.width;
+        m_height = tgaHeader.height;
+        m_depth = tgaHeader.bits / 8;
 
-		// File is Open. Read in bitmap header information
-		fread(&bitmapHeader, sizeof(BMPHeader), 1, fd);
+        // Calculate size of image buffer
+        m_imageSize = m_width * m_height * m_depth;
 
-		// Read in bitmap information structure
-		lInfoSize = bitmapHeader.offset - sizeof(BMPHeader);
-		pBitmapInfo = (BMPInfo *) malloc(sizeof(GLbyte)*lInfoSize);
-		if(fread(pBitmapInfo, lInfoSize, 1, fd) != 1)
-		{
-			free(pBitmapInfo);
-			return (false);
-		}
+        // Allocate memory and check for success
+        m_imageBuffer = GCC_NEW GLbyte[m_imageSize];
+        if(m_imageBuffer == NULL) {
+            return (false);
+        }
 
-		// Save the size and dimensions of the bitmap
-		m_width = pBitmapInfo->header.width;
-		m_height = pBitmapInfo->header.height;
-		m_imageSize = pBitmapInfo->header.imageSize;
+        // Read in the bits
+        // Check for read error. This should catch RLE or other
+        // weird formats that I don't want to recognize
+        if(fread(m_imageBuffer, m_imageSize, 1, fd) != 1) {
+            DeleteArray(m_imageBuffer);
+            return (false);
+        }
 
-		// If the size isn't specified, calculate it anyway	
-		if(pBitmapInfo->header.bits != 24)
-		{
-			free(pBitmapInfo);
-			return (false);
-		}
-		if(m_imageSize == 0)
-		{
-			m_imageSize = (m_width * pBitmapInfo->header.bits + 7) / 8 * abs(m_height);
-		}
+        // Set OpenGL format expected
+        switch(m_depth) {
+#ifndef OPENGL_ES
+            case 3:     // Most likely case
+                m_format = GL_BGR;
+                m_components = GL_RGB;
+                break;
+#endif
+            case 4:
+                m_format = GL_BGRA;
+                m_components = GL_RGBA;
+                break;
+            case 1:
+                m_format = GL_LUMINANCE;
+                m_components = GL_LUMINANCE;
+                break;
+            default:        // RGB
+                // If on the iPhone, TGA's are BGR, and the iPhone does not
+                // support BGR without alpha, but it does support RGB,
+                // so a simple swizzle of the red and blue bytes will suffice.
+                // For faster iPhone loads however, save your TGA's with an Alpha!
+#ifdef OPENGL_ES
+                for(I32 i = 0; i < m_imageSize; i += 3) {
+                    GLbyte temp = m_imageBuffer[i];
+                    m_imageBuffer[i] = m_imageBuffer[i + 2];
+                    m_imageBuffer[i + 2] = temp;
+                }
+#endif
+                break;
+        }
 
-		free(pBitmapInfo);
+        return (true);
+    }
 
-		// Allocate space for the actual bitmap
-		m_imageBuffer = GCC_NEW GLbyte[m_imageSize];
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    bool ImageResHandle::ParseBmp(FILE *fd)
+    {
+        BMPInfo *pBitmapInfo = NULL;                /// BMP information.
+        U64 lInfoSize = 0;              /// Size of BMP information.
+        BMPHeader bitmapHeader;                     /// BMP Header
 
-		// Read in the bitmap bits, check for corruption
-		if(fread(m_imageBuffer, m_imageSize, 1, fd) != 1)
-		{
-			DeleteArray(m_imageBuffer);
-		}
+        if(fd == NULL) {
+            return (false);
+        }
 
-		m_components = GL_RGB;
-		m_format = GL_BGR;
+        // File is Open. Read in bitmap header information
+        fread(&bitmapHeader, sizeof(BMPHeader), 1, fd);
 
-		return (true);
-	}
+        // Read in bitmap information structure
+        lInfoSize = bitmapHeader.offset - sizeof(BMPHeader);
+        pBitmapInfo = (BMPInfo *) malloc(sizeof(GLbyte) * lInfoSize);
+        if(fread(pBitmapInfo, lInfoSize, 1, fd) != 1) {
+            free(pBitmapInfo);
+            return (false);
+        }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	bool ImageResHandle::ParsePng(FILE *fd)
-	{
-		// TODO: 
-		return (false);
-	}
+        // Save the size and dimensions of the bitmap
+        m_width = pBitmapInfo->header.width;
+        m_height = pBitmapInfo->header.height;
+        m_imageSize = pBitmapInfo->header.imageSize;
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	bool ImageResHandle::ParseJpeg(FILE *fd)
-	{
-		// TODO: 
-		return (false);
-	}
+        // If the size isn't specified, calculate it anyway
+        if(pBitmapInfo->header.bits != 24) {
+            free(pBitmapInfo);
+            return (false);
+        }
+        if(m_imageSize == 0) {
+            m_imageSize = (m_width * pBitmapInfo->header.bits + 7) / 8 * abs(m_height);
+        }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	bool ImageResHandle::ParseTga(char *tgaStream, const size_t length)
-	{
-		TGAHEADER tgaHeader;				// TGA file header
-	    size_t pos = 0;						// Stream pointer.
+        free(pBitmapInfo);
 
-		//if(length < sizeof(TGAHEADER) || tgaStream == NULL)
-		if(length < 18 || tgaStream == NULL)
-		{
-			return (false);
-		}
-		
-		// Read in header.
-		tgaHeader.identsize = *(reinterpret_cast<GLbyte *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.identsize);
-		tgaHeader.colorMapType = *(reinterpret_cast<GLbyte *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.colorMapType);
-		tgaHeader.imageType = *(reinterpret_cast<GLbyte *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.imageType);
-		tgaHeader.colorMapStart = *(reinterpret_cast<U16 *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.colorMapStart);
-		tgaHeader.colorMapLength = *(reinterpret_cast<U16 *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.colorMapLength);
-		tgaHeader.colorMapBits = *(reinterpret_cast<unsigned char *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.colorMapBits);
-		tgaHeader.xstart = *(reinterpret_cast<U16 *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.xstart);
-		tgaHeader.ystart = *(reinterpret_cast<U16 *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.ystart);
-		tgaHeader.width = *(reinterpret_cast<U16 *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.width);
-		tgaHeader.height = *(reinterpret_cast<U16 *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.height);
-		tgaHeader.bits = *(reinterpret_cast<GLbyte *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.bits);
-		tgaHeader.descriptor = *(reinterpret_cast<GLbyte *>(tgaStream + pos));
-		pos += sizeof(tgaHeader.descriptor);	// Now we should be pointing at the beginning of the image data...
-	    
-		// Put some validity checks here. Very simply, I only understand
-		// or care about 8, 24, or 32 bit targa's.
-		if(tgaHeader.bits != 8 && tgaHeader.bits != 24 && tgaHeader.bits != 32)
-		{
-			return (false);
-		}
+        // Allocate space for the actual bitmap
+        m_imageBuffer = GCC_NEW GLbyte[m_imageSize];
 
-		// Do byte swap for big vs little endian on APPLE platforms.
-		#ifdef __APPLE__
-			LITTLE_ENDIAN_WORD(&tgaHeader.colorMapStart);
-			LITTLE_ENDIAN_WORD(&tgaHeader.colorMapLength);
-			LITTLE_ENDIAN_WORD(&tgaHeader.xstart);
-			LITTLE_ENDIAN_WORD(&tgaHeader.ystart);
-			LITTLE_ENDIAN_WORD(&tgaHeader.width);
-			LITTLE_ENDIAN_WORD(&tgaHeader.height);
-		#endif
-		
-		// Get width, height, and depth of texture
-		m_width = tgaHeader.width;
-		m_height = tgaHeader.height;
-		m_depth = tgaHeader.bits / 8;
-		
-		// Calculate size of image buffer
-		m_imageSize = m_width * m_height * m_depth;
+        // Read in the bitmap bits, check for corruption
+        if(fread(m_imageBuffer, m_imageSize, 1, fd) != 1) {
+            DeleteArray(m_imageBuffer);
+        }
 
-		//// Sanity check before we allocate the buffer!!
-		//if(size_t(m_imageSize) + pos + 1 != length)
-		//{
-		//	return (false);
-		//}
-	    
-		// Allocate memory and check for success
-		m_imageBuffer = GCC_NEW GLbyte[m_imageSize];
-		if(m_imageBuffer == NULL)
-		{
-			return (false);
-		}
+        m_components = GL_RGB;
+        m_format = GL_BGR;
 
-		// Read in the bits into the buffer.
-		memcpy(m_imageBuffer, tgaStream + pos, m_imageSize);
-	    
-		// Set OpenGL format expected
-		switch(m_depth)
-		{
-			#ifndef OPENGL_ES
-			case 3:     // Most likely case
-				m_format = GL_BGR;
-				m_components = GL_RGB;
-				break;
-			#endif
-			case 4:
-				m_format = GL_BGRA;
-				m_components = GL_RGBA;
-				break;
-			case 1:
-				m_format = GL_LUMINANCE;
-				m_components = GL_LUMINANCE;
-				break;
-			default:        // RGB
-				// If on the iPhone, TGA's are BGR, and the iPhone does not 
-				// support BGR without alpha, but it does support RGB,
-				// so a simple swizzle of the red and blue bytes will suffice.
-				// For faster iPhone loads however, save your TGA's with an Alpha!
-				#ifdef OPENGL_ES
-					for(I32 i = 0; i < m_imageSize; i+=3)
-					{
-						GLbyte temp = m_imageBuffer[i];
-						m_imageBuffer[i] = m_imageBuffer[i+2];
-						m_imageBuffer[i+2] = temp;
-					}
-				#endif
-			break;
-		}
+        return (true);
+    }
 
-		return (true);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    bool ImageResHandle::ParsePng(FILE *fd)
+    {
+        // TODO:
+        return (false);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	bool ImageResHandle::ParseBmp(char *bmpStream, const size_t length)
-	{
-		BMPInfo *pBitmapInfo = NULL;				// BMP information.
-		U64 lInfoSize = 0;				// Size of BMP information.
-		BMPHeader bitmapHeader;						// BMP Header
-		size_t pos = 0;								// Stream pointer.
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    bool ImageResHandle::ParseJpeg(FILE *fd)
+    {
+        // TODO:
+        return (false);
+    }
 
-		if(bmpStream == NULL || length < sizeof(BMPHeader))
-		{
-			return (false);
-		}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    bool ImageResHandle::ParseTga(char *tgaStream, const size_t length)
+    {
+        TGAHEADER tgaHeader;                // TGA file header
+        size_t pos = 0;                     // Stream pointer.
 
-		// Read in bitmap header information.
-		bitmapHeader.type = *(reinterpret_cast<GLushort *>(bmpStream + pos));
-		pos += sizeof(bitmapHeader.type);
-		bitmapHeader.size = *(reinterpret_cast<GLuint *>(bmpStream + pos));
-		pos += sizeof(bitmapHeader.size);
-		bitmapHeader.unused = *(reinterpret_cast<GLushort *>(bmpStream + pos));
-		pos += sizeof(bitmapHeader.unused);
-		bitmapHeader.unused2 = *(reinterpret_cast<GLushort *>(bmpStream + pos));
-		pos += sizeof(bitmapHeader.unused2);
-		bitmapHeader.offset = *(reinterpret_cast<GLuint *>(bmpStream + pos));
-		pos += sizeof(bitmapHeader.offset);
+        //if(length < sizeof(TGAHEADER) || tgaStream == NULL)
+        if(length < 18 || tgaStream == NULL) {
+            return (false);
+        }
 
-		// Read in bitmap information structure
-		lInfoSize = bitmapHeader.offset - sizeof(BMPHeader);
-		pBitmapInfo = (BMPInfo *) malloc(sizeof(GLbyte)*lInfoSize);
-		if(pBitmapInfo == NULL)
-		{
-			return (false);
-		}
-		memcpy(pBitmapInfo, bmpStream + pos, lInfoSize);
-		pos += size_t(lInfoSize);
+        // Read in header.
+        tgaHeader.identsize = *(reinterpret_cast<GLbyte *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.identsize);
+        tgaHeader.colorMapType = *(reinterpret_cast<GLbyte *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.colorMapType);
+        tgaHeader.imageType = *(reinterpret_cast<GLbyte *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.imageType);
+        tgaHeader.colorMapStart = *(reinterpret_cast<U16 *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.colorMapStart);
+        tgaHeader.colorMapLength = *(reinterpret_cast<U16 *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.colorMapLength);
+        tgaHeader.colorMapBits = *(reinterpret_cast<unsigned char *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.colorMapBits);
+        tgaHeader.xstart = *(reinterpret_cast<U16 *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.xstart);
+        tgaHeader.ystart = *(reinterpret_cast<U16 *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.ystart);
+        tgaHeader.width = *(reinterpret_cast<U16 *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.width);
+        tgaHeader.height = *(reinterpret_cast<U16 *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.height);
+        tgaHeader.bits = *(reinterpret_cast<GLbyte *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.bits);
+        tgaHeader.descriptor = *(reinterpret_cast<GLbyte *>(tgaStream + pos));
+        pos += sizeof(tgaHeader.descriptor);    // Now we should be pointing at the beginning of the image data...
 
-		// Save the size and dimensions of the bitmap
-		m_width = pBitmapInfo->header.width;
-		m_height = pBitmapInfo->header.height;
-		m_imageSize = pBitmapInfo->header.imageSize;
+        // Put some validity checks here. Very simply, I only understand
+        // or care about 8, 24, or 32 bit targa's.
+        if(tgaHeader.bits != 8 && tgaHeader.bits != 24 && tgaHeader.bits != 32) {
+            return (false);
+        }
 
-		// If the size isn't specified, calculate it anyway	
-		if(pBitmapInfo->header.bits != 24)
-		{
-			free(pBitmapInfo);
-			return (false);
-		}
-		if(m_imageSize == 0)
-		{
-			m_imageSize = (m_width * pBitmapInfo->header.bits + 7) / 8 * abs(m_height);
-		}
+        // Do byte swap for big vs little endian on APPLE platforms.
+#ifdef __APPLE__
+        LITTLE_ENDIAN_WORD(&tgaHeader.colorMapStart);
+        LITTLE_ENDIAN_WORD(&tgaHeader.colorMapLength);
+        LITTLE_ENDIAN_WORD(&tgaHeader.xstart);
+        LITTLE_ENDIAN_WORD(&tgaHeader.ystart);
+        LITTLE_ENDIAN_WORD(&tgaHeader.width);
+        LITTLE_ENDIAN_WORD(&tgaHeader.height);
+#endif
 
-		free(pBitmapInfo);
+        // Get width, height, and depth of texture
+        m_width = tgaHeader.width;
+        m_height = tgaHeader.height;
+        m_depth = tgaHeader.bits / 8;
 
-		//// Sanity check before we allocate the buffer!
-		//if(size_t(m_imageSize) + pos + 1 != length)
-		//{
-		//	return (false);
-		//}
+        // Calculate size of image buffer
+        m_imageSize = m_width * m_height * m_depth;
 
-		// Allocate space for the actual bitmap
-		m_imageBuffer = GCC_NEW GLbyte[m_imageSize];
+        //// Sanity check before we allocate the buffer!!
+        //if(size_t(m_imageSize) + pos + 1 != length)
+        //{
+        //  return (false);
+        //}
 
-		// Read in the bitmap bits
-		memcpy(m_imageBuffer, bmpStream + pos, m_imageSize);
+        // Allocate memory and check for success
+        m_imageBuffer = GCC_NEW GLbyte[m_imageSize];
+        if(m_imageBuffer == NULL) {
+            return (false);
+        }
 
-		m_components = GL_RGB;
-		m_format = GL_BGR;
+        // Read in the bits into the buffer.
+        memcpy(m_imageBuffer, tgaStream + pos, m_imageSize);
 
-		return (true);
-	}
+        // Set OpenGL format expected
+        switch(m_depth) {
+#ifndef OPENGL_ES
+            case 3:     // Most likely case
+                m_format = GL_BGR;
+                m_components = GL_RGB;
+                break;
+#endif
+            case 4:
+                m_format = GL_BGRA;
+                m_components = GL_RGBA;
+                break;
+            case 1:
+                m_format = GL_LUMINANCE;
+                m_components = GL_LUMINANCE;
+                break;
+            default:        // RGB
+                // If on the iPhone, TGA's are BGR, and the iPhone does not
+                // support BGR without alpha, but it does support RGB,
+                // so a simple swizzle of the red and blue bytes will suffice.
+                // For faster iPhone loads however, save your TGA's with an Alpha!
+#ifdef OPENGL_ES
+                for(I32 i = 0; i < m_imageSize; i += 3) {
+                    GLbyte temp = m_imageBuffer[i];
+                    m_imageBuffer[i] = m_imageBuffer[i + 2];
+                    m_imageBuffer[i + 2] = temp;
+                }
+#endif
+                break;
+        }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	bool ImageResHandle::ParsePng(char *pngStream, const size_t length)
-	{
-		// TODO: 
-		return (false);
-	}
+        return (true);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	bool ImageResHandle::ParseJpeg(char *jpegStream, const size_t length)
-	{
-		// TODO: 
-		return (false);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    bool ImageResHandle::ParseBmp(char *bmpStream, const size_t length)
+    {
+        BMPInfo *pBitmapInfo = NULL;                // BMP information.
+        U64 lInfoSize = 0;              // Size of BMP information.
+        BMPHeader bitmapHeader;                     // BMP Header
+        size_t pos = 0;                             // Stream pointer.
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	ImageResHandle::ImageResHandle(Resource &r, char *buffer, const U32 size, ResCache *pResCache)\
-		: ResHandle(r, buffer, size, pResCache), m_imageType(IMAGE_TYPE_UNKNOWN), m_initialized(false), m_fromFile(false),\
-			m_imageBuffer(NULL), m_imageSize(0), m_width(0), m_height(0), m_depth(0), m_format(GL_RGB), m_components(GL_RGB),\
-				m_imageFilename(r.GetName())
-	{
-		m_fromFile = (buffer == NULL);
-	}
+        if(bmpStream == NULL || length < sizeof(BMPHeader)) {
+            return (false);
+        }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	ImageResHandle::~ImageResHandle()
-	{
-		// Note - since ImageResources have a lifetime controlled by shared_ptr, 
-		// it's safe for us to nuke the memory without checking first.
-		try
-		{
+        // Read in bitmap header information.
+        bitmapHeader.type = *(reinterpret_cast<GLushort *>(bmpStream + pos));
+        pos += sizeof(bitmapHeader.type);
+        bitmapHeader.size = *(reinterpret_cast<GLuint *>(bmpStream + pos));
+        pos += sizeof(bitmapHeader.size);
+        bitmapHeader.unused = *(reinterpret_cast<GLushort *>(bmpStream + pos));
+        pos += sizeof(bitmapHeader.unused);
+        bitmapHeader.unused2 = *(reinterpret_cast<GLushort *>(bmpStream + pos));
+        pos += sizeof(bitmapHeader.unused2);
+        bitmapHeader.offset = *(reinterpret_cast<GLuint *>(bmpStream + pos));
+        pos += sizeof(bitmapHeader.offset);
+
+        // Read in bitmap information structure
+        lInfoSize = bitmapHeader.offset - sizeof(BMPHeader);
+        pBitmapInfo = (BMPInfo *) malloc(sizeof(GLbyte) * lInfoSize);
+        if(pBitmapInfo == NULL) {
+            return (false);
+        }
+        memcpy(pBitmapInfo, bmpStream + pos, lInfoSize);
+        pos += size_t(lInfoSize);
+
+        // Save the size and dimensions of the bitmap
+        m_width = pBitmapInfo->header.width;
+        m_height = pBitmapInfo->header.height;
+        m_imageSize = pBitmapInfo->header.imageSize;
+
+        // If the size isn't specified, calculate it anyway
+        if(pBitmapInfo->header.bits != 24) {
+            free(pBitmapInfo);
+            return (false);
+        }
+        if(m_imageSize == 0) {
+            m_imageSize = (m_width * pBitmapInfo->header.bits + 7) / 8 * abs(m_height);
+        }
+
+        free(pBitmapInfo);
+
+        //// Sanity check before we allocate the buffer!
+        //if(size_t(m_imageSize) + pos + 1 != length)
+        //{
+        //  return (false);
+        //}
+
+        // Allocate space for the actual bitmap
+        m_imageBuffer = GCC_NEW GLbyte[m_imageSize];
+
+        // Read in the bitmap bits
+        memcpy(m_imageBuffer, bmpStream + pos, m_imageSize);
+
+        m_components = GL_RGB;
+        m_format = GL_BGR;
+
+        return (true);
+    }
+
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    bool ImageResHandle::ParsePng(char *pngStream, const size_t length)
+    {
+        // TODO:
+        return (false);
+    }
+
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    bool ImageResHandle::ParseJpeg(char *jpegStream, const size_t length)
+    {
+        // TODO:
+        return (false);
+    }
+
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    ImageResHandle::ImageResHandle(Resource &r, char *buffer, const U32 size, ResCache *pResCache)\
+:
+    ResHandle(r, buffer, size, pResCache), m_imageType(IMAGE_TYPE_UNKNOWN), m_initialized(false), m_fromFile(false), \
+    m_imageBuffer(NULL), m_imageSize(0), m_width(0), m_height(0), m_depth(0), m_format(GL_RGB), m_components(GL_RGB), \
+    m_imageFilename(r.GetName())
+    {
+        m_fromFile = (buffer == NULL);
+    }
+
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    ImageResHandle::~ImageResHandle()
+    {
+        // Note - since ImageResources have a lifetime controlled by shared_ptr,
+        // it's safe for us to nuke the memory without checking first.
+        try {
             GF_LOG_DEB(std::string("Freeing the image resource ") + m_imageFilename);
-			DeleteArray(m_imageBuffer);
-		}
-		catch(...)
-		{
-		}
-	}
+            DeleteArray(m_imageBuffer);
+        } catch(...) {
+        }
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	const GLbyte *ImageResHandle::GetImageBuffer() const
-	{
-		return (m_imageBuffer);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    const GLbyte *ImageResHandle::GetImageBuffer() const
+    {
+        return (m_imageBuffer);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	GLint ImageResHandle::GetImageSize() const
-	{
-		return (m_imageSize);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    GLint ImageResHandle::GetImageSize() const
+    {
+        return (m_imageSize);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	ImageType ImageResHandle::GetImageType()
-	{
-		return (m_imageType);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    ImageType ImageResHandle::GetImageType()
+    {
+        return (m_imageType);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	GLint ImageResHandle::GetImageWidth() const
-	{
-		return (m_width);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    GLint ImageResHandle::GetImageWidth() const
+    {
+        return (m_width);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	GLint ImageResHandle::GetImageHeight() const
-	{
-		return (m_height);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    GLint ImageResHandle::GetImageHeight() const
+    {
+        return (m_height);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	GLint ImageResHandle::GetImageDepth() const
-	{
-		return (m_depth);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    GLint ImageResHandle::GetImageDepth() const
+    {
+        return (m_depth);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	GLint ImageResHandle::GetImageComponents() const
-	{
-		return (m_components);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    GLint ImageResHandle::GetImageComponents() const
+    {
+        return (m_components);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	GLenum ImageResHandle::GetImageFormat() const
-	{
-		return (m_format);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    GLenum ImageResHandle::GetImageFormat() const
+    {
+        return (m_format);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	//
-	// ////////////////////////////////////////////////////////////////////
-	std::string ImageResHandle::GetImageFilename() const
-	{
-		return (m_imageFilename);
-	}
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    std::string ImageResHandle::GetImageFilename() const
+    {
+        return (m_imageFilename);
+    }
 
-	// ////////////////////////////////////////////////////////////////////
-	// 
-	// ////////////////////////////////////////////////////////////////////
-	bool ImageResHandle::VInitialize()
-	{
-		bool result = true;
+    // ////////////////////////////////////////////////////////////////////
+    //
+    // ////////////////////////////////////////////////////////////////////
+    bool ImageResHandle::VInitialize()
+    {
+        bool result = true;
 
-		if (!m_initialized)
-		{
-			m_imageType = FindImageTypeFromFile(m_imageFilename);
-			if (m_fromFile)
-			{
-				FILE *file = NULL;
-				file = fopen(m_imageFilename.c_str(), "rb");
-				if(file == NULL)
-				{
-					result = false;
-				}
+        if(!m_initialized) {
+            m_imageType = FindImageTypeFromFile(m_imageFilename);
+            if(m_fromFile) {
+                FILE *file = NULL;
+                file = fopen(m_imageFilename.c_str(), "rb");
+                if(file == NULL) {
+                    result = false;
+                }
 
-				if(result)
-				{
-					switch (m_imageType)
-					{
-						case IMAGE_TYPE_TGA:
-							result = ParseTga(file);
-							break;
+                if(result) {
+                    switch(m_imageType) {
+                        case IMAGE_TYPE_TGA:
+                            result = ParseTga(file);
+                            break;
 
-						case IMAGE_TYPE_BMP:
-							result = ParseBmp(file);
-							break;
+                        case IMAGE_TYPE_BMP:
+                            result = ParseBmp(file);
+                            break;
 
-						case IMAGE_TYPE_PNG:
-						case IMAGE_TYPE_JPEG:
-							// TODO:
-						default:
+                        case IMAGE_TYPE_PNG:
+                        case IMAGE_TYPE_JPEG:
+                            // TODO:
+                        default:
                             GF_LOG_ERR("Image Type Not Supported");
-							result = false;
-							break;
-					}
+                            result = false;
+                            break;
+                    }
 
-					fclose(file);
-				}
-			}
-			else 
-			{
-				// initializing from a memory buffer
-				switch (m_imageType)
-				{
-					case IMAGE_TYPE_TGA:
-						result = ParseTga(ResHandle::Buffer(), ResHandle::Size());
-						break;
+                    fclose(file);
+                }
+            } else {
+                // initializing from a memory buffer
+                switch(m_imageType) {
+                    case IMAGE_TYPE_TGA:
+                        result = ParseTga(ResHandle::Buffer(), ResHandle::Size());
+                        break;
 
-					case IMAGE_TYPE_BMP:
-						result = ParseBmp(ResHandle::Buffer(), ResHandle::Size());
-						break;
+                    case IMAGE_TYPE_BMP:
+                        result = ParseBmp(ResHandle::Buffer(), ResHandle::Size());
+                        break;
 
-					case IMAGE_TYPE_PNG:
-					case IMAGE_TYPE_JPEG:
-						// TODO:
-					default:
-						result = false;
+                    case IMAGE_TYPE_PNG:
+                    case IMAGE_TYPE_JPEG:
+                        // TODO:
+                    default:
+                        result = false;
                         GF_LOG_ERR("Image Type Not Supported");
-						break;
-				}
+                        break;
+                }
 
-			}
-			m_initialized = true;
-		}
+            }
+            m_initialized = true;
+        }
 
-		return (result);
-	}
+        return (result);
+    }
 
 }
