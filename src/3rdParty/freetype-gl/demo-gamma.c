@@ -35,6 +35,10 @@
  *
  * ============================================================================
  */
+#include <stdarg.h>
+#include <stdio.h>
+#include <wchar.h>
+
 #include "freetype-gl.h"
 #include "font-manager.h"
 #include "vertex-buffer.h"
@@ -134,30 +138,41 @@ int main( int argc, char **argv )
     }
     fprintf( stderr, "Using GLEW %s\n", glewGetString(GLEW_VERSION) );
 
-    buffer = text_buffer_new( LCD_FILTERING_ON );
+    buffer = text_buffer_new( LCD_FILTERING_OFF );
     vec4 white = {{1.0, 1.0, 1.0, 1.0}};
     vec4 black = {{0.0, 0.0, 0.0, 1.0}};
     vec4 none  = {{1.0, 1.0, 1.0, 0.0}};
-    markup_t markup = {
-        .family  = "fonts/Vera.ttf",
-        .size    = 15.0, .bold    = 0,   .italic  = 0,
-        .rise    = 0.0,  .spacing = 0.0, .gamma   = 1.0,
-        .foreground_color    = white, .background_color    = none,
-        .underline           = 0,     .underline_color     = none,
-        .overline            = 0,     .overline_color      = none,
-        .strikethrough       = 0,     .strikethrough_color = none,
-        .font = 0,
-    };
+    markup_t markup;
+    markup.family  = "fonts/Vera.ttf";
+    markup.size    = 15.0;
+    markup.bold    = 0;
+    markup.italic  = 0;
+    markup.rise    = 0.0;
+    markup.spacing = 0.0;
+    markup.gamma   = 1.0;
+    markup.foreground_color    = white;
+    markup.background_color    = none;
+    markup.underline           = 0;   
+    markup.underline_color     = none;
+    markup.overline            = 0;  
+    markup.overline_color      = none;
+    markup.strikethrough       = 0;   
+    markup.strikethrough_color = none;
+    markup.font = 0;
 
     size_t i;
-    vec2 pen = {{32, 508}};
+    vec2 pen;
+    pen.x = 32;
+    pen.y = 508;
+
     wchar_t *text = L"A Quick Brown Fox Jumps Over The Lazy Dog 0123456789\n";
     for( i=0; i < 14; ++i )
     {
         markup.gamma = 0.75 + 1.5*i*(1.0/14);
         text_buffer_add_text( buffer, &pen, &markup, text, wcslen(text) );
     }
-    pen = (vec2) {{32, 252}};
+    pen.x = 32;
+    pen.y = 252;
     markup.foreground_color = black;
     for( i=0; i < 14; ++i )
     {

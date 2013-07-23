@@ -31,6 +31,8 @@
  * policies, either expressed or implied, of Nicolas P. Rougier.
  * ============================================================================
  */
+#include <math.h>
+#include <stdio.h>
 #include <AntTweakBar.h>
 #include "freetype-gl.h"
 #include "font-manager.h"
@@ -228,13 +230,19 @@ build_buffer( void )
 // ---------------------------------------------------------------- display ---
 void display(void)
 {
+    vec4 black  = {{0.0, 0.0, 0.0, 1.0}};
+    vec4 white  = {{1.0, 1.0, 1.0, 1.0}};
+
     if( !p_invert )
     {
         glClearColor( 0, 0, 0, 1 );
+        buffer->base_color = white;
+                
     }
     else
     {
         glClearColor( 1, 1, 1, 1 );
+        buffer->base_color = black;
     }
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
@@ -277,7 +285,7 @@ void reset( void )
     p_kerning   = 1;
     p_hinting   = 1;
     p_lcd_filtering = 1;
-    p_gamma     = 2.2;
+    p_gamma     = 1.75;
     p_interval  = 0.0;
     p_weight    = 0.33;
     p_width     = 1.0;
