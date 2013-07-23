@@ -33,6 +33,9 @@
  */
 #include "freetype-gl.h"
 
+#include <stdio.h>
+#include <wchar.h>
+
 #if defined(__APPLE__)
     #include <Glut/glut.h>
 #elif defined(_WIN32) || defined(_WIN64)
@@ -227,7 +230,7 @@ int main( int argc, char **argv )
     // -------------------
     // Texture information
     // -------------------
-    fwprintf( file, L" %f, %f, %f, %f, %f, %d, \n", 
+    fwprintf( file, L" %ff, %ff, %ff, %ff, %ff, %d, \n", 
              font->size, font->height,
              font->linegap,font->ascender, font->descender,
              glyph_count );
@@ -248,9 +251,9 @@ int main( int argc, char **argv )
                  glyph->width, glyph->height );
         wprintf( L"  offset     : %+d%+d\n",
                  glyph->offset_x, glyph->offset_y );
-        wprintf( L"  advance    : %f, %f\n",
+        wprintf( L"  advance    : %ff, %ff\n",
                  glyph->advance_x, glyph->advance_y );
-        wprintf( L"  tex coords.: %f, %f, %f, %f\n", 
+        wprintf( L"  tex coords.: %ff, %ff, %ff, %ff\n", 
                  glyph->u0, glyph->v0, glyph->u1, glyph->v1 );
 
         wprintf( L"  kerning    : " );
@@ -258,7 +261,7 @@ int main( int argc, char **argv )
         {
             for( j=0; j < glyph->kerning_count; ++j )
             {
-                wprintf( L"('%lc', %f)", 
+                wprintf( L"('%lc', %ff)", 
                          glyph->kerning[j].charcode, glyph->kerning[j].kerning );
                 if( j < (glyph->kerning_count-1) )
                 {
@@ -280,7 +283,7 @@ int main( int argc, char **argv )
             fwprintf( file, L"  {L'\\%lc', ", glyph->charcode );
             //wprintf( L"  {L'\\%lc', ", glyph->charcode );
         }
-        else if( (glyph->charcode == (wchar_t)(-1) ) )
+        else if( glyph->charcode == (wchar_t)(-1) )
         {
             fwprintf( file, L"  {L'\\0', " );
             //wprintf( L"  {L'\\0', " );
@@ -292,8 +295,8 @@ int main( int argc, char **argv )
         }
         fwprintf( file, L"%d, %d, ", glyph->width, glyph->height );
         fwprintf( file, L"%d, %d, ", glyph->offset_x, glyph->offset_y );
-        fwprintf( file, L"%f, %f, ", glyph->advance_x, glyph->advance_y );
-        fwprintf( file, L"%f, %f, %f, %f, ", glyph->s0, glyph->t0, glyph->s1, glyph->t1 );
+        fwprintf( file, L"%ff, %ff, ", glyph->advance_x, glyph->advance_y );
+        fwprintf( file, L"%ff, %ff, %ff, %ff, ", glyph->s0, glyph->t0, glyph->s1, glyph->t1 );
         fwprintf( file, L"%d, ", vector_size(glyph->kerning) );
         fwprintf( file, L"{ " );
         for( j=0; j < vector_size(glyph->kerning); ++j )
@@ -303,11 +306,11 @@ int main( int argc, char **argv )
 
             if( (charcode == L'\'' ) || (charcode == L'\\') )
             {
-                fwprintf( file, L"{L'\\%lc', %f}", charcode, kerning->kerning );
+                fwprintf( file, L"{L'\\%lc', %ff}", charcode, kerning->kerning );
             }
             else if( (charcode != (wchar_t)(-1) ) )
             {
-                fwprintf( file, L"{L'%lc', %f}", charcode, kerning->kerning );
+                fwprintf( file, L"{L'%lc', %ff}", charcode, kerning->kerning );
             }
             if( j < (vector_size(glyph->kerning)-1))
             {

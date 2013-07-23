@@ -42,6 +42,11 @@
     #include <Glut/glut.h>
 #elif defined(_WIN32) || defined(_WIN64)
     #include <GLUT/glut.h>
+	// Round and INFINITY only defined in C99
+	double round(double r) {
+		return (r > 0.0) ? floor(r + 0.5) : ceil(r - 0.5);
+	}
+	#define INFINITY 99999999999
 #else
     #include <GL/glut.h>
 #endif
@@ -442,8 +447,8 @@ main( int argc, char **argv )
 
     // Generate the glyp at 512 points, compute distance field and scale it
     // back to 32 points
-    // Just load another glyp if you want to see difference (draw render a '@')
-    glyph = load_glyph( "fonts/Vera.ttf", L'@', 512, 32, 0.05);
+    // Just load another glyph if you want to see difference (draw render a '@')
+    glyph = load_glyph( "fonts/Vera.ttf", L'@', 512, 64, 0.1);
     vector_push_back( font->glyphs, &glyph );
 
     texture_atlas_upload( atlas );
