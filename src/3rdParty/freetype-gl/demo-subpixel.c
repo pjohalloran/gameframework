@@ -34,6 +34,9 @@
 #include <ft2build.h>
 #include FT_CONFIG_OPTIONS_H
 
+#include <stdio.h>
+#include <wchar.h>
+
 #include "freetype-gl.h"
 
 #include "font-manager.h"
@@ -69,7 +72,7 @@ mat4 model, view, projection;
 // ---------------------------------------------------------------- display ---
 void display( void )
 {
-    glClearColor( 1.0,1.0,1.0,1.0 );
+    glClearColor( 1.0, 1.0, 1.0, 1.0 );
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
     glUseProgram( text_buffer->shader );
@@ -82,7 +85,8 @@ void display( void )
                             1, 0, projection.data);
         text_buffer_render( text_buffer );
     }
-
+    glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+    glBlendColor( 1.0, 1.0, 1.0, 1.0 );
     glUseProgram( shader );
     {
         glUniformMatrix4fv( glGetUniformLocation( shader, "model" ),
@@ -149,22 +153,31 @@ int main( int argc, char **argv )
                                { 15,330,0, 0,0,0,1},
                                {245,  0,0, 0,0,0,1},
                                {245,330,0, 0,0,0,1} };
-    GLuint indices[4*3] = { 0,1, 2,3, };
+    GLuint indices[4*3] = { 0,1,2,3, };
     vertex_buffer_push_back( buffer, vertices, 4, indices, 4 );
 
     text_buffer = text_buffer_new( LCD_FILTERING_ON );
     vec4 black  = {{0.0, 0.0, 0.0, 1.0}};
+    text_buffer->base_color = black;
+
     vec4 none   = {{1.0, 1.0, 1.0, 0.0}};
-    markup_t markup = {
-        .family  = "fonts/Vera.ttf",
-        .size    = 9.0, .bold    = 0,   .italic  = 0,
-        .rise    = 0.0,  .spacing = 0.0, .gamma   = 1.0,
-        .foreground_color    = black, .background_color    = none,
-        .underline           = 0,     .underline_color     = black,
-        .overline            = 0,     .overline_color      = black,
-        .strikethrough       = 0,     .strikethrough_color = black,
-        .font = 0,
-    };
+ 	markup_t markup;
+    markup.family  = "fonts/Vera.ttf";
+    markup.size    = 9.0;
+    markup.bold    = 0;
+    markup.italic  = 0;
+    markup.rise    = 0.0;
+    markup.spacing = 0.0;
+    markup.gamma   = 1.0;
+    markup.foreground_color    = black;
+    markup.background_color    = none;
+    markup.underline           = 0;   
+    markup.underline_color     = black;
+    markup.overline            = 0;  
+    markup.overline_color      = black;
+    markup.strikethrough       = 0;   
+    markup.strikethrough_color = black;
+    markup.font = 0;
 
     size_t i;
     vec2 pen = {{20, 320}};

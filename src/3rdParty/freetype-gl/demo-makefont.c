@@ -31,12 +31,14 @@
  * policies, either expressed or implied, of Nicolas P. Rougier.
  * ============================================================================
  */
+#include <stdlib.h>
 #if defined(__APPLE__)
     #include <Glut/glut.h>
+#elif defined(_WIN32) || defined(_WIN64)
+     #include <GLUT/glut.h>
 #else
     #include <GL/glut.h>
 #endif
-#include <stdlib.h>
 #include <stdio.h>
 #include <wchar.h>
 #include "arial-16.h"

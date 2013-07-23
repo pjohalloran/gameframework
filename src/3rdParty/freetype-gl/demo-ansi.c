@@ -31,6 +31,9 @@
  * policies, either expressed or implied, of Nicolas P. Rougier.
  * ============================================================================
  */
+#include <stdarg.h>
+#include <stdio.h>
+#include <wchar.h>
 #include "freetype-gl.h"
 #include "font-manager.h"
 #include "vertex-buffer.h"
@@ -48,17 +51,18 @@
 #endif
 
 
-// ------------------------------------------------------- global variables ---
+/* ------------------------------------------------------ global variables - */
 text_buffer_t * buffer;
 mat4   model, view, projection;
 
 
-// ---------------------------------------------------------------- display ---
+/* --------------------------------------------------------------- display - */
 void display( void )
 {
     glClearColor(1.00,1.00,1.00,1.00);
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
+    glColor4f(1.00,1.00,1.00,1.00);
     glUseProgram( buffer->shader );
     {
         glUniformMatrix4fv( glGetUniformLocation( buffer->shader, "model" ),
@@ -74,7 +78,7 @@ void display( void )
 }
 
 
-// --------------------------------------------------------------- reshape ---
+/* -------------------------------------------------------------- reshape - */
 void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -82,7 +86,7 @@ void reshape(int width, int height)
 }
 
 
-// --------------------------------------------------------------- keyboard ---
+/* -------------------------------------------------------------- keyboard - */
 void keyboard( unsigned char key, int x, int y )
 {
     if ( key == 27 )
@@ -92,7 +96,7 @@ void keyboard( unsigned char key, int x, int y )
 }
 
 
-// ------------------------------------------------------------ init_colors ---
+/* ----------------------------------------------------------- init_colors - */
 void
 init_colors( vec4 *colors )
 {
@@ -116,18 +120,18 @@ init_colors( vec4 *colors )
             {{238/256.0f, 238/256.0f, 236/256.0f, 1.0f}}
         };
     size_t i = 0;
-    // Default 16 colors
+    /* Default 16 colors */
     for( i=0; i< 16; ++i )
     {
         colors[i] = defaults[i];
     }
-    // Color cube
+    /* Color cube */
     for( i=0; i<6*6*6; i++ )
     {
         vec4 color = {{ (i/6/6)/5.0f, ((i/6)%6)/5.0f, (i%6)/5.0f, 1.0f}};
         colors[i+16] = color;
     }
-    // Grascale ramp (24 tones)
+    /* Grascale ramp (24 tones) */
     for( i=0; i<24; i++ )
     {
         vec4 color ={{i/24.0f, i/24.0f, i/24.0f, 1.0f}};
@@ -136,7 +140,7 @@ init_colors( vec4 *colors )
 }
 
 
-// --------------------------------------------------------- ansi_to_markup ---
+/* -------------------------------------------------------- ansi_to_markup - */
 void
 ansi_to_markup( wchar_t *sequence, size_t length, markup_t *markup )
 {
@@ -198,12 +202,12 @@ ansi_to_markup( wchar_t *sequence, size_t length, markup_t *markup )
                 set_bg = 1;
                 code = 0;
             }
-            // Set fg color (30 + x, where x is the index of the color)
+            /* Set fg color (30 + x, where x is the index of the color) */
             else if( (code >= 30) && (code < 38 ) )
             {
                 markup->foreground_color = colors[code-30];
             }
-            // Set bg color (40 + x, where x is the index of the color)
+            /* Set bg color (40 + x, where x is the index of the color) */
             else if( (code >= 40) && (code < 48 ) )
             {
                 markup->background_color = colors[code-40];
@@ -251,7 +255,7 @@ ansi_to_markup( wchar_t *sequence, size_t length, markup_t *markup )
     markup->outline_color = markup->foreground_color;
 }
 
-// ------------------------------------------------------------------ print ---
+/* ----------------------------------------------------------------- print - */
 void
 print( text_buffer_t * buffer, vec2 * pen,
        wchar_t *text, markup_t *markup )
@@ -295,7 +299,7 @@ print( text_buffer_t * buffer, vec2 * pen,
 }
 
 
-// ------------------------------------------------------------------- main ---
+/* ------------------------------------------------------------------ main - */
 int main( int argc, char **argv )
 {
     glutInit( &argc, argv );
@@ -318,16 +322,24 @@ int main( int argc, char **argv )
     buffer = text_buffer_new( LCD_FILTERING_OFF );
     vec4 black = {{0.0, 0.0, 0.0, 1.0}};
     vec4 none  = {{1.0, 1.0, 1.0, 0.0}};
-    markup_t markup = {
-        .family  = "fonts/VeraMono.ttf",
-        .size    = 15.0, .bold    = 0,   .italic  = 0,
-        .rise    = 0.0,  .spacing = 0.0, .gamma   = 1.0,
-        .foreground_color    = black, .background_color    = none,
-        .underline           = 0,     .underline_color     = black,
-        .overline            = 0,     .overline_color      = black,
-        .strikethrough       = 0,     .strikethrough_color = black,
-        .font = 0,
-    };
+
+    markup_t markup;
+    markup.family  = "fonts/VeraMono.ttf",
+    markup.size    = 15.0;
+    markup.bold    = 0;
+    markup.italic  = 0;
+    markup.rise    = 0.0;
+    markup.spacing = 0.0;
+    markup.gamma   = 1.0;
+    markup.foreground_color    = black;
+    markup.background_color    = none;
+    markup.underline           = 0;   
+    markup.underline_color     = black;
+    markup.overline            = 0;  
+    markup.overline_color      = black;
+    markup.strikethrough       = 0;   
+    markup.strikethrough_color = black;
+    markup.font = 0;
 
     vec2 pen = {{10.0, 480.0}};
     FILE *file = fopen ( "data/256colors.txt", "r" );
