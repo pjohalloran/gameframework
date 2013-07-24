@@ -45,6 +45,11 @@
 // TEST
 #include <FTGL/ftgl.h>
 
+#include <freetype-gl/freetype-gl.h>
+#include <freetype-gl/vertex-buffer.h>
+#include <freetype-gl/shader.h>
+#include <freetype-gl/mat4.h>
+
 namespace GameHalloran {
 
     class Pool3dView;
@@ -257,6 +262,12 @@ namespace GameHalloran {
         bool OnSoundConfigChange(const EvtData_Sound_Config_Change &eventData);
 
     };
+    
+    typedef struct {
+        float x, y, z;    // position
+        float s, t;       // texture
+        float r, g, b, a; // color
+    } vertex_t;
 
     // /////////////////////////////////////////////////////////////////
     // @class Pool3dView
@@ -321,7 +332,14 @@ namespace GameHalloran {
 
         boost::shared_ptr<ContainerWidget> m_hudContainerPtr;           ///< Pointer to the HUD game status overlay widget container.
 
-
+        
+        GLuint m_shader;
+        vertex_buffer_t *m_buffer;
+        mat4   m_model, m_view, m_projection;
+        texture_atlas_t *m_atlas;
+        void add_text( vertex_buffer_t * buffer, texture_font_t * font,
+                      wchar_t * text, vec4 * color, vec2 * pen );
+        
         //// TEST
         //boost::shared_ptr<FTFont> m_fontPtr;                                  ///< Pointer to the FTGL font.
 

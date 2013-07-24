@@ -61,6 +61,8 @@ typedef struct
 {
     /** Format of the vertex buffer. */
     char * format;
+    
+    GLuint vao_id;
 
     /** Vector of vertices. */
     vector_t * vertices;

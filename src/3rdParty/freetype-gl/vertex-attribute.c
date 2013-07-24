@@ -148,21 +148,26 @@ vertex_attribute_parse( char *format )
 void
 vertex_attribute_enable( vertex_attribute_t *attr )
 {
+    GLenum err = glGetError();
     if( attr->index == -1 )
     {
         GLint program;
         glGetIntegerv( GL_CURRENT_PROGRAM, &program );
+        err = glGetError();
         if( program == 0)
         {
             return;
         }
         attr->index = glGetAttribLocation( program, attr->name );
+        err = glGetError();
         if( attr->index == -1 )
         {
             return;
         }
     }
     glEnableVertexAttribArray( attr->index );
+    err = glGetError();
     glVertexAttribPointer( attr->index, attr->size, attr->type,
                            attr->normalized, attr->stride, attr->pointer );
+    err = glGetError();
 }

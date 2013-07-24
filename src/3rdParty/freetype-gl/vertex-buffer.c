@@ -113,6 +113,8 @@ vertex_buffer_new( const char *format )
         self->attributes[i]->stride = stride;
     }
 
+    glGenVertexArrays(1, &self->vao_id);
+    
     self->vertices = vector_new( stride );
     self->vertices_id  = 0;
     self->GPU_vsize = 0;
@@ -165,6 +167,10 @@ vertex_buffer_delete( vertex_buffer_t *self )
 
     vector_delete( self->items );
 
+    glBindVertexArray(0);
+    glDeleteVertexArrays(1, &self->vao_id);
+    self->vao_id = 0;
+    
     if( self->format )
     {
         free( self->format );
@@ -248,18 +254,21 @@ vertex_buffer_upload ( vertex_buffer_t *self )
 {
     size_t vsize, isize;
 
+    GLenum err = glGetError();
     if( self->state == FROZEN )
     {
         return;
     }
-
+    
     if( !self->vertices_id )
     {
         glGenBuffers( 1, &self->vertices_id );
+        err = glGetError();
     }
     if( !self->indices_id )
     {
         glGenBuffers( 1, &self->indices_id );
+        err = glGetError();
     }
 
     vsize = self->vertices->size*self->vertices->item_size;
@@ -271,33 +280,41 @@ vertex_buffer_upload ( vertex_buffer_t *self )
 
     // Upload vertices
     glBindBuffer( GL_ARRAY_BUFFER, self->vertices_id );
+    err = glGetError();
     if( vsize != self->GPU_vsize )
     {
         glBufferData( GL_ARRAY_BUFFER,
                       vsize, self->vertices->items, GL_DYNAMIC_DRAW );
+        err = glGetError();
         self->GPU_vsize = vsize;
     }
     else
     {
         glBufferSubData( GL_ARRAY_BUFFER,
                          0, vsize, self->vertices->items );
+        err = glGetError();
     }
     glBindBuffer( GL_ARRAY_BUFFER, 0 );
+    err = glGetError();
 
     // Upload indices
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, self->indices_id );
+    err = glGetError();
     if( isize != self->GPU_isize )
     {
         glBufferData( GL_ELEMENT_ARRAY_BUFFER,
                       isize, self->indices->items, GL_DYNAMIC_DRAW );
+        err = glGetError();
         self->GPU_isize = isize;
     }
     else
     {
         glBufferSubData( GL_ELEMENT_ARRAY_BUFFER,
                          0, isize, self->indices->items );
+        err = glGetError();
     }
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+    err = glGetError();
 }
 
 
@@ -323,6 +340,8 @@ vertex_buffer_render_setup ( vertex_buffer_t *self, GLenum mode )
 {
     size_t i;
 
+    glBindVertexArray(self->vao_id);
+    
     if( self->state != CLEAN )
     {
         vertex_buffer_upload( self );
@@ -330,6 +349,7 @@ vertex_buffer_render_setup ( vertex_buffer_t *self, GLenum mode )
     }
     
     glBindBuffer( GL_ARRAY_BUFFER, self->vertices_id );
+    GLenum err = glGetError();
 
     for( i=0; i<MAX_VERTEX_ATTRIBUTE; ++i )
     {
@@ -341,6 +361,7 @@ vertex_buffer_render_setup ( vertex_buffer_t *self, GLenum mode )
         else
         {
             vertex_attribute_enable( attribute );
+            
         }
     }
 
@@ -357,6 +378,7 @@ vertex_buffer_render_finish ( vertex_buffer_t *self )
 {
     glBindBuffer( GL_ARRAY_BUFFER, 0 );
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+    glBindVertexArray(0);
 }
 
 
@@ -393,10 +415,13 @@ vertex_buffer_render ( vertex_buffer_t *self, GLenum mode )
     size_t icount = self->indices->size;
 
     vertex_buffer_render_setup( self, mode );
+    GLenum err = glGetError();
     if( icount )
     {
         glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, self->indices_id );
+        err = glGetError();
         glDrawElements( mode, icount, GL_UNSIGNED_INT, 0 );
+        err = glGetError();
     }
     else
     {

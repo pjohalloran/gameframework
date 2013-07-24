@@ -311,16 +311,24 @@ texture_atlas_upload( texture_atlas_t * self )
     assert( self );
     assert( self->data );
 
+    GLenum err = glGetError();
+    
     if( !self->id )
     {
         glGenTextures( 1, &self->id );
     }
+    err = glGetError();
 
     glBindTexture( GL_TEXTURE_2D, self->id );
+    err = glGetError();
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+    err = glGetError();
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+    err = glGetError();
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+    err = glGetError();
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+    err = glGetError();
     if( self->depth == 4 )
     {
 #ifdef GL_UNSIGNED_INT_8_8_8_8_REV
@@ -330,16 +338,19 @@ texture_atlas_upload( texture_atlas_t * self )
         glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, self->width, self->height,
                       0, GL_RGBA, GL_UNSIGNED_BYTE, self->data );
 #endif
+        err = glGetError();
     }
     else if( self->depth == 3 )
     {
         glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, self->width, self->height,
                       0, GL_RGB, GL_UNSIGNED_BYTE, self->data );
+        err = glGetError();
     }
     else
     {
-        glTexImage2D( GL_TEXTURE_2D, 0, GL_ALPHA, self->width, self->height,
-                      0, GL_ALPHA, GL_UNSIGNED_BYTE, self->data );
+        glTexImage2D( GL_TEXTURE_2D, 0, GL_RED, self->width, self->height,
+                      0, GL_RED, GL_UNSIGNED_BYTE, self->data );
+        err = glGetError();
     }
 }
 
