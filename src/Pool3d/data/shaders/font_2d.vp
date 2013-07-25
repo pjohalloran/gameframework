@@ -1,0 +1,18 @@
+#version 150
+
+uniform mat4 mvMat;
+uniform mat4 projection;
+
+in vec3 vertex;
+in vec2 tex_coord;
+in vec4 color;
+
+smooth out vec2 tex_coord_out;
+out vec4 color_out;
+
+void main()
+{
+    tex_coord_out = tex_coord;
+    color_out = color;
+    gl_Position = projection*(mvMat*vec4(vertex,1.0));
+}

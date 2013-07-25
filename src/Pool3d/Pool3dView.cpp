@@ -592,14 +592,14 @@ namespace GameHalloran {
         shaderAttVec.push_back(tmpVec);
         tmpVec.clear();
 
-//      // D) GUI texture shader.
-//      shaderNameVec.push_back(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("GuiTextureColor"));
-//      tmpVec.push_back(string("vertexPos"));
-//      tmpVec.push_back(g_ignoreShaderSlot);
-//      tmpVec.push_back(g_ignoreShaderSlot);
-//      tmpVec.push_back(string("texCoords"));
-//      shaderAttVec.push_back(tmpVec);
-//      tmpVec.clear();
+        // D) 2D Font texture shader.
+        shaderNameVec.push_back(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("font_2d"));
+        tmpVec.push_back(string("vertex"));
+        tmpVec.push_back(string("color"));
+        tmpVec.push_back(g_ignoreShaderSlot);
+        tmpVec.push_back(string("tex_coord"));
+        shaderAttVec.push_back(tmpVec);
+        tmpVec.clear();
 
         return (AddShadersToSceneGraphManager(m_sgm, shaderNameVec, shaderAttVec));
     }
@@ -781,61 +781,51 @@ namespace GameHalloran {
 
         size_t i;
         texture_font_t *font = 0;
-        m_atlas = texture_atlas_new( 512, 512, 4);
+        m_atlas = texture_atlas_new(512, 512, 1);
         const char * filename = "fonts/Vera.ttf";
         wchar_t *text = L"A Quick Brown Fox Jumps Over The Lazy Dog 0123456789";
-        m_buffer = vertex_buffer_new( "vertex:3f,tex_coord:2f,color:4f" );
+        m_buffer = vertex_buffer_new("vertex:3f,tex_coord:2f,color:4f");
         vec2 pen = {{g_appPtr->GetWindowManager()->GetWidth() * 0.5f, (float)g_appPtr->GetWindowManager()->GetHeight()}};
-        vec4 black = {{0,0,0,1.0f}};
-        for( i=7; i < 27; ++i)
-        {
-            font = texture_font_new( m_atlas, filename, i );
+        vec4 black = {{1, 1, 1, 1.0f}};
+        for(i = 7; i < 27; ++i) {
+            font = texture_font_new(m_atlas, filename, i);
             pen.x = 5;
             pen.y -= font->height;
-            texture_font_load_glyphs( font, text );
-            add_text( m_buffer, font, text, &black, &pen );
-            texture_font_delete( font );
+            texture_font_load_glyphs(font, text);
+            add_text(m_buffer, font, text, &black, &pen);
+            texture_font_delete(font);
         }
-        glBindTexture( GL_TEXTURE_2D, m_atlas->id );
-        
-        m_shader = shader_load("shaders/v3f-t2f-c4f.vert",
-                             "shaders/v3f-t2f-c4f.frag");
-        mat4_set_identity( &m_projection );
-        mat4_set_identity( &m_model );
-        mat4_set_identity( &m_view );
-        
+        glBindTexture(GL_TEXTURE_2D, m_atlas->id);
     }
-    
-    void Pool3dView::add_text( vertex_buffer_t * buffer, texture_font_t * font,
-                  wchar_t * text, vec4 * color, vec2 * pen )
+
+    void Pool3dView::add_text(vertex_buffer_t * buffer, texture_font_t * font,
+                              wchar_t * text, vec4 * color, vec2 * pen)
     {
         size_t i;
         float r = color->red, g = color->green, b = color->blue, a = color->alpha;
-        for( i=0; i<wcslen(text); ++i )
-        {
-            texture_glyph_t *glyph = texture_font_get_glyph( font, text[i] );
-            if( glyph != NULL )
-            {
+        for(i = 0; i < wcslen(text); ++i) {
+            texture_glyph_t *glyph = texture_font_get_glyph(font, text[i]);
+            if(glyph != NULL) {
                 int kerning = 0;
-                if( i > 0)
-                {
-                    kerning = texture_glyph_get_kerning( glyph, text[i-1] );
+                if(i > 0) {
+                    kerning = texture_glyph_get_kerning(glyph, text[i - 1]);
                 }
                 pen->x += kerning;
-                float x0  = (float)( pen->x + glyph->offset_x );
-                float y0  = (float)( pen->y + glyph->offset_y );
-                float x1  = (float)( x0 + glyph->width );
-                float y1  = (float)( y0 - glyph->height );
+                float x0  = (float)(pen->x + glyph->offset_x);
+                float y0  = (float)(pen->y + glyph->offset_y);
+                float x1  = (float)(x0 + glyph->width);
+                float y1  = (float)(y0 - glyph->height);
                 float s0 = glyph->s0;
                 float t0 = glyph->t0;
                 float s1 = glyph->s1;
                 float t1 = glyph->t1;
-                GLuint indices[6] = {0,1,2, 0,2,3};
-                vertex_t vertices[4] = { { x0,y0,0.0f,  s0,t0,  r,g,b,a },
-                    { x0,y1,0.0f,  s0,t1,  r,g,b,a },
-                    { x1,y1,0.0f,  s1,t1,  r,g,b,a },
-                    { x1,y0,0.0f,  s1,t0,  r,g,b,a } };
-                vertex_buffer_push_back( buffer, vertices, 4, indices, 6 );
+                GLuint indices[6] = {0, 1, 2, 0, 2, 3};
+                vertex_t vertices[4] = { { x0, y0, 0.0f,  s0, t0,  r, g, b, a },
+                    { x0, y1, 0.0f,  s0, t1,  r, g, b, a },
+                    { x1, y1, 0.0f,  s1, t1,  r, g, b, a },
+                    { x1, y0, 0.0f,  s1, t0,  r, g, b, a }
+                };
+                vertex_buffer_push_back(buffer, vertices, 4, indices, 6);
                 pen->x += glyph->advance_x;
             }
         }
@@ -897,33 +887,37 @@ namespace GameHalloran {
             // Clear the color, depth and stencil buffers
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            glEnable( GL_BLEND );
-            GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
-            glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-            GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
-            glUseProgram( m_shader );
-            GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
+            // Save the perspective matrix and pop it off the stack for now as we require the orthographic matrix.
+            Matrix4 topProjStackMat;
+            m_projStackPtr->GetMatrix(topProjStackMat);
+            m_projStackPtr->PopMatrix();
             {
-                glActiveTexture(GL_TEXTURE0);
-                GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
-                glBindTexture( GL_TEXTURE_2D, m_atlas->id );
-                GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
-                glUniform1i( glGetUniformLocation( m_shader, "texture" ),
-                            0 );
-                GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
-                glUniformMatrix4fv( glGetUniformLocation( m_shader, "model" ),
-                                   1, 0, m_model.data);
-                GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
-                glUniformMatrix4fv( glGetUniformLocation( m_shader, "view" ),
-                                   1, 0, m_view.data);
-                GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
-                glUniformMatrix4fv( glGetUniformLocation( m_shader, "projection" ),
-                                   1, 0, m_projection.data);
-                GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
-                vertex_buffer_render( m_buffer, GL_TRIANGLES );
-                GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
+                // Save MV identity matrix.
+                GLMatrixStackRaii mvSaveStack(m_modelViewStackPtr);
+
+                Matrix4 model(g_identityMat);
+                BuildRotationZMatrix4(model, -5.0f);
+
+                m_modelViewStackPtr->PushMatrix(model);
+
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                {
+                    glActiveTexture(GL_TEXTURE0);
+                    glBindTexture(GL_TEXTURE_2D, m_atlas->id);
+                    
+                    string shaderName = std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + string("font_2d");
+                    m_sgm.GetShader(shaderName)->SetUniform("texture", 0);
+                    m_sgm.GetShader(shaderName)->SetUniform("mvMat", m_modelViewStackPtr->GetMatrix());
+                    m_sgm.GetShader(shaderName)->SetUniform("projection", m_projStackPtr->GetMatrix());
+                    m_sgm.GetShader(shaderName)->Activate();
+                    vertex_buffer_render(m_buffer, GL_TRIANGLES);
+                }
+                glDisable(GL_BLEND);
             }
-            
+            // Restore the Perspective matrix to the top of the projection stack.
+            m_projStackPtr->PushMatrix(topProjStackMat);
+
             // Save identity matrix.
             m_modelViewStackPtr->PushMatrix();
             {
@@ -1315,8 +1309,6 @@ namespace GameHalloran {
     // /////////////////////////////////////////////////////////////////
     void Pool3dView::VOnUpdate(const F32 elapsedTime)
     {
-        mat4_set_orthographic( &m_projection, 0, g_appPtr->GetWindowManager()->GetWidth(), 0, g_appPtr->GetWindowManager()->GetHeight(), -1, 1);
-        
         if(m_state == BGS_Running) {
             // Update the scene based on the user input.
             m_controller->Update(elapsedTime);

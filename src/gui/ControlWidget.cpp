@@ -62,8 +62,6 @@ namespace GameHalloran {
     // /////////////////////////////////////////////////////////////////
     bool ControlWidget::RenderText(const std::string &textToRender)
     {
-        printf("Rendering text: %s\n", textToRender.c_str());
-        
         if(!m_fontPtr) {
             return (false);
         }
