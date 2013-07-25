@@ -779,6 +779,9 @@ namespace GameHalloran {
 
         InitHud();
 
+        Resource fontResource(std::string("fonts") + ZipFile::ZIP_PATH_SEPERATOR + std::string("freesansbold.ttf"));
+        boost::shared_ptr<ResHandle> fontHandle(g_appPtr->GetResourceCache()->GetHandle(&fontResource));
+
         size_t i;
         texture_font_t *font = 0;
         m_atlas = texture_atlas_new(512, 512, 1);
@@ -788,7 +791,7 @@ namespace GameHalloran {
         vec2 pen = {{g_appPtr->GetWindowManager()->GetWidth() * 0.5f, (float)g_appPtr->GetWindowManager()->GetHeight()}};
         vec4 black = {{1, 1, 1, 1.0f}};
         for(i = 7; i < 27; ++i) {
-            font = texture_font_new(m_atlas, filename, i);
+            font = texture_font_new_memory_buffer(m_atlas, fontHandle->Buffer(), fontHandle->Size(), i);
             pen.x = 5;
             pen.y -= font->height;
             texture_font_load_glyphs(font, text);
@@ -905,7 +908,7 @@ namespace GameHalloran {
                 {
                     glActiveTexture(GL_TEXTURE0);
                     glBindTexture(GL_TEXTURE_2D, m_atlas->id);
-                    
+
                     string shaderName = std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + string("font_2d");
                     m_sgm.GetShader(shaderName)->SetUniform("texture", 0);
                     m_sgm.GetShader(shaderName)->SetUniform("mvMat", m_modelViewStackPtr->GetMatrix());
