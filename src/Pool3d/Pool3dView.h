@@ -42,11 +42,7 @@
 #include "Pool3dEvents.h"
 #include "Pool3dActors.h"
 
-// TEST
-#include <FTGL/ftgl.h>
-
-#include <freetype-gl/freetype-gl.h>
-#include <freetype-gl/vertex-buffer.h>
+#include "FontRenderer.h"
 
 namespace GameHalloran {
 
@@ -261,12 +257,6 @@ namespace GameHalloran {
 
     };
 
-    typedef struct {
-        float x, y, z;    // position
-        float s, t;       // texture
-        float r, g, b, a; // color
-    } vertex_t;
-
     // /////////////////////////////////////////////////////////////////
     // @class Pool3dView
     // @author PJ O Halloran.
@@ -330,13 +320,7 @@ namespace GameHalloran {
 
         boost::shared_ptr<ContainerWidget> m_hudContainerPtr;           ///< Pointer to the HUD game status overlay widget container.
 
-        vertex_buffer_t *m_buffer;
-        texture_atlas_t *m_atlas;
-        void add_text(vertex_buffer_t * buffer, texture_font_t * font,
-                      wchar_t * text, vec4 * color, vec2 * pen);
-
-        //// TEST
-        //boost::shared_ptr<FTFont> m_fontPtr;                                  ///< Pointer to the FTGL font.
+        FontRenderer m_font;
 
         // /////////////////////////////////////////////////////////////////
         // Constructor helper function.  Create shaders for the scene graph

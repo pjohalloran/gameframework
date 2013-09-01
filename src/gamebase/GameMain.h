@@ -44,6 +44,7 @@ namespace GameHalloran {
     class TextureAtlasManager;
     class GameOptions;
     class GameLog;
+    class FontBufferCache;
 
     // /////////////////////////////////////////////////////////////////
     // @class GameMain
@@ -196,6 +197,7 @@ namespace GameHalloran {
         boost::shared_ptr<WindowManager> m_windowManagerPtr;                    ///< WindowManager.
         boost::shared_ptr<GameOptions> m_optionsPtr;                            ///< Pointer to the GameOptions for the game.
         boost::shared_ptr<TextureManager> m_texManagerPtr;                      ///< OpenGL texture manager.
+        boost::shared_ptr<FontBufferCache> m_fontBufferCachePtr;                ///< The Font VB cache.
 
         // Directories of interest globally to the application.
         boost::filesystem::path m_gameRootDir;                                  ///< Location of game root.
@@ -400,6 +402,10 @@ namespace GameHalloran {
         boost::shared_ptr<TextureManager> GetTextureManagerPtr() {
             return (m_texManagerPtr);
         };
+
+        boost::shared_ptr<FontBufferCache> GetFontBufferCachePtr() {
+            return (m_fontBufferCachePtr);
+        }
 
         // /////////////////////////////////////////////////////////////////
         // Get the TextureAtlas Manager object.

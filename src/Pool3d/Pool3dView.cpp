@@ -28,7 +28,6 @@
 #include "ZipFile.h"
 
 // DEBUG
-#include <iostream>
 #include "Pool3dActors.h"
 #include "Pool3dSceneNodes.h"
 
@@ -42,7 +41,6 @@ using boost::filesystem::path;
 using std::string;
 
 namespace GameHalloran {
-
     // /////////////////////////////////////////////////////////////////
     // ******************* Pool3dViewEventListener *********************
     // /////////////////////////////////////////////////////////////////
@@ -779,59 +777,11 @@ namespace GameHalloran {
 
         InitHud();
 
-        Resource fontResource(std::string("fonts") + ZipFile::ZIP_PATH_SEPERATOR + std::string("freesansbold.ttf"));
-        boost::shared_ptr<ResHandle> fontHandle(g_appPtr->GetResourceCache()->GetHandle(&fontResource));
-
-        size_t i;
-        texture_font_t *font = 0;
-        m_atlas = texture_atlas_new(512, 512, 1);
-        const char * filename = "fonts/Vera.ttf";
-        wchar_t *text = L"A Quick Brown Fox Jumps Over The Lazy Dog 0123456789";
-        m_buffer = vertex_buffer_new("vertex:3f,tex_coord:2f,color:4f");
-        vec2 pen = {{g_appPtr->GetWindowManager()->GetWidth() * 0.5f, (float)g_appPtr->GetWindowManager()->GetHeight()}};
-        vec4 black = {{1, 1, 1, 1.0f}};
-        for(i = 7; i < 27; ++i) {
-            font = texture_font_new_memory_buffer(m_atlas, fontHandle->Buffer(), fontHandle->Size(), i);
-            pen.x = 5;
-            pen.y -= font->height;
-            texture_font_load_glyphs(font, text);
-            add_text(m_buffer, font, text, &black, &pen);
-            texture_font_delete(font);
-        }
-        glBindTexture(GL_TEXTURE_2D, m_atlas->id);
-    }
-
-    void Pool3dView::add_text(vertex_buffer_t * buffer, texture_font_t * font,
-                              wchar_t * text, vec4 * color, vec2 * pen)
-    {
-        size_t i;
-        float r = color->red, g = color->green, b = color->blue, a = color->alpha;
-        for(i = 0; i < wcslen(text); ++i) {
-            texture_glyph_t *glyph = texture_font_get_glyph(font, text[i]);
-            if(glyph != NULL) {
-                int kerning = 0;
-                if(i > 0) {
-                    kerning = texture_glyph_get_kerning(glyph, text[i - 1]);
-                }
-                pen->x += kerning;
-                float x0  = (float)(pen->x + glyph->offset_x);
-                float y0  = (float)(pen->y + glyph->offset_y);
-                float x1  = (float)(x0 + glyph->width);
-                float y1  = (float)(y0 - glyph->height);
-                float s0 = glyph->s0;
-                float t0 = glyph->t0;
-                float s1 = glyph->s1;
-                float t1 = glyph->t1;
-                GLuint indices[6] = {0, 1, 2, 0, 2, 3};
-                vertex_t vertices[4] = { { x0, y0, 0.0f,  s0, t0,  r, g, b, a },
-                    { x0, y1, 0.0f,  s0, t1,  r, g, b, a },
-                    { x1, y1, 0.0f,  s1, t1,  r, g, b, a },
-                    { x1, y0, 0.0f,  s1, t0,  r, g, b, a }
-                };
-                vertex_buffer_push_back(buffer, vertices, 4, indices, 6);
-                pen->x += glyph->advance_x;
-            }
-        }
+        m_font.LoadFont("freesansbold.ttf", 20.0f);
+        m_font.SetFontCharset(std::string("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"));
+        m_font.SetMatrictStack(m_stackManager);
+        m_font.SetShader(m_sgm.GetShader(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + string("font_2d")));
+        m_font.SetText(std::string("Hello World"), g_gcGreen, Point3(g_appPtr->GetWindowManager()->GetWidth() * 0.5f, (float)g_appPtr->GetWindowManager()->GetHeight() * 0.5f, 0.0f));
     }
 
     // /////////////////////////////////////////////////////////////////
@@ -895,28 +845,15 @@ namespace GameHalloran {
             m_projStackPtr->GetMatrix(topProjStackMat);
             m_projStackPtr->PopMatrix();
             {
-                // Save MV identity matrix.
-                GLMatrixStackRaii mvSaveStack(m_modelViewStackPtr);
+                m_font.SetText(std::string("Hello World"), Vector4(1.0f, 0.0f, 0.0f, 1.0f), g_originPt + Vector3(50.0f, 50.0f, 0.0f));
+                m_font.PreRender();
+                m_font.Render();
+                m_font.PostRender();
 
-                Matrix4 model(g_identityMat);
-                BuildRotationZMatrix4(model, -5.0f);
-
-                m_modelViewStackPtr->PushMatrix(model);
-
-                glEnable(GL_BLEND);
-                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                {
-                    glActiveTexture(GL_TEXTURE0);
-                    glBindTexture(GL_TEXTURE_2D, m_atlas->id);
-
-                    string shaderName = std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + string("font_2d");
-                    m_sgm.GetShader(shaderName)->SetUniform("texture", 0);
-                    m_sgm.GetShader(shaderName)->SetUniform("mvMat", m_modelViewStackPtr->GetMatrix());
-                    m_sgm.GetShader(shaderName)->SetUniform("projection", m_projStackPtr->GetMatrix());
-                    m_sgm.GetShader(shaderName)->Activate();
-                    vertex_buffer_render(m_buffer, GL_TRIANGLES);
-                }
-                glDisable(GL_BLEND);
+                m_font.SetText(std::string("BLAH blah 123"), g_gcGreen, g_originPt);
+                m_font.PreRender();
+                m_font.Render();
+                m_font.PostRender();
             }
             // Restore the Perspective matrix to the top of the projection stack.
             m_projStackPtr->PushMatrix(topProjStackMat);
