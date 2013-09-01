@@ -13,6 +13,8 @@
 
 // Project Headers
 #include "GameBase.h"
+#include "FontBufferCache.h"
+
 #include "Pool3dGame.h"
 #include "Pool3dLogic.h"
 #include "Pool3dView.h"
@@ -155,6 +157,8 @@ namespace GameHalloran {
             m_texManagerPtr->SetAnisotropicLinearLevel(1.0f);
 
             GameMain::SetupTextureAtlasManager(std::string("atlases") + ZipFile::ZIP_PATH_SEPERATOR + std::string("atlasDictionary.xml"));
+
+            m_fontBufferCachePtr.reset(new FontBufferCache());
         }
 
         return (result);

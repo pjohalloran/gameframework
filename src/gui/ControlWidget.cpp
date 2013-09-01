@@ -74,6 +74,7 @@ namespace GameHalloran {
         Point3 windowPos;
         windowPos.SetX(VGetPosition().GetX() + (VGetWidth() - bb.GetWidth()) / 2.0f);
         windowPos.SetY(VGetPosition().GetY() - (VGetHeight() - bb.GetHeight()) / 2.0f - bb.GetHeight());
+        //m_fontPtr->Render(textToRender.c_str());
 
         return(true);
     }
