@@ -1,3 +1,6 @@
 [submodule "src/3rdParty/luaplus51-all"]
 	path = src/3rdParty/luaplus51-all
 	url = git://github.com/jjensen/luaplus51-all.git
+[submodule "src/3rdParty/freetype-gl"]
+	path = src/3rdParty/freetype-gl
+	url = ssh://git@github.com/pjohalloran/freetype-gl

@@ -42,8 +42,7 @@
 #include "Pool3dEvents.h"
 #include "Pool3dActors.h"
 
-// TEST
-#include <FTGL/ftgl.h>
+#include "FontRenderer.h"
 
 namespace GameHalloran {
 
@@ -321,9 +320,7 @@ namespace GameHalloran {
 
         boost::shared_ptr<ContainerWidget> m_hudContainerPtr;           ///< Pointer to the HUD game status overlay widget container.
 
-
-        //// TEST
-        //boost::shared_ptr<FTFont> m_fontPtr;                                  ///< Pointer to the FTGL font.
+        FontRenderer m_font;
 
         // /////////////////////////////////////////////////////////////////
         // Constructor helper function.  Create shaders for the scene graph

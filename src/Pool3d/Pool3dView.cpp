@@ -28,7 +28,6 @@
 #include "ZipFile.h"
 
 // DEBUG
-#include <iostream>
 #include "Pool3dActors.h"
 #include "Pool3dSceneNodes.h"
 
@@ -42,7 +41,6 @@ using boost::filesystem::path;
 using std::string;
 
 namespace GameHalloran {
-
     // /////////////////////////////////////////////////////////////////
     // ******************* Pool3dViewEventListener *********************
     // /////////////////////////////////////////////////////////////////
@@ -592,14 +590,14 @@ namespace GameHalloran {
         shaderAttVec.push_back(tmpVec);
         tmpVec.clear();
 
-//      // D) GUI texture shader.
-//      shaderNameVec.push_back(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("GuiTextureColor"));
-//      tmpVec.push_back(string("vertexPos"));
-//      tmpVec.push_back(g_ignoreShaderSlot);
-//      tmpVec.push_back(g_ignoreShaderSlot);
-//      tmpVec.push_back(string("texCoords"));
-//      shaderAttVec.push_back(tmpVec);
-//      tmpVec.clear();
+        // D) 2D Font texture shader.
+        shaderNameVec.push_back(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + std::string("font_2d"));
+        tmpVec.push_back(string("vertex"));
+        tmpVec.push_back(string("color"));
+        tmpVec.push_back(g_ignoreShaderSlot);
+        tmpVec.push_back(string("tex_coord"));
+        shaderAttVec.push_back(tmpVec);
+        tmpVec.clear();
 
         return (AddShadersToSceneGraphManager(m_sgm, shaderNameVec, shaderAttVec));
     }
@@ -779,13 +777,11 @@ namespace GameHalloran {
 
         InitHud();
 
-        //std::string fontFile(g_appPtr->GetDatatDir().string() + std::string("/freesansbold.ttf"));
-        //m_fontPtr.reset(GCC_NEW FTGLTextureFont(fontFile.c_str()));
-        //if(m_fontPtr->Error())
-        //{
-        //  throw GameException(std::string("Failed to load the font: ") + fontFile);
-        //}
-        //m_fontPtr->FaceSize(100);
+        m_font.LoadFont("freesansbold.ttf", 20.0f);
+        m_font.SetFontCharset(std::string("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"));
+        m_font.SetMatrictStack(m_stackManager);
+        m_font.SetShader(m_sgm.GetShader(std::string("shaders") + ZipFile::ZIP_PATH_SEPERATOR + string("font_2d")));
+        m_font.SetText(std::string("Hello World"), g_gcGreen, Point3(g_appPtr->GetWindowManager()->GetWidth() * 0.5f, (float)g_appPtr->GetWindowManager()->GetHeight() * 0.5f, 0.0f));
     }
 
     // /////////////////////////////////////////////////////////////////
@@ -842,7 +838,25 @@ namespace GameHalloran {
             GF_CLEAR_GL_ERROR();
 
             // Clear the color, depth and stencil buffers
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            // Save the perspective matrix and pop it off the stack for now as we require the orthographic matrix.
+            Matrix4 topProjStackMat;
+            m_projStackPtr->GetMatrix(topProjStackMat);
+            m_projStackPtr->PopMatrix();
+            {
+                m_font.SetText(std::string("Hello World"), Vector4(1.0f, 0.0f, 0.0f, 1.0f), g_originPt + Vector3(50.0f, 50.0f, 0.0f));
+                m_font.PreRender();
+                m_font.Render();
+                m_font.PostRender();
+
+                m_font.SetText(std::string("BLAH blah 123"), g_gcGreen, g_originPt);
+                m_font.PreRender();
+                m_font.Render();
+                m_font.PostRender();
+            }
+            // Restore the Perspective matrix to the top of the projection stack.
+            m_projStackPtr->PushMatrix(topProjStackMat);
 
             // Save identity matrix.
             m_modelViewStackPtr->PushMatrix();
@@ -862,45 +876,6 @@ namespace GameHalloran {
                     g_appPtr->GetLogicPtr()->VRenderDiagnostics();
                     GF_CHECK_GL_ERROR_TRC("Pool3dView::VOnRender(): ");
                 }
-
-                //// TEST CODE FOR FTGL TEXTURE FONT
-                //glEnable(GL_TEXTURE_2D);
-                //glDisable(GL_DEPTH_TEST);
-                //// Set up lighting.
-                //F32 light1_ambient[4]  = { 1.0, 1.0, 1.0, 1.0 };
-                //F32 light1_diffuse[4]  = { 1.0, 0.9, 0.9, 1.0 };
-                //F32 light1_specular[4] = { 1.0, 0.7, 0.7, 1.0 };
-                //F32 light1_position[4] = { 400.0, 400.0, 100.0, 1.0 };
-                //glLightfv(GL_LIGHT1, GL_AMBIENT,  light1_ambient);
-                //glLightfv(GL_LIGHT1, GL_DIFFUSE,  light1_diffuse);
-                //glLightfv(GL_LIGHT1, GL_SPECULAR, light1_specular);
-                //glLightfv(GL_LIGHT1, GL_POSITION, light1_position);
-                //glEnable(GL_LIGHT1);
-                //F32 front_emission[4] = { 0.5, 0.4, 0.3, 0.0 };
-                //F32 front_ambient[4]  = { 1.0, 1.0, 1.0, 0.0 };
-                //F32 front_diffuse[4]  = { 0.95, 0.95, 0.8, 0.0 };
-                //F32 front_specular[4] = { 0.8, 0.8, 0.8, 0.0 };
-                //glMaterialfv(GL_FRONT, GL_EMISSION, front_emission);
-                //glMaterialfv(GL_FRONT, GL_AMBIENT, front_ambient);
-                //glMaterialfv(GL_FRONT, GL_DIFFUSE, front_diffuse);
-                //glMaterialfv(GL_FRONT, GL_SPECULAR, front_specular);
-                //glMaterialf(GL_FRONT, GL_SHININESS, 25.0);
-                //glColor4fv(front_diffuse);
-                //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
-                //glColorMaterial(GL_FRONT, GL_DIFFUSE);
-                //glEnable(GL_COLOR_MATERIAL);
-                //glEnable(GL_LIGHTING);
-                //  glPushMatrix();
-                //  //glLoadMatrixf(m_sgm.GetCamera()->VGet()->GetToWorld().GetComponentsConst());
-                //  gluLookAt(0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-                //  glPushMatrix();
-                //  //glTranslatef(0.0f, 0.0f, 0.0f);
-                //  // Render font here...
-                //  //std::string test("Hello World");
-                //  m_fontPtr->Render("Hello World");
-                //  glPopMatrix();
-                //  glPopMatrix();
-                //glEnable(GL_DEPTH_TEST);
             }
             // Restore identity matrix.
             m_modelViewStackPtr->PopMatrix();
@@ -908,7 +883,7 @@ namespace GameHalloran {
             // Render all the screen elements belong to the view.
             HumanView::VOnRender(time, elapsedTime);
         } else if(m_state == BGS_Paused) {
-            // Do no rendering while game is paused.
+
         } else {
             // do nothing.
         }
